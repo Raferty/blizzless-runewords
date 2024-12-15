@@ -407,7 +407,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 22,
+    id: 21,
     name: "Black",
     runes: [10, 16, 4],
     types: ["Clubs", "Hammers", "Maces"],
@@ -429,7 +429,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 23,
+    id: 22,
     name: "White",
     runes: [14, 16],
     types: ["Wands"],
@@ -451,7 +451,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 24,
+    id: 23,
     name: "Bulwark",
     runes: [13, 16, 12],
     types: ["Helms"],
@@ -472,7 +472,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 25,
+    id: 24,
     name: "Cure",
     runes: [13, 16, 7],
     types: ["Helms"],
@@ -492,7 +492,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 26,
+    id: 25,
     name: "Ground",
     runes: [13, 16, 9],
     types: ["Helms"],
@@ -511,7 +511,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 27,
+    id: 26,
     name: "Hearth",
     runes: [13, 16, 10],
     types: ["Helms"],
@@ -531,7 +531,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 28,
+    id: 27,
     name: "Temper",
     runes: [13, 16, 8],
     types: ["Helms"],
@@ -550,7 +550,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 29,
+    id: 28,
     name: "Memory",
     runes: [17, 16, 12, 5],
     types: ["Staves"],
@@ -594,7 +594,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 29,
+    id: 30,
     name: "Splendor",
     runes: [5, 17],
     types: ["Shields"],
@@ -616,7 +616,7 @@ export const RUNEWORDS = [
     ],
   },
   {
-    id: 29,
+    id: 31,
     name: "Melody",
     runes: [13, 18, 4],
     types: ["Missile Weapons"],
@@ -639,7 +639,7 @@ export const RUNEWORDS = [
   },
 
   {
-    id: 29,
+    id: 32,
     name: "Harmony",
     runes: [3, 6, 12, 18],
     types: ["Missile Weapons"],
@@ -651,7 +651,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 33,
     name: "Hustle",
     runes: [13, 18, 2],
     types: ["Weapons", "Body Armors"],
@@ -663,7 +663,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 34,
     name: "Lionheart",
     runes: [15, 17, 19],
     types: ["Body Armors"],
@@ -675,7 +675,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 35,
     name: "Obedience",
     runes: [15, 18, 10, 5, 19],
     types: ["Polearms", "Spears"],
@@ -687,7 +687,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 36,
     name: "Unbending Will",
     runes: [19, 16, 6, 2, 1, 15],
     types: ["Polearms", "Spears"],
@@ -699,7 +699,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 37,
     name: "Wealth",
     runes: [20, 18, 3],
     types: ["Body Armors"],
@@ -711,7 +711,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 38,
     name: "Passion",
     runes: [14, 9, 2, 20],
     types: ["Weapons"],
@@ -723,7 +723,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 39,
     name: "Lawbringer",
     runes: [11, 20, 18],
     types: ["Swords", "Hammers", "Scepters"],
@@ -735,7 +735,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 40,
     name: "Voice of Reason",
     runes: [20, 18, 1, 2],
     types: ["Swords", "Maces"],
@@ -747,7 +747,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 41,
     name: "Treachery",
     runes: [13, 10, 20],
     types: ["Body Armors"],
@@ -759,7 +759,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 42,
     name: "Enlightenment",
     runes: [21, 8, 12],
     types: ["Body Armors"],
@@ -771,7 +771,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 43,
     name: "Wisdom",
     runes: [21, 6, 2],
     types: ["Helms"],
@@ -783,7 +783,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 44,
     name: "Crescent Moon",
     runes: [13, 22, 3],
     types: ["Axes", "Swords", "Polearms"],
@@ -795,7 +795,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 45,
     name: "Duress",
     runes: [13, 22, 10],
     types: ["Body Armors"],
@@ -807,7 +807,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 46,
     name: "Gloom",
     runes: [19, 22, 21],
     types: ["Body Armors"],
@@ -819,7 +819,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 47,
     name: "Stone",
     runes: [13, 22, 21, 17],
     types: ["Body Armors"],
@@ -831,7 +831,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 48,
     name: "Bone",
     runes: [12, 22, 22],
     types: ["Body Armors"],
@@ -843,7 +843,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 49,
     name: "Venom",
     runes: [7, 14, 23],
     types: ["Weapons"],
@@ -855,7 +855,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 50,
     name: "Prudence",
     runes: [23, 3],
     types: ["Body Armors"],
@@ -867,7 +867,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 51,
     name: "Sanctuary",
     runes: [18, 18, 23],
     types: ["Shields"],
@@ -879,7 +879,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 52,
     name: "Oath",
     runes: [13, 21, 23, 17],
     types: ["Swords", "Axes", "Maces"],
@@ -891,7 +891,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 53,
     name: "Rain",
     runes: [9, 23, 6],
     types: ["Body Armors"],
@@ -903,7 +903,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 54,
     name: "Delirium",
     runes: [20, 24, 16],
     types: ["Helms"],
@@ -915,7 +915,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 55,
     name: "Kingslayer",
     runes: [23, 22, 25, 19],
     types: ["Swords", "Axes"],
@@ -927,7 +927,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 56,
     name: "Rift",
     runes: [15, 18, 20, 25],
     types: ["Polearms", "Scepters"],
@@ -939,7 +939,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 57,
     name: "Principle",
     runes: [8, 25, 2],
     types: ["Body Armors"],
@@ -951,7 +951,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 58,
     name: "Mosaic",
     runes: [23, 25, 11],
     types: ["Claws"],
@@ -963,7 +963,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 59,
     name: "Silence",
     runes: [14, 2, 15, 24, 3, 26],
     types: ["Weapons"],
@@ -975,7 +975,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 60,
     name: "Heart of the Oak",
     runes: [18, 26, 21, 10],
     types: ["Staves", "Maces"],
@@ -987,7 +987,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 61,
     name: "Death",
     runes: [15, 1, 26, 9, 25],
     types: ["Swords", "Axes"],
@@ -999,7 +999,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 62,
     name: "Flickering Flame",
     runes: [4, 21, 26],
     types: ["Helms"],
@@ -1011,7 +1011,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 63,
     name: "Call to Arms",
     runes: [11, 8, 23, 24, 27],
     types: ["Weapons"],
@@ -1023,7 +1023,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 64,
     name: "Chaos",
     runes: [19, 27, 22],
     types: ["Claws"],
@@ -1035,7 +1035,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 65,
     name: "Exile",
     runes: [26, 27, 24, 14],
     types: ["Paladin Shields"],
@@ -1047,7 +1047,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 66,
     name: "Fortitude",
     runes: [1, 12, 14, 28],
     types: ["Weapons", "Body Armors"],
@@ -1059,7 +1059,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 67,
     name: "Grief",
     runes: [5, 3, 28, 23, 8],
     types: ["Swords", "Axes"],
@@ -1070,7 +1070,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 68,
     name: "Bramble",
     runes: [8, 27, 29, 5],
     types: ["Body Armors"],
@@ -1081,7 +1081,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 69,
     name: "Wind",
     runes: [29, 1],
     types: ["Melee Weapons"],
@@ -1092,7 +1092,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 70,
     name: "Dragon",
     runes: [29, 28, 12],
     types: ["Body Armors", "Shields"],
@@ -1103,7 +1103,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 71,
     name: "Beast",
     runes: [30, 3, 22, 23, 17],
     types: ["Axes", "Scepters", "Hammers"],
@@ -1114,7 +1114,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 72,
     name: "Chains of Honor",
     runes: [14, 22, 30, 24],
     types: ["Body Armors"],
@@ -1125,7 +1125,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 73,
     name: "Eternity",
     runes: [11, 30, 24, 12, 29],
     types: ["Melee Weapons"],
@@ -1136,7 +1136,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 74,
     name: "Infinity",
     runes: [30, 23, 30, 24],
     types: ["Polearms", "Spears"],
@@ -1147,7 +1147,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 75,
     name: "Wrath",
     runes: [21, 17, 30, 23],
     types: ["Missile Weapons"],
@@ -1158,7 +1158,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 76,
     name: "Fury",
     runes: [31, 25, 5],
     types: ["Melee Weapons"],
@@ -1169,7 +1169,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 77,
     name: "Enigma",
     runes: [31, 6, 30],
     types: ["Body Armors"],
@@ -1180,7 +1180,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 78,
     name: "Famine",
     runes: [19, 27, 9, 31],
     types: ["Axes", "Hammers"],
@@ -1191,7 +1191,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 79,
     name: "Brand",
     runes: [31, 28, 23, 25],
     types: ["Missile Weapons"],
@@ -1202,7 +1202,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 80,
     name: "Destruction",
     runes: [26, 28, 30, 31, 18],
     types: ["Polearms", "Swords"],
@@ -1213,7 +1213,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 81,
     name: "Dream",
     runes: [16, 31, 21],
     types: ["Helms", "Shields"],
@@ -1224,7 +1224,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 82,
     name: "Faith",
     runes: [27, 31, 20, 2],
     types: ["Missile Weapons"],
@@ -1235,7 +1235,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 83,
     name: "Ice",
     runes: [11, 13, 31, 28],
     types: ["Missile Weapons"],
@@ -1246,7 +1246,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 84,
     name: "Last Wish",
     runes: [31, 23, 31, 29, 31, 30],
     types: ["Swords", "Hammers", "Axes"],
@@ -1257,7 +1257,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 85,
     name: "Phoenix",
     runes: [26, 26, 28, 31],
     types: ["Weapons", "Shields"],
@@ -1268,7 +1268,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 86,
     name: "Doom",
     runes: [15, 27, 22, 28, 32],
     types: ["Axes", "Polearms", "Hammers"],
@@ -1279,7 +1279,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 87,
     name: "Hand of Justice",
     runes: [29, 32, 11, 28],
     types: ["Weapons"],
@@ -1290,7 +1290,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 88,
     name: "Pride",
     runes: [32, 29, 16, 28],
     types: ["Polearms", "Spears"],
@@ -1301,7 +1301,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 89,
     name: "Plague",
     runes: [32, 13, 22],
     types: ["Swords", "Claws", "Daggers"],
@@ -1312,7 +1312,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 90,
     name: "Mist",
     runes: [32, 13, 25, 10, 6],
     types: ["Missile Weapons"],
@@ -1323,7 +1323,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 91,
     name: "Metamorphosis",
     runes: [16, 32, 19],
     types: ["Helms"],
@@ -1335,7 +1335,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 92,
     name: "Breath of the Dying",
     runes: [26, 15, 1, 2, 33, 5],
     types: ["Weapons"],
@@ -1347,7 +1347,7 @@ export const RUNEWORDS = [
     stats: [],
   },
   {
-    id: 29,
+    id: 93,
     name: "Obsession",
     runes: [33, 24, 20, 17, 16, 4],
     types: ["Staves"],

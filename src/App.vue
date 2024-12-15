@@ -3,22 +3,26 @@
   <main class="main">
     <aside class="aside">
       Runes
-      <RuneList @select="(e: any) => console.log('select', e)" />
+      <RuneList :runes="RUNES" @select="(e: any) => SelectedRunes = e" />
     </aside>
     <section class="wrapper">
-      <RuneTable :items="RUNEWORDS" />
+      <RuneTable :items="RUNEWORDS" :runes="RUNES" :selected="SelectedRunes" />
     </section>
   </main>
   <TheFooter />
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
 import { RUNEWORDS } from "@/shared/runewords";
+import RUNES from "@/shared/constants";
 
 import TheHeader from "./components/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
 import RuneList from "./components/RuneList.vue";
 import RuneTable from "./components/RuneTable.vue";
+
+const SelectedRunes = ref([]);
 </script>
 
 <style lang="scss" scoped>

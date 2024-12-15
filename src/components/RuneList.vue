@@ -23,9 +23,15 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { RUNES } from "@/shared/constants";
 
-console.log("RUNES", RUNES);
+const props = defineProps({
+  runes: {
+    type: Array,
+    default: () => {
+      return [];
+    },
+  },
+});
 
 const emit = defineEmits(["select"]);
 
@@ -61,7 +67,7 @@ function splitToNChunks(array, n) {
   return result;
 }
 
-const splittedRunes = computed(() => splitToNChunks(RUNES, 3));
+const splittedRunes = computed(() => splitToNChunks([...props.runes], 3));
 </script>
 
 <style lang="scss" scoped>
