@@ -5,6 +5,7 @@ import * as path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: "/blizzless-runewords/",
   plugins: [vue()],
   resolve: {
     alias: {
