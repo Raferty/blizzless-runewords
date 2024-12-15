@@ -12,7 +12,11 @@
         :class="{ '--active': isActive(rune.id) }"
         @click="selectRune(rune.id)"
       >
-        <img :src="rune.image_url" :alt="rune.name" class="runelist__image" />
+        <img
+          :src="`/blizzless-runewords/` + rune.image_url"
+          :alt="rune.name"
+          class="runelist__image"
+        />
       </div>
     </div>
   </div>
