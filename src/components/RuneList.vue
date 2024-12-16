@@ -61,6 +61,8 @@ const selectRune = (id) => {
 
 const clearRunes = () => {
   selectedRunes.value = [];
+
+  emit("select", selectedRunes.value);
 };
 
 function splitToNChunks(array, n) {
