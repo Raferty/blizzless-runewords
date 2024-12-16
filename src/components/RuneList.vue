@@ -21,7 +21,7 @@
     </div>
   </div>
   <div>
-    <button @click="clearRunes">Clear</button>
+    <button class="button" @click="clearRunes">Clear</button>
   </div>
 </template>
 
@@ -78,6 +78,7 @@ const splittedRunes = computed(() => splitToNChunks([...props.runes], 3));
 .runelist {
   gap: 4px;
   display: flex;
+  margin-bottom: 16px;
 
   &__part {
     gap: 4px;
@@ -101,5 +102,17 @@ const splittedRunes = computed(() => splitToNChunks([...props.runes], 3));
   &__image {
     width: 48px;
   }
+}
+
+.button {
+  cursor: pointer;
+  width: 100%;
+  display: block;
+  padding: 4px 8px;
+  border: 1px solid #ae2a1a;
+  border-radius: 4px;
+  display: block;
+  color: #fff;
+  background-color: #ae2a1a;
 }
 </style>
