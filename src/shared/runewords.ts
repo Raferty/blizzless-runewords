@@ -156,6 +156,7 @@ export const RUNEWORDS = [
     patch: "2.4",
     level: 23,
     ladder: false,
+    reworked: true,
     stats: [
       "+30% Faster Block Rate",
       "+40-80% Enhanced Damage (varies)",
@@ -267,6 +268,7 @@ export const RUNEWORDS = [
     patch: "1.11",
     level: 25,
     ladder: false,
+    reworked: true,
     stats: [
       "3% Chance To Cast Level 1 Howl When Struck",
       "10% Chance To Cast Level 1 Taunt On Striking",
@@ -396,6 +398,7 @@ export const RUNEWORDS = [
     patch: "",
     level: 29,
     ladder: false,
+    reworked: true,
     stats: [
       "4% Chance To Cast Level 5 Slow Missiles When Struck",
       "2% Chance To Cast level 15 Valkyrie On Striking",
@@ -501,6 +504,7 @@ export const RUNEWORDS = [
     patch: "",
     level: 35,
     ladder: true,
+    reworked: true,
     stats: [
       "+20% Faster Hit Recovery",
       "+75-100% Enhanced Defense",
@@ -520,6 +524,7 @@ export const RUNEWORDS = [
     patch: "",
     level: 35,
     ladder: true,
+    reworked: true,
     stats: [
       "+20% Faster Hit Recovery",
       "+75-100% Enhanced Defense",
@@ -540,6 +545,7 @@ export const RUNEWORDS = [
     patch: "",
     level: 35,
     ladder: true,
+    reworked: true,
     stats: [
       "+20% Faster Hit Recovery",
       "+75-100% Enhanced Defense",
@@ -696,6 +702,7 @@ export const RUNEWORDS = [
     patch: "2.4",
     level: 41,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -720,6 +727,7 @@ export const RUNEWORDS = [
     patch: "",
     level: 43,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -732,6 +740,7 @@ export const RUNEWORDS = [
     patch: "",
     level: 43,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -744,6 +753,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 43,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -768,6 +778,7 @@ export const RUNEWORDS = [
     patch: "1.11",
     level: 43,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -780,6 +791,7 @@ export const RUNEWORDS = [
     patch: "2.4",
     level: 45,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -816,6 +828,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 47,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -828,6 +841,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 47,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -840,6 +854,7 @@ export const RUNEWORDS = [
     patch: "1.11",
     level: 47,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -876,6 +891,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 49,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -888,6 +904,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 49,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -900,6 +917,7 @@ export const RUNEWORDS = [
     patch: "1.11",
     level: 49,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -912,6 +930,7 @@ export const RUNEWORDS = [
     patch: "1.11",
     level: 51,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -924,6 +943,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 53,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -936,6 +956,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 53,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -948,6 +969,7 @@ export const RUNEWORDS = [
     patch: "1.11",
     level: 53,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -960,6 +982,7 @@ export const RUNEWORDS = [
     patch: "2.6",
     level: 53,
     ladder: true,
+    reworked: true,
     stats: [],
   },
   {
@@ -1067,6 +1090,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 59,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1089,6 +1113,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 61,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1122,7 +1147,20 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 63,
     ladder: false,
-    stats: [],
+    reworked: true,
+    stats: [
+      'Magic damage reduced by 25',
+      '+15% increased attack speed',
+      '400% Damage To Demons',
+      '10% Life Stolen Per Hit',
+      '120% Enhanced Defense',
+      'All Resistances +50',
+      '+50% Better Chance of Getting Magic Items',
+      'Damage Reduced By 8%',
+      '25% Better Chance of Getting Magic Items',
+      'All Resistances +15',
+      'Replenish Life +7'
+    ],
   },
   {
     id: 73,
@@ -1133,6 +1171,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 63,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1155,6 +1194,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 63,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1188,6 +1228,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 65,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1199,6 +1240,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 65,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1210,6 +1252,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 65,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1243,6 +1286,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 65,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1254,6 +1298,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 65,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1265,6 +1310,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 65,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1276,6 +1322,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 67,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1287,6 +1334,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 67,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1298,6 +1346,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 67,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1320,6 +1369,7 @@ export const RUNEWORDS = [
     patch: "2.4",
     level: 67,
     ladder: false,
+    reworked: true,
     stats: [],
   },
   {
@@ -1340,11 +1390,28 @@ export const RUNEWORDS = [
     runes: [26, 15, 1, 2, 33, 5],
     types: ["Weapons"],
     excluded: "",
-    classes: ["Druid"],
+    classes: [""],
     patch: "1.10",
     level: 69,
     ladder: false,
-    stats: [],
+    reworked: true,
+    stats: [
+      '50% Chance To Cast Level 20 Poison Nova When You Kill An Enemy',
+      '+60% Increased Attack Speed',
+      '375-435% Enhanced Damage (varies)',
+      '+30% Crushing Blow',
+      '12-15% Life Stolen Per Hit (varies)',
+      'Prevent Monster Heal',
+      'Requirements -20%',
+      '+50 To Attack Rating',
+      '+50 To Attack Rating Against Undead',
+      '7% Mana Stolen Per Hit',
+      '75%  Damage To Undead',
+      '+1 To Light Radius',
+      'Requirements -20%',
+      '-25% Target Defense',
+      'Indestructible',
+    ],
   },
   {
     id: 93,

@@ -7,6 +7,12 @@
     </aside>
     <section class="wrapper">
       <RuneTable :items="RUNEWORDS" :runes="RUNES" :selected="SelectedRunes" />
+
+      <div class="hints">
+        <h3 class="hints__title">Hints</h3>
+
+        <span class="chips">L</span> - Ladder only runewords
+      </div>
     </section>
   </main>
   <TheFooter />
@@ -39,5 +45,15 @@ const SelectedRunes = ref([]);
 .wrapper {
   flex: 1;
   margin-left: 32px;
+}
+
+.hints {
+  margin-top: 32px;
+  margin-bottom: 32px;
+  margin-bottom: 400px;
+
+  &__title {
+    margin-bottom: 16px;
+  }
 }
 </style>

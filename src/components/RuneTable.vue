@@ -13,13 +13,14 @@
         :key="item.id"
         :class="[isComplete(selected, item.runes) ? 'complete' : '']"
       >
-        <td>{{ item.id }}</td>
         <td class="table__name">
           <span
             @mouseenter="handleMouseEnter(item)"
             @mouseleave="handleMouseLeave(item)"
             >{{ item.name }}</span
           >
+          <span v-if="item.reworked" class="reworked">reworked</span>
+          <span v-if="item.ladder" class="chips">L</span>
         </td>
         <template v-for="rune in item.runes" :key="rune">
           <template v-if="isFound(rune)">
@@ -48,8 +49,11 @@
     class="modal"
     :style="`left: ${x + 40}px; top: ${y + 20}px`"
   >
-    {{ currentItem }}
     <h3 class="modal__title">{{ currentItem.name }}</h3>
+    <div class="modal__type">{{ currentItem.types.join(', ') }}</div>
+    <div class="modal__property" v-for="prop in currentItem.stats">
+      {{ prop }}
+    </div>
   </div>
 </template>
 
@@ -132,7 +136,7 @@ const handleMouseLeave = () => {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .table {
   width: 100%;
   font-size: 14px;
@@ -154,10 +158,14 @@ const handleMouseLeave = () => {
   }
 
   &__name {
+
     position: relative;
 
+
     span {
+      display: inline-block;
       cursor: pointer;
+      margin-right: 8px;
     }
   }
 }
@@ -165,8 +173,6 @@ const handleMouseLeave = () => {
 .modal {
   padding: 32px;
   position: absolute;
-  // left: 40px;
-  // top: 40px;
   min-width: 22rem;
   max-width: 460px;
   border: 1px solid #bab197;
@@ -179,6 +185,18 @@ const handleMouseLeave = () => {
     font-size: 1.4em;
     line-height: 1em;
   }
+
+  &__type {
+    text-align: center;
+    font-size: .875em;
+    margin-bottom: .5rem;
+    color: #bd8547;
+  }
+
+  &__property {
+    text-align: center;
+    color: #5cbd4b;
+  }
 }
 
 .found {
@@ -189,5 +207,22 @@ const handleMouseLeave = () => {
 }
 .complete {
   background-color: #200000;
+}
+
+.chips {
+  text-align: center;
+  display: inline-block;
+  width: 16px;
+  color: #fff;
+  background-color: #501008;
+  border-radius: 4px;
+}
+
+.reworked {
+  font-size: 12px;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: #007bff;
 }
 </style>
