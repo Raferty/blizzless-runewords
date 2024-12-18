@@ -1061,6 +1061,7 @@ export const RUNEWORDS = [
     bugged: {
       status: true,
       message: [
+        '+5 to Raise Skeleton (necromancer only)',
         '+40% Faster Cast Rate',
       ]
     },
