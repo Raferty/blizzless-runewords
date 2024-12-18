@@ -160,7 +160,7 @@ export const RUNEWORDS = [
     stats: [
       "+30% Faster Block Rate",
       "+40-80% Enhanced Damage (varies)",
-      "+ 3 to Weapon block (Assassin only)",
+      "+3 to Weapon block (Assassin only)",
       "+75 Poison Damage Over 5 Seconds",
       "+6 to Strength",
       "+6 to Dexterity",
@@ -1267,7 +1267,7 @@ export const RUNEWORDS = [
     excluded: "",
     classes: ["Paladin"],
     patch: "1.11",
-    level: 53,
+    level: 51,
     ladder: false,
     reworked: true,
     stats: [
@@ -1275,9 +1275,9 @@ export const RUNEWORDS = [
       "+2 To Paladin Skill Levels",
       "+50% Damage to Undead",
       "+100-150 To Life (varies)",
-      "+75% Better Chance of Getting Magic Items",
+      "15% Slower Stamina Drain",
       "Fire Resist +30%",
-      "15% Slower Stamina Drain"
+      "+75% Better Chance of Getting Magic Items"
     ],
   },
   {

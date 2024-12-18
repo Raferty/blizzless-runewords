@@ -22,6 +22,10 @@
         <div class="hints__block">
           <span class="reworked">Reworked</span> - Reworked runeword by Blizzless team.
         </div>
+
+        <div class="hints__block">
+          <span class="warning">!!! Bugged atm</span> - Bugged at this moment. Will be fix soon.
+        </div>
       </div>
     </section>
   </main>
