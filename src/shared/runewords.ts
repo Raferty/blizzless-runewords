@@ -536,6 +536,7 @@ export const RUNEWORDS = [
     stats: [
       "+20% Faster Hit Recovery",
       "+75-100% Enhanced Defense",
+      "Level 16 Blessed Aim aura when equipped",
       "+10 to Vitality",
       "Cold Resist +30%",
       "Cold Absorb +10-15%",
