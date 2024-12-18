@@ -157,6 +157,13 @@ export const RUNEWORDS = [
     level: 23,
     ladder: false,
     reworked: true,
+    bugged: {
+      status: true,
+      message: [
+        "+5-7 to Weapon block (Assassin only)",
+        "+258 Poison Damage Over 5 Seconds",
+      ]
+    },
     stats: [
       "+30% Faster Block Rate",
       "+40-80% Enhanced Damage (varies)",
