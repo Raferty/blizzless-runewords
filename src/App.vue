@@ -15,7 +15,13 @@
       <div class="hints">
         <h3 class="hints__title">Hints</h3>
 
-        <span class="chips">L</span> - Ladder only runewords
+        <div class="hints__block">
+          <span class="chips">L</span> - Ladder only runewords.
+        </div>
+
+        <div class="hints__block">
+          <span class="reworked">Reworked</span> - Reworked runeword by Blizzless team.
+        </div>
       </div>
     </section>
   </main>
@@ -69,6 +75,10 @@ const filteredRunewords = computed(() => search.value ? RUNEWORDS.filter((word) 
   margin-bottom: 400px;
 
   &__title {
+    margin-bottom: 16px;
+  }
+
+  &__block {
     margin-bottom: 16px;
   }
 }
