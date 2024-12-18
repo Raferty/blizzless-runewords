@@ -219,7 +219,7 @@ const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
 }
 
 .modal {
-  padding: 32px;
+  padding: 24px;
   position: absolute;
   min-width: 22rem;
   max-width: 490px;
