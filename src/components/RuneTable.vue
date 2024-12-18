@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       <tr
-        v-for="item in items"
+        v-for="item in sortedItems"
         :key="item.id"
         :class="[isComplete(selected, item.runes) ? 'complete' : '']"
       >
@@ -39,7 +39,15 @@
         <template v-for="n in RUNELENGTH - item.runes.length" :key="n">
           <td>&nbsp;</td>
         </template>
-        <td>{{ item.types.join(", ") }}</td>
+        <td class="table__types">
+          {{ item.types.join(", ") }}
+          <template v-if="item.excluded && item.excluded.length > 0">
+            <span class="table__classes">({{ item.excluded }})</span>
+          </template>
+          <template v-if="item.classes && item.classes.length > 0">
+            <span class="table__classes">({{ item.classes.join(", ") }})</span>
+          </template>
+        </td>
         <td>{{ item.level }}</td>
       </tr>
     </tbody>
@@ -142,6 +150,30 @@ const handleMouseLeave = () => {
   showModal.value = false;
   currentItem.value = [];
 };
+
+function useSortArrayByField(array, field) {
+  return array.sort((a, b) => {
+    // nulls sort after anything else
+    if (a[field] === null) {
+      return 1;
+    }
+    if (b[field] === null) {
+      return -1;
+    }
+
+    if (a[field] < b[field]) {
+      return -1;
+    }
+
+    if (a[field] > b[field]) {
+      return 1;
+    }
+
+    return 0;
+  });
+}
+
+const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
 </script>
 
 <style lang="scss">
@@ -166,15 +198,18 @@ const handleMouseLeave = () => {
   }
 
   &__name {
-
     position: relative;
-
 
     span {
       display: inline-block;
       cursor: pointer;
       margin-right: 8px;
     }
+  }
+
+  &__classes {
+    display: block;
+    color: #bd8547;
   }
 }
 
