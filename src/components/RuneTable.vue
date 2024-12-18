@@ -55,6 +55,13 @@
     <div class="modal__property" v-for="prop in currentItem.stats">
       {{ prop }}
     </div>
+    <br />
+    <template v-if="currentItem?.bugged?.status">
+      <h3 class="modal__title">Bugged</h3>
+      <div class="modal__property modal__property--bugged" v-for="prop in currentItem?.bugged?.message">
+        {{ prop }}
+      </div>
+    </template>
   </div>
 </template>
 
@@ -197,6 +204,10 @@ const handleMouseLeave = () => {
   &__property {
     text-align: center;
     color: #5cbd4b;
+
+    &--bugged {
+      color: #ae2a1a;
+    }
   }
 }
 
