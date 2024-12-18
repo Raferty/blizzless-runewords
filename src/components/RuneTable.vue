@@ -21,6 +21,7 @@
           >
           <span v-if="item.reworked" class="reworked">reworked</span>
           <span v-if="item.ladder" class="chips">L</span>
+          <span v-if="item?.bugged?.status" class="warning">!!! bugged atm</span>
         </td>
         <template v-for="rune in item.runes" :key="rune">
           <template v-if="isFound(rune)">
@@ -205,6 +206,7 @@ const handleMouseLeave = () => {
 .notfound {
   color: #844;
 }
+
 .complete {
   background-color: #200000;
 }
@@ -224,5 +226,13 @@ const handleMouseLeave = () => {
   padding: 2px 4px;
   border-radius: 4px;
   background-color: #007bff;
+}
+
+.warning {
+  font-size: 12px;
+  color: #000;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: #ffc107;
 }
 </style>

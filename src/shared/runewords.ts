@@ -269,6 +269,12 @@ export const RUNEWORDS = [
     level: 25,
     ladder: false,
     reworked: true,
+    bugged: {
+      status: true,
+      message: [
+        '100% Enhanced Damage'
+      ]
+    },
     stats: [
       "Adds +40 damage",
       "+3 to Masteries (barbarian only)",
@@ -549,12 +555,14 @@ export const RUNEWORDS = [
     ladder: true,
     reworked: true,
     stats: [
-      "+20% Faster Hit Recovery",
       "130% Enhanced Defense",
-      "+10 to Vitality",
       "8% life stolen per hit",
       "Fire Resist +30%",
       "Fire Absorb +10-15%",
+      "+350% extra gold from monsters",
+      "+20% Faster Cast Rate",
+      "+10 to Vitality",
+      "+20% Faster Hit Recovery",
     ],
   },
   {
@@ -765,15 +773,15 @@ export const RUNEWORDS = [
       '+20-30% Increased Attack Speed (varies)',
       '+300-350% Enhanced Damage (varies)',
       '+9 To Maximum Damage',
-      '+50 To Attack Rating',
-      '+75% Damage to Undead',
-      '+50 Attack Rating Against Undead',
+      // '+50 To Attack Rating', El rune
+      // '+75% Damage to Undead', Eld rune
+      // '+50 Attack Rating Against Undead', Eld rune
       '8-10% Life Stolen Per Hit (varies)',
       'Prevent Monster Heal',
       '+10 To Strength',
       '+10 To Vitality',
       'Damage Reduced By 8',
-      '+1 Light Radius',
+      // '+1 Light Radius', El rune
       'Requirements -20%',
     ],
   },
@@ -805,9 +813,16 @@ export const RUNEWORDS = [
     level: 43,
     ladder: false,
     reworked: true,
+    bugged: {
+      status: true,
+      message: [
+        'Adds +210 Maximum Damage',
+        'Hit Causes Monster To Flee 44%'
+      ]
+    },
     stats: [
       '+25% Increased Attack Speed',
-      'Adds +200 maximum damage',
+      'Adds +200 Maximum Damage',
       '50-80% Bonus To Attack Rating (varies)',
       '+1-6 To Berserk',
       '+1-6 To Zeal',
@@ -924,6 +939,7 @@ export const RUNEWORDS = [
     reworked: true,
     stats: [
       '+33% Piercing Attack',
+      '90% Enhanced Damage',
       '4-8% Mana Stolen Per Hit (varies)',
       '+10 Energy',
       'Cannot Be Frozen',
@@ -991,6 +1007,13 @@ export const RUNEWORDS = [
     level: 47,
     ladder: false,
     reworked: true,
+    bugged: {
+      status: true,
+      message: [
+        "30% Chance To Cast Level 8 Cloak of Shadows When Struck (doesn't work)",
+        "-25% Chance Of Getting Magic Items (doesn't work)",
+      ]
+    },
     stats: [
       '30% Chance To Cast Level 8 Cloak of Shadows When Struck',
       '30% Faster Hit Recovery',
@@ -1035,6 +1058,12 @@ export const RUNEWORDS = [
     level: 47,
     ladder: false,
     reworked: true,
+    bugged: {
+      status: true,
+      message: [
+        '+40% Faster Cast Rate',
+      ]
+    },
     stats: [
       '+6 to Bone Armor (necromancer only)',
       '+6 to Raise Skeleton (necromancer only)',
