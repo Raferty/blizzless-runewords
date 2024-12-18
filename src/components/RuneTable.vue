@@ -61,7 +61,12 @@
     <h3 class="modal__title">{{ currentItem.name }}</h3>
     <div class="modal__type">{{ currentItem.types.join(', ') }}</div>
     <div class="modal__property" v-for="prop in currentItem.stats">
-      {{ prop }}
+      <template v-if="prop.includes('#')">
+        <span class="modal__property--type">{{ prop.substring(1, prop.length - 1) }}</span>
+      </template>
+      <template v-else>
+        {{ prop }}
+      </template>
     </div>
     <br />
     <template v-if="currentItem?.bugged?.status">
@@ -217,7 +222,7 @@ const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
   padding: 32px;
   position: absolute;
   min-width: 22rem;
-  max-width: 460px;
+  max-width: 490px;
   border: 1px solid #bab197;
   background-color: rgba(#000, 0.8);
 
@@ -239,6 +244,12 @@ const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
   &__property {
     text-align: center;
     color: #5cbd4b;
+
+    &--type {
+      display: block;
+      color: #74706c;
+      margin-top: 16px;
+    }
 
     &--bugged {
       color: #ae2a1a;

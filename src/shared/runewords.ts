@@ -416,9 +416,9 @@ export const RUNEWORDS = [
       "2% Chance To Cast level 15 Valkyrie On Striking",
       "+2 To Amazon Skill Levels",
       "+2 To Critical Strike",
-      "+30% increased attack speed",
+      "+30% Increased Attack Speed",
       "Cold Resist +30%",
-      "All resist +15%",
+      "All Resistances +15%",
       "Attacker Takes Damage of 14",
     ],
   },
@@ -699,7 +699,7 @@ export const RUNEWORDS = [
     level: 39,
     ladder: true,
     stats: [
-      "Weapons",
+      "#Weapons#",
       "5% Chance to cast level 1 Burst of Speed on striking",
       "Level 1 Fanaticism Aura",
       "+30% Increased Attack Speed",
@@ -707,8 +707,7 @@ export const RUNEWORDS = [
       "+75% Damage to Undead",
       "+50 to Attack Rating against Undead",
       "+10 to Dexterity",
-
-      "Body Armors",
+      "#Body Armors#",
       "+65% Faster Run/Walk",
       "+40% Increased Attack Speed",
       "+20% Faster Hit Recovery",
@@ -1491,7 +1490,7 @@ export const RUNEWORDS = [
     level: 59,
     ladder: false,
     stats: [
-      "Weapons",
+      "#Weapons#",
       "20% Chance To Cast Level 15 Chilling Armor when Struck",
       "+25% Faster Cast Rate",
       "+300% Enhanced Damage",
@@ -1505,7 +1504,7 @@ export const RUNEWORDS = [
       "12% Damage Taken Goes To Mana",
       "+1 To Light Radius",
 
-      "Body Armor",
+      "#Body Armor#",
       "20% Chance To Cast Level 15 Chilling Armor when Struck",
       "+25% Faster Cast Rate",
       "+300% Enhanced Damage",
@@ -1947,7 +1946,7 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     stats: [
-      'Weapons',
+      '#Weapons#',
       '100% Chance To Cast level 40 Blaze When You Level-up',
       '20% Chance to cast level 44 Firestorm on striking',
       'Level 10-15 Redemption Aura When Equipped (varies)',
@@ -1958,8 +1957,7 @@ export const RUNEWORDS = [
       '20% Deadly Strike',
       'Ignores Target Defense',
       '14% Mana Stolen Per Hit',
-
-      'Shields',
+      '#Shields#',
       '100% Chance To Cast level 40 Blaze When You Level-up',
       '20% Chance to cast level 44 Firestorm on striking',
       'Level 10-15 Redemption Aura When Equipped (varies)',
