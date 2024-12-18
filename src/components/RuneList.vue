@@ -39,7 +39,7 @@ const props = defineProps({
 
 const emit = defineEmits(["select"]);
 
-const selectedRunes = ref([]);
+const selectedRunes = ref(JSON.parse(localStorage.getItem('selectedRunes')) || []);
 
 const isActive = (id) => {
   const index = selectedRunes.value.findIndex((rune) => rune === id);
@@ -56,12 +56,14 @@ const selectRune = (id) => {
     selectedRunes.value.splice(index, 1);
   }
 
+  localStorage.setItem('selectedRunes', JSON.stringify(selectedRunes.value));
   emit("select", selectedRunes.value);
 };
 
 const clearRunes = () => {
   selectedRunes.value = [];
 
+  localStorage.setItem('selectedRunes', JSON.stringify([]));
   emit("select", selectedRunes.value);
 };
 

@@ -33,7 +33,7 @@ import RuneList from "./components/RuneList.vue";
 import RuneTable from "./components/RuneTable.vue";
 
 const search = ref('');
-const SelectedRunes = ref([]);
+const SelectedRunes = ref(JSON.parse(localStorage.getItem('selectedRunes')) || []);
 
 
 const filteredRunewords = computed(() => search.value ? RUNEWORDS.filter((word) => word.name.toLowerCase().includes(search.value.toLowerCase())) : RUNEWORDS );
