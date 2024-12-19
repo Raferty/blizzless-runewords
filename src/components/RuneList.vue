@@ -1,27 +1,30 @@
 <template>
   <div class="runelist">
-    <div
-      v-for="runePart in splittedRunes"
-      :key="runePart"
-      class="runelist__part"
-    >
+    <div class="runelist__title">Runes</div>
+    <div class="runelist__wrapper">
       <div
-        v-for="rune in runePart"
-        :key="rune.id"
-        class="runelist__item"
-        :class="{ '--active': isActive(rune.id) }"
-        @click="selectRune(rune.id)"
+        v-for="runePart in splittedRunes"
+        :key="runePart"
+        class="runelist__part"
       >
-        <img
-          :src="`/blizzless-runewords/` + rune.image_url"
-          :alt="rune.name"
-          class="runelist__image"
-        />
+        <div
+          v-for="rune in runePart"
+          :key="rune.id"
+          class="runelist__item"
+          :class="{ '--active': isActive(rune.id) }"
+          @click="selectRune(rune.id)"
+        >
+          <img
+            :src="`/blizzless-runewords/` + rune.image_url"
+            :alt="rune.name"
+            class="runelist__image"
+          />
+        </div>
       </div>
     </div>
-  </div>
-  <div>
-    <button class="button" @click="clearRunes">Clear</button>
+    <div class="runelist__actions">
+      <button class="button" @click="clearRunes">Clear</button>
+    </div>
   </div>
 </template>
 
@@ -39,7 +42,9 @@ const props = defineProps({
 
 const emit = defineEmits(["select"]);
 
-const selectedRunes = ref(JSON.parse(localStorage.getItem('selectedRunes')) || []);
+const selectedRunes = ref(
+  JSON.parse(localStorage.getItem("selectedRunes")) || []
+);
 
 const isActive = (id) => {
   const index = selectedRunes.value.findIndex((rune) => rune === id);
@@ -56,14 +61,14 @@ const selectRune = (id) => {
     selectedRunes.value.splice(index, 1);
   }
 
-  localStorage.setItem('selectedRunes', JSON.stringify(selectedRunes.value));
+  localStorage.setItem("selectedRunes", JSON.stringify(selectedRunes.value));
   emit("select", selectedRunes.value);
 };
 
 const clearRunes = () => {
   selectedRunes.value = [];
 
-  localStorage.setItem('selectedRunes', JSON.stringify([]));
+  localStorage.setItem("selectedRunes", JSON.stringify([]));
   emit("select", selectedRunes.value);
 };
 
@@ -80,14 +85,35 @@ const splittedRunes = computed(() => splitToNChunks([...props.runes], 3));
 
 <style lang="scss" scoped>
 .runelist {
-  gap: 4px;
-  display: flex;
   margin-bottom: 16px;
+
+  &__wrapper {
+    gap: 4px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+    }
+  }
+
+  &__title {
+    font-weight: 700;
+    padding: 4px;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 4px;
+  }
 
   &__part {
     gap: 4px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+
+    @media (min-width: 1024px) {
+      flex-direction: column;
+    }
   }
 
   &__item {

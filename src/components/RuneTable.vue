@@ -12,6 +12,7 @@
         v-for="item in sortedItems"
         :key="item.id"
         :class="[isComplete(selected, item.runes) ? 'complete' : '']"
+        @click="$emit('select', item)"
       >
         <td class="table__name">
           <span
@@ -21,7 +22,9 @@
           >
           <span v-if="item.reworked" class="reworked">reworked</span>
           <span v-if="item.ladder" class="chips">L</span>
-          <span v-if="item?.bugged?.status" class="warning">!!! bugged atm</span>
+          <span v-if="item?.bugged?.status" class="warning"
+            >!!! bugged atm</span
+          >
         </td>
         <template v-for="rune in item.runes" :key="rune">
           <template v-if="isFound(rune)">
@@ -59,10 +62,24 @@
     :style="`left: ${x + 40}px; top: ${y + 20}px`"
   >
     <h3 class="modal__title">{{ currentItem.name }}</h3>
-    <div class="modal__type">{{ currentItem.types.join(', ') }}</div>
+    <div class="modal__type">{{ currentItem.types.join(", ") }}</div>
+    <div class="modal__runes">
+      <template v-for="rune in currentItem.runes" :key="rune">
+        <span class="modal__rune">
+          <img
+            :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
+            :alt="findRune(rune)?.name"
+            class="modal__image"
+          />
+          {{ findRune(rune)?.name }}
+        </span>
+      </template>
+    </div>
     <div class="modal__property" v-for="prop in currentItem.stats">
       <template v-if="prop.includes('#')">
-        <span class="modal__property--type">{{ prop.substring(1, prop.length - 1) }}</span>
+        <span class="modal__property--type">{{
+          prop.substring(1, prop.length - 1)
+        }}</span>
       </template>
       <template v-else>
         {{ prop }}
@@ -71,7 +88,10 @@
     <br />
     <template v-if="currentItem?.bugged?.status">
       <h3 class="modal__title">Bugged</h3>
-      <div class="modal__property modal__property--bugged" v-for="prop in currentItem?.bugged?.message">
+      <div
+        class="modal__property modal__property--bugged"
+        v-for="prop in currentItem?.bugged?.message"
+      >
         {{ prop }}
       </div>
     </template>
@@ -81,6 +101,8 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import RUNES from "@/shared/constants";
+
+defineEmits(["select"]);
 
 const RUNELENGTH = 6;
 
@@ -104,6 +126,10 @@ const props = defineProps({
     },
   },
 });
+
+const findRune = (id) => {
+  return RUNES.find((rune) => rune.id === id);
+};
 
 const headers = [
   "Runeword",
@@ -156,6 +182,18 @@ const handleMouseLeave = () => {
   currentItem.value = [];
 };
 
+function useSortArrayBoolean(array, field) {
+  return array.sort((a, b) => {
+    if (a[field] && !b[field]) {
+      return -1;
+    } else if (!a[field] && b[field]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
 function useSortArrayByField(array, field) {
   return array.sort((a, b) => {
     // nulls sort after anything else
@@ -178,7 +216,11 @@ function useSortArrayByField(array, field) {
   });
 }
 
-const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
+const sortedItems = computed(() => {
+  const items = useSortArrayByField(props.items, "name");
+
+  return useSortArrayBoolean(items, "complete");
+});
 </script>
 
 <style lang="scss">
@@ -186,6 +228,13 @@ const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
   width: 100%;
   font-size: 14px;
   border-collapse: collapse;
+
+  display: block;
+  overflow-x: auto;
+
+  @media (min-width: 1024px) {
+    display: table;
+  }
 
   th {
     padding: 4px;
@@ -236,8 +285,8 @@ const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
 
   &__type {
     text-align: center;
-    font-size: .875em;
-    margin-bottom: .5rem;
+    font-size: 0.875em;
+    margin-bottom: 0.5rem;
     color: #bd8547;
   }
 
@@ -254,6 +303,25 @@ const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
     &--bugged {
       color: #ae2a1a;
     }
+  }
+
+  &__runes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    gap: 8px;
+  }
+
+  &__rune {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image {
+    max-width: 32px;
+    margin-right: 4px;
   }
 }
 
@@ -282,7 +350,7 @@ const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
   color: #fff;
   padding: 2px 4px;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: rgba(#007bff, 0.8);
 }
 
 .warning {
@@ -290,6 +358,6 @@ const sortedItems = computed(() => useSortArrayByField(props.items, 'level'));
   color: #000;
   padding: 2px 4px;
   border-radius: 4px;
-  background-color: #ffc107;
+  background-color: rgba(#ffc107, 0.8);
 }
 </style>

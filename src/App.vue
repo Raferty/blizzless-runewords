@@ -1,35 +1,54 @@
 <template>
   <TheHeader />
   <main class="main">
-    <aside class="aside">
-      <div class="aside__title">Runes</div>
-      <RuneList :runes="RUNES" @select="(e: any) => SelectedRunes = e" />
-    </aside>
-    <section class="wrapper">
-      <div class="search">
-        <input v-model="search" type="text" class="search__input" placeholder="Search by name">
-      </div>
-
-      <RuneTable :items="filteredRunewords" :runes="RUNES" :selected="SelectedRunes" />
-
-      <div class="hints">
-        <h3 class="hints__title">Hints</h3>
-
-        <div class="hints__block">
-          <span class="chips">L</span> - Ladder only runewords.
+    <div class="main__container container">
+      <aside class="aside">
+        <div class="aside__container">
+          <RuneList :runes="RUNES" @select="(e: any) => SelectedRunes = e" />
         </div>
+      </aside>
+      <section class="wrapper">
+        <div class="container">
+          <div class="search">
+            <input
+              v-model="search"
+              type="text"
+              class="search__input"
+              placeholder="Search by name"
+            />
+          </div>
 
-        <div class="hints__block">
-          <span class="reworked">Reworked</span> - Reworked runeword by Blizzless team.
-        </div>
+          <RuneTable
+            :items="filteredRunewords"
+            :runes="RUNES"
+            :selected="SelectedRunes"
+            @select="handleRuneWord"
+          />
 
-        <div class="hints__block">
-          <span class="warning">!!! Bugged atm</span> - Bugged at this moment. Will be fix soon.
+          <div class="hints">
+            <h3 class="hints__title">Hints</h3>
+
+            <div class="hints__block">
+              <span class="chips">L</span> - Ladder only runewords.
+            </div>
+
+            <div class="hints__block">
+              <span class="reworked">Reworked</span> - Reworked runeword by
+              Blizzless team.
+            </div>
+
+            <div class="hints__block">
+              <span class="warning">!!! Bugged atm</span> - Bugged at this
+              moment. Will be fix soon.
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
   <TheFooter />
+
+  <RuneWordCard v-model="currentCard" :runeword="currentRuneWord" />
 </template>
 
 <script setup>
@@ -41,36 +60,111 @@ import TheHeader from "./components/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
 import RuneList from "./components/RuneList.vue";
 import RuneTable from "./components/RuneTable.vue";
+import RuneWordCard from "./components/RuneWordCard.vue";
 
-const search = ref('');
-const SelectedRunes = ref(JSON.parse(localStorage.getItem('selectedRunes')) || []);
+const search = ref("");
+const SelectedRunes = ref(
+  JSON.parse(localStorage.getItem("selectedRunes")) || []
+);
 
+const isComplete = (where, what) => {
+  for (var i = 0; i < what.length; i++) {
+    if (where.indexOf(what[i]) == -1) return false;
+  }
+  return true;
+};
 
-const filteredRunewords = computed(() => search.value ? RUNEWORDS.filter((word) => word.name.toLowerCase().includes(search.value.toLowerCase())) : RUNEWORDS );
+const sortedRunewords = computed(() => {
+  let result = [];
+
+  RUNEWORDS.forEach((item) => {
+    if (isComplete(SelectedRunes.value, item.runes)) {
+      result.push({
+        ...item,
+        complete: true,
+      });
+    } else {
+      result.push({
+        ...item,
+      });
+    }
+  });
+
+  return result;
+});
+
+const filteredRunewords = computed(() => {
+  return search.value
+    ? sortedRunewords.value.filter((word) =>
+        word.name.toLowerCase().includes(search.value.toLowerCase())
+      )
+    : sortedRunewords.value;
+});
+
+const currentCard = ref(false);
+const currentRuneWord = ref({});
+
+const handleRuneWord = (evt) => {
+  currentRuneWord.value = evt;
+  currentCard.value = true;
+};
 </script>
 
 <style lang="scss" scoped>
 .aside {
-  width: 144px;
+  width: 100%;
+  margin-bottom: 16px;
 
-  &__title {
-    font-weight: 700;
-    padding: 4px;
-    font-size: 14px;
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 4px;
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
+    width: 144px;
+  }
+
+  &__container {
+    position: sticky;
+    top: 15px;
+
+    padding-top: 55px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    @media (min-width: 1024px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+
+.container {
+  padding-left: 8px;
+  padding-right: 8px;
+
+  @media (min-width: 1024px) {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }
 
 .main {
-  display: flex;
-  margin: 0 auto;
+  //margin: 0 auto;
   max-width: 1100px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 1024px) {
+      flex-direction: row;
+    }
+  }
 }
 
 .wrapper {
   flex: 1;
-  margin-left: 32px;
+
+  // @media (min-width: 1024px) {
+  //   margin-left: 32px;
+  // }
 }
 
 .hints {
