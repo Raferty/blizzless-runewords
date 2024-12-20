@@ -233,7 +233,7 @@ export const RUNEWORDS = [
     id: 12,
     name: "Edge",
     runes: [3, 7, 11],
-    types: ["Melee Weapons"],
+    types: ["Missile Weapons"],
     excluded: "",
     classes: [],
     patch: "1.10",
