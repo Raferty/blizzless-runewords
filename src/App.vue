@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { RUNEWORDS } from "@/shared/runewords";
 import RUNES from "@/shared/constants";
 
@@ -61,6 +61,20 @@ import TheFooter from "./components/TheFooter.vue";
 import RuneList from "./components/RuneList.vue";
 import RuneTable from "./components/RuneTable.vue";
 import RuneWordCard from "./components/RuneWordCard.vue";
+
+const currentWidth = ref(0);
+
+const handleResize = () => {
+  currentWidth.value = window.innerWidth;
+};
+
+onMounted(() => {
+  handleResize();
+
+  if (import.meta.client) {
+    window.addEventListener("resize", handleResize);
+  }
+});
 
 const search = ref("");
 const SelectedRunes = ref(
@@ -106,7 +120,10 @@ const currentRuneWord = ref({});
 
 const handleRuneWord = (evt) => {
   currentRuneWord.value = evt;
-  currentCard.value = true;
+
+  if (currentWidth.value >= 1024) {
+    currentCard.value = true;
+  }
 };
 </script>
 
