@@ -2075,7 +2075,6 @@ export const RUNEWORDS = [
       "+330-370% Enhanced Damage (varies)",
       "-(40-60)% To Enemy Cold Resistance (varies)",
       "Repairs 1 durability in 5 seconds",
-      "-(40-60)% To Enemy Cold Resistance (varies)",
       "Freezes Target +3",
       "Requirements -20%",
       "20% Deadly Strike",
