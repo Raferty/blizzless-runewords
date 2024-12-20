@@ -1155,6 +1155,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 49,
     ladder: false,
+    reworked: true,
     stats: [
       "10% Chance to cast level 16 Cyclone Armor when struck",
       "10% Chance to cast level 20 Bone Armor when struck",
@@ -1167,6 +1168,12 @@ export const RUNEWORDS = [
       "Repairs Durability 1 In 4 Seconds",
     ],
     complete: false,
+    bugged: {
+      status: true,
+      message: [
+        "Repairs Durability 1 In 25 Seconds",
+      ],
+    },
   },
   {
     id: 51,
