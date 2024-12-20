@@ -2,7 +2,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th v-for="item in headers" :key="headers">
+        <th v-for="(item, index) in store.interface.table.headers[store.currentLang]" :key="index">
           {{ item }}
         </th>
       </tr>
@@ -18,7 +18,7 @@
           <span
             @mouseenter="handleMouseEnter(item)"
             @mouseleave="handleMouseLeave(item)"
-            >{{ item.name }}</span
+            >{{ item.name[store.currentLang] }}</span
           >
           <span v-if="item.reworked" class="reworked">reworked</span>
           <span v-if="item.ladder" class="chips">L</span>
@@ -68,10 +68,10 @@
         <span class="modal__rune">
           <img
             :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
-            :alt="findRune(rune)?.name"
+            :alt="findRune(rune)?.name[store.currentLang]"
             class="modal__image"
           />
-          {{ findRune(rune)?.name }}
+          {{ findRune(rune)?.name[store.currentLang] }}
         </span>
       </template>
     </div>
@@ -100,7 +100,10 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import RUNES from "@/shared/constants";
+import { RUNES } from "@/shared/constants";
+import { useInfoStore } from '@/store/index.js';
+
+const store = useInfoStore();
 
 defineEmits(["select"]);
 
@@ -131,20 +134,8 @@ const findRune = (id) => {
   return RUNES.find((rune) => rune.id === id);
 };
 
-const headers = [
-  "Runeword",
-  "Rune",
-  "Rune",
-  "Rune",
-  "Rune",
-  "Rune",
-  "Rune",
-  "Item Types",
-  "Level",
-];
-
 const getRuneName = (id) => {
-  return RUNES.find((rune) => rune.id === parseInt(id)).name;
+  return RUNES.find((rune) => rune.id === parseInt(id)).name[store.currentLang];
 };
 
 const isFound = (id) => {

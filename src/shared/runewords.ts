@@ -1,7 +1,10 @@
 export const RUNEWORDS = [
   {
     id: 1,
-    name: "Nadir",
+    name: {
+      ru: "Упадок",
+      en: "Nadir",
+    },
     runes: [4, 3],
     types: ["Helms"],
     level: 13,
@@ -20,7 +23,10 @@ export const RUNEWORDS = [
   },
   {
     id: 2,
-    name: "Steel",
+    name: {
+      ru: "Сталь",
+      en: "Steel",
+    },
     runes: [3, 1],
     types: ["Swords", "Axes", "Maces"],
     level: 13,
@@ -39,7 +45,10 @@ export const RUNEWORDS = [
   },
   {
     id: 3,
-    name: "Malice",
+    name: {
+      ru: "Злоба",
+      en: "Malice",
+    },
     runes: [6, 1, 5],
     types: ["Melee Weapons"],
     level: 15,
@@ -58,7 +67,10 @@ export const RUNEWORDS = [
   },
   {
     id: 4,
-    name: "Stealth",
+    name: {
+      ru: "Незаметность",
+      en: "Stealth",
+    },
     runes: [7, 5],
     types: ["Body Armors"],
     level: 17,
@@ -76,7 +88,10 @@ export const RUNEWORDS = [
   },
   {
     id: 5,
-    name: "Leaf",
+    name: {
+      ru: "Лист",
+      en: "Leaf",
+    },
     runes: [3, 8],
     types: ["Staves"],
     excluded: "Not Orbs/Wands",
@@ -96,7 +111,10 @@ export const RUNEWORDS = [
   },
   {
     id: 6,
-    name: "Ancient's Pledge",
+    name: {
+      ru: "Клятва Древних",
+      en: "Ancient's Pledge",
+    },
     runes: [8, 9, 7],
     types: ["Shields"],
     excluded: "",
@@ -114,7 +132,10 @@ export const RUNEWORDS = [
   },
   {
     id: 7,
-    name: "Holy Thunder",
+    name: {
+      ru: "Божественный гром",
+      en: "Holy Thunder",
+    },
     runes: [5, 8, 9, 7],
     types: ["Scepters"],
     excluded: "",
@@ -136,7 +157,10 @@ export const RUNEWORDS = [
   },
   {
     id: 8,
-    name: "Zephyr",
+    name: {
+      ru: "Бриз",
+      en: "Zephyr",
+    },
     runes: [9, 5],
     types: ["Missile Weapons"],
     excluded: "",
@@ -156,7 +180,10 @@ export const RUNEWORDS = [
   },
   {
     id: 9,
-    name: "Pattern",
+    name: {
+      ru: "Узор",
+      en: "Pattern",
+    },
     runes: [7, 9, 10],
     types: ["Katars"],
     excluded: "",
@@ -188,7 +215,10 @@ export const RUNEWORDS = [
   },
   {
     id: 10,
-    name: "King's Grace",
+    name: {
+      ru: "Милость короля",
+      en: "King's Grace",
+    },
     runes: [11, 8, 10],
     types: ["Swords", "Scepters"],
     excluded: "",
@@ -211,7 +241,10 @@ export const RUNEWORDS = [
   },
   {
     id: 11,
-    name: "Strength",
+    name: {
+      ru: "Сила",
+      en: "Strength",
+    },
     runes: [11, 3],
     types: ["Melee Weapons"],
     excluded: "",
@@ -231,7 +264,10 @@ export const RUNEWORDS = [
   },
   {
     id: 12,
-    name: "Edge",
+    name: {
+      ru: "Острие",
+      en: "Edge",
+    },
     runes: [3, 7, 11],
     types: ["Melee Weapons"],
     excluded: "",
@@ -255,7 +291,10 @@ export const RUNEWORDS = [
   },
   {
     id: 13,
-    name: "Spirit",
+    name: {
+      ru: "Дух",
+      en: "Spirit",
+    },
     runes: [7, 10, 9, 11],
     types: ["Swords", "Shields"],
     excluded: "",
@@ -280,7 +319,10 @@ export const RUNEWORDS = [
   },
   {
     id: 14,
-    name: "Myth",
+    name: {
+      ru: "Миф",
+      en: "Myth",
+    },
     runes: [15, 14, 21],
     types: ["Body Armors"],
     excluded: "",
@@ -306,7 +348,10 @@ export const RUNEWORDS = [
   },
   {
     id: 15,
-    name: "Honor",
+    name: {
+      ru: "Честь",
+      en: "Honor",
+    },
     runes: [11, 1, 6, 3, 12],
     types: ["Melee Weapons"],
     excluded: "",
@@ -331,7 +376,10 @@ export const RUNEWORDS = [
   },
   {
     id: 16,
-    name: "Lore",
+    name: {
+      ru: "История",
+      en: "Lore",
+    },
     runes: [9, 12],
     types: ["Helms"],
     excluded: "",
@@ -351,7 +399,10 @@ export const RUNEWORDS = [
   },
   {
     id: 17,
-    name: "Radiance",
+    name: {
+      ru: "Сияние",
+      en: "Radiance",
+    },
     runes: [4, 12, 6],
     types: ["Helms"],
     excluded: "",
@@ -374,7 +425,10 @@ export const RUNEWORDS = [
   },
   {
     id: 18,
-    name: "Insight",
+    name: {
+      ru: "Прозрение",
+      en: "Insight",
+    },
     runes: [8, 3, 7, 12],
     types: ["Missile Weapons", "Polearms", "Staves"],
     excluded: "",
@@ -399,7 +453,10 @@ export const RUNEWORDS = [
   },
   {
     id: 19,
-    name: "Rhyme",
+    name: {
+      ru: "Рифма",
+      en: "Rhyme",
+    },
     runes: [13, 5],
     types: ["Shields"],
     excluded: "",
@@ -420,7 +477,10 @@ export const RUNEWORDS = [
   },
   {
     id: 20,
-    name: "Peace",
+    name: {
+      ru: "Мир",
+      en: "Peace",
+    },
     runes: [22, 10, 11],
     types: ["Body Armors"],
     excluded: "",
@@ -442,7 +502,10 @@ export const RUNEWORDS = [
   },
   {
     id: 21,
-    name: "Black",
+    name: {
+      ru: "Мрак",
+      en: "Black",
+    },
     runes: [10, 16, 4],
     types: ["Clubs", "Hammers", "Maces"],
     excluded: "",
@@ -465,7 +528,10 @@ export const RUNEWORDS = [
   },
   {
     id: 22,
-    name: "White",
+    name: {
+      ru: "Белизна",
+      en: "White",
+    },
     runes: [14, 16],
     types: ["Wands"],
     excluded: "",
@@ -488,7 +554,10 @@ export const RUNEWORDS = [
   },
   {
     id: 23,
-    name: "Bulwark",
+    name: {
+      ru: "Оплот",
+      en: "Bulwark",
+    },
     runes: [13, 16, 12],
     types: ["Helms"],
     excluded: "",
@@ -510,7 +579,10 @@ export const RUNEWORDS = [
   },
   {
     id: 24,
-    name: "Cure",
+    name: {
+      ru: "Лекарство",
+      en: "Cure",
+    },
     runes: [13, 16, 7],
     types: ["Helms"],
     excluded: "",
@@ -531,7 +603,10 @@ export const RUNEWORDS = [
   },
   {
     id: 25,
-    name: "Ground",
+    name: {
+      ru: "Земля",
+      en: "Ground",
+    },
     runes: [13, 16, 24],
     types: ["Helms"],
     excluded: "",
@@ -554,7 +629,10 @@ export const RUNEWORDS = [
   },
   {
     id: 26,
-    name: "Hearth",
+    name: {
+      ru: "Очаг",
+      en: "Hearth",
+    },
     runes: [13, 16, 25],
     types: ["Helms"],
     excluded: "",
@@ -577,7 +655,10 @@ export const RUNEWORDS = [
   },
   {
     id: 27,
-    name: "Temper",
+    name: {
+      ru: "Закалка",
+      en: "Temper",
+    },
     runes: [13, 16, 21],
     types: ["Helms"],
     excluded: "",
@@ -600,7 +681,10 @@ export const RUNEWORDS = [
   },
   {
     id: 28,
-    name: "Memory",
+    name: {
+      ru: "Память",
+      en: "Memory",
+    },
     runes: [17, 16, 12, 5],
     types: ["Staves"],
     excluded: "Not Orbs/Wands",
@@ -625,7 +709,10 @@ export const RUNEWORDS = [
   },
   {
     id: 29,
-    name: "Smoke",
+    name: {
+      ru: "Дым",
+      en: "Smoke",
+    },
     runes: [4, 17],
     types: ["Body Armors"],
     excluded: "",
@@ -646,7 +733,10 @@ export const RUNEWORDS = [
   },
   {
     id: 30,
-    name: "Splendor",
+    name: {
+      ru: "Великолепие",
+      en: "Splendor",
+    },
     runes: [5, 17],
     types: ["Shields"],
     excluded: "",
@@ -669,7 +759,10 @@ export const RUNEWORDS = [
   },
   {
     id: 31,
-    name: "Melody",
+    name: {
+      ru: "Мелодия",
+      en: "Melody",
+    },
     runes: [13, 18, 4],
     types: ["Missile Weapons"],
     excluded: "",
@@ -693,7 +786,10 @@ export const RUNEWORDS = [
 
   {
     id: 32,
-    name: "Harmony",
+    name: {
+      ru: "Гармония",
+      en: "Harmony",
+    },
     runes: [3, 6, 12, 18],
     types: ["Missile Weapons"],
     excluded: "",
@@ -720,7 +816,10 @@ export const RUNEWORDS = [
   },
   {
     id: 33,
-    name: "Hustle",
+    name: {
+      ru: "Переполох",
+      en: "Hustle",
+    },
     runes: [13, 18, 2],
     types: ["Weapons", "Body Armors"],
     excluded: "",
@@ -744,13 +843,16 @@ export const RUNEWORDS = [
       "+6 to Evade",
       "+10 to Dexterity",
       "50% Slower Stamina Drain",
-      "+All Resistances +10",
+      "All Resistances +10",
     ],
     complete: false,
   },
   {
     id: 34,
-    name: "Lionheart",
+    name: {
+      ru: "Львиное сердце",
+      en: "Lionheart",
+    },
     runes: [15, 17, 19],
     types: ["Body Armors"],
     excluded: "",
@@ -772,7 +874,10 @@ export const RUNEWORDS = [
   },
   {
     id: 35,
-    name: "Obedience",
+    name: {
+      ru: "Послушание",
+      en: "Obedience",
+    },
     runes: [15, 18, 10, 5, 19],
     types: ["Polearms", "Spears"],
     excluded: "",
@@ -798,7 +903,10 @@ export const RUNEWORDS = [
   },
   {
     id: 36,
-    name: "Unbending Will",
+    name: {
+      ru: "Непреклонность",
+      en: "Unbending Will",
+    },
     runes: [19, 16, 6, 15],
     types: ["Swords"],
     excluded: "",
@@ -828,7 +936,10 @@ export const RUNEWORDS = [
   },
   {
     id: 37,
-    name: "Wealth",
+    name: {
+      ru: "Изобилие",
+      en: "Wealth",
+    },
     runes: [20, 18, 3],
     types: ["Body Armors"],
     excluded: "",
@@ -846,7 +957,10 @@ export const RUNEWORDS = [
   },
   {
     id: 38,
-    name: "Passion",
+    name: {
+      ru: "Страсть",
+      en: "Passion",
+    },
     runes: [14, 9, 2, 20],
     types: ["Weapons"],
     excluded: "",
@@ -876,7 +990,10 @@ export const RUNEWORDS = [
   },
   {
     id: 39,
-    name: "Lawbringer",
+    name: {
+      ru: "Судия",
+      en: "Lawbringer",
+    },
     runes: [11, 20, 18],
     types: ["Swords", "Hammers", "Scepters"],
     excluded: "",
@@ -901,7 +1018,10 @@ export const RUNEWORDS = [
   },
   {
     id: 40,
-    name: "Voice of Reason",
+    name: {
+      ru: "Голос разума",
+      en: "Voice of Reason",
+    },
     runes: [20, 18, 1, 2],
     types: ["Swords", "Maces", "Scepters"],
     excluded: "",
@@ -928,7 +1048,10 @@ export const RUNEWORDS = [
   },
   {
     id: 41,
-    name: "Treachery",
+    name: {
+      ru: "Вероломство",
+      en: "Treachery",
+    },
     runes: [13, 10, 20],
     types: ["Body Armors"],
     excluded: "",
@@ -949,7 +1072,10 @@ export const RUNEWORDS = [
   },
   {
     id: 42,
-    name: "Enlightenment",
+    name: {
+      ru: "Просветление",
+      en: "Enlightenment",
+    },
     runes: [21, 8, 12],
     types: ["Body Armors"],
     excluded: "",
@@ -972,7 +1098,10 @@ export const RUNEWORDS = [
   },
   {
     id: 43,
-    name: "Wisdom",
+    name: {
+      ru: "Мудрость",
+      en: "Wisdom",
+    },
     runes: [21, 6, 2],
     types: ["Helms"],
     excluded: "",
@@ -996,7 +1125,10 @@ export const RUNEWORDS = [
   },
   {
     id: 44,
-    name: "Crescent Moon",
+    name: {
+      ru: "Полумесяц",
+      en: "Crescent Moon",
+    },
     runes: [13, 22, 3],
     types: ["Axes", "Swords", "Polearms"],
     excluded: "",
@@ -1069,7 +1201,7 @@ export const RUNEWORDS = [
       "+1 To All Skills",
       "-25% Chance Of Getting Magic Items",
       "+10 To Strength",
-      "All resistances 15%",
+      "All resistances 15",
     ],
     complete: false,
   },
@@ -1090,7 +1222,7 @@ export const RUNEWORDS = [
       "+20% increased chance of blocking",
       "+16 To Strength",
       "+16 To Vitality",
-      "All Resistances +40%",
+      "All Resistances +40",
       "Level 6 Defiance aura when equipped",
       "+10 To Energy",
     ],
@@ -1427,9 +1559,9 @@ export const RUNEWORDS = [
     level: 55,
     ladder: false,
     stats: [
+      "Indestructible",
       "100% Chance To Cast Level 44 Chain Lightning When You Die",
       "25% Chance To Cast Level 18 Glacial Spike On Attack",
-      "Indestructible",
       "+300-385% Enhanced Damage (varies)*",
       "20% Bonus To Attack Rating",
       "+50 To Attack Rating",
@@ -1715,7 +1847,7 @@ export const RUNEWORDS = [
     reworked: true,
     stats: [
       "Magic damage reduced by 25",
-      "+15% increased attack speed",
+      "+15% Increased Attack Speed",
       "400% Damage To Demons",
       "10% Life Stolen Per Hit",
       "120% Enhanced Defense",
@@ -2113,7 +2245,7 @@ export const RUNEWORDS = [
     reworked: true,
     stats: [
       "Indestructible",
-      "450-500% enhanced damage",
+      "450-500% Enhanced Damage",
       "Level 16-20 Concentration Aura When Equipped (varies)",
       "260-300% Bonus To Attack Rating (varies)",
       "+4-396% Damage To Demons (Based on Character Level)",
@@ -2209,6 +2341,7 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     stats: [
+      "Indestructible",
       "50% Chance To Cast Level 20 Poison Nova When You Kill An Enemy",
       "+60% Increased Attack Speed",
       "375-435% Enhanced Damage (varies)",
@@ -2222,7 +2355,6 @@ export const RUNEWORDS = [
       "75%  Damage To Undead",
       "+1 To Light Radius",
       "-25% Target Defense",
-      "Indestructible",
     ],
     complete: false,
   },

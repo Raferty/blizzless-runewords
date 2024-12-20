@@ -4,7 +4,7 @@
       <div class="runeword__close" @click="$emit('update:modelValue', false)">
         Close
       </div>
-      <h3 class="runeword__title">{{ runeword.name }}</h3>
+      <h3 class="runeword__title">{{ runeword.name[store.currentLang] }}</h3>
       <div class="runeword__type">{{ runeword.types.join(", ") }}</div>
       <div class="runeword__runes">
         <template v-for="rune in runeword.runes" :key="rune">
@@ -14,7 +14,7 @@
               :alt="findRune(rune)?.name"
               class="runeword__image"
             />
-            {{ findRune(rune)?.name }}
+            {{ findRune(rune)?.name[store.currentLang] }}
           </span>
         </template>
       </div>
@@ -44,7 +44,10 @@
 
 <script setup>
 import { ref } from "vue";
-import RUNES from "@/shared/constants";
+import { RUNES } from "@/shared/constants";
+import { useInfoStore } from '@/store/index.js';
+
+const store = useInfoStore();
 
 const props = defineProps({
   modelValue: {

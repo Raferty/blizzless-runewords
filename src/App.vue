@@ -8,7 +8,7 @@
         </div>
       </aside>
       <section class="wrapper">
-        <div class="container">
+        <div class="wrapper__container">
           <div class="search">
             <input
               v-model="search"
@@ -54,7 +54,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { RUNEWORDS } from "@/shared/runewords";
-import RUNES from "@/shared/constants";
+import { RUNES } from "@/shared/constants";
 
 import TheHeader from "./components/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
@@ -62,7 +62,15 @@ import RuneList from "./components/RuneList.vue";
 import RuneTable from "./components/RuneTable.vue";
 import RuneWordCard from "./components/RuneWordCard.vue";
 
+import { useInfoStore } from '@/store/index.js';
+
+const store = useInfoStore();
+
 const currentWidth = ref(0);
+
+const initLang = (lang) => {
+  document.querySelector('html').setAttribute('lang', lang);
+}
 
 const handleResize = () => {
   currentWidth.value = window.innerWidth;
@@ -70,6 +78,7 @@ const handleResize = () => {
 
 onMounted(() => {
   handleResize();
+  initLang(localStorage.getItem('lang'));
 
   if (import.meta.client) {
     window.addEventListener("resize", handleResize);
@@ -179,9 +188,11 @@ const handleRuneWord = (evt) => {
 .wrapper {
   flex: 1;
 
-  // @media (min-width: 1024px) {
-  //   margin-left: 32px;
-  // }
+  &__container {
+    @media (min-width: 1024px) {
+      margin-left: 32px;
+    }
+  }
 }
 
 .hints {
