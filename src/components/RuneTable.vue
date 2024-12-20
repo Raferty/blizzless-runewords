@@ -12,12 +12,13 @@
         v-for="item in sortedItems"
         :key="item.id"
         :class="[isComplete(selected, item.runes) ? 'complete' : '']"
-        @click="$emit('select', item)"
+
       >
         <td class="table__name">
           <span
             @mouseenter="handleMouseEnter(item)"
             @mouseleave="handleMouseLeave(item)"
+            @click="$emit('select', item)"
             >{{ item.name }}</span
           >
           <span v-if="item.reworked" class="reworked">reworked</span>
