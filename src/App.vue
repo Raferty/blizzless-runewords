@@ -62,15 +62,15 @@ import RuneList from "./components/RuneList.vue";
 import RuneTable from "./components/RuneTable.vue";
 import RuneWordCard from "./components/RuneWordCard.vue";
 
-import { useInfoStore } from '@/store/index.js';
+import { useInfoStore } from "@/store/index.js";
 
 const store = useInfoStore();
 
 const currentWidth = ref(0);
 
 const initLang = (lang) => {
-  document.querySelector('html').setAttribute('lang', lang);
-}
+  document.querySelector("html").setAttribute("lang", lang);
+};
 
 const handleResize = () => {
   currentWidth.value = window.innerWidth;
@@ -78,7 +78,7 @@ const handleResize = () => {
 
 onMounted(() => {
   handleResize();
-  initLang(localStorage.getItem('lang'));
+  initLang(localStorage.getItem("lang") || "en");
 
   if (import.meta.client) {
     window.addEventListener("resize", handleResize);
@@ -149,8 +149,6 @@ const handleRuneWord = (evt) => {
   &__container {
     position: sticky;
     top: 15px;
-
-    padding-top: 55px;
     padding-left: 8px;
     padding-right: 8px;
 

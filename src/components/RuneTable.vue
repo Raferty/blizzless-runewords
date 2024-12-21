@@ -2,7 +2,12 @@
   <table class="table">
     <thead>
       <tr>
-        <th v-for="(item, index) in store.interface.table.headers[store.currentLang]" :key="index">
+        <th
+          v-for="(item, index) in store.interface.table.headers[
+            store.currentLang
+          ]"
+          :key="index"
+        >
           {{ item }}
         </th>
       </tr>
@@ -12,12 +17,12 @@
         v-for="item in sortedItems"
         :key="item.id"
         :class="[isComplete(selected, item.runes) ? 'complete' : '']"
-        @click="$emit('select', item)"
       >
         <td class="table__name">
           <span
             @mouseenter="handleMouseEnter(item)"
             @mouseleave="handleMouseLeave(item)"
+            @click="$emit('select', item)"
             >{{ item.name[store.currentLang] }}</span
           >
           <span v-if="item.reworked" class="reworked">reworked</span>
@@ -61,7 +66,7 @@
     class="modal"
     :style="`left: ${x + 40}px; top: ${y + 20}px`"
   >
-    <h3 class="modal__title">{{ currentItem.name }}</h3>
+    <h3 class="modal__title">{{ currentItem.name[store.currentLang] }}</h3>
     <div class="modal__type">{{ currentItem.types.join(", ") }}</div>
     <div class="modal__runes">
       <template v-for="rune in currentItem.runes" :key="rune">
@@ -71,7 +76,9 @@
             :alt="findRune(rune)?.name[store.currentLang]"
             class="modal__image"
           />
-          {{ findRune(rune)?.name[store.currentLang] }}
+          <span class="rune">{{
+            findRune(rune)?.name[store.currentLang]
+          }}</span>
         </span>
       </template>
     </div>
@@ -101,7 +108,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { RUNES } from "@/shared/constants";
-import { useInfoStore } from '@/store/index.js';
+import { useInfoStore } from "@/store/index.js";
 
 const store = useInfoStore();
 
@@ -267,7 +274,7 @@ const sortedItems = computed(() => {
   background-color: rgba(#000, 0.8);
 
   &__title {
-    color: #8a8062;
+    color: #ecd2a8;
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.4em;
@@ -278,7 +285,7 @@ const sortedItems = computed(() => {
     text-align: center;
     font-size: 0.875em;
     margin-bottom: 0.5rem;
-    color: #bd8547;
+    color: #888;
   }
 
   &__property {

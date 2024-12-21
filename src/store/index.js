@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
 export const useInfoStore = defineStore({
-  id: 'info-store',
+  id: "info-store",
 
   state: () => {
     return {
-      lang: 'en',
+      lang: "en",
       interface: {
         table: {
           headers: {
@@ -30,22 +30,22 @@ export const useInfoStore = defineStore({
               "Rune",
               "Item Types",
               "Level",
-            ]
-          }
-        }
-      }
+            ],
+          },
+        },
+      },
     };
   },
 
   actions: {
     setLang(lang) {
+      console.log("lang", lang);
       this.lang = lang;
-      localStorage.setItem('lang', lang);
-    }
+      //localStorage.setItem("lang", lang);
+    },
   },
 
   getters: {
     currentLang: (state) => state.lang,
   },
-
 });

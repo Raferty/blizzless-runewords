@@ -1,6 +1,5 @@
 <template>
   <div class="runelist">
-    <div class="runelist__title">Runes</div>
     <div class="runelist__wrapper">
       <div
         v-for="runePart in splittedRunes"

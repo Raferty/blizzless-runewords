@@ -31,16 +31,28 @@ export const RUNEWORDS = [
     types: ["Swords", "Axes", "Maces"],
     level: 13,
     ladder: false,
-    stats: [
-      "20% Enhanced Damage",
-      "+3 To Minimum Damage",
-      "+3 To Maximum Damage",
-      "+50 To Attack Rating",
-      "50% Chance Of Open Wounds",
-      "25% Increased Attack Speed",
-      "+2 To Mana After Each Kill",
-      "+1 To Light Radius",
-    ],
+    stats: {
+      ru: [
+        "+20% к урону",
+        "+3 к минимальному урону",
+        "+3 к максимальному урону",
+        "+50 к рейтингу атаки",
+        "+50% к вероятности нанести открытую рану",
+        "+25% к скорости атаки",
+        "+2 к мане при убийстве",
+        "+1 к радиусу обзора",
+      ],
+      en: [
+        "20% Enhanced Damage",
+        "+3 To Minimum Damage",
+        "+3 To Maximum Damage",
+        "+50 To Attack Rating",
+        "50% Chance Of Open Wounds",
+        "25% Increased Attack Speed",
+        "+2 To Mana After Each Kill",
+        "+1 To Light Radius",
+      ],
+    },
     complete: false,
   },
   {
@@ -53,16 +65,28 @@ export const RUNEWORDS = [
     types: ["Melee Weapons"],
     level: 15,
     ladder: false,
-    stats: [
-      "+33% Enhanced Damage",
-      "+9 To Maximum Damage",
-      "100% Chance Of Open Wounds",
-      "-25% Target Defense",
-      "-100 To Monster Defense Per Hit",
-      "Prevent Monster Heal",
-      "+50 To Attack Rating",
-      "Drain Life -5",
-    ],
+    stats: {
+      ru: [
+        "+33% к урону",
+        "+9 к максимальному урону",
+        "-25% к защите цели",
+        "+50 к рейтингу атаки",
+        "+100% к вероятности нанести открытую рану",
+        "Запрещает монстрам лечиться",
+        "-100 к защите от монстров за удар",
+        "Похищает -5 здоровья",
+      ],
+      en: [
+        "+33% Enhanced Damage",
+        "+9 To Maximum Damage",
+        "100% Chance Of Open Wounds",
+        "-25% Target Defense",
+        "-100 To Monster Defense Per Hit",
+        "Prevent Monster Heal",
+        "+50 To Attack Rating",
+        "Drain Life -5",
+      ],
+    },
     complete: false,
   },
   {
@@ -75,15 +99,27 @@ export const RUNEWORDS = [
     types: ["Body Armors"],
     level: 17,
     ladder: false,
-    stats: [
-      "Magic Damage Reduced By 3",
-      "+6 To Dexterity",
-      "+15 To Maximum Stamina",
-      "Poison Resist +30%",
-      "Regenerate Mana 15%",
-      "25% Faster Cast Rate",
-      "25% Faster Hit Recovery",
-    ],
+    stats: {
+      ru: [
+        "+25% к скорости ходьбы и бега",
+        "+25% к скорости применения умений",
+        "+25% к ускоренному восстановлению от удара",
+        "+6 к ловкости",
+        "Восполняет 15% маны",
+        "15 к максимальной выносливости",
+        "+30% к сопротивлению яду",
+        "-3 к магическому урону",
+      ],
+      en: [
+        "Magic Damage Reduced By 3",
+        "+6 To Dexterity",
+        "+15 To Maximum Stamina",
+        "Poison Resist +30%",
+        "Regenerate Mana 15%",
+        "25% Faster Cast Rate",
+        "25% Faster Hit Recovery",
+      ],
+    },
     complete: false,
   },
   {
@@ -97,16 +133,28 @@ export const RUNEWORDS = [
     excluded: "Not Orbs/Wands",
     level: 19,
     ladder: false,
-    stats: [
-      "Adds 5-30 Fire Damage",
-      "+3 To Fire Skills",
-      "+3 To Fire Bolt (Sorceress Only)",
-      "+3 To Inferno (Sorceress Only)",
-      "+3 To Warmth (Sorceress Only)",
-      "+2 To Mana After Each Kill",
-      "+ (2 Per Character Level) +2-198 To Defense (Based On Character Level)",
-      "Cold Resist +33%",
-    ],
+    stats: {
+      ru: [
+        "+3 к умениям огня",
+        "+5-30 урона от огня",
+        "+3 к умению «Инферно»",
+        "+3 к умению «Тепло»",
+        "+3 к умению «Стрела огня»",
+        "+(2 за уровень персонажа) к защите (зависит от уровня персонажа)",
+        "+33% к сопротивлению льду",
+        "+2 к мане при убийстве",
+      ],
+      en: [
+        "Adds 5-30 Fire Damage",
+        "+3 To Fire Skills",
+        "+3 To Fire Bolt (Sorceress Only)",
+        "+3 To Inferno (Sorceress Only)",
+        "+3 To Warmth (Sorceress Only)",
+        "+2 To Mana After Each Kill",
+        "+ (2 Per Character Level) +2-198 To Defense (Based On Character Level)",
+        "Cold Resist +33%",
+      ],
+    },
     complete: false,
   },
   {
@@ -120,14 +168,24 @@ export const RUNEWORDS = [
     excluded: "",
     level: 21,
     ladder: false,
-    stats: [
-      "+50% Enhanced Defense",
-      "Cold Resist +43%",
-      "Fire Resist +48%",
-      "Lightning Resist +48%",
-      "Poison Resist +48%",
-      "10% Damage Goes To Mana",
-    ],
+    stats: {
+      ru: [
+        "+50% к защите",
+        "+43% к сопротивлению льду",
+        "+48% к сопротивлению молнии",
+        "+48% к сопротивлению огню",
+        "+48% к сопротивлению яду",
+        "+10% к урону, приходящемуся на ману",
+      ],
+      en: [
+        "+50% Enhanced Defense",
+        "Cold Resist +43%",
+        "Fire Resist +48%",
+        "Lightning Resist +48%",
+        "Poison Resist +48%",
+        "10% Damage Goes To Mana",
+      ],
+    },
     complete: false,
   },
   {
@@ -141,18 +199,32 @@ export const RUNEWORDS = [
     excluded: "",
     level: 21,
     ladder: false,
-    stats: [
-      "+60% Enhanced Damage",
-      "-25% Target Defense",
-      "Adds 5-30 Fire Damage",
-      "Adds 21-110 Lightning Damage",
-      "+75 Poison Damage Over 5 Seconds",
-      "+10 To Maximum Damage",
-      "Lightning Resistance +60%",
-      "+5 To Maximum Lightning Resistance",
-      "+3 To Holy Shock (Paladin Only)",
-      "Level 7 Chain Lightning (60 Charges)",
-    ],
+    stats: {
+      ru: [
+        "+60% к урону",
+        "+10 к максимальному урону",
+        "-25% к защите цели",
+        "+5-30 урона от огня",
+        "+21-110 урона от молнии",
+        "+75 урона от яда за 5 сек.",
+        "+3 к умению «Священная молния» (только для паладинов)",
+        "+5% к максимальному сопротивлению молнии",
+        "+60% к сопротивлению молнии",
+        "«Цепная молния» 7-го уровня (60/60 зарядов)",
+      ],
+      en: [
+        "+60% Enhanced Damage",
+        "-25% Target Defense",
+        "Adds 5-30 Fire Damage",
+        "Adds 21-110 Lightning Damage",
+        "+75 Poison Damage Over 5 Seconds",
+        "+10 To Maximum Damage",
+        "Lightning Resistance +60%",
+        "+5 To Maximum Lightning Resistance",
+        "+3 To Holy Shock (Paladin Only)",
+        "Level 7 Chain Lightning (60 Charges)",
+      ],
+    },
     complete: false,
   },
   {
@@ -166,16 +238,28 @@ export const RUNEWORDS = [
     excluded: "",
     level: 21,
     ladder: false,
-    stats: [
-      "+33% Enhanced Damage",
-      "+66 To Attack Rating",
-      "Adds 1-50 Lightning Damage",
-      "-25% Target Defense",
-      "+25 Defense",
-      "25% Faster Run/Walk",
-      "25% Increased Attack Speed",
-      "7% Chance To Cast Level 1 Twister When Struck",
-    ],
+    stats: {
+      ru: [
+        "Вероятность 7% применить умение «Смерч» 1-го уровня при получении урона",
+        "+25% к скорости ходьбы и бега",
+        "+25% к скорости атаки",
+        "+33% к урону",
+        "-25% к защите цели",
+        "+66 к рейтингу атаки",
+        "+1-50 урона от молнии",
+        "+25 к защите",
+      ],
+      en: [
+        "+33% Enhanced Damage",
+        "+66 To Attack Rating",
+        "Adds 1-50 Lightning Damage",
+        "-25% Target Defense",
+        "+25 Defense",
+        "25% Faster Run/Walk",
+        "25% Increased Attack Speed",
+        "7% Chance To Cast Level 1 Twister When Struck",
+      ],
+    },
     complete: false,
   },
   {
@@ -199,19 +283,62 @@ export const RUNEWORDS = [
         "+258 Poison Damage Over 5 Seconds",
       ],
     },
-    stats: [
-      "+30% Faster Block Rate",
-      "+40-80% Enhanced Damage (varies)",
-      "+3 to Weapon block (Assassin only)",
-      "+75 Poison Damage Over 5 Seconds",
-      "+6 to Strength",
-      "+6 to Dexterity",
-      "All Resistances +15",
-      "Adds 17-62 Fire Damage",
-      "Adds 1-50 Lightning Damage",
-      "Adds 3-14 Cold Damage",
-    ],
+    stats: {
+      ru: [
+        "+30% к скорости блока",
+        "+(40-80)% к урону",
+        "+3 to Weapon block (Assassin only)",
+        "+75 урона от яда за 5 сек",
+        "+6 к силе",
+        "+6 к ловкости",
+        "+15 к сопротивлению всем видам урона",
+        "+17-62 урона от огня",
+        "+1-50 урона от молнии",
+        "+3-14 урона от льда",
+      ],
+      en: [
+        "+30% Faster Block Rate",
+        "+40-80% Enhanced Damage (varies)",
+        "+3 to Weapon block (Assassin only)",
+        "+75 Poison Damage Over 5 Seconds",
+        "+6 to Strength",
+        "+6 to Dexterity",
+        "All Resistances +15",
+        "Adds 17-62 Fire Damage",
+        "Adds 1-50 Lightning Damage",
+        "Adds 3-14 Cold Damage",
+      ],
+    },
     complete: false,
+    old: {
+      types: ["Claws"],
+      stats: {
+        ru: [
+          "+30% к скорости блока",
+          "+(40-80)% к урону",
+          "+10% к рейтингу атаки",
+          "+17-62 урона от огня",
+          "+1-50 урона от молнии",
+          "+3-14 урона от льда",
+          "+75 урона от яда за 5 сек",
+          "+6 к силе",
+          "+6 к ловкости",
+          "+15 к сопротивлению всем видам урона",
+        ],
+        en: [
+          "+30% Faster Block Rate",
+          "+40-80% Enhanced Damage (varies)",
+          "10% Bonus to Attack Rating",
+          "Adds 17-62 Fire Damage",
+          "Adds 1-50 Lightning Damage",
+          "Adds 3-14 Cold Damage",
+          "+75 Poison Damage Over 5 Seconds",
+          "+6 to Strength",
+          "+6 to Dexterity",
+          "All Resistances +15",
+        ],
+      },
+    },
   },
   {
     id: 10,
@@ -269,7 +396,7 @@ export const RUNEWORDS = [
       en: "Edge",
     },
     runes: [3, 7, 11],
-    types: ["Melee Weapons"],
+    types: ["Missile Weapons"],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -1152,7 +1279,10 @@ export const RUNEWORDS = [
   },
   {
     id: 45,
-    name: "Duress",
+    name: {
+      ru: "Принуждение",
+      en: "Duress",
+    },
     runes: [13, 22, 10],
     types: ["Body Armors"],
     excluded: "",
@@ -1177,7 +1307,10 @@ export const RUNEWORDS = [
   },
   {
     id: 46,
-    name: "Gloom",
+    name: {
+      ru: "Сумрак",
+      en: "Gloom",
+    },
     runes: [19, 22, 21],
     types: ["Body Armors"],
     excluded: "",
@@ -1207,7 +1340,10 @@ export const RUNEWORDS = [
   },
   {
     id: 47,
-    name: "Stone",
+    name: {
+      ru: "Камень",
+      en: "Stone",
+    },
     runes: [13, 22, 21, 17],
     types: ["Body Armors"],
     excluded: "",
@@ -1230,7 +1366,10 @@ export const RUNEWORDS = [
   },
   {
     id: 48,
-    name: "Bone",
+    name: {
+      ru: "Кость",
+      en: "Bone",
+    },
     runes: [12, 22, 22],
     types: ["Body Armors"],
     excluded: "",
@@ -1258,7 +1397,10 @@ export const RUNEWORDS = [
   },
   {
     id: 49,
-    name: "Venom",
+    name: {
+      ru: "Яд",
+      en: "Venom",
+    },
     runes: [7, 14, 23],
     types: ["Weapons"],
     excluded: "",
@@ -1279,7 +1421,10 @@ export const RUNEWORDS = [
   },
   {
     id: 50,
-    name: "Prudence",
+    name: {
+      ru: "Благоразумие",
+      en: "Prudence",
+    },
     runes: [23, 3],
     types: ["Body Armors"],
     excluded: "",
@@ -1287,6 +1432,7 @@ export const RUNEWORDS = [
     patch: "1.10",
     level: 49,
     ladder: false,
+    reworked: true,
     stats: [
       "10% Chance to cast level 16 Cyclone Armor when struck",
       "10% Chance to cast level 20 Bone Armor when struck",
@@ -1299,10 +1445,17 @@ export const RUNEWORDS = [
       "Repairs Durability 1 In 4 Seconds",
     ],
     complete: false,
+    bugged: {
+      status: true,
+      message: ["Repairs Durability 1 In 25 Seconds"],
+    },
   },
   {
     id: 51,
-    name: "Sanctuary",
+    name: {
+      ru: "Убежище",
+      en: "Sanctuary",
+    },
     runes: [18, 18, 23],
     types: ["Shields"],
     excluded: "",
@@ -1326,7 +1479,10 @@ export const RUNEWORDS = [
   },
   {
     id: 52,
-    name: "Oath",
+    name: {
+      ru: "Клятва",
+      en: "Oath",
+    },
     runes: [13, 21, 23, 17],
     types: ["Swords", "Axes", "Maces"],
     excluded: "",
@@ -1352,7 +1508,10 @@ export const RUNEWORDS = [
   },
   {
     id: 53,
-    name: "Rain",
+    name: {
+      ru: "Дождь",
+      en: "Rain",
+    },
     runes: [9, 23, 6],
     types: ["Body Armors"],
     excluded: "",
@@ -1376,7 +1535,10 @@ export const RUNEWORDS = [
   },
   {
     id: 54,
-    name: "Delirium",
+    name: {
+      ru: "Бред",
+      en: "Delirium",
+    },
     runes: [20, 24, 16],
     types: ["Helms"],
     excluded: "",
@@ -1400,7 +1562,10 @@ export const RUNEWORDS = [
   },
   {
     id: 55,
-    name: "Kingslayer",
+    name: {
+      ru: "Цареубийца",
+      en: "Kingslayer",
+    },
     runes: [23, 22, 25, 19],
     types: ["Swords", "Axes"],
     excluded: "",
@@ -1424,7 +1589,10 @@ export const RUNEWORDS = [
   },
   {
     id: 56,
-    name: "Rift",
+    name: {
+      ru: "Разлом",
+      en: "Rift",
+    },
     runes: [15, 18, 20, 25],
     types: ["Polearms", "Scepters"],
     excluded: "",
@@ -1450,7 +1618,10 @@ export const RUNEWORDS = [
   },
   {
     id: 57,
-    name: "Principle",
+    name: {
+      ru: "Убеждение",
+      en: "Principle",
+    },
     runes: [8, 24, 2],
     types: ["Body Armors"],
     excluded: "",
@@ -1472,7 +1643,10 @@ export const RUNEWORDS = [
   },
   {
     id: 58,
-    name: "Mosaic",
+    name: {
+      ru: "Мозаика",
+      en: "Mosaic",
+    },
     runes: [23, 25, 11],
     types: ["Katars"],
     excluded: "",
@@ -1497,7 +1671,10 @@ export const RUNEWORDS = [
   },
   {
     id: 59,
-    name: "Silence",
+    name: {
+      ru: "Тишина",
+      en: "Silence",
+    },
     runes: [14, 2, 15, 24, 3, 26],
     types: ["Weapons"],
     excluded: "",
@@ -1524,7 +1701,10 @@ export const RUNEWORDS = [
   },
   {
     id: 60,
-    name: "Heart of the Oak",
+    name: {
+      ru: "Сердце дуба",
+      en: "Heart of the Oak",
+    },
     runes: [18, 26, 21, 10],
     types: ["Staves", "Maces"],
     excluded: "",
@@ -1550,7 +1730,10 @@ export const RUNEWORDS = [
   },
   {
     id: 61,
-    name: "Death",
+    name: {
+      ru: "Смерть",
+      en: "Death",
+    },
     runes: [15, 1, 26, 9, 25],
     types: ["Swords", "Axes"],
     excluded: "",
@@ -1577,7 +1760,10 @@ export const RUNEWORDS = [
   },
   {
     id: 62,
-    name: "Flickering Flame",
+    name: {
+      ru: "Мерцающее пламя",
+      en: "Flickering Flame",
+    },
     runes: [4, 21, 26],
     types: ["Helms"],
     excluded: "",
@@ -1600,7 +1786,10 @@ export const RUNEWORDS = [
   },
   {
     id: 63,
-    name: "Call to Arms",
+    name: {
+      ru: "Призыв к оружию",
+      en: "Call to Arms",
+    },
     runes: [11, 8, 23, 24, 27],
     types: ["Weapons"],
     excluded: "",
@@ -1625,7 +1814,10 @@ export const RUNEWORDS = [
   },
   {
     id: 64,
-    name: "Chaos",
+    name: {
+      ru: "Хаос",
+      en: "Chaos",
+    },
     runes: [19, 27, 22],
     types: ["Claws"],
     excluded: "",
@@ -1648,7 +1840,10 @@ export const RUNEWORDS = [
   },
   {
     id: 65,
-    name: "Exile",
+    name: {
+      ru: "Изгнание",
+      en: "Exile",
+    },
     runes: [26, 27, 24, 14],
     types: ["Paladin Shields"],
     excluded: "",
@@ -1673,7 +1868,10 @@ export const RUNEWORDS = [
   },
   {
     id: 66,
-    name: "Fortitude",
+    name: {
+      ru: "Сила духа",
+      en: "Fortitude",
+    },
     runes: [1, 12, 14, 28],
     types: ["Weapons", "Body Armors"],
     excluded: "",
@@ -1714,7 +1912,10 @@ export const RUNEWORDS = [
   },
   {
     id: 67,
-    name: "Grief",
+    name: {
+      ru: "Печаль",
+      en: "Grief",
+    },
     runes: [5, 3, 28, 23, 8],
     types: ["Swords", "Axes"],
     excluded: "",
@@ -1740,7 +1941,10 @@ export const RUNEWORDS = [
   },
   {
     id: 68,
-    name: "Bramble",
+    name: {
+      ru: "Терновник",
+      en: "Bramble",
+    },
     runes: [8, 27, 29, 5],
     types: ["Body Armors"],
     excluded: "",
@@ -1764,7 +1968,10 @@ export const RUNEWORDS = [
   },
   {
     id: 69,
-    name: "Wind",
+    name: {
+      ru: "Ветер",
+      en: "Wind",
+    },
     runes: [29, 1],
     types: ["Melee Weapons"],
     excluded: "",
@@ -1788,7 +1995,10 @@ export const RUNEWORDS = [
   },
   {
     id: 70,
-    name: "Dragon",
+    name: {
+      ru: "Дракон",
+      en: "Dragon",
+    },
     runes: [29, 28, 12],
     types: ["Body Armors", "Shields"],
     excluded: "",
@@ -1812,7 +2022,10 @@ export const RUNEWORDS = [
   },
   {
     id: 71,
-    name: "Beast",
+    name: {
+      ru: "Зверь",
+      en: "Beast",
+    },
     runes: [30, 3, 22, 23, 17],
     types: ["Axes", "Scepters", "Hammers"],
     excluded: "",
@@ -1837,7 +2050,10 @@ export const RUNEWORDS = [
   },
   {
     id: 72,
-    name: "Chains of Honor",
+    name: {
+      ru: "Цепи чести",
+      en: "Chains of Honor",
+    },
     runes: [14, 22, 30, 24],
     types: ["Body Armors"],
     excluded: "",
@@ -1860,7 +2076,10 @@ export const RUNEWORDS = [
   },
   {
     id: 73,
-    name: "Eternity",
+    name: {
+      ru: "Вечность",
+      en: "Eternity",
+    },
     runes: [11, 30, 24, 12, 29],
     types: ["Melee Weapons"],
     excluded: "",
@@ -1885,7 +2104,10 @@ export const RUNEWORDS = [
   },
   {
     id: 74,
-    name: "Infinity",
+    name: {
+      ru: "Бесконечность",
+      en: "Infinity",
+    },
     runes: [30, 23, 30, 24],
     types: ["Polearms", "Spears"],
     excluded: "",
@@ -1908,7 +2130,10 @@ export const RUNEWORDS = [
   },
   {
     id: 75,
-    name: "Wrath",
+    name: {
+      ru: "Гнев",
+      en: "Wrath",
+    },
     runes: [21, 17, 30, 23],
     types: ["Missile Weapons"],
     excluded: "",
@@ -1933,7 +2158,10 @@ export const RUNEWORDS = [
   },
   {
     id: 76,
-    name: "Fury",
+    name: {
+      ru: "Неистовство",
+      en: "Fury",
+    },
     runes: [31, 25, 5],
     types: ["Melee Weapons"],
     excluded: "",
@@ -1956,7 +2184,10 @@ export const RUNEWORDS = [
   },
   {
     id: 77,
-    name: "Enigma",
+    name: {
+      ru: "Тайна",
+      en: "Enigma",
+    },
     runes: [31, 6, 30],
     types: ["Body Armors"],
     excluded: "",
@@ -1979,7 +2210,10 @@ export const RUNEWORDS = [
   },
   {
     id: 78,
-    name: "Famine",
+    name: {
+      ru: "Голод",
+      en: "Famine",
+    },
     runes: [19, 27, 9, 31],
     types: ["Missile Weapons"],
     excluded: "",
@@ -2002,7 +2236,10 @@ export const RUNEWORDS = [
   },
   {
     id: 79,
-    name: "Brand",
+    name: {
+      ru: "Клеймо",
+      en: "Brand",
+    },
     runes: [31, 28, 23, 25],
     types: ["Missile Weapons"],
     excluded: "",
@@ -2026,7 +2263,10 @@ export const RUNEWORDS = [
   },
   {
     id: 80,
-    name: "Destruction",
+    name: {
+      ru: "Разрушение",
+      en: "Destruction",
+    },
     runes: [26, 28, 30, 31, 18],
     types: ["Weapons"],
     excluded: "",
@@ -2052,7 +2292,10 @@ export const RUNEWORDS = [
   },
   {
     id: 81,
-    name: "Dream",
+    name: {
+      ru: "Мечта",
+      en: "Dream",
+    },
     runes: [16, 31, 21],
     types: ["Helms", "Shields"],
     excluded: "",
@@ -2076,7 +2319,10 @@ export const RUNEWORDS = [
   },
   {
     id: 82,
-    name: "Faith",
+    name: {
+      ru: "Вера",
+      en: "Faith",
+    },
     runes: [27, 31, 20, 2],
     types: ["Missile Weapons"],
     excluded: "",
@@ -2100,7 +2346,10 @@ export const RUNEWORDS = [
   },
   {
     id: 83,
-    name: "Ice",
+    name: {
+      ru: "Лёд",
+      en: "Ice",
+    },
     runes: [11, 13, 31, 28],
     types: ["Missile Weapons"],
     excluded: "",
@@ -2124,7 +2373,10 @@ export const RUNEWORDS = [
   },
   {
     id: 84,
-    name: "Last Wish",
+    name: {
+      ru: "Последняя воля",
+      en: "Last Wish",
+    },
     runes: [31, 23, 31, 29, 31, 30],
     types: ["Weapons"],
     excluded: "",
@@ -2148,7 +2400,10 @@ export const RUNEWORDS = [
   },
   {
     id: 85,
-    name: "Phoenix",
+    name: {
+      ru: "Феникс",
+      en: "Phoenix",
+    },
     runes: [26, 26, 28, 31],
     types: ["Weapons", "Shields"],
     excluded: "",
@@ -2184,7 +2439,10 @@ export const RUNEWORDS = [
   },
   {
     id: 86,
-    name: "Doom",
+    name: {
+      ru: "Гибель",
+      en: "Doom",
+    },
     runes: [15, 27, 22, 28, 32],
     types: ["Melee Weapons"],
     excluded: "",
@@ -2200,7 +2458,6 @@ export const RUNEWORDS = [
       "+330-370% Enhanced Damage (varies)",
       "-(40-60)% To Enemy Cold Resistance (varies)",
       "Repairs 1 durability in 5 seconds",
-      "-(40-60)% To Enemy Cold Resistance (varies)",
       "Freezes Target +3",
       "Requirements -20%",
       "20% Deadly Strike",
@@ -2210,7 +2467,10 @@ export const RUNEWORDS = [
   },
   {
     id: 87,
-    name: "Hand of Justice",
+    name: {
+      ru: "Длань Правосудия",
+      en: "Hand of Justice",
+    },
     runes: [29, 32, 11, 28],
     types: ["Weapons"],
     excluded: "",
@@ -2235,7 +2495,10 @@ export const RUNEWORDS = [
   },
   {
     id: 88,
-    name: "Pride",
+    name: {
+      ru: "Гордость",
+      en: "Pride",
+    },
     runes: [32, 29, 16, 28],
     types: ["Polearms", "Spears"],
     excluded: "",
@@ -2260,7 +2523,10 @@ export const RUNEWORDS = [
   },
   {
     id: 89,
-    name: "Plague",
+    name: {
+      ru: "Чума",
+      en: "Plague",
+    },
     runes: [32, 13, 22],
     types: ["Swords", "Claws", "Daggers"],
     excluded: "",
@@ -2283,7 +2549,10 @@ export const RUNEWORDS = [
   },
   {
     id: 90,
-    name: "Mist",
+    name: {
+      ru: "Туман",
+      en: "Mist",
+    },
     runes: [32, 13, 25, 10, 6],
     types: ["Missile Weapons"],
     excluded: "",
@@ -2308,7 +2577,10 @@ export const RUNEWORDS = [
   },
   {
     id: 91,
-    name: "Metamorphosis",
+    name: {
+      ru: "Метаморфоза",
+      en: "Metamorphosis",
+    },
     runes: [16, 32, 19],
     types: ["Helms"],
     excluded: "",
@@ -2331,7 +2603,10 @@ export const RUNEWORDS = [
   },
   {
     id: 92,
-    name: "Breath of the Dying",
+    name: {
+      ru: "Вздох умирающего",
+      en: "Breath of the Dying",
+    },
     runes: [26, 15, 1, 2, 33, 5],
     types: ["Weapons"],
     excluded: "",
@@ -2360,7 +2635,10 @@ export const RUNEWORDS = [
   },
   {
     id: 93,
-    name: "Obsession",
+    name: {
+      ru: "Помешательство",
+      en: "Obsession",
+    },
     runes: [33, 24, 20, 17, 16, 4],
     types: ["Staves"],
     excluded: "",

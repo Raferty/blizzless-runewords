@@ -14,7 +14,9 @@
               :alt="findRune(rune)?.name"
               class="runeword__image"
             />
-            {{ findRune(rune)?.name[store.currentLang] }}
+            <span class="rune">{{
+              findRune(rune)?.name[store.currentLang]
+            }}</span>
           </span>
         </template>
       </div>
@@ -45,7 +47,7 @@
 <script setup>
 import { ref } from "vue";
 import { RUNES } from "@/shared/constants";
-import { useInfoStore } from '@/store/index.js';
+import { useInfoStore } from "@/store/index.js";
 
 const store = useInfoStore();
 
@@ -93,7 +95,7 @@ const findRune = (id) => {
   }
 
   &__title {
-    color: #8a8062;
+    color: #ecd2a8;
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.4em;
@@ -104,7 +106,7 @@ const findRune = (id) => {
     text-align: center;
     font-size: 0.875em;
     margin-bottom: 0.5rem;
-    color: #bd8547;
+    color: #888;
   }
 
   &__property {
