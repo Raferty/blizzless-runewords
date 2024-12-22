@@ -91,7 +91,11 @@
           <td>&nbsp;</td>
         </template>
         <td class="table__types">
-          {{ item.types.join(", ") }}
+          <template v-for="(type, index) in item.types" :key="index">
+            {{ getTypeName(type)
+            }}<template v-if="index < item?.types.length - 1">, </template>
+          </template>
+
           <template v-if="item.excluded && item.excluded.length > 0">
             <span class="table__classes">({{ item.excluded }})</span>
           </template>
@@ -152,8 +156,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from "vue";
-import { RUNES } from "@/shared/constants";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
+import { RUNES, ITEM_TYPES } from "@/shared/constants";
 import { useInfoStore } from "@/store/index.js";
 
 const store = useInfoStore();
@@ -189,6 +193,12 @@ const findRune = (id) => {
 
 const getRuneName = (id) => {
   return RUNES.find((rune) => rune.id === parseInt(id)).name[store.currentLang];
+};
+
+const getTypeName = (id) => {
+  return ITEM_TYPES.find((rune) => rune.id === parseInt(id)).name[
+    store.currentLang
+  ];
 };
 
 const isFound = (id) => {
@@ -284,7 +294,7 @@ function useSortArrayByField(array, field) {
 }
 
 const sortField = ref("name");
-const sortedItems = ref([...props.items]);
+const sortedItems = ref(useSortArrayBoolean(props.items, "complete"));
 
 const sortBy = (type) => {
   sortField.value = type;
@@ -293,22 +303,26 @@ const sortBy = (type) => {
 
   switch (type) {
     case "name":
-      items = useSortArrayByField(
-        sortedItems.value,
-        `name.${store.currentLang}`
-      );
+      items = useSortArrayByField(props.items, `name.${store.currentLang}`);
       break;
     case "level":
-      items = useSortArrayByField(sortedItems.value, `level`);
+      items = useSortArrayByField(props.items, `level`);
       break;
   }
 
   sortedItems.value = useSortArrayBoolean(items, "complete");
 };
 
+watch(
+  () => props.selected,
+  (newValue) => {
+    sortBy(sortField.value);
+  },
+  { deep: true, immediate: true }
+);
+
 onMounted(() => window.addEventListener("mousemove", update));
 onUnmounted(() => window.removeEventListener("mousemove", update));
-onMounted(() => sortBy("name"));
 </script>
 
 <style lang="scss">

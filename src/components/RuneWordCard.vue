@@ -5,7 +5,12 @@
         Close
       </div>
       <h3 class="runeword__title">{{ runeword.name[store.currentLang] }}</h3>
-      <div class="runeword__type">{{ runeword.types.join(", ") }}</div>
+      <div class="runeword__type">
+        <template v-for="(type, index) in runeword.types" :key="index">
+          {{ getTypeName(type)
+          }}<template v-if="index < runeword?.types.length - 1">, </template>
+        </template>
+      </div>
       <div class="runeword__runes">
         <template v-for="(rune, index) in runeword.runes" :key="index">
           <span class="runeword__rune">
@@ -49,7 +54,10 @@
         <br />
         <h2 class="runeword__original">Original version</h2>
         <div v-if="runeword?.old.types" class="runeword__type">
-          {{ runeword?.old.types.join(", ") }}
+          <template v-for="(type, index) in runeword.types" :key="index">
+            {{ getTypeName(type)
+            }}<template v-if="index < runeword?.types.length - 1">, </template>
+          </template>
         </div>
         <div v-if="runeword?.old.runes" class="runeword__runes">
           <template v-for="(rune, index) in runeword?.old.runes" :key="index">
@@ -85,7 +93,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { RUNES } from "@/shared/constants";
+import { RUNES, ITEM_TYPES } from "@/shared/constants";
 import { useInfoStore } from "@/store/index.js";
 
 const store = useInfoStore();
@@ -107,6 +115,12 @@ const localVisible = ref(props.modelValue);
 
 const findRune = (id) => {
   return RUNES.find((rune) => rune.id === id);
+};
+
+const getTypeName = (id) => {
+  return ITEM_TYPES.find((rune) => rune.id === parseInt(id)).name[
+    store.currentLang
+  ];
 };
 </script>
 

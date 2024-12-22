@@ -265,119 +265,145 @@ export const RUNES = [
   },
 ];
 
-
-export const ITEM_TYPES = [{
-  id: 1,
-  name: {
-    ru: 'Топоры',
-    en: 'Axes',
-  }
-}, {
-  id: 2,
-  name: {
-    ru: 'Булавы',
-    en: 'Maces',
-  }
-}, {
-  id: 3,
-  name: {
-    ru: 'Мечи',
-    en: 'Swords',
-  }
-}, {
-  id: 4,
-  name: {
-    ru: 'Оружие ближнего боя',
-    en: 'Melee Weapons',
-  }
-}, {
-  id: 5,
-  name: {
-    ru: 'Посохи',
-    en: 'Staves',
-  }
-}, {
-  id: 6,
-  name: {
-    ru: 'Оружие дальнего боя',
-    en: 'Missile Weapons',
-  }
-}, {
-  id: 7,
-  name: {
-    ru: 'Скипетры',
-    en: 'Scepters',
-  }
-}, {
-  id: 8,
-  name: {
-    ru: 'Когти',
-    en: 'Claws',
-  }
-}, {
-  id: 9,
-  name: {
-    ru: 'Древковое оружие',
-    en: 'Polearms',
-  }
-}, {
-  id: 10,
-  name: {
-    ru: 'Дубины',
-    en: 'Clubs',
-  }
-}, {
-  id: 11,
-  name: {
-    ru: 'Молоты',
-    en: 'Hammers',
-  }
-}, {
-  id: 12,
-  name: {
-    ru: 'Молоты',
-    en: 'Hammers',
-  }
-}, {
-  id: 13,
-  name: {
-    ru: 'Оружие',
-    en: 'Weapons',
-  }
-}, {
-  id: 14,
-  name: {
-    ru: 'Копья',
-    en: 'Spears',
-  }
-}, {
-  id: 15,
-  name: {
-    ru: 'Жезлы',
-    en: 'Wands',
-  }
-}, {
-  id: 16,
-  name: {
-    ru: 'Кинжалы',
-    en: 'Daggers',
-  }
-}, {
-  id: 17,
-  name: {
-    ru: 'Щиты',
-    en: 'Shields',
-  }
-}, {
-  id: 18,
-  name: {
-    ru: 'Нагрудная броня',
-    en: 'Body Armors',
-  }
-}, {
-  id: 19,
-  name: {
-    ru: 'Шлемы',
-    en: 'Helms',
-  }
-}]
+export const ITEM_TYPES = [
+  {
+    id: 1,
+    name: {
+      ru: "Топоры",
+      en: "Axes",
+    },
+  },
+  {
+    id: 2,
+    name: {
+      ru: "Булавы",
+      en: "Maces",
+    },
+  },
+  {
+    id: 3,
+    name: {
+      ru: "Мечи",
+      en: "Swords",
+    },
+  },
+  {
+    id: 4,
+    name: {
+      ru: "Оружие ближнего боя",
+      en: "Melee Weapons",
+    },
+  },
+  {
+    id: 5,
+    name: {
+      ru: "Посохи",
+      en: "Staves",
+    },
+  },
+  {
+    id: 6,
+    name: {
+      ru: "Оружие дальнего боя",
+      en: "Missile Weapons",
+    },
+  },
+  {
+    id: 7,
+    name: {
+      ru: "Скипетры",
+      en: "Scepters",
+    },
+  },
+  {
+    id: 8,
+    name: {
+      ru: "Когти",
+      en: "Claws",
+    },
+  },
+  {
+    id: 9,
+    name: {
+      ru: "Древковое оружие",
+      en: "Polearms",
+    },
+  },
+  {
+    id: 10,
+    name: {
+      ru: "Дубины",
+      en: "Clubs",
+    },
+  },
+  {
+    id: 11,
+    name: {
+      ru: "Молоты",
+      en: "Hammers",
+    },
+  },
+  {
+    id: 12,
+    name: {
+      ru: "Оружие",
+      en: "Weapons",
+    },
+  },
+  {
+    id: 13,
+    name: {
+      ru: "Копья",
+      en: "Spears",
+    },
+  },
+  {
+    id: 14,
+    name: {
+      ru: "Жезлы",
+      en: "Wands",
+    },
+  },
+  {
+    id: 15,
+    name: {
+      ru: "Кинжалы",
+      en: "Daggers",
+    },
+  },
+  {
+    id: 16,
+    name: {
+      ru: "Щиты",
+      en: "Shields",
+    },
+  },
+  {
+    id: 17,
+    name: {
+      ru: "Нагрудная броня",
+      en: "Body Armors",
+    },
+  },
+  {
+    id: 18,
+    name: {
+      ru: "Шлемы",
+      en: "Helms",
+    },
+  },
+  {
+    id: 19,
+    name: {
+      ru: "Катары",
+      en: "Katars",
+    },
+  },
+  {
+    id: 20,
+    name: {
+      ru: "Щиты паладина",
+      en: "Paladin Shields",
+    },
+  },
+];
