@@ -140,8 +140,6 @@ const handleRuneWord = (evt) => {
   &__container {
     position: sticky;
     top: 15px;
-
-    padding-top: 55px;
     padding-left: 8px;
     padding-right: 8px;
 

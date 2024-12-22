@@ -1,6 +1,5 @@
 <template>
   <div class="runelist">
-    <div class="runelist__title">Runes</div>
     <div class="runelist__wrapper">
       <div
         v-for="runePart in splittedRunes"
@@ -98,13 +97,13 @@ const splittedRunes = computed(() => splitToNChunks([...props.runes], 3));
     }
   }
 
-  &__title {
-    font-weight: 700;
-    padding: 4px;
-    font-size: 14px;
-    border-bottom: 1px solid #e5e7eb;
-    margin-bottom: 4px;
-  }
+  // &__title {
+  //   font-weight: 700;
+  //   padding: 4px;
+  //   font-size: 14px;
+  //   border-bottom: 1px solid #e5e7eb;
+  //   margin-bottom: 4px;
+  // }
 
   &__part {
     gap: 4px;
