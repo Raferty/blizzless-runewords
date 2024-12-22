@@ -825,6 +825,29 @@ export const RUNEWORDS = [
       ],
     },
     complete: false,
+    old: {
+      runes: [13, 10, 11],
+      stats: {
+        ru: [
+          "Вероятность 4% применить умение «Замедление снарядов» 5-го уровня при получении урона",
+          "Вероятность 2% применить умение «Валькирия» 15-го уровня при ударе",
+          "+2 к умениям амазонки",
+          "+20% к ускоренному восстановлению после удара",
+          "+2 к умению «Критический удар»",
+          "+30% к сопротивлению льду",
+          "Атакующий получает 14 урона",
+        ],
+        en: [
+          "4% Chance To Cast Level 5 Slow Missiles When Struck",
+          "2% Chance To Cast level 15 Valkyrie On Striking",
+          "+2 To Amazon Skill Levels",
+          "+20% Faster Hit Recovery",
+          "+2 To Critical Strike",
+          "Cold Resist +30%",
+          "Attacker Takes Damage of 14",
+        ],
+      },
+    },
   },
   {
     id: 21,
@@ -1014,6 +1037,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [13, 16, 9],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -1072,6 +1096,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [13, 16, 10],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -1132,6 +1157,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [13, 16, 8],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -1539,6 +1565,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [19, 16, 6, 2, 1, 15],
       stats: {
         ru: [
           "Вероятность 18% применить умение «Провокация» 18-го уровня при ударе",
@@ -2768,6 +2795,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [8, 25, 2],
       stats: {
         ru: [
           "Вероятность 100% применить умение «Заряд света» 5-го уровня при ударе",
@@ -2828,6 +2856,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      types: [8],
       stats: {
         ru: [
           "+50% к вероятности завершающих приемов не потратить заряды",
@@ -3882,6 +3911,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      types: [1, 11],
       stats: {
         ru: [
           "+30% к скорости атаки",
@@ -4024,6 +4054,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      types: [9, 3],
       stats: {
         ru: [
           "Вероятность 23% применить умение «Вулкан» 12-го уровня при ударе",
@@ -4252,6 +4283,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      types: [3, 11, 1],
       stats: {
         ru: [
           "Вероятность 6% применить умение «Уход в тень» 11-го уровня при получении урона",
