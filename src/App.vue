@@ -8,13 +8,15 @@
         </div>
       </aside>
       <section class="wrapper">
-        <div class="container">
+        <div class="wrapper__container">
           <div class="search">
             <input
               v-model="search"
               type="text"
               class="search__input"
-              placeholder="Search by name"
+              :placeholder="
+                store.interface.search.placeholder[store.currentLang]
+              "
             />
           </div>
 
@@ -26,20 +28,45 @@
           />
 
           <div class="hints">
-            <h3 class="hints__title">Hints</h3>
+            <h3 class="hints__title">
+              {{ store.interface.hints.title[store.currentLang] }}
+            </h3>
 
             <div class="hints__block">
-              <span class="chips">L</span> - Ladder only runewords.
+              <span class="chips">{{
+                store.interface.markers.ladder[store.currentLang]
+              }}</span>
+              -
+              {{
+                store.currentLang === "ru"
+                  ? `Работает только на лестнице :D`
+                  : `Ladder only runewords.`
+              }}
             </div>
 
             <div class="hints__block">
-              <span class="reworked">Reworked</span> - Reworked runeword by
-              Blizzless team.
+              <span class="reworked">{{
+                store.interface.markers.reworked[store.currentLang]
+              }}</span>
+              -
+              {{
+                store.currentLang === "ru"
+                  ? `Переработан командой «безМетелицы»`
+                  : `Reworked runeword by Blizzless team.`
+              }}
             </div>
 
             <div class="hints__block">
-              <span class="warning">!!! Bugged atm</span> - Bugged at this
-              moment. Will be fix soon.
+              <span class="warning"
+                >!!!
+                {{ store.interface.markers.bugged[store.currentLang] }}</span
+              >
+              -
+              {{
+                store.currentLang === "ru"
+                  ? `В данный момент работает некорректно. Скоро будет исправлен`
+                  : `Bugged at this moment. Will be fix soon`
+              }}.
             </div>
           </div>
         </div>
@@ -54,7 +81,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { RUNEWORDS } from "@/shared/runewords";
-import RUNES from "@/shared/constants";
+import { RUNES } from "@/shared/constants";
 
 import TheHeader from "./components/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
@@ -62,7 +89,15 @@ import RuneList from "./components/RuneList.vue";
 import RuneTable from "./components/RuneTable.vue";
 import RuneWordCard from "./components/RuneWordCard.vue";
 
+import { useInfoStore } from "@/store/index.js";
+
+const store = useInfoStore();
+
 const currentWidth = ref(0);
+
+const initLang = (lang) => {
+  document.querySelector("html").setAttribute("lang", lang);
+};
 
 const handleResize = () => {
   currentWidth.value = window.innerWidth;
@@ -70,6 +105,9 @@ const handleResize = () => {
 
 onMounted(() => {
   handleResize();
+
+  initLang(localStorage.getItem("lang") || "en");
+  store.setLang(localStorage.getItem("lang") || "en");
 
   if (import.meta.client) {
     window.addEventListener("resize", handleResize);
@@ -110,7 +148,9 @@ const sortedRunewords = computed(() => {
 const filteredRunewords = computed(() => {
   return search.value
     ? sortedRunewords.value.filter((word) =>
-        word.name.toLowerCase().includes(search.value.toLowerCase())
+        word.name[store.currentLang]
+          .toLowerCase()
+          .includes(search.value.toLowerCase())
       )
     : sortedRunewords.value;
 });
@@ -177,9 +217,11 @@ const handleRuneWord = (evt) => {
 .wrapper {
   flex: 1;
 
-  // @media (min-width: 1024px) {
-  //   margin-left: 32px;
-  // }
+  &__container {
+    @media (min-width: 1024px) {
+      margin-left: 32px;
+    }
+  }
 }
 
 .hints {

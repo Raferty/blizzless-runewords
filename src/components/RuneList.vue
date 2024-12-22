@@ -22,13 +22,18 @@
       </div>
     </div>
     <div class="runelist__actions">
-      <button class="button" @click="clearRunes">Clear</button>
+      <button class="button" @click="clearRunes">
+        {{ store.interface.runelist.clear[store.currentLang] }}
+      </button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
+import { useInfoStore } from "@/store/index.js";
+
+const store = useInfoStore();
 
 const props = defineProps({
   runes: {

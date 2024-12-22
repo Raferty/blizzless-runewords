@@ -2,8 +2,51 @@
   <table class="table">
     <thead>
       <tr>
-        <th v-for="item in headers" :key="headers">
-          {{ item }}
+        <th
+          v-for="(item, index) in store.interface.table.headers[
+            store.currentLang
+          ]"
+          :key="index"
+          :class="{
+            'table__th--name': item === 'Runeword',
+            'table__th--level': item === 'Level',
+          }"
+        >
+          <template v-if="item === 'Runeword'">
+            <span class="sortable" @click="sortBy('name')">{{ item }}</span>
+            <span v-if="sortField === 'name'" class="sort">
+              <svg
+                width="0.5em"
+                height="1em"
+                viewBox="0 0 256 512"
+                class="ux-icon ux-icon--fw"
+              >
+                <path
+                  d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </span>
+          </template>
+          <template v-else-if="item === 'Level'">
+            <span class="sortable" @click="sortBy('level')">{{ item }}</span>
+            <span v-if="sortField === 'level'" class="sort">
+              <svg
+                width="0.5em"
+                height="1em"
+                viewBox="0 0 256 512"
+                class="ux-icon ux-icon--fw"
+              >
+                <path
+                  d="M168 345.941V44c0-6.627-5.373-12-12-12h-56c-6.627 0-12 5.373-12 12v301.941H41.941c-21.382 0-32.09 25.851-16.971 40.971l86.059 86.059c9.373 9.373 24.569 9.373 33.941 0l86.059-86.059c15.119-15.119 4.411-40.971-16.971-40.971H168z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </span>
+          </template>
+          <template v-else>
+            <span>{{ item }}</span>
+          </template>
         </th>
       </tr>
     </thead>
@@ -12,22 +55,26 @@
         v-for="item in sortedItems"
         :key="item.id"
         :class="[isComplete(selected, item.runes) ? 'complete' : '']"
-
       >
         <td class="table__name">
           <span
             @mouseenter="handleMouseEnter(item)"
             @mouseleave="handleMouseLeave(item)"
             @click="$emit('select', item)"
-            >{{ item.name }}</span
+            class="name"
+            >{{ item.name[store.currentLang] }}</span
           >
-          <span v-if="item.reworked" class="reworked">reworked</span>
-          <span v-if="item.ladder" class="chips">L</span>
+          <span v-if="item.reworked" class="reworked">{{
+            store.interface.markers.reworked[store.currentLang]
+          }}</span>
+          <span v-if="item.ladder" class="chips">{{
+            store.interface.markers.ladder[store.currentLang]
+          }}</span>
           <span v-if="item?.bugged?.status" class="warning"
-            >!!! bugged atm</span
+            >!!! {{ store.interface.markers.bugged[store.currentLang] }}</span
           >
         </td>
-        <template v-for="rune in item.runes" :key="rune">
+        <template v-for="(rune, index) in item.runes" :key="index">
           <template v-if="isFound(rune)">
             <td class="found">
               {{ getRuneName(rune) }}
@@ -62,21 +109,26 @@
     class="modal"
     :style="`left: ${x + 40}px; top: ${y + 20}px`"
   >
-    <h3 class="modal__title">{{ currentItem.name }}</h3>
+    <h3 class="modal__title">{{ currentItem.name[store.currentLang] }}</h3>
     <div class="modal__type">{{ currentItem.types.join(", ") }}</div>
     <div class="modal__runes">
-      <template v-for="rune in currentItem.runes" :key="rune">
+      <template v-for="(rune, index) in currentItem.runes" :key="index">
         <span class="modal__rune">
           <img
             :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
-            :alt="findRune(rune)?.name"
+            :alt="findRune(rune)?.name[store.currentLang]"
             class="modal__image"
           />
-          {{ findRune(rune)?.name }}
+          <span class="rune">{{
+            findRune(rune)?.name[store.currentLang]
+          }}</span>
         </span>
       </template>
     </div>
-    <div class="modal__property" v-for="prop in currentItem.stats">
+    <div
+      class="modal__property"
+      v-for="prop in currentItem.stats[store.currentLang]"
+    >
       <template v-if="prop.includes('#')">
         <span class="modal__property--type">{{
           prop.substring(1, prop.length - 1)
@@ -100,8 +152,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from "vue";
-import RUNES from "@/shared/constants";
+import { ref, computed, onMounted, onUnmounted, nextTick } from "vue";
+import { RUNES } from "@/shared/constants";
+import { useInfoStore } from "@/store/index.js";
+
+const store = useInfoStore();
 
 defineEmits(["select"]);
 
@@ -132,20 +187,8 @@ const findRune = (id) => {
   return RUNES.find((rune) => rune.id === id);
 };
 
-const headers = [
-  "Runeword",
-  "Rune",
-  "Rune",
-  "Rune",
-  "Rune",
-  "Rune",
-  "Rune",
-  "Item Types",
-  "Level",
-];
-
 const getRuneName = (id) => {
-  return RUNES.find((rune) => rune.id === parseInt(id)).name;
+  return RUNES.find((rune) => rune.id === parseInt(id)).name[store.currentLang];
 };
 
 const isFound = (id) => {
@@ -170,9 +213,6 @@ const update = (e) => {
   y.value = e.pageY;
 };
 
-onMounted(() => window.addEventListener("mousemove", update));
-onUnmounted(() => window.removeEventListener("mousemove", update));
-
 const handleMouseEnter = (item) => {
   showModal.value = true;
   currentItem.value = item;
@@ -196,32 +236,79 @@ function useSortArrayBoolean(array, field) {
 }
 
 function useSortArrayByField(array, field) {
-  return array.sort((a, b) => {
-    // nulls sort after anything else
-    if (a[field] === null) {
-      return 1;
-    }
-    if (b[field] === null) {
-      return -1;
-    }
+  const withDot = field.includes(".");
 
-    if (a[field] < b[field]) {
-      return -1;
-    }
+  if (withDot) {
+    const [field1, field2] = field.split(".");
 
-    if (a[field] > b[field]) {
-      return 1;
-    }
+    return array.sort((a, b) => {
+      // nulls sort after anything else
+      if (a[field1][field2] === null) {
+        return 1;
+      }
+      if (b[field1][field2] === null) {
+        return -1;
+      }
 
-    return 0;
-  });
+      if (a[field1][field2] < b[field1][field2]) {
+        return -1;
+      }
+
+      if (a[field1][field2] > b[field1][field2]) {
+        return 1;
+      }
+
+      return 0;
+    });
+  } else {
+    return array.sort((a, b) => {
+      // nulls sort after anything else
+      if (a[field] === null) {
+        return 1;
+      }
+      if (b[field] === null) {
+        return -1;
+      }
+
+      if (a[field] < b[field]) {
+        return -1;
+      }
+
+      if (a[field] > b[field]) {
+        return 1;
+      }
+
+      return 0;
+    });
+  }
 }
 
-const sortedItems = computed(() => {
-  const items = useSortArrayByField(props.items, "name");
+const sortField = ref("name");
+const sortedItems = ref([...props.items]);
 
-  return useSortArrayBoolean(items, "complete");
-});
+const sortBy = (type) => {
+  sortField.value = type;
+
+  let items = [];
+
+  switch (type) {
+    case "name":
+      items = useSortArrayByField(
+        sortedItems.value,
+        `name.${store.currentLang}`
+      );
+      break;
+    case "level":
+      items = useSortArrayByField(sortedItems.value, `level`);
+      break;
+  }
+
+  sortedItems.value = useSortArrayBoolean(items, "complete");
+};
+
+onMounted(() => window.addEventListener("mousemove", update));
+onUnmounted(() => window.removeEventListener("mousemove", update));
+onMounted(() => sortBy("name"));
 </script>
 
 <style lang="scss">
@@ -240,6 +327,7 @@ const sortedItems = computed(() => {
   th {
     padding: 4px;
     text-align: left;
+    line-height: 100%;
   }
 
   tr {
@@ -250,6 +338,15 @@ const sortedItems = computed(() => {
     padding: 7px 5px;
     text-align: left;
     border-bottom: 1px solid #24221c;
+  }
+
+  &__th {
+    &--name,
+    &--level {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
   }
 
   &__name {
@@ -266,6 +363,14 @@ const sortedItems = computed(() => {
     display: block;
     color: #bd8547;
   }
+
+  &__types {
+    color: #888;
+  }
+}
+
+.name {
+  color: #ecd2a8;
 }
 
 .modal {
@@ -277,7 +382,7 @@ const sortedItems = computed(() => {
   background-color: rgba(#000, 0.8);
 
   &__title {
-    color: #8a8062;
+    color: #ecd2a8;
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.4em;
@@ -288,7 +393,7 @@ const sortedItems = computed(() => {
     text-align: center;
     font-size: 0.875em;
     margin-bottom: 0.5rem;
-    color: #bd8547;
+    color: #888;
   }
 
   &__property {
@@ -326,6 +431,10 @@ const sortedItems = computed(() => {
   }
 }
 
+.sortable {
+  cursor: pointer;
+}
+
 .found {
   color: #44aa44;
 }
@@ -340,8 +449,9 @@ const sortedItems = computed(() => {
 .chips {
   text-align: center;
   display: inline-block;
-  width: 16px;
   color: #fff;
+  font-size: 12px;
+  padding: 2px 4px;
   background-color: #501008;
   border-radius: 4px;
 }

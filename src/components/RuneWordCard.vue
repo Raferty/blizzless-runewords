@@ -4,21 +4,26 @@
       <div class="runeword__close" @click="$emit('update:modelValue', false)">
         Close
       </div>
-      <h3 class="runeword__title">{{ runeword.name }}</h3>
+      <h3 class="runeword__title">{{ runeword.name[store.currentLang] }}</h3>
       <div class="runeword__type">{{ runeword.types.join(", ") }}</div>
       <div class="runeword__runes">
-        <template v-for="rune in runeword.runes" :key="rune">
+        <template v-for="(rune, index) in runeword.runes" :key="index">
           <span class="runeword__rune">
             <img
               :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
               :alt="findRune(rune)?.name"
               class="runeword__image"
             />
-            {{ findRune(rune)?.name }}
+            <span class="rune">{{
+              findRune(rune)?.name[store.currentLang]
+            }}</span>
           </span>
         </template>
       </div>
-      <div class="runeword__property" v-for="prop in runeword.stats">
+      <div
+        class="runeword__property"
+        v-for="prop in runeword.stats[store.currentLang]"
+      >
         <template v-if="prop.includes('#')">
           <span class="modal__property--type">{{
             prop.substring(1, prop.length - 1)
@@ -38,13 +43,52 @@
           {{ prop }}
         </div>
       </template>
+      <template v-if="runeword?.old">
+        <br />
+        <hr />
+        <br />
+        <h2 class="runeword__original">Original version</h2>
+        <div v-if="runeword?.old.types" class="runeword__type">
+          {{ runeword?.old.types.join(", ") }}
+        </div>
+        <div v-if="runeword?.old.runes" class="runeword__runes">
+          <template v-for="(rune, index) in runeword?.old.runes" :key="index">
+            <span class="runeword__rune">
+              <img
+                :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
+                :alt="findRune(rune)?.name"
+                class="runeword__image"
+              />
+              <span class="rune">{{
+                findRune(rune)?.name[store.currentLang]
+              }}</span>
+            </span>
+          </template>
+        </div>
+        <div
+          class="runeword__property"
+          v-for="prop in runeword?.old.stats[store.currentLang]"
+        >
+          <template v-if="prop.includes('#')">
+            <span class="modal__property--type">{{
+              prop.substring(1, prop.length - 1)
+            }}</span>
+          </template>
+          <template v-else>
+            {{ prop }}
+          </template>
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import RUNES from "@/shared/constants";
+import { RUNES } from "@/shared/constants";
+import { useInfoStore } from "@/store/index.js";
+
+const store = useInfoStore();
 
 const props = defineProps({
   modelValue: {
@@ -69,12 +113,14 @@ const findRune = (id) => {
 <style lang="scss" scoped>
 .runeword {
   right: 12px;
-  top: 132px;
+  top: 115px;
   position: fixed;
   min-width: 22rem;
-  max-width: 490px;
+  width: 490px;
   border: 1px solid #bab197;
   background-color: rgba(#000, 0.8);
+  max-height: calc(100% - 200px);
+  overflow-y: auto;
 
   &__wrapper {
     padding: 24px;
@@ -89,8 +135,13 @@ const findRune = (id) => {
     cursor: pointer;
   }
 
+  &__original {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
   &__title {
-    color: #8a8062;
+    color: #ecd2a8;
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.4em;
@@ -101,7 +152,7 @@ const findRune = (id) => {
     text-align: center;
     font-size: 0.875em;
     margin-bottom: 0.5rem;
-    color: #bd8547;
+    color: #888;
   }
 
   &__property {
