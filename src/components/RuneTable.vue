@@ -116,7 +116,12 @@
     :style="`left: ${x + 40}px; top: ${y + 20}px`"
   >
     <h3 class="modal__title">{{ currentItem.name[store.currentLang] }}</h3>
-    <div class="modal__type">{{ currentItem.types.join(", ") }}</div>
+    <div class="modal__type">
+      <template v-for="(type, index) in currentItem.types" :key="index">
+        {{ getTypeName(type)
+        }}<template v-if="index < currentItem?.types.length - 1">, </template>
+      </template>
+    </div>
     <div class="modal__runes">
       <template v-for="(rune, index) in currentItem.runes" :key="index">
         <span class="modal__rune">

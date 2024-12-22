@@ -4440,6 +4440,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      types: [1, 9, 11],
       stats: {
         ru: [
           "Вероятность 5% применить умение «Вулкан» 18-го уровня при ударе",
@@ -4784,20 +4785,20 @@ export const RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Indestructible",
-        "50% Chance To Cast Level 20 Poison Nova When You Kill An Enemy",
-        "+60% Increased Attack Speed",
-        "375-435% Enhanced Damage (varies)",
-        "+30% Crushing Blow",
-        "12-15% Life Stolen Per Hit (varies)",
-        "Prevent Monster Heal",
-        "Requirements -40%",
-        "+50 To Attack Rating",
-        "+50 To Attack Rating Against Undead",
-        "7% Mana Stolen Per Hit",
-        "75%  Damage To Undead",
-        "+1 To Light Radius",
-        "-25% Target Defense",
+        "Не теряет прочности",
+        "Вероятность 50% применить умение «Кольцо яда» 20-го уровня при убийстве",
+        "+60% к скорости атаки",
+        "+(375-435)% к урону",
+        "+30% к вероятности нанести сокрушающий удар",
+        "Похищает (12-15)% здоровья за удар",
+        "Запрещает монстрам лечиться",
+        "Требования -40%",
+        "+50 к рейтингу атаки",
+        "+50 к рейтингу атаки по нежити",
+        "Похищает 7% маны за удар",
+        "+75% урона по нежити",
+        "+1 к радиусу обзора",
+        "-25% к защите цели",
       ],
       en: [
         "Indestructible",

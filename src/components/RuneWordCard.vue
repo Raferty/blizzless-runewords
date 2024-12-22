@@ -54,9 +54,11 @@
         <br />
         <h2 class="runeword__original">Original version</h2>
         <div v-if="runeword?.old.types" class="runeword__type">
-          <template v-for="(type, index) in runeword.types" :key="index">
+          <template v-for="(type, index) in runeword?.old.types" :key="index">
             {{ getTypeName(type)
-            }}<template v-if="index < runeword?.types.length - 1">, </template>
+            }}<template v-if="index < runeword?.old.types.length - 1"
+              >,
+            </template>
           </template>
         </div>
         <div v-if="runeword?.old.runes" class="runeword__runes">
