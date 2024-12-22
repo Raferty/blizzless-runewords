@@ -310,7 +310,7 @@ export const RUNEWORDS = [
       ],
       en: [
         "+30% Faster Block Rate",
-        "+40-80% Enhanced Damage (varies)",
+        "+<span class='varies'>40-80$</span>% Enhanced Damage (varies)",
         "+3 to Weapon block (Assassin only)",
         "+75 Poison Damage Over 5 Seconds",
         "+6 to Strength",
@@ -323,6 +323,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [7, 9, 10],
       types: [8],
       stats: {
         ru: [
@@ -827,6 +828,7 @@ export const RUNEWORDS = [
     complete: false,
     old: {
       runes: [13, 10, 11],
+      types: [17],
       stats: {
         ru: [
           "Вероятность 4% применить умение «Замедление снарядов» 5-го уровня при получении урона",
@@ -1038,6 +1040,7 @@ export const RUNEWORDS = [
     complete: false,
     old: {
       runes: [13, 16, 9],
+      types: [18],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -1097,6 +1100,7 @@ export const RUNEWORDS = [
     complete: false,
     old: {
       runes: [13, 16, 10],
+      types: [18],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -1681,6 +1685,40 @@ export const RUNEWORDS = [
       ],
     },
     complete: false,
+    old: {
+      runes: [14, 9, 2, 20],
+      types: [12],
+      stats: {
+        ru: [
+          "+25% к скорости атаки",
+          "+(160-210)% к урону",
+          "+(50-80)% к рейтингу атаки",
+          "+75% урона по нежити",
+          "+50 к рейтингу атаки против нежити",
+          "+1-50 урона от молнии",
+          "+1 к умению «Берсерк»",
+          "+1 к умению «Истовость»",
+          "При ударе ослепляет цель +10",
+          "+25% к вероятности обратить монстра в бегство при ударе",
+          "+75% к золоту за убийство монстров",
+          "«Сердце росомахи» 3-го уровня (12/12 зарядов)",
+        ],
+        en: [
+          "+25% Increased Attack Speed",
+          "+160-210% Enhanced Damage (varies)",
+          "50-80% Bonus To Attack Rating (varies)",
+          "+75% Damage To Undead",
+          "+50 To Attack Rating Against Undead",
+          "Adds 1-50 Lightning Damage",
+          "+1 To Berserk",
+          "+1 To Zeal",
+          "Hit Blinds Target +10",
+          "Hit Causes Monster To Flee 25%",
+          "75% Extra Gold From Monsters",
+          "Level 3 Heart of Wolverine (12 Charges)",
+        ],
+      },
+    },
   },
   {
     id: 39,
@@ -1724,6 +1762,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [11, 20, 18],
+      types: [3, 11, 7],
       stats: {
         ru: [
           "Вероятность 20% применить умение «Одряхление» 15-го уровня при ударе",
@@ -1904,6 +1944,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [21, 8, 12],
+      types: [17],
       stats: {
         ru: [
           "Вероятность 5% применить умение «Огненный след» 15-го уровня при получении урона",
@@ -2095,6 +2137,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [19, 22, 21],
+      types: [17],
       stats: {
         ru: [
           "Вероятность 15% применить умение «Лишение зрения» 3-го уровня при получении урона",
@@ -2224,6 +2268,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [12, 22, 22],
+      types: [17],
       stats: {
         ru: [
           "Вероятность 15% применить умение «Костяной доспех» 10-го уровня при получении урона",
@@ -2457,6 +2503,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [13, 21, 23, 17],
+      types: [3, 1, 2],
       stats: {
         ru: [
           "Не теряет прочности",
@@ -2589,6 +2637,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [20, 24, 16],
+      types: [18],
       stats: {
         ru: [
           "Вероятность 1% применить умение «Бред» 50-го уровня при получении урона",
@@ -2657,6 +2707,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [23, 22, 25, 19],
+      types: [3, 1],
       stats: {
         ru: [
           "+30% к скорости атаки",
@@ -2856,6 +2908,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [23, 25, 11],
       types: [8],
       stats: {
         ru: [
@@ -3309,6 +3362,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [5, 3, 28, 23, 8],
+      types: [3, 1],
       stats: {
         ru: [
           "Вероятность 35% применить умение «Яд» 15-го уровня при ударе",
@@ -3577,6 +3632,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [14, 22, 30, 24],
+      types: [17],
       stats: {
         ru: [
           "+2 ко всем умениям",
@@ -3648,6 +3705,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [11, 30, 24, 12, 29],
+      types: [4],
       stats: {
         ru: [
           "Не теряет прочности",
@@ -3911,6 +3970,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [19, 27, 9, 31],
       types: [1, 11],
       stats: {
         ru: [
@@ -3981,6 +4041,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [31, 28, 23, 25],
+      types: [6],
       stats: {
         ru: [
           "Вероятность 35% применить умение «Усиление урона» 14-го уровня при получении урона",
@@ -4054,6 +4116,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [26, 28, 30, 31, 18],
       types: [9, 3],
       stats: {
         ru: [
@@ -4212,6 +4275,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [11, 13, 31, 28],
+      types: [6],
       stats: {
         ru: [
           "Вероятность 100% применить умение «Снежная буря» 40-го уровня при достижении нового уровня",
@@ -4283,6 +4348,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [31, 23, 31, 29, 31, 30],
       types: [3, 11, 1],
       stats: {
         ru: [
@@ -4377,6 +4443,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [26, 26, 28, 31],
+      types: [12, 16],
       stats: {
         ru: [
           "#Оружие#",
@@ -4472,6 +4540,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [15, 27, 22, 28, 32],
       types: [1, 9, 11],
       stats: {
         ru: [
@@ -4546,6 +4615,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [29, 32, 11, 28],
+      types: [12],
       stats: {
         ru: [
           "Вероятность 100% применить умение «Огненный след» 36-го уровня при достижении нового уровня",
@@ -4732,6 +4803,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [32, 13, 25, 10, 6],
+      types: [6],
       stats: {
         ru: [
           "При надевании дает ауру «Сосредоточенность» (8-12)-го уровня",
@@ -4851,6 +4924,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [26, 15, 1, 2, 33, 5],
+      types: [12],
       stats: {
         ru: [
           "Вероятность 50% применить умение «Кольцо яда» 20-го уровня при убийстве",

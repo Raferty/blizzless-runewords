@@ -35,7 +35,7 @@
           }}</span>
         </template>
         <template v-else>
-          {{ prop }}
+          <span v-html="prop"></span>
         </template>
       </div>
       <br />
@@ -76,7 +76,7 @@
           </template>
         </div>
         <div
-          class="runeword__property"
+          class="runeword__property runeword__property--original"
           v-for="prop in runeword?.old.stats[store.currentLang]"
         >
           <template v-if="prop.includes('#')">
@@ -85,7 +85,7 @@
             }}</span>
           </template>
           <template v-else>
-            {{ prop }}
+            <span v-html="prop"></span>
           </template>
         </div>
       </template>
@@ -174,6 +174,10 @@ const getTypeName = (id) => {
   &__property {
     text-align: center;
     color: #5cbd4b;
+
+    &--original {
+      color: #6e6eff;
+    }
 
     &--type {
       display: block;
