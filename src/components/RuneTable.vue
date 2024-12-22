@@ -8,11 +8,11 @@
           ]"
           :key="index"
           :class="{
-            'table__th--name': item === 'Runeword',
-            'table__th--level': item === 'Level',
+            'table__th--name': item === 'Runeword' || item === 'Рунное слово',
+            'table__th--level': item === 'Level' || item === 'Уровень',
           }"
         >
-          <template v-if="item === 'Runeword'">
+          <template v-if="item === 'Runeword' || item === 'Рунное слово'">
             <span class="sortable" @click="sortBy('name')">{{ item }}</span>
             <span v-if="sortField === 'name'" class="sort">
               <svg
@@ -28,7 +28,7 @@
               </svg>
             </span>
           </template>
-          <template v-else-if="item === 'Level'">
+          <template v-else-if="item === 'Level' || item === 'Уровень'">
             <span class="sortable" @click="sortBy('level')">{{ item }}</span>
             <span v-if="sortField === 'level'" class="sort">
               <svg

@@ -2,27 +2,43 @@
   <header class="header">
     <div class="container header__container">
       <div class="header__logo">
-        <img src="/images/logo.png" alt="Blizzless runewords" class="header__image" />
-        <h1 class="title title--h1">Blizzless runewords</h1>
+        <img
+          src="/images/logo.png"
+          alt="Blizzless runewords"
+          class="header__image"
+        />
+        <h1 class="title title--h1 header__title">Blizzless runewords</h1>
       </div>
 
       <div class="lang">
-        <div class="lang__item" :class="{'lang__item--active': store.currentLang === 'en'}" @click="setLang('en')">EN</div>
-        <div class="lang__item" :class="{'lang__item--active': store.currentLang === 'ru'}" @click="setLang('ru')">RU</div>
+        <div
+          class="lang__item"
+          :class="{ 'lang__item--active': store.currentLang === 'en' }"
+          @click="setLang('en')"
+        >
+          EN
+        </div>
+        <div
+          class="lang__item"
+          :class="{ 'lang__item--active': store.currentLang === 'ru' }"
+          @click="setLang('ru')"
+        >
+          RU
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { useInfoStore } from '@/store/index.js';
+import { useInfoStore } from "@/store/index.js";
 
 const store = useInfoStore();
 
 const setLang = (lang: string) => {
-  document.querySelector('html').setAttribute('lang', lang || 'ru');
+  document.querySelector("html").setAttribute("lang", lang || "ru");
   store.setLang(lang);
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -35,6 +51,10 @@ const setLang = (lang: string) => {
 
   @media (min-width: 1024px) {
     margin-bottom: 32px;
+  }
+
+  &__title {
+    color: #ecd2a8;
   }
 
   &__container {
