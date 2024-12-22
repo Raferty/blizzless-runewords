@@ -1,6 +1,9 @@
 <template>
   <footer class="footer">
     <div class="container">
+      <div>
+        <a href="https://discord.gg/TJgm9ZAhwW" target="_blank">Discord</a>
+      </div>
       inspired by
       <a class="footer__link" href="https://github.com/fabd/diablo2-runewizard"
         >fabd/diablo2-runewizard</a

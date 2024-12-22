@@ -23,15 +23,20 @@
             @mouseenter="handleMouseEnter(item)"
             @mouseleave="handleMouseLeave(item)"
             @click="$emit('select', item)"
+            class="name"
             >{{ item.name[store.currentLang] }}</span
           >
-          <span v-if="item.reworked" class="reworked">reworked</span>
-          <span v-if="item.ladder" class="chips">L</span>
+          <span v-if="item.reworked" class="reworked">{{
+            store.interface.markers.reworked[store.currentLang]
+          }}</span>
+          <span v-if="item.ladder" class="chips">{{
+            store.interface.markers.ladder[store.currentLang]
+          }}</span>
           <span v-if="item?.bugged?.status" class="warning"
-            >!!! bugged atm</span
+            >!!! {{ store.interface.markers.bugged[store.currentLang] }}</span
           >
         </td>
-        <template v-for="rune in item.runes" :key="rune">
+        <template v-for="(rune, index) in item.runes" :key="index">
           <template v-if="isFound(rune)">
             <td class="found">
               {{ getRuneName(rune) }}
@@ -69,7 +74,7 @@
     <h3 class="modal__title">{{ currentItem.name[store.currentLang] }}</h3>
     <div class="modal__type">{{ currentItem.types.join(", ") }}</div>
     <div class="modal__runes">
-      <template v-for="rune in currentItem.runes" :key="rune">
+      <template v-for="(rune, index) in currentItem.runes" :key="index">
         <span class="modal__rune">
           <img
             :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
@@ -82,7 +87,10 @@
         </span>
       </template>
     </div>
-    <div class="modal__property" v-for="prop in currentItem.stats">
+    <div
+      class="modal__property"
+      v-for="prop in currentItem.stats[store.currentLang]"
+    >
       <template v-if="prop.includes('#')">
         <span class="modal__property--type">{{
           prop.substring(1, prop.length - 1)
@@ -193,29 +201,55 @@ function useSortArrayBoolean(array, field) {
 }
 
 function useSortArrayByField(array, field) {
-  return array.sort((a, b) => {
-    // nulls sort after anything else
-    if (a[field] === null) {
-      return 1;
-    }
-    if (b[field] === null) {
-      return -1;
-    }
+  const withDot = field.includes(".");
 
-    if (a[field] < b[field]) {
-      return -1;
-    }
+  if (withDot) {
+    const [field1, field2] = field.split(".");
 
-    if (a[field] > b[field]) {
-      return 1;
-    }
+    return array.sort((a, b) => {
+      // nulls sort after anything else
+      if (a[field1][field2] === null) {
+        return 1;
+      }
+      if (b[field1][field2] === null) {
+        return -1;
+      }
 
-    return 0;
-  });
+      if (a[field1][field2] < b[field1][field2]) {
+        return -1;
+      }
+
+      if (a[field1][field2] > b[field1][field2]) {
+        return 1;
+      }
+
+      return 0;
+    });
+  } else {
+    return array.sort((a, b) => {
+      // nulls sort after anything else
+      if (a[field] === null) {
+        return 1;
+      }
+      if (b[field] === null) {
+        return -1;
+      }
+
+      if (a[field] < b[field]) {
+        return -1;
+      }
+
+      if (a[field] > b[field]) {
+        return 1;
+      }
+
+      return 0;
+    });
+  }
 }
 
 const sortedItems = computed(() => {
-  const items = useSortArrayByField(props.items, "name");
+  const items = useSortArrayByField(props.items, `name.${store.currentLang}`);
 
   return useSortArrayBoolean(items, "complete");
 });
@@ -263,6 +297,14 @@ const sortedItems = computed(() => {
     display: block;
     color: #bd8547;
   }
+
+  &__types {
+    color: #888;
+  }
+}
+
+.name {
+  color: #ecd2a8;
 }
 
 .modal {
@@ -337,8 +379,9 @@ const sortedItems = computed(() => {
 .chips {
   text-align: center;
   display: inline-block;
-  width: 16px;
   color: #fff;
+  font-size: 12px;
+  padding: 2px 4px;
   background-color: #501008;
   border-radius: 4px;
 }

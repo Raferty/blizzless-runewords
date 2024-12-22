@@ -33,15 +33,46 @@ export const useInfoStore = defineStore({
             ],
           },
         },
+        markers: {
+          ladder: {
+            ru: "ладдер",
+            en: "L",
+          },
+          reworked: {
+            ru: "переработан",
+            en: "reworked",
+          },
+          bugged: {
+            ru: "багнут",
+            en: "bugged atm",
+          },
+        },
+        search: {
+          placeholder: {
+            ru: "Поиск по названию",
+            en: "Search by name",
+          },
+        },
+        runelist: {
+          clear: {
+            ru: "Сбросить",
+            en: "Clear",
+          },
+        },
+        hints: {
+          title: {
+            ru: "Подсказки",
+            en: "Hints",
+          },
+        },
       },
     };
   },
 
   actions: {
     setLang(lang) {
-      console.log("lang", lang);
       this.lang = lang;
-      //localStorage.setItem("lang", lang);
+      localStorage.setItem("lang", lang);
     },
   },
 
