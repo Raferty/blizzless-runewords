@@ -13,7 +13,7 @@
           }"
         >
           <template v-if="item === 'Runeword' || item === 'Рунное слово'">
-            <span class="sortable" @click="sortBy('name')">{{ item }}</span>
+            <span class="sortable" @click="sortField = 'name'">{{ item }}</span>
             <span v-if="sortField === 'name'" class="sort">
               <svg
                 width="0.5em"
@@ -29,7 +29,9 @@
             </span>
           </template>
           <template v-else-if="item === 'Level' || item === 'Уровень'">
-            <span class="sortable" @click="sortBy('level')">{{ item }}</span>
+            <span class="sortable" @click="sortField = 'level'">{{
+              item
+            }}</span>
             <span v-if="sortField === 'level'" class="sort">
               <svg
                 width="0.5em"
@@ -294,14 +296,11 @@ function useSortArrayByField(array, field) {
 }
 
 const sortField = ref("name");
-const sortedItems = ref(useSortArrayBoolean(props.items, "complete"));
 
-const sortBy = (type) => {
-  sortField.value = type;
-
+const sortedItems = computed(() => {
   let items = [];
 
-  switch (type) {
+  switch (sortField.value) {
     case "name":
       items = useSortArrayByField(props.items, `name.${store.currentLang}`);
       break;
@@ -310,16 +309,8 @@ const sortBy = (type) => {
       break;
   }
 
-  sortedItems.value = useSortArrayBoolean(items, "complete");
-};
-
-watch(
-  () => props.selected,
-  (newValue) => {
-    sortBy(sortField.value);
-  },
-  { deep: true, immediate: true }
-);
+  return useSortArrayBoolean(items, "complete");
+});
 
 onMounted(() => window.addEventListener("mousemove", update));
 onUnmounted(() => window.removeEventListener("mousemove", update));

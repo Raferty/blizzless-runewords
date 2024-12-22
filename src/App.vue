@@ -147,10 +147,10 @@ const sortedRunewords = computed(() => {
 
 const filteredRunewords = computed(() => {
   return search.value
-    ? sortedRunewords.value.filter((word) =>
-        word.name[store.currentLang]
-          .toLowerCase()
-          .includes(search.value.toLowerCase())
+    ? sortedRunewords.value.filter(
+        (word) =>
+          word.name.ru.toLowerCase().includes(search.value.toLowerCase()) ||
+          word.name.en.toLowerCase().includes(search.value.toLowerCase())
       )
     : sortedRunewords.value;
 });
