@@ -4939,7 +4939,11 @@ export const RUNEWORDS = [
     bugged: {
       status: true,
       message: [
-        "Missing a lot of properties",
+        "50% Chance To Cast Level 20 Poison Nova When You Kill An Enemy (missing)",
+        "Prevent Monster Heal (missing)",
+        "12-15% Life Stolen Per Hit (varies) (missing)",
+        "15% Enhanced Damage",
+        "Requirements -20%",
       ],
     },
     stats: {
