@@ -4936,6 +4936,12 @@ export const RUNEWORDS = [
     level: 69,
     ladder: false,
     reworked: true,
+    bugged: {
+      status: true,
+      message: [
+        "Missing a lot of properties",
+      ],
+    },
     stats: {
       ru: [
         "Не теряет прочности",
