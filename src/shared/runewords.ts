@@ -4942,6 +4942,7 @@ export const RUNEWORDS = [
         "50% Chance To Cast Level 20 Poison Nova When You Kill An Enemy (missing)",
         "Prevent Monster Heal (missing)",
         "12-15% Life Stolen Per Hit (varies) (missing)",
+        "+30% Crushing Blow (missing)",
         "15% Enhanced Damage",
         "Requirements -20%",
       ],

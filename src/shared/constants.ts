@@ -160,6 +160,20 @@ export const RUNES = [
       en: "Ral",
     },
     image_url: "/images/ral.webp",
+    properties: {
+      ru: {
+        weapon: ['Adds 5-30 Fire Damage'],
+        armor: ['Fire Resist +30%'],
+        helm: ['Fire Resist +30%'],
+        shield: ['Fire Resist +35%'],
+      },
+      en: {
+        weapon: ['Adds 5-30 Fire Damage'],
+        armor: ['Fire Resist +30%'],
+        helm: ['Fire Resist +30%'],
+        shield: ['Fire Resist +35%'],
+      }
+    }
   },
   {
     id: 9,
@@ -168,6 +182,20 @@ export const RUNES = [
       en: "Ort",
     },
     image_url: "/images/ort.webp",
+    properties: {
+      ru: {
+        weapon: ['Adds 1-50 Lightning Damage'],
+        armor: ['Lightning Resist +30%'],
+        helm: ['Lightning Resist +30%'],
+        shield: ['Lightning Resist +35%'],
+      },
+      en: {
+        weapon: ['Adds 1-50 Lightning Damage'],
+        armor: ['Lightning Resist +30%'],
+        helm: ['Lightning Resist +30%'],
+        shield: ['Lightning Resist +35%'],
+      }
+    }
   },
   {
     id: 10,
@@ -176,6 +204,20 @@ export const RUNES = [
       en: "Thul",
     },
     image_url: "/images/thul.webp",
+    properties: {
+      ru: {
+        weapon: ['Adds 3-14 Cold Damage'],
+        armor: ['Cold Resist +30%'],
+        helm: ['Cold Resist +30%'],
+        shield: ['Cold Resist +35%'],
+      },
+      en: {
+        weapon: ['Adds 3-14 Cold Damage'],
+        armor: ['Cold Resist +30%'],
+        helm: ['Cold Resist +30%'],
+        shield: ['Cold Resist +35%'],
+      }
+    }
   },
   {
     id: 11,
@@ -184,6 +226,20 @@ export const RUNES = [
       en: "Amn",
     },
     image_url: "/images/amn.webp",
+    properties: {
+      ru: {
+        weapon: ['7% Life Stolen Per Hit'],
+        armor: ['Attacker takes damage of 14'],
+        helm: ['Attacker takes damage of 14'],
+        shield: ['Attacker takes damage of 14'],
+      },
+      en: {
+        weapon: ['7% Life Stolen Per Hit'],
+        armor: ['Attacker takes damage of 14'],
+        helm: ['Attacker takes damage of 14'],
+        shield: ['Attacker takes damage of 14'],
+      }
+    }
   },
   {
     id: 12,
@@ -192,6 +248,20 @@ export const RUNES = [
       en: "Sol",
     },
     image_url: "/images/sol.webp",
+    properties: {
+      ru: {
+        weapon: ['+9 to Minimum Damage'],
+        armor: ['Damage Reduced by 7'],
+        helm: ['Damage Reduced by 7'],
+        shield: ['Damage Reduced by 7'],
+      },
+      en: {
+        weapon: ['+9 to Minimum Damage'],
+        armor: ['Damage Reduced by 7'],
+        helm: ['Damage Reduced by 7'],
+        shield: ['Damage Reduced by 7'],
+      }
+    }
   },
   {
     id: 13,
@@ -200,6 +270,20 @@ export const RUNES = [
       en: "Shael",
     },
     image_url: "/images/shael.webp",
+    properties: {
+      ru: {
+        weapon: ['+20% Increased Attack Speed'],
+        armor: ['+20% Faster Hit Recovery'],
+        helm: ['+20% Faster Hit Recovery'],
+        shield: ['20% Increased Chance of Blocking'],
+      },
+      en: {
+        weapon: ['+20% Increased Attack Speed'],
+        armor: ['+20% Faster Hit Recovery'],
+        helm: ['+20% Faster Hit Recovery'],
+        shield: ['20% Increased Chance of Blocking'],
+      }
+    }
   },
   {
     id: 14,
@@ -208,6 +292,20 @@ export const RUNES = [
       en: "Dol",
     },
     image_url: "/images/dol.webp",
+    properties: {
+      ru: {
+        weapon: ['Hit Causes Monster to Flee 25%'],
+        armor: ['Replenish Life +7'],
+        helm: ['Replenish Life +7'],
+        shield: ['Replenish Life +7'],
+      },
+      en: {
+        weapon: ['Hit Causes Monster to Flee 25%'],
+        armor: ['Replenish Life +7'],
+        helm: ['Replenish Life +7'],
+        shield: ['Replenish Life +7'],
+      }
+    }
   },
   {
     id: 15,
@@ -216,6 +314,20 @@ export const RUNES = [
       en: "Hel",
     },
     image_url: "/images/hel.webp",
+    properties: {
+      ru: {
+        weapon: ['Requirements -20%'],
+        armor: ['Requirements -15%'],
+        helm: ['Requirements -15%'],
+        shield: ['Requirements -15%'],
+      },
+      en: {
+        weapon: ['Hit Causes Monster to Flee 25%'],
+        armor: ['Replenish Life +7'],
+        helm: ['Replenish Life +7'],
+        shield: ['Replenish Life +7'],
+      }
+    }
   },
   {
     id: 16,
@@ -224,6 +336,20 @@ export const RUNES = [
       en: "Io",
     },
     image_url: "/images/io.webp",
+    properties: {
+      ru: {
+        weapon: ['+10 to Vitality'],
+        armor: ['+10 to Vitality'],
+        helm: ['+10 to Vitality'],
+        shield: ['+10 to Vitality'],
+      },
+      en: {
+        weapon: ['+10 to Vitality'],
+        armor: ['+10 to Vitality'],
+        helm: ['+10 to Vitality'],
+        shield: ['+10 to Vitality'],
+      }
+    }
   },
   {
     id: 17,
@@ -232,6 +358,20 @@ export const RUNES = [
       en: "Lum",
     },
     image_url: "/images/lum.webp",
+    properties: {
+      ru: {
+        weapon: ['+10 to Energy'],
+        armor: ['+10 to Energy'],
+        helm: ['+10 to Energy'],
+        shield: ['+10 to Energy'],
+      },
+      en: {
+        weapon: ['+10 to Energy'],
+        armor: ['+10 to Energy'],
+        helm: ['+10 to Energy'],
+        shield: ['+10 to Energy'],
+      }
+    }
   },
   {
     id: 18,
@@ -240,6 +380,20 @@ export const RUNES = [
       en: "Ko",
     },
     image_url: "/images/ko.webp",
+    properties: {
+      ru: {
+        weapon: ['+10 to Dexterity'],
+        armor: ['+10 to Dexterity'],
+        helm: ['+10 to Dexterity'],
+        shield: ['+10 to Dexterity'],
+      },
+      en: {
+        weapon: ['+10 to Dexterity'],
+        armor: ['+10 to Dexterity'],
+        helm: ['+10 to Dexterity'],
+        shield: ['+10 to Dexterity'],
+      }
+    }
   },
   {
     id: 19,
@@ -248,6 +402,20 @@ export const RUNES = [
       en: "Fal",
     },
     image_url: "/images/fal.webp",
+    properties: {
+      ru: {
+        weapon: ['+10 to Strength'],
+        armor: ['+10 to Strength'],
+        helm: ['+10 to Strength'],
+        shield: ['+10 to Strength'],
+      },
+      en: {
+        weapon: ['+10 to Strength'],
+        armor: ['+10 to Strength'],
+        helm: ['+10 to Strength'],
+        shield: ['+10 to Strength'],
+      }
+    }
   },
   {
     id: 20,
@@ -256,6 +424,20 @@ export const RUNES = [
       en: "Lem",
     },
     image_url: "/images/lem.webp",
+    properties: {
+      ru: {
+        weapon: ['75% Extra Gold from Monsters'],
+        armor: ['50% Extra Gold from Monsters'],
+        helm: ['50% Extra Gold from Monsters'],
+        shield: ['50% Extra Gold from Monsters'],
+      },
+      en: {
+        weapon: ['75% Extra Gold from Monsters'],
+        armor: ['50% Extra Gold from Monsters'],
+        helm: ['50% Extra Gold from Monsters'],
+        shield: ['50% Extra Gold from Monsters'],
+      }
+    }
   },
   {
     id: 21,
@@ -264,6 +446,20 @@ export const RUNES = [
       en: "Pul",
     },
     image_url: "/images/pul.webp",
+    properties: {
+      ru: {
+        weapon: ['+75% Damage to Demons', '+100 to Attack Rating against Demons'],
+        armor: ['+30% Enhanced Defense'],
+        helm: ['+30% Enhanced Defense'],
+        shield: ['+30% Enhanced Defense'],
+      },
+      en: {
+        weapon: ['+75% Damage to Demons', '+100 to Attack Rating against Demons'],
+        armor: ['+30% Enhanced Defense'],
+        helm: ['+30% Enhanced Defense'],
+        shield: ['+30% Enhanced Defense'],
+      }
+    }
   },
   {
     id: 22,
@@ -272,6 +468,20 @@ export const RUNES = [
       en: "Um",
     },
     image_url: "/images/um.webp",
+    properties: {
+      ru: {
+        weapon: ['25% Chance of Open Wounds'],
+        armor: ['All Resistances +15'],
+        helm: ['All Resistances +15'],
+        shield: ['All Resistances +22'],
+      },
+      en: {
+        weapon: ['25% Chance of Open Wounds'],
+        armor: ['All Resistances +15'],
+        helm: ['All Resistances +15'],
+        shield: ['All Resistances +22'],
+      }
+    }
   },
   {
     id: 23,
@@ -280,6 +490,20 @@ export const RUNES = [
       en: "Mal",
     },
     image_url: "/images/mal.webp",
+    properties: {
+      ru: {
+        weapon: ['Prevent Monster Heal'],
+        armor: ['Magic Damage Reduced by 7'],
+        helm: ['Magic Damage Reduced by 7'],
+        shield: ['Magic Damage Reduced by 7'],
+      },
+      en: {
+        weapon: ['Prevent Monster Heal'],
+        armor: ['Magic Damage Reduced by 7'],
+        helm: ['Magic Damage Reduced by 7'],
+        shield: ['Magic Damage Reduced by 7'],
+      }
+    }
   },
   {
     id: 24,
@@ -288,6 +512,20 @@ export const RUNES = [
       en: "Ist",
     },
     image_url: "/images/ist.webp",
+    properties: {
+      ru: {
+        weapon: ['30% Better Chance of Getting Magic Items'],
+        armor: ['25% Better Chance of Getting Magic Items'],
+        helm: ['25% Better Chance of Getting Magic Items'],
+        shield: ['25% Better Chance of Getting Magic Items'],
+      },
+      en: {
+        weapon: ['30% Better Chance of Getting Magic Items'],
+        armor: ['25% Better Chance of Getting Magic Items'],
+        helm: ['25% Better Chance of Getting Magic Items'],
+        shield: ['25% Better Chance of Getting Magic Items'],
+      }
+    }
   },
   {
     id: 25,
