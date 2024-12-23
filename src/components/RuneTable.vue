@@ -338,6 +338,7 @@ onUnmounted(() => window.removeEventListener("mousemove", update));
     padding: 4px;
     text-align: left;
     line-height: 100%;
+    white-space: nowrap;
   }
 
   tr {

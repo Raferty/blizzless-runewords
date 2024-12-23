@@ -2868,13 +2868,13 @@ export const RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "15% chance to cast level 25 Fist of Heavens on striking",
-        "+2 To Paladin Skill Levels",
-        "+50% Damage to Undead",
-        "+100-150 To Life (varies)",
-        "15% Slower Stamina Drain",
-        "Fire Resist +30%",
-        "+75% Better Chance of Getting Magic Items",
+        "Вероятность 15% применить умение «Длань небес» 25-го уровня при ударе",
+        "+2 к уровню умений падалина",
+        "+50% урона по нежети",
+        "+100-150 к здоровью",
+        "Выносливость снижается на 15% медленнее",
+        "+30% к сопротивлению огню",
+        "+75% к вероятности найти магический предмет",
       ],
       en: [
         "15% chance to cast level 25 Fist of Heavens on striking",

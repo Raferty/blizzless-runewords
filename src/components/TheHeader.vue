@@ -71,6 +71,7 @@ const setLang = (lang: string) => {
   &__logo {
     display: flex;
     gap: 16px;
+    align-items: center;
     //color: #242c53;
   }
 }
@@ -101,7 +102,8 @@ const setLang = (lang: string) => {
 }
 
 .title {
-  font-size: 34px;
+  font-size: 28px;
+  line-height: 110%;
 
   @media (min-width: 1024px) {
     font-size: 34px;

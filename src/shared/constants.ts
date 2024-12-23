@@ -6,6 +6,20 @@ export const RUNES = [
       en: "El",
     },
     image_url: "/images/el.webp",
+    properties: {
+      ru: {
+        weapon: ['+50 to Attack Rating', '+1 to Light Radius'],
+        armor: ['+1 to Light Radius', '+15 Defense'],
+        helm: ['+1 to Light Radius', '+15 Defense'],
+        shield: ['+1 to Light Radius', '+15 Defense'],
+      },
+      en: {
+        weapon: ['+50 to Attack Rating', '+1 to Light Radius'],
+        armor: ['+1 to Light Radius', '+15 Defense'],
+        helm: ['+1 to Light Radius', '+15 Defense'],
+        shield: ['+1 to Light Radius', '+15 Defense'],
+      }
+    }
   },
   {
     id: 2,
@@ -14,6 +28,20 @@ export const RUNES = [
       en: "Eld",
     },
     image_url: "/images/eld.webp",
+    properties: {
+      ru: {
+        weapon: ['+75% Damage to Undead', '+50 to Attack Rating against Undead'],
+        armor: ['Lowers Stamina drain by 15%'],
+        helm: ['Lowers Stamina drain by 15%'],
+        shield: ['+7% Blocking'],
+      },
+      en: {
+        weapon: ['+75% Damage to Undead', '+50 to Attack Rating against Undead'],
+        armor: ['Lowers Stamina drain by 15%'],
+        helm: ['Lowers Stamina drain by 15%'],
+        shield: ['+7% Blocking'],
+      }
+    }
   },
   {
     id: 3,
@@ -22,6 +50,20 @@ export const RUNES = [
       en: "Tir",
     },
     image_url: "/images/tir.webp",
+    properties: {
+      ru: {
+        weapon: ['+2 to Mana After Each Kill'],
+        armor: ['+2 to Mana After Each Kill'],
+        helm: ['+2 to Mana After Each Kill'],
+        shield: ['+2 to Mana After Each Kill'],
+      },
+      en: {
+        weapon: ['+2 to Mana After Each Kill'],
+        armor: ['+2 to Mana After Each Kill'],
+        helm: ['+2 to Mana After Each Kill'],
+        shield: ['+2 to Mana After Each Kill'],
+      }
+    }
   },
   {
     id: 4,
@@ -30,6 +72,20 @@ export const RUNES = [
       en: "Nef",
     },
     image_url: "/images/nef.webp",
+    properties: {
+      ru: {
+        weapon: ['Knockback'],
+        armor: ['+30 Defense vs. Missile'],
+        helm: ['+30 Defense vs. Missile'],
+        shield: ['+30 Defense vs. Missile'],
+      },
+      en: {
+        weapon: ['Knockback'],
+        armor: ['+30 Defense vs. Missile'],
+        helm: ['+30 Defense vs. Missile'],
+        shield: ['+30 Defense vs. Missile'],
+      }
+    }
   },
   {
     id: 5,
@@ -38,6 +94,20 @@ export const RUNES = [
       en: "Eth",
     },
     image_url: "/images/eth.webp",
+    properties: {
+      ru: {
+        weapon: ['-25% Target Defense'],
+        armor: ['Regenerate Mana 15%'],
+        helm: ['Regenerate Mana 15%'],
+        shield: ['Regenerate Mana 15%'],
+      },
+      en: {
+        weapon: ['-25% Target Defense'],
+        armor: ['Regenerate Mana 15%'],
+        helm: ['Regenerate Mana 15%'],
+        shield: ['Regenerate Mana 15%'],
+      }
+    }
   },
   {
     id: 6,
@@ -46,6 +116,20 @@ export const RUNES = [
       en: "Ith",
     },
     image_url: "/images/ith.webp",
+    properties: {
+      ru: {
+        weapon: ['+9 to Maximum Damage'],
+        armor: ['15% Damage Taken Goes to Mana'],
+        helm: ['15% Damage Taken Goes to Mana'],
+        shield: ['15% Damage Taken Goes to Mana'],
+      },
+      en: {
+        weapon: ['+9 to Maximum Damage'],
+        armor: ['15% Damage Taken Goes to Mana'],
+        helm: ['15% Damage Taken Goes to Mana'],
+        shield: ['15% Damage Taken Goes to Mana'],
+      }
+    }
   },
   {
     id: 7,
@@ -54,6 +138,20 @@ export const RUNES = [
       en: "Tal",
     },
     image_url: "/images/tal.webp",
+    properties: {
+      ru: {
+        weapon: ['+75 Poison damage over 5 seconds'],
+        armor: ['Poison Resist +30%'],
+        helm: ['Poison Resist +30%'],
+        shield: ['Poison Resist +35%'],
+      },
+      en: {
+        weapon: ['+75 Poison damage over 5 seconds'],
+        armor: ['Poison Resist +30%'],
+        helm: ['Poison Resist +30%'],
+        shield: ['Poison Resist +35%'],
+      }
+    }
   },
   {
     id: 8,
