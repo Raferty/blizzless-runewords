@@ -135,7 +135,7 @@ const getTypeName = (id) => {
   width: 490px;
   border: 1px solid #bab197;
   background-color: rgba(#000, 0.8);
-  max-height: calc(100% - 200px);
+  max-height: calc(100% - 125px);
   overflow-y: auto;
 
   &__wrapper {

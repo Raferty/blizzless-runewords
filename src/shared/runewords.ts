@@ -1162,6 +1162,7 @@ export const RUNEWORDS = [
     complete: false,
     old: {
       runes: [13, 16, 8],
+      types: [18],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -1570,6 +1571,7 @@ export const RUNEWORDS = [
     complete: false,
     old: {
       runes: [19, 16, 6, 2, 1, 15],
+      types: [3],
       stats: {
         ru: [
           "Вероятность 18% применить умение «Провокация» 18-го уровня при ударе",
@@ -1838,6 +1840,7 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [20, 18, 1, 2],
       types: [3, 2],
       stats: {
         ru: [
@@ -2007,6 +2010,34 @@ export const RUNEWORDS = [
       ],
     },
     complete: false,
+    old: {
+      runes: [21, 6, 2],
+      types: [18],
+      stats: {
+        ru: [
+          "+33% к пронзающей атаке",
+          "+(15-25)% к рейтингу атаки",
+          "Похищает (4-8)% маны за удар",
+          "+30% к защите",
+          "+10 к энергии",
+          "Выносливость снижается на 15% медленнее",
+          "Нельзя заморозить",
+          "+5 к мане при убийстве",
+          "+15% к урону, приходящемуся на ману",
+        ],
+        en: [
+          "+33% Piercing Attack",
+          "+15-25% Bonus to Attack Rating (varies)",
+          "4-8% Mana Stolen Per Hit (varies)",
+          "+30% Enhanced Defense",
+          "+10 Energy",
+          "15% Slower Stamina Drain",
+          "Cannot Be Frozen",
+          "+5 Mana After Each Kill",
+          "15% Damage Taken Goes to Mana",
+        ],
+      }
+    }
   },
   {
     id: 44,
@@ -2201,6 +2232,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [13, 22, 21, 17],
+      types: [17],
       stats: {
         ru: [
           "+60% к ускоренному восстановлению от удара",
@@ -2369,6 +2402,8 @@ export const RUNEWORDS = [
       message: ["Repairs Durability 1 In 25 Seconds"],
     },
     old: {
+      runes: [23, 3],
+      types: [17],
       stats: {
         ru: [
           "+25% к ускоренному восстановлению от удара",
@@ -2433,6 +2468,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [18, 18, 23],
+      types: [16],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -2575,6 +2612,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [9, 23, 6],
+      types: [17],
       stats: {
         ru: [
           "Вероятность 5% применить умение «Ураганный доспех» 15-го уровня при получении урона",
@@ -2781,6 +2820,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [15, 18, 20, 25],
+      types: [9, 7],
       stats: {
         ru: [
           "Вероятность 20% применить умение «Торнадо» 16-го уровня при ударе",
@@ -2848,6 +2889,7 @@ export const RUNEWORDS = [
     complete: false,
     old: {
       runes: [8, 25, 2],
+      types: [17],
       stats: {
         ru: [
           "Вероятность 100% применить умение «Заряд света» 5-го уровня при ударе",
@@ -3479,6 +3521,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [29, 1],
+      types: [4],
       stats: {
         ru: [
           "Вероятность 10% применить умение «Торнадо» 9-го уровня при ударе",
@@ -3821,6 +3865,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [21, 17, 30, 23],
+      types: [6],
       stats: {
         ru: [
           "Вероятность 30% применить умение «Одряхление» 1-го уровня при ударе",
@@ -4690,6 +4736,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     old: {
+      runes: [32, 29, 16, 28],
+      types: [9, 13],
       stats: {
         ru: [
           "Вероятность 25% применить умение «Огненная стена» 17-го уровня при получении урона",

@@ -146,7 +146,7 @@
         }}</span>
       </template>
       <template v-else>
-        {{ prop }}
+        <span v-html="prop"></span>
       </template>
     </div>
     <br />
