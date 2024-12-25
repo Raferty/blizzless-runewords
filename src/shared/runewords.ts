@@ -2527,7 +2527,7 @@ export const RUNEWORDS = [
       en: [
         "30% Chance To Cast Level 20 Bone Spirit On Striking",
         "Indestructible",
-        "<span class='varies'>40-50</span>% Increased Attack Speed (varies)",
+        "+<span class='varies'>40-50</span>% Increased Attack Speed (varies)",
         "+<span class='varies'>300-340</span>% Enhanced Damage (varies)",
         "+75% Damage To Demons",
         "+100 To Attack Rating Against Demons",
