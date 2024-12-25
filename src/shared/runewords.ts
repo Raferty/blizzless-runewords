@@ -2533,7 +2533,7 @@ export const RUNEWORDS = [
         "+100 To Attack Rating Against Demons",
         "Prevent Monster Heal",
         "+10 To Energy",
-        "+10-15 Magic Absorb (varies)",
+        "+<span class='varies'>10-15</span> Magic Absorb (varies)",
         "Level 16 Heart Of Wolverine (20 Charges)",
         "Level 17 Iron Golem (14 Charges)",
       ],
