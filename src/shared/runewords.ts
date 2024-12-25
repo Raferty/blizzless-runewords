@@ -1553,18 +1553,14 @@ export const RUNEWORDS = [
       en: [
         "18% Chance to cast Level 18 Taunt on striking",
         "+3 To Combat Skills (Barbarian Only)",
-        "+20-30% Increased Attack Speed (varies)",
-        "+300-350% Enhanced Damage (varies)",
+        "+<span class='varies'>20-30</span>% Increased Attack Speed (varies)",
+        "+<span class='varies'>300-350</span>% Enhanced Damage (varies)",
         "+9 To Maximum Damage",
-        // '+50 To Attack Rating', El rune
-        // '+75% Damage to Undead', Eld rune
-        // '+50 Attack Rating Against Undead', Eld rune
-        "8-10% Life Stolen Per Hit (varies)",
+        "<span class='varies'>8-10</span>% Life Stolen Per Hit (varies)",
         "Prevent Monster Heal",
         "+10 To Strength",
         "+10 To Vitality",
         "Damage Reduced By 8",
-        // '+1 Light Radius', El rune
         "Requirements -20%",
       ],
     },
@@ -1593,13 +1589,13 @@ export const RUNEWORDS = [
         en: [
           "18% Chance to cast Level 18 Taunt on striking",
           "+3 To Combat Skills (Barbarian Only)",
-          "+20-30% Increased Attack Speed (varies)",
-          "+300-350% Enhanced Damage (varies)",
+          "+<span class='varies varies--old'>20-30</span>% Increased Attack Speed (varies)",
+          "+<span class='varies varies--old'>300-350</span>% Enhanced Damage (varies)",
           "+9 To Maximum Damage",
           "+50 To Attack Rating",
           "+75% Damage to Undead",
           "+50 Attack Rating Against Undead",
-          "8-10% Life Stolen Per Hit (varies)",
+          "<span class='varies varies--old'>8-10</span>% Life Stolen Per Hit (varies)",
           "Prevent Monster Heal",
           "+10 To Strength",
           "+10 To Vitality",
