@@ -2036,8 +2036,8 @@ export const RUNEWORDS = [
           "+5 Mana After Each Kill",
           "15% Damage Taken Goes to Mana",
         ],
-      }
-    }
+      },
+    },
   },
   {
     id: 44,
@@ -2525,17 +2525,17 @@ export const RUNEWORDS = [
         "«Желеный голем» 17-го уровня (14/14 зарядов)",
       ],
       en: [
-        "Indestructible",
         "30% Chance To Cast Level 20 Bone Spirit On Striking",
+        "Indestructible",
         "40-50% Increased Attack Speed",
         "+300-340% Enhanced Damage (varies)",
+        "+75% Damage To Demons",
+        "+100 To Attack Rating Against Demons",
+        "Prevent Monster Heal",
+        "+10 To Energy",
         "+10-15 Magic Absorb (varies)",
         "Level 16 Heart Of Wolverine (20 Charges)",
         "Level 17 Iron Golem (14 Charges)",
-        "+10 To Energy",
-        "Prevent Monster Heal",
-        "+75% Damage To Demons",
-        "+100 To Attack Rating Against Demons",
       ],
     },
     complete: false,
