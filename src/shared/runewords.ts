@@ -1923,9 +1923,9 @@ export const RUNEWORDS = [
       ru: [
         "30% Chance To Cast Level 15 Blaze When Struck",
         "+2 To Sorceress Skill Levels",
+        "+10% Faster Cast Rate",
         "+6 to Frost Nova (sorceress only)",
         "+6 to Fire Wall (sorceress only)",
-        "+10% Faster Cast Rate",
         "+30% Enhanced Defense",
         "Fire Resist +30%",
         "Damage Reduced By 7",
@@ -1933,9 +1933,9 @@ export const RUNEWORDS = [
       en: [
         "30% Chance To Cast Level 15 Blaze When Struck",
         "+2 To Sorceress Skill Levels",
+        "+10% Faster Cast Rate",
         "+6 to Frost Nova (sorceress only)",
         "+6 to Fire Wall (sorceress only)",
-        "+10% Faster Cast Rate",
         "+30% Enhanced Defense",
         "Fire Resist +30%",
         "Damage Reduced By 7",
