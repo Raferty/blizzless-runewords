@@ -410,7 +410,6 @@ onUnmounted(() => window.removeEventListener("mousemove", update));
   &__property {
     text-align: center;
     color: #5cbd4b;
-    margin-bottom: 4px;
 
     &--type {
       display: block;
