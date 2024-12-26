@@ -722,7 +722,7 @@ export const RUNEWORDS = [
     },
     runes: [8, 3, 7, 12],
     types: [6, 9, 5],
-    excluded: "",
+    excluded: "Not Spears",
     classes: [],
     patch: "1.10",
     level: 27,
