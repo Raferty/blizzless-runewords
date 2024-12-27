@@ -112,6 +112,7 @@
 
   <div
     v-if="showModal"
+    ref="modal"
     class="modal"
     :style="`left: ${x + 40}px; top: ${y + 20}px`"
   >
@@ -166,6 +167,7 @@
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { RUNES, ITEM_TYPES } from "@/shared/constants";
 import { useInfoStore } from "@/store/index.js";
+import { useElementSize } from '@vueuse/core'
 
 const store = useInfoStore();
 
@@ -218,6 +220,9 @@ const isComplete = (where, what) => {
   }
   return true;
 };
+
+const modal = ref(null);
+const { modalHeight } = useElementSize(modal)
 
 const showModal = ref(false);
 const currentItem = ref([]);
@@ -317,8 +322,13 @@ const sortedItems = computed(() => {
   return useSortArrayBoolean(items, "complete");
 });
 
-onMounted(() => window.addEventListener("mousemove", update));
+onMounted(() => {
+  window.addEventListener("mousemove", update);
+  window.addEventListener("touchstart", update);
+});
 onUnmounted(() => window.removeEventListener("mousemove", update));
+
+
 </script>
 
 <style lang="scss">

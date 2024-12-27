@@ -85,8 +85,6 @@ const getTypeName = (id) => {
   ];
 };
 
-const stats = ref(props.runeword.stats[currentLang.value]);
-
 const classes = computed(() => ({
   [`--${props.type}`]: true,
 }));
