@@ -1,0 +1,6 @@
+// Функции для работы с компонентнами
+@use 'sass:math';
+
+@function to-rem($px) {
+  @return math.div($px, 16) + rem;
+}

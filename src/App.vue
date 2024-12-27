@@ -75,6 +75,14 @@
   </main>
   <TheFooter />
 
+  <UiModal v-model="currentCard" style="right: 12px;top: 115px;position: fixed;">
+    <RuneWord type="modified" :name="currentRuneWord.name[store.currentLang]" :runeword="currentRuneWord" />
+    <br />
+    <hr />
+    <br />
+    <RuneWord type="original" :name="store.interface.modal.title[store.currentLang]" :runeword="currentRuneWord.old" />
+  </UiModal>
+
   <RuneWordCard v-model="currentCard" :runeword="currentRuneWord" />
 </template>
 
@@ -83,11 +91,14 @@ import { ref, computed, onMounted } from "vue";
 import { RUNEWORDS } from "@/shared/runewords";
 import { RUNES } from "@/shared/constants";
 
-import TheHeader from "./components/TheHeader.vue";
-import TheFooter from "./components/TheFooter.vue";
-import RuneList from "./components/RuneList.vue";
-import RuneTable from "./components/RuneTable.vue";
-import RuneWordCard from "./components/RuneWordCard.vue";
+import TheHeader from "@/components/TheHeader.vue";
+import TheFooter from "@/components/TheFooter.vue";
+import RuneList from "@/components/RuneList.vue";
+import RuneTable from "@/components/RuneTable.vue";
+import RuneWordCard from "@/components/RuneWordCard.vue";
+
+import RuneWord from "@/components/RuneWord.vue";
+import UiModal from "@/components/_ui/ui-modal.vue";
 
 import { useInfoStore } from "@/store/index.js";
 
@@ -156,7 +167,16 @@ const filteredRunewords = computed(() => {
 });
 
 const currentCard = ref(false);
-const currentRuneWord = ref({});
+const currentRuneWord = ref({
+  name: {
+    ru: '',
+    en: '',
+  },
+  stats: {
+    ru: [],
+    en: []
+  }
+});
 
 const handleRuneWord = (evt) => {
   currentRuneWord.value = evt;

@@ -128,7 +128,7 @@ const getTypeName = (id) => {
 
 <style lang="scss" scoped>
 .runeword {
-  right: 12px;
+  left: 12px;
   top: 115px;
   position: fixed;
   min-width: 22rem;

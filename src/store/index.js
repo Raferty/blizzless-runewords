@@ -65,6 +65,12 @@ export const useInfoStore = defineStore({
             en: "Hints",
           },
         },
+        modal: {
+          title: {
+            ru: "Оригинальный рунворд",
+            en: "Original runeword",
+          }
+        }
       },
     };
   },
