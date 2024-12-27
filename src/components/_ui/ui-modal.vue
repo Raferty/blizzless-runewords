@@ -34,6 +34,7 @@ const emit = defineEmits(["update:modelValue"]);
   border: 1px solid #bab197;
   background-color: rgba(#000, 0.8);
   max-height: calc(100% - 124px);
+  overflow-y: auto;
 
   &__wrapper {
     padding: to-rem(16);
@@ -53,11 +54,6 @@ const emit = defineEmits(["update:modelValue"]);
     text-align: center;
     font-size: to-rem(22);
     margin-bottom: to-rem(1);
-  }
-
-  &__wrapper {
-    overflow-y: auto;
-    max-height: calc(100% - 32px);
   }
 }
 </style>

@@ -36,7 +36,7 @@
       </template>
     </div>
     <template v-if="runeword?.bugged?.status">
-      <h3 class="runeword__title">Bugged</h3>
+      <h3 class="runeword__title runeword__bugged">Bugged</h3>
       <div
         class="runeword__property runeword__property--bugged"
         v-for="prop in runeword?.bugged?.message"
@@ -101,6 +101,10 @@ const classes = computed(() => ({
     margin-bottom: 0.5rem;
     font-size: 1.4em;
     line-height: 1em;
+  }
+
+  &__bugged {
+    margin-top: 16px;
   }
 
   &__original {

@@ -75,15 +75,13 @@
   </main>
   <TheFooter />
 
-  <UiModal v-model="currentCard" style="right: 12px;top: 115px;position: fixed;">
+  <UiModal v-model="showModal" style="right: 12px;top: 115px;position: fixed;">
     <RuneWord type="modified" :name="currentRuneWord.name[store.currentLang]" :runeword="currentRuneWord" />
     <br />
     <hr />
     <br />
     <RuneWord type="original" :name="store.interface.modal.title[store.currentLang]" :runeword="currentRuneWord.old" />
   </UiModal>
-
-  <RuneWordCard v-model="currentCard" :runeword="currentRuneWord" />
 </template>
 
 <script setup>
@@ -95,7 +93,6 @@ import TheHeader from "@/components/TheHeader.vue";
 import TheFooter from "@/components/TheFooter.vue";
 import RuneList from "@/components/RuneList.vue";
 import RuneTable from "@/components/RuneTable.vue";
-import RuneWordCard from "@/components/RuneWordCard.vue";
 
 import RuneWord from "@/components/RuneWord.vue";
 import UiModal from "@/components/_ui/ui-modal.vue";
@@ -166,7 +163,7 @@ const filteredRunewords = computed(() => {
     : sortedRunewords.value;
 });
 
-const currentCard = ref(false);
+const showModal = ref(false);
 const currentRuneWord = ref({
   name: {
     ru: '',
@@ -182,7 +179,7 @@ const handleRuneWord = (evt) => {
   currentRuneWord.value = evt;
 
   if (currentWidth.value >= 1024) {
-    currentCard.value = true;
+    showModal.value = true;
   }
 };
 </script>
