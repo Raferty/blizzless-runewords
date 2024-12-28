@@ -2586,7 +2586,7 @@ export const RUNEWORDS = [
       status: true,
       message: [
         "+2 to Elemental skils (druid only)",
-        "Level 12 Attack (1 Charge)",
+        "Level 12 Attack (1/1 Charges)",
       ],
     },
     stats: {
