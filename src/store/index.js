@@ -72,6 +72,16 @@ export const useInfoStore = defineStore({
           }
         }
       },
+      runeword: {
+        name: {
+          ru: [],
+          en: []
+        },
+        stats: {
+          ru: [],
+          en: []
+        }
+      }
     };
   },
 
@@ -80,9 +90,28 @@ export const useInfoStore = defineStore({
       this.lang = lang;
       localStorage.setItem("lang", lang);
     },
+
+    updateRuneword(item) {
+      if(item) {
+        this.runeword = item;
+      } else {
+        this.runeword = {
+          name: {
+            ru: [],
+            en: []
+          },
+          stats: {
+            ru: [],
+            en: []
+          }
+        }
+      }
+
+    }
   },
 
   getters: {
     currentLang: (state) => state.lang,
+    currentRuneword: (state) => state.runeword,
   },
 });

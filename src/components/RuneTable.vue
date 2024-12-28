@@ -110,7 +110,11 @@
     </tbody>
   </table>
 
-  <div
+  <UiModal v-model="showModal" :style="`left: ${x + 40}px; top: ${y + 20}px;`">
+    <RuneWord :name="currentItem.name[store.currentLang]" :runeword="currentItem"  />
+  </UiModal>
+
+  <!-- <div
     v-if="showModal"
     ref="modal"
     class="modal"
@@ -160,14 +164,17 @@
         {{ prop }}
       </div>
     </template>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 import { RUNES, ITEM_TYPES } from "@/shared/constants";
 import { useInfoStore } from "@/store/index.js";
-import { useElementSize } from '@vueuse/core'
+import { useElementSize } from '@vueuse/core';
+
+import UiModal from "@/components/_ui/ui-modal.vue";
+import RuneWord from "@/components/RuneWord.vue";
 
 const store = useInfoStore();
 
@@ -238,11 +245,15 @@ const update = (e) => {
 const handleMouseEnter = (item) => {
   showModal.value = true;
   currentItem.value = item;
+
+  store.updateRuneword(item)
 };
 
 const handleMouseLeave = () => {
   showModal.value = false;
   currentItem.value = [];
+
+  store.updateRuneword()
 };
 
 function useSortArrayBoolean(array, field) {

@@ -75,12 +75,14 @@
   </main>
   <TheFooter />
 
-  <UiModal v-model="showModal" style="right: 12px;top: 115px;position: fixed;">
+  <UiModal v-model="showModal" closable style="right: 12px;top: 115px;position: fixed;">
     <RuneWord type="modified" :name="currentRuneWord.name[store.currentLang]" :runeword="currentRuneWord" />
-    <br />
-    <hr />
-    <br />
-    <RuneWord type="original" :name="store.interface.modal.title[store.currentLang]" :runeword="currentRuneWord.old" />
+    <template v-if="currentRuneWord.old && Object.keys(currentRuneWord.old).length > 0">
+      <br />
+      <hr />
+      <br />
+      <RuneWord type="original" :name="store.interface.modal.title[store.currentLang]" :runeword="currentRuneWord.old" />
+    </template>
   </UiModal>
 </template>
 

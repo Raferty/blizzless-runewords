@@ -24,7 +24,7 @@
     </div>
     <div
       class="runeword__property"
-      v-for="prop in runeword.stats[store.currentLang]"
+      v-for="prop in runewordStats"
     >
       <template v-if="prop.includes('#')">
         <span class="modal__property--type">{{
@@ -85,10 +85,16 @@ const getTypeName = (id) => {
   ];
 };
 
+const runewordStats = computed(() => {
+  console.log('props.runeword.stats', props.runeword.stats);
+  console.log('store.currentLang', store.currentLang);
+
+  return props.runeword.stats[store.currentLang];
+});
+
 const classes = computed(() => ({
   [`--${props.type}`]: true,
 }));
-
 </script>
 
 <style lang="scss" scoped>

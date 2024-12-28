@@ -1,7 +1,7 @@
 <template>
   <div v-if="modelValue" class="ui-modal">
     <div class="ui-modal__wrapper">
-      <div class="ui-modal__close" @click="$emit('update:modelValue', false)">close</div>
+      <div v-if="closable" class="ui-modal__close" @click="$emit('update:modelValue', false)">close</div>
       <div v-if="title" class="ui-modal__title"></div>
       <div class="ui-modal__content">
         <slot />
@@ -15,6 +15,10 @@ const props = defineProps({
   title: {
     type: String,
     default: '',
+  },
+  closable: {
+    type: Boolean,
+    default: false,
   },
   modelValue: {
     type: Boolean,
