@@ -2582,17 +2582,24 @@ export const RUNEWORDS = [
     level: 49,
     ladder: false,
     reworked: true,
+    bugged: {
+      status: true,
+      message: [
+        "+2 to Elemental skils (druid only)",
+        "Level 12 Attack (1 Charge)",
+      ],
+    },
     stats: {
       ru: [
+        "Вероятность 5% применить умение «Ураган» 26-го уровня при получении урона",
         "Вероятность 5% применить умение «Ураганный доспех» 15-го уровня при получении урона",
-        "5% Chance To Cast Level 26 Hurricane When Struck",
         "+2 к умениям друида",
         "+2 to Summoning skils (druid only)",
-        "300% extra gold from monsters",
-        "Level 1 Amplify Damage (12 Charges)",
         "+30% к сопротивлению молнии",
         "-7 к магическому урону",
         "+15% к урону, приходящемуся на ману",
+        "300% к золоту за убийство монстров",
+        "Level 1 Amplify Damage (12 Charges)",
       ],
       en: [
         "5% Chance To Cast Level 15 Cyclone Armor When Struck",
