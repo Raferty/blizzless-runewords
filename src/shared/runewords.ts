@@ -550,10 +550,6 @@ export const RUNEWORDS = [
     level: 45,
     ladder: false,
     reworked: true,
-    bugged: {
-      status: true,
-      message: ["+100% Enhanced Damage"],
-    },
     stats: {
       ru: [
         "+3 к умениям владения оружием (только для варваров)",
@@ -567,9 +563,9 @@ export const RUNEWORDS = [
       en: [
         "+3 to Masteries (Barbarian only)",
         "+2 To Barbarian Skill Levels",
-        "+130% Enhanced Defence",
         "Adds +40 damage",
         "+20% Deadly Strike",
+        "+130% Enhanced Defence",
         "Replenish Life 7",
         "Requirements -15%",
       ],
