@@ -4743,10 +4743,6 @@ export const RUNEWORDS = [
     level: 67,
     ladder: false,
     reworked: true,
-    bugged: {
-      status: true,
-      message: ["+7 to Jab (Amazon only)"],
-    },
     stats: {
       ru: [
         "Не теряет прочности",
@@ -4768,7 +4764,7 @@ export const RUNEWORDS = [
         "+4-396% Damage To Demons (Based on Character Level)",
         "+20% Deadly Strike",
         "+6 to Fend (Amazon only)",
-        "+6 to Jab (Amazon only)",
+        "+<span class='varies'>6-7</span> to Jab (Amazon only) (varies)",
         "Hit Blinds Target",
         "Freezes Target +3",
         "+10 To Vitality",
