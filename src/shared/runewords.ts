@@ -2139,7 +2139,7 @@ export const RUNEWORDS = [
       status: true,
       message: [
         "30% Chance To Cast Level 8 Cloak of Shadows When Struck (doesn't work)",
-        "-25% Chance Of Getting Magic Items (doesn't work)",
+        "-30% Chance Of Getting Magic Items (doesn't work)",
       ],
     },
     stats: {
@@ -2161,7 +2161,7 @@ export const RUNEWORDS = [
         "+<span class='varies'>200-260</span>% Enhanced Defense (varies)",
         "+10 To Strength",
         "All resistances +15",
-        "-25% Chance Of Getting Magic Items",
+        "-30% Chance Of Getting Magic Items",
       ],
     },
     complete: false,
