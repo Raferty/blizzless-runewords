@@ -290,11 +290,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: [
-        "+5-7 to Weapon block (Assassin only)",
-        "+258 Poison Damage Over 5 Seconds",
-      ],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -1647,8 +1644,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: ["Adds +210 Maximum Damage", "Hit Causes Monster To Flee 44%"],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -1801,10 +1798,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: [
-        "Gives +30% Increased Attack Speed instead +30% Faster Cast Rate",
-      ],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -2136,11 +2131,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: [
-        "30% Chance To Cast Level 8 Cloak of Shadows When Struck (doesn't work)",
-        "-30% Chance Of Getting Magic Items (doesn't work)",
-      ],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -2273,10 +2265,9 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
+      status: false,
       message: [
-        "+5 to Raise Skeleton (necromancer only)",
-        "+40% Faster Cast Rate",
+
       ],
     },
     stats: {
@@ -2396,8 +2387,8 @@ export const RUNEWORDS = [
     },
     complete: false,
     bugged: {
-      status: true,
-      message: ["Repairs 1 Durability In 25 Seconds"],
+      status: false,
+      message: [],
     },
     old: {
       runes: [23, 3],
@@ -2585,11 +2576,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: [
-        "+2 to Elemental skils (druid only)",
-        "Level 12 Attack (1/1 Charges)",
-      ],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -2726,8 +2714,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: ["Repairs 1 Durability in 5 seconds"],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -4001,12 +3989,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: [
-        "Adds 255-511 Fire Damage",
-        "Adds 2-1073 Lightning Damage",
-        "+1 to Fire Mastery (Sorceress Only)",
-      ],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -4312,8 +4296,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: ["+20% Increased Attack Speed", "+70% Fast Cast Rate"],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -4460,8 +4444,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: ["Repairs 1 durability in 20 seconds"],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
@@ -4583,11 +4567,8 @@ export const RUNEWORDS = [
     ladder: false,
     reworked: true,
     bugged: {
-      status: true,
-      message: [
-        "5% Chance To Cast Level 18 Armageddon On Striking doesn't work",
-        "Repairs 1 Durability In 20 Seconds",
-      ],
+      status: false,
+      message: [],
     },
     stats: {
       ru: [
