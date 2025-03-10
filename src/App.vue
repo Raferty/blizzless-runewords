@@ -57,6 +57,18 @@
             </div>
 
             <div class="hints__block">
+              <span class="new">{{
+                store.interface.markers.new[store.currentLang]
+              }}</span>
+              -
+              {{
+                store.currentLang === "ru"
+                  ? `Новый рунворд разработанный командой Blizzless. В разработке`
+                  : `New runeword designed by Blizzless team. In development now`
+              }}
+            </div>
+
+            <div class="hints__block">
               <span class="reworked">{{
                 store.interface.markers.reworked[store.currentLang]
               }}</span>

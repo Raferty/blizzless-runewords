@@ -5073,4 +5073,77 @@ export const RUNEWORDS = [
     },
     complete: false,
   },
+
+  {
+    id: 94,
+    name: {
+      ru: "Nightfall",
+      en: "Nightfall",
+    },
+    runes: [1, 33],
+    types: [21],
+    excluded: "",
+    classes: ["Necromancer"],
+    patch: "new",
+    level: 69,
+    ladder: true,
+    marked: true,
+    stats: {
+      ru: [
+
+      ],
+      en: [
+
+      ],
+    },
+    complete: false,
+  },
+  {
+    id: 94,
+    name: {
+      ru: "Lightning",
+      en: "Lightning",
+    },
+    runes: [24, 29],
+    types: [22],
+    excluded: "",
+    classes: ["Sorceress"],
+    patch: "new",
+    level: 61,
+    ladder: true,
+    marked: true,
+    stats: {
+      ru: [
+
+      ],
+      en: [
+
+      ],
+    },
+    complete: false,
+  },
+  {
+    id: 94,
+    name: {
+      ru: "Envy",
+      en: "Envy",
+    },
+    runes: [22, 23],
+    types: [23],
+    excluded: "",
+    classes: ["Druid"],
+    patch: "new",
+    level: 49,
+    ladder: true,
+    marked: true,
+    stats: {
+      ru: [
+
+      ],
+      en: [
+
+      ],
+    },
+    complete: false,
+  },
 ];

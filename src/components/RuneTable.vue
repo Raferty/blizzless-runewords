@@ -75,6 +75,9 @@
           <span v-if="item?.bugged?.status" class="warning"
             >!!! {{ store.interface.markers.bugged[store.currentLang] }}</span
           >
+          <span v-if="item?.marked" class="new"
+            >new</span
+          >
         </td>
         <template v-for="(rune, index) in item.runes" :key="index">
           <template v-if="isFound(rune)">
@@ -481,5 +484,13 @@ onUnmounted(() => window.removeEventListener("mousemove", update));
   padding: 2px 4px;
   border-radius: 4px;
   background-color: rgba(#ffc107, 0.8);
+}
+
+.new {
+  font-size: 12px;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: #44aa44;
 }
 </style>
