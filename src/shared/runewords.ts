@@ -5099,7 +5099,7 @@ export const RUNEWORDS = [
     complete: false,
   },
   {
-    id: 94,
+    id: 95,
     name: {
       ru: "Lightning",
       en: "Lightning",
@@ -5123,7 +5123,7 @@ export const RUNEWORDS = [
     complete: false,
   },
   {
-    id: 94,
+    id: 96,
     name: {
       ru: "Envy",
       en: "Envy",
@@ -5147,7 +5147,7 @@ export const RUNEWORDS = [
     complete: false,
   },
   {
-    id: 94,
+    id: 97,
     name: {
       ru: "Voice",
       en: "Voice",
