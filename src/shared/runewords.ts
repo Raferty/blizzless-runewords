@@ -5146,4 +5146,28 @@ export const RUNEWORDS = [
     },
     complete: false,
   },
+  {
+    id: 94,
+    name: {
+      ru: "Voice",
+      en: "Voice",
+    },
+    runes: [8, 14, 16],
+    types: [17],
+    excluded: "",
+    classes: [],
+    patch: "new",
+    level: 35,
+    ladder: true,
+    marked: true,
+    stats: {
+      ru: [
+
+      ],
+      en: [
+
+      ],
+    },
+    complete: false,
+  },
 ];
