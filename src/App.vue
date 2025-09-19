@@ -20,6 +20,18 @@
             />
           </div>
 
+          <div class="filter">
+            <div class="filter__block">
+              <div class="filter__title">Sockets:</div>
+              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(2) }" @click="setSocket(2)">2</div>
+              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(3) }" @click="setSocket(3)">3</div>
+              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(4) }" @click="setSocket(4)">4</div>
+              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(5) }" @click="setSocket(5)">5</div>
+              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(6) }" @click="setSocket(6)">6</div>
+              <div class="filter__item filter__item--all" @click="setSocket()">all</div>
+            </div>
+          </div>
+
           <RuneTable
             :items="filteredRunewords"
             :runes="RUNES"
@@ -41,6 +53,18 @@
                 store.currentLang === "ru"
                   ? `Работает только на лестнице :D`
                   : `Ladder only runewords.`
+              }}
+            </div>
+
+            <div class="hints__block">
+              <span class="new">{{
+                store.interface.markers.new[store.currentLang]
+              }}</span>
+              -
+              {{
+                store.currentLang === "ru"
+                  ? `Новый рунворд разработанный командой Blizzless. В разработке`
+                  : `New runeword designed by Blizzless team. In development now`
               }}
             </div>
 
@@ -145,14 +169,31 @@ const sortedRunewords = computed(() => {
   return result;
 });
 
+const socketFilter = ref([]);
+
+const setSocket = (value) => {
+  const Index = socketFilter.value.findIndex(i => i === value);
+
+  if(value) {
+    if(Index === -1) {
+    socketFilter.value.push(value);
+  } else {
+    socketFilter.value.splice(Index, 1)
+  }
+  } else {
+    socketFilter.value = [];
+  }
+
+}
+
 const filteredRunewords = computed(() => {
   return search.value
     ? sortedRunewords.value.filter(
         (word) =>
           word.name.ru.toLowerCase().includes(search.value.toLowerCase()) ||
           word.name.en.toLowerCase().includes(search.value.toLowerCase())
-      )
-    : sortedRunewords.value;
+      ).filter(i => socketFilter.value.length ? socketFilter.value.includes(i.runes.length) : i.runes.length)
+    : sortedRunewords.value.filter(i => socketFilter.value.length ? socketFilter.value.includes(i.runes.length) : i.runes.length);
 });
 
 const currentCard = ref(false);
@@ -165,6 +206,8 @@ const handleRuneWord = (evt) => {
     currentCard.value = true;
   }
 };
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -256,6 +299,44 @@ const handleRuneWord = (evt) => {
 
     &:focus::-webkit-input-placeholder {
       opacity: 0;
+    }
+  }
+}
+
+.filter {
+  margin-bottom: 16px;
+
+  &__title {margin-right: 4px;}
+
+  &__block {
+    display: flex;
+    padding: 4px;
+    gap: 4px;
+  }
+
+  &__item {
+    font-size: 14px;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    background-color:#844 ;
+    border: 1px solid #844;
+    cursor: pointer;
+
+    &--active {
+      color: #fff;
+      background-color: #44aa44;
+      border-color: #44aa44;
+    }
+
+    &--all {
+      border-color: #ffc107cc;
+      background-color: #ffc107cc;
+      color: #000;
     }
   }
 }

@@ -742,4 +742,25 @@ export const ITEM_TYPES = [
       en: "Paladin Shields",
     },
   },
+  {
+    id: 21,
+    name: {
+      ru: "Усохшие Головы некроманта",
+      en: "Necromancer Shrunken Heads",
+    },
+  },
+  {
+    id: 22,
+    name: {
+      ru: "Сферы волшебницы",
+      en: "Sorceress Orbs",
+    },
+  },
+  {
+    id: 23,
+    name: {
+      ru: "Маски друида",
+      en: "Druid Pelts",
+    },
+  },
 ];

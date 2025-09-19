@@ -38,6 +38,10 @@ export const useInfoStore = defineStore({
             ru: "ладдер",
             en: "L",
           },
+          new: {
+            ru: "новый",
+            en: "new",
+          },
           reworked: {
             ru: "переработан",
             en: "reworked",

@@ -291,10 +291,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: [
-        "+5-7 to Weapon block (Assassin only)",
-        "+258 Poison Damage Over 5 Seconds",
-      ],
+      message: [],
     },
     stats: {
       ru: [
@@ -1648,7 +1645,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: ["Adds +210 Maximum Damage", "Hit Causes Monster To Flee 44%"],
+      message: [],
     },
     stats: {
       ru: [
@@ -1802,9 +1799,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: [
-        "Gives +30% Increased Attack Speed instead +30% Faster Cast Rate",
-      ],
+      message: [],
     },
     stats: {
       ru: [
@@ -2137,10 +2132,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: [
-        "30% Chance To Cast Level 8 Cloak of Shadows When Struck (doesn't work)",
-        "-30% Chance Of Getting Magic Items (doesn't work)",
-      ],
+      message: [],
     },
     stats: {
       ru: [
@@ -2274,10 +2266,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: [
-        "+5 to Raise Skeleton (necromancer only)",
-        "+40% Faster Cast Rate",
-      ],
+      message: [],
     },
     stats: {
       ru: [
@@ -2397,7 +2386,7 @@ export const RUNEWORDS = [
     complete: false,
     bugged: {
       status: false,
-      message: ["Repairs 1 Durability In 25 Seconds"],
+      message: [],
     },
     old: {
       runes: [23, 3],
@@ -2586,10 +2575,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: [
-        "+2 to Elemental skils (druid only)",
-        "Level 12 Attack (1/1 Charges)",
-      ],
+      message: [],
     },
     stats: {
       ru: [
@@ -2727,7 +2713,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: ["Repairs 1 Durability in 5 seconds"],
+      message: [],
     },
     stats: {
       ru: [
@@ -4002,11 +3988,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: [
-        "Adds 255-511 Fire Damage",
-        "Adds 2-1073 Lightning Damage",
-        "+1 to Fire Mastery (Sorceress Only)",
-      ],
+      message: [],
     },
     stats: {
       ru: [
@@ -4313,7 +4295,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: ["+20% Increased Attack Speed", "+70% Fast Cast Rate"],
+      message: [],
     },
     stats: {
       ru: [
@@ -4461,7 +4443,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: ["Repairs 1 durability in 20 seconds"],
+      message: [],
     },
     stats: {
       ru: [
@@ -4584,10 +4566,7 @@ export const RUNEWORDS = [
     reworked: true,
     bugged: {
       status: false,
-      message: [
-        "5% Chance To Cast Level 18 Armageddon On Striking doesn't work",
-        "Repairs 1 Durability In 20 Seconds",
-      ],
+      message: [],
     },
     stats: {
       ru: [
@@ -5088,6 +5067,127 @@ export const RUNEWORDS = [
         "All Resistances +<span class='varies'>60-70</span> (varies)",
         "75% Extra Gold from Monsters",
         "30% Better Chance of Getting Magic Items",
+      ],
+    },
+    complete: false,
+  },
+
+  {
+    id: 94,
+    name: {
+      ru: "Nightfall",
+      en: "Nightfall",
+    },
+    runes: [1, 33],
+    types: [21],
+    excluded: "",
+    classes: ["Necromancer"],
+    patch: "new",
+    level: 69,
+    ladder: true,
+    marked: true,
+    stats: {
+      ru: [],
+      en: [
+        "+<span class='varies'>1-10</span> To Teleport",
+        "+30% Faster Cast Rate",
+        "Regenerate Mana <span class='varies'>50-100</span>%",
+        "+<span class='varies'>50-100</span>% Better Chance of Getting Magic Items",
+        "+60% Increased Chance of Blocking",
+        "+20% To Poison Skill Damage",
+        "+3 To Raise Skeleton (Necromancer only)",
+        "+15 Defense",
+        "+1 To Light Radius",
+        "Indestructible",
+      ],
+    },
+    complete: false,
+  },
+  {
+    id: 95,
+    name: {
+      ru: "Lightning",
+      en: "Lightning",
+    },
+    runes: [24, 29],
+    types: [22],
+    excluded: "",
+    classes: ["Sorceress"],
+    patch: "new",
+    level: 61,
+    ladder: true,
+    marked: true,
+    stats: {
+      ru: [],
+      en: [
+        "+3 To Chain Lightning (Sorceress only)",
+        "+3 To Lightning (Sorceress only)",
+        "+2 To Lightning Spells (Sorceress Only)",
+        "+25% Faster Cast Rate",
+        "-<span class='varies'>10-15</span>% To Enemy Lightning Resistance",
+        "+<span class='varies'>200-300</span> To Mana",
+        "+30% Better Chance of Getting Magic Items",
+        "Hit Blinds Target",
+      ],
+    },
+    complete: false,
+  },
+  {
+    id: 96,
+    name: {
+      ru: "Envy",
+      en: "Envy",
+    },
+    runes: [22, 23],
+    types: [23],
+    excluded: "",
+    classes: ["Druid"],
+    patch: "new",
+    level: 49,
+    ladder: true,
+    marked: true,
+    stats: {
+      ru: [],
+      en: [
+        "+6 To Find Item",
+        "+2 To Summoning (Druid) (Druid Only)",
+        "+8 per Character Lvl to Attack Rating (Based on Character Level)",
+        "+<span class='varies'>50-75</span>% Better Chance of Getting Magic Items",
+        "30% Increased Attack Speed",
+        "+<span class='varies'>10-15</span>% Faster Cast Rate",
+        "Requirements +30%",
+        "All Resistances +15%",
+        "Magic Damage Reduced by 7",
+      ],
+    },
+    complete: false,
+  },
+  {
+    id: 97,
+    name: {
+      ru: "Voice",
+      en: "Voice",
+    },
+    runes: [8, 14, 16],
+    types: [17],
+    excluded: "",
+    classes: [],
+    patch: "new",
+    level: 35,
+    ladder: true,
+    marked: true,
+    stats: {
+      ru: [],
+      en: [
+        "+<span class='varies'>2-4</span> To War Cry (Barbarian only)",
+        "+<span class='varies'>2-6</span> To Find Item (Barbarian only)",
+        "+2 To Leap (Barbarian only)",
+        "+35% Faster Cast Rate",
+        "+200 To Mana",
+        "+<span class='varies'>150-200</span>% Enhanced Defense",
+        "Fire Resist +30%",
+        "Replenish Life +7",
+        "+10 To Vitality",
       ],
     },
     complete: false,
