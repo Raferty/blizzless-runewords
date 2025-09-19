@@ -5087,7 +5087,18 @@ export const RUNEWORDS = [
     ladder: true,
     marked: true,
     stats: {
-      ru: [],
+      ru: [
+        "+<span class='varies'>1-10</span> к умению 'Телепортация'",
+        "+30% к скорости колдовства",
+        "Восстановление маны <span class='varies'>50-100</span>%",
+        "+<span class='varies'>50-100</span>% к поиску магических предметов",
+        "+60% к шансу блока",
+        "+20% к урону от умений яда",
+        "+3 к умению 'Скелет' (только для Некромант)",
+        "+15 к защите",
+        "+1 к радиусу света",
+        "Не теряет прочности",
+      ],
       en: [
         "+<span class='varies'>1-10</span> To Teleport",
         "+30% Faster Cast Rate",
@@ -5106,7 +5117,7 @@ export const RUNEWORDS = [
   {
     id: 95,
     name: {
-      ru: "Lightning",
+      ru: "Молния",
       en: "Lightning",
     },
     runes: [24, 29],
@@ -5118,7 +5129,16 @@ export const RUNEWORDS = [
     ladder: true,
     marked: true,
     stats: {
-      ru: [],
+      ru: [
+        "+3 к умению 'Цепная молния' (только для Волшебница)",
+        "+3 к умению 'Молния' (только для Волшебница)",
+        "+2 к древу навыков 'Магия молнии' (только для Волшебница)",
+        "+25% к скорости колдовства",
+        "-10~15% к сопротивлению молнии у врага",
+        "+200~300 к мане",
+        "+30% к поиску магических предметов",
+        "Попадание ослепляет цель",
+      ],
       en: [
         "+3 To Chain Lightning (Sorceress only)",
         "+3 To Lightning (Sorceress only)",
@@ -5135,7 +5155,7 @@ export const RUNEWORDS = [
   {
     id: 96,
     name: {
-      ru: "Envy",
+      ru: "Зависть",
       en: "Envy",
     },
     runes: [22, 23],
@@ -5147,7 +5167,17 @@ export const RUNEWORDS = [
     ladder: true,
     marked: true,
     stats: {
-      ru: [],
+      ru: [
+        "+6 к умению 'Поиск предметов'",
+        "+2 к древу навыков 'Спутники''(только для Друид)",
+        "+8 за уровень к рейтингу атаки (зависит от уровня)",
+        "+<span class='varies'>50-75</span>% к поиску магических предметов",
+        "30% к скорости атаки",
+        "+<span class='varies'>10-15</span>% к скорости колдовства",
+        "Требования +30%",
+        "+15% ко всем сопротивлениям",
+        "Магический урон уменьшен на 7",
+      ],
       en: [
         "+6 To Find Item",
         "+2 To Summoning (Druid) (Druid Only)",
@@ -5165,7 +5195,7 @@ export const RUNEWORDS = [
   {
     id: 97,
     name: {
-      ru: "Voice",
+      ru: "Голос",
       en: "Voice",
     },
     runes: [8, 14, 16],
@@ -5177,7 +5207,17 @@ export const RUNEWORDS = [
     ladder: true,
     marked: true,
     stats: {
-      ru: [],
+      ru: [
+        "+<span class='varies'>2-4</span> к умению 'Воинственный клич' (только для Варвар)",
+        "+<span class='varies'>2-6</span> к умению 'Поиск предметов' (только для Варвар)",
+        "+2 к умению 'Прыжок' (только для Варвар)",
+        "+35% к скорости колдовства",
+        "+200 к мане",
+        "+<span class='varies'>150-200</span>% к защите",
+        "+30% к сопротивлению огню",
+        "Восполнение жизни +7",
+        "+10 к живучести",
+      ],
       en: [
         "+<span class='varies'>2-4</span> To War Cry (Barbarian only)",
         "+<span class='varies'>2-6</span> To Find Item (Barbarian only)",
