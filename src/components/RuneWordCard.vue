@@ -27,14 +27,12 @@
         v-for="(prop, index) in runeword.stats[store.currentLang]"
         :key="`stat-${index}`"
         class="runeword__property"
+        :class="prop.includes('#') ? 'runeword__property--type' : ''"
       >
         <template v-if="prop.includes('#')">
-          <span class="modal__property--type">{{
-            prop.substring(1, prop.length - 1)
-          }}</span>
+          {{ prop.substring(1, prop.length - 1) }}
         </template>
         <template v-else>
-          <!-- eslint-disable-next-line vue/no-v-html -- trusted game strings -->
           <span v-html="prop"></span>
         </template>
       </div>
@@ -78,14 +76,12 @@
           v-for="(prop, index) in runeword.old.stats[store.currentLang]"
           :key="`old-stat-${index}`"
           class="runeword__property runeword__property--original"
+          :class="prop.includes('#') ? 'runeword__property--type' : ''"
         >
           <template v-if="prop.includes('#')">
-            <span class="modal__property--type">{{
-              prop.substring(1, prop.length - 1)
-            }}</span>
+            {{ prop.substring(1, prop.length - 1) }}
           </template>
           <template v-else>
-            <!-- eslint-disable-next-line vue/no-v-html -- trusted game strings -->
             <span v-html="prop"></span>
           </template>
         </div>

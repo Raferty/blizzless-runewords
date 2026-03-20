@@ -50,4 +50,11 @@ module.exports = [
     },
   },
   eslintConfigPrettier,
+  // Runeword stat lines embed trusted `<span class="varies">` from bundled data, not user input.
+  {
+    files: ["src/components/RuneWordCard.vue"],
+    rules: {
+      "vue/no-v-html": "off",
+    },
+  },
 ];
