@@ -1,12 +1,18 @@
 import { defineStore } from "pinia";
 import { ITEM_TYPES, RUNES } from "@/shared/constants";
 import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
+import { REWORKED_RUNEWORDS } from "@/shared/reworked-runewords";
 import { RUNEWORDS } from "@/shared/runewords";
 import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
 import { isComplete } from "@/utils/runeword";
 
-/** Базовый список + RotW (`rotw-runewords.ts`) + кастомные с `marked` (`custom-runewords.ts`). */
-const ALL_RUNEWORDS = [...RUNEWORDS, ...ROTW_RUNEWORDS, ...CUSTOM_RUNEWORDS];
+/** Базовый список + переработанные (`reworked-runewords.ts`) + RotW + кастомные с `marked`. */
+const ALL_RUNEWORDS = [
+  ...RUNEWORDS,
+  ...REWORKED_RUNEWORDS,
+  ...ROTW_RUNEWORDS,
+  ...CUSTOM_RUNEWORDS,
+];
 import type { RuneItem, RunewordTableItem } from "@/types";
 
 interface RunewordsState {
