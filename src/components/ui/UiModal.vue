@@ -69,54 +69,54 @@ onBeforeUnmount(() => {
   background-color: rgba(0, 0, 0, 0.75);
 
   &--tooltip {
-    background: transparent;
-    padding: 0;
     align-items: flex-start;
     justify-content: flex-start;
+    padding: 0;
+    background: transparent;
   }
 
   &__wrapper {
     position: relative;
     width: 100%;
-    max-width: 490px;
     min-width: min(22rem, 100%);
-    border: 1px solid var(--color-border);
-    background-color: var(--color-bg);
+    max-width: 490px;
     padding: 20px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
   }
 
   &--tooltip &__wrapper {
-    padding: 0;
-    border: none;
+    width: auto;
     min-width: 0;
     max-width: none;
-    width: auto;
+    padding: 0;
     background: transparent;
+    border: none;
   }
 
   &__title {
-    color: var(--color-title);
-    text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.4em;
     line-height: 1em;
+    color: var(--color-title);
+    text-align: center;
   }
 
   &__type {
-    text-align: center;
-    font-size: 0.875em;
     margin-bottom: 0.5rem;
+    font-size: 0.875em;
     color: var(--color-muted);
+    text-align: center;
   }
 
   &__property {
-    text-align: center;
     color: var(--color-success);
+    text-align: center;
 
     &--type {
       display: block;
-      color: var(--color-text);
       margin-top: 16px;
+      color: var(--color-text);
     }
 
     &--bugged {
@@ -126,10 +126,10 @@ onBeforeUnmount(() => {
 
   &__runes {
     display: flex;
+    gap: 8px;
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    gap: 8px;
   }
 
   &__rune {

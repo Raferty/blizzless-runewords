@@ -77,9 +77,9 @@ const splittedRunes = computed(() => splitToNChunks([...runewordsStore.runes], 3
   margin-bottom: 16px;
 
   &__wrapper {
-    gap: 4px;
     display: flex;
     flex-direction: column;
+    gap: 4px;
     margin-bottom: 16px;
 
     @media (min-width: 1024px) {
@@ -96,9 +96,9 @@ const splittedRunes = computed(() => splitToNChunks([...runewordsStore.runes], 3
   // }
 
   &__part {
-    gap: 4px;
     display: flex;
     flex-direction: row;
+    gap: 4px;
 
     @media (min-width: 1024px) {
       flex-direction: column;
@@ -106,12 +106,12 @@ const splittedRunes = computed(() => splitToNChunks([...runewordsStore.runes], 3
   }
 
   &__item {
-    border-radius: 2px;
-    border: 1px solid transparent;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 4px;
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: 2px;
 
     &:hover {
       cursor: pointer;
@@ -128,26 +128,26 @@ const splittedRunes = computed(() => splitToNChunks([...runewordsStore.runes], 3
 
   &__name {
     width: 48px;
-    font-size: 12px;
-    line-height: 1.1;
-    text-align: center;
-    color: var(--color-text);
-    white-space: nowrap;
+    padding-bottom: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-bottom: 2px;
+    font-size: 12px;
+    line-height: 1.1;
+    color: var(--color-text);
+    text-align: center;
+    white-space: nowrap;
   }
 }
 
 .button {
-  cursor: pointer;
-  width: 100%;
   display: block;
+  display: block;
+  width: 100%;
   padding: 4px 8px;
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  background-color: var(--color-danger);
   border: 1px solid var(--color-danger);
   border-radius: 4px;
-  display: block;
-  color: var(--color-text-inverse);
-  background-color: var(--color-danger);
 }
 </style>

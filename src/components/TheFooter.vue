@@ -16,8 +16,8 @@
 
 <style lang="scss" scoped>
 .footer {
-  margin-top: 32px;
   padding: 8px 0;
+  margin-top: 32px;
   text-align: center;
   border-top: 2px solid var(--color-border);
 
@@ -27,12 +27,12 @@
 }
 
 .container {
-  padding-left: 8px;
   padding-right: 8px;
+  padding-left: 8px;
 
   @media (min-width: 1024px) {
-    padding-left: 16px;
     padding-right: 16px;
+    padding-left: 16px;
   }
 }
 </style>

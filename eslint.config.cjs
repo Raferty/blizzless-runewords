@@ -13,6 +13,7 @@ module.exports = [
       "dist-ssr/",
       "coverage/",
       "eslint.config.cjs",
+      "stylelint.config.cjs",
     ],
   },
   eslint.configs.recommended,

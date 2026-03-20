@@ -27,12 +27,12 @@ defineEmits<{
 
   &__input {
     width: 100%;
+    padding: 8px;
     font-size: 16px;
-    border-radius: 4px;
     color: var(--color-border);
     background-color: var(--color-bg);
     border: 1px solid var(--color-border-input);
-    padding: 8px;
+    border-radius: 4px;
 
     &::-webkit-input-placeholder {
       transition: all 0.4s ease;

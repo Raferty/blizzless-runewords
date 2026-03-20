@@ -26,11 +26,11 @@ const { gridFilteredRunewords } = storeToRefs(runewordsStore);
 <style scoped lang="scss">
 .runewords-list {
   display: grid;
-  width: 100%;
-  min-width: 0;
   grid-template-columns: 1fr;
   gap: 12px;
   align-items: stretch;
+  width: 100%;
+  min-width: 0;
 
   @media (min-width: 641px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -49,8 +49,8 @@ const { gridFilteredRunewords } = storeToRefs(runewordsStore);
   }
 
   &__item {
-    min-width: 0;
     display: flex;
+    min-width: 0;
   }
 }
 </style>

@@ -232,11 +232,11 @@ const handleModalKeydown = (e: KeyboardEvent): void => {
   z-index: 10050;
   max-width: min(92vw, 440px);
   max-height: min(85vh, 800px);
+  padding: 16px;
   overflow: auto;
   pointer-events: auto;
-  background-color: #000;
-  padding: 16px;
   outline: none;
+  background-color: #000;
   border: 1px solid var(--color-border-light);
   border-radius: 8px;
 }
@@ -248,8 +248,8 @@ const handleModalKeydown = (e: KeyboardEvent): void => {
   padding: 0;
   margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+  clip: rect(0, 0, 0, 0);
 }
 </style>

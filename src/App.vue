@@ -156,30 +156,30 @@ const handleTooltipClose = (): void => {
   margin-bottom: 16px;
 
   @media (min-width: 1024px) {
-    margin-bottom: 0;
     width: 158px;
+    margin-bottom: 0;
   }
 
   &__container {
     position: sticky;
     top: 15px;
-    padding-left: 8px;
     padding-right: 8px;
+    padding-left: 8px;
 
     @media (min-width: 1024px) {
-      padding-left: 0;
       padding-right: 0;
+      padding-left: 0;
     }
   }
 }
 
 .main {
-  padding-left: 8px;
   padding-right: 8px;
+  padding-left: 8px;
 
   @media (min-width: 1024px) {
-    padding-left: 16px;
     padding-right: 16px;
+    padding-left: 16px;
   }
 
   &__container {
@@ -204,15 +204,15 @@ const handleTooltipClose = (): void => {
 
   &__meta {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 16px;
   }
 }
 
 .filters {
-  gap: 12px;
   display: flex;
+  gap: 12px;
 }
 
 .switcher {
@@ -220,17 +220,17 @@ const handleTooltipClose = (): void => {
   gap: 4px;
 
   &__button {
-    font-size: 14px;
-    line-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 90px;
     height: 24px;
+    font-size: 14px;
+    line-height: 100%;
     color: var(--color-text-inverse);
+    cursor: pointer;
     background-color: var(--color-notfound);
     border: 1px solid var(--color-notfound);
-    cursor: pointer;
     border-radius: 4px;
 
     &--active {

@@ -26,8 +26,8 @@ const { currentLang, setLang } = useLangSwitcher();
 <style lang="scss" scoped>
 .lang {
   display: flex;
-  align-items: center;
   gap: 12px;
+  align-items: center;
 
   &__item {
     color: var(--color-notfound);

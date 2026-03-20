@@ -254,12 +254,11 @@ const sortedItems = computed(() => {
 
 <style lang="scss">
 .table {
+  display: block;
   width: 100%;
+  overflow-x: auto;
   font-size: 14px;
   border-collapse: collapse;
-
-  display: block;
-  overflow-x: auto;
 
   @media (min-width: 1024px) {
     display: table;
@@ -267,8 +266,8 @@ const sortedItems = computed(() => {
 
   th {
     padding: 4px;
-    text-align: left;
     line-height: 100%;
+    text-align: left;
     white-space: nowrap;
   }
 
@@ -284,8 +283,8 @@ const sortedItems = computed(() => {
 
   &__th-inner {
     display: inline-flex;
-    align-items: center;
     gap: 2px;
+    align-items: center;
   }
 
   &__name {
@@ -293,8 +292,8 @@ const sortedItems = computed(() => {
 
     span {
       display: inline-block;
-      cursor: pointer;
       margin-right: 8px;
+      cursor: pointer;
     }
   }
 
@@ -334,44 +333,44 @@ const sortedItems = computed(() => {
 }
 
 .chips {
-  text-align: center;
   display: inline-block;
-  color: var(--color-text-inverse);
-  font-size: 12px;
   padding: 2px 4px;
+  font-size: 12px;
+  color: var(--color-text-inverse);
+  text-align: center;
   background-color: var(--color-ladder-bg);
   border-radius: 4px;
 }
 
 .reworked {
+  padding: 2px 4px;
   font-size: 12px;
   color: var(--color-text-inverse);
-  padding: 2px 4px;
-  border-radius: 4px;
   background-color: var(--color-reworked-bg);
+  border-radius: 4px;
 }
 
 .warning {
+  padding: 2px 4px;
   font-size: 12px;
   color: var(--color-text-on-warning);
-  padding: 2px 4px;
-  border-radius: 4px;
   background-color: var(--color-warning-bg);
+  border-radius: 4px;
 }
 
 .new {
+  padding: 2px 4px;
   font-size: 12px;
   color: var(--color-text-inverse);
-  padding: 2px 4px;
-  border-radius: 4px;
   background-color: var(--color-success-alt);
+  border-radius: 4px;
 }
 
 .rotw {
-  background-color: var(--color-rotw);
+  padding: 2px 4px;
   font-size: 12px;
   color: var(--color-text-inverse);
-  padding: 2px 4px;
+  background-color: var(--color-rotw);
   border-radius: 4px;
 }
 </style>

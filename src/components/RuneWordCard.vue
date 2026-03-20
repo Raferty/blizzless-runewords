@@ -115,75 +115,75 @@ withDefaults(
   width: 100%;
 
   &__reworked {
-    padding: 2px 4px;
-    border-radius: 2px;
-    display: inline-block;
-    background-color: var(--color-reworked-bg);
     position: absolute;
     top: 1px;
     right: 1px;
+    display: inline-block;
+    padding: 2px 4px;
     color: var(--color-text-inverse);
+    background-color: var(--color-reworked-bg);
+    border-radius: 2px;
   }
 
   &__new {
-    padding: 2px 4px;
-    border-radius: 2px;
-    display: inline-block;
-    background-color: #4a4;
     position: absolute;
     top: 1px;
     left: 1px;
+    display: inline-block;
+    padding: 2px 4px;
+    background-color: #4a4;
+    border-radius: 2px;
   }
 
   &__rotw {
-    padding: 2px 4px;
-    border-radius: 2px;
-    display: inline-block;
-    background-color: var(--color-rotw);
     position: absolute;
     top: 1px;
     right: 1px;
+    display: inline-block;
+    padding: 2px 4px;
     color: var(--color-text-inverse);
+    background-color: var(--color-rotw);
+    border-radius: 2px;
   }
 
   &__wrapper {
-    padding: 24px;
     position: relative;
+    padding: 24px;
   }
 
   &__close {
     position: absolute;
-    right: 12px;
     top: 10px;
+    right: 12px;
     color: var(--color-danger);
     cursor: pointer;
   }
 
   &__original {
-    text-align: center;
     margin-bottom: 16px;
+    text-align: center;
   }
 
   &__title {
-    color: var(--color-title);
-    text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.4em;
     line-height: 1em;
+    color: var(--color-title);
+    text-align: center;
   }
 
   &__type {
-    text-align: center;
-    font-size: 0.875em;
     margin-bottom: 0.5rem;
+    font-size: 0.875em;
     color: var(--color-muted);
+    text-align: center;
   }
 
   &__property {
     margin-bottom: 2px;
     font-size: 0.875em;
-    text-align: center;
     color: var(--color-success);
+    text-align: center;
 
     &--original {
       color: var(--color-link);
@@ -191,8 +191,8 @@ withDefaults(
 
     &--type {
       display: block;
-      color: var(--color-text);
       margin-top: 16px;
+      color: var(--color-text);
     }
 
     &--bugged {
@@ -202,11 +202,11 @@ withDefaults(
 
   &__runes {
     display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    gap: 8px;
-    flex-wrap: wrap;
   }
 
   &__rune {

@@ -62,13 +62,15 @@ yarn preview
 ### Линтинг и форматирование
 
 ```bash
-npm run lint          # проверка ESLint
-npm run lint:fix      # автоисправление
+npm run lint          # ESLint + Stylelint (порядок CSS/SCSS-свойств)
+npm run lint:fix      # ESLint + Stylelint с автоисправлением
+npm run stylelint     # только Stylelint
+npm run stylelint:fix # сортировка свойств в .vue / .scss / .css
 npm run format        # Prettier
 npm run format:check  # проверка стиля без записи
 ```
 
-Конфиги: `eslint.config.cjs` (flat config), `.prettierrc`, `.prettierignore`. Для Prettier подключён `eslint-config-prettier`.
+Конфиги: `eslint.config.cjs` (flat config), `.prettierrc`, `.prettierignore`, `stylelint.config.cjs` ([Recess order](https://github.com/stormwarning/stylelint-config-recess-order) — сортировка свойств без лишних CSS-правил). Для Prettier подключён `eslint-config-prettier`.
 
 ## Деплой на GitHub Pages
 

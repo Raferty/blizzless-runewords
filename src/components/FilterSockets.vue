@@ -49,22 +49,22 @@ function toggleSocket(value: number): void {
 
   &__block {
     display: flex;
-    padding: 4px;
     gap: 4px;
+    padding: 4px;
   }
 
   &__item {
-    font-size: 14px;
-    line-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 24px;
     height: 24px;
+    font-size: 14px;
+    line-height: 100%;
     color: var(--color-text-inverse);
+    cursor: pointer;
     background-color: var(--color-notfound);
     border: 1px solid var(--color-notfound);
-    cursor: pointer;
 
     &--active {
       color: var(--color-text-inverse);

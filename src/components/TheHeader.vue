@@ -18,8 +18,8 @@ import LangSwitcher from "@/components/LangSwitcher.vue";
 <style lang="scss" scoped>
 .header {
   padding: 8px 0;
-  border-bottom: 2px solid var(--color-border);
   margin-bottom: 8px;
+  border-bottom: 2px solid var(--color-border);
 
   @media (min-width: 1024px) {
     margin-bottom: 16px;
@@ -48,12 +48,12 @@ import LangSwitcher from "@/components/LangSwitcher.vue";
 }
 
 .container {
-  padding-left: 8px;
   padding-right: 8px;
+  padding-left: 8px;
 
   @media (min-width: 1024px) {
-    padding-left: 16px;
     padding-right: 16px;
+    padding-left: 16px;
   }
 }
 
