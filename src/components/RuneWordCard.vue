@@ -210,6 +210,7 @@ withDefaults(
     justify-content: center;
     margin-bottom: 16px;
     gap: 8px;
+    flex-wrap: wrap;
   }
 
   &__rune {
