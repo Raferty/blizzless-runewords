@@ -763,4 +763,11 @@ export const ITEM_TYPES = [
       en: "Druid Pelts",
     },
   },
+  {
+    id: 24,
+    name: {
+      ru: "Гримуары",
+      en: "Grimoires",
+    },
+  },
 ];

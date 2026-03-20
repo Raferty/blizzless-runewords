@@ -1,6 +1,7 @@
 <template>
   <div class="runeword">
-    <div v-if="runeword?.marked" class="runeword__new">new</div>
+    <div v-if="runeword?.patch === 'rotw'" class="runeword__rotw">rotw</div>
+    <div v-if="runeword?.marked" class="runeword__new">custom</div>
     <div v-if="runeword?.reworked" class="runeword__reworked">reworked</div>
     <h3 class="runeword__title">{{ runeword.name?.[store.currentLang] }}</h3>
     <div class="runeword__type">
@@ -125,6 +126,7 @@ withDefaults(
     position: absolute;
     top: 1px;
     right: 1px;
+    color: var(--color-text-inverse);
   }
 
   &__new {
@@ -135,6 +137,17 @@ withDefaults(
     position: absolute;
     top: 1px;
     left: 1px;
+  }
+
+  &__rotw {
+    padding: 2px 4px;
+    border-radius: 2px;
+    display: inline-block;
+    background-color: var(--color-rotw);
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    color: var(--color-text-inverse);
   }
 
   &__wrapper {

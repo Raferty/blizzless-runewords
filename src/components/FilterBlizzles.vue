@@ -1,14 +1,12 @@
 <template>
   <div class="filter">
     <div class="filter__block">
-      <div class="filter__title">New:</div>
-
       <div
         class="filter__item"
         :class="{ 'filter__item--active': modelValue === true }"
         @click="toggle()"
       >
-        new
+        Blizzless Only
       </div>
     </div>
   </div>
@@ -46,7 +44,8 @@ function toggle(): void {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90px;
+    width: fit-content;
+    padding: 0 8px;
     height: 24px;
     color: var(--color-text-inverse);
     background-color: var(--color-notfound);

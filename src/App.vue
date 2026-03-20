@@ -18,7 +18,8 @@
             <div class="filters">
               <FilterSockets v-model="socketsFilter" />
               <FilterReworked v-model="reworkedFilter" />
-              <FilterNew v-model="newFilter" />
+              <FilterBlizzles v-model="blizzlessFilter" />
+              <FilterROTW v-model="rotwFilter" />
             </div>
 
             <div class="switcher">
@@ -39,7 +40,12 @@
             </div>
           </div>
 
-          <RunewordsTable v-if="view === 'table'" />
+          <RunewordsTable
+            v-if="view === 'table'"
+            @select="openRunewordModal"
+            @tooltip-hover="handleTableTooltipHover"
+            @tooltip-hover-end="handleTableTooltipHoverEnd"
+          />
 
           <RunewordsList v-if="view === 'grid'" />
 
@@ -50,8 +56,8 @@
   </main>
   <TheFooter />
 
-  <UiModal :model-value="currentCard" :closable="true" @close="currentCard = false">
-    <RuneWordCard :runeword="currentRuneWord" :show-old="true" />
+  <UiModal :model-value="currentCard" :closable="true" @close="closeRunewordModal">
+    <RuneWordCard v-if="selectedRuneword" :runeword="selectedRuneword" :show-old="true" />
   </UiModal>
 
   <Tooltip
@@ -65,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useDebouncedRef } from "@/composables/useDebouncedRef";
 import TheHeader from "@/components/TheHeader.vue";
@@ -79,16 +85,19 @@ import Hints from "@/components/Hints.vue";
 import SearchInput from "@/components/SearchInput.vue";
 import FilterSockets from "@/components/FilterSockets.vue";
 import FilterReworked from "@/components/FilterReworked.vue";
-import FilterNew from "@/components/FilterNew.vue";
+import FilterBlizzles from "@/components/FilterBlizzles.vue";
+import FilterROTW from "@/components/FilterROTW.vue";
 import RunewordsTable from "@/components/RunewordsTable.vue";
 
 import { useInfoStore, useRunewordsStore } from "@/store";
 import type { RunewordCardItem, RunewordTableItem } from "@/types";
 
+type TableTooltipPayload = { item: RunewordTableItem; left: number; top: number };
+
 const store = useInfoStore();
 const runewordsStore = useRunewordsStore();
 
-const { search, socketsFilter, reworkedFilter, newFilter, filteredRunewords } =
+const { search, socketsFilter, reworkedFilter, blizzlessFilter, rotwFilter } =
   storeToRefs(runewordsStore);
 
 const debouncedSearch = useDebouncedRef(search, 250);
@@ -103,13 +112,37 @@ watch(
 );
 
 const currentCard = ref(false);
-const currentRuneWord = computed<RunewordCardItem>(
-  () => filteredRunewords.value[0] ?? ({} as RunewordCardItem)
-);
+const selectedRuneword = ref<RunewordCardItem | null>(null);
 const tooltipShow = ref(false);
 const tooltipItem = ref<RunewordTableItem | null>(null);
 const tooltipLeft = ref(0);
 const tooltipTop = ref(0);
+
+/** Клик по имени в таблице — полноэкранная модалка с карточкой. */
+function openRunewordModal(item: RunewordTableItem): void {
+  selectedRuneword.value = item as RunewordCardItem;
+  currentCard.value = true;
+  tooltipShow.value = false;
+  tooltipItem.value = null;
+}
+
+function closeRunewordModal(): void {
+  currentCard.value = false;
+}
+
+/** Ховер по имени — плавающий Tooltip с RuneWordCard. */
+function handleTableTooltipHover(payload: TableTooltipPayload): void {
+  if (currentCard.value) return;
+  tooltipItem.value = payload.item;
+  tooltipLeft.value = payload.left;
+  tooltipTop.value = payload.top;
+  tooltipShow.value = true;
+}
+
+function handleTableTooltipHoverEnd(): void {
+  tooltipShow.value = false;
+  tooltipItem.value = null;
+}
 
 const handleTooltipClose = (): void => {
   tooltipShow.value = false;

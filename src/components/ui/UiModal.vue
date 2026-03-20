@@ -2,46 +2,96 @@
   <div
     v-if="modelValue"
     class="ui-modal"
-    :class="{ 'ui-modal-tooltip': mode === 'tooltip' }"
+    :class="{ 'ui-modal--tooltip': mode === 'tooltip' }"
+    role="presentation"
+    @click.self="onBackdropClick"
   >
-    <div class="ui-modal__wrapper">
-      <div v-if="closable" class="ui-modal__close" @click="$emit('close')">Close</div>
+    <div class="ui-modal__wrapper" role="dialog" aria-modal="true" @click.stop>
       <slot />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-defineEmits<{
-  (e: "close"): void;
-}>();
+import { onBeforeUnmount, watch } from "vue";
 
-defineProps<{
+const props = defineProps<{
   modelValue: boolean;
   mode?: "fixed" | "tooltip";
   closable?: boolean;
 }>();
+
+const emit = defineEmits<{
+  (e: "close"): void;
+}>();
+
+function onBackdropClick(): void {
+  if (props.closable) {
+    emit("close");
+  }
+}
+
+function onEscapeKeydown(e: KeyboardEvent): void {
+  if (e.key !== "Escape") return;
+  if (!props.closable) return;
+  e.preventDefault();
+  emit("close");
+}
+
+watch(
+  () => props.modelValue,
+  (isOpen) => {
+    if (isOpen) {
+      window.addEventListener("keydown", onEscapeKeydown);
+    } else {
+      window.removeEventListener("keydown", onEscapeKeydown);
+    }
+  },
+  { immediate: true }
+);
+
+onBeforeUnmount(() => {
+  window.removeEventListener("keydown", onEscapeKeydown);
+});
 </script>
 
 <style lang="scss">
 .ui-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 24px;
-  position: absolute;
-  min-width: 22rem;
-  max-width: 490px;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-bg-overlay);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: rgba(0, 0, 0, 0.75);
 
-  &-tooltip {
-    position: static;
-    right: auto;
-    top: auto;
-    min-width: 0;
-    width: 100%;
+  &--tooltip {
+    background: transparent;
+    padding: 0;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
-  &-tooltip &__wrapper {
+  &__wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 490px;
+    min-width: min(22rem, 100%);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    padding: 20px;
+  }
+
+  &--tooltip &__wrapper {
     padding: 0;
+    border: none;
+    min-width: 0;
+    max-width: none;
+    width: auto;
+    background: transparent;
   }
 
   &__title {

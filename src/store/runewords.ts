@@ -1,7 +1,12 @@
 import { defineStore } from "pinia";
 import { ITEM_TYPES, RUNES } from "@/shared/constants";
+import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
 import { RUNEWORDS } from "@/shared/runewords";
+import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
 import { isComplete } from "@/utils/runeword";
+
+/** Базовый список + RotW (`rotw-runewords.ts`) + кастомные с `marked` (`custom-runewords.ts`). */
+const ALL_RUNEWORDS = [...RUNEWORDS, ...ROTW_RUNEWORDS, ...CUSTOM_RUNEWORDS];
 import type { RuneItem, RunewordTableItem } from "@/types";
 
 interface RunewordsState {
@@ -22,12 +27,19 @@ interface RunewordsState {
   reworkedFilter: "unchanged" | "changed" | null;
 
   /**
-   * New/Marked filter:
-   * - `null` => don't filter by marked/new
-   * - `true` => only marked/new
-   * - `false` => only not marked/new
+   * Blizzless (marked) filter:
+   * - `null` => don't filter by marked
+   * - `true` => only marked
+   * - `false` => only not marked
    */
-  newFilter: boolean | null;
+  blizzlessFilter: boolean | null;
+
+  /**
+   * RotW patch filter (`patch === "rotw"`):
+   * - `null` => don't filter by patch
+   * - `true` => only `patch: "rotw"`
+   */
+  rotwFilter: boolean | null;
   /** All runes needed by RuneList */
   runes: RuneItem[];
 }
@@ -39,7 +51,8 @@ export const useRunewordsStore = defineStore({
     searchDebounced: "",
     socketsFilter: [],
     reworkedFilter: null,
-    newFilter: null,
+    blizzlessFilter: null,
+    rotwFilter: null,
     runes: RUNES,
     selectedRunes: JSON.parse(localStorage.getItem("selectedRunes") ?? "[]") ?? [],
   }),
@@ -50,7 +63,7 @@ export const useRunewordsStore = defineStore({
     sortedRunewords(state): RunewordTableItem[] {
       const result: RunewordTableItem[] = [];
 
-      RUNEWORDS.forEach((item) => {
+      ALL_RUNEWORDS.forEach((item) => {
         const word = item as RunewordTableItem;
         if (isComplete(state.selectedRunes, word.runes)) {
           result.push({
@@ -66,7 +79,7 @@ export const useRunewordsStore = defineStore({
     },
 
     /**
-     * Filtered list: `searchDebounced`, sockets, reworked, new.
+     * Filtered list: `searchDebounced`, sockets, reworked, blizzless, rotw.
      * Selected runes do not reduce the list (they affect `complete` / highlights via `sortedRunewords`).
      */
     filteredRunewords(): RunewordTableItem[] {
@@ -98,7 +111,7 @@ export const useRunewordsStore = defineStore({
         ? bySearch.filter((i) => this.socketsFilter.includes(i.runes.length))
         : bySearch;
 
-      /** Sidebar rune selection does not shrink the list — only search / sockets / reworked / new. */
+      /** Sidebar rune selection does not shrink the list — only search / sockets / reworked / blizzless / rotw. */
       let result = bySockets;
 
       if (this.reworkedFilter !== null) {
@@ -108,10 +121,17 @@ export const useRunewordsStore = defineStore({
         });
       }
 
-      if (this.newFilter !== null) {
+      if (this.blizzlessFilter !== null) {
         result = result.filter((word) => {
           const isNew = (word as { marked?: unknown }).marked === true;
-          return this.newFilter ? isNew : !isNew;
+          return this.blizzlessFilter ? isNew : !isNew;
+        });
+      }
+
+      if (this.rotwFilter !== null) {
+        result = result.filter((word) => {
+          const isRotw = (word as { patch?: string }).patch === "rotw";
+          return this.rotwFilter ? isRotw : !isRotw;
         });
       }
 

@@ -69,10 +69,12 @@
             store.interface.markers.reworked[store.currentLang]
           }}</span>
 
+          <span v-if="item.patch === 'rotw'" class="rotw">RotW</span>
+
           <span v-if="item?.bugged?.status" class="warning"
             >!!! {{ store.interface.markers.bugged[store.currentLang] }}</span
           >
-          <span v-if="item?.marked" class="new">new</span>
+          <span v-if="item?.marked" class="new">blizzless only</span>
         </td>
         <template v-for="(rune, index) in item.runes" :key="index">
           <template v-if="isFound(rune)">
@@ -152,34 +154,38 @@ const isTouchDevice = (): boolean => {
   return "ontouchstart" in window || navigator.maxTouchPoints > 0;
 };
 
-const getAnchorFromEvent = (
+/** Viewport coords for `position: fixed` tooltip (clientX/Y + offset). */
+const getTooltipAnchorViewport = (
   e: MouseEvent | KeyboardEvent
-): { pageX: number; pageY: number } => {
+): { left: number; top: number } => {
   const maybeMouse = e as MouseEvent;
-  if (typeof maybeMouse.pageX === "number" && typeof maybeMouse.pageY === "number") {
-    return { pageX: maybeMouse.pageX, pageY: maybeMouse.pageY };
+  if (typeof maybeMouse.clientX === "number" && typeof maybeMouse.clientY === "number") {
+    return {
+      left: maybeMouse.clientX + MODAL_X_OFFSET,
+      top: maybeMouse.clientY + MODAL_Y_ANCHOR_OFFSET,
+    };
   }
 
   const activeEl = document.activeElement as HTMLElement | null;
   if (activeEl) {
     const rect = activeEl.getBoundingClientRect();
     return {
-      pageX: rect.left + rect.width / 2 + window.scrollX,
-      pageY: rect.top + window.scrollY,
+      left: rect.left + rect.width / 2 + MODAL_X_OFFSET,
+      top: rect.top + MODAL_Y_ANCHOR_OFFSET,
     };
   }
 
-  return { pageX: window.scrollX, pageY: window.scrollY };
+  return { left: MODAL_X_OFFSET, top: MODAL_Y_ANCHOR_OFFSET };
 };
 
 const handleMouseEnter = (item: RunewordTableItem, e: MouseEvent): void => {
   if (isTouchDevice()) return;
 
-  const { pageX, pageY } = getAnchorFromEvent(e);
+  const { left, top } = getTooltipAnchorViewport(e);
   emit("tooltip-hover", {
     item,
-    left: pageX + MODAL_X_OFFSET,
-    top: pageY + MODAL_Y_ANCHOR_OFFSET,
+    left,
+    top,
   });
 };
 
@@ -193,11 +199,11 @@ const handleRuneNameClick = (
 ): void => {
   emit("select", item);
 
-  const { pageX, pageY } = getAnchorFromEvent(e);
+  const { left, top } = getTooltipAnchorViewport(e);
   emit("tooltip-click", {
     item,
-    left: pageX + MODAL_X_OFFSET,
-    top: pageY + MODAL_Y_ANCHOR_OFFSET,
+    left,
+    top,
   });
 };
 
@@ -359,5 +365,13 @@ const sortedItems = computed(() => {
   padding: 2px 4px;
   border-radius: 4px;
   background-color: var(--color-success-alt);
+}
+
+.rotw {
+  background-color: var(--color-rotw);
+  font-size: 12px;
+  color: var(--color-text-inverse);
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 </style>

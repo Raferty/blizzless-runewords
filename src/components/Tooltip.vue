@@ -6,7 +6,7 @@
     role="dialog"
     aria-modal="true"
     :aria-labelledby="titleId"
-    :style="{ left: `${left}px`, top: `${resolvedTop}px` }"
+    :style="{ left: `${resolvedLeft}px`, top: `${resolvedTop}px` }"
     tabindex="-1"
     @keydown="handleModalKeydown"
     @focusout="handleFocusOut"
@@ -47,42 +47,48 @@ defineExpose({ modalEl });
 const modalOpen = computed(() => props.show && props.item !== null);
 const item = computed(() => props.item as RunewordTableItem);
 
-// Keep the dialog inside the viewport: if there isn't enough space below,
-// position it above the cursor/anchor.
+// `left` / `top` from parent are viewport coordinates (clientX / clientY + offset).
+// Tooltip uses position: fixed, so we must not mix page/document Y with viewport Y.
 const resolvedTop = ref(props.top);
+const resolvedLeft = ref(props.left);
 const lastFocusedEl = ref<HTMLElement | null>(null);
 const VIEWPORT_PADDING = 12;
 
-const repositionTop = (): void => {
+const reposition = (): void => {
   const el = modalEl.value;
   if (!el) return;
 
-  const height = el.getBoundingClientRect().height;
-  if (!height) return;
+  const { width, height } = el.getBoundingClientRect();
+  if (!width || !height) return;
 
-  const desiredTop = props.top;
-  const viewportTop = window.scrollY;
-  const viewportBottom = window.scrollY + window.innerHeight;
+  const innerW = window.innerWidth;
+  const innerH = window.innerHeight;
 
-  const spaceBelow = viewportBottom - desiredTop - VIEWPORT_PADDING;
-  if (spaceBelow >= height) {
-    resolvedTop.value = desiredTop;
-    return;
+  let top = props.top;
+  const spaceBelow = innerH - top - VIEWPORT_PADDING;
+  if (spaceBelow < height) {
+    const desiredAbove = top - height - VIEWPORT_PADDING;
+    const minTop = VIEWPORT_PADDING;
+    const maxTop = innerH - height - VIEWPORT_PADDING;
+    top = Math.min(Math.max(desiredAbove, minTop), maxTop);
   }
+  resolvedTop.value = top;
 
-  const desiredAboveTop = desiredTop - height - VIEWPORT_PADDING;
-  const minTop = viewportTop + VIEWPORT_PADDING;
-  const maxTop = viewportBottom - height - VIEWPORT_PADDING;
-
-  // Prefer above; clamp to viewport if it's still too tall.
-  resolvedTop.value = Math.min(Math.max(desiredAboveTop, minTop), maxTop);
+  let left = props.left;
+  if (left + width > innerW - VIEWPORT_PADDING) {
+    left = innerW - width - VIEWPORT_PADDING;
+  }
+  if (left < VIEWPORT_PADDING) {
+    left = VIEWPORT_PADDING;
+  }
+  resolvedLeft.value = left;
 };
 
 let isMounted = true;
 let openSeq = 0;
 const onReposition = (): void => {
   if (!modalOpen.value) return;
-  repositionTop();
+  reposition();
 };
 
 const handleOutsidePointerDown = (e: PointerEvent): void => {
@@ -116,9 +122,10 @@ watch(modalOpen, async (isOpen) => {
     if (!isMounted || !modalOpen.value || openSeq !== seq) return;
 
     resolvedTop.value = props.top;
-    repositionTop();
+    resolvedLeft.value = props.left;
+    reposition();
 
-    modalEl.value?.focus();
+    modalEl.value?.focus({ preventScroll: true });
     window.addEventListener("resize", onReposition);
     window.addEventListener("scroll", onReposition, { passive: true });
     window.addEventListener("pointerdown", handleOutsidePointerDown, true);
@@ -134,7 +141,7 @@ watch(modalOpen, async (isOpen) => {
 });
 
 watch(
-  () => props.top,
+  () => [props.left, props.top] as const,
   async () => {
     if (!modalOpen.value) return;
     await nextTick();
@@ -220,6 +227,20 @@ const handleModalKeydown = (e: KeyboardEvent): void => {
 </script>
 
 <style scoped>
+.modal {
+  position: fixed;
+  z-index: 10050;
+  max-width: min(92vw, 440px);
+  max-height: min(85vh, 800px);
+  overflow: auto;
+  pointer-events: auto;
+  background-color: #000;
+  padding: 16px;
+  outline: none;
+  border: 1px solid var(--color-border-light);
+  border-radius: 8px;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
