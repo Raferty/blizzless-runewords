@@ -1,5 +1,102 @@
-# Vue 3 + TypeScript + Vite
+# Blizzless Runewords
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Справочник рунных слов для частного сервера Diablo II Blizzless: на странице собраны **оригинальные и переработанные рунворды**, которые реально используются на сервере — с рунами, типами предметов, уровнем и подсказками по отличиям от классики.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+**Опубликованная версия:** [raferty.github.io/blizzless-runewords](https://raferty.github.io/blizzless-runewords/)
+
+---
+
+## Возможности
+
+- таблица и сетка рунвордов, поиск и фильтры (сокеты, переработка, новые);
+- выбор рун в сайдбаре — подсветка «собранных» рун и полных рецептов;
+- русский и английский интерфейс (язык сохраняется в `localStorage`).
+
+**Стек:** Vue 3, TypeScript, Vite, Pinia, SCSS.
+
+## Локальная разработка
+
+### Требования
+
+- Node.js 18+
+- npm или yarn
+
+### Установка
+
+```bash
+npm install
+# или
+yarn install
+```
+
+### Запуск dev-сервера
+
+```bash
+npm run dev
+# или
+yarn dev
+```
+
+В `vite.config.ts` задан `base: "/blizzless-runewords/"`, поэтому удобно открывать приложение по адресу:
+
+`http://localhost:5173/blizzless-runewords/`
+
+### Сборка
+
+```bash
+npm run build
+# или
+yarn build
+```
+
+Артефакты — в каталоге `dist/`.
+
+### Предпросмотр production-сборки
+
+```bash
+npm run preview
+# или
+yarn preview
+```
+
+### Линтинг и форматирование
+
+```bash
+npm run lint          # проверка ESLint
+npm run lint:fix      # автоисправление
+npm run format        # Prettier
+npm run format:check  # проверка стиля без записи
+```
+
+Конфиги: `eslint.config.cjs` (flat config), `.prettierrc`, `.prettierignore`. Для Prettier подключён `eslint-config-prettier`.
+
+## Деплой на GitHub Pages
+
+```bash
+npm run deploy
+# или
+yarn deploy
+```
+
+Скрипт собирает проект (`predeploy` → `build`) и публикует `dist/` в ветку `gh-pages`. В настройках репозитория укажите источник Pages: ветка `gh-pages`, корень.
+
+Итоговый URL (при стандартном имени репозитория):
+
+`https://<username>.github.io/blizzless-runewords/`
+
+Если меняется имя репозитория или путь публикации — обновите `base` в `vite.config.ts`.
+
+## Переменные окружения
+
+Сейчас не используются; базовый путь задаётся в Vite. При появлении API можно вынести настройки в `.env`.
+
+## Структура репозитория
+
+| Путь | Назначение |
+|------|------------|
+| `src/components/` | UI: таблица, карточки, фильтры, поиск |
+| `src/composables/` | композаблы (руны, дебаунс и т.д.) |
+| `src/store/` | Pinia: язык, тексты, данные рунвордов |
+| `src/types/` | общие TypeScript-типы |
+| `src/utils/` | утилиты (массивы, проверка «полного» набора рун) |
+| `src/shared/` | константы: руны, типы предметов, данные рунвордов |

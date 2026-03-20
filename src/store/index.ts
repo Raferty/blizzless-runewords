@@ -1,9 +1,41 @@
 import { defineStore } from "pinia";
+import type { Lang } from "@/types";
+
+interface TableHeaders {
+  ru: string[];
+  en: string[];
+}
+
+interface InterfaceState {
+  table: {
+    headers: TableHeaders;
+  };
+  markers: {
+    ladder: { ru: string; en: string };
+    new: { ru: string; en: string };
+    reworked: { ru: string; en: string };
+    bugged: { ru: string; en: string };
+  };
+  search: {
+    placeholder: { ru: string; en: string };
+  };
+  runelist: {
+    clear: { ru: string; en: string };
+  };
+  hints: {
+    title: { ru: string; en: string };
+  };
+}
+
+interface InfoState {
+  lang: Lang;
+  interface: InterfaceState;
+}
 
 export const useInfoStore = defineStore({
   id: "info-store",
 
-  state: () => {
+  state: (): InfoState => {
     return {
       lang: "en",
       interface: {
@@ -53,8 +85,8 @@ export const useInfoStore = defineStore({
         },
         search: {
           placeholder: {
-            ru: "Поиск по названию",
-            en: "Search by name",
+            ru: "Поиск по названию или типу предмета",
+            en: "Search by name or item type",
           },
         },
         runelist: {
@@ -74,13 +106,15 @@ export const useInfoStore = defineStore({
   },
 
   actions: {
-    setLang(lang) {
+    setLang(lang: Lang): void {
       this.lang = lang;
       localStorage.setItem("lang", lang);
     },
   },
 
   getters: {
-    currentLang: (state) => state.lang,
+    currentLang: (state): Lang => state.lang,
   },
 });
+
+export { useRunewordsStore } from "./runewords";

@@ -2,59 +2,31 @@
   <header class="header">
     <div class="container header__container">
       <div class="header__logo">
-        <img
-          src="/images/logo.png"
-          alt="Blizzless runewords"
-          class="header__image"
-        />
+        <img src="/images/logo.png" alt="Blizzless runewords" class="header__image" />
         <h1 class="title title--h1 header__title">Blizzless runewords</h1>
       </div>
 
-      <div class="lang">
-        <div
-          class="lang__item"
-          :class="{ 'lang__item--active': store.currentLang === 'en' }"
-          @click="setLang('en')"
-        >
-          EN
-        </div>
-        <div
-          class="lang__item"
-          :class="{ 'lang__item--active': store.currentLang === 'ru' }"
-          @click="setLang('ru')"
-        >
-          RU
-        </div>
-      </div>
+      <LangSwitcher />
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { useInfoStore } from "@/store/index.js";
-
-const store = useInfoStore();
-
-const setLang = (lang: string) => {
-  document.querySelector("html").setAttribute("lang", lang || "ru");
-  store.setLang(lang);
-};
+import LangSwitcher from "@/components/LangSwitcher.vue";
 </script>
 
 <style lang="scss" scoped>
 .header {
-  //margin: 0 auto;
-  max-width: 1100px;
-  padding: 16px 0;
-  border-bottom: 4px solid #bab197;
-  margin-bottom: 16px;
+  padding: 8px 0;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 8px;
 
   @media (min-width: 1024px) {
-    margin-bottom: 32px;
+    margin-bottom: 16px;
   }
 
   &__title {
-    color: #ecd2a8;
+    color: var(--color-title);
   }
 
   &__container {
@@ -64,30 +36,14 @@ const setLang = (lang: string) => {
   }
 
   &__image {
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
   }
 
   &__logo {
     display: flex;
     gap: 16px;
     align-items: center;
-    //color: #242c53;
-  }
-}
-
-.lang {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  &__item {
-    color: #844;
-    cursor: pointer;
-
-    &--active {
-      color: #44aa44;
-    }
   }
 }
 
@@ -102,11 +58,11 @@ const setLang = (lang: string) => {
 }
 
 .title {
-  font-size: 28px;
+  font-size: 22px;
   line-height: 110%;
 
   @media (min-width: 1024px) {
-    font-size: 34px;
+    font-size: 28px;
   }
 }
 </style>

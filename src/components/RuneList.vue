@@ -2,8 +2,8 @@
   <div class="runelist">
     <div class="runelist__wrapper">
       <div
-        v-for="runePart in splittedRunes"
-        :key="runePart"
+        v-for="(runePart, partIndex) in splittedRunes"
+        :key="partIndex"
         class="runelist__part"
       >
         <div
@@ -15,9 +15,12 @@
         >
           <img
             :src="`/blizzless-runewords/` + rune.image_url"
-            :alt="rune.name"
+            :alt="rune.name[store.currentLang]"
             class="runelist__image"
           />
+          <span class="runelist__name">
+            {{ rune.name[store.currentLang] }}
+          </span>
         </div>
       </div>
     </div>
@@ -29,62 +32,44 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
-import { useInfoStore } from "@/store/index.js";
+import { useInfoStore, useRunewordsStore } from "@/store";
+import { splitToNChunks } from "@/utils/array";
 
 const store = useInfoStore();
+const runewordsStore = useRunewordsStore();
 
-const props = defineProps({
-  runes: {
-    type: Array,
-    default: () => {
-      return [];
-    },
-  },
-});
+const emit = defineEmits<{
+  (e: "select", value: number[]): void;
+}>();
 
-const emit = defineEmits(["select"]);
-
-const selectedRunes = ref(
-  JSON.parse(localStorage.getItem("selectedRunes")) || []
+const selectedRunes = ref<number[]>(
+  JSON.parse(localStorage.getItem("selectedRunes") ?? "[]") ?? []
 );
 
-const isActive = (id) => {
-  const index = selectedRunes.value.findIndex((rune) => rune === id);
-
-  return index === -1 ? false : true;
+const isActive = (id: number): boolean => {
+  return selectedRunes.value.includes(id);
 };
 
-const selectRune = (id) => {
-  const index = selectedRunes.value.findIndex((rune) => rune === id);
-
+const selectRune = (id: number): void => {
+  const index = selectedRunes.value.indexOf(id);
   if (index === -1) {
     selectedRunes.value.push(id);
   } else {
     selectedRunes.value.splice(index, 1);
   }
-
   localStorage.setItem("selectedRunes", JSON.stringify(selectedRunes.value));
   emit("select", selectedRunes.value);
 };
 
-const clearRunes = () => {
+const clearRunes = (): void => {
   selectedRunes.value = [];
-
   localStorage.setItem("selectedRunes", JSON.stringify([]));
   emit("select", selectedRunes.value);
 };
 
-function splitToNChunks(array, n) {
-  let result = [];
-  for (let i = n; i > 0; i--) {
-    result.push(array.splice(0, Math.ceil(array.length / i)));
-  }
-  return result;
-}
-
-const splittedRunes = computed(() => splitToNChunks([...props.runes], 3));
+const splittedRunes = computed(() => splitToNChunks([...runewordsStore.runes], 3));
 </script>
 
 <style lang="scss" scoped>
@@ -123,18 +108,34 @@ const splittedRunes = computed(() => splitToNChunks([...props.runes], 3));
   &__item {
     border-radius: 2px;
     border: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
 
     &:hover {
       cursor: pointer;
     }
 
     &.--active {
-      border: 1px solid #ffd100;
+      border: 1px solid var(--color-rune-active-border);
     }
   }
 
   &__image {
     width: 48px;
+  }
+
+  &__name {
+    width: 48px;
+    font-size: 12px;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-bottom: 2px;
   }
 }
 
@@ -143,10 +144,10 @@ const splittedRunes = computed(() => splitToNChunks([...props.runes], 3));
   width: 100%;
   display: block;
   padding: 4px 8px;
-  border: 1px solid #ae2a1a;
+  border: 1px solid var(--color-danger);
   border-radius: 4px;
   display: block;
-  color: #fff;
-  background-color: #ae2a1a;
+  color: var(--color-text-inverse);
+  background-color: var(--color-danger);
 }
 </style>

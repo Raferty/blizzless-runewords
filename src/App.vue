@@ -4,210 +4,117 @@
     <div class="main__container container">
       <aside class="aside">
         <div class="aside__container">
-          <RuneList :runes="RUNES" @select="(e: any) => SelectedRunes = e" />
+          <RuneList @select="(e: number[]) => runewordsStore.setSelectedRunes(e)" />
         </div>
       </aside>
       <section class="wrapper">
         <div class="wrapper__container">
-          <div class="search">
-            <input
-              v-model="search"
-              type="text"
-              class="search__input"
-              :placeholder="
-                store.interface.search.placeholder[store.currentLang]
-              "
-            />
-          </div>
-
-          <div class="filter">
-            <div class="filter__block">
-              <div class="filter__title">Sockets:</div>
-              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(2) }" @click="setSocket(2)">2</div>
-              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(3) }" @click="setSocket(3)">3</div>
-              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(4) }" @click="setSocket(4)">4</div>
-              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(5) }" @click="setSocket(5)">5</div>
-              <div class="filter__item" :class="{'filter__item--active': socketFilter.includes(6) }" @click="setSocket(6)">6</div>
-              <div class="filter__item filter__item--all" @click="setSocket()">all</div>
-            </div>
-          </div>
-
-          <RuneTable
-            :items="filteredRunewords"
-            :runes="RUNES"
-            :selected="SelectedRunes"
-            @select="handleRuneWord"
+          <SearchInput
+            v-model="search"
+            :placeholder="store.interface.search.placeholder[store.currentLang]"
           />
 
-          <div class="hints">
-            <h3 class="hints__title">
-              {{ store.interface.hints.title[store.currentLang] }}
-            </h3>
-
-            <div class="hints__block">
-              <span class="chips">{{
-                store.interface.markers.ladder[store.currentLang]
-              }}</span>
-              -
-              {{
-                store.currentLang === "ru"
-                  ? `Работает только на лестнице :D`
-                  : `Ladder only runewords.`
-              }}
+          <div class="wrapper__meta">
+            <div class="filters">
+              <FilterSockets v-model="socketsFilter" />
+              <FilterReworked v-model="reworkedFilter" />
+              <FilterNew v-model="newFilter" />
             </div>
 
-            <div class="hints__block">
-              <span class="new">{{
-                store.interface.markers.new[store.currentLang]
-              }}</span>
-              -
-              {{
-                store.currentLang === "ru"
-                  ? `Новый рунворд разработанный командой Blizzless. В разработке`
-                  : `New runeword designed by Blizzless team. In development now`
-              }}
-            </div>
-
-            <div class="hints__block">
-              <span class="reworked">{{
-                store.interface.markers.reworked[store.currentLang]
-              }}</span>
-              -
-              {{
-                store.currentLang === "ru"
-                  ? `Переработан командой «безМетелицы»`
-                  : `Reworked runeword by Blizzless team.`
-              }}
-            </div>
-
-            <div class="hints__block">
-              <span class="warning"
-                >!!!
-                {{ store.interface.markers.bugged[store.currentLang] }}</span
+            <div class="switcher">
+              <button
+                class="switcher__button"
+                :class="{ 'switcher__button--active': view === 'table' }"
+                @click="view = 'table'"
               >
-              -
-              {{
-                store.currentLang === "ru"
-                  ? `В данный момент работает некорректно. Скоро будет исправлен`
-                  : `Bugged at this moment. Will be fix soon`
-              }}.
+                Table
+              </button>
+              <button
+                class="switcher__button"
+                :class="{ 'switcher__button--active': view === 'grid' }"
+                @click="view = 'grid'"
+              >
+                Grid
+              </button>
             </div>
           </div>
+
+          <RunewordsTable v-if="view === 'table'" />
+
+          <RunewordsList v-if="view === 'grid'" />
+
+          <Hints />
         </div>
       </section>
     </div>
   </main>
   <TheFooter />
 
-  <RuneWordCard v-model="currentCard" :runeword="currentRuneWord" />
+  <UiModal :model-value="currentCard" :closable="true" @close="currentCard = false">
+    <RuneWordCard :runeword="currentRuneWord" :show-old="true" />
+  </UiModal>
+
+  <Tooltip
+    :show="tooltipShow"
+    :item="tooltipItem"
+    :left="tooltipLeft"
+    :top="tooltipTop"
+    title-id="runeword-dialog-title"
+    @close="handleTooltipClose"
+  />
 </template>
 
-<script setup>
-import { ref, computed, onMounted } from "vue";
-import { RUNEWORDS } from "@/shared/runewords";
-import { RUNES } from "@/shared/constants";
+<script setup lang="ts">
+import { ref, computed, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { useDebouncedRef } from "@/composables/useDebouncedRef";
+import TheHeader from "@/components/TheHeader.vue";
+import TheFooter from "@/components/TheFooter.vue";
+import RuneList from "@/components/RuneList.vue";
+import RunewordsList from "@/components/RunewordsList.vue";
+import RuneWordCard from "@/components/RuneWordCard.vue";
+import UiModal from "@/components/ui/UiModal.vue";
+import Tooltip from "@/components/Tooltip.vue";
+import Hints from "@/components/Hints.vue";
+import SearchInput from "@/components/SearchInput.vue";
+import FilterSockets from "@/components/FilterSockets.vue";
+import FilterReworked from "@/components/FilterReworked.vue";
+import FilterNew from "@/components/FilterNew.vue";
+import RunewordsTable from "@/components/RunewordsTable.vue";
 
-import TheHeader from "./components/TheHeader.vue";
-import TheFooter from "./components/TheFooter.vue";
-import RuneList from "./components/RuneList.vue";
-import RuneTable from "./components/RuneTable.vue";
-import RuneWordCard from "./components/RuneWordCard.vue";
-
-import { useInfoStore } from "@/store/index.js";
+import { useInfoStore, useRunewordsStore } from "@/store";
+import type { RunewordCardItem, RunewordTableItem } from "@/types";
 
 const store = useInfoStore();
+const runewordsStore = useRunewordsStore();
 
-const currentWidth = ref(0);
+const { search, socketsFilter, reworkedFilter, newFilter, filteredRunewords } =
+  storeToRefs(runewordsStore);
 
-const initLang = (lang) => {
-  document.querySelector("html").setAttribute("lang", lang);
-};
+const debouncedSearch = useDebouncedRef(search, 250);
+const view = ref("table");
 
-const handleResize = () => {
-  currentWidth.value = window.innerWidth;
-};
-
-onMounted(() => {
-  handleResize();
-
-  initLang(localStorage.getItem("lang") || "en");
-  store.setLang(localStorage.getItem("lang") || "en");
-
-  if (import.meta.client) {
-    window.addEventListener("resize", handleResize);
-  }
-});
-
-const search = ref("");
-const SelectedRunes = ref(
-  JSON.parse(localStorage.getItem("selectedRunes")) || []
+watch(
+  debouncedSearch,
+  (value) => {
+    runewordsStore.setSearchDebounced(value);
+  },
+  { immediate: true }
 );
 
-const isComplete = (where, what) => {
-  for (var i = 0; i < what.length; i++) {
-    if (where.indexOf(what[i]) == -1) return false;
-  }
-  return true;
-};
-
-const sortedRunewords = computed(() => {
-  let result = [];
-
-  RUNEWORDS.forEach((item) => {
-    if (isComplete(SelectedRunes.value, item.runes)) {
-      result.push({
-        ...item,
-        complete: true,
-      });
-    } else {
-      result.push({
-        ...item,
-      });
-    }
-  });
-
-  return result;
-});
-
-const socketFilter = ref([]);
-
-const setSocket = (value) => {
-  const Index = socketFilter.value.findIndex(i => i === value);
-
-  if(value) {
-    if(Index === -1) {
-    socketFilter.value.push(value);
-  } else {
-    socketFilter.value.splice(Index, 1)
-  }
-  } else {
-    socketFilter.value = [];
-  }
-
-}
-
-const filteredRunewords = computed(() => {
-  return search.value
-    ? sortedRunewords.value.filter(
-        (word) =>
-          word.name.ru.toLowerCase().includes(search.value.toLowerCase()) ||
-          word.name.en.toLowerCase().includes(search.value.toLowerCase())
-      ).filter(i => socketFilter.value.length ? socketFilter.value.includes(i.runes.length) : i.runes.length)
-    : sortedRunewords.value.filter(i => socketFilter.value.length ? socketFilter.value.includes(i.runes.length) : i.runes.length);
-});
-
 const currentCard = ref(false);
-const currentRuneWord = ref({});
+const currentRuneWord = computed<RunewordCardItem>(
+  () => filteredRunewords.value[0] ?? ({} as RunewordCardItem)
+);
+const tooltipShow = ref(false);
+const tooltipItem = ref<RunewordTableItem | null>(null);
+const tooltipLeft = ref(0);
+const tooltipTop = ref(0);
 
-const handleRuneWord = (evt) => {
-  currentRuneWord.value = evt;
-
-  if (currentWidth.value >= 1024) {
-    currentCard.value = true;
-  }
+const handleTooltipClose = (): void => {
+  tooltipShow.value = false;
+  tooltipItem.value = null;
 };
-
-
 </script>
 
 <style lang="scss" scoped>
@@ -217,7 +124,7 @@ const handleRuneWord = (evt) => {
 
   @media (min-width: 1024px) {
     margin-bottom: 0;
-    width: 144px;
+    width: 158px;
   }
 
   &__container {
@@ -233,7 +140,7 @@ const handleRuneWord = (evt) => {
   }
 }
 
-.container {
+.main {
   padding-left: 8px;
   padding-right: 8px;
 
@@ -241,15 +148,10 @@ const handleRuneWord = (evt) => {
     padding-left: 16px;
     padding-right: 16px;
   }
-}
-
-.main {
-  //margin: 0 auto;
-  max-width: 1100px;
 
   &__container {
     display: flex;
-    flex-direction: column;
+    gap: 16px;
 
     @media (min-width: 1024px) {
       flex-direction: row;
@@ -259,84 +161,48 @@ const handleRuneWord = (evt) => {
 
 .wrapper {
   flex: 1;
+  min-width: 0;
 
   &__container {
     @media (min-width: 1024px) {
-      margin-left: 32px;
+      //margin-left: 32px;
     }
   }
-}
 
-.hints {
-  margin-top: 32px;
-  margin-bottom: 32px;
-  margin-bottom: 400px;
-
-  &__title {
-    margin-bottom: 16px;
-  }
-
-  &__block {
-    margin-bottom: 16px;
-  }
-}
-
-.search {
-  margin-bottom: 16px;
-
-  &__input {
-    width: 100%;
-    font-size: 16px;
-    border-radius: 4px;
-    color: #bab197;
-    background-color: #000;
-    border: 1px solid #8a8062;
-    padding: 8px;
-
-    &::-webkit-input-placeholder {
-      transition: all 0.4s ease;
-    }
-
-    &:focus::-webkit-input-placeholder {
-      opacity: 0;
-    }
-  }
-}
-
-.filter {
-  margin-bottom: 16px;
-
-  &__title {margin-right: 4px;}
-
-  &__block {
+  &__meta {
     display: flex;
-    padding: 4px;
-    gap: 4px;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
   }
+}
 
-  &__item {
+.filters {
+  gap: 12px;
+  display: flex;
+}
+
+.switcher {
+  display: flex;
+  gap: 4px;
+
+  &__button {
     font-size: 14px;
     line-height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
+    width: 90px;
     height: 24px;
-    color: #fff;
-    background-color:#844 ;
-    border: 1px solid #844;
+    color: var(--color-text-inverse);
+    background-color: var(--color-notfound);
+    border: 1px solid var(--color-notfound);
     cursor: pointer;
+    border-radius: 4px;
 
     &--active {
-      color: #fff;
-      background-color: #44aa44;
-      border-color: #44aa44;
-    }
-
-    &--all {
-      border-color: #ffc107cc;
-      background-color: #ffc107cc;
-      color: #000;
+      background-color: var(--color-success-alt);
+      border-color: var(--color-success-alt);
     }
   }
 }

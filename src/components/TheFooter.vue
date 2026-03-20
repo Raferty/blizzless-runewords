@@ -12,16 +12,14 @@
   </footer>
 </template>
 
-<script setup></script>
+<script setup lang="ts"></script>
 
 <style lang="scss" scoped>
 .footer {
   margin-top: 32px;
-  padding: 16px 0;
+  padding: 8px 0;
   text-align: center;
-  //margin: 0 auto;
-  max-width: 1100px;
-  border-top: 4px solid #bab197;
+  border-top: 2px solid var(--color-border);
 
   &__link {
     font-weight: 700;

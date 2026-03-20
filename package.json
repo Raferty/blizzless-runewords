@@ -8,7 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,vue,js,json,scss,css}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,vue,js,json,scss,css}\""
   },
   "dependencies": {
     "gh-pages": "^6.2.0",
@@ -16,11 +20,18 @@
     "vue": "^3.5.13"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
     "@vitejs/plugin-vue": "^5.2.1",
-    "less": "^4.2.1",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.0.1",
+    "eslint-plugin-vue": "^10.0.0",
+    "globals": "^17.4.0",
+    "prettier": "^3.4.2",
     "sass": "^1.83.0",
     "typescript": "~5.6.2",
+    "typescript-eslint": "^8.18.0",
     "vite": "^6.0.1",
+    "vue-eslint-parser": "^9.4.3",
     "vue-tsc": "^2.1.10"
   }
 }

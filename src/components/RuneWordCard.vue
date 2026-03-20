@@ -1,33 +1,31 @@
 <template>
-  <div v-if="modelValue" class="runeword">
-    <div class="runeword__wrapper">
-      <div class="runeword__close" @click="$emit('update:modelValue', false)">
-        Close
-      </div>
-      <h3 class="runeword__title">{{ runeword.name[store.currentLang] }}</h3>
-      <div class="runeword__type">
-        <template v-for="(type, index) in runeword.types" :key="index">
-          {{ getTypeName(type)
-          }}<template v-if="index < runeword?.types.length - 1">, </template>
-        </template>
-      </div>
-      <div class="runeword__runes">
-        <template v-for="(rune, index) in runeword.runes" :key="index">
-          <span class="runeword__rune">
-            <img
-              :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
-              :alt="findRune(rune)?.name"
-              class="runeword__image"
-            />
-            <span class="rune">{{
-              findRune(rune)?.name[store.currentLang]
-            }}</span>
-          </span>
-        </template>
-      </div>
+  <div class="runeword">
+    <div v-if="runeword?.marked" class="runeword__new">new</div>
+    <div v-if="runeword?.reworked" class="runeword__reworked">reworked</div>
+    <h3 class="runeword__title">{{ runeword.name?.[store.currentLang] }}</h3>
+    <div class="runeword__type">
+      <template v-for="(type, index) in runeword.types ?? []" :key="index">
+        {{ getTypeName(type)
+        }}<template v-if="index < (runeword.types?.length ?? 0) - 1">, </template>
+      </template>
+    </div>
+    <div class="runeword__runes">
+      <template v-for="(rune, index) in runeword.runes ?? []" :key="index">
+        <span class="runeword__rune">
+          <img
+            :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
+            :alt="findRune(rune)?.name?.[store.currentLang]"
+            class="runeword__image"
+          />
+          <span class="rune">{{ findRune(rune)?.name?.[store.currentLang] }}</span>
+        </span>
+      </template>
+    </div>
+    <template v-if="runeword.stats">
       <div
+        v-for="(prop, index) in runeword.stats[store.currentLang]"
+        :key="`stat-${index}`"
         class="runeword__property"
-        v-for="prop in runeword.stats[store.currentLang]"
       >
         <template v-if="prop.includes('#')">
           <span class="modal__property--type">{{
@@ -35,49 +33,50 @@
           }}</span>
         </template>
         <template v-else>
+          <!-- eslint-disable-next-line vue/no-v-html -- trusted game strings -->
           <span v-html="prop"></span>
         </template>
       </div>
+    </template>
+    <br />
+    <template v-if="runeword?.bugged?.status">
+      <h3 class="modal__title">Bugged</h3>
+      <div
+        v-for="(prop, index) in runeword?.bugged?.message ?? []"
+        :key="`bug-${index}`"
+        class="modal__property modal__property--bugged"
+      >
+        {{ prop }}
+      </div>
+    </template>
+    <template v-if="showOld && runeword?.old">
       <br />
-      <template v-if="runeword?.bugged?.status">
-        <h3 class="modal__title">Bugged</h3>
+      <hr />
+      <br />
+      <h2 class="runeword__original">Original version</h2>
+      <div v-if="runeword?.old?.types" class="runeword__type">
+        <template v-for="(type, index) in runeword?.old?.types ?? []" :key="index">
+          {{ getTypeName(type)
+          }}<template v-if="index < (runeword?.old?.types?.length ?? 0) - 1">, </template>
+        </template>
+      </div>
+      <div v-if="runeword?.old?.runes" class="runeword__runes">
+        <template v-for="(rune, index) in runeword?.old?.runes ?? []" :key="index">
+          <span class="runeword__rune">
+            <img
+              :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
+              :alt="findRune(rune)?.name?.[store.currentLang]"
+              class="runeword__image"
+            />
+            <span class="rune">{{ findRune(rune)?.name?.[store.currentLang] }}</span>
+          </span>
+        </template>
+      </div>
+      <template v-if="runeword?.old?.stats">
         <div
-          class="modal__property modal__property--bugged"
-          v-for="prop in runeword?.bugged?.message"
-        >
-          {{ prop }}
-        </div>
-      </template>
-      <template v-if="runeword?.old">
-        <br />
-        <hr />
-        <br />
-        <h2 class="runeword__original">Original version</h2>
-        <div v-if="runeword?.old.types" class="runeword__type">
-          <template v-for="(type, index) in runeword?.old.types" :key="index">
-            {{ getTypeName(type)
-            }}<template v-if="index < runeword?.old.types.length - 1"
-              >,
-            </template>
-          </template>
-        </div>
-        <div v-if="runeword?.old.runes" class="runeword__runes">
-          <template v-for="(rune, index) in runeword?.old.runes" :key="index">
-            <span class="runeword__rune">
-              <img
-                :src="`/blizzless-runewords/` + findRune(rune)?.image_url"
-                :alt="findRune(rune)?.name"
-                class="runeword__image"
-              />
-              <span class="rune">{{
-                findRune(rune)?.name[store.currentLang]
-              }}</span>
-            </span>
-          </template>
-        </div>
-        <div
+          v-for="(prop, index) in runeword.old.stats[store.currentLang]"
+          :key="`old-stat-${index}`"
           class="runeword__property runeword__property--original"
-          v-for="prop in runeword?.old.stats[store.currentLang]"
         >
           <template v-if="prop.includes('#')">
             <span class="modal__property--type">{{
@@ -85,58 +84,58 @@
             }}</span>
           </template>
           <template v-else>
+            <!-- eslint-disable-next-line vue/no-v-html -- trusted game strings -->
             <span v-html="prop"></span>
           </template>
         </div>
       </template>
-    </div>
+    </template>
   </div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-import { RUNES, ITEM_TYPES } from "@/shared/constants";
-import { useInfoStore } from "@/store/index.js";
+<script setup lang="ts">
+import { useInfoStore } from "@/store";
+import { useRunes } from "@/composables/useRunes";
+import type { RunewordCardItem } from "@/types";
 
 const store = useInfoStore();
+const { findRune, getTypeName } = useRunes();
 
-const props = defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false,
-  },
-  runeword: {
-    type: Object,
-    default: () => {
-      return {};
-    },
-  },
-});
-
-const localVisible = ref(props.modelValue);
-
-const findRune = (id) => {
-  return RUNES.find((rune) => rune.id === id);
-};
-
-const getTypeName = (id) => {
-  return ITEM_TYPES.find((rune) => rune.id === parseInt(id)).name[
-    store.currentLang
-  ];
-};
+withDefaults(
+  defineProps<{
+    runeword?: RunewordCardItem;
+    showOld?: boolean;
+  }>(),
+  {
+    runeword: () => ({}),
+    showOld: false,
+  }
+);
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .runeword {
-  right: 12px;
-  top: 115px;
-  position: fixed;
-  min-width: 22rem;
-  width: 490px;
-  border: 1px solid #bab197;
-  background-color: rgba(#000, 0.8);
-  max-height: calc(100% - 125px);
-  overflow-y: auto;
+  width: 100%;
+
+  &__reworked {
+    padding: 2px 4px;
+    border-radius: 2px;
+    display: inline-block;
+    background-color: var(--color-reworked-bg);
+    position: absolute;
+    top: 1px;
+    right: 1px;
+  }
+
+  &__new {
+    padding: 2px 4px;
+    border-radius: 2px;
+    display: inline-block;
+    background-color: #4a4;
+    position: absolute;
+    top: 1px;
+    left: 1px;
+  }
 
   &__wrapper {
     padding: 24px;
@@ -147,7 +146,7 @@ const getTypeName = (id) => {
     position: absolute;
     right: 12px;
     top: 10px;
-    color: #ae2a1a;
+    color: var(--color-danger);
     cursor: pointer;
   }
 
@@ -157,7 +156,7 @@ const getTypeName = (id) => {
   }
 
   &__title {
-    color: #ecd2a8;
+    color: var(--color-title);
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.4em;
@@ -168,25 +167,27 @@ const getTypeName = (id) => {
     text-align: center;
     font-size: 0.875em;
     margin-bottom: 0.5rem;
-    color: #888;
+    color: var(--color-muted);
   }
 
   &__property {
+    margin-bottom: 2px;
+    font-size: 0.875em;
     text-align: center;
-    color: #5cbd4b;
+    color: var(--color-success);
 
     &--original {
-      color: #6e6eff;
+      color: var(--color-link);
     }
 
     &--type {
       display: block;
-      color: #74706c;
+      color: var(--color-text);
       margin-top: 16px;
     }
 
     &--bugged {
-      color: #ae2a1a;
+      color: var(--color-danger);
     }
   }
 
@@ -207,6 +208,10 @@ const getTypeName = (id) => {
   &__image {
     max-width: 32px;
     margin-right: 4px;
+  }
+
+  &__wrapper {
+    padding: 0;
   }
 }
 </style>

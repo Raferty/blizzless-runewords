@@ -1,3 +1,34 @@
+// ========== Color variables ==========
+:root {
+  --color-bg: #000;
+  --color-bg-overlay: rgba(0, 0, 0, 0.8);
+  --color-text: #74706c;
+  --color-text-inverse: #fff;
+  --color-text-on-warning: #000;
+  --color-rune: #fab100;
+  --color-accent: #bd8547;
+  --color-border: #bab197;
+  --color-border-light: #e5e7eb;
+  --color-border-dark: #24221c;
+  --color-border-input: #8a8062;
+  --color-title: #ecd2a8;
+  --color-muted: #888;
+  --color-success: #5cbd4b;
+  --color-success-alt: #44aa44;
+  --color-link: #6e6eff;
+  --color-danger: #ae2a1a;
+  --color-notfound: #844;
+  --color-complete-bg: #200000;
+  --color-ladder-bg: #501008;
+  --color-reworked-bg: rgba(0, 123, 255, 0.8);
+  --color-warning-bg: rgba(255, 193, 7, 0.8);
+  --color-filter-active-border: #ffc107cc;
+  --color-filter-active-bg: #ffc107cc;
+  --color-rune-active-border: #ffd100;
+  --color-varies: #90ff00;
+  --color-varies-old: #a7a7ff;
+}
+
 *,
 *::before,
 *::after {
@@ -63,36 +94,43 @@ h6 {
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-size: 1rem;
-  color: #74706c;
-  background-color: #000;
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    sans-serif,
+    "Apple Color Emoji",
+    "Segoe UI Emoji",
+    Segoe UI Symbol,
+    "Noto Color Emoji";
 }
 
 .rune {
-  color: #fab100;
+  color: var(--color-rune);
 }
 
 .sort {
   margin-top: 3px;
-  color: #bd8547;
+  color: var(--color-accent);
 }
 
 .varies {
   font-size: 14px;
   border-radius: 2px;
-  border: 1px solid #90ff00;
-  color: #90ff00;
+  border: 1px solid var(--color-varies);
+  color: var(--color-varies);
   padding: 0 4px;
   margin: 0 2px;
   line-height: 90%;
 
   &--old {
-    border: 1px solid #a7a7ff;
-    color: #a7a7ff;
+    border: 1px solid var(--color-varies-old);
+    color: var(--color-varies-old);
   }
 }
