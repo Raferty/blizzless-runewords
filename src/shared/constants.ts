@@ -1,3 +1,9 @@
+import type { Lang } from "../types/lang";
+import type {
+  ItemTypeTaxonomyNode,
+  ItemTypeTaxonomyRelations,
+} from "../types/item-taxonomy";
+
 export const RUNES = [
   {
     id: 1,
@@ -601,173 +607,412 @@ export const RUNES = [
   },
 ];
 
-export const ITEM_TYPES = [
+/**
+ * Иерархия типов предметов по `docs/diablo-2-resurrected-item-types.md`:
+ * верхний уровень (§1) → вложенность (оружие §2, доспехи §3) → листья с числовым `itemTypeId` (1–24).
+ */
+export const ITEM_TYPES: ItemTypeTaxonomyNode[] = [
   {
-    id: 1,
-    name: {
-      ru: "Топоры",
-      en: "Axes",
-    },
+    key: "equipment",
+    name: { ru: "Экипировка", en: "Equipment" },
+    children: [
+      {
+        key: "weapons",
+        name: { ru: "Оружие", en: "Weapons" },
+        children: [
+          {
+            key: "weapon_aggregates",
+            name: {
+              ru: "Агрегаты для рунвордов",
+              en: "Runeword weapon aggregates",
+            },
+            children: [
+              {
+                key: "weapons_all",
+                name: { ru: "Оружие", en: "Weapons" },
+                itemTypeId: 12,
+                isAggregate: true,
+              },
+              {
+                key: "melee_weapons",
+                name: {
+                  ru: "Оружие ближнего боя",
+                  en: "Melee Weapons",
+                },
+                itemTypeId: 4,
+                isAggregate: true,
+              },
+              {
+                key: "missile_weapons",
+                name: {
+                  ru: "Оружие дальнего боя",
+                  en: "Missile Weapons",
+                },
+                itemTypeId: 6,
+                isAggregate: true,
+              },
+            ],
+          },
+          {
+            key: "weapon_subtypes",
+            name: {
+              ru: "Классы оружия (подтипы баз)",
+              en: "Weapon base classes (subtypes)",
+            },
+            children: [
+              { key: "axes", name: { ru: "Топоры", en: "Axes" }, itemTypeId: 1 },
+              { key: "maces", name: { ru: "Булавы", en: "Maces" }, itemTypeId: 2 },
+              { key: "swords", name: { ru: "Мечи", en: "Swords" }, itemTypeId: 3 },
+              { key: "staves", name: { ru: "Посохи", en: "Staves" }, itemTypeId: 5 },
+              {
+                key: "scepters",
+                name: { ru: "Скипетры", en: "Scepters" },
+                itemTypeId: 7,
+              },
+              { key: "claws", name: { ru: "Когти", en: "Claws" }, itemTypeId: 8 },
+              {
+                key: "polearms",
+                name: { ru: "Древковое оружие", en: "Polearms" },
+                itemTypeId: 9,
+              },
+              { key: "clubs", name: { ru: "Дубины", en: "Clubs" }, itemTypeId: 10 },
+              { key: "hammers", name: { ru: "Молоты", en: "Hammers" }, itemTypeId: 11 },
+              { key: "spears", name: { ru: "Копья", en: "Spears" }, itemTypeId: 13 },
+              { key: "wands", name: { ru: "Жезлы", en: "Wands" }, itemTypeId: 14 },
+              { key: "daggers", name: { ru: "Кинжалы", en: "Daggers" }, itemTypeId: 15 },
+            ],
+          },
+          {
+            key: "class_specific_weapons",
+            name: {
+              ru: "Классовое оружие",
+              en: "Class-specific weapons",
+            },
+            children: [
+              {
+                key: "katars",
+                name: { ru: "Катары", en: "Katars" },
+                itemTypeId: 19,
+              },
+              {
+                key: "sorceress_orbs",
+                name: {
+                  ru: "Сферы волшебницы",
+                  en: "Sorceress Orbs",
+                },
+                itemTypeId: 22,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        key: "shields",
+        name: { ru: "Щиты", en: "Shields" },
+        children: [
+          {
+            key: "shields_common",
+            name: { ru: "Щиты", en: "Shields" },
+            itemTypeId: 16,
+          },
+          {
+            key: "paladin_shields",
+            name: {
+              ru: "Щиты паладина",
+              en: "Paladin Shields",
+            },
+            itemTypeId: 20,
+          },
+        ],
+      },
+      {
+        key: "armor",
+        name: { ru: "Доспехи", en: "Armor" },
+        children: [
+          {
+            key: "body_armors",
+            name: {
+              ru: "Нагрудная броня",
+              en: "Body Armors",
+            },
+            itemTypeId: 17,
+          },
+          {
+            key: "helms",
+            name: { ru: "Шлемы", en: "Helms" },
+            itemTypeId: 18,
+          },
+          {
+            key: "gloves_boots_belts",
+            name: {
+              ru: "Перчатки, пояса, обувь (нет отдельного itemTypeId в данных)",
+              en: "Gloves, Belts, Boots (no itemTypeId in app data)",
+            },
+          },
+        ],
+      },
+      {
+        key: "class_head_armor",
+        name: {
+          ru: "Классовая броня головы",
+          en: "Class-specific head armor",
+        },
+        children: [
+          {
+            key: "necro_shrunken_heads",
+            name: {
+              ru: "Головы вуду (усыхшие головы)",
+              en: "Voodoo Heads (Shrunken Heads)",
+            },
+            itemTypeId: 21,
+          },
+          {
+            key: "druid_pelts",
+            name: {
+              ru: "Маски друида",
+              en: "Druid Pelts",
+            },
+            itemTypeId: 23,
+          },
+        ],
+      },
+      {
+        key: "rotw_extensions",
+        name: {
+          ru: "Расширения Blizzless / RotW",
+          en: "Blizzless / RotW extensions",
+        },
+        children: [
+          {
+            key: "grimoires",
+            name: { ru: "Гримуары", en: "Grimoires" },
+            itemTypeId: 24,
+            extension: "rotw",
+          },
+        ],
+      },
+    ],
   },
   {
-    id: 2,
-    name: {
-      ru: "Булавы",
-      en: "Maces",
-    },
+    key: "jewelry",
+    name: { ru: "Бижутерия", en: "Jewelry" },
+    children: [
+      {
+        key: "rings",
+        name: { ru: "Кольца", en: "Rings" },
+      },
+      {
+        key: "amulets",
+        name: { ru: "Амулеты", en: "Amulets" },
+      },
+    ],
   },
   {
-    id: 3,
-    name: {
-      ru: "Мечи",
-      en: "Swords",
-    },
+    key: "charms",
+    name: { ru: "Чармы", en: "Charms" },
+    children: [
+      {
+        key: "grand_charms",
+        name: { ru: "Большие чармы", en: "Grand Charms" },
+      },
+      {
+        key: "large_charms",
+        name: { ru: "Средние чармы", en: "Large Charms" },
+      },
+      {
+        key: "small_charms",
+        name: { ru: "Малые чармы", en: "Small Charms" },
+      },
+    ],
   },
   {
-    id: 4,
-    name: {
-      ru: "Оружие ближнего боя",
-      en: "Melee Weapons",
-    },
+    key: "consumables",
+    name: { ru: "Расходники", en: "Consumables" },
+    children: [
+      { key: "potions", name: { ru: "Зелья", en: "Potions" } },
+      { key: "scrolls", name: { ru: "Свитки", en: "Scrolls" } },
+      { key: "keys", name: { ru: "Ключи", en: "Keys" } },
+      {
+        key: "ammo",
+        name: { ru: "Стрелы и болты", en: "Arrows and Bolts" },
+      },
+      { key: "gold", name: { ru: "Золото", en: "Gold" } },
+    ],
   },
   {
-    id: 5,
+    key: "cube_and_recipes",
     name: {
-      ru: "Посохи",
-      en: "Staves",
+      ru: "Куб и рецепты",
+      en: "Horadric Cube & recipes",
     },
+    children: [
+      { key: "horadric_cube", name: { ru: "Куб Хорадрима", en: "Horadric Cube" } },
+      { key: "gems", name: { ru: "Гемы", en: "Gems" } },
+      { key: "runes", name: { ru: "Руны (как материал)", en: "Runes (as items)" } },
+      { key: "misc_recipes", name: { ru: "Прочее", en: "Misc." } },
+    ],
   },
   {
-    id: 6,
-    name: {
-      ru: "Оружие дальнего боя",
-      en: "Missile Weapons",
-    },
+    key: "quest",
+    name: { ru: "Квестовые предметы", en: "Quest items" },
+    children: [
+      {
+        key: "quest_uniques",
+        name: {
+          ru: "Уникальные предметы сюжета",
+          en: "Unique quest items",
+        },
+      },
+    ],
   },
   {
-    id: 7,
-    name: {
-      ru: "Скипетры",
-      en: "Scepters",
-    },
-  },
-  {
-    id: 8,
-    name: {
-      ru: "Когти",
-      en: "Claws",
-    },
-  },
-  {
-    id: 9,
-    name: {
-      ru: "Древковое оружие",
-      en: "Polearms",
-    },
-  },
-  {
-    id: 10,
-    name: {
-      ru: "Дубины",
-      en: "Clubs",
-    },
-  },
-  {
-    id: 11,
-    name: {
-      ru: "Молоты",
-      en: "Hammers",
-    },
-  },
-  {
-    id: 12,
-    name: {
-      ru: "Оружие",
-      en: "Weapons",
-    },
-  },
-  {
-    id: 13,
-    name: {
-      ru: "Копья",
-      en: "Spears",
-    },
-  },
-  {
-    id: 14,
-    name: {
-      ru: "Жезлы",
-      en: "Wands",
-    },
-  },
-  {
-    id: 15,
-    name: {
-      ru: "Кинжалы",
-      en: "Daggers",
-    },
-  },
-  {
-    id: 16,
-    name: {
-      ru: "Щиты",
-      en: "Shields",
-    },
-  },
-  {
-    id: 17,
-    name: {
-      ru: "Нагрудная броня",
-      en: "Body Armors",
-    },
-  },
-  {
-    id: 18,
-    name: {
-      ru: "Шлемы",
-      en: "Helms",
-    },
-  },
-  {
-    id: 19,
-    name: {
-      ru: "Катары",
-      en: "Katars",
-    },
-  },
-  {
-    id: 20,
-    name: {
-      ru: "Щиты паладина",
-      en: "Paladin Shields",
-    },
-  },
-  {
-    id: 21,
-    name: {
-      ru: "Усохшие Головы некроманта",
-      en: "Necromancer Shrunken Heads",
-    },
-  },
-  {
-    id: 22,
-    name: {
-      ru: "Сферы волшебницы",
-      en: "Sorceress Orbs",
-    },
-  },
-  {
-    id: 23,
-    name: {
-      ru: "Маски друида",
-      en: "Druid Pelts",
-    },
-  },
-  {
-    id: 24,
-    name: {
-      ru: "Гримуары",
-      en: "Grimoires",
-    },
+    key: "other",
+    name: { ru: "Прочее", en: "Other" },
+    children: [
+      {
+        key: "jewels",
+        name: { ru: "Jewels", en: "Jewels" },
+      },
+      {
+        key: "runes_as_loot",
+        name: {
+          ru: "Руны как отдельный тип лута",
+          en: "Runes as loot category",
+        },
+      },
+    ],
   },
 ];
+
+/**
+ * Ищет `itemTypeId` у первого узла с заданным `key` в дереве `ITEM_TYPES` (обход в глубину).
+ */
+export function findTaxonomyItemTypeId(
+  nodes: ItemTypeTaxonomyNode[],
+  key: string
+): number | undefined {
+  for (const node of nodes) {
+    if (node.key === key && node.itemTypeId !== undefined) {
+      return node.itemTypeId;
+    }
+    if (node.children?.length) {
+      const found = findTaxonomyItemTypeId(node.children, key);
+      if (found !== undefined) return found;
+    }
+  }
+  return undefined;
+}
+
+function collectTaxonomyNodesByItemTypeId(
+  nodes: ItemTypeTaxonomyNode[],
+  acc = new Map<number, ItemTypeTaxonomyNode>()
+): Map<number, ItemTypeTaxonomyNode> {
+  for (const node of nodes) {
+    if (node.itemTypeId !== undefined) {
+      acc.set(node.itemTypeId, node);
+    }
+    if (node.children?.length) {
+      collectTaxonomyNodesByItemTypeId(node.children, acc);
+    }
+  }
+  return acc;
+}
+
+/** Кэш id → узел таксономии (O(1) для UI и поиска). */
+export const TAXONOMY_NODE_BY_ITEM_TYPE_ID = collectTaxonomyNodesByItemTypeId(ITEM_TYPES);
+
+/**
+ * Узел таксономии по числовому `itemTypeId` (без обхода дерева).
+ */
+export function findTaxonomyNodeByItemTypeId(
+  itemTypeId: number
+): ItemTypeTaxonomyNode | undefined {
+  return TAXONOMY_NODE_BY_ITEM_TYPE_ID.get(itemTypeId);
+}
+
+/** Локализованное имя типа предмета для UI / поиска. */
+export function getItemTypeDisplayName(itemTypeId: number, lang: Lang): string {
+  return findTaxonomyNodeByItemTypeId(itemTypeId)?.name[lang] ?? "";
+}
+
+/**
+ * Единая таблица: ключ узла в `ITEM_TYPES` → суффикс имени → fallback id (док. §4).
+ */
+const ITEM_TYPE_SPEC = [
+  ["weapons_all", "WEAPONS", 12],
+  ["melee_weapons", "MELEE_WEAPONS", 4],
+  ["missile_weapons", "MISSILE_WEAPONS", 6],
+  ["axes", "AXES", 1],
+  ["maces", "MACES", 2],
+  ["swords", "SWORDS", 3],
+  ["staves", "STAVES", 5],
+  ["scepters", "SCEPTERS", 7],
+  ["claws", "CLAWS", 8],
+  ["polearms", "POLEARMS", 9],
+  ["clubs", "CLUBS", 10],
+  ["hammers", "HAMMERS", 11],
+  ["spears", "SPEARS", 13],
+  ["wands", "WANDS", 14],
+  ["daggers", "DAGGERS", 15],
+  ["shields_common", "SHIELDS", 16],
+  ["body_armors", "BODY_ARMORS", 17],
+  ["helms", "HELMS", 18],
+  ["katars", "KATARS", 19],
+  ["paladin_shields", "PALADIN_SHIELDS", 20],
+  ["necro_shrunken_heads", "VOODOO_HEADS", 21],
+  ["sorceress_orbs", "SORCERESS_ORBS", 22],
+  ["druid_pelts", "DRUID_PELTS", 23],
+  ["grimoires", "GRIMOIRES", 24],
+] as const;
+
+type ItemTypeIdSuffix = (typeof ITEM_TYPE_SPEC)[number][1];
+
+/**
+ * Все числовые id типов предметов (ключи таксономии → id 1–24).
+ */
+export const ITEM_TYPE_ID = Object.fromEntries(
+  ITEM_TYPE_SPEC.map(([taxKey, suffix, fb]) => [
+    suffix,
+    findTaxonomyItemTypeId(ITEM_TYPES, taxKey) ?? fb,
+  ])
+) as Record<ItemTypeIdSuffix, number>;
+
+export const ITEM_TYPE_WEAPONS = ITEM_TYPE_ID.WEAPONS;
+export const ITEM_TYPE_MELEE_WEAPONS = ITEM_TYPE_ID.MELEE_WEAPONS;
+export const ITEM_TYPE_MISSILE_WEAPONS = ITEM_TYPE_ID.MISSILE_WEAPONS;
+export const ITEM_TYPE_AXES = ITEM_TYPE_ID.AXES;
+export const ITEM_TYPE_MACES = ITEM_TYPE_ID.MACES;
+export const ITEM_TYPE_SWORDS = ITEM_TYPE_ID.SWORDS;
+export const ITEM_TYPE_STAVES = ITEM_TYPE_ID.STAVES;
+export const ITEM_TYPE_SCEPTERS = ITEM_TYPE_ID.SCEPTERS;
+export const ITEM_TYPE_CLAWS = ITEM_TYPE_ID.CLAWS;
+export const ITEM_TYPE_POLEARMS = ITEM_TYPE_ID.POLEARMS;
+export const ITEM_TYPE_CLUBS = ITEM_TYPE_ID.CLUBS;
+export const ITEM_TYPE_HAMMERS = ITEM_TYPE_ID.HAMMERS;
+export const ITEM_TYPE_SPEARS = ITEM_TYPE_ID.SPEARS;
+export const ITEM_TYPE_WANDS = ITEM_TYPE_ID.WANDS;
+export const ITEM_TYPE_DAGGERS = ITEM_TYPE_ID.DAGGERS;
+export const ITEM_TYPE_SHIELDS = ITEM_TYPE_ID.SHIELDS;
+export const ITEM_TYPE_BODY_ARMORS = ITEM_TYPE_ID.BODY_ARMORS;
+export const ITEM_TYPE_HELMS = ITEM_TYPE_ID.HELMS;
+export const ITEM_TYPE_KATARS = ITEM_TYPE_ID.KATARS;
+export const ITEM_TYPE_PALADIN_SHIELDS = ITEM_TYPE_ID.PALADIN_SHIELDS;
+export const ITEM_TYPE_VOODOO_HEADS = ITEM_TYPE_ID.VOODOO_HEADS;
+export const ITEM_TYPE_SORCERESS_ORBS = ITEM_TYPE_ID.SORCERESS_ORBS;
+export const ITEM_TYPE_DRUID_PELTS = ITEM_TYPE_ID.DRUID_PELTS;
+export const ITEM_TYPE_GRIMOIRES = ITEM_TYPE_ID.GRIMOIRES;
+
+/**
+ * Зависимости агрегатов оружия (см. док. §5).
+ */
+export const ITEM_TYPES_RELATIONS: ItemTypeTaxonomyRelations = {
+  weaponAggregates: {
+    allWeapons: { itemTypeId: ITEM_TYPE_ID.WEAPONS },
+    melee: { itemTypeId: ITEM_TYPE_ID.MELEE_WEAPONS },
+    missile: { itemTypeId: ITEM_TYPE_ID.MISSILE_WEAPONS },
+    note: {
+      ru: "В данных рунворда `Weapons` (12) — «любое оружие»; `Melee` (4) и `Missile` (6) — агрегаты ближнего и дальнего боя, не смешивать с подтипами 1–15.",
+      en: "`Weapons` (12) is the broad weapon group; `Melee` (4) and `Missile` (6) are runeword aggregates—distinct from base subtypes 1–15.",
+    },
+  },
+};

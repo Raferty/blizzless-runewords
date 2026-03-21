@@ -2,6 +2,8 @@
  * Кастомные / выделенные рунворды (`marked: true`) — «новые в RotW» и т.п.
  * Склеиваются с базовым списком в store вместе с `rotw-runewords.ts`.
  */
+import * as ItemTypes from "./constants";
+
 export const CUSTOM_RUNEWORDS = [
   {
     id: 94,
@@ -10,7 +12,7 @@ export const CUSTOM_RUNEWORDS = [
       en: "Nightfall",
     },
     runes: [1, 33],
-    types: [21],
+    types: [ItemTypes.ITEM_TYPE_VOODOO_HEADS],
     excluded: "",
     classes: ["Necromancer"],
     patch: "blizzless",
@@ -52,7 +54,7 @@ export const CUSTOM_RUNEWORDS = [
       en: "Lightning",
     },
     runes: [24, 29],
-    types: [22],
+    types: [ItemTypes.ITEM_TYPE_SORCERESS_ORBS],
     excluded: "",
     classes: ["Sorceress"],
     patch: "new",
@@ -90,7 +92,7 @@ export const CUSTOM_RUNEWORDS = [
       en: "Envy",
     },
     runes: [22, 23],
-    types: [23],
+    types: [ItemTypes.ITEM_TYPE_DRUID_PELTS],
     excluded: "",
     classes: ["Druid"],
     patch: "new",
@@ -130,7 +132,7 @@ export const CUSTOM_RUNEWORDS = [
       en: "Voice",
     },
     runes: [8, 14, 16],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: [],
     patch: "new",

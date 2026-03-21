@@ -1,6 +1,6 @@
-import { RUNES, ITEM_TYPES } from "@/shared/constants";
+import { RUNES, getItemTypeDisplayName } from "@/shared/constants";
 import { useInfoStore } from "@/store";
-import type { RuneItem, ItemType } from "@/types";
+import type { RuneItem } from "@/types";
 
 export function useRunes() {
   const store = useInfoStore();
@@ -15,8 +15,7 @@ export function useRunes() {
   }
 
   function getTypeName(id: number | string): string {
-    const type = ITEM_TYPES.find((t: ItemType) => t.id === parseInt(String(id)));
-    return type?.name[store.currentLang] ?? "";
+    return getItemTypeDisplayName(parseInt(String(id), 10), store.currentLang);
   }
 
   /** Returns comma-separated type names for an item (for sorting/display) */

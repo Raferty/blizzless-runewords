@@ -17,6 +17,11 @@ export interface RunewordItem {
 /** Runeword row in table (with optional display fields) */
 export interface RunewordTableItem extends RunewordItem {
   complete?: boolean;
+  reworked?: boolean;
+  marked?: boolean;
+  /** например `"1.10"`, `"2.4"`, `"rotw"`, `"blizzless"` */
+  patch?: string;
+  ladder?: boolean;
   stats?: Record<string, string[]>;
   bugged?: { status?: boolean; message?: string[] };
   excluded?: string[];

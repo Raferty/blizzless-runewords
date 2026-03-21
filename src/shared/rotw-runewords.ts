@@ -3,6 +3,8 @@
  * Склеиваются с базовым списком в store.
  * Записи с `marked: true` по умолчанию в `custom-runewords.ts` (здесь могут быть исключения).
  */
+import * as ItemTypes from "./constants";
+
 export const ROTW_RUNEWORDS = [
   {
     id: 98,
@@ -11,7 +13,7 @@ export const ROTW_RUNEWORDS = [
       en: "Hysteria",
     },
     runes: [13, 18, 2],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: [],
     patch: "rotw",
@@ -47,7 +49,7 @@ export const ROTW_RUNEWORDS = [
       en: "Mania",
     },
     runes: [13, 18, 2],
-    types: [12],
+    types: [ItemTypes.ITEM_TYPE_WEAPONS],
     excluded: "",
     classes: [],
     patch: "rotw",
@@ -83,7 +85,7 @@ export const ROTW_RUNEWORDS = [
       en: "Coven",
     },
     runes: [24, 8, 16],
-    types: [18],
+    types: [ItemTypes.ITEM_TYPE_HELMS],
     excluded: "",
     classes: [],
     patch: "rotw",
@@ -121,7 +123,7 @@ export const ROTW_RUNEWORDS = [
       en: "Ritual",
     },
     runes: [11, 13, 27],
-    types: [15],
+    types: [ItemTypes.ITEM_TYPE_DAGGERS],
     excluded: "",
     classes: [],
     patch: "rotw",
@@ -159,7 +161,7 @@ export const ROTW_RUNEWORDS = [
       en: "Authority",
     },
     runes: [15, 13, 8],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: ["Warlock"],
     patch: "rotw",
@@ -188,6 +190,10 @@ export const ROTW_RUNEWORDS = [
     },
     complete: false,
   },
+  /**
+   * Vigilance — Dol + Gul, ур. 53. Типы как в RotW: Grimoires, Shields, Voodoo Heads, Auric Shields
+   * (id: 24, 16, 21, 20).
+   */
   {
     id: 103,
     name: {
@@ -195,7 +201,12 @@ export const ROTW_RUNEWORDS = [
       en: "Vigilance",
     },
     runes: [14, 25],
-    types: [24, 16, 21, 20],
+    types: [
+      ItemTypes.ITEM_TYPE_GRIMOIRES,
+      ItemTypes.ITEM_TYPE_SHIELDS,
+      ItemTypes.ITEM_TYPE_VOODOO_HEADS,
+      ItemTypes.ITEM_TYPE_PALADIN_SHIELDS,
+    ],
     excluded: "",
     classes: [],
     patch: "rotw",
@@ -235,7 +246,7 @@ export const ROTW_RUNEWORDS = [
       en: "Void",
     },
     runes: [10, 33, 24],
-    types: [15],
+    types: [ItemTypes.ITEM_TYPE_DAGGERS],
     excluded: "",
     classes: [],
     patch: "rotw",

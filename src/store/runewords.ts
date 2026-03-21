@@ -1,9 +1,11 @@
 import { defineStore } from "pinia";
-import { ITEM_TYPES, RUNES } from "@/shared/constants";
+import type { RuneItem, RunewordTableItem } from "@/types";
+import { getItemTypeDisplayName, RUNES } from "@/shared/constants";
 import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
 import { REWORKED_RUNEWORDS } from "@/shared/reworked-runewords";
 import { RUNEWORDS } from "@/shared/runewords";
 import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
+import { getStoredLang } from "@/utils/lang";
 import { isComplete } from "@/utils/runeword";
 
 /** Базовый список + переработанные (`reworked-runewords.ts`) + RotW + кастомные с `marked`. */
@@ -13,7 +15,6 @@ const ALL_RUNEWORDS = [
   ...ROTW_RUNEWORDS,
   ...CUSTOM_RUNEWORDS,
 ];
-import type { RuneItem, RunewordTableItem } from "@/types";
 
 interface RunewordsState {
   /** Search query (bound to SearchInput v-model) */
@@ -92,10 +93,7 @@ export const useRunewordsStore = defineStore({
       const sorted = this.sortedRunewords;
 
       const q = this.searchDebounced.toLowerCase().trim();
-      const currentLang: "en" | "ru" =
-        typeof window !== "undefined"
-          ? ((localStorage.getItem("lang") ?? "en") as "en" | "ru")
-          : "en";
+      const currentLang = getStoredLang();
 
       const bySearch = q
         ? sorted.filter((word) => {
@@ -105,9 +103,9 @@ export const useRunewordsStore = defineStore({
             if (nameMatch) return true;
 
             const matchesType = (word.types ?? [])
-              .map((typeId) => ITEM_TYPES.find((t) => t.id === typeId)?.name[currentLang])
+              .map((typeId) => getItemTypeDisplayName(typeId, currentLang))
               .filter(Boolean)
-              .some((name) => (name as string).toLowerCase().includes(q));
+              .some((name) => name.toLowerCase().includes(q));
 
             return matchesType;
           })
@@ -122,21 +120,21 @@ export const useRunewordsStore = defineStore({
 
       if (this.reworkedFilter !== null) {
         result = result.filter((word) => {
-          const isReworked = (word as { reworked?: unknown }).reworked === true;
+          const isReworked = word.reworked === true;
           return this.reworkedFilter === "changed" ? isReworked : !isReworked;
         });
       }
 
       if (this.blizzlessFilter !== null) {
         result = result.filter((word) => {
-          const isNew = (word as { marked?: unknown }).marked === true;
+          const isNew = word.marked === true;
           return this.blizzlessFilter ? isNew : !isNew;
         });
       }
 
       if (this.rotwFilter !== null) {
         result = result.filter((word) => {
-          const isRotw = (word as { patch?: string }).patch === "rotw";
+          const isRotw = word.patch === "rotw";
           return this.rotwFilter ? isRotw : !isRotw;
         });
       }

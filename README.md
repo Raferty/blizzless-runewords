@@ -59,6 +59,14 @@ npm run preview
 yarn preview
 ```
 
+### Проверка типов (TypeScript)
+
+```bash
+npm run typecheck     # vue-tsc --noEmit
+# или
+yarn typecheck
+```
+
 ### Линтинг и форматирование
 
 ```bash

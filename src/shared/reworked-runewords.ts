@@ -1,4 +1,10 @@
+import * as ItemTypes from "./constants";
+
 export const REWORKED_RUNEWORDS = [
+  /**
+   * Pattern (id 9) — сверено со скрином вики/UI (март 2026).
+   * Руны Tal–Ort–Thul, ур. 23, patch 2.4, когти (тип 8). Порядок строк как на скрине.
+   */
   {
     id: 9,
     name: {
@@ -6,7 +12,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Pattern",
     },
     runes: [7, 9, 10],
-    types: [19],
+    types: [ItemTypes.ITEM_TYPE_CLAWS],
     excluded: "",
     classes: ["Assassin"],
     patch: "2.4",
@@ -19,33 +25,34 @@ export const REWORKED_RUNEWORDS = [
     },
     stats: {
       ru: [
+        "Все сопротивления +15%",
         "+30% к скорости блока",
-        "+(40-80)% к урону",
-        "+1-50 урона от молнии",
-        "+3-14 урона от льда",
-        "+75 урона от яда за 5 сек.",
-        "+3 к умению «Блокирование» (только для Ассасинов)",
+        "+3 к умению «Блок оружием» (только для ассасина)",
+        "+<span class='varies'>40-80</span>% к урону",
+        "+17-62 урона от огня",
         "+6 к силе",
         "+6 к ловкости",
-        "+15 к сопротивлению всем видам урона",
+        "+75 урона от яда за 5 сек.",
+        "+1-50 урона от молнии",
+        "+3-14 урона от льда",
       ],
       en: [
+        "All Resistances +15%",
         "+30% Faster Block Rate",
+        "+3 To Weapon Block (Assassin Only)",
         "+<span class='varies'>40-80</span>% Enhanced Damage (varies)",
+        "Adds 17-62 Fire Damage",
+        "+6 To Strength",
+        "+6 To Dexterity",
+        "+75 Poison Damage Over 5 Seconds",
         "Adds 1-50 Lightning Damage",
         "Adds 3-14 Cold Damage",
-        "Adds 17-62 Fire Damage",
-        "+75 Poison Damage Over 5 Seconds",
-        "+3 to Weapon block (Assassin only)",
-        "+6 to Strength",
-        "+6 to Dexterity",
-        "All Resistances +15",
       ],
     },
     complete: false,
     old: {
       runes: [7, 9, 10],
-      types: [8],
+      types: [ItemTypes.ITEM_TYPE_CLAWS],
       stats: {
         ru: [
           "+30% к скорости блока",
@@ -75,6 +82,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Myth (id 14) — сверено со скрином вики/UI (март 2026).
+   * Руны Hel–Dol–Pul, ур. 45, patch 1.11, нагрудная броня (варвар). Порядок и формулировки как на скрине.
+   */
   {
     id: 14,
     name: {
@@ -82,7 +93,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Myth",
     },
     runes: [15, 14, 21],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: ["Barbarian"],
     patch: "1.11",
@@ -91,28 +102,28 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "+3 к умениям владения оружием (только для варваров)",
         "+2 к уровню умений варвара",
-        "+130% к урону",
+        "+3 к умению «Боевые умения» (только для варваров)",
         "+40 к урону",
+        "+130% к защите",
         "+20% к вероятности нанести смертельный удар",
+        "Требования -15%",
         "Восполняет +7 здоровья",
-        "Требования: -15%",
       ],
       en: [
-        "+3 to Masteries (Barbarian only)",
         "+2 To Barbarian Skill Levels",
-        "Adds +40 damage",
-        "+20% Deadly Strike",
-        "+130% Enhanced Defence",
-        "Replenish Life 7",
+        "+3 To Combat Masteries (Barbarian Only)",
+        "Damage +40",
+        "+130% Enhanced Defense",
+        "20% Deadly Strike",
         "Requirements -15%",
+        "Replenish Life +7",
       ],
     },
     complete: false,
     old: {
       runes: [15, 11, 4],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "Вероятность 3% применить умение «Рев» 1-го уровня при получении урона",
@@ -136,6 +147,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Peace (id 20) — сверено со скрином вики/UI (март 2026).
+   * Руны Um–Thul–Amn, ур. 47, patch 1.11, нагрудная броня (амазонка). Порядок строк как на скрине.
+   */
   {
     id: 20,
     name: {
@@ -143,37 +158,37 @@ export const REWORKED_RUNEWORDS = [
       en: "Peace",
     },
     runes: [22, 10, 11],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: ["Amazon"],
-    patch: "",
+    patch: "1.11",
     level: 47,
     ladder: false,
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 2% применить умение «Валькирия» 15-го уровня при ударе",
-        "+2 к уровню умениям амазонки",
-        "+30% к скорости атаки",
+        "+2 к уровню умений амазонки",
         "+2 к умению «Критический удар»",
-        "+30% к сопротивлению льду",
+        "Вероятность 2% применить умение «Валькирия» 15-го уровня при ударе",
+        "+30% к скорости атаки",
         "+15% к сопротивлению всем видам урона",
+        "+30% к сопротивлению льду",
         "Атакующий получает 14 урона",
       ],
       en: [
-        "2% Chance To Cast level 15 Valkyrie On Striking",
         "+2 To Amazon Skill Levels",
-        "+30% Increased Attack Speed",
         "+2 To Critical Strike",
-        "Cold Resist +30%",
+        "2% Chance To Cast Level 15 Valkyrie On Striking",
+        "+30% Increased Attack Speed",
         "All Resistances +15%",
+        "Cold Resist +30%",
         "Attacker Takes Damage of 14",
       ],
     },
     complete: false,
     old: {
       runes: [13, 10, 11],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "Вероятность 4% применить умение «Замедление снарядов» 5-го уровня при получении урона",
@@ -197,6 +212,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Ground (id 25) — сверено со скрином вики/UI (март 2026).
+   * Руны Shael–Io–Ist, ур. 51, patch 2.6, шлемы. MF +75%; порядок строк как на скрине.
+   */
   {
     id: 25,
     name: {
@@ -204,39 +223,41 @@ export const REWORKED_RUNEWORDS = [
       en: "Ground",
     },
     runes: [13, 16, 24],
-    types: [18],
+    types: [ItemTypes.ITEM_TYPE_HELMS],
     excluded: "",
     classes: [],
-    patch: "",
+    patch: "2.6",
     level: 51,
     ladder: true,
     reworked: true,
     stats: {
       ru: [
-        "При надевании дает ауру «Очищение» 1-го уровня",
-        "+20% к ускоренному восстановлению от удара",
-        "+<span class='varies'>75-100</span>% к защите",
-        "+10 к живучести",
+        "+10% к скорости применения умений",
         "+30% к максимальному запасу маны",
         "+30% к сопротивлению молнии",
         "+<span class='varies'>10-15</span>% к поглощению урона от молнии",
-        "+25% к вероятности найти магический предмет",
+        "При надевании даёт ауру «Очищение» 1-го уровня",
+        "+<span class='varies'>75-100</span>% к защите",
+        "+75% к вероятности найти магический предмет",
+        "+20% к ускоренному восстановлению от удара",
+        "+10 к живучести",
       ],
       en: [
-        "Level 1 Cleansing Aura When Equipped",
-        "+20% Faster Hit Recovery",
-        "+<span class='varies'>75-100</span>% Enhanced Defense (varies)",
-        "+10 to Vitality",
+        "+10% Faster Cast Rate",
         "Increase Maximum Mana 30%",
         "Lightning Resist +30%",
-        "Lightning Absorb +<span class='varies'>10-15</span>%",
-        "+25% Better Chance of Getting Magic Items",
+        "+<span class='varies'>10-15</span>% To Lightning Absorb (varies)",
+        "Level 1 Cleansing Aura When Equipped",
+        "+<span class='varies'>75-100</span>% Enhanced Defense (varies)",
+        "+75% Better Chance of Getting Magic Items",
+        "+20% Faster Hit Recovery",
+        "+10 To Vitality",
       ],
     },
     complete: false,
     old: {
       runes: [13, 16, 9],
-      types: [18],
+      types: [ItemTypes.ITEM_TYPE_HELMS],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -258,6 +279,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Hearth (id 26) — сверено со скрином вики/UI (март 2026).
+   * Руны Shael–Io–Gul, ур. 53, patch 2.6, шлемы. Опечатка «дате» → «даёт»; порядок: CBF → аура → ED → …
+   */
   {
     id: 26,
     name: {
@@ -265,39 +290,39 @@ export const REWORKED_RUNEWORDS = [
       en: "Hearth",
     },
     runes: [13, 16, 25],
-    types: [18],
+    types: [ItemTypes.ITEM_TYPE_HELMS],
     excluded: "",
     classes: [],
-    patch: "",
+    patch: "2.6",
     level: 53,
     ladder: true,
     reworked: true,
     stats: {
       ru: [
-        "При надевании дате ауру «Правое дело» 16-го уровня",
-        "+20% к ускоренному восстановлению от удара",
+        "Нельзя заморозить",
+        "При надевании даёт ауру «Правое дело» 16-го уровня",
         "+<span class='varies'>75-100</span>% к защите",
-        "+10 к живучести",
-        "5% к максимальному сопротивлению яду",
         "+30% к сопротивлению льду",
         "+<span class='varies'>10-15</span>% к поглощению урона от льда",
-        "Нельзя заморозить",
+        "+20% к ускоренному восстановлению от удара",
+        "+10 к живучести",
+        "+5% к максимальному сопротивлению яду",
       ],
       en: [
+        "Cannot Be Frozen",
         "Level 16 Blessed Aim Aura When Equipped",
-        "+20% Faster Hit Recovery",
         "+<span class='varies'>75-100</span>% Enhanced Defense (varies)",
-        "+10 to Vitality",
-        "+5% to Maximum Poison Resist",
         "Cold Resist +30%",
-        "Cold Absorb +10-15%",
-        "Cannot be Frozen",
+        "+<span class='varies'>10-15</span>% To Cold Absorb (varies)",
+        "+20% Faster Hit Recovery",
+        "+10 To Vitality",
+        "+5% To Maximum Poison Resist",
       ],
     },
     complete: false,
     old: {
       runes: [13, 16, 10],
-      types: [18],
+      types: [ItemTypes.ITEM_TYPE_HELMS],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -321,6 +346,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Temper (id 27) — сверено со скрином вики/UI (март 2026).
+   * Руны Shael–Io–Pul, ур. 45, patch 2.6, шлемы. Порядок строк как на скрине.
+   */
   {
     id: 27,
     name: {
@@ -328,39 +357,39 @@ export const REWORKED_RUNEWORDS = [
       en: "Temper",
     },
     runes: [13, 16, 21],
-    types: [18],
+    types: [ItemTypes.ITEM_TYPE_HELMS],
     excluded: "",
     classes: [],
-    patch: "",
+    patch: "2.6",
     level: 45,
     ladder: true,
     reworked: true,
     stats: {
       ru: [
         "+20% к скорости применения умений",
-        "+20% к ускоренному восстановлению от удара",
         "Похищает 8% здоровья за удар",
-        "+130% к защите",
-        "+10 к живучести",
+        "+<span class='varies'>10-15</span>% к поглощению урона от огня",
         "+30% к сопротивлению огню",
-        "+(10-15)% к поглощению урона от огня",
+        "+130% к защите",
         "+350% к золоту за убийство монстров",
+        "+20% к ускоренному восстановлению от удара",
+        "+10 к живучести",
       ],
       en: [
         "+20% Faster Cast Rate",
-        "+20% Faster Hit Recovery",
-        "8% life stolen per hit",
-        "130% Enhanced Defense",
-        "+10 to Vitality",
+        "+8% Life Stolen Per Hit",
+        "+<span class='varies'>10-15</span>% To Fire Absorb (varies)",
         "Fire Resist +30%",
-        "Fire Absorb +10-15%",
-        "+350% extra gold from monsters",
+        "+130% Enhanced Defense",
+        "350% Extra Gold From Monsters",
+        "+20% Faster Hit Recovery",
+        "+10 To Vitality",
       ],
     },
     complete: false,
     old: {
       runes: [13, 16, 8],
-      types: [18],
+      types: [ItemTypes.ITEM_TYPE_HELMS],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -394,7 +423,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Unbending Will",
     },
     runes: [19, 16, 6, 15],
-    types: [3],
+    types: [ItemTypes.ITEM_TYPE_SWORDS],
     excluded: "",
     classes: [],
     patch: "2.4",
@@ -432,7 +461,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [19, 16, 6, 2, 1, 15],
-      types: [3],
+      types: [ItemTypes.ITEM_TYPE_SWORDS],
       stats: {
         ru: [
           "Вероятность 18% применить умение «Провокация» 18-го уровня при ударе",
@@ -479,7 +508,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Passion",
     },
     runes: [14, 9, 2, 20],
-    types: [12],
+    types: [ItemTypes.ITEM_TYPE_WEAPONS],
     excluded: "",
     classes: [],
     patch: "",
@@ -521,7 +550,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [14, 9, 2, 20],
-      types: [12],
+      types: [ItemTypes.ITEM_TYPE_WEAPONS],
       stats: {
         ru: [
           "+25% к скорости атаки",
@@ -555,6 +584,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Lawbringer (id 39) — сверено со скрином вики/UI (март 2026).
+   * Руны Amn–Lem–Ko, ур. 43, patch 1.10, мечи / молоты / скипетры. Порядок строк как на скрине.
+   */
   {
     id: 39,
     name: {
@@ -562,43 +595,51 @@ export const REWORKED_RUNEWORDS = [
       en: "Lawbringer",
     },
     runes: [11, 20, 18],
-    types: [3, 11, 7],
+    types: [
+      ItemTypes.ITEM_TYPE_SWORDS,
+      ItemTypes.ITEM_TYPE_HAMMERS,
+      ItemTypes.ITEM_TYPE_SCEPTERS,
+    ],
     excluded: "",
     classes: [],
-    patch: "",
+    patch: "1.10",
     level: 43,
     ladder: false,
     reworked: true,
     stats: {
       ru: [
         "Вероятность 20% применить умение «Одряхление» 15-го уровня при ударе",
-        "При надевании дает ауру «Убежище» <span class='varies'>16-18</span>-го уровня",
-        "+25% к скорости атаки",
-        "+1-990 урона от молнии",
-        "Похищает 15% маны за удар",
-        "Похищает 7% здоровья за удар",
+        "При надевании даёт ауру «Убежище» <span class='varies'>16-18</span>-го уровня",
         "+1 к умению «Истовость»",
         "Убитые монстры не возрождаются",
-        "+10 к ловкости",
+        "Похищает 15% маны за удар",
+        "+25% к скорости атаки",
+        "+1-990 урона от молнии",
+        "Похищает 7% здоровья за удар",
         "+75% к золоту за убийство монстров",
+        "+10 к ловкости",
       ],
       en: [
         "20% Chance To Cast Level 15 Decrepify On Striking",
         "Level <span class='varies'>16-18</span> Sanctuary Aura When Equipped (varies)",
+        "+1 To Zeal",
+        "Slain Monsters Rest In Peace",
+        "15% Mana Stolen Per Hit",
         "+25% Increased Attack Speed",
         "Adds 1-990 Lightning Damage",
-        "15% Mana Stolen Per Hit",
         "7% Life Stolen Per Hit",
-        "+1 to Zeal",
-        "Slain Monsters Rest In Peace",
-        "+10 To Dexterity",
         "75% Extra Gold From Monsters",
+        "+10 To Dexterity",
       ],
     },
     complete: false,
     old: {
       runes: [11, 20, 18],
-      types: [3, 11, 7],
+      types: [
+        ItemTypes.ITEM_TYPE_SWORDS,
+        ItemTypes.ITEM_TYPE_HAMMERS,
+        ItemTypes.ITEM_TYPE_SCEPTERS,
+      ],
       stats: {
         ru: [
           "Вероятность 20% применить умение «Одряхление» 15-го уровня при ударе",
@@ -640,7 +681,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Voice of Reason",
     },
     runes: [20, 18, 1, 2],
-    types: [3, 2],
+    types: [ItemTypes.ITEM_TYPE_SWORDS, ItemTypes.ITEM_TYPE_MACES],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -684,7 +725,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [20, 18, 1, 2],
-      types: [3, 2],
+      types: [ItemTypes.ITEM_TYPE_SWORDS, ItemTypes.ITEM_TYPE_MACES],
       stats: {
         ru: [
           "Вероятность 15% применить умение «Морозная сфера» 13-го уровня при ударе",
@@ -718,6 +759,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Enlightenment (id 42) — сверено со скрином вики/UI (март 2026).
+   * Руны Pul–Ral–Sol, ур. 45, patch 1.11, нагрудная броня (волшебница). Порядок строк как на скрине.
+   */
   {
     id: 42,
     name: {
@@ -725,7 +770,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Enlightenment",
     },
     runes: [21, 8, 12],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: ["Sorceress"],
     patch: "1.11",
@@ -734,21 +779,21 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 30% применить умение «Огненный след» 15-го уровня при получении урона",
         "+2 к уровню умений волшебницы",
+        "Вероятность 30% применить умение «Огненный след» 15-го уровня при получении урона",
         "+10% к скорости применения умений",
         "+6 к умению «Огненная стена» (только для волшебниц)",
         "+6 к умению «Кольцо льда» (только для волшебниц)",
         "+30% к защите",
         "+30% к сопротивлению огню",
-        "-7 к урону",
+        "Урон уменьшен на 7",
       ],
       en: [
-        "30% Chance To Cast Level 15 Blaze When Struck",
         "+2 To Sorceress Skill Levels",
+        "30% Chance To Cast Level 15 Blaze When Struck",
         "+10% Faster Cast Rate",
-        "+6 to Fire Wall (Sorceress only)",
-        "+6 to Frost Nova (Sorceress only)",
+        "+6 To Fire Wall (Sorceress Only)",
+        "+6 To Frost Nova (Sorceress Only)",
         "+30% Enhanced Defense",
         "Fire Resist +30%",
         "Damage Reduced By 7",
@@ -757,7 +802,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [21, 8, 12],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "Вероятность 5% применить умение «Огненный след» 15-го уровня при получении урона",
@@ -781,6 +826,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Wisdom (id 43) — сверено со скрином вики/UI (март 2026).
+   * Руны Pul–Ith–Eld, ур. 45, patch 2.4, шлемы. Порядок: CBF → Piercing → … → Stamina.
+   */
   {
     id: 43,
     name: {
@@ -788,7 +837,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Wisdom",
     },
     runes: [21, 6, 2],
-    types: [18],
+    types: [ItemTypes.ITEM_TYPE_HELMS],
     excluded: "",
     classes: [],
     patch: "2.4",
@@ -797,32 +846,32 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "+33% к пробивающей атаке",
-        "+90% к урону",
-        "Похищает <span class='varies'>4-8</span>% маны за удар",
-        "+30% к защите",
-        "+10 к энергии",
-        "Выносливость снижается на 15% медленнее",
         "Нельзя заморозить",
+        "+33% к пробивающей атаке",
+        "Похищает <span class='varies'>4-8</span>% маны за удар",
+        "+90% к урону",
+        "+10 к энергии",
         "+5 к мане при убийстве",
+        "+30% к защите",
         "+15% к урону, приходящемуся на ману",
+        "Выносливость снижается на 15% медленнее",
       ],
       en: [
-        "+33% Piercing Attack",
-        "+90% Enhanced Damage",
-        "<span class='varies'>4-8</span>% Mana Stolen Per Hit (varies)",
-        "+30% Enhanced Defense",
-        "+10 To Energy",
-        "15% Slower Stamina Drain",
         "Cannot Be Frozen",
+        "+33% Piercing Attack",
+        "+<span class='varies'>4-8</span>% Mana Stolen Per Hit (varies)",
+        "+90% Enhanced Damage",
+        "+10 To Energy",
         "+5 Mana After Each Kill",
+        "+30% Enhanced Defense",
         "15% Damage Taken Goes to Mana",
+        "15% Slower Stamina Drain",
       ],
     },
     complete: false,
     old: {
       runes: [21, 6, 2],
-      types: [18],
+      types: [ItemTypes.ITEM_TYPE_HELMS],
       stats: {
         ru: [
           "+33% к пронзающей атаке",
@@ -850,6 +899,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Gloom (id 46) — сверено со скрином вики/UI (март 2026).
+   * Руны Fal–Um–Pul, ур. 47, patch 1.10, нагрудная броня. Прок Cloak: 15% / 1-й уровень (не 30% / 8).
+   */
   {
     id: 46,
     name: {
@@ -857,7 +910,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Gloom",
     },
     runes: [19, 22, 21],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -870,30 +923,30 @@ export const REWORKED_RUNEWORDS = [
     },
     stats: {
       ru: [
-        "Вероятность 30% применить умение «Покров теней» 8-го уровня при получении урона",
         "+1 ко всем умениям",
-        "+20% к скорости применения умений",
-        "+30% к ускоренному восстановления от удара",
+        "Вероятность 15% применить умение «Покров теней» 1-го уровня при получении урона",
         "+<span class='varies'>200-260</span>% к защите",
+        "+30% к ускоренному восстановлению от удара",
+        "+20% к скорости применения умений",
+        "-30% к вероятности найти магический предмет",
         "+10 к силе",
-        "+15 к сопротивлению всем видам урона",
-        "-25% к вероятности найти магический предмет",
+        "Все сопротивления +15%",
       ],
       en: [
-        "30% Chance To Cast Level 8 Cloak of Shadows When Struck",
         "+1 To All Skills",
-        "+20% Faster Cast Rate",
-        "+30% Faster Hit Recovery",
+        "15% Chance To Cast Level 1 Cloak of Shadows When Struck",
         "+<span class='varies'>200-260</span>% Enhanced Defense (varies)",
+        "+30% Faster Hit Recovery",
+        "+20% Faster Cast Rate",
+        "-30% Better Chance of Getting Magic Items",
         "+10 To Strength",
-        "All resistances +15",
-        "-30% Chance Of Getting Magic Items",
+        "All Resistances +15%",
       ],
     },
     complete: false,
     old: {
       runes: [19, 22, 21],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "Вероятность 15% применить умение «Лишение зрения» 3-го уровня при получении урона",
@@ -931,7 +984,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Stone",
     },
     runes: [13, 22, 21, 17],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -963,7 +1016,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [13, 22, 21, 17],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "+60% к ускоренному восстановлению от удара",
@@ -991,6 +1044,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Bone (id 48) — сверено со скрином вики/UI (март 2026).
+   * Руны Sol–Um–Um, ур. 47, patch 1.11, нагрудная броня (некромант). FCR +30%; порядок: DR → все резисты.
+   */
   {
     id: 48,
     name: {
@@ -998,7 +1055,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Bone",
     },
     runes: [12, 22, 22],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: ["Necromancer"],
     patch: "1.11",
@@ -1012,25 +1069,25 @@ export const REWORKED_RUNEWORDS = [
     stats: {
       ru: [
         "+2 к уровню умений некроманта",
-        "+20% к скорости применения умений",
+        "+30% к скорости применения умений",
         "+6 к умению «Скелет» (только для некромантов)",
         "+6 к умению «Костяной доспех» (только для некромантов)",
-        "+30 к сопротивлению всем видам урона",
-        "-7 к урону",
+        "Урон уменьшен на 7",
+        "Все сопротивления +30%",
       ],
       en: [
         "+2 To Necromancer Skill Levels",
-        "+20% Faster Cast Rate",
-        "+6 to Raise Skeleton (Necromancer only)",
-        "+6 to Bone Armor (Necromancer only)",
-        "All Resistances +30",
+        "+30% Faster Cast Rate",
+        "+6 To Raise Skeleton (Necromancer Only)",
+        "+6 To Bone Armor (Necromancer Only)",
         "Damage Reduced By 7",
+        "All Resistances +30%",
       ],
     },
     complete: false,
     old: {
       runes: [12, 22, 22],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "Вероятность 15% применить умение «Костяной доспех» 10-го уровня при получении урона",
@@ -1052,6 +1109,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Prudence (id 50) — сверено со скрином вики/UI (март 2026).
+   * Руны Mal–Tir, ур. 49, patch 1.10, нагрудная броня. Порядок: проки → ED → All res → Shout → PDR → Repair → MDR → MAEK.
+   */
   {
     id: 50,
     name: {
@@ -1059,7 +1120,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Prudence",
     },
     runes: [23, 3],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -1070,24 +1131,24 @@ export const REWORKED_RUNEWORDS = [
       ru: [
         "Вероятность 10% применить умение «Ураганный доспех» 16-го уровня при получении урона",
         "Вероятность 10% применить умение «Костяной доспех» 20-го уровня при получении урона",
+        "+<span class='varies'>200-235</span>% к защите",
+        "+<span class='varies'>25-35</span>% к сопротивлению всем видам урона",
         "+<span class='varies'>4-6</span> к умению «Крик»",
-        "<span class='varies'>200-235</span>% к защите",
-        "+<span class='varies'>25-35</span> к сопротивлению всем видам урона",
-        "Урон уменьшен на 12%",
+        "Физический урон снижен на 12%",
+        "Восполняет 1 ед. прочности раз в 4 сек.",
         "-7 к магическому урону",
         "+2 к мане при убийстве",
-        "Восполняет 1 ед. прочности раз в 25 сек.",
       ],
       en: [
-        "10% Chance to cast level 16 Cyclone Armor when struck",
-        "10% Chance to cast level 20 Bone Armor when struck",
-        "+<span class='varies'>4-6</span> to Shout (varies)",
-        "<span class='varies'>200-235</span>% Enhanced Defense (varies)",
-        "All Resistances +<span class='varies'>25-35</span> (varies)",
-        "Damage reduced by 12%",
-        "Magic Damage Reduced by 7",
-        "+2 To Mana After Each Kill",
+        "10% Chance To Cast Level 16 Cyclone Armor When Struck",
+        "10% Chance To Cast Level 20 Bone Armor When Struck",
+        "+<span class='varies'>200-235</span>% Enhanced Defense (varies)",
+        "All Resistances +<span class='varies'>25-35</span>% (varies)",
+        "+<span class='varies'>4-6</span> To Shout (varies)",
+        "Physical Damage Reduced by 12%",
         "Repairs 1 Durability In 4 Seconds",
+        "Magic Damage Reduced by 7",
+        "+2 Mana After Each Kill",
       ],
     },
     complete: false,
@@ -1097,7 +1158,7 @@ export const REWORKED_RUNEWORDS = [
     },
     old: {
       runes: [23, 3],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "+25% к ускоренному восстановлению от удара",
@@ -1123,6 +1184,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Sanctuary (id 51) — сверено со скрином вики/UI (март 2026).
+   * Руны Ko–Ko–Mal, ур. 49, щиты. Порядок: +2 skills → аура → блок → FHR/FBR → ED → Slow Missiles → Dex → MDR.
+   */
   {
     id: 51,
     name: {
@@ -1130,33 +1195,33 @@ export const REWORKED_RUNEWORDS = [
       en: "Sanctuary",
     },
     runes: [18, 18, 23],
-    types: [16],
+    types: [ItemTypes.ITEM_TYPE_SHIELDS],
     excluded: "",
     classes: [],
-    patch: "1.10",
+    patch: "1.11",
     level: 49,
     ladder: false,
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 10% применить умение «Замедление снарядов» 12-го уровня при получении урона",
-        "При надевании дает ауру «Спасение» <span class='varies'>1-4</span> уровня",
         "+2 ко всем умениям",
+        "При надевании даёт ауру «Спасение» <span class='varies'>1-4</span>-го уровня",
+        "Вероятность 40% заблокировать удар",
         "+20% к ускоренному восстановлению от удара",
         "+20% к скорости блока",
-        "Вероятность 40% заблокировать удар",
         "+<span class='varies'>130-160</span>% к защите",
+        "Вероятность 10% применить умение «Замедление снарядов» 12-го уровня при получении урона",
         "+20 к ловкости",
         "-7 к магическому урону",
       ],
       en: [
-        "10% Chance to cast level 12 Slow Missiles when struck",
-        "Level <span class='varies'>1-4</span> Salvation Aura When Equipped",
         "+2 To All Skills",
+        "Level <span class='varies'>1-4</span> Salvation Aura When Equipped (varies)",
+        "+40% Increased Chance of Blocking",
         "+20% Faster Hit Recovery",
         "+20% Faster Block Rate",
-        "40% Increased Chance of Blocking",
         "+<span class='varies'>130-160</span>% Enhanced Defense (varies)",
+        "10% Chance To Cast Level 12 Slow Missiles When Struck",
         "+20 To Dexterity",
         "Magic Damage Reduced By 7",
       ],
@@ -1164,7 +1229,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [18, 18, 23],
-      types: [16],
+      types: [ItemTypes.ITEM_TYPE_SHIELDS],
       stats: {
         ru: [
           "+20% к ускоренному восстановлению от удара",
@@ -1199,7 +1264,11 @@ export const REWORKED_RUNEWORDS = [
       en: "Oath",
     },
     runes: [13, 21, 23, 17],
-    types: [3, 1, 2],
+    types: [
+      ItemTypes.ITEM_TYPE_SWORDS,
+      ItemTypes.ITEM_TYPE_AXES,
+      ItemTypes.ITEM_TYPE_MACES,
+    ],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -1237,7 +1306,11 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [13, 21, 23, 17],
-      types: [3, 1, 2],
+      types: [
+        ItemTypes.ITEM_TYPE_SWORDS,
+        ItemTypes.ITEM_TYPE_AXES,
+        ItemTypes.ITEM_TYPE_MACES,
+      ],
       stats: {
         ru: [
           "Не теряет прочности",
@@ -1269,6 +1342,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Rain (id 53) — сверено со скрином вики/UI (март 2026).
+   * Руны Ort–Mal–Ith, ур. 49, patch 1.11, нагрудная броня (друид). +6 Hurricane, Cyclone Armor 20 при ударе (не Hurricane 26).
+   */
   {
     id: 53,
     name: {
@@ -1276,7 +1353,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Rain",
     },
     runes: [9, 23, 6],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: ["Druid"],
     patch: "1.11",
@@ -1289,32 +1366,32 @@ export const REWORKED_RUNEWORDS = [
     },
     stats: {
       ru: [
-        "Вероятность 5% применить умение «Ураган» 26-го уровня при получении урона",
-        "Вероятность 5% применить умение «Ураганный доспех» 15-го уровня при получении урона",
         "+2 к умениям друида",
-        "+2 to Summoning skils (druid only)",
+        "+2 к умению «Призыв» (только друид)",
+        "+6 к умению «Ураган» (только друид)",
+        "Вероятность 5% применить умение «Ураганный доспех» 20-го уровня при получении урона",
+        "300% к золоту за убийство монстров",
+        "«Усиление урона» 1-го уровня (12 зарядов)",
         "+30% к сопротивлению молнии",
         "-7 к магическому урону",
         "+15% к урону, приходящемуся на ману",
-        "300% к золоту за убийство монстров",
-        "Level 1 Amplify Damage (12 Charges)",
       ],
       en: [
-        "5% Chance To Cast Level 26 Hurricane When Struck",
-        "5% Chance To Cast Level 15 Cyclone Armor When Struck",
-        "+2 to Summoning skils (druid only)",
         "+2 To Druid Skills",
+        "+2 To Summoning (Druid) (Druid Only)",
+        "+6 To Hurricane (Druid Only)",
+        "5% Chance To Cast Level 20 Cyclone Armor When Struck",
+        "300% Extra Gold From Monsters",
+        "Level 1 Amplify Damage (12 Charges)",
         "Lightning Resist +30%",
         "Magic Damage Reduced By 7",
-        "15% Damage Taken Goes to Mana",
-        "300% extra gold from monsters",
-        "Level 1 Amplify Damage (12 Charges)",
+        "15% Damage Taken Goes To Mana",
       ],
     },
     complete: false,
     old: {
       runes: [9, 23, 6],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "Вероятность 5% применить умение «Ураганный доспех» 15-го уровня при получении урона",
@@ -1338,6 +1415,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Delirium (id 54) — сверено со скрином вики/UI (март 2026).
+   * Руны Lem–Ist–Io, ур. 51, patch 1.11, шлемы. Порядок: +2 skills → Teleport → проки → защита → MF/золото → VIT.
+   */
   {
     id: 54,
     name: {
@@ -1345,7 +1426,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Delirium",
     },
     runes: [20, 24, 16],
-    types: [18],
+    types: [ItemTypes.ITEM_TYPE_HELMS],
     excluded: "",
     classes: [],
     patch: "1.11",
@@ -1354,32 +1435,32 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 1% применить умение «Бред» 50-го уровня при получении урона",
-        "Вероятность 6% применить умение «Ментальный взрыв» 14-го уровня при получении урона",
-        "Вероятность 11% применить умение «Замешательство» 18-го уровня при ударе",
         "+2 ко всем умениям",
-        "+261 к защите",
-        "+10 к живучести",
-        "+50% к золоту за убийство монстров",
-        "+25% к вероятности найти магический предмет",
         "«Телепортация» 1-го уровня (60 зарядов)",
+        "Вероятность 1% применить умение «Бред» 50-го уровня при получении урона",
+        "+261 к защите",
+        "Вероятность 6% применить умение «Ментальный взрыв» 14-го уровня при получении урона",
+        "Вероятность 11% применить умение «Замешательство» 18-го уровня при получении урона",
+        "+75% к вероятности найти магический предмет",
+        "+50% к золоту за убийство монстров",
+        "+10 к живучести",
       ],
       en: [
+        "+2 To All Skills",
+        "Level 1 Teleport (60 Charges)",
         "1% Chance To Cast Level 50 Delirium When Struck",
+        "+261 Defense",
         "6% Chance To Cast Level 14 Mind Blast When Struck",
         "11% Chance To Cast Level 18 Confuse When Struck",
-        "+2 To All Skills",
-        "+261 Defense",
-        "+10 To Vitality",
-        "50% Extra Gold From Monsters",
         "+75% Better Chance of Getting Magic Items",
-        "Level 1 Teleport (60 Charges)",
+        "50% Extra Gold From Monsters",
+        "+10 To Vitality",
       ],
     },
     complete: false,
     old: {
       runes: [20, 24, 16],
-      types: [18],
+      types: [ItemTypes.ITEM_TYPE_HELMS],
       stats: {
         ru: [
           "Вероятность 1% применить умение «Бред» 50-го уровня при получении урона",
@@ -1416,7 +1497,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Kingslayer",
     },
     runes: [23, 22, 25, 19],
-    types: [3, 1],
+    types: [ItemTypes.ITEM_TYPE_SWORDS, ItemTypes.ITEM_TYPE_AXES],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -1456,7 +1537,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [23, 22, 25, 19],
-      types: [3, 1],
+      types: [ItemTypes.ITEM_TYPE_SWORDS, ItemTypes.ITEM_TYPE_AXES],
       stats: {
         ru: [
           "+30% к скорости атаки",
@@ -1498,7 +1579,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Rift",
     },
     runes: [15, 18, 20, 25],
-    types: [9, 7],
+    types: [ItemTypes.ITEM_TYPE_POLEARMS, ItemTypes.ITEM_TYPE_SCEPTERS],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -1536,7 +1617,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [15, 18, 20, 25],
-      types: [9, 7],
+      types: [ItemTypes.ITEM_TYPE_POLEARMS, ItemTypes.ITEM_TYPE_SCEPTERS],
       stats: {
         ru: [
           "Вероятность 20% применить умение «Торнадо» 16-го уровня при ударе",
@@ -1568,6 +1649,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Principle (id 57) — сверено со скрином вики/UI (март 2026).
+   * Руны Ral–Ist–Eld, ур. 51, patch 1.11, нагрудная броня (паладин). FoH **25%** при ударе (не 15%).
+   */
   {
     id: 57,
     name: {
@@ -1575,7 +1660,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Principle",
     },
     runes: [8, 24, 2],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     classes: ["Paladin"],
     patch: "1.11",
@@ -1584,28 +1669,28 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 15% применить умение «Длань небес» 25-го уровня при ударе",
-        "+2 к уровню умений падалина",
-        "+50% урона по нежети",
+        "+2 к уровню умений паладина",
+        "Вероятность 25% применить умение «Длань небес» 25-го уровня при ударе",
+        "+50% урона по нежити",
         "+<span class='varies'>100-150</span> к здоровью",
-        "Выносливость снижается на 15% медленнее",
-        "+30% к сопротивлению огню",
         "+75% к вероятности найти магический предмет",
+        "+30% к сопротивлению огню",
+        "Выносливость снижается на 15% медленнее",
       ],
       en: [
-        "15% chance to cast level 25 Fist of Heavens on striking",
         "+2 To Paladin Skill Levels",
-        "+50% Damage to Undead",
+        "25% Chance To Cast Level 25 Fist of the Heavens On Striking",
+        "+50% To Damage to Undead",
         "+<span class='varies'>100-150</span> To Life (varies)",
-        "15% Slower Stamina Drain",
-        "Fire Resist +30%",
         "+75% Better Chance of Getting Magic Items",
+        "Fire Resist +30%",
+        "15% Slower Stamina Drain",
       ],
     },
     complete: false,
     old: {
       runes: [8, 25, 2],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "Вероятность 100% применить умение «Заряд света» 5-го уровня при ударе",
@@ -1625,6 +1710,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Mosaic (id 58) — сверено со скрином вики/UI (март 2026).
+   * Руны Mal–Gul–Amn, ур. 53, patch 2.6, когти (тип 8). Порядок: три +5 к скилам → IAS → стихии → PMH → AR → лайфстил.
+   */
   {
     id: 58,
     name: {
@@ -1632,7 +1721,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Mosaic",
     },
     runes: [23, 25, 11],
-    types: [19],
+    types: [ItemTypes.ITEM_TYPE_CLAWS],
     excluded: "",
     classes: ["Assassin"],
     patch: "2.6",
@@ -1641,34 +1730,34 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
+        "+5 к умению «Удар феникса» (только для ассасина)",
+        "+5 к умению «Грозовые когти» (только для ассасина)",
+        "+5 к умению «Ледяные клинки» (только для ассасина)",
         "+50% к скорости атаки",
-        "+20% к рейтингу атаки",
-        "Похищает 7% здоровья за удар",
-        "+8-15% к урону от умений льда",
-        "+8-15% к урону от умений молнии",
-        "+8-15% к урону от умений огня",
-        "+5 к умению «Удар феникса» (только для ассасинов)",
-        "+5 к умению «Ледяные клинки» (только для ассасинов)",
-        "+5 к умению «Грозовые когти» (только для ассасинов)",
+        "+<span class='varies'>8-15</span>% к урону от умений льда",
+        "+<span class='varies'>8-15</span>% к урону от умений молнии",
+        "+<span class='varies'>8-15</span>% к урону от умений огня",
         "Запрещает монстрам лечиться",
+        "+20% бонус к рейтингу атаки",
+        "Похищает 7% здоровья за удар",
       ],
       en: [
-        "+50% Increased Attack Speed",
-        "+20% Bonus to Attack Rating",
-        "7% Life Slolen Per Hit",
-        "+8-15% to Cold Skill Damage",
-        "+8-15% to Lightning Skill Damage",
-        "+8-15% to Fire Skill Damage",
-        "+5 to Phoenix Strike (Assassin only)",
-        "+5 to Blades of Ice (Assassin only)",
-        "+5 to Claws of Thunder (Assassin only)",
+        "+5 To Phoenix Strike (Assassin Only)",
+        "+5 To Claws of Thunder (Assassin Only)",
+        "+5 To Blades of Ice (Assassin Only)",
+        "50% Increased Attack Speed",
+        "+<span class='varies'>8-15</span>% To Cold Skill Damage (varies)",
+        "+<span class='varies'>8-15</span>% To Lightning Skill Damage (varies)",
+        "+<span class='varies'>8-15</span>% To Fire Skill Damage (varies)",
         "Prevent Monster Heal",
+        "+20% Bonus To Attack Rating",
+        "7% Life Stolen Per Hit",
       ],
     },
     complete: false,
     old: {
       runes: [23, 25, 11],
-      types: [8],
+      types: [ItemTypes.ITEM_TYPE_CLAWS],
       stats: {
         ru: [
           "+50% к вероятности завершающих приемов не потратить заряды",
@@ -1711,7 +1800,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Grief",
     },
     runes: [5, 3, 28, 23, 8],
-    types: [3, 1],
+    types: [ItemTypes.ITEM_TYPE_SWORDS, ItemTypes.ITEM_TYPE_AXES],
     excluded: "",
     patch: "1.10",
     level: 59,
@@ -1750,7 +1839,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [5, 3, 28, 23, 8],
-      types: [3, 1],
+      types: [ItemTypes.ITEM_TYPE_SWORDS, ItemTypes.ITEM_TYPE_AXES],
       stats: {
         ru: [
           "Вероятность 35% применить умение «Яд» 15-го уровня при ударе",
@@ -1784,6 +1873,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Wind (id 69) — сверено со скрином вики/UI (март 2026).
+   * Руны Sur–El, ур. 61, patch 1.10, оружие ближнего боя. Порядок: +skills → FCR → flat dmg → IAS → FRW → …
+   */
   {
     id: 69,
     name: {
@@ -1791,7 +1884,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Wind",
     },
     runes: [29, 1],
-    types: [4],
+    types: [ItemTypes.ITEM_TYPE_MELEE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 61,
@@ -1799,34 +1892,34 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 25% применить умение Смерч 9-го уровня при ударе",
         "+1 ко всем умениям",
-        "+20% к скороти ходьбы и бега",
-        "+40% к скорости атаки",
         "+10% к скорости применения умений",
-        "+<span class='varies'>280-320</span>к урону",
+        "+<span class='varies'>340-360</span> к урону",
+        "+40% к скорости атаки",
+        "+20% к скорости ходьбы и бега",
         "-50% к защите цели",
-        "+50 к рейтингу атаки",
+        "Вероятность 25% применить умение Смерч 9-го уровня при ударе",
         "При ударе ослепляет цель",
+        "+50 к рейтингу атаки",
         "+1 к радиусу обзора",
       ],
       en: [
-        "25% Chance To Cast Level 9 Twister On Striking",
-        "+1 to All Skills",
-        "+20% Faster Run/Walk",
-        "+40% Increased Attack Speed",
+        "+1 To All Skills",
         "+10% Faster Cast Rate",
-        "Damage +<span class='varies'>280-320</span> (varies)",
+        "Damage +<span class='varies'>340-360</span> (varies)",
+        "40% Increased Attack Speed",
+        "+20% Faster Run/Walk",
         "-50% Target Defense",
-        "+50 To Attack Rating",
+        "25% Chance To Cast Level 9 Twister On Striking",
         "Hit Blinds Target",
+        "+50 To Attack Rating",
         "+1 To Light Radius",
       ],
     },
     complete: false,
     old: {
       runes: [29, 1],
-      types: [4],
+      types: [ItemTypes.ITEM_TYPE_MELEE_WEAPONS],
       stats: {
         ru: [
           "Вероятность 10% применить умение «Торнадо» 9-го уровня при ударе",
@@ -1856,6 +1949,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Chains of Honor (id 72) — см. docs/reworked-screens-diff-brand-coh-famine-hoj.md
+   * Сверка со скрином: значения совпадают; отличается порядок строк и «+65» vs «+65%».
+   */
   {
     id: 72,
     name: {
@@ -1863,7 +1960,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Chains of Honor",
     },
     runes: [14, 22, 30, 24],
-    types: [17],
+    types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
     patch: "1.10",
     level: 63,
@@ -1896,7 +1993,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [14, 22, 30, 24],
-      types: [17],
+      types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
       stats: {
         ru: [
           "+2 ко всем умениям",
@@ -1938,7 +2035,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Eternity",
     },
     runes: [11, 30, 24, 12, 29],
-    types: [4],
+    types: [ItemTypes.ITEM_TYPE_MELEE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 63,
@@ -1975,7 +2072,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [11, 30, 24, 12, 29],
-      types: [4],
+      types: [ItemTypes.ITEM_TYPE_MELEE_WEAPONS],
       stats: {
         ru: [
           "Не теряет прочности",
@@ -2020,7 +2117,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Wrath",
     },
     runes: [21, 17, 30, 23],
-    types: [6],
+    types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 63,
@@ -2055,7 +2152,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [21, 17, 30, 23],
-      types: [6],
+      types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
       stats: {
         ru: [
           "Вероятность 30% применить умение «Одряхление» 1-го уровня при ударе",
@@ -2087,6 +2184,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Famine (id 78) — сверено со скрином вики/UI (март 2026).
+   * Руны Fal–Ohm–Ort–Jah, ур. 65, Missile Weapons; огонь 511–840, молния 2–2030; порядок строк как на скрине.
+   */
   {
     id: 78,
     name: {
@@ -2094,7 +2195,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Famine",
     },
     runes: [19, 27, 9, 31],
-    types: [6],
+    types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 65,
@@ -2106,32 +2207,32 @@ export const REWORKED_RUNEWORDS = [
     },
     stats: {
       ru: [
-        "Вероятность 10% применить умение «Снижение сопротивления» 7-го уровня при ударе",
         "+85% к скорости атаки",
-        "Взрывные стрелы или болты",
         "250% к урону",
-        "Игнорирует защиту цели",
-        "+520-840 урона от огня",
-        "+1-2030 урона от молнии",
+        "Взрывные стрелы или болты (12-го уровня)",
         "+1 к умению «Мастер огня»",
+        "Вероятность 10% применить умение «Снижение сопротивления» 7-го уровня при ударе",
+        "+511-840 урона от огня",
+        "+2-2030 урона от молнии",
         "+10 к силе",
+        "Игнорирует защиту цели",
       ],
       en: [
-        "10% chance to cast level 7 Lower Resist on striking",
         "+85% Increased Attack Speed",
-        "Fires Explosive arrows or bolts (Level 12)",
-        "250% Enhanced Damage",
-        "Ignore Target's Defense",
-        "Adds 520-840 Fire Damage",
-        "Adds 1-2030 Lightning Damage",
-        "+1 to Fire Mastery ",
+        "+250% Enhanced Damage",
+        "Fires Explosive Arrows or Bolts (Level 12)",
+        "+1 To Fire Mastery",
+        "10% Chance To Cast Level 7 Lower Resist On Striking",
+        "Adds 511-840 Fire Damage",
+        "Adds 2-2030 Lightning Damage",
         "+10 To Strength",
+        "Ignore Target Defense",
       ],
     },
     complete: false,
     old: {
       runes: [19, 27, 9, 31],
-      types: [1, 11],
+      types: [ItemTypes.ITEM_TYPE_AXES, ItemTypes.ITEM_TYPE_HAMMERS],
       stats: {
         ru: [
           "+30% к скорости атаки",
@@ -2161,6 +2262,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Brand (id 79) — сверено со скрином вики/UI (март 2026).
+   * Руны Jah–Lo–Mal–Gul, ур. 65, Missile Weapons; ED 380–400; без взрывных стрел; есть Cannot Be Frozen; порядок как на скрине.
+   */
   {
     id: 79,
     name: {
@@ -2168,7 +2273,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Brand",
     },
     runes: [31, 28, 23, 25],
-    types: [6],
+    types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 65,
@@ -2178,32 +2283,32 @@ export const REWORKED_RUNEWORDS = [
       ru: [
         "Вероятность 30% применить умение «Одряхление» 1-го уровня при ударе",
         "Вероятность 100% применить умение «Костяное копье» 18-го уровня при ударе",
-        "Взрывные стрелы или болты",
-        "+<span class='varies'>365-400</span>% к урону",
-        "Игнорирует защиту цели",
-        "20% к рейтингу атаки",
+        "+<span class='varies'>380-400</span>% к урону",
         "+<span class='varies'>280-330</span>% к урону по демонам",
-        "+50% к вероятности нанести смертельный удар",
-        "Запрещает монстрам лечиться",
         "Отбрасывание врагов",
+        "Нельзя заморозить",
+        "+50% к вероятности нанести смертельный удар",
+        "Игнорирует защиту цели",
+        "Запрещает монстрам лечиться",
+        "+20% бонус к рейтингу атаки",
       ],
       en: [
         "30% Chance To Cast Level 1 Decrepify On Striking",
         "100% Chance To Cast Level 18 Bone Spear On Striking",
-        "Fires Explosive Arrows or Bolts (15)",
-        "+<span class='varies'>365-400</span>% Enhanced Damage (varies)",
-        "Ignore Target's Defense",
-        "20% Bonus to Attack Rating",
+        "+<span class='varies'>380-400</span>% Enhanced Damage (varies)",
         "+<span class='varies'>280-330</span>% Damage To Demons (varies)",
-        "+50% Deadly Strike",
-        "Prevent Monster Heal",
         "Knockback",
+        "Cannot Be Frozen",
+        "50% Deadly Strike",
+        "Ignore Target Defense",
+        "Prevent Monster Heal",
+        "+20% Bonus To Attack Rating",
       ],
     },
     complete: false,
     old: {
       runes: [31, 28, 23, 25],
-      types: [6],
+      types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
       stats: {
         ru: [
           "Вероятность 35% применить умение «Усиление урона» 14-го уровня при получении урона",
@@ -2245,7 +2350,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Destruction",
     },
     runes: [26, 28, 30, 31, 18],
-    types: [9],
+    types: [ItemTypes.ITEM_TYPE_POLEARMS],
     excluded: "",
     patch: "1.10",
     level: 65,
@@ -2284,7 +2389,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [26, 28, 30, 31, 18],
-      types: [9, 3],
+      types: [ItemTypes.ITEM_TYPE_POLEARMS, ItemTypes.ITEM_TYPE_SWORDS],
       stats: {
         ru: [
           "Вероятность 23% применить умение «Вулкан» 12-го уровня при ударе",
@@ -2325,7 +2430,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Ice",
     },
     runes: [11, 13, 31, 28],
-    types: [6],
+    types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 65,
@@ -2364,7 +2469,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [11, 13, 31, 28],
-      types: [6],
+      types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
       stats: {
         ru: [
           "Вероятность 100% применить умение «Снежная буря» 40-го уровня при достижении нового уровня",
@@ -2409,7 +2514,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Last Wish",
     },
     runes: [31, 23, 31, 29, 31, 30],
-    types: [12],
+    types: [ItemTypes.ITEM_TYPE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 65,
@@ -2444,7 +2549,11 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [31, 23, 31, 29, 31, 30],
-      types: [3, 11, 1],
+      types: [
+        ItemTypes.ITEM_TYPE_SWORDS,
+        ItemTypes.ITEM_TYPE_HAMMERS,
+        ItemTypes.ITEM_TYPE_AXES,
+      ],
       stats: {
         ru: [
           "Вероятность 6% применить умение «Уход в тень» 11-го уровня при получении урона",
@@ -2486,7 +2595,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Phoenix",
     },
     runes: [26, 26, 28, 31],
-    types: [12, 16],
+    types: [ItemTypes.ITEM_TYPE_WEAPONS, ItemTypes.ITEM_TYPE_SHIELDS],
     excluded: "",
     patch: "1.10",
     level: 65,
@@ -2550,7 +2659,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [26, 26, 28, 31],
-      types: [12, 16],
+      types: [ItemTypes.ITEM_TYPE_WEAPONS, ItemTypes.ITEM_TYPE_SHIELDS],
       stats: {
         ru: [
           "#Оружие#",
@@ -2616,7 +2725,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Doom",
     },
     runes: [15, 27, 22, 28, 32],
-    types: [4],
+    types: [ItemTypes.ITEM_TYPE_MELEE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 67,
@@ -2657,7 +2766,11 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [15, 27, 22, 28, 32],
-      types: [1, 9, 11],
+      types: [
+        ItemTypes.ITEM_TYPE_AXES,
+        ItemTypes.ITEM_TYPE_POLEARMS,
+        ItemTypes.ITEM_TYPE_HAMMERS,
+      ],
       stats: {
         ru: [
           "Вероятность 5% применить умение «Вулкан» 18-го уровня при ударе",
@@ -2689,6 +2802,10 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Hand of Justice (id 87) — сверено со скрином вики/UI (март 2026).
+   * Руны Sur–Cham–Amn–Lo, ур. 67, Weapons; порядок: аура → −fire res → fire skill → ED → IAS → ITD → Meteor → …
+   */
   {
     id: 87,
     name: {
@@ -2696,7 +2813,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Hand of Justice",
     },
     runes: [29, 32, 11, 28],
-    types: [12],
+    types: [ItemTypes.ITEM_TYPE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 67,
@@ -2704,35 +2821,36 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 100% применить умение «Метеорит» 48-го уровня после смерти",
         "При надевании дает ауру «Священный огонь» 16-го уровня",
-        "+33% к скорости атаки",
-        "+<span class='varies'>280-330</span>% к урону",
-        "Игнорирует защиту цели",
-        "Похищает 7% здоровья при ударе",
         "-20% к сопротивлению огню у врага",
-        "+20% к вероятности нанести смертельный удар",
+        "+20% к урону огненных умений",
+        "+<span class='varies'>280-330</span>% к урону",
+        "+33% к скорости атаки",
+        "Игнорирует защиту цели",
+        "Вероятность 100% применить умение «Метеорит» 48-го уровня после смерти",
         "При ударе ослепляет цель",
         "Замораживает цель +3",
+        "Похищает 7% здоровья при ударе",
+        "+20% к вероятности нанести смертельный удар",
       ],
       en: [
-        "100% Chance To Cast Level 48 Meteor When You Die",
         "Level 16 Holy Fire Aura When Equipped",
-        "+33% Increased Attack Speed",
-        "+<span class='varies'>280-330</span>% Enhanced Damage (varies)",
-        "Ignore Target's Defense",
-        "7% Life Stolen Per Hit",
         "-20% To Enemy Fire Resistance",
-        "+20% fire skill damage",
-        "+20% Deadly Strike",
+        "+20% To Fire Skill Damage",
+        "+<span class='varies'>280-330</span>% Enhanced Damage (varies)",
+        "+33% Increased Attack Speed",
+        "Ignore Target Defense",
+        "100% Chance To Cast Level 48 Meteor When You Die",
         "Hit Blinds Target",
         "Freezes Target +3",
+        "+7% Life Stolen Per Hit",
+        "20% Deadly Strike",
       ],
     },
     complete: false,
     old: {
       runes: [29, 32, 11, 28],
-      types: [12],
+      types: [ItemTypes.ITEM_TYPE_WEAPONS],
       stats: {
         ru: [
           "Вероятность 100% применить умение «Огненный след» 36-го уровня при достижении нового уровня",
@@ -2776,7 +2894,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Pride",
     },
     runes: [32, 29, 16, 28],
-    types: [9, 13],
+    types: [ItemTypes.ITEM_TYPE_POLEARMS, ItemTypes.ITEM_TYPE_SPEARS],
     excluded: "",
     patch: "1.10",
     level: 67,
@@ -2813,7 +2931,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [32, 29, 16, 28],
-      types: [9, 13],
+      types: [ItemTypes.ITEM_TYPE_POLEARMS, ItemTypes.ITEM_TYPE_SPEARS],
       stats: {
         ru: [
           "Вероятность 25% применить умение «Огненная стена» 17-го уровня при получении урона",
@@ -2858,7 +2976,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Mist",
     },
     runes: [32, 13, 25, 10, 6],
-    types: [6],
+    types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
     excluded: "",
     patch: "2.4",
     level: 67,
@@ -2895,7 +3013,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [32, 13, 25, 10, 6],
-      types: [6],
+      types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
       stats: {
         ru: [
           "При надевании дает ауру «Сосредоточенность» (8-12)-го уровня",
@@ -2937,7 +3055,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Breath of the Dying",
     },
     runes: [26, 15, 1, 2, 33, 5],
-    types: [12],
+    types: [ItemTypes.ITEM_TYPE_WEAPONS],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -2987,7 +3105,7 @@ export const REWORKED_RUNEWORDS = [
     complete: false,
     old: {
       runes: [26, 15, 1, 2, 33, 5],
-      types: [12],
+      types: [ItemTypes.ITEM_TYPE_WEAPONS],
       stats: {
         ru: [
           "Вероятность 50% применить умение «Кольцо яда» 20-го уровня при убийстве",
