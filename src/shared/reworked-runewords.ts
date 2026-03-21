@@ -382,6 +382,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Unbending Will (id 36) — сверено со скрином вики/UI (март 2026).
+   * Руны Fal–Io–Ith–Hel, ур. 41, patch 2.4, мечи.
+   * Прок Taunt 10% (не 18%); порядок: ED → IAS → лайфстил → PMH → Damage reduced → STR/VIT → +9 Max → Req.
+   */
   {
     id: 36,
     name: {
@@ -398,29 +403,29 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 18% применить умение «Провокация» 18-го уровня при ударе",
+        "Вероятность 10% применить умение «Провокация» 18-го уровня при ударе",
         "+3 к боевым умениям (только для варваров)",
-        "+<span class='varies'>20-30</span>% к скорости атаки",
         "+<span class='varies'>300-350</span>% к урону",
-        "+9 к максимальному урону",
-        "Похищает <span class='varies'>6-8</span>% здоровья за удар",
+        "+<span class='varies'>20-30</span>% к скорости атаки",
+        "Похищает <span class='varies'>8-10</span>% здоровья за удар",
         "Запрещает монстрам лечиться",
+        "Урон уменьшен на 8",
         "+10 к силе",
         "+10 к живучести",
-        "-8 к урону",
+        "+9 к максимальному урону",
         "Требования -20%",
       ],
       en: [
-        "18% Chance to cast Level 18 Taunt on striking",
-        "+3 To Combat Skills (Barbarian Only)",
-        "+<span class='varies'>20-30</span>% Increased Attack Speed (varies)",
+        "10% Chance To Cast Level 18 Taunt On Striking",
+        "+3 To Combat Skills (Barbarian) (Barbarian Only)",
         "+<span class='varies'>300-350</span>% Enhanced Damage (varies)",
-        "+9 To Maximum Damage",
-        "<span class='varies'>8-10</span>% Life Stolen Per Hit (varies)",
+        "+<span class='varies'>20-30</span>% Increased Attack Speed (varies)",
+        "+<span class='varies'>8-10</span>% Life Stolen Per Hit (varies)",
         "Prevent Monster Heal",
+        "Damage Reduced By 8",
         "+10 To Strength",
         "+10 To Vitality",
-        "Damage Reduced By 8",
+        "+9 To Maximum Damage",
         "Requirements -20%",
       ],
     },
@@ -623,6 +628,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Voice of Reason (id 40) — сверено со скрином вики/UI (март 2026).
+   * Руны Lem–Ko–El–Eld, ур. 43, patch 1.10, мечи и булавы (без скипетров на скрине).
+   * Порядок и диапазоны: ED 150–200, демоны 220–350, нежить 430–450.
+   */
   {
     id: 40,
     name: {
@@ -630,7 +640,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Voice of Reason",
     },
     runes: [20, 18, 1, 2],
-    types: [3, 2, 7],
+    types: [3, 2],
     excluded: "",
     classes: [],
     patch: "1.10",
@@ -643,32 +653,32 @@ export const REWORKED_RUNEWORDS = [
     },
     stats: {
       ru: [
-        "+30% к скорости атаки",
-        "+<span class='varies'>150-200</span>% к урону",
-        "+50 к рейтингу атаки",
-        "+<span class='varies'>220-350</span>% к урону по демонам",
-        "+<span class='varies'>355-375</span>% урона по нежети",
-        "+50 к рейтингу атаки против нежити",
-        "+100-220 урона от льда",
+        "+30% к скорости применения умений",
         "-24% к сопротивлению льду у врага",
-        "+10 к ловкости",
+        "+<span class='varies'>150-200</span>% к урону",
+        "+<span class='varies'>220-350</span>% к урону по демонам",
+        "+<span class='varies'>430-450</span>% урона по нежети",
         "Нельзя заморозить",
+        "+100-220 урона от льда",
         "75% к золоту за убийство монстров",
+        "+10 к ловкости",
+        "+50 к рейтингу атаки",
         "+1 к радиусу обзора",
+        "+50 к рейтингу атаки против нежити",
       ],
       en: [
         "+30% Faster Cast Rate",
-        "+<span class='varies'>150-200</span>% Enhanced Damage (varies)",
-        "+50 To Attack Rating",
-        "+<span class='varies'>220-350</span>% Damage To Demons (varies)",
-        "+<span class='varies'>355-375</span>% Damage To Undead (varies)",
-        "+50 To Attack Rating Against Undead",
-        "Adds 100-220 Cold Damage",
         "-24% To Enemy Cold Resistance",
-        "+10 To Dexterity",
+        "+<span class='varies'>150-200</span>% Enhanced Damage (varies)",
+        "+<span class='varies'>220-350</span>% To Damage to Demons (varies)",
+        "+<span class='varies'>430-450</span>% To Damage to Undead (varies)",
         "Cannot Be Frozen",
+        "Adds 100-220 Cold Damage",
         "75% Extra Gold From Monsters",
+        "+10 To Dexterity",
+        "+50 To Attack Rating",
         "+1 To Light Radius",
+        "+50 To Attack Rating Against Undead",
       ],
     },
     complete: false,
@@ -909,6 +919,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Stone (id 47) — сверено со скрином вики/UI (март 2026).
+   * Руны Shael–Um–Pul–Lum, ур. 47, patch 1.10, нагрудная броня.
+   * Порядок: FHR → ED 250–290 → все резисты +40% → аура Defiance 6 → блок → статы.
+   */
   {
     id: 47,
     name: {
@@ -925,24 +940,24 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "При надевании дает ауру «Непокорность» 6-го уровня",
         "+60% к ускоренному восстановлению от удара",
-        "Вероятность 20% заблокировать удар",
         "+<span class='varies'>250-290</span>% к защите",
+        "Все сопротивления +40%",
+        "При надевании дает ауру «Непокорность» 6-го уровня",
+        "+20% к вероятности заблокировать удар",
         "+16 к силе",
         "+16 к живучести",
         "+10 к энергии",
-        "+40 к сопротивлению всем видам урона",
       ],
       en: [
-        "Level 6 Defiance Aura When Equipped",
         "+60% Faster Hit Recovery",
-        "+20% Increased Chance Of Blocking",
         "+<span class='varies'>250-290</span>% Enhanced Defense (varies)",
+        "All Resistances +40%",
+        "Level 6 Defiance Aura When Equipped",
+        "+20% Increased Chance Of Blocking",
         "+16 To Strength",
         "+16 To Vitality",
         "+10 To Energy",
-        "All Resistances +40",
       ],
     },
     complete: false,
@@ -1471,6 +1486,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Rift (id 56) — сверено со скрином вики/UI (март 2026).
+   * Руны Hel–Ko–Lem–Gul, ур. 53, patch 1.10, древковое оружие и скипетры.
+   * Порядок как на скрине: холодный урон умений → проки Orb/Glacial → IAS → атрибуты 5–10 → …
+   */
   {
     id: 56,
     name: {
@@ -1487,30 +1507,30 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 20% применить умение «Ураган» 16-го уровня при ударе",
+        "+15% к урону умений холода",
         "Вероятность 16% применить умение «Морозная сфера» 21-го уровня при атаке",
+        "Вероятность 32% применить умение «Ледниковая игла» 42-го уровня при ударе",
         "+20% к скорости атаки",
-        "+20% к рейтингу атаки",
-        "+15% к урону от умений льда",
         "+<span class='varies'>5-10</span> ко всем характеристикам",
-        "+10 к ловкости",
-        "+38% к урону, приходящемуся на ману",
-        "+75% к золоту за убийство монстров",
+        "38% полученного урона переходит в ману",
         "«Железная дева» 15-го уровня (40 зарядов)",
         "Требования -20%",
+        "+10 к ловкости",
+        "75% больше золота от монстров",
+        "+20% бонус к рейтингу атаки",
       ],
       en: [
-        "20% Chance To Cast Level 16 Hurricane On Striking",
+        "+15% To Cold Skill Damage",
         "16% Chance To Cast Level 21 Frozen Orb On Attack",
+        "32% Chance To Cast Level 42 Glacial Spike On Striking",
         "+20% Increased Attack Speed",
-        "20% Bonus To Attack Rating",
-        "+15% Cold Skill Damage",
-        "+<span class='varies'>5-10</span> To All Stats (varies)",
-        "+10 To Dexterity",
+        "+<span class='varies'>5-10</span> To All Attributes (varies)",
         "+38% Damage Taken Goes To Mana",
-        "75% Extra Gold From Monsters",
         "Level 15 Iron Maiden (40 Charges)",
         "Requirements -20%",
+        "+10 To Dexterity",
+        "75% Extra Gold From Monsters",
+        "+20% Bonus To Attack Rating",
       ],
     },
     complete: false,
@@ -1679,6 +1699,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Grief (id 67) — сверено со скрином вики/UI (март 2026).
+   * Руны Eth–Tir–Lo–Mal–Ral, ур. 59, patch 1.10, типы меч и топор; IAS 30–40, яд/LAEK — вариативные диапазоны.
+   * Урон в данных был 320–360 — по скрину 300–400; порядок строк и EN приведены к скрину; Ignore Target Defense без апострофа.
+   */
   {
     id: 67,
     name: {
@@ -1694,32 +1719,32 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 35% применить умение «Яд» 15-го уровня при ударе",
+        "Урон +<span class='varies'>300-400</span>",
         "+<span class='varies'>30-40</span>% к скорости атаки",
-        "+<span class='varies'>320-360</span> к урону",
         "Игнорирует защиту цели",
-        "-25% к защите цели",
         "+(1.875*clvl)% к урону по демонам (зависит от уровня персонажа)",
-        "+5-30 урона от огня",
+        "+<span class='varies'>10-15</span> к здоровью при убийстве",
         "-<span class='varies'>20-25</span>% к сопротивлению яду у врага",
+        "Вероятность 35% применить умение «Яд» 15-го уровня при ударе",
+        "-25% к защите цели",
+        "+2 к мане при убийстве",
         "+20% к вероятности нанести смертельный удар",
         "Запрещает монстрам лечиться",
-        "+<span class='varies'>10-15</span> к здоровью при убийстве",
-        "+2 к мане при убийстве",
+        "+5-30 урона от огня",
       ],
       en: [
-        "35% Chance To Cast Level 15 Venom On Striking",
+        "Damage +<span class='varies'>300-400</span> (varies)",
         "+<span class='varies'>30-40</span>% Increased Attack Speed (varies)",
-        "Damage +<span class='varies'>320-360</span> (varies)",
-        "Ignore Target's Defense",
-        "-25% Target Defense",
-        "+(1.875 per character level) 1.875-185.625% Damage To Demons (Based on Character Level) ",
-        "Adds 5-30 Fire Damage",
-        "-<span class='varies'>20-25</span>% To Enemy Poison Resistance (varies)",
-        "+20% Deadly Strike",
-        "Prevent Monster Heal",
+        "Ignore Target Defense",
+        "+1.875% per Character Lvl Damage To Demons (Based on Character Level)",
         "+<span class='varies'>10-15</span> Life After Each Kill (varies)",
+        "-<span class='varies'>20-25</span>% To Enemy Poison Resistance (varies)",
+        "35% Chance To Cast Level 15 Venom On Striking",
+        "-25% Target Defense",
         "+2 To Mana After Each Kill",
+        "20% Deadly Strike",
+        "Prevent Monster Heal",
+        "Adds 5-30 Fire Damage",
       ],
     },
     complete: false,
@@ -1901,6 +1926,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Eternity (id 73) — сверено со скрином вики/UI (март 2026).
+   * Руны Amn–Ber–Ist–Sol–Sur, ур. 63, patch 1.10, оружие ближнего боя.
+   * В данных: ED 310–350 (varies), +1 Teleport — по скрину +350% ED и +6 Teleport; порядок строк как на скрине.
+   */
   {
     id: 73,
     name: {
@@ -1916,30 +1946,30 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
+        "+6 к умению «Телепортация»",
         "Не теряет прочности",
-        "+<span class='varies'>310-350</span>% к урону",
-        "+9 к минимальному урону",
-        "Похищает 7% здоровья за удар",
-        "20% к вероятности нанести сокрущающий удар",
-        "+6 к умению «Оживление»",
-        "+1 к умению «Телепортация»",
-        "+6 к умению «Чары»",
-        "При ударе ослепляет цель",
+        "+350% к урону",
         "Замедляет цель на 33%",
+        "+6 к умению «Чары»",
+        "+6 к умению «Оживление»",
+        "Похищает 7% здоровья за удар",
+        "20% к вероятности нанести сокрушающий удар",
         "30% к вероятности найти магический предмет",
+        "+9 к минимальному урону",
+        "При ударе ослепляет цель",
       ],
       en: [
+        "+6 To Teleport",
         "Indestructible",
-        "+<span class='varies'>310-350</span>% Enhanced Damage (varies)",
-        "+9 To Minimum Damage",
+        "+350% Enhanced Damage",
+        "Slows Target By 33%",
+        "+6 To Enchant",
+        "+6 To Revive",
         "7% Life Stolen Per Hit",
         "20% Chance of Crushing Blow",
-        "+6 to Revive",
-        "+1 to Teleport",
-        "+6 to Enchant",
-        "Hit Blinds Target",
-        "Slows Target By 33%",
         "30% Better Chance Of Getting Magic Items",
+        "+9 To Minimum Damage",
+        "Hit Blinds Target",
       ],
     },
     complete: false,
@@ -1978,6 +2008,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Wrath (id 75) — сверено со скрином вики/UI (март 2026).
+   * Руны Pul–Lum–Ber–Mal, ур. 63, patch 1.10, оружие дальнего боя (лук/арбалет).
+   * На скрине нет прока Life Tap — только Amplify Damage 15% / 14; ED +340%, CB +30%.
+   */
   {
     id: 75,
     name: {
@@ -1993,30 +2028,28 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 5% применить умение «Похищение жизни» 10-го уровня при ударе",
         "Вероятность 15% применить умение «Усиление урона» 14-го уровня при ударе",
-        "+20% к скорости атаки",
-        "+300% к урону",
-        "75% к урону по демонам",
-        "+100 к рейтингу атаки против демонов",
-        "+20% к вероятности нанести сокрушающий удар",
+        "+30% к вероятности нанести сокрушающий удар",
         "+1 к умению «Залп»",
-        "Запрещает монстрам лечиться",
-        "+10 к энергии",
+        "+20% к скорости атаки",
+        "+340% к урону",
         "Нельзя заморозить",
+        "+75% к урону по демонам",
+        "+100 к рейтингу атаки против демонов",
+        "+10 к энергии",
+        "Запрещает монстрам лечиться",
       ],
       en: [
-        "5% Chance To Cast Level 10 Life Tap On Striking",
         "15% Chance To Cast Level 14 Amplify Damage On Striking",
+        "+30% Chance of Crushing Blow",
+        "+1 To Multiple Shot",
         "+20% Increased Attack Speed",
-        "+300% Enhanced Damage",
-        "75% Damage To Demons",
-        "+100 To Attack Rating Against Demons",
-        "20% Chance of Crushing Blow",
-        "+1 to Multiple Shot",
-        "Prevent Monster Heal",
-        "+10 To Energy",
+        "+340% Enhanced Damage",
         "Cannot Be Frozen",
+        "+75% To Damage to Demons",
+        "+100 To Attack Rating Against Demons",
+        "+10 To Energy",
+        "Prevent Monster Heal",
       ],
     },
     complete: false,
@@ -2200,6 +2233,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Destruction (id 80) — сверено со скрином вики/UI (март 2026).
+   * Руны Vex–Lo–Ber–Jah–Ko, ур. 65, patch 1.10, древковое оружие (копья).
+   * В данных: ru/en были на EN; Fissure 15%, без War Cry, лишний Armageddon — по скрину 30% Fissure, 25% War Cry 40, без Armageddon; порядок как на скрине.
+   */
   {
     id: 80,
     name: {
@@ -2207,7 +2245,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Destruction",
     },
     runes: [26, 28, 30, 31, 18],
-    types: [12],
+    types: [9],
     excluded: "",
     patch: "1.10",
     level: 65,
@@ -2215,31 +2253,31 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "15% chance to cast level 30 Fissure on striking",
-        "10% chance to cast level 25 Immolation Arrow on striking",
-        "10% chance to cast level 20 Death Sentry when you kill an enemy",
-        "10% chance to cast Level 20 Armageddon when you kill an enemy",
-        "20% increased attack speed",
-        "+350% Enhanced Damage",
-        "Ignore Target's Defense",
-        "7% Mana Stolen Per Hit",
-        "20% Chance Of Crushing Blow",
-        "20% Deadly Strike",
-        "Knockback",
-        "+10 To Dexterity",
+        "Вероятность 30% применить умение «Расселина» 30-го уровня при ударе",
+        "Вероятность 25% применить умение «Боевой клич» 40-го уровня при ударе",
+        "Вероятность 10% применить умение «Пылающая стрела» 25-го уровня при ударе",
+        "Вероятность 10% применить умение «Часовой смерти» 20-го уровня при убийстве врага",
+        "+350% к урону",
+        "+20% к скорости атаки",
+        "Отбрасывает врагов",
+        "Похищает +7% маны за удар",
+        "20% к вероятности нанести смертельный удар",
+        "+20% к вероятности нанести сокрушающий удар",
+        "Игнорирует защиту цели",
+        "+10 к ловкости",
       ],
       en: [
-        "15% chance to cast level 30 Fissure on striking",
-        "10% chance to cast level 25 Immolation Arrow on striking",
-        "10% chance to cast level 20 Death Sentry when you kill an enemy",
-        "10% chance to cast Level 20 Armageddon when you kill an enemy",
-        "20% increased attack speed",
+        "30% Chance To Cast Level 30 Fissure On Striking",
+        "25% Chance To Cast Level 40 War Cry On Striking",
+        "10% Chance To Cast Level 25 Immolation Arrow On Striking",
+        "10% Chance To Cast Level 20 Death Sentry When You Kill An Enemy",
         "+350% Enhanced Damage",
-        "Ignore Target's Defense",
-        "7% Mana Stolen Per Hit",
-        "20% Chance Of Crushing Blow",
-        "20% Deadly Strike",
+        "20% Increased Attack Speed",
         "Knockback",
+        "+7% Mana Stolen Per Hit",
+        "20% Deadly Strike",
+        "+20% Chance of Crushing Blow",
+        "Ignore Target Defense",
         "+10 To Dexterity",
       ],
     },
@@ -2358,6 +2396,12 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Last Wish (id 84) — сверено со скрином вики/UI (март 2026).
+   * Руны Jah–Mal–Jah–Sur–Jah–Ber, ур. 65, patch 1.10, тип оружие; Might 12–17, +496% ED, 60–70% Crushing/Deadly.
+   * stats.ru раньше дублировал EN — исправлено на русский; порядок строк как на скрине (аура → ED → проки → …).
+   * EN-строки приведены к скрину: Ignore Target Defense (без апострофа); Deadly Strike без ведущего «+».
+   */
   {
     id: 84,
     name: {
@@ -2373,26 +2417,26 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "10% Chance To Cast Level 18 Life Tap On Striking",
-        "6% Chance To Cast Level 11 Burst of Speed When you kill an enemy",
-        "Level <span class='varies'>12-17</span> Might Aura When Equipped (varies)",
-        "+496% Enhanced Damage",
-        "+ (2.5 Per Character Level) 2-247 To Maximum Damage (Based On Character Level)",
-        "Ignore Target's Defense",
-        "+<span class='varies'>60-70</span>% Chance of Crushing Blow (varies)",
-        "+<span class='varies'>60-70</span>% Deadly Strike (varies)",
-        "Prevent Monster Heal",
-        "Hit Blinds Target",
+        "При надевании даёт ауру «Мощь» <span class='varies'>12-17</span>-го уровня",
+        "+496% к урону",
+        "Вероятность 10% применить умение «Похищение жизни» 18-го уровня при ударе",
+        "Вероятность 6% применить умение «Ускорение» 11-го уровня при убийстве врага",
+        "+ (2.5 за уровень персонажа) +2–247 к максимальному урону (зависит от уровня персонажа)",
+        "+<span class='varies'>60-70</span>% к вероятности нанести сокрушающий удар",
+        "+<span class='varies'>60-70</span>% к вероятности нанести смертельный удар",
+        "Игнорирует защиту цели",
+        "Запрещает монстрам лечиться",
+        "При ударе ослепляет цель",
       ],
       en: [
-        "10% Chance To Cast Level 18 Life Tap On Striking",
-        "6% Chance To Cast Level 11 Burst of Speed When you kill an enemy",
         "Level <span class='varies'>12-17</span> Might Aura When Equipped (varies)",
         "+496% Enhanced Damage",
+        "10% Chance To Cast Level 18 Life Tap On Striking",
+        "6% Chance To Cast Level 11 Burst of Speed When You Kill An Enemy",
         "+ (2.5 Per Character Level) 2-247 To Maximum Damage (Based On Character Level)",
-        "Ignore Target's Defense",
         "+<span class='varies'>60-70</span>% Chance of Crushing Blow (varies)",
-        "+<span class='varies'>60-70</span>% Deadly Strike (varies)",
+        "<span class='varies'>60-70</span>% Deadly Strike (varies)",
+        "Ignore Target Defense",
         "Prevent Monster Heal",
         "Hit Blinds Target",
       ],
@@ -2430,6 +2474,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Phoenix (id 85) — сверено со скрином вики/UI (март 2026).
+   * Руны Vex–Vex–Lo–Jah, ур. 65, patch 1.10, оружие и щиты.
+   * Общие строки (аура, рез огня, ED, поглощение, ремонт, проки) → затем только оружие / только щит.
+   */
   {
     id: 85,
     name: {
@@ -2450,51 +2499,52 @@ export const REWORKED_RUNEWORDS = [
     stats: {
       ru: [
         "#Оружие#",
-        "Вероятность 100% применить умение «Огненный след» 40-го уровня при достижении нового уровня",
-        "Вероятность 20% применить умение «Огненная буря» 44-го уровня при ударе",
         "При надевании дает ауру «Искупление» <span class='varies'>10-15</span>-го уровня",
-        "+<span class='varies'>350-400</span>% к урону",
-        "Игнорирует защиту цели",
-        "Похищает 14% маны за удар",
         "-28% к сопротивлению огню у врага",
-        "+20% к вероятности нанести смертельный удар",
+        "+<span class='varies'>350-400</span>% к урону",
         "+<span class='varies'>15-21</span> к поглощению огня",
         "Восполняет 1 ед. прочности раз в 5 сек.",
+        "Вероятность 20% применить умение «Огненная буря» 44-го уровня при ударе",
+        "Вероятность 100% применить умение «Огненный след» 40-го уровня при достижении нового уровня",
+        "Похищает 14% маны за удар",
+        "+20% к вероятности нанести смертельный удар",
+        "Игнорирует защиту цели",
 
         "#Щиты#",
-        "Вероятность 100% применить умение «Огненный след» 40-го уровня при достижении нового уровня",
-        "Вероятность 20% применить умение «Огненная буря» 44-го уровня при ударе",
         "При надевании дает ауру «Искупление» <span class='varies'>10-15</span>-го уровня",
+        "-28% к сопротивлению огню у врага",
         "+<span class='varies'>350-400</span>% к урону",
-        "+50 к здоровью",
-        "+5% к максимальному сопротивлению молнии",
-        "+10% к максимальному сопротивлению огню",
         "+<span class='varies'>15-21</span> к поглощению огня",
         "Восполняет 1 ед. прочности раз в 5 сек.",
+        "Вероятность 20% применить умение «Огненная буря» 44-го уровня при ударе",
+        "Вероятность 100% применить умение «Огненный след» 40-го уровня при достижении нового уровня",
+        "+10% к максимальному сопротивлению огню",
+        "+5% к максимальному сопротивлению молнии",
+        "+50 к здоровью",
       ],
       en: [
         "#Weapons#",
-        "100% Chance To Cast level 40 Blaze When You Level-up",
-        "20% Chance to cast level 44 Firestorm on striking",
         "Level <span class='varies'>10-15</span> Redemption Aura When Equipped (varies)",
+        "-28% To Enemy Fire Resistance",
         "+<span class='varies'>350-400</span>% Enhanced Damage (varies)",
-        "Ignores Target Defense",
+        "+<span class='varies'>15-21</span> To Fire Absorb (varies)",
+        "Repairs 1 Durability In 5 Seconds",
+        "20% Chance To Cast Level 44 Firestorm On Striking",
+        "100% Chance To Cast Level 40 Blaze When You Level Up",
         "14% Mana Stolen Per Hit",
-        "-28% To Enemy Fire Resistance",
         "20% Deadly Strike",
-        "+<span class='varies'>15-21</span> Fire Absorb (varies)",
-        "Repairs 1 durability in 5 seconds",
+        "Ignore Target Defense",
         "#Shields#",
-        "100% Chance To Cast level 40 Blaze When You Level-up",
-        "20% Chance to cast level 44 Firestorm on striking",
         "Level <span class='varies'>10-15</span> Redemption Aura When Equipped (varies)",
-        "+<span class='varies'>350-400</span>% Enhanced Damage (varies)",
         "-28% To Enemy Fire Resistance",
-        "+50 To Life",
+        "+<span class='varies'>350-400</span>% Enhanced Damage (varies)",
+        "+<span class='varies'>15-21</span> To Fire Absorb (varies)",
+        "Repairs 1 Durability In 5 Seconds",
+        "20% Chance To Cast Level 44 Firestorm On Striking",
+        "100% Chance To Cast Level 40 Blaze When You Level Up",
+        "10% To Maximum Fire Resist",
         "+5% To Maximum Lightning Resist",
-        "+10% To Maximum Fire Resist",
-        "+<span class='varies'>15-21</span> Fire Absorb (varies)",
-        "Repairs 1 durability in 5 seconds",
+        "+50 To Life",
       ],
     },
     complete: false,
@@ -2554,6 +2604,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Doom (id 86) — сверено со скрином вики/UI (март 2026).
+   * Руны Hel–Ohm–Um–Lo–Cham, ур. 67, patch 1.10, оружие ближнего боя.
+   * В данных: прок Armageddon 18, ED 330–370 — по скрину Tornado 44, ED 400–435; порядок строк как на скрине.
+   */
   {
     id: 86,
     name: {
@@ -2573,30 +2628,30 @@ export const REWORKED_RUNEWORDS = [
     },
     stats: {
       ru: [
-        "Вероятность 5% применить умение «Армагеддон» 18-го уровня при ударе",
-        "При надевании дает ауру «Священный холод» 12-го уровня",
         "+2 ко всем умениям",
+        "При надевании даёт ауру «Священный холод» 12-го уровня",
+        "-<span class='varies'>40-60</span>% к сопротивлению льду у врага",
         "+45% к скорости атаки",
-        "+<span class='varies'>330-370</span>% к урону",
-        "-(<span class='varies'>40-60</span>)% к сопротивлению льду у врага",
-        "+20% к вероятности нанести смертельный удар",
-        "+25% к вероятности нанести открытую рану",
-        "Замораживает цель +3",
+        "+<span class='varies'>400-435</span>% к урону",
+        "Вероятность 5% применить умение «Смерч» 44-го уровня при ударе",
         "Восполняет 1 ед. прочности раз в 5 сек.",
         "Требования -20%",
+        "25% к вероятности нанести открытую рану",
+        "20% к вероятности нанести смертельный удар",
+        "Замораживает цель +3",
       ],
       en: [
-        "5% Chance To Cast Level 18 Armageddon On Striking",
-        "Level 12 Holy Freeze Aura When Equipped",
         "+2 To All Skills",
-        "+45% Increased Attack Speed",
-        "+<span class='varies'>330-370</span>% Enhanced Damage (varies)",
+        "Level 12 Holy Freeze Aura When Equipped",
         "-<span class='varies'>40-60</span>% To Enemy Cold Resistance (varies)",
-        "+20% Deadly Strike",
-        "+25% Chance of Open Wounds",
-        "Freezes Target +3",
-        "Repairs 1 durability in 5 seconds",
+        "+45% Increased Attack Speed",
+        "+<span class='varies'>400-435</span>% Enhanced Damage (varies)",
+        "5% Chance To Cast Level 44 Tornado On Striking",
+        "Repairs 1 Durability in 5 Seconds",
         "Requirements -20%",
+        "25% Chance of Open Wounds",
+        "20% Deadly Strike",
+        "Freezes Target +3",
       ],
     },
     complete: false,
@@ -2709,6 +2764,11 @@ export const REWORKED_RUNEWORDS = [
     },
   },
 
+  /**
+   * Pride (id 88) — сверено со скрином вики/UI (март 2026).
+   * Руны Cham–Sur–Io–Lo, ур. 67, patch 1.10, древковое оружие и копья.
+   * ED 400–450, Jab/Fend +12, порядок как на скрине (Deadly Strike в конце).
+   */
   {
     id: 88,
     name: {
@@ -2725,28 +2785,29 @@ export const REWORKED_RUNEWORDS = [
     stats: {
       ru: [
         "Не теряет прочности",
+        "+<span class='varies'>400-450</span>% к урону",
         "При надевании дает ауру «Сосредоточенность» (<span class='varies'>16-20</span>)-го уровня",
-        "+<span class='varies'>450-500</span>% к урону",
-        "+(1*clvl)% к урону по демонам (зависит от уровня персонажа)",
-        "+20% к вероятности нанести смертельный удар",
-        "+ 6 к умению «Лучшая защита» (только для амазонок)",
-        "+ 6 к умению «Выпад» (только для амазонок)",
-        "При ударе ослепляет цель",
+        "+<span class='varies'>260-300</span>% бонус к рейтингу атаки",
+        "+12 к умению «Выпад» (только для амазонок)",
+        "+12 к умению «Лучшая защита» (только для амазонок)",
+        "+4% к урону по демонам за уровень персонажа (зависит от уровня персонажа)",
         "Замораживает цель +3",
+        "При ударе ослепляет цель",
         "+10 к живучести",
+        "+20% к вероятности нанести смертельный удар",
       ],
       en: [
         "Indestructible",
+        "+<span class='varies'>400-450</span>% Enhanced Damage (varies)",
         "Level <span class='varies'>16-20</span> Concentration Aura When Equipped (varies)",
-        "+<span class='varies'>450-500</span>% Enhanced Damage (varies)",
-        "<span class='varies'>260-300</span>% Bonus To Attack Rating (varies)",
-        "+4-396% Damage To Demons (Based on Character Level)",
-        "+20% Deadly Strike",
-        "+6 to Fend (Amazon only)",
-        "+<span class='varies'>6-7</span> to Jab (Amazon only) (varies)",
-        "Hit Blinds Target",
+        "+<span class='varies'>260-300</span>% Bonus To Attack Rating (varies)",
+        "+12 To Jab (Amazon only)",
+        "+12 To Fend (Amazon only)",
+        "+4% Per Character Level Damage To Demons (Based on Character Level)",
         "Freezes Target +3",
+        "Hit Blinds Target",
         "+10 To Vitality",
+        "20% Deadly Strike",
       ],
     },
     complete: false,
@@ -2785,8 +2846,10 @@ export const REWORKED_RUNEWORDS = [
   },
 
   /**
-   * Mist (id 90) — сверено со скрином вики/UI (март 2026): порядок stats и EN-строки
-   * приведены к типичному отображению в игре (IAS → аура → piercing → ED → резисты → проки → …).
+   * Mist (id 90) — сверено со скрином вики/UI (март 2026).
+   * Руны Cham–Shael–Gul–Thul–Ith, ур. 67, patch 2.4, луки и арбалеты (дальнобойное оружие).
+   * Порядок строк как на скрине: IAS → Concentration 8–12 → Piercing → ED 325–375 → all res +40% → проки → …
+   * EN: Freezes Target +3; All Resistances +40% — как в игре.
    */
   {
     id: 90,
@@ -2804,10 +2867,10 @@ export const REWORKED_RUNEWORDS = [
     stats: {
       ru: [
         "+60% к скорости атаки",
-        "При надевании дает ауру «Сосредоточенность» <span class='varies'>8-12</span>-го уровня",
+        "При надевании даёт ауру «Сосредоточенность» <span class='varies'>8-12</span>-го уровня",
         "+100% к пробивающей атаке",
         "+<span class='varies'>325-375</span>% к урону",
-        "+40 к сопротивлению всем видам урона",
+        "Все сопротивления +40%",
         "Вероятность 20% применить умение «Внутреннее зрение» 16-го уровня при атаке",
         "Вероятность 10% применить умение «Уход в тень» 12-го уровня при убийстве врага",
         "Замораживает цель +3",

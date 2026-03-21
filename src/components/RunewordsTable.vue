@@ -247,8 +247,20 @@ const sortedItems = computed(() => {
   if (sortDirection.value === "desc") {
     items = [...items].reverse();
   }
-  /** Rune selection only affects CSS (`.complete`, found cells, `table-selected`), not row order. */
-  return items;
+
+  /** Rows where every rune of the runeword is among selected runes — on top (subset of selection is enough). */
+  const selected = selectedRunes.value;
+  const rowIsComplete = (item: RunewordTableItem): boolean => {
+    const runes = item.runes ?? [];
+    return runes.length > 0 && isRunewordComplete(selected, runes);
+  };
+
+  const completeRows: RunewordTableItem[] = [];
+  const otherRows: RunewordTableItem[] = [];
+  for (const item of items) {
+    (rowIsComplete(item) ? completeRows : otherRows).push(item);
+  }
+  return [...completeRows, ...otherRows];
 });
 </script>
 

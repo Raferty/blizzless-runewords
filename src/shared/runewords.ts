@@ -1450,6 +1450,11 @@ export const RUNEWORDS = [
     complete: false,
   },
 
+  /**
+   * Death (id 61) — сверено со скрином вики/UI (март 2026).
+   * Руны Hel–El–Vex–Ort–Gul, ур. 55, patch 1.10, мечи и топоры.
+   * По скрину: нет прока Glacial Spike; плоский AR +300 (было +50 и отдельно 20% bonus); порядок строк как на скрине.
+   */
   {
     id: 61,
     name: {
@@ -1465,34 +1470,32 @@ export const RUNEWORDS = [
     ladder: false,
     stats: {
       ru: [
-        "Не теряет прочности",
-        "Вероятность 25% применить умение «Ледяной шип» 18-го уровня при атаке",
         "Вероятность 100% применить умение «Цепная молния» 44-го уровня после смерти",
+        "+300 к рейтингу атаки",
+        "Не теряет прочности",
         "+<span class='varies'>300-385</span>% к урону",
-        "+20% к рейтингу атаки",
-        "+50 к рейтингу атаки",
-        "+1-50 урона от молнии",
-        "Похищает 7% маны за удар",
         "+50% к вероятности нанести сокрушающий удар",
         "+(0.5%*clvl)% к вероятности нанести смертельный удар (зависит от уровня персонажа)",
-        "+1 к радиусу обзора",
-        "«Кровяной голем» 22-го уровня (15/15 зарядов)",
+        "«Кровяной голем» 22-го уровня (15 зарядов)",
         "Требования -20%",
+        "+1 к радиусу обзора",
+        "Похищает 7% маны за удар",
+        "+1-50 урона от молнии",
+        "+20% к бонусу к рейтингу атаки",
       ],
       en: [
-        "Indestructible",
-        "25% Chance To Cast Level 18 Glacial Spike On Attack",
         "100% Chance To Cast Level 44 Chain Lightning When You Die",
+        "+300 To Attack Rating",
+        "Indestructible",
         "+<span class='varies'>300-385</span>% Enhanced Damage (varies)*",
-        "20% Bonus To Attack Rating",
-        "+50 To Attack Rating",
-        "Adds 1-50 Lightning Damage",
-        "7% Mana Stolen Per Hit",
-        "50% Chance of Crushing Blow",
+        "+50% Chance of Crushing Blow",
         "+(0.5 per Character Level) 0.5-49.5% Deadly Strike (Based on Character Level)",
-        "+1 To Light Radius",
-        "Level 22 Blood Golem  (15 Charges)",
+        "Level 22 Blood Golem (15 Charges)",
         "Requirements -20%",
+        "+1 To Light Radius",
+        "+7% Mana Stolen Per Hit",
+        "Adds 1-50 Lightning Damage",
+        "20% Bonus To Attack Rating",
       ],
     },
     complete: false,
@@ -1827,6 +1830,11 @@ export const RUNEWORDS = [
     complete: false,
   },
 
+  /**
+   * Beast (id 71) — сверено со скрином вики/UI (март 2026).
+   * Руны Ber–Tir–Um–Mal–Lum, ур. 63, patch 1.10, топоры / молоты / скипетры.
+   * Аура была «9-й уровень» — по скрину 9–12 (varies); порядок строк как на скрине.
+   */
   {
     id: 71,
     name: {
@@ -1841,32 +1849,32 @@ export const RUNEWORDS = [
     ladder: false,
     stats: {
       ru: [
-        "При надевании дает ауру «Фанатизм» 9-го уровня",
+        "При надевании даёт ауру «Фанатизм» <span class='varies'>9-12</span>-го уровня",
         "+40% к скорости атаки",
         "+<span class='varies'>240-270</span>% к урону",
-        "+20% к вероятности нанести сокрушающий удар",
-        "+25% к вероятности нанести открытую рану",
         "+3 к умению «Облик медведя»",
         "+3 к умению «Ликантропия»",
-        "Запрещает монстрам лечиться",
         "+<span class='varies'>25-40</span> к силе",
-        "+10 к энергии",
-        "+2 к мане при убийстве",
         "«Гризли» 13-го уровня (5 зарядов)",
+        "+20% к вероятности нанести сокрушающий удар",
+        "+2 к мане при убийстве",
+        "25% к вероятности нанести открытую рану",
+        "Запрещает монстрам лечиться",
+        "+10 к энергии",
       ],
       en: [
-        "Level 9 Fanaticism Aura When Equipped",
+        "Level <span class='varies'>9-12</span> Fanaticism Aura When Equipped (varies)",
         "+40% Increased Attack Speed",
         "+<span class='varies'>240-270</span>% Enhanced Damage (varies)",
-        "20% Chance of Crushing Blow",
-        "25% Chance of Open Wounds",
         "+3 To Werebear",
         "+3 To Lycanthropy",
-        "Prevent Monster Heal",
         "+<span class='varies'>25-40</span> To Strength (varies)",
-        "+10 To Energy",
-        "+2 To Mana After Each Kill",
         "Level 13 Summon Grizzly (5 Charges)",
+        "+20% Chance of Crushing Blow",
+        "+2 To Mana After Each Kill",
+        "25% Chance of Open Wounds",
+        "Prevent Monster Heal",
+        "+10 To Energy",
       ],
     },
     complete: false,
