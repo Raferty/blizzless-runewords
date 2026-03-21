@@ -268,6 +268,7 @@ const sortedItems = computed(() => {
 .table {
   display: block;
   width: 100%;
+  max-width: 1280px;
   overflow-x: auto;
   font-size: 14px;
   border-collapse: collapse;
