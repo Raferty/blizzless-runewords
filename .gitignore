@@ -25,3 +25,7 @@ dist-ssr
 
 # Local docs (notes, improvements, etc.)
 docs/
+
+#
+yarn.lock
+package-lock.json
