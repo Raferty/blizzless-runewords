@@ -7,6 +7,9 @@ interface TableHeaders {
 }
 
 interface InterfaceState {
+  header: {
+    updatedAt: { ru: string; en: string };
+  };
   table: {
     headers: TableHeaders;
   };
@@ -39,6 +42,12 @@ export const useInfoStore = defineStore({
     return {
       lang: "en",
       interface: {
+        header: {
+          updatedAt: {
+            ru: "Актуально на",
+            en: "As of",
+          },
+        },
         table: {
           headers: {
             ru: [

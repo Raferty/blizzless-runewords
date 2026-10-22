@@ -6,13 +6,24 @@
         <h1 class="title title--h1 header__title">Blizzless runewords</h1>
       </div>
 
-      <LangSwitcher />
+      <div class="header__actions">
+        <p class="header__date">
+          {{ store.interface.header.updatedAt[store.currentLang] }}
+          <time :datetime="releaseDate">{{ formattedReleaseDate }}</time>
+        </p>
+        <LangSwitcher />
+      </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
 import LangSwitcher from "@/components/LangSwitcher.vue";
+import { useInfoStore } from "@/store";
+
+const store = useInfoStore();
+const releaseDate = import.meta.env.VITE_RELEASE_DATE;
+const formattedReleaseDate = releaseDate.split("-").reverse().join(".");
 </script>
 
 <style lang="scss" scoped>
@@ -31,6 +42,8 @@ import LangSwitcher from "@/components/LangSwitcher.vue";
 
   &__container {
     display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
     align-items: center;
     justify-content: space-between;
   }
@@ -44,6 +57,23 @@ import LangSwitcher from "@/components/LangSwitcher.vue";
     display: flex;
     gap: 16px;
     align-items: center;
+    min-width: 0;
+  }
+
+  &__actions {
+    display: flex;
+    flex-shrink: 0;
+    gap: 16px;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  &__date {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--color-muted);
+    white-space: nowrap;
   }
 }
 

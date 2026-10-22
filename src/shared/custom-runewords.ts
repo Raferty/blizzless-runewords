@@ -17,7 +17,7 @@ export const CUSTOM_RUNEWORDS = [
     classes: ["Necromancer"],
     patch: "blizzless",
     level: 69,
-    ladder: true,
+    ladder: false,
     marked: true,
     stats: {
       ru: [
@@ -59,7 +59,7 @@ export const CUSTOM_RUNEWORDS = [
     classes: ["Sorceress"],
     patch: "new",
     level: 61,
-    ladder: true,
+    ladder: false,
     marked: true,
     stats: {
       ru: [
@@ -97,7 +97,7 @@ export const CUSTOM_RUNEWORDS = [
     classes: ["Druid"],
     patch: "new",
     level: 49,
-    ladder: true,
+    ladder: false,
     marked: true,
     stats: {
       ru: [
@@ -137,7 +137,7 @@ export const CUSTOM_RUNEWORDS = [
     classes: [],
     patch: "new",
     level: 35,
-    ladder: true,
+    ladder: false,
     marked: true,
     stats: {
       ru: [
