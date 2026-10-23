@@ -1,38 +1,37 @@
 <template>
   <footer class="footer">
-    <div class="container">
-      <div>
-        <a href="https://discord.gg/TJgm9ZAhwW" target="_blank">Discord</a>
-      </div>
-      inspired by
-      <a class="footer__link" href="https://github.com/fabd/diablo2-runewizard"
-        >fabd/diablo2-runewizard</a
-      >
-    </div>
+    <span>BLIZZLESS · DIABLO II: RESURRECTED</span
+    ><a
+      href="https://blizzless.info/ru/runewords"
+      target="_blank"
+      rel="noopener noreferrer"
+      >{{ t("Данные Blizzless", "Blizzless data") }} ↗</a
+    ><a
+      href="https://github.com/fabd/diablo2-runewizard"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Inspired by Rune Wizard ↗</a
+    >
   </footer>
 </template>
-
-<script setup lang="ts"></script>
-
-<style lang="scss" scoped>
+<script setup lang="ts">
+import { useText } from "@/composables/useText";
+const t = useText();
+</script>
+<style scoped lang="scss">
 .footer {
-  padding: 8px 0;
-  margin-top: 32px;
-  text-align: center;
-  border-top: 2px solid var(--color-border);
-
-  &__link {
-    font-weight: 700;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  justify-content: space-between;
+  padding: 16px 0;
+  margin-top: 24px;
+  font-size: 9px;
+  color: var(--color-muted);
+  letter-spacing: 0.4px;
+  border-top: 1px var(--border-style) var(--color-border);
 }
-
-.container {
-  padding-right: 8px;
-  padding-left: 8px;
-
-  @media (min-width: 1024px) {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
+.footer a:hover {
+  color: var(--color-accent);
 }
 </style>

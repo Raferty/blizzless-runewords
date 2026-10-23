@@ -1,46 +1,98 @@
 <template>
   <div class="search">
+    <span class="search__icon" aria-hidden="true">⌕</span>
     <input
+      ref="input"
       :value="modelValue"
-      type="text"
-      class="search__input"
+      type="search"
       :placeholder="placeholder"
+      :aria-label="t('Поиск', 'Search')"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+      @keydown.esc="$emit('update:modelValue', '')"
     />
+    <button
+      v-if="modelValue"
+      class="search__clear"
+      :aria-label="t('Очистить поиск', 'Clear search')"
+      @click="$emit('update:modelValue', '')"
+    >
+      ×
+    </button>
+    <kbd aria-hidden="true">/</kbd>
   </div>
 </template>
-
 <script setup lang="ts">
-defineProps<{
-  modelValue: string;
-  placeholder?: string;
-}>();
-
-defineEmits<{
-  (e: "update:modelValue", value: string): void;
-}>();
-</script>
-
-<style lang="scss" scoped>
-.search {
-  margin-bottom: 16px;
-
-  &__input {
-    width: 100%;
-    padding: 8px;
-    font-size: 16px;
-    color: var(--color-border);
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border-input);
-    border-radius: 4px;
-
-    &::-webkit-input-placeholder {
-      transition: all 0.4s ease;
-    }
-
-    &:focus::-webkit-input-placeholder {
-      opacity: 0;
-    }
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { useText } from "@/composables/useText";
+defineProps<{ modelValue: string; placeholder?: string }>();
+defineEmits<{ (e: "update:modelValue", value: string): void }>();
+const t = useText();
+const input = ref<HTMLInputElement | null>(null);
+function focusSearch(event: KeyboardEvent) {
+  const target = event.target as HTMLElement;
+  if (
+    event.key === "/" &&
+    !event.ctrlKey &&
+    !event.metaKey &&
+    !event.altKey &&
+    !target.closest(
+      "input, textarea, select, [role=combobox], [role=listbox], [contenteditable], [role=dialog], dialog[open]"
+    )
+  ) {
+    event.preventDefault();
+    input.value?.focus();
   }
+}
+onMounted(() => window.addEventListener("keydown", focusSearch));
+onBeforeUnmount(() => window.removeEventListener("keydown", focusSearch));
+</script>
+<style scoped lang="scss">
+.search {
+  display: flex;
+  flex: 1;
+  gap: 9px;
+  align-items: center;
+  min-width: 100px;
+  height: 35px;
+  padding: 0 10px;
+  background: #10151a;
+  border: 1px var(--border-style) #445360;
+  border-radius: 7px;
+}
+.search:focus-within {
+  border-color: var(--color-accent);
+}
+.search__icon {
+  font-size: 23px;
+  line-height: 1;
+  color: var(--color-accent);
+}
+input {
+  width: 100%;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--color-text);
+  outline: none;
+  background: transparent;
+  border: 0;
+}
+input::-webkit-search-cancel-button {
+  display: none;
+}
+input::placeholder {
+  color: var(--color-muted);
+}
+kbd {
+  padding: 0 4px;
+  color: #8a9da9;
+  border: 1px var(--border-style) #39454f;
+  border-radius: 3px;
+}
+.search__clear {
+  padding: 0 3px;
+  font-size: 18px;
+  line-height: 1;
+  background: transparent;
+  border: 0;
 }
 </style>

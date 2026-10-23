@@ -1,242 +1,300 @@
 <template>
   <TheHeader />
-  <main class="main">
-    <div class="main__container container">
-      <aside class="aside">
-        <div class="aside__container">
-          <RuneList @select="(e: number[]) => runewordsStore.setSelectedRunes(e)" />
-        </div>
-      </aside>
-      <section class="wrapper">
-        <div class="wrapper__container">
-          <SearchInput
-            v-model="search"
-            :placeholder="store.interface.search.placeholder[store.currentLang]"
+  <div class="shell">
+    <aside class="aside">
+      <div class="aside__inner"><RuneList /></div>
+    </aside>
+    <main class="catalog">
+      <CatalogFilters />
+      <div class="results-top">
+        <p role="status">
+          {{ t("Найдено", "Found") }} <b>{{ visibleCount }}</b> /
+          {{ words.sortedRunewords.length }}
+        </p>
+        <div class="results-top__controls">
+          <UiSelect
+            v-model="words.sortBy"
+            class="sort-select"
+            :options="sortOptions"
+            :aria-label="t('Сортировка', 'Sort')"
+            @change="words.sortDirection = 'asc'"
           />
-
-          <div class="wrapper__meta">
-            <div class="filters">
-              <FilterSockets v-model="socketsFilter" />
-              <FilterReworked v-model="reworkedFilter" />
-              <FilterBlizzles v-model="blizzlessFilter" />
-              <FilterROTW v-model="rotwFilter" />
-            </div>
-
-            <div class="switcher">
-              <button
-                class="switcher__button"
-                :class="{ 'switcher__button--active': view === 'table' }"
-                @click="view = 'table'"
-              >
-                Table
-              </button>
-              <button
-                class="switcher__button"
-                :class="{ 'switcher__button--active': view === 'grid' }"
-                @click="view = 'grid'"
-              >
-                Grid
-              </button>
-            </div>
+          <div class="view-switch" :aria-label="t('Вид каталога', 'Catalog view')">
+            <button :aria-pressed="view === 'table'" @click="view = 'table'">
+              {{ t("Таблица", "Table") }}</button
+            ><button :aria-pressed="view === 'grid'" @click="view = 'grid'">
+              {{ t("Сетка", "Grid") }}
+            </button>
           </div>
-
-          <RunewordsTable
-            v-if="view === 'table'"
-            @select="openRunewordModal"
-            @tooltip-hover="handleTableTooltipHover"
-            @tooltip-hover-end="handleTableTooltipHoverEnd"
-          />
-
-          <RunewordsList v-if="view === 'grid'" />
-
-          <Hints />
+          <button
+            class="favorite-filter"
+            :aria-pressed="words.favoritesOnly"
+            :aria-label="t('Показать избранное', 'Show favorites')"
+            :title="t('Избранное', 'Favorites')"
+            @click="words.favoritesOnly = !words.favoritesOnly"
+          >
+            {{ words.favoritesOnly ? "★" : "☆" }}
+          </button>
         </div>
-      </section>
-    </div>
-  </main>
-  <TheFooter />
-
-  <UiModal :model-value="currentCard" :closable="true" @close="closeRunewordModal">
-    <RuneWordCard v-if="selectedRuneword" :runeword="selectedRuneword" :show-old="true" />
+      </div>
+      <RunewordsTable v-if="view === 'table' && visibleCount" @select="openRuneword" />
+      <RunewordsList v-else-if="visibleCount" @select="openRuneword" />
+      <div v-else class="empty-state">
+        <span aria-hidden="true">⌕</span>
+        <h2>{{ t("Ничего не найдено", "No runewords found") }}</h2>
+        <p>
+          {{
+            t(
+              "Попробуйте изменить запрос или сбросить фильтры.",
+              "Try another search or reset the filters."
+            )
+          }}
+        </p>
+        <button @click="words.resetFilters()">
+          {{ t("Сбросить фильтры", "Reset filters") }}
+        </button>
+      </div>
+      <p v-if="words.selectedRunes.length" class="rune-hint">
+        {{
+          view === "table"
+            ? t(
+                "Выбранные руны подсвечены. Полные рецепты показаны первыми.",
+                "Selected runes are highlighted. Complete recipes appear first."
+              )
+            : t(
+                "Показаны рецепты хотя бы с одной выбранной руной.",
+                "Showing recipes containing at least one selected rune."
+              )
+        }}
+      </p>
+      <TheFooter />
+    </main>
+  </div>
+  <UiModal
+    :model-value="selectedRuneword !== null"
+    :closable="true"
+    :label="selectedRuneword?.name[info.currentLang]"
+    @close="selectedRuneword = null"
+  >
+    <template v-if="selectedRuneword">
+      <div class="detail-topbar">
+        <span
+          >{{ t("Рунное слово", "Runeword") }} ·
+          {{ String(selectedRuneword.id).padStart(3, "0") }}</span
+        ><button
+          :aria-pressed="words.favorites.includes(selectedRuneword.id)"
+          :aria-label="
+            words.favorites.includes(selectedRuneword.id)
+              ? t('Убрать из избранного', 'Remove from favorites')
+              : t('В избранное', 'Add to favorites')
+          "
+          @click="words.toggleFavorite(selectedRuneword.id)"
+        >
+          {{ words.favorites.includes(selectedRuneword.id) ? "★" : "☆" }}</button
+        ><button
+          autofocus
+          :aria-label="t('Закрыть', 'Close')"
+          @click="selectedRuneword = null"
+        >
+          ×
+        </button>
+      </div>
+      <RuneWordCard :key="selectedRuneword.id" :runeword="selectedRuneword" show-old />
+    </template>
   </UiModal>
-
-  <Tooltip
-    :show="tooltipShow"
-    :item="tooltipItem"
-    :left="tooltipLeft"
-    :top="tooltipTop"
-    title-id="runeword-dialog-title"
-    @close="handleTooltipClose"
-  />
 </template>
-
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useDebouncedRef } from "@/composables/useDebouncedRef";
+import { useText } from "@/composables/useText";
 import TheHeader from "@/components/TheHeader.vue";
 import TheFooter from "@/components/TheFooter.vue";
 import RuneList from "@/components/RuneList.vue";
+import CatalogFilters from "@/components/CatalogFilters.vue";
 import RunewordsList from "@/components/RunewordsList.vue";
-import RuneWordCard from "@/components/RuneWordCard.vue";
-import UiModal from "@/components/ui/UiModal.vue";
-import Tooltip from "@/components/Tooltip.vue";
-import Hints from "@/components/Hints.vue";
-import SearchInput from "@/components/SearchInput.vue";
-import FilterSockets from "@/components/FilterSockets.vue";
-import FilterReworked from "@/components/FilterReworked.vue";
-import FilterBlizzles from "@/components/FilterBlizzles.vue";
-import FilterROTW from "@/components/FilterROTW.vue";
 import RunewordsTable from "@/components/RunewordsTable.vue";
-
+import RuneWordCard from "@/components/RuneWordCard.vue";
+import UiSelect from "@/components/ui/UiSelect.vue";
+import type { SelectOption } from "@/types/select";
+import type { RunewordSortField } from "@/store/runewords";
+import UiModal from "@/components/ui/UiModal.vue";
 import { useInfoStore, useRunewordsStore } from "@/store";
-import type { RunewordCardItem, RunewordTableItem } from "@/types";
-
-type TableTooltipPayload = { item: RunewordTableItem; left: number; top: number };
-
-const store = useInfoStore();
-const runewordsStore = useRunewordsStore();
-
-const { search, socketsFilter, reworkedFilter, blizzlessFilter, rotwFilter } =
-  storeToRefs(runewordsStore);
-
+import type { RunewordTableItem } from "@/types";
+const info = useInfoStore();
+const words = useRunewordsStore();
+const t = useText();
+const sortOptions = computed<SelectOption<RunewordSortField>[]>(() => [
+  { value: "name", label: t("По названию", "By name") },
+  { value: "level", label: t("По уровню", "By level") },
+  { value: "sockets", label: t("По сокетам", "By sockets") },
+]);
+const { search } = storeToRefs(words);
 const debouncedSearch = useDebouncedRef(search, 250);
-const view = ref("table");
-
-watch(
-  debouncedSearch,
-  (value) => {
-    runewordsStore.setSearchDebounced(value);
-  },
-  { immediate: true }
+watch(debouncedSearch, (value) => words.setSearchDebounced(value), { immediate: true });
+const view = ref(localStorage.getItem("blizzless-view") === "grid" ? "grid" : "table");
+watch(view, (value) => localStorage.setItem("blizzless-view", value));
+const visibleCount = computed(() =>
+  view.value === "table"
+    ? words.filteredRunewords.length
+    : words.gridFilteredRunewords.length
 );
-
-const currentCard = ref(false);
-const selectedRuneword = ref<RunewordCardItem | null>(null);
-const tooltipShow = ref(false);
-const tooltipItem = ref<RunewordTableItem | null>(null);
-const tooltipLeft = ref(0);
-const tooltipTop = ref(0);
-
-/** Клик по имени в таблице — полноэкранная модалка с карточкой. */
-function openRunewordModal(item: RunewordTableItem): void {
-  selectedRuneword.value = item as RunewordCardItem;
-  currentCard.value = true;
-  tooltipShow.value = false;
-  tooltipItem.value = null;
+const selectedRuneword = ref<RunewordTableItem | null>(null);
+function openRuneword(item: RunewordTableItem) {
+  selectedRuneword.value = item;
 }
-
-function closeRunewordModal(): void {
-  currentCard.value = false;
-}
-
-/** Ховер по имени — плавающий Tooltip с RuneWordCard. */
-function handleTableTooltipHover(payload: TableTooltipPayload): void {
-  if (currentCard.value) return;
-  tooltipItem.value = payload.item;
-  tooltipLeft.value = payload.left;
-  tooltipTop.value = payload.top;
-  tooltipShow.value = true;
-}
-
-function handleTableTooltipHoverEnd(): void {
-  tooltipShow.value = false;
-  tooltipItem.value = null;
-}
-
-const handleTooltipClose = (): void => {
-  tooltipShow.value = false;
-  tooltipItem.value = null;
-};
 </script>
-
-<style lang="scss" scoped>
+<style scoped lang="scss">
+.shell {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  max-width: 1800px;
+  min-height: calc(100svh - 60px);
+  margin: 0 auto;
+}
 .aside {
-  width: 100%;
-  margin-bottom: 16px;
-
-  @media (min-width: 1024px) {
-    width: 158px;
-    margin-bottom: 0;
-  }
-
-  &__container {
-    position: sticky;
-    top: 15px;
-    padding-right: 8px;
-    padding-left: 8px;
-
-    @media (min-width: 1024px) {
-      padding-right: 0;
-      padding-left: 0;
-    }
-  }
-}
-
-.main {
-  padding-right: 8px;
-  padding-left: 8px;
-
-  @media (min-width: 1024px) {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  &__container {
-    display: flex;
-    gap: 16px;
-
-    @media (min-width: 1024px) {
-      flex-direction: row;
-    }
-  }
-}
-
-.wrapper {
-  flex: 1;
   min-width: 0;
-
-  &__container {
-    @media (min-width: 1024px) {
-      //margin-left: 32px;
-    }
-  }
-
-  &__meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
+  border-right: 1px var(--border-style) var(--color-border);
+}
+.aside__inner {
+  position: sticky;
+  top: 0;
+  max-height: 100svh;
+  padding: 12px 10px;
+  overflow: auto;
+}
+.catalog {
+  min-width: 0;
+  padding: 0 16px;
+}
+.results-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 0;
+  font-size: 11px;
+  color: var(--color-muted);
+}
+.results-top b {
+  color: var(--color-text);
+}
+.results-top__controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+.sort-select {
+  width: 140px;
+}
+.view-switch {
+  display: flex;
+}
+.view-switch button {
+  padding: 5px 9px;
+  font-size: 11px;
+  border-radius: 0;
+}
+.view-switch button:first-child {
+  border-radius: 3px 0 0 3px;
+}
+.view-switch button:last-child {
+  border-radius: 0 3px 3px 0;
+}
+.view-switch button[aria-pressed="true"] {
+  color: #e3f1f7;
+  background: #3b5b6b;
+  border-color: #536f7e;
+  box-shadow: none;
+}
+.favorite-filter {
+  width: 34px;
+  height: 28px;
+  font-size: 21px;
+  line-height: 1;
+}
+.empty-state {
+  padding: 80px 16px;
+  color: var(--color-muted);
+  text-align: center;
+}
+.empty-state > span {
+  font-size: 42px;
+  color: var(--color-accent);
+}
+.empty-state h2 {
+  margin: 10px 0;
+  font-size: 20px;
+  color: var(--color-title);
+}
+.empty-state button {
+  padding: 7px 12px;
+  margin-top: 20px;
+}
+.rune-hint {
+  margin-top: 14px;
+  font-size: 10px;
+  color: var(--color-muted);
+}
+.detail-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding: 8px 14px;
+  background: #243039;
+  border-bottom: 1px var(--border-style) var(--color-border);
+}
+.detail-topbar > span {
+  margin-right: auto;
+  font-size: 10px;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.detail-topbar button {
+  width: 28px;
+  height: 28px;
+  font-size: 21px;
+  line-height: 1;
+  background: transparent;
+  border: 0;
+}
+@media (min-width: 2200px) {
+  .shell {
+    max-width: none;
   }
 }
-
-.filters {
-  display: flex;
-  gap: 12px;
+@media (max-width: 900px) {
+  .catalog {
+    padding: 0 12px;
+  }
 }
-
-.switcher {
-  display: flex;
-  gap: 4px;
-
-  &__button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90px;
-    height: 24px;
-    font-size: 14px;
-    line-height: 100%;
-    color: var(--color-text-inverse);
-    cursor: pointer;
-    background-color: var(--color-notfound);
-    border: 1px solid var(--color-notfound);
-    border-radius: 4px;
-
-    &--active {
-      background-color: var(--color-success-alt);
-      border-color: var(--color-success-alt);
-    }
+@media (max-width: 600px) {
+  .shell {
+    display: block;
+  }
+  .aside {
+    border-right: 0;
+    border-bottom: 1px var(--border-style) var(--color-border);
+  }
+  .aside__inner {
+    position: static;
+    max-height: none;
+    padding: 12px;
+  }
+  .results-top__controls {
+    gap: 5px;
+  }
+  .sort-select {
+    width: 105px;
+  }
+  .view-switch button {
+    padding: 5px 6px;
   }
 }
 </style>

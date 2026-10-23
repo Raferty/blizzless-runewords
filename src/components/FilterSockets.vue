@@ -64,7 +64,7 @@ function toggleSocket(value: number): void {
     color: var(--color-text-inverse);
     cursor: pointer;
     background-color: var(--color-notfound);
-    border: 1px solid var(--color-notfound);
+    border: 1px var(--border-style) var(--color-notfound);
 
     &--active {
       color: var(--color-text-inverse);

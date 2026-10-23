@@ -1,146 +1,84 @@
 <template>
-  <div
-    v-if="modelValue"
+  <dialog
+    ref="dialog"
     class="ui-modal"
-    :class="{ 'ui-modal--tooltip': mode === 'tooltip' }"
-    role="presentation"
-    @click.self="onBackdropClick"
+    :aria-label="label"
+    @cancel="onCancel"
+    @close="emit('close')"
+    @click="onBackdropClick"
   >
-    <div class="ui-modal__wrapper" role="dialog" aria-modal="true" @click.stop>
-      <slot />
-    </div>
-  </div>
+    <div v-if="modelValue" class="ui-modal__content"><slot /></div>
+  </dialog>
 </template>
-
 <script setup lang="ts">
-import { onBeforeUnmount, watch } from "vue";
-
-const props = defineProps<{
-  modelValue: boolean;
-  mode?: "fixed" | "tooltip";
-  closable?: boolean;
-}>();
-
-const emit = defineEmits<{
-  (e: "close"): void;
-}>();
-
-function onBackdropClick(): void {
-  if (props.closable) {
-    emit("close");
+import { nextTick, onBeforeUnmount, ref, watch } from "vue";
+const props = defineProps<{ modelValue: boolean; closable?: boolean; label?: string }>();
+const emit = defineEmits<{ (e: "close"): void }>();
+const dialog = ref<HTMLDialogElement | null>(null);
+let previousOverflow = "";
+let locked = false;
+function unlock() {
+  if (locked) {
+    document.body.style.overflow = previousOverflow;
+    locked = false;
   }
 }
-
-function onEscapeKeydown(e: KeyboardEvent): void {
-  if (e.key !== "Escape") return;
-  if (!props.closable) return;
-  e.preventDefault();
-  emit("close");
-}
-
 watch(
   () => props.modelValue,
-  (isOpen) => {
-    if (isOpen) {
-      window.addEventListener("keydown", onEscapeKeydown);
+  async (open) => {
+    await nextTick();
+    if (open && props.modelValue) {
+      if (!locked) {
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        locked = true;
+      }
+      if (!dialog.value?.open) dialog.value?.showModal();
     } else {
-      window.removeEventListener("keydown", onEscapeKeydown);
+      dialog.value?.close();
+      unlock();
     }
   },
   { immediate: true }
 );
-
-onBeforeUnmount(() => {
-  window.removeEventListener("keydown", onEscapeKeydown);
-});
+function onCancel(event: Event) {
+  if (!props.closable) event.preventDefault();
+}
+function onBackdropClick(event: MouseEvent) {
+  if (event.target !== dialog.value || !props.closable) return;
+  const rect = dialog.value.getBoundingClientRect();
+  if (
+    event.clientX < rect.left ||
+    event.clientX > rect.right ||
+    event.clientY < rect.top ||
+    event.clientY > rect.bottom
+  )
+    emit("close");
+}
+onBeforeUnmount(unlock);
 </script>
-
-<style lang="scss">
+<style scoped lang="scss">
 .ui-modal {
   position: fixed;
-  inset: 0;
-  z-index: 11000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  background-color: rgba(0, 0, 0, 0.75);
-
-  &--tooltip {
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 0;
-    background: transparent;
-  }
-
-  &__wrapper {
-    position: relative;
-    width: 100%;
-    min-width: min(22rem, 100%);
-    max-width: 490px;
-    padding: 20px;
-    background-color: var(--color-bg);
-    border: 1px solid var(--color-border);
-  }
-
-  &--tooltip &__wrapper {
-    width: auto;
-    min-width: 0;
-    max-width: none;
-    padding: 0;
-    background: transparent;
-    border: none;
-  }
-
-  &__title {
-    margin-bottom: 0.5rem;
-    font-size: 1.4em;
-    line-height: 1em;
-    color: var(--color-title);
-    text-align: center;
-  }
-
-  &__type {
-    margin-bottom: 0.5rem;
-    font-size: 0.875em;
-    color: var(--color-muted);
-    text-align: center;
-  }
-
-  &__property {
-    color: var(--color-success);
-    text-align: center;
-
-    &--type {
-      display: block;
-      margin-top: 16px;
-      color: var(--color-text);
-    }
-
-    &--bugged {
-      color: var(--color-danger);
-    }
-  }
-
-  &__runes {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-
-  &__rune {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__image {
-    max-width: 32px;
-    margin-right: 4px;
+  width: 580px;
+  max-width: calc(100vw - 32px);
+  max-height: calc(100svh - 48px);
+  padding: 0;
+  margin: auto;
+  overflow: auto;
+  color: var(--color-text);
+  background: var(--color-panel);
+  border: 1px var(--border-style) #536570;
+  border-radius: 6px;
+  box-shadow: 0 25px 100px #000;
+}
+.ui-modal::backdrop {
+  background: rgb(0 0 0 / 78%);
+}
+@media (max-width: 600px) {
+  .ui-modal {
+    max-width: calc(100vw - 20px);
+    max-height: calc(100svh - 24px);
   }
 }
 </style>

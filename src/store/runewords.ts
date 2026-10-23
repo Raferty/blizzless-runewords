@@ -5,10 +5,9 @@ import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
 import { REWORKED_RUNEWORDS } from "@/shared/reworked-runewords";
 import { RUNEWORDS } from "@/shared/runewords";
 import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
-import { getStoredLang } from "@/utils/lang";
-import { isComplete } from "@/utils/runeword";
+import { useInfoStore } from "@/store";
+import { isComplete, matchesItemType } from "@/utils/runeword";
 
-/** Базовый список + переработанные (`reworked-runewords.ts`) + RotW + кастомные с `marked`. */
 const ALL_RUNEWORDS = [
   ...RUNEWORDS,
   ...REWORKED_RUNEWORDS,
@@ -16,38 +15,33 @@ const ALL_RUNEWORDS = [
   ...CUSTOM_RUNEWORDS,
 ];
 
+function storedIds(key: string): number[] {
+  try {
+    const value: unknown = JSON.parse(localStorage.getItem(key) ?? "[]");
+    return Array.isArray(value)
+      ? value.filter((id): id is number => Number.isInteger(id))
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+export type RunewordSortField = "name" | "level" | "sockets";
+
 interface RunewordsState {
-  /** Search query (bound to SearchInput v-model) */
   search: string;
-  /** Debounced search string for filtering (synced from App) */
   searchDebounced: string;
-  /** Selected rune ids coming from RuneList */
   selectedRunes: number[];
-  /** Selected sockets from FilterSockets */
   socketsFilter: number[];
-  /**
-   * Reworked filter:
-   * - `null` => don't filter by reworked
-   * - `changed` => only reworked
-   * - `unchanged` => only not reworked
-   */
   reworkedFilter: "unchanged" | "changed" | null;
-
-  /**
-   * Blizzless (marked) filter:
-   * - `null` => don't filter by marked
-   * - `true` => only marked
-   * - `false` => only not marked
-   */
   blizzlessFilter: boolean | null;
-
-  /**
-   * RotW patch filter (`patch === "rotw"`):
-   * - `null` => don't filter by patch
-   * - `true` => only `patch: "rotw"`
-   */
   rotwFilter: boolean | null;
-  /** All runes needed by RuneList */
+  itemTypeFilter: number | null;
+  sortBy: RunewordSortField;
+  sortDirection: "asc" | "desc";
+  favorites: number[];
+  favoritesOnly: boolean;
+  baseSelections: Record<number, number>;
   runes: RuneItem[];
 }
 
@@ -56,127 +50,84 @@ export const useRunewordsStore = defineStore({
   state: (): RunewordsState => ({
     search: "",
     searchDebounced: "",
+    selectedRunes: storedIds("selectedRunes"),
     socketsFilter: [],
     reworkedFilter: null,
     blizzlessFilter: null,
     rotwFilter: null,
+    itemTypeFilter: null,
+    sortBy: "name",
+    sortDirection: "asc",
+    favorites: storedIds("blizzless-favorites"),
+    favoritesOnly: false,
+    baseSelections: {},
     runes: RUNES,
-    selectedRunes: JSON.parse(localStorage.getItem("selectedRunes") ?? "[]") ?? [],
   }),
   getters: {
-    /**
-     * All runewords with `complete` flag derived from selected runes.
-     */
     sortedRunewords(state): RunewordTableItem[] {
-      const result: RunewordTableItem[] = [];
-
-      ALL_RUNEWORDS.forEach((item) => {
-        const word = item as RunewordTableItem;
-        if (isComplete(state.selectedRunes, word.runes)) {
-          result.push({
-            ...word,
-            complete: true,
-          });
-        } else {
-          result.push({ ...word });
-        }
-      });
-
-      return result;
+      return ALL_RUNEWORDS.map((item) => ({
+        ...item,
+        complete: isComplete(state.selectedRunes, item.runes),
+      })) as RunewordTableItem[];
     },
-
-    /**
-     * Filtered list: `searchDebounced`, sockets, reworked, blizzless, rotw.
-     * Selected runes do not reduce the list (they affect `complete` / highlights via `sortedRunewords`).
-     */
     filteredRunewords(): RunewordTableItem[] {
-      const sorted = this.sortedRunewords;
-
       const q = this.searchDebounced.toLowerCase().trim();
-      const currentLang = getStoredLang();
-
-      const bySearch = q
-        ? sorted.filter((word) => {
-            const nameMatch =
-              word.name.ru.toLowerCase().includes(q) ||
-              word.name.en.toLowerCase().includes(q);
-            if (nameMatch) return true;
-
-            const matchesType = (word.types ?? [])
-              .map((typeId) => getItemTypeDisplayName(typeId, currentLang))
-              .filter(Boolean)
-              .some((name) => name.toLowerCase().includes(q));
-
-            return matchesType;
-          })
-        : sorted;
-
-      const bySockets = this.socketsFilter.length
-        ? bySearch.filter((i) => this.socketsFilter.includes(i.runes.length))
-        : bySearch;
-
-      /** Sidebar rune selection does not shrink the list — only search / sockets / reworked / blizzless / rotw. */
-      let result = bySockets;
-
-      if (this.reworkedFilter !== null) {
-        result = result.filter((word) => {
-          const isReworked = word.reworked === true;
-          return this.reworkedFilter === "changed" ? isReworked : !isReworked;
-        });
-      }
-
-      if (this.blizzlessFilter !== null) {
-        result = result.filter((word) => {
-          const isNew = word.marked === true;
-          return this.blizzlessFilter ? isNew : !isNew;
-        });
-      }
-
-      if (this.rotwFilter !== null) {
-        result = result.filter((word) => {
-          const isRotw = word.patch === "rotw";
-          return this.rotwFilter ? isRotw : !isRotw;
-        });
-      }
-
-      return result;
+      return this.sortedRunewords.filter((word) => {
+        const searchText = [
+          word.name.ru,
+          word.name.en,
+          ...(word.types ?? []).flatMap((id) => [
+            getItemTypeDisplayName(id, "ru"),
+            getItemTypeDisplayName(id, "en"),
+          ]),
+          ...word.runes.flatMap((id) => {
+            const rune = RUNES.find((r) => r.id === id);
+            return [rune?.name.ru ?? "", rune?.name.en ?? ""];
+          }),
+        ]
+          .join(" ")
+          .toLowerCase();
+        return (
+          (!q || searchText.includes(q)) &&
+          (!this.socketsFilter.length ||
+            this.socketsFilter.includes(word.runes.length)) &&
+          (this.reworkedFilter === null ||
+            (this.reworkedFilter === "changed"
+              ? word.reworked === true
+              : !word.reworked)) &&
+          (this.blizzlessFilter === null ||
+            Boolean(word.marked) === this.blizzlessFilter) &&
+          (this.rotwFilter === null || (word.patch === "rotw") === this.rotwFilter) &&
+          (this.itemTypeFilter === null ||
+            matchesItemType(word.types ?? [], this.itemTypeFilter)) &&
+          (!this.favoritesOnly || this.favorites.includes(word.id))
+        );
+      });
     },
-
-    /**
-     * Grid view: same as `filteredRunewords`, but when the user picked runes in the sidebar,
-     * only runewords that use at least one of those runes (table shows the full list + highlights).
-     */
+    orderedRunewords(): RunewordTableItem[] {
+      const lang = useInfoStore().currentLang;
+      const direction = this.sortDirection === "asc" ? 1 : -1;
+      return [...this.filteredRunewords].sort((a, b) => {
+        if (Boolean(a.complete) !== Boolean(b.complete)) return a.complete ? -1 : 1;
+        let result = 0;
+        if (this.sortBy === "level") result = a.level - b.level;
+        else if (this.sortBy === "sockets") result = a.runes.length - b.runes.length;
+        else result = a.name[lang].localeCompare(b.name[lang], lang);
+        return direction * (result || a.name[lang].localeCompare(b.name[lang], lang));
+      });
+    },
     gridFilteredRunewords(state): RunewordTableItem[] {
-      const base = this.filteredRunewords;
-      if (state.selectedRunes.length === 0) {
-        return base;
-      }
-      const selectedSet = new Set(state.selectedRunes);
-      return base.filter((word) =>
-        (word.runes ?? []).some((runeId) => selectedSet.has(runeId))
+      return this.orderedRunewords.filter(
+        (word) =>
+          !state.selectedRunes.length ||
+          word.runes.some((id) => state.selectedRunes.includes(id))
       );
     },
-
-    /**
-     * Runewords that contain at least one rune from `selectedRunes`.
-     * Used as a "table" view for selected runes.
-     */
     tableSelectedRunewords(state): RunewordTableItem[] {
-      const selected = state.selectedRunes;
-      if (selected.length === 0) {
-        return [];
-      }
-
-      const selectedSet = new Set(selected);
       return this.sortedRunewords.filter((word) =>
-        (word.runes ?? []).some((runeId) => selectedSet.has(runeId))
+        word.runes.some((id) => state.selectedRunes.includes(id))
       );
     },
-
-    /**
-     * Ids of runewords that use at least one sidebar-selected rune (`tableSelectedRunewords`).
-     * For row highlighting in `RunewordsTable` without passing arrays as props.
-     */
     tableSelectedRunewordIds(): Set<number> {
       return new Set(this.tableSelectedRunewords.map((w) => w.id));
     },
@@ -188,6 +139,31 @@ export const useRunewordsStore = defineStore({
     },
     setSearchDebounced(value: string): void {
       this.searchDebounced = value;
+    },
+    toggleFavorite(id: number): void {
+      this.favorites = this.favorites.includes(id)
+        ? this.favorites.filter((value) => value !== id)
+        : [...this.favorites, id];
+      localStorage.setItem("blizzless-favorites", JSON.stringify(this.favorites));
+    },
+    resetVersions(): void {
+      this.reworkedFilter = null;
+      this.blizzlessFilter = null;
+      this.rotwFilter = null;
+    },
+    resetFilters(): void {
+      this.search = "";
+      this.searchDebounced = "";
+      this.socketsFilter = [];
+      this.itemTypeFilter = null;
+      this.resetVersions();
+      this.favoritesOnly = false;
+      this.setSelectedRunes([]);
+    },
+    setSort(field: RunewordsState["sortBy"]): void {
+      this.sortDirection =
+        this.sortBy === field && this.sortDirection === "asc" ? "desc" : "asc";
+      this.sortBy = field;
     },
   },
 });

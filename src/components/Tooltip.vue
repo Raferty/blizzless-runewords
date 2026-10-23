@@ -237,7 +237,7 @@ const handleModalKeydown = (e: KeyboardEvent): void => {
   pointer-events: auto;
   outline: none;
   background-color: #000;
-  border: 1px solid var(--color-border-light);
+  border: 1px var(--border-style) var(--color-border-light);
   border-radius: 8px;
 }
 

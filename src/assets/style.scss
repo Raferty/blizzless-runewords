@@ -1,141 +1,152 @@
-// ========== Color variables ==========
+@font-face {
+  font-family: Diablo;
+  src: url("/fonts/DiabloFont.ttf") format("truetype");
+  font-display: swap;
+}
+
 :root {
+  color-scheme: dark;
   --color-bg: #000;
-  --color-bg-overlay: rgba(0, 0, 0, 0.8);
-  --color-text: #74706c;
-  --color-text-inverse: #fff;
-  --color-text-on-warning: #000;
-  --color-rune: #fab100;
-  --color-accent: #bd8547;
-  --color-border: #bab197;
-  --color-border-light: #e5e7eb;
-  --color-border-dark: #24221c;
-  --color-border-input: #8a8062;
-  --color-title: #ecd2a8;
-  --color-muted: #888;
+  --color-panel: #1d242c;
+  --color-text: #e0e6ed;
+  --color-muted: #a3b0bc;
+  --color-title: #bad5e0;
+  --color-accent: #8dc4da;
+  --color-border: #39454f;
+  --border-style: dashed;
   --color-success: #5cbd4b;
-  --color-success-alt: #44aa44;
-  --color-rotw: #7b3fe4;
-  --color-link: #6e6eff;
-  --color-danger: #ae2a1a;
-  --color-notfound: #844;
-  --color-complete-bg: #200000;
-  --color-ladder-bg: #501008;
-  --color-reworked-bg: rgba(0, 123, 255, 0.8);
-  --color-warning-bg: rgba(255, 193, 7, 0.8);
-  --color-filter-active-border: #ffc107cc;
-  --color-filter-active-bg: #ffc107cc;
-  --color-rune-active-border: #ffd100;
-  --color-varies: #90ff00;
+  --color-rune-missing: #e57373;
+  --color-varies: #abfd4f;
   --color-varies-old: #a7a7ff;
+  --color-reworked-bg: #0875da;
+  --color-rotw: #7d2ae8;
+  --color-danger: #ff9780;
+  --color-text-inverse: #fff;
+  --color-bg-overlay: rgb(0 0 0 / 78%);
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
-  padding: 0;
-  margin: 0;
-  font-family: inherit;
-}
-
-#app {
-  max-width: 2560px;
-}
-
-html {
   box-sizing: border-box;
 }
-
+* {
+  padding: 0;
+  margin: 0;
+}
+html {
+  min-width: 320px;
+  background: #000;
+}
+body {
+  font:
+    14px/1.5 "Segoe UI",
+    Arial,
+    sans-serif;
+  color: var(--color-text);
+  background: #000;
+}
 a {
   color: inherit;
   text-decoration: none;
 }
-
+button,
+input,
+select {
+  font: inherit;
+}
+button,
+select {
+  color: var(--color-text);
+  background: #26313a;
+  border: 1px var(--border-style) var(--color-border);
+  border-radius: 4px;
+}
+button {
+  cursor: pointer;
+}
+button:hover,
+select:hover {
+  background: #27333d;
+  border-color: #668393;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+:focus-visible {
+  outline: 2px var(--border-style) var(--color-accent);
+  outline-offset: 3px;
+}
+button[aria-pressed="true"],
+.is-active {
+  color: #ffe866;
+  background: #29270b;
+  border-color: #ffdf00;
+  box-shadow: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+h1,
+h2,
+h3 {
+  font-weight: 500;
+}
 ul {
   list-style: none;
 }
-
-img,
-video {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-iframe {
-  border: 0;
-}
-
-table {
-  border-spacing: 0;
-  border-collapse: collapse;
-}
-
-td {
-  padding: var(--a-padding-x1);
-}
-
-input,
-button,
-textarea {
-  font-family: inherit;
-  font-size: inherit;
-}
-
-strong {
-  font-weight: 500;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 500;
-}
-
-html,
-body {
-  height: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    Segoe UI Symbol,
-    "Noto Color Emoji";
-  font-size: 1rem;
-  color: var(--color-text);
-  background-color: var(--color-bg);
-}
-
-.rune {
-  color: var(--color-rune);
-}
-
-.sort {
-  margin-top: 3px;
-  color: var(--color-accent);
-}
-
 .varies {
+  display: inline-block;
   padding: 0 4px;
   margin: 0 2px;
-  font-size: 14px;
-  line-height: 90%;
+  line-height: 1.2;
   color: var(--color-varies);
-  border: 1px solid var(--color-varies);
+  white-space: nowrap;
+  border: 1px var(--border-style) currentColor;
   border-radius: 2px;
-
-  &--old {
-    color: var(--color-varies-old);
-    border: 1px solid var(--color-varies-old);
-  }
+}
+.varies--old {
+  color: var(--color-varies-old);
+}
+.rune--found {
+  color: var(--color-success);
+}
+.rune--missing {
+  color: var(--color-rune-missing);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+.badges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+.badge {
+  display: inline-block;
+  padding: 2px 5px;
+  font-size: 9px;
+  line-height: 1.4;
+  color: #fff;
+  text-transform: uppercase;
+  background: #0875da;
+  border-radius: 3px;
+}
+.badge--rotw {
+  background: #7d2ae8;
+}
+.badge--new {
+  background: #118448;
+}
+.badge--warning {
+  color: #201b00;
+  background: #f2cb65;
 }
