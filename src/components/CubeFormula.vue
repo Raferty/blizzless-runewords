@@ -201,9 +201,10 @@ function label(key: string) {
   --result-border: #60602c;
 }
 .cube-ingredient--magic {
-  --result-color: #8f8fff;
-  --result-background: #191925;
-  --result-border: #48486e;
+  // D2 palette BLUE (color 3): RGB(105, 105, 255).
+  --result-color: #6969ff;
+  --result-background: #101020;
+  --result-border: #3b3b8f;
 }
 .cube-ingredient--unique {
   --result-color: #c7b377;

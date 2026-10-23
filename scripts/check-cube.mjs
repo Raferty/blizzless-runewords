@@ -92,6 +92,51 @@ try {
   store.toggleStatus("changed");
   assert.equal(store.filteredRecipes.length, 86, "Statuses combine with OR");
   store.resetFilters();
+  for (const [material, count, resultRecipe] of [
+    ["Horadric Sphere", 27, "hora_sphere"],
+    ["Resplendent Spark", 14, "resplendet_spark_rec"],
+    ["blacksmith ingot", 3, "blacksmith_ingot_rec"],
+  ]) {
+    store.toggleMaterial(material);
+    assert.equal(store.filteredRecipes.length, count, material);
+    assert(
+      !store.filteredRecipes.some((recipe) => recipe.key === resultRecipe),
+      "Exclude recipes that only create the selected material"
+    );
+    assert(
+      store.filteredRecipes.every((recipe) =>
+        recipe.ingredients.some((item) => item.key === material)
+      ),
+      "Every result must require the selected material"
+    );
+    store.toggleMaterial(material);
+    assert.equal(store.filteredRecipes.length, 98, "Toggle material off");
+  }
+  store.toggleMaterial("Horadric Sphere");
+  store.toggleMaterial("Resplendent Spark");
+  assert.equal(store.filteredRecipes.length, 41, "Materials combine with OR");
+  store.toggleStatus("unchanged");
+  assert.deepEqual(
+    store.filteredRecipes.map((recipe) => recipe.key),
+    ["Unstoppable Ring"],
+    "Materials combine with version filters using AND"
+  );
+  store.resetFilters();
+  store.toggleMaterial("Horadric Sphere");
+  store.search = "Sensei";
+  assert.deepEqual(
+    store.filteredRecipes.map((recipe) => recipe.key),
+    ["Amulet of the Sensei"]
+  );
+  store.addTag("recipe", "ring");
+  assert.equal(
+    store.filteredRecipes.length,
+    0,
+    "Material, search and category intersect"
+  );
+  store.resetFilters();
+  assert.equal(store.materials.length, 0);
+  assert.equal(store.filteredRecipes.length, 98);
   store.search = "caster helm";
   assert(store.filteredRecipes.some((recipe) => recipe.key === "caster_helm"));
   store.search = "шлем колдуна";

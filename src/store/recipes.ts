@@ -4,6 +4,7 @@ import {
   cubeIngredients,
   matchesCubeSearch,
   recipeSearchText,
+  type CubeMaterialKey,
 } from "@/utils/cube";
 import type { CubeStatus } from "@/types/cube";
 
@@ -14,6 +15,7 @@ export const useRecipesStore = defineStore("recipes", {
   state: () => ({
     search: "",
     statuses: [] as CubeStatus[],
+    materials: [] as CubeMaterialKey[],
     recipeTags: [] as string[],
     ingredientTags: [] as string[],
   }),
@@ -25,6 +27,10 @@ export const useRecipesStore = defineStore("recipes", {
         );
         return (
           (!state.statuses.length || state.statuses.includes(recipe.status)) &&
+          (!state.materials.length ||
+            recipe.ingredients.some((item) =>
+              state.materials.some((key) => item.key === key)
+            )) &&
           state.recipeTags.every((tag) => recipe.tags.includes(tag)) &&
           state.ingredientTags.every((tag) => tags.has(tag)) &&
           matchesCubeSearch(searchable.get(recipe.key) ?? "", state.search)
@@ -38,6 +44,11 @@ export const useRecipesStore = defineStore("recipes", {
         ? this.statuses.filter((value) => value !== status)
         : [...this.statuses, status];
     },
+    toggleMaterial(key: CubeMaterialKey) {
+      this.materials = this.materials.includes(key)
+        ? this.materials.filter((value) => value !== key)
+        : [...this.materials, key];
+    },
     addTag(kind: "recipe" | "ingredient", key: string | null) {
       const tags = kind === "recipe" ? this.recipeTags : this.ingredientTags;
       if (key && !tags.includes(key)) tags.push(key);
@@ -50,6 +61,7 @@ export const useRecipesStore = defineStore("recipes", {
     resetFilters() {
       this.search = "";
       this.statuses = [];
+      this.materials = [];
       this.recipeTags = [];
       this.ingredientTags = [];
     },

@@ -16,6 +16,24 @@
           {{ status.label }}
         </button>
       </div>
+      <div class="recipes-filters__materials">
+        <span>{{ t("Материалы", "Materials") }}</span>
+        <div
+          class="recipes-filters__material-options"
+          role="group"
+          :aria-label="t('Материалы', 'Materials')"
+        >
+          <button
+            v-for="material in cubeMaterials"
+            :key="material.key"
+            :aria-pressed="recipes.materials.includes(material.key)"
+            :title="text(cubeIngredients.get(material.key)?.name ?? material.name)"
+            @click="recipes.toggleMaterial(material.key)"
+          >
+            {{ text(material.name) }}
+          </button>
+        </div>
+      </div>
       <UiSelect
         v-model="recipeTagToAdd"
         class="recipes-filters__select"
@@ -90,7 +108,7 @@ import { computed, ref, watch } from "vue";
 import { useInfoStore } from "@/store";
 import { useRecipesStore } from "@/store/recipes";
 import { useText } from "@/composables/useText";
-import { cubeCatalog, cubeText } from "@/utils/cube";
+import { cubeCatalog, cubeIngredients, cubeMaterials, cubeText } from "@/utils/cube";
 import type { CubeRecipe, CubeStatus, CubeTag } from "@/types/cube";
 import type { LocalizedName } from "@/types/runeword";
 import type { SelectOption } from "@/types/select";
@@ -197,10 +215,19 @@ function reset() {
   padding: 5px 9px;
   font-size: 11px;
 }
-.recipes-filters__status {
+.recipes-filters__status,
+.recipes-filters__material-options {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
+}
+.recipes-filters__materials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-size: 11px;
+  color: var(--color-muted);
 }
 .recipes-filters__select {
   width: 180px;

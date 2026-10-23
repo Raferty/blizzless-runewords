@@ -7,6 +7,12 @@ export const cubeCatalog = data as CubeCatalog;
 export const cubeIngredients = new Map<string, CubeIngredient>([
   ...cubeCatalog.ingredients.map((item): [string, CubeIngredient] => [item.key, item]),
 ]);
+export const cubeMaterials = [
+  { key: "Horadric Sphere", name: { ru: "Сферы", en: "Spheres" } },
+  { key: "Resplendent Spark", name: { ru: "Осколки", en: "Sparks" } },
+  { key: "blacksmith ingot", name: { ru: "Инготы", en: "Ingots" } },
+] as const;
+export type CubeMaterialKey = (typeof cubeMaterials)[number]["key"];
 const uniqueResultKeys = new Set([
   "griffon",
   "arach_mesh",
