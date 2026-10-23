@@ -165,4 +165,48 @@ export const CUSTOM_RUNEWORDS = [
     },
     complete: false,
   },
+  {
+    // https://blizzless.info/changelogs/season4 — published 2026-10-23.
+    // The unpublished API entry differs: the announcement specifies on striking.
+    id: 106,
+    name: {
+      ru: "Wonder",
+      en: "Wonder",
+    },
+    runes: [27, 20, 24],
+    types: [ItemTypes.ITEM_TYPE_STAVES],
+    excluded: "",
+    classes: [],
+    patch: "4th season",
+    level: 57,
+    ladder: false,
+    marked: true,
+    stats: {
+      ru: [
+        "При надевании дает ауру «Осуждение» 9-го уровня",
+        "Вероятность 7% применить умение «Огненная волна» 33-го уровня при нанесении удара",
+        "+2 ко всем умениям",
+        "+20% к скорости применения умений",
+        "-10% к сопротивлению огню у врага",
+        "+<span class='varies'>20-40</span>% к сопротивлению всем видам урона",
+        "+1 к умению «Телекинез» (для любого класса)",
+        "+50% к урону",
+        "+75% к золоту за убийство монстров",
+        "30% к вероятности найти магический предмет",
+      ],
+      en: [
+        "Level 9 Conviction Aura When Equipped",
+        "7% Chance to cast Level 33 Flame Wave on Striking",
+        "+2 To All Skills",
+        "+20% Faster Cast Rate",
+        "-10% To Enemy Fire Resistance",
+        "All Resistances +<span class='varies'>20-40</span>% (varies)",
+        "+1 To Telekinesis (any class)",
+        "+50% Enhanced Damage",
+        "75% Extra Gold from Monsters",
+        "30% Better Chance of Getting Magic Items",
+      ],
+    },
+    complete: false,
+  },
 ];

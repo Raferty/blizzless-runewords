@@ -16,7 +16,8 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,vue,js,json,scss,css}\"",
     "stylelint": "stylelint \"src/**/*.{vue,scss,css}\"",
     "stylelint:fix": "stylelint \"src/**/*.{vue,scss,css}\" --fix",
-    "test": "node scripts/check-catalog.mjs"
+    "test": "node scripts/check-catalog.mjs && node scripts/check-cube.mjs",
+    "sync:cube": "node scripts/sync-cube.mjs && prettier --write src/shared/cube-catalog.json"
   },
   "dependencies": {
     "gh-pages": "^6.2.0",

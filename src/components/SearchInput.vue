@@ -1,6 +1,21 @@
 <template>
   <div class="search">
-    <span class="search__icon" aria-hidden="true">⌕</span>
+    <svg
+      class="search__icon"
+      aria-hidden="true"
+      focusable="false"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="11" cy="11" r="8" />
+      <path d="m21 21-4.35-4.35" />
+    </svg>
     <input
       ref="input"
       :value="modelValue"
@@ -63,8 +78,10 @@ onBeforeUnmount(() => window.removeEventListener("keydown", focusSearch));
   border-color: var(--color-accent);
 }
 .search__icon {
-  font-size: 23px;
-  line-height: 1;
+  display: block;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
   color: var(--color-accent);
 }
 input {

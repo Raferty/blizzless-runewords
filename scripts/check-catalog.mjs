@@ -10,7 +10,7 @@ globalThis.localStorage = {
   setItem: (key, value) => storage.set(key, value),
 };
 const server = await createServer({
-  server: { middlewareMode: true, hmr: false },
+  server: { middlewareMode: true, hmr: false, ws: false },
   appType: "custom",
 });
 try {
@@ -24,11 +24,51 @@ try {
   const words = useRunewordsStore();
   const info = useInfoStore();
 
-  assert.equal(words.sortedRunewords.length, 104);
-  assert.equal(new Set(words.sortedRunewords.map((word) => word.id)).size, 104);
+  assert.equal(words.sortedRunewords.length, 105);
+  assert.equal(new Set(words.sortedRunewords.map((word) => word.id)).size, 105);
   assert.equal(words.sortedRunewords.filter((word) => word.reworked).length, 51);
-  assert.equal(words.sortedRunewords.filter((word) => word.marked).length, 5);
+  assert.equal(words.sortedRunewords.filter((word) => word.marked).length, 6);
   assert.equal(words.sortedRunewords.filter((word) => word.patch === "rotw").length, 6);
+
+  const wonder = words.sortedRunewords.find((word) => word.name.en === "Wonder");
+  assert(
+    wonder,
+    "Season 4 announcement adds Wonder even while its API entry is unpublished"
+  );
+  assert.deepEqual(wonder.runes, [27, 20, 24], "Wonder requires Ohm → Lem → Ist");
+  assert.deepEqual(wonder.types, [T.STAVES]);
+  assert.deepEqual(wonder.classes, [], "Staves are usable by any class");
+  assert.equal(wonder.level, 57);
+  assert(wonder.marked);
+  assert(wonder.stats.en.includes("Level 9 Conviction Aura When Equipped"));
+  assert(wonder.stats.en.includes("7% Chance to cast Level 33 Flame Wave on Striking"));
+  assert(wonder.stats.en.includes("+1 To Telekinesis (any class)"));
+  assert(wonder.stats.en.includes("+50% Enhanced Damage"));
+  assert(wonder.stats.en.includes("75% Extra Gold from Monsters"));
+  assert(wonder.stats.en.includes("30% Better Chance of Getting Magic Items"));
+  const statNumbers = (lines) =>
+    lines.map((line) => line.replace(/<[^>]+>/g, "").match(/-?\d+/g) ?? []);
+  assert.deepEqual(statNumbers(wonder.stats.ru), statNumbers(wonder.stats.en));
+  words.searchDebounced = "wonder";
+  assert.deepEqual(
+    words.filteredRunewords.map((word) => word.id),
+    [wonder.id]
+  );
+  words.itemTypeFilter = T.STAVES;
+  words.socketsFilter = [3];
+  words.blizzlessFilter = true;
+  assert.deepEqual(
+    words.filteredRunewords.map((word) => word.id),
+    [wonder.id]
+  );
+  words.itemTypeFilter = T.SORCERESS_ORBS;
+  assert.equal(words.filteredRunewords.length, 0);
+  words.resetFilters();
+  words.setSelectedRunes([27, 20]);
+  assert(!words.sortedRunewords.find((word) => word.id === wonder.id).complete);
+  words.setSelectedRunes([27, 20, 24]);
+  assert(words.sortedRunewords.find((word) => word.id === wonder.id).complete);
+  words.resetFilters();
 
   const fortitude = words.sortedRunewords.find((word) => word.name.en === "Fortitude");
   const fortitudeStats = splitStatSections(fortitude.stats.en);
@@ -66,7 +106,7 @@ try {
   words.setSelectedRunes([8, 9, 7]);
   assert.equal(
     words.filteredRunewords.length,
-    104,
+    105,
     "Rune selection must preserve all table rows"
   );
   assert(words.orderedRunewords[0].complete, "Complete recipes must sort first");
@@ -104,7 +144,7 @@ try {
   words.toggleFavorite(fortitude.id);
   assert.equal(words.filteredRunewords.length, 0);
   words.resetFilters();
-  assert.equal(words.filteredRunewords.length, 104);
+  assert.equal(words.filteredRunewords.length, 105);
 
   info.setLang("en");
   words.sortBy = "level";
@@ -131,7 +171,7 @@ try {
     ascendingSockets.map((word) => word.id).reverse()
   );
   console.log(
-    "Catalog checks passed: 104 recipes, base-specific stats, filters, rune selection, favorites and sorting."
+    "Catalog checks passed: 105 recipes, base-specific stats, filters, rune selection, favorites and sorting."
   );
 } finally {
   await server.close();

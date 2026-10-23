@@ -1,10 +1,7 @@
 <template>
   <footer class="footer">
     <span>BLIZZLESS · DIABLO II: RESURRECTED</span
-    ><a
-      href="https://blizzless.info/ru/runewords"
-      target="_blank"
-      rel="noopener noreferrer"
+    ><a :href="sourceUrl" target="_blank" rel="noopener noreferrer"
       >{{ t("Данные Blizzless", "Blizzless data") }} ↗</a
     ><a
       href="https://github.com/fabd/diablo2-runewizard"
@@ -17,6 +14,9 @@
 <script setup lang="ts">
 import { useText } from "@/composables/useText";
 const t = useText();
+withDefaults(defineProps<{ sourceUrl?: string }>(), {
+  sourceUrl: "https://blizzless.info/ru/runewords",
+});
 </script>
 <style scoped lang="scss">
 .footer {

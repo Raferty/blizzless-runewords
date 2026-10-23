@@ -4,9 +4,20 @@
       <img :src="`${base}images/snowflake.png`" alt="" width="33" height="33" />
       <h1>BLIZZLESS<small>DIABLO II: RUNEWIZARD</small></h1>
     </a>
+    <nav class="section-nav" :aria-label="t('Разделы', 'Sections')">
+      <a
+        href="#/runewords"
+        :aria-current="section === 'runewords' ? 'page' : undefined"
+        >{{ t("Рунные слова", "Runewords") }}</a
+      >
+      <a href="#/recipes" :aria-current="section === 'recipes' ? 'page' : undefined">{{
+        t("Рецепты", "Recipes")
+      }}</a>
+    </nav>
     <SearchInput
-      v-model="words.search"
-      :placeholder="t('Название, руна или тип предмета…', 'Name, rune or item type…')"
+      :model-value="search"
+      :placeholder="searchPlaceholder"
+      @update:model-value="$emit('update:search', $event)"
     />
     <a
       class="discord"
@@ -27,10 +38,16 @@
 <script setup lang="ts">
 import LangSwitcher from "@/components/LangSwitcher.vue";
 import SearchInput from "@/components/SearchInput.vue";
-import { useInfoStore, useRunewordsStore } from "@/store";
+import { useInfoStore } from "@/store";
 import { useText } from "@/composables/useText";
+import type { CatalogRoute } from "@/utils/navigation";
+defineProps<{
+  search: string;
+  searchPlaceholder: string;
+  section: CatalogRoute["section"];
+}>();
+defineEmits<{ (event: "update:search", value: string): void }>();
 const store = useInfoStore();
-const words = useRunewordsStore();
 const t = useText();
 const base = import.meta.env.BASE_URL;
 const releaseDate = import.meta.env.VITE_RELEASE_DATE;
@@ -38,7 +55,8 @@ const formattedReleaseDate = releaseDate.split("-").reverse().join(".");
 </script>
 <style scoped lang="scss">
 .header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto minmax(100px, 1fr) auto auto;
   gap: 18px;
   align-items: center;
   min-height: 60px;
@@ -72,7 +90,29 @@ small {
   letter-spacing: 1.4px;
 }
 .search {
-  margin: 0 8px 0 20px;
+  margin: 0;
+}
+.section-nav {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  white-space: nowrap;
+}
+.section-nav a {
+  padding: 7px 10px;
+  font-size: 12px;
+  color: var(--color-muted);
+  border: 1px var(--border-style) transparent;
+  border-radius: 4px;
+}
+.section-nav a:hover {
+  color: var(--color-title);
+  background: var(--color-panel);
+}
+.section-nav a[aria-current="page"] {
+  color: #ffe866;
+  background: #29270b;
+  border-color: #756b1f;
 }
 .discord {
   font-size: 11px;
@@ -91,9 +131,10 @@ small {
   color: var(--color-muted);
   white-space: nowrap;
 }
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .header {
-    gap: 9px;
+    grid-template-columns: auto auto minmax(100px, 1fr) auto;
+    gap: 10px;
     padding: 8px 12px;
   }
   h1 {
@@ -103,20 +144,34 @@ small {
   .discord {
     display: none;
   }
-  .search {
-    margin: 0;
-  }
   .header__actions {
     gap: 9px;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .header {
-    flex-wrap: wrap;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .header__actions {
+    grid-row: 1;
+    grid-column: 2;
+  }
+  .section-nav {
+    grid-row: 2;
+    grid-column: 1;
   }
   .search {
-    flex-basis: 100%;
-    order: 3;
+    grid-row: 2;
+    grid-column: 2;
+  }
+}
+@media (max-width: 600px) {
+  .section-nav {
+    grid-column: 1 / -1;
+  }
+  .search {
+    grid-row: 3;
+    grid-column: 1 / -1;
   }
   .header__date {
     font-size: 9px;
@@ -128,6 +183,25 @@ small {
   .brand img {
     width: 28px;
     height: 28px;
+  }
+}
+@media (max-width: 374px) {
+  .header {
+    gap: 8px;
+  }
+  .brand {
+    gap: 6px;
+  }
+  .brand img {
+    width: 24px;
+    height: 24px;
+  }
+  h1 {
+    font-size: 12px;
+    letter-spacing: 1.5px;
+  }
+  .header__actions {
+    gap: 6px;
   }
 }
 </style>
