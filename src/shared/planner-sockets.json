@@ -1,0 +1,2459 @@
+{
+  "gameDataSha256": "c176ba98069801f011553d5d7ee1358a754c98ad8f2f6e228be6a11fada640e7",
+  "items": [
+    {
+      "code": "gcv",
+      "name": {
+        "en": "Chipped Amethyst",
+        "ru": "Колотый Аметист"
+      },
+      "group": "gem",
+      "requiredLevel": 1,
+      "image_url": "/images/planner/sockets/gcv.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "strength": 3
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gfv",
+      "name": {
+        "en": "Flawed Amethyst",
+        "ru": "Мутный Аметист"
+      },
+      "group": "gem",
+      "requiredLevel": 5,
+      "image_url": "/images/planner/sockets/gfv.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "strength": 4
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gsv",
+      "name": {
+        "en": "Amethyst",
+        "ru": "Аметист"
+      },
+      "group": "gem",
+      "requiredLevel": 12,
+      "image_url": "/images/planner/sockets/gsv.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "strength": 6
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gzv",
+      "name": {
+        "en": "Flawless Amethyst",
+        "ru": "Безупречный Аметист"
+      },
+      "group": "gem",
+      "requiredLevel": 15,
+      "image_url": "/images/planner/sockets/gzv.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "strength": 8
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gpv",
+      "name": {
+        "en": "Perfect Amethyst",
+        "ru": "Идеальный Аметист"
+      },
+      "group": "gem",
+      "requiredLevel": 18,
+      "image_url": "/images/planner/sockets/gpv.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "strength": 10
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gcb",
+      "name": {
+        "en": "Chipped Sapphire",
+        "ru": "Колотый Сапфир"
+      },
+      "group": "gem",
+      "requiredLevel": 1,
+      "image_url": "/images/planner/sockets/gcb.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "mana": 10
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "coldResist": 12
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gfb",
+      "name": {
+        "en": "Flawed Sapphire",
+        "ru": "Мутный Сапфир"
+      },
+      "group": "gem",
+      "requiredLevel": 5,
+      "image_url": "/images/planner/sockets/gfb.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "mana": 17
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "coldResist": 16
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gsb",
+      "name": {
+        "en": "Sapphire",
+        "ru": "Сапфир"
+      },
+      "group": "gem",
+      "requiredLevel": 12,
+      "image_url": "/images/planner/sockets/gsb.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "mana": 24
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "coldResist": 22
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "glb",
+      "name": {
+        "en": "Flawless Sapphire",
+        "ru": "Безупречный Сапфир"
+      },
+      "group": "gem",
+      "requiredLevel": 15,
+      "image_url": "/images/planner/sockets/glb.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "mana": 31
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "coldResist": 28
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gpb",
+      "name": {
+        "en": "Perfect Sapphire",
+        "ru": "Идеальный Сапфир"
+      },
+      "group": "gem",
+      "requiredLevel": 18,
+      "image_url": "/images/planner/sockets/gpb.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "mana": 38
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "coldResist": 40
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gcg",
+      "name": {
+        "en": "Chipped Emerald",
+        "ru": "Колотый Изумруд"
+      },
+      "group": "gem",
+      "requiredLevel": 1,
+      "image_url": "/images/planner/sockets/gcg.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "dexterity": 3
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "poisonResist": 12
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gfg",
+      "name": {
+        "en": "Flawed Emerald",
+        "ru": "Мутный Изумруд"
+      },
+      "group": "gem",
+      "requiredLevel": 5,
+      "image_url": "/images/planner/sockets/gfg.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "dexterity": 4
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "poisonResist": 16
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gsg",
+      "name": {
+        "en": "Emerald",
+        "ru": "Изумруд"
+      },
+      "group": "gem",
+      "requiredLevel": 12,
+      "image_url": "/images/planner/sockets/gsg.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "dexterity": 6
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "poisonResist": 22
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "glg",
+      "name": {
+        "en": "Flawless Emerald",
+        "ru": "Безупречный Изумруд"
+      },
+      "group": "gem",
+      "requiredLevel": 15,
+      "image_url": "/images/planner/sockets/glg.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "dexterity": 8
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "poisonResist": 28
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gpg",
+      "name": {
+        "en": "Perfect Emerald",
+        "ru": "Идеальный Изумруд"
+      },
+      "group": "gem",
+      "requiredLevel": 18,
+      "image_url": "/images/planner/sockets/gpg.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "dexterity": 10
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "poisonResist": 40
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gcr",
+      "name": {
+        "en": "Chipped Ruby",
+        "ru": "Колотый Рубин"
+      },
+      "group": "gem",
+      "requiredLevel": 1,
+      "image_url": "/images/planner/sockets/gcr.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "life": 10
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 12
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gfr",
+      "name": {
+        "en": "Flawed Ruby",
+        "ru": "Мутный Рубин"
+      },
+      "group": "gem",
+      "requiredLevel": 5,
+      "image_url": "/images/planner/sockets/gfr.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "life": 17
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 16
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gsr",
+      "name": {
+        "en": "Ruby",
+        "ru": "Рубин"
+      },
+      "group": "gem",
+      "requiredLevel": 12,
+      "image_url": "/images/planner/sockets/gsr.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "life": 24
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 22
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "glr",
+      "name": {
+        "en": "Flawless Ruby",
+        "ru": "Безупречный Рубин"
+      },
+      "group": "gem",
+      "requiredLevel": 15,
+      "image_url": "/images/planner/sockets/glr.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "life": 31
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 28
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gpr",
+      "name": {
+        "en": "Perfect Ruby",
+        "ru": "Идеальный Рубин"
+      },
+      "group": "gem",
+      "requiredLevel": 18,
+      "image_url": "/images/planner/sockets/gpr.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "life": 38
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 40
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gcw",
+      "name": {
+        "en": "Chipped Diamond",
+        "ru": "Колотый Алмаз"
+      },
+      "group": "gem",
+      "requiredLevel": 1,
+      "image_url": "/images/planner/sockets/gcw.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 6,
+            "coldResist": 6,
+            "lightningResist": 6,
+            "poisonResist": 6
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gfw",
+      "name": {
+        "en": "Flawed Diamond",
+        "ru": "Мутный Алмаз"
+      },
+      "group": "gem",
+      "requiredLevel": 5,
+      "image_url": "/images/planner/sockets/gfw.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 8,
+            "coldResist": 8,
+            "lightningResist": 8,
+            "poisonResist": 8
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gsw",
+      "name": {
+        "en": "Diamond",
+        "ru": "Алмаз"
+      },
+      "group": "gem",
+      "requiredLevel": 12,
+      "image_url": "/images/planner/sockets/gsw.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 11,
+            "coldResist": 11,
+            "lightningResist": 11,
+            "poisonResist": 11
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "glw",
+      "name": {
+        "en": "Flawless Diamond",
+        "ru": "Безупречный Алмаз"
+      },
+      "group": "gem",
+      "requiredLevel": 15,
+      "image_url": "/images/planner/sockets/glw.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 14,
+            "coldResist": 14,
+            "lightningResist": 14,
+            "poisonResist": 14
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gpw",
+      "name": {
+        "en": "Perfect Diamond",
+        "ru": "Идеальный Алмаз"
+      },
+      "group": "gem",
+      "requiredLevel": 18,
+      "image_url": "/images/planner/sockets/gpw.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 19,
+            "coldResist": 19,
+            "lightningResist": 19,
+            "poisonResist": 19
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gcy",
+      "name": {
+        "en": "Chipped Topaz",
+        "ru": "Колотый Топаз"
+      },
+      "group": "gem",
+      "requiredLevel": 1,
+      "image_url": "/images/planner/sockets/gcy.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "magicFind": 9
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "lightningResist": 12
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gfy",
+      "name": {
+        "en": "Flawed Topaz",
+        "ru": "Мутный Топаз"
+      },
+      "group": "gem",
+      "requiredLevel": 5,
+      "image_url": "/images/planner/sockets/gfy.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "magicFind": 13
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "lightningResist": 16
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gsy",
+      "name": {
+        "en": "Topaz",
+        "ru": "Топаз"
+      },
+      "group": "gem",
+      "requiredLevel": 12,
+      "image_url": "/images/planner/sockets/gsy.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "magicFind": 16
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "lightningResist": 22
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gly",
+      "name": {
+        "en": "Flawless Topaz",
+        "ru": "Безупречный Топаз"
+      },
+      "group": "gem",
+      "requiredLevel": 15,
+      "image_url": "/images/planner/sockets/gly.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "magicFind": 20
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "lightningResist": 28
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "gpy",
+      "name": {
+        "en": "Perfect Topaz",
+        "ru": "Идеальный Топаз"
+      },
+      "group": "gem",
+      "requiredLevel": 18,
+      "image_url": "/images/planner/sockets/gpy.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "magicFind": 24
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "lightningResist": 40
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "skc",
+      "name": {
+        "en": "Chipped Skull",
+        "ru": "Колотый Череп"
+      },
+      "group": "gem",
+      "requiredLevel": 1,
+      "image_url": "/images/planner/sockets/skc.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "skf",
+      "name": {
+        "en": "Flawed Skull",
+        "ru": "Мутный Череп"
+      },
+      "group": "gem",
+      "requiredLevel": 5,
+      "image_url": "/images/planner/sockets/skf.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "sku",
+      "name": {
+        "en": "Skull",
+        "ru": "Череп"
+      },
+      "group": "gem",
+      "requiredLevel": 12,
+      "image_url": "/images/planner/sockets/sku.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "skl",
+      "name": {
+        "en": "Flawless Skull",
+        "ru": "Безупречный Череп"
+      },
+      "group": "gem",
+      "requiredLevel": 15,
+      "image_url": "/images/planner/sockets/skl.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "skz",
+      "name": {
+        "en": "Perfect Skull",
+        "ru": "Идеальный Череп"
+      },
+      "group": "gem",
+      "requiredLevel": 18,
+      "image_url": "/images/planner/sockets/skz.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r01",
+      "name": {
+        "en": "El Rune",
+        "ru": "Руна Эл"
+      },
+      "group": "rune",
+      "requiredLevel": 11,
+      "image_url": "/images/el.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r02",
+      "name": {
+        "en": "Eld Rune",
+        "ru": "Руна Элд"
+      },
+      "group": "rune",
+      "requiredLevel": 11,
+      "image_url": "/images/eld.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r03",
+      "name": {
+        "en": "Tir Rune",
+        "ru": "Руна Тир"
+      },
+      "group": "rune",
+      "requiredLevel": 13,
+      "image_url": "/images/tir.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r04",
+      "name": {
+        "en": "Nef Rune",
+        "ru": "Руна Неф"
+      },
+      "group": "rune",
+      "requiredLevel": 13,
+      "image_url": "/images/nef.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r05",
+      "name": {
+        "en": "Eth Rune",
+        "ru": "Руна Эт"
+      },
+      "group": "rune",
+      "requiredLevel": 15,
+      "image_url": "/images/eth.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r06",
+      "name": {
+        "en": "Ith Rune",
+        "ru": "Руна Ит"
+      },
+      "group": "rune",
+      "requiredLevel": 15,
+      "image_url": "/images/ith.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r07",
+      "name": {
+        "en": "Tal Rune",
+        "ru": "Руна Тал"
+      },
+      "group": "rune",
+      "requiredLevel": 17,
+      "image_url": "/images/tal.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "poisonResist": 30
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "poisonResist": 35
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r08",
+      "name": {
+        "en": "Ral Rune",
+        "ru": "Руна Рал"
+      },
+      "group": "rune",
+      "requiredLevel": 19,
+      "image_url": "/images/ral.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "fireResist": 30
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 35
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r09",
+      "name": {
+        "en": "Ort Rune",
+        "ru": "Руна Орт"
+      },
+      "group": "rune",
+      "requiredLevel": 21,
+      "image_url": "/images/ort.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "lightningResist": 30
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "lightningResist": 35
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r10",
+      "name": {
+        "en": "Thul Rune",
+        "ru": "Руна Тул"
+      },
+      "group": "rune",
+      "requiredLevel": 23,
+      "image_url": "/images/thul.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "coldResist": 30
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "coldResist": 35
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r11",
+      "name": {
+        "en": "Amn Rune",
+        "ru": "Руна Амн"
+      },
+      "group": "rune",
+      "requiredLevel": 25,
+      "image_url": "/images/amn.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r12",
+      "name": {
+        "en": "Sol Rune",
+        "ru": "Руна Сол"
+      },
+      "group": "rune",
+      "requiredLevel": 27,
+      "image_url": "/images/sol.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r13",
+      "name": {
+        "en": "Shael Rune",
+        "ru": "Руна Шаэл"
+      },
+      "group": "rune",
+      "requiredLevel": 29,
+      "image_url": "/images/shael.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {
+            "ias": 20
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "fhr": 20
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r14",
+      "name": {
+        "en": "Dol Rune",
+        "ru": "Руна Дол"
+      },
+      "group": "rune",
+      "requiredLevel": 31,
+      "image_url": "/images/dol.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r15",
+      "name": {
+        "en": "Hel Rune",
+        "ru": "Руна Хел"
+      },
+      "group": "rune",
+      "requiredLevel": 1,
+      "image_url": "/images/hel.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r16",
+      "name": {
+        "en": "Io Rune",
+        "ru": "Руна Ио"
+      },
+      "group": "rune",
+      "requiredLevel": 35,
+      "image_url": "/images/io.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {
+            "vitality": 10
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "vitality": 10
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "vitality": 10
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r17",
+      "name": {
+        "en": "Lum Rune",
+        "ru": "Руна Лум"
+      },
+      "group": "rune",
+      "requiredLevel": 37,
+      "image_url": "/images/lum.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {
+            "energy": 10
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "energy": 10
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "energy": 10
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r18",
+      "name": {
+        "en": "Ko Rune",
+        "ru": "Руна Ко"
+      },
+      "group": "rune",
+      "requiredLevel": 39,
+      "image_url": "/images/ko.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {
+            "dexterity": 10
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "dexterity": 10
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "dexterity": 10
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r19",
+      "name": {
+        "en": "Fal Rune",
+        "ru": "Руна Фал"
+      },
+      "group": "rune",
+      "requiredLevel": 41,
+      "image_url": "/images/fal.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {
+            "strength": 10
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "strength": 10
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "strength": 10
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r20",
+      "name": {
+        "en": "Lem Rune",
+        "ru": "Руна Лем"
+      },
+      "group": "rune",
+      "requiredLevel": 43,
+      "image_url": "/images/lem.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r21",
+      "name": {
+        "en": "Pul Rune",
+        "ru": "Руна Пул"
+      },
+      "group": "rune",
+      "requiredLevel": 45,
+      "image_url": "/images/pul.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r22",
+      "name": {
+        "en": "Um Rune",
+        "ru": "Руна Ум"
+      },
+      "group": "rune",
+      "requiredLevel": 47,
+      "image_url": "/images/um.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "fireResist": 15,
+            "coldResist": 15,
+            "lightningResist": 15,
+            "poisonResist": 15
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "fireResist": 22,
+            "coldResist": 22,
+            "lightningResist": 22,
+            "poisonResist": 22
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r23",
+      "name": {
+        "en": "Mal Rune",
+        "ru": "Руна Мал"
+      },
+      "group": "rune",
+      "requiredLevel": 49,
+      "image_url": "/images/mal.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r24",
+      "name": {
+        "en": "Ist Rune",
+        "ru": "Руна Ист"
+      },
+      "group": "rune",
+      "requiredLevel": 51,
+      "image_url": "/images/ist.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {
+            "magicFind": 30
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {
+            "magicFind": 25
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "magicFind": 25
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r25",
+      "name": {
+        "en": "Gul Rune",
+        "ru": "Руна Гул"
+      },
+      "group": "rune",
+      "requiredLevel": 53,
+      "image_url": "/images/gul.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r26",
+      "name": {
+        "en": "Vex Rune",
+        "ru": "Руна Векс"
+      },
+      "group": "rune",
+      "requiredLevel": 55,
+      "image_url": "/images/vex.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r27",
+      "name": {
+        "en": "Ohm Rune",
+        "ru": "Руна Ом"
+      },
+      "group": "rune",
+      "requiredLevel": 57,
+      "image_url": "/images/ohm.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r28",
+      "name": {
+        "en": "Lo Rune",
+        "ru": "Руна Ло"
+      },
+      "group": "rune",
+      "requiredLevel": 59,
+      "image_url": "/images/lo.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r29",
+      "name": {
+        "en": "Sur Rune",
+        "ru": "Руна Сур"
+      },
+      "group": "rune",
+      "requiredLevel": 61,
+      "image_url": "/images/sur.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "mana": 50
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r30",
+      "name": {
+        "en": "Ber Rune",
+        "ru": "Руна Бер"
+      },
+      "group": "rune",
+      "requiredLevel": 63,
+      "image_url": "/images/ber.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r31",
+      "name": {
+        "en": "Jah Rune",
+        "ru": "Руна Джа"
+      },
+      "group": "rune",
+      "requiredLevel": 65,
+      "image_url": "/images/jah.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "life": 50
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r32",
+      "name": {
+        "en": "Cham Rune",
+        "ru": "Руна Чам"
+      },
+      "group": "rune",
+      "requiredLevel": 67,
+      "image_url": "/images/cham.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "r33",
+      "name": {
+        "en": "Zod Rune",
+        "ru": "Руна Зод"
+      },
+      "group": "rune",
+      "requiredLevel": 69,
+      "image_url": "/images/zod.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "04r",
+      "name": {
+        "en": "Nef Rune Pure",
+        "ru": "Чистая руна Неф"
+      },
+      "group": "rune",
+      "requiredLevel": 13,
+      "image_url": "/images/nef.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "14r",
+      "name": {
+        "en": "Dol Rune Pure",
+        "ru": "Чистая руна Дол"
+      },
+      "group": "rune",
+      "requiredLevel": 31,
+      "image_url": "/images/dol.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "29r",
+      "name": {
+        "en": "Sur Rune Pure",
+        "ru": "Чистая руна Сур"
+      },
+      "group": "rune",
+      "requiredLevel": 61,
+      "image_url": "/images/sur.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {
+            "mana": 50
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "32r",
+      "name": {
+        "en": "Cham Rune Pure",
+        "ru": "Чистая руна Чам"
+      },
+      "group": "rune",
+      "requiredLevel": 67,
+      "image_url": "/images/cham.webp",
+      "effects": {
+        "weapon": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    }
+  ],
+  "bases": {
+    "cap": "helm",
+    "skp": "helm",
+    "hlm": "helm",
+    "fhl": "helm",
+    "ghm": "helm",
+    "crn": "helm",
+    "msk": "helm",
+    "qui": "helm",
+    "lea": "helm",
+    "hla": "helm",
+    "stu": "helm",
+    "rng": "helm",
+    "scl": "helm",
+    "chn": "helm",
+    "brs": "helm",
+    "spl": "helm",
+    "plt": "helm",
+    "fld": "helm",
+    "gth": "helm",
+    "ful": "helm",
+    "aar": "helm",
+    "ltp": "helm",
+    "buc": "shield",
+    "sml": "shield",
+    "lrg": "shield",
+    "kit": "shield",
+    "tow": "shield",
+    "gts": "shield",
+    "lgl": "helm",
+    "vgl": "helm",
+    "mgl": "helm",
+    "tgl": "helm",
+    "hgl": "helm",
+    "lbt": "helm",
+    "vbt": "helm",
+    "mbt": "helm",
+    "tbt": "helm",
+    "hbt": "helm",
+    "lbl": "helm",
+    "vbl": "helm",
+    "mbl": "helm",
+    "tbl": "helm",
+    "hbl": "helm",
+    "bhm": "helm",
+    "bsh": "shield",
+    "spk": "shield",
+    "xap": "helm",
+    "xkp": "helm",
+    "xlm": "helm",
+    "xhl": "helm",
+    "xhm": "helm",
+    "xrn": "helm",
+    "xsk": "helm",
+    "xui": "helm",
+    "xea": "helm",
+    "xla": "helm",
+    "xtu": "helm",
+    "xng": "helm",
+    "xcl": "helm",
+    "xhn": "helm",
+    "xrs": "helm",
+    "xpl": "helm",
+    "xlt": "helm",
+    "xld": "helm",
+    "xth": "helm",
+    "xul": "helm",
+    "xar": "helm",
+    "xtp": "helm",
+    "xuc": "shield",
+    "xml": "shield",
+    "xrg": "shield",
+    "xit": "shield",
+    "xow": "shield",
+    "xts": "shield",
+    "xlg": "helm",
+    "xvg": "helm",
+    "xmg": "helm",
+    "xtg": "helm",
+    "xhg": "helm",
+    "xlb": "helm",
+    "xvb": "helm",
+    "xmb": "helm",
+    "xtb": "helm",
+    "xhb": "helm",
+    "zlb": "helm",
+    "zvb": "helm",
+    "zmb": "helm",
+    "ztb": "helm",
+    "zhb": "helm",
+    "xh9": "helm",
+    "xsh": "shield",
+    "xpk": "shield",
+    "dr1": "helm",
+    "dr2": "helm",
+    "dr3": "helm",
+    "dr4": "helm",
+    "dr5": "helm",
+    "ba1": "helm",
+    "ba2": "helm",
+    "ba3": "helm",
+    "ba4": "helm",
+    "ba5": "helm",
+    "pa1": "shield",
+    "pa2": "shield",
+    "pa3": "shield",
+    "pa4": "shield",
+    "pa5": "shield",
+    "ne1": "shield",
+    "ne2": "shield",
+    "ne3": "shield",
+    "ne4": "shield",
+    "ne5": "shield",
+    "ci0": "helm",
+    "ci1": "helm",
+    "ci2": "helm",
+    "ci3": "helm",
+    "uap": "helm",
+    "ukp": "helm",
+    "ulm": "helm",
+    "uhl": "helm",
+    "uhm": "helm",
+    "urn": "helm",
+    "usk": "helm",
+    "uui": "helm",
+    "uea": "helm",
+    "ula": "helm",
+    "utu": "helm",
+    "ung": "helm",
+    "ucl": "helm",
+    "uhn": "helm",
+    "urs": "helm",
+    "upl": "helm",
+    "ult": "helm",
+    "uld": "helm",
+    "uth": "helm",
+    "uul": "helm",
+    "uar": "helm",
+    "utp": "helm",
+    "uuc": "shield",
+    "uml": "shield",
+    "urg": "shield",
+    "uit": "shield",
+    "uow": "shield",
+    "uts": "shield",
+    "ulg": "helm",
+    "uvg": "helm",
+    "umg": "helm",
+    "utg": "helm",
+    "uhg": "helm",
+    "ulb": "helm",
+    "uvb": "helm",
+    "umb": "helm",
+    "utb": "helm",
+    "uhb": "helm",
+    "ulc": "helm",
+    "uvc": "helm",
+    "umc": "helm",
+    "utc": "helm",
+    "uhc": "helm",
+    "uh9": "helm",
+    "ush": "shield",
+    "upk": "shield",
+    "dr6": "helm",
+    "dr7": "helm",
+    "dr8": "helm",
+    "dr9": "helm",
+    "dra": "helm",
+    "ba6": "helm",
+    "ba7": "helm",
+    "ba8": "helm",
+    "ba9": "helm",
+    "baa": "helm",
+    "pa6": "shield",
+    "pa7": "shield",
+    "pa8": "shield",
+    "pa9": "shield",
+    "paa": "shield",
+    "ne6": "shield",
+    "ne7": "shield",
+    "ne8": "shield",
+    "ne9": "shield",
+    "nea": "shield",
+    "drb": "helm",
+    "drc": "helm",
+    "drd": "helm",
+    "dre": "helm",
+    "drf": "helm",
+    "bab": "helm",
+    "bac": "helm",
+    "bad": "helm",
+    "bae": "helm",
+    "baf": "helm",
+    "pab": "shield",
+    "pac": "shield",
+    "pad": "shield",
+    "pae": "shield",
+    "paf": "shield",
+    "neb": "shield",
+    "neg": "shield",
+    "ned": "shield",
+    "nee": "shield",
+    "nef": "shield",
+    "wa1": "shield",
+    "wa2": "shield",
+    "wa3": "shield",
+    "wa4": "shield",
+    "wa5": "shield",
+    "wa6": "shield",
+    "wa7": "shield",
+    "wa8": "shield",
+    "wa9": "shield",
+    "waa": "shield",
+    "wab": "shield",
+    "wac": "shield",
+    "wad": "shield",
+    "wae": "shield",
+    "waf": "shield",
+    "p01": "shield",
+    "p02": "helm",
+    "p03": "helm",
+    "p05": "helm",
+    "p06": "helm",
+    "p07": "helm",
+    "p08": "helm",
+    "p11": "helm",
+    "p12": "helm",
+    "p13": "shield",
+    "p23": "helm",
+    "p24": "helm",
+    "p25": "helm",
+    "p26": "helm",
+    "p27": "shield",
+    "hax": "weapon",
+    "axe": "weapon",
+    "2ax": "weapon",
+    "mpi": "weapon",
+    "wax": "weapon",
+    "lax": "weapon",
+    "bax": "weapon",
+    "btx": "weapon",
+    "gax": "weapon",
+    "gix": "weapon",
+    "wnd": "weapon",
+    "ywn": "weapon",
+    "bwn": "weapon",
+    "gwn": "weapon",
+    "clb": "weapon",
+    "scp": "weapon",
+    "gsc": "weapon",
+    "wsp": "weapon",
+    "spc": "weapon",
+    "mac": "weapon",
+    "mst": "weapon",
+    "fla": "weapon",
+    "whm": "weapon",
+    "mau": "weapon",
+    "gma": "weapon",
+    "ssd": "weapon",
+    "scm": "weapon",
+    "sbr": "weapon",
+    "flc": "weapon",
+    "crs": "weapon",
+    "bsd": "weapon",
+    "lsd": "weapon",
+    "wsd": "weapon",
+    "2hs": "weapon",
+    "clm": "weapon",
+    "gis": "weapon",
+    "bsw": "weapon",
+    "flb": "weapon",
+    "gsd": "weapon",
+    "dgr": "weapon",
+    "dir": "weapon",
+    "kri": "weapon",
+    "bld": "weapon",
+    "tkf": "weapon",
+    "tax": "weapon",
+    "bkf": "weapon",
+    "bal": "weapon",
+    "jav": "weapon",
+    "pil": "weapon",
+    "ssp": "weapon",
+    "glv": "weapon",
+    "tsp": "weapon",
+    "spr": "weapon",
+    "tri": "weapon",
+    "brn": "weapon",
+    "spt": "weapon",
+    "pik": "weapon",
+    "bar": "weapon",
+    "vou": "weapon",
+    "scy": "weapon",
+    "pax": "weapon",
+    "hal": "weapon",
+    "wsc": "weapon",
+    "sst": "weapon",
+    "lst": "weapon",
+    "cst": "weapon",
+    "bst": "weapon",
+    "wst": "weapon",
+    "sbw": "weapon",
+    "hbw": "weapon",
+    "lbw": "weapon",
+    "cbw": "weapon",
+    "sbb": "weapon",
+    "lbb": "weapon",
+    "swb": "weapon",
+    "lwb": "weapon",
+    "lxb": "weapon",
+    "mxb": "weapon",
+    "hxb": "weapon",
+    "rxb": "weapon",
+    "gps": "weapon",
+    "ops": "weapon",
+    "gpm": "weapon",
+    "opm": "weapon",
+    "gpl": "weapon",
+    "opl": "weapon",
+    "d33": "weapon",
+    "g33": "weapon",
+    "leg": "weapon",
+    "hdm": "weapon",
+    "hfh": "weapon",
+    "hst": "weapon",
+    "msf": "weapon",
+    "9ha": "weapon",
+    "9ax": "weapon",
+    "92a": "weapon",
+    "9mp": "weapon",
+    "9wa": "weapon",
+    "9la": "weapon",
+    "9ba": "weapon",
+    "9bt": "weapon",
+    "9ga": "weapon",
+    "9gi": "weapon",
+    "9wn": "weapon",
+    "9yw": "weapon",
+    "9bw": "weapon",
+    "9gw": "weapon",
+    "9cl": "weapon",
+    "9sc": "weapon",
+    "9qs": "weapon",
+    "9ws": "weapon",
+    "9sp": "weapon",
+    "9ma": "weapon",
+    "9mt": "weapon",
+    "9fl": "weapon",
+    "9wh": "weapon",
+    "9m9": "weapon",
+    "9gm": "weapon",
+    "9ss": "weapon",
+    "9sm": "weapon",
+    "9sb": "weapon",
+    "9fc": "weapon",
+    "9cr": "weapon",
+    "9bs": "weapon",
+    "9ls": "weapon",
+    "9wd": "weapon",
+    "92h": "weapon",
+    "9cm": "weapon",
+    "9gs": "weapon",
+    "9b9": "weapon",
+    "9fb": "weapon",
+    "9gd": "weapon",
+    "9dg": "weapon",
+    "9di": "weapon",
+    "9kr": "weapon",
+    "9bl": "weapon",
+    "9tk": "weapon",
+    "9ta": "weapon",
+    "9bk": "weapon",
+    "9b8": "weapon",
+    "9ja": "weapon",
+    "9pi": "weapon",
+    "9s9": "weapon",
+    "9gl": "weapon",
+    "9ts": "weapon",
+    "9sr": "weapon",
+    "9tr": "weapon",
+    "9br": "weapon",
+    "9st": "weapon",
+    "9p9": "weapon",
+    "9b7": "weapon",
+    "9vo": "weapon",
+    "9s8": "weapon",
+    "9pa": "weapon",
+    "9h9": "weapon",
+    "9wc": "weapon",
+    "8ss": "weapon",
+    "8ls": "weapon",
+    "8cs": "weapon",
+    "8bs": "weapon",
+    "8ws": "weapon",
+    "8sb": "weapon",
+    "8hb": "weapon",
+    "8lb": "weapon",
+    "8cb": "weapon",
+    "8s8": "weapon",
+    "8l8": "weapon",
+    "8sw": "weapon",
+    "8lw": "weapon",
+    "8lx": "weapon",
+    "8mx": "weapon",
+    "8hx": "weapon",
+    "8rx": "weapon",
+    "qf1": "weapon",
+    "qf2": "weapon",
+    "ktr": "weapon",
+    "wrb": "weapon",
+    "axf": "weapon",
+    "ces": "weapon",
+    "clw": "weapon",
+    "btl": "weapon",
+    "skr": "weapon",
+    "9ar": "weapon",
+    "9wb": "weapon",
+    "9xf": "weapon",
+    "9cs": "weapon",
+    "9lw": "weapon",
+    "9tw": "weapon",
+    "9qr": "weapon",
+    "7ar": "weapon",
+    "7wb": "weapon",
+    "7xf": "weapon",
+    "7cs": "weapon",
+    "7lw": "weapon",
+    "7tw": "weapon",
+    "7qr": "weapon",
+    "7ha": "weapon",
+    "7ax": "weapon",
+    "72a": "weapon",
+    "7mp": "weapon",
+    "7wa": "weapon",
+    "7la": "weapon",
+    "7ba": "weapon",
+    "7bt": "weapon",
+    "7ga": "weapon",
+    "7gi": "weapon",
+    "7wn": "weapon",
+    "7yw": "weapon",
+    "7bw": "weapon",
+    "7gw": "weapon",
+    "7cl": "weapon",
+    "7sc": "weapon",
+    "7qs": "weapon",
+    "7ws": "weapon",
+    "7sp": "weapon",
+    "7ma": "weapon",
+    "7mt": "weapon",
+    "7fl": "weapon",
+    "7wh": "weapon",
+    "7m7": "weapon",
+    "7gm": "weapon",
+    "7ss": "weapon",
+    "7sm": "weapon",
+    "7sb": "weapon",
+    "7fc": "weapon",
+    "7cr": "weapon",
+    "7bs": "weapon",
+    "7ls": "weapon",
+    "7wd": "weapon",
+    "72h": "weapon",
+    "7cm": "weapon",
+    "7gs": "weapon",
+    "7b7": "weapon",
+    "7fb": "weapon",
+    "7gd": "weapon",
+    "7dg": "weapon",
+    "7di": "weapon",
+    "7kr": "weapon",
+    "7bl": "weapon",
+    "7tk": "weapon",
+    "7ta": "weapon",
+    "7bk": "weapon",
+    "7b8": "weapon",
+    "7ja": "weapon",
+    "7pi": "weapon",
+    "7s7": "weapon",
+    "7gl": "weapon",
+    "7ts": "weapon",
+    "7sr": "weapon",
+    "7tr": "weapon",
+    "7br": "weapon",
+    "7st": "weapon",
+    "7p7": "weapon",
+    "7o7": "weapon",
+    "7vo": "weapon",
+    "7s8": "weapon",
+    "7pa": "weapon",
+    "7h7": "weapon",
+    "7wc": "weapon",
+    "6ss": "weapon",
+    "6ls": "weapon",
+    "6cs": "weapon",
+    "6bs": "weapon",
+    "6ws": "weapon",
+    "6sb": "weapon",
+    "6hb": "weapon",
+    "6lb": "weapon",
+    "6cb": "weapon",
+    "6s7": "weapon",
+    "6l7": "weapon",
+    "6sw": "weapon",
+    "6lw": "weapon",
+    "6lx": "weapon",
+    "6mx": "weapon",
+    "6hx": "weapon",
+    "6rx": "weapon",
+    "ob1": "weapon",
+    "ob2": "weapon",
+    "ob3": "weapon",
+    "ob4": "weapon",
+    "ob5": "weapon",
+    "am1": "weapon",
+    "am2": "weapon",
+    "am3": "weapon",
+    "am4": "weapon",
+    "am5": "weapon",
+    "ob6": "weapon",
+    "ob7": "weapon",
+    "ob8": "weapon",
+    "ob9": "weapon",
+    "oba": "weapon",
+    "am6": "weapon",
+    "am7": "weapon",
+    "am8": "weapon",
+    "am9": "weapon",
+    "ama": "weapon",
+    "obb": "weapon",
+    "obc": "weapon",
+    "obd": "weapon",
+    "obe": "weapon",
+    "obf": "weapon",
+    "amb": "weapon",
+    "amc": "weapon",
+    "amd": "weapon",
+    "ame": "weapon",
+    "amf": "weapon",
+    "p04": "weapon",
+    "p09": "weapon",
+    "p10": "weapon",
+    "p16": "weapon",
+    "p28": "weapon"
+  }
+}

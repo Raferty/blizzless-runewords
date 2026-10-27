@@ -1,0 +1,22 @@
+// Shared metrics for ordinary planner controls; game artwork keeps its own scale.
+@mixin control {
+  min-height: var(--planner-control-height, 36px);
+  padding: 7px 10px;
+  font-size: var(--planner-control-font-size, 13px);
+  line-height: var(--planner-control-line-height, 20px);
+  border-radius: var(--planner-control-radius, 5px);
+}
+
+@mixin field {
+  @include control;
+  height: var(--planner-control-height, 36px);
+}
+
+@mixin square {
+  @include field;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--planner-control-height, 36px);
+  padding: 0;
+}

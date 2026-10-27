@@ -45,7 +45,7 @@ function onCancel(event: Event) {
   if (!props.closable) event.preventDefault();
 }
 function onBackdropClick(event: MouseEvent) {
-  if (event.target !== dialog.value || !props.closable) return;
+  if (!dialog.value || event.target !== dialog.value || !props.closable) return;
   const rect = dialog.value.getBoundingClientRect();
   if (
     event.clientX < rect.left ||

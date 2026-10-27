@@ -5,7 +5,8 @@
     :section="route.section"
   />
   <RunewordsCatalog v-if="route.section === 'runewords'" />
-  <RecipesCatalog v-else v-model:search="recipeSearch" />
+  <RecipesCatalog v-else-if="route.section === 'recipes'" v-model:search="recipeSearch" />
+  <CharacterPlanner v-else />
 </template>
 <script setup lang="ts">
 import { computed, defineAsyncComponent, onBeforeUnmount, onMounted, ref } from "vue";
@@ -16,6 +17,9 @@ import { useText } from "@/composables/useText";
 import { parseCatalogHash } from "@/utils/navigation";
 const RecipesCatalog = defineAsyncComponent(
   () => import("@/components/RecipesCatalog.vue")
+);
+const CharacterPlanner = defineAsyncComponent(
+  () => import("@/components/CharacterPlanner.vue")
 );
 const words = useRunewordsStore();
 const t = useText();

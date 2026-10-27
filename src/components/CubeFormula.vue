@@ -12,6 +12,7 @@
         v-for="(item, index) in ingredients"
         :key="`${item.key}-${index}`"
         class="cube-ingredient"
+        :class="{ 'cube-ingredient--magic': cubeResultQuality(item.key) === 'magic' }"
       >
         <img
           v-if="ingredient(item.key)?.image"
@@ -122,6 +123,9 @@ function label(key: string) {
   text-align: center;
   background: transparent;
   border: 0;
+}
+.cube-formula__items > .cube-ingredient--magic {
+  color: var(--result-color);
 }
 .cube-formula__items .cube-ingredient img,
 .cube-formula__items .cube-ingredient__placeholder {

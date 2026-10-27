@@ -1,0 +1,1718 @@
+{
+  "source": {
+    "version": "Blizzless 1.3.2",
+    "patch": "1.3.2",
+    "datasetId": "6ada53efa3680a208170ae3d",
+    "manifestVersion": 1792771561313,
+    "updatedAt": "2026-10-23T16:06:01.313Z",
+    "url": "https://blizzless.info/ru/skills",
+    "files": {
+      "global/excel/charstats.txt": {
+        "sha256": "0b4ab97796e2286cb11c3b810bb290b0dc27d862118d6e28d90fe02f5d4d3d13",
+        "size": 4127
+      },
+      "global/excel/difficultylevels.txt": {
+        "sha256": "c54b77d7fc12081913815bb8b58b0b8778a5a7a3a851d7cfa477abe86a36f3b6",
+        "size": 1073
+      },
+      "global/excel/base/skills.txt": {
+        "sha256": "ae6f0c6242df854aa9eacc1d861555e26c385b6f11293142a3bb0571a467aac4",
+        "size": 340435
+      },
+      "global/excel/gems.txt": {
+        "sha256": "caf1bda937f2207f58dc854b5c968d99e585c90c29794ffdc11ee37c6fc6fe75",
+        "size": 8016
+      },
+      "global/excel/runes.txt": {
+        "sha256": "ee99dbc8248010efbea6ef7ddf7dc65435a5fb512db4ea490f9d4f751928c228",
+        "size": 32679
+      },
+      "global/excel/base/skilldesc.txt": {
+        "sha256": "740c3ce63a8ee2c091939e7c0236c1642c7e9a1c6052d681f348251a89a50bb8",
+        "size": 83609
+      },
+      "global/excel/inventory.txt": {
+        "sha256": "c9b758fca47eabd74c5d1240c0c06ec768eb6025669942553f6a0cccfb7cf4fa",
+        "size": 8427
+      },
+      "global/excel/skills.txt": {
+        "sha256": "acd30f649df831f7ddde8b2eedeafa8957e2fc5c253a11c4840ebbe133c64608",
+        "size": 366339
+      },
+      "global/excel/skilldesc.txt": {
+        "sha256": "b8d3137e16bf8c72b34854ec659d92e77eb1459ad6b6db7ed9a3b976a6c9d6d9",
+        "size": 98287
+      },
+      "local/lng/strings/skills.json": {
+        "sha256": "cdc527bf323045660c282d43f048571b06dd2706b1b4a23c6f51594b1f4b1d43",
+        "size": 1073374
+      }
+    }
+  },
+  "items": [
+    {
+      "name": "Ancients' Pledge",
+      "kind": "shield",
+      "ranges": {
+        "coldResist": [43, 43],
+        "fireResist": [48, 48],
+        "lightningResist": [48, 48],
+        "poisonResist": [48, 48]
+      },
+      "classRanges": {},
+      "unsupported": 2
+    },
+    {
+      "name": "Authority",
+      "kind": "armor",
+      "ranges": {
+        "fhr": [20, 20],
+        "fireResist": [30, 30]
+      },
+      "classRanges": {
+        "warlock": [2, 2]
+      },
+      "unsupported": 4
+    },
+    {
+      "name": "Beast",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [40, 40],
+        "strength": [25, 40],
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Black",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [15, 15],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Bone",
+      "kind": "armor",
+      "ranges": {
+        "fcr": [30, 30],
+        "fireResist": [30, 30],
+        "coldResist": [30, 30],
+        "lightningResist": [30, 30],
+        "poisonResist": [30, 30]
+      },
+      "classRanges": {
+        "necromancer": [2, 2]
+      },
+      "unsupported": 3
+    },
+    {
+      "name": "Bramble",
+      "kind": "armor",
+      "ranges": {
+        "fhr": [50, 50],
+        "poisonResist": [100, 100],
+        "fireResist": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Brand",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 11
+    },
+    {
+      "name": "Breath of the Dying",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [60, 60]
+      },
+      "classRanges": {},
+      "unsupported": 14
+    },
+    {
+      "name": "Call to Arms",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [40, 40],
+        "allSkills": [1, 1],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Chains of Honor",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [65, 65],
+        "coldResist": [65, 65],
+        "lightningResist": [65, 65],
+        "poisonResist": [65, 65],
+        "ias": [15, 15],
+        "magicFind": [75, 75]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Chaos",
+      "kind": "weapon",
+      "ranges": {
+        "magicFind": [100, 100],
+        "ias": [35, 35],
+        "strength": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Crescent Moon",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 20]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Death",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 13
+    },
+    {
+      "name": "Delirium",
+      "kind": "armor",
+      "ranges": {
+        "magicFind": [75, 75],
+        "allSkills": [2, 2],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Destruction",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 20],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Doom",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [45, 45],
+        "allSkills": [2, 2]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Dragon",
+      "kind": "armor",
+      "ranges": {
+        "strength": [3, 5],
+        "dexterity": [3, 5],
+        "vitality": [3, 5],
+        "energy": [3, 5]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Dragon",
+      "kind": "shield",
+      "ranges": {
+        "strength": [3, 5],
+        "dexterity": [3, 5],
+        "vitality": [3, 5],
+        "energy": [3, 5],
+        "mana": [50, 50]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Dream",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [5, 20],
+        "coldResist": [5, 20],
+        "lightningResist": [5, 20],
+        "poisonResist": [5, 20],
+        "fhr": [20, 30],
+        "magicFind": [12, 25],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Dream",
+      "kind": "shield",
+      "ranges": {
+        "fireResist": [5, 20],
+        "coldResist": [5, 20],
+        "lightningResist": [5, 20],
+        "poisonResist": [5, 20],
+        "fhr": [20, 30],
+        "magicFind": [12, 25],
+        "vitality": [10, 10],
+        "life": [50, 50]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Duress",
+      "kind": "armor",
+      "ranges": {
+        "fhr": [40, 40],
+        "fireResist": [15, 15],
+        "coldResist": [45, 45],
+        "lightningResist": [15, 15],
+        "poisonResist": [15, 15]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Edge",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [35, 35],
+        "strength": [5, 10],
+        "dexterity": [5, 10],
+        "vitality": [5, 10],
+        "energy": [5, 10]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Enigma",
+      "kind": "armor",
+      "ranges": {
+        "frw": [45, 45],
+        "allSkills": [2, 2]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Enlightenment",
+      "kind": "armor",
+      "ranges": {
+        "fcr": [10, 10],
+        "fireResist": [30, 30]
+      },
+      "classRanges": {
+        "sorceress": [2, 2]
+      },
+      "unsupported": 5
+    },
+    {
+      "name": "Envy",
+      "kind": "armor",
+      "ranges": {
+        "magicFind": [50, 75],
+        "ias": [30, 30],
+        "fcr": [10, 15],
+        "fireResist": [15, 15],
+        "coldResist": [15, 15],
+        "lightningResist": [15, 15],
+        "poisonResist": [15, 15]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Eternity",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [25, 25],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Exile",
+      "kind": "shield",
+      "ranges": {
+        "magicFind": [25, 25]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Faith",
+      "kind": "weapon",
+      "ranges": {
+        "fireResist": [15, 15],
+        "coldResist": [15, 15],
+        "lightningResist": [15, 15],
+        "poisonResist": [15, 15],
+        "allSkills": [1, 2]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Famine",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [85, 85],
+        "strength": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Flickering Flame",
+      "kind": "armor",
+      "ranges": {
+        "mana": [50, 75]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Fortitude",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [25, 25],
+        "fireResist": [25, 30],
+        "coldResist": [25, 30],
+        "lightningResist": [25, 30],
+        "poisonResist": [25, 30]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Fortitude",
+      "kind": "armor",
+      "ranges": {
+        "fcr": [25, 25],
+        "fireResist": [25, 30],
+        "coldResist": [25, 30],
+        "lightningResist": [25, 30],
+        "poisonResist": [25, 30]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Fury",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [40, 40]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Gloom",
+      "kind": "armor",
+      "ranges": {
+        "fcr": [20, 20],
+        "fhr": [30, 30],
+        "allSkills": [1, 1],
+        "magicFind": [-30, -30],
+        "strength": [10, 10],
+        "fireResist": [15, 15],
+        "coldResist": [15, 15],
+        "lightningResist": [15, 15],
+        "poisonResist": [15, 15]
+      },
+      "classRanges": {},
+      "unsupported": 3
+    },
+    {
+      "name": "Grief",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [30, 40]
+      },
+      "classRanges": {},
+      "unsupported": 11
+    },
+    {
+      "name": "Hand of Justice",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [33, 33]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Harmony",
+      "kind": "weapon",
+      "ranges": {
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Heart of the Oak",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [40, 40],
+        "allSkills": [3, 3],
+        "fireResist": [30, 40],
+        "coldResist": [30, 40],
+        "lightningResist": [30, 40],
+        "poisonResist": [30, 40],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Holy Thunder",
+      "kind": "weapon",
+      "ranges": {
+        "lightningResist": [60, 60]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Honor",
+      "kind": "weapon",
+      "ranges": {
+        "allSkills": [1, 1],
+        "strength": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Ice",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [90, 90]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Infinity",
+      "kind": "weapon",
+      "ranges": {
+        "frw": [35, 35],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Insight",
+      "kind": "weapon",
+      "ranges": {
+        "magicFind": [23, 23],
+        "fcr": [35, 35],
+        "strength": [5, 5],
+        "dexterity": [5, 5],
+        "vitality": [5, 5],
+        "energy": [5, 5]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "King's Grace",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Kingslayer",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [30, 30],
+        "strength": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Last Wish",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 13
+    },
+    {
+      "name": "Lawbringer",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [25, 25],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Leaf",
+      "kind": "weapon",
+      "ranges": {
+        "coldResist": [33, 33]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Lightning",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [25, 25],
+        "mana": [200, 300],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Lionheart",
+      "kind": "armor",
+      "ranges": {
+        "strength": [25, 25],
+        "vitality": [20, 20],
+        "dexterity": [15, 15],
+        "life": [50, 50],
+        "fireResist": [30, 30],
+        "coldResist": [30, 30],
+        "lightningResist": [30, 30],
+        "poisonResist": [30, 30],
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 2
+    },
+    {
+      "name": "Lore",
+      "kind": "armor",
+      "ranges": {
+        "energy": [10, 10],
+        "allSkills": [1, 1],
+        "lightningResist": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 3
+    },
+    {
+      "name": "Malice",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Melody",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 20],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Memory",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [33, 33],
+        "energy": [10, 10],
+        "vitality": [10, 10]
+      },
+      "classRanges": {
+        "sorceress": [3, 3]
+      },
+      "unsupported": 7
+    },
+    {
+      "name": "Mist",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [60, 60],
+        "fireResist": [40, 40],
+        "coldResist": [40, 40],
+        "lightningResist": [40, 40],
+        "poisonResist": [40, 40]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Myth",
+      "kind": "armor",
+      "ranges": {},
+      "classRanges": {
+        "barbarian": [2, 2]
+      },
+      "unsupported": 7
+    },
+    {
+      "name": "Nadir",
+      "kind": "armor",
+      "ranges": {
+        "strength": [5, 5]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Oath",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [40, 50],
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Obedience",
+      "kind": "weapon",
+      "ranges": {
+        "fhr": [40, 40],
+        "fireResist": [20, 30],
+        "coldResist": [20, 30],
+        "lightningResist": [20, 30],
+        "poisonResist": [20, 30],
+        "dexterity": [10, 10],
+        "strength": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Obsession",
+      "kind": "weapon",
+      "ranges": {
+        "allSkills": [4, 4],
+        "fcr": [75, 75],
+        "fhr": [60, 60],
+        "fireResist": [60, 70],
+        "coldResist": [60, 70],
+        "lightningResist": [60, 70],
+        "poisonResist": [60, 70],
+        "magicFind": [30, 30],
+        "energy": [10, 10],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Passion",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [25, 25]
+      },
+      "classRanges": {},
+      "unsupported": 11
+    },
+    {
+      "name": "Pattern",
+      "kind": "weapon",
+      "ranges": {
+        "fireResist": [15, 15],
+        "coldResist": [15, 15],
+        "lightningResist": [15, 15],
+        "poisonResist": [15, 15],
+        "strength": [6, 6],
+        "dexterity": [6, 6]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Peace",
+      "kind": "armor",
+      "ranges": {
+        "ias": [30, 30],
+        "fireResist": [15, 15],
+        "coldResist": [45, 45],
+        "lightningResist": [15, 15],
+        "poisonResist": [15, 15]
+      },
+      "classRanges": {
+        "amazon": [2, 2]
+      },
+      "unsupported": 3
+    },
+    {
+      "name": "Voice of Reason",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [30, 30],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 11
+    },
+    {
+      "name": "Phoenix",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 11
+    },
+    {
+      "name": "Phoenix",
+      "kind": "shield",
+      "ranges": {
+        "life": [50, 50]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Plague",
+      "kind": "weapon",
+      "ranges": {
+        "allSkills": [1, 2],
+        "ias": [20, 20]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Pride",
+      "kind": "weapon",
+      "ranges": {
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Principle",
+      "kind": "armor",
+      "ranges": {
+        "life": [100, 150],
+        "magicFind": [75, 75],
+        "fireResist": [30, 30]
+      },
+      "classRanges": {
+        "paladin": [2, 2]
+      },
+      "unsupported": 3
+    },
+    {
+      "name": "Prudence",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [25, 35],
+        "coldResist": [25, 35],
+        "lightningResist": [25, 35],
+        "poisonResist": [25, 35]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Radiance",
+      "kind": "armor",
+      "ranges": {
+        "energy": [10, 10],
+        "vitality": [10, 10],
+        "mana": [33, 33]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Rain",
+      "kind": "armor",
+      "ranges": {
+        "lightningResist": [30, 30]
+      },
+      "classRanges": {
+        "druid": [2, 2]
+      },
+      "unsupported": 7
+    },
+    {
+      "name": "Rhyme",
+      "kind": "shield",
+      "ranges": {
+        "fireResist": [25, 25],
+        "coldResist": [25, 25],
+        "lightningResist": [25, 25],
+        "poisonResist": [25, 25],
+        "magicFind": [25, 25]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Rift",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 20],
+        "strength": [5, 10],
+        "dexterity": [15, 20],
+        "vitality": [5, 10],
+        "energy": [5, 10]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Sanctuary",
+      "kind": "shield",
+      "ranges": {
+        "allSkills": [2, 2],
+        "fhr": [20, 20],
+        "dexterity": [20, 20]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Silence",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 20],
+        "fireResist": [75, 75],
+        "coldResist": [75, 75],
+        "lightningResist": [75, 75],
+        "poisonResist": [75, 75],
+        "allSkills": [2, 2],
+        "fhr": [20, 20],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Smoke",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [50, 50],
+        "coldResist": [50, 50],
+        "lightningResist": [50, 50],
+        "poisonResist": [50, 50],
+        "fhr": [20, 20],
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Spirit",
+      "kind": "weapon",
+      "ranges": {
+        "fhr": [55, 55],
+        "mana": [89, 112],
+        "vitality": [22, 22],
+        "fcr": [25, 35],
+        "allSkills": [2, 2]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Spirit",
+      "kind": "shield",
+      "ranges": {
+        "fhr": [55, 55],
+        "mana": [89, 112],
+        "vitality": [22, 22],
+        "fcr": [25, 35],
+        "allSkills": [2, 2],
+        "poisonResist": [35, 35],
+        "coldResist": [35, 35],
+        "lightningResist": [35, 35]
+      },
+      "classRanges": {},
+      "unsupported": 3
+    },
+    {
+      "name": "Splendor",
+      "kind": "shield",
+      "ranges": {
+        "magicFind": [20, 20],
+        "fcr": [10, 10],
+        "allSkills": [1, 1],
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Stealth",
+      "kind": "armor",
+      "ranges": {
+        "dexterity": [6, 6],
+        "frw": [25, 25],
+        "fcr": [25, 25],
+        "fhr": [25, 25],
+        "poisonResist": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 3
+    },
+    {
+      "name": "Steel",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [25, 25]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Stone",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [40, 40],
+        "coldResist": [40, 40],
+        "lightningResist": [40, 40],
+        "poisonResist": [40, 40],
+        "strength": [16, 16],
+        "vitality": [16, 16],
+        "fhr": [60, 60],
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 4
+    },
+    {
+      "name": "Strength",
+      "kind": "weapon",
+      "ranges": {
+        "strength": [20, 20],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 4
+    },
+    {
+      "name": "Temptation",
+      "kind": "shield",
+      "ranges": {
+        "fireResist": [30, 45],
+        "coldResist": [30, 45],
+        "lightningResist": [30, 45],
+        "poisonResist": [30, 45],
+        "mana": [120, 160],
+        "vitality": [10, 10]
+      },
+      "classRanges": {
+        "warlock": [3, 3]
+      },
+      "unsupported": 5
+    },
+    {
+      "name": "Treachery",
+      "kind": "armor",
+      "ranges": {
+        "ias": [45, 45],
+        "fhr": [20, 20],
+        "coldResist": [30, 30]
+      },
+      "classRanges": {
+        "assassin": [2, 2]
+      },
+      "unsupported": 3
+    },
+    {
+      "name": "Unbending Will",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 30],
+        "strength": [10, 10],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Venom",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Voice",
+      "kind": "armor",
+      "ranges": {
+        "fcr": [35, 35],
+        "mana": [200, 200],
+        "fireResist": [30, 30],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Void",
+      "kind": "weapon",
+      "ranges": {
+        "allSkills": [2, 2],
+        "fcr": [40, 40],
+        "strength": [8, 12],
+        "dexterity": [8, 12],
+        "vitality": [8, 12],
+        "energy": [8, 12],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Wealth",
+      "kind": "armor",
+      "ranges": {
+        "magicFind": [100, 100],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 3
+    },
+    {
+      "name": "White",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [20, 20],
+        "mana": [13, 13],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Wind",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [40, 40],
+        "allSkills": [1, 1],
+        "fcr": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Wisdom",
+      "kind": "armor",
+      "ranges": {
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Wonder",
+      "kind": "weapon",
+      "ranges": {
+        "allSkills": [2, 2],
+        "fcr": [20, 20],
+        "fireResist": [20, 40],
+        "coldResist": [20, 40],
+        "lightningResist": [20, 40],
+        "poisonResist": [20, 40],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Wrath",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 20],
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Zephyr",
+      "kind": "weapon",
+      "ranges": {
+        "frw": [25, 25],
+        "ias": [25, 25]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Hustle (armor)",
+      "kind": "armor",
+      "ranges": {
+        "frw": [65, 65],
+        "ias": [40, 40],
+        "fireResist": [10, 10],
+        "coldResist": [10, 10],
+        "lightningResist": [10, 10],
+        "poisonResist": [10, 10],
+        "fhr": [20, 20],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 3
+    },
+    {
+      "name": "Hustle (weapon)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [30, 30],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Mosaic",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [50, 50]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Metamorphosis",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [10, 10],
+        "coldResist": [10, 10],
+        "lightningResist": [10, 10],
+        "poisonResist": [10, 10],
+        "vitality": [10, 10],
+        "strength": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Ground",
+      "kind": "armor",
+      "ranges": {
+        "lightningResist": [30, 30],
+        "magicFind": [75, 75],
+        "fcr": [10, 10],
+        "fhr": [20, 20],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 4
+    },
+    {
+      "name": "Temper",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [30, 30],
+        "fcr": [20, 20],
+        "fhr": [20, 20],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Hearth",
+      "kind": "armor",
+      "ranges": {
+        "coldResist": [30, 30],
+        "fhr": [20, 20],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Cure",
+      "kind": "armor",
+      "ranges": {
+        "poisonResist": [40, 60],
+        "fhr": [20, 20],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 4
+    },
+    {
+      "name": "Bulwark",
+      "kind": "armor",
+      "ranges": {
+        "fhr": [20, 20],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Nightfall",
+      "kind": "shield",
+      "ranges": {
+        "fcr": [30, 30],
+        "magicFind": [50, 100]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Black (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [15, 15],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Flickering Flame (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "mana": [50, 75]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Melody (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 20],
+        "dexterity": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Nadir (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "strength": [5, 5]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Obsession (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "allSkills": [4, 4],
+        "fcr": [75, 75],
+        "fhr": [60, 60],
+        "fireResist": [60, 70],
+        "coldResist": [60, 70],
+        "lightningResist": [60, 70],
+        "poisonResist": [60, 70],
+        "magicFind": [30, 30],
+        "energy": [10, 10],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Radiance (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "energy": [10, 10],
+        "vitality": [10, 10],
+        "mana": [33, 33]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Smoke (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [50, 50],
+        "coldResist": [50, 50],
+        "lightningResist": [50, 50],
+        "poisonResist": [50, 50],
+        "fhr": [20, 20],
+        "energy": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Chains of Honor (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [65, 65],
+        "coldResist": [65, 65],
+        "lightningResist": [65, 65],
+        "poisonResist": [65, 65],
+        "ias": [15, 15],
+        "magicFind": [75, 75]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Exile (Pure)",
+      "kind": "shield",
+      "ranges": {
+        "magicFind": [25, 25]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Fortitude (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [25, 25],
+        "fireResist": [25, 30],
+        "coldResist": [25, 30],
+        "lightningResist": [25, 30],
+        "poisonResist": [25, 30]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Fortitude (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "fcr": [25, 25],
+        "fireResist": [25, 30],
+        "coldResist": [25, 30],
+        "lightningResist": [25, 30],
+        "poisonResist": [25, 30]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Myth (Pure)",
+      "kind": "armor",
+      "ranges": {},
+      "classRanges": {
+        "barbarian": [2, 2]
+      },
+      "unsupported": 7
+    },
+    {
+      "name": "Passion (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [25, 25]
+      },
+      "classRanges": {},
+      "unsupported": 10
+    },
+    {
+      "name": "Silence (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [20, 20],
+        "fireResist": [75, 75],
+        "coldResist": [75, 75],
+        "lightningResist": [75, 75],
+        "poisonResist": [75, 75],
+        "allSkills": [2, 2],
+        "fhr": [20, 20],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Venom (Pure)",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Voice (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "fcr": [35, 35],
+        "mana": [200, 200],
+        "fireResist": [30, 30],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "White (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [20, 20],
+        "mana": [13, 13],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 5
+    },
+    {
+      "name": "Bramble (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "fhr": [50, 50],
+        "poisonResist": [100, 100],
+        "fireResist": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Dragon (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "strength": [3, 5],
+        "dexterity": [3, 5],
+        "vitality": [3, 5],
+        "energy": [3, 5]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Dragon (Pure)",
+      "kind": "shield",
+      "ranges": {
+        "strength": [3, 5],
+        "dexterity": [3, 5],
+        "vitality": [3, 5],
+        "energy": [3, 5],
+        "mana": [50, 50]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Eternity (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [25, 25],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Hand of Justice (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [33, 33]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Hand of Justice (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [33, 33]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Hand of Justice (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [33, 33]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Last Wish (Pure)",
+      "kind": "weapon",
+      "ranges": {},
+      "classRanges": {},
+      "unsupported": 12
+    },
+    {
+      "name": "Lightning (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "fcr": [25, 25],
+        "mana": [200, 300],
+        "magicFind": [30, 30]
+      },
+      "classRanges": {},
+      "unsupported": 4
+    },
+    {
+      "name": "Pride (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Pride (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Pride (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Wind (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [40, 40],
+        "allSkills": [1, 1],
+        "fcr": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Doom (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [45, 45],
+        "allSkills": [2, 2]
+      },
+      "classRanges": {},
+      "unsupported": 9
+    },
+    {
+      "name": "Mist (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [60, 60],
+        "fireResist": [40, 40],
+        "coldResist": [40, 40],
+        "lightningResist": [40, 40],
+        "poisonResist": [40, 40]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Plague (Pure)",
+      "kind": "weapon",
+      "ranges": {
+        "allSkills": [1, 2],
+        "ias": [20, 20]
+      },
+      "classRanges": {},
+      "unsupported": 7
+    },
+    {
+      "name": "Metamorphosis (Pure)",
+      "kind": "armor",
+      "ranges": {
+        "fireResist": [10, 10],
+        "coldResist": [10, 10],
+        "lightningResist": [10, 10],
+        "poisonResist": [10, 10],
+        "vitality": [10, 10],
+        "strength": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 6
+    },
+    {
+      "name": "Coven",
+      "kind": "armor",
+      "ranges": {
+        "allSkills": [1, 1],
+        "fcr": [10, 10],
+        "magicFind": [26, 40],
+        "fireResist": [30, 30],
+        "vitality": [10, 10]
+      },
+      "classRanges": {},
+      "unsupported": 3
+    },
+    {
+      "name": "Vigilance",
+      "kind": "shield",
+      "ranges": {
+        "allSkills": [1, 1],
+        "fcr": [20, 20],
+        "life": [20, 40],
+        "mana": [20, 40],
+        "fireResist": [25, 35],
+        "coldResist": [25, 35],
+        "lightningResist": [25, 35],
+        "poisonResist": [25, 35]
+      },
+      "classRanges": {},
+      "unsupported": 4
+    },
+    {
+      "name": "Ritual",
+      "kind": "weapon",
+      "ranges": {
+        "ias": [40, 40]
+      },
+      "classRanges": {},
+      "unsupported": 8
+    },
+    {
+      "name": "Vigilance (Pure)",
+      "kind": "shield",
+      "ranges": {
+        "allSkills": [1, 1],
+        "fcr": [20, 20],
+        "life": [20, 40],
+        "mana": [20, 40],
+        "fireResist": [25, 35],
+        "coldResist": [25, 35],
+        "lightningResist": [25, 35],
+        "poisonResist": [25, 35]
+      },
+      "classRanges": {},
+      "unsupported": 4
+    },
+    {
+      "name": "Temptation (Pure)",
+      "kind": "shield",
+      "ranges": {
+        "fireResist": [30, 45],
+        "coldResist": [30, 45],
+        "lightningResist": [30, 45],
+        "poisonResist": [30, 45],
+        "mana": [120, 160],
+        "vitality": [10, 10]
+      },
+      "classRanges": {
+        "warlock": [3, 3]
+      },
+      "unsupported": 5
+    }
+  ]
+}

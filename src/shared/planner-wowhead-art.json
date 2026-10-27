@@ -1,0 +1,1622 @@
+{
+  "trees": [
+    {
+      "classId": "amazon",
+      "tree": 2,
+      "image": "images/planner/wowhead/trees/amazon1.webp",
+      "skills": [
+        {
+          "id": 10,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 14,
+          "row": 2,
+          "column": 2,
+          "requires": [10]
+        },
+        {
+          "id": 15,
+          "row": 2,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 19,
+          "row": 3,
+          "column": 1,
+          "requires": [10]
+        },
+        {
+          "id": 20,
+          "row": 3,
+          "column": 3,
+          "requires": [15]
+        },
+        {
+          "id": 24,
+          "row": 4,
+          "column": 2,
+          "requires": [14, 20]
+        },
+        {
+          "id": 25,
+          "row": 4,
+          "column": 3,
+          "requires": [20]
+        },
+        {
+          "id": 30,
+          "row": 5,
+          "column": 1,
+          "requires": [19]
+        },
+        {
+          "id": 34,
+          "row": 6,
+          "column": 2,
+          "requires": [24]
+        },
+        {
+          "id": 35,
+          "row": 6,
+          "column": 3,
+          "requires": [25]
+        }
+      ]
+    },
+    {
+      "classId": "amazon",
+      "tree": 1,
+      "image": "images/planner/wowhead/trees/amazon2.webp",
+      "skills": [
+        {
+          "id": 8,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 9,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 13,
+          "row": 2,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 17,
+          "row": 3,
+          "column": 1,
+          "requires": [8]
+        },
+        {
+          "id": 18,
+          "row": 3,
+          "column": 2,
+          "requires": [13]
+        },
+        {
+          "id": 23,
+          "row": 4,
+          "column": 3,
+          "requires": [9]
+        },
+        {
+          "id": 28,
+          "row": 5,
+          "column": 1,
+          "requires": [17]
+        },
+        {
+          "id": 29,
+          "row": 5,
+          "column": 2,
+          "requires": [18]
+        },
+        {
+          "id": 32,
+          "row": 6,
+          "column": 1,
+          "requires": [28, 29]
+        },
+        {
+          "id": 33,
+          "row": 6,
+          "column": 3,
+          "requires": [23]
+        }
+      ]
+    },
+    {
+      "classId": "amazon",
+      "tree": 0,
+      "image": "images/planner/wowhead/trees/amazon3.webp",
+      "skills": [
+        {
+          "id": 6,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 7,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 11,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 12,
+          "row": 2,
+          "column": 2,
+          "requires": [6]
+        },
+        {
+          "id": 16,
+          "row": 3,
+          "column": 3,
+          "requires": [7, 12]
+        },
+        {
+          "id": 21,
+          "row": 4,
+          "column": 1,
+          "requires": [11]
+        },
+        {
+          "id": 22,
+          "row": 4,
+          "column": 2,
+          "requires": [11, 12]
+        },
+        {
+          "id": 26,
+          "row": 5,
+          "column": 2,
+          "requires": [22]
+        },
+        {
+          "id": 27,
+          "row": 5,
+          "column": 3,
+          "requires": [16]
+        },
+        {
+          "id": 31,
+          "row": 6,
+          "column": 1,
+          "requires": [21]
+        }
+      ]
+    },
+    {
+      "classId": "assassin",
+      "tree": 2,
+      "image": "images/planner/wowhead/trees/assassin1.webp",
+      "skills": [
+        {
+          "id": 254,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 255,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 259,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 260,
+          "row": 2,
+          "column": 3,
+          "requires": [255]
+        },
+        {
+          "id": 265,
+          "row": 3,
+          "column": 2,
+          "requires": [254]
+        },
+        {
+          "id": 269,
+          "row": 4,
+          "column": 1,
+          "requires": [259]
+        },
+        {
+          "id": 270,
+          "row": 4,
+          "column": 3,
+          "requires": [260]
+        },
+        {
+          "id": 274,
+          "row": 5,
+          "column": 1,
+          "requires": [269]
+        },
+        {
+          "id": 275,
+          "row": 5,
+          "column": 3,
+          "requires": [270]
+        },
+        {
+          "id": 280,
+          "row": 6,
+          "column": 2,
+          "requires": [265, 274]
+        }
+      ]
+    },
+    {
+      "classId": "assassin",
+      "tree": 1,
+      "image": "images/planner/wowhead/trees/assassin2.webp",
+      "skills": [
+        {
+          "id": 252,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 253,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 258,
+          "row": 2,
+          "column": 1,
+          "requires": [252]
+        },
+        {
+          "id": 263,
+          "row": 3,
+          "column": 2,
+          "requires": [252]
+        },
+        {
+          "id": 264,
+          "row": 3,
+          "column": 3,
+          "requires": [253]
+        },
+        {
+          "id": 267,
+          "row": 4,
+          "column": 1,
+          "requires": [258]
+        },
+        {
+          "id": 268,
+          "row": 4,
+          "column": 2,
+          "requires": [264, 263]
+        },
+        {
+          "id": 273,
+          "row": 5,
+          "column": 3,
+          "requires": [264]
+        },
+        {
+          "id": 278,
+          "row": 6,
+          "column": 1,
+          "requires": [267]
+        },
+        {
+          "id": 279,
+          "row": 6,
+          "column": 2,
+          "requires": [268]
+        }
+      ]
+    },
+    {
+      "classId": "assassin",
+      "tree": 0,
+      "image": "images/planner/wowhead/trees/assassin3.webp",
+      "skills": [
+        {
+          "id": 251,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 256,
+          "row": 2,
+          "column": 1,
+          "requires": [251]
+        },
+        {
+          "id": 257,
+          "row": 2,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 261,
+          "row": 3,
+          "column": 1,
+          "requires": [256]
+        },
+        {
+          "id": 262,
+          "row": 3,
+          "column": 2,
+          "requires": [251]
+        },
+        {
+          "id": 266,
+          "row": 4,
+          "column": 3,
+          "requires": [257, 262]
+        },
+        {
+          "id": 271,
+          "row": 5,
+          "column": 1,
+          "requires": [261]
+        },
+        {
+          "id": 272,
+          "row": 5,
+          "column": 2,
+          "requires": [262]
+        },
+        {
+          "id": 276,
+          "row": 6,
+          "column": 1,
+          "requires": [271]
+        },
+        {
+          "id": 277,
+          "row": 6,
+          "column": 3,
+          "requires": [266]
+        }
+      ]
+    },
+    {
+      "classId": "barbarian",
+      "tree": 2,
+      "image": "images/planner/wowhead/trees/barbarian1.webp",
+      "skills": [
+        {
+          "id": 130,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 131,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 137,
+          "row": 2,
+          "column": 1,
+          "requires": [130]
+        },
+        {
+          "id": 138,
+          "row": 2,
+          "column": 2,
+          "requires": [130]
+        },
+        {
+          "id": 142,
+          "row": 3,
+          "column": 3,
+          "requires": [131]
+        },
+        {
+          "id": 146,
+          "row": 4,
+          "column": 1,
+          "requires": [137]
+        },
+        {
+          "id": 149,
+          "row": 5,
+          "column": 2,
+          "requires": [138]
+        },
+        {
+          "id": 150,
+          "row": 5,
+          "column": 3,
+          "requires": [142]
+        },
+        {
+          "id": 154,
+          "row": 6,
+          "column": 1,
+          "requires": [146, 149]
+        },
+        {
+          "id": 155,
+          "row": 6,
+          "column": 2,
+          "requires": [149]
+        }
+      ]
+    },
+    {
+      "classId": "barbarian",
+      "tree": 1,
+      "image": "images/planner/wowhead/trees/barbarian2.webp",
+      "skills": [
+        {
+          "id": 127,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 128,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 129,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 134,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 135,
+          "row": 2,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 136,
+          "row": 2,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 141,
+          "row": 3,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 145,
+          "row": 4,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 148,
+          "row": 5,
+          "column": 1,
+          "requires": [141]
+        },
+        {
+          "id": 153,
+          "row": 6,
+          "column": 3,
+          "requires": [145]
+        }
+      ]
+    },
+    {
+      "classId": "barbarian",
+      "tree": 0,
+      "image": "images/planner/wowhead/trees/barbarian3.webp",
+      "skills": [
+        {
+          "id": 126,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 132,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 133,
+          "row": 2,
+          "column": 3,
+          "requires": [126]
+        },
+        {
+          "id": 139,
+          "row": 3,
+          "column": 2,
+          "requires": [126]
+        },
+        {
+          "id": 140,
+          "row": 3,
+          "column": 3,
+          "requires": [133]
+        },
+        {
+          "id": 143,
+          "row": 4,
+          "column": 1,
+          "requires": [132]
+        },
+        {
+          "id": 144,
+          "row": 4,
+          "column": 2,
+          "requires": [139]
+        },
+        {
+          "id": 147,
+          "row": 5,
+          "column": 3,
+          "requires": [140]
+        },
+        {
+          "id": 151,
+          "row": 6,
+          "column": 1,
+          "requires": [143, 144]
+        },
+        {
+          "id": 152,
+          "row": 6,
+          "column": 2,
+          "requires": [144]
+        }
+      ]
+    },
+    {
+      "classId": "druid",
+      "tree": 2,
+      "image": "images/planner/wowhead/trees/druid1.webp",
+      "skills": [
+        {
+          "id": 225,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 229,
+          "row": 2,
+          "column": 1,
+          "requires": [225]
+        },
+        {
+          "id": 230,
+          "row": 2,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 234,
+          "row": 3,
+          "column": 1,
+          "requires": [229]
+        },
+        {
+          "id": 235,
+          "row": 3,
+          "column": 3,
+          "requires": [230]
+        },
+        {
+          "id": 240,
+          "row": 4,
+          "column": 2,
+          "requires": [235]
+        },
+        {
+          "id": 244,
+          "row": 5,
+          "column": 1,
+          "requires": [234]
+        },
+        {
+          "id": 245,
+          "row": 5,
+          "column": 2,
+          "requires": [240]
+        },
+        {
+          "id": 249,
+          "row": 6,
+          "column": 1,
+          "requires": [244]
+        },
+        {
+          "id": 250,
+          "row": 6,
+          "column": 2,
+          "requires": [245]
+        }
+      ]
+    },
+    {
+      "classId": "druid",
+      "tree": 1,
+      "image": "images/planner/wowhead/trees/druid2.webp",
+      "skills": [
+        {
+          "id": 223,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 224,
+          "row": 1,
+          "column": 2,
+          "requires": [223]
+        },
+        {
+          "id": 228,
+          "row": 2,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 232,
+          "row": 3,
+          "column": 1,
+          "requires": [223]
+        },
+        {
+          "id": 233,
+          "row": 3,
+          "column": 3,
+          "requires": [228]
+        },
+        {
+          "id": 238,
+          "row": 4,
+          "column": 1,
+          "requires": [232]
+        },
+        {
+          "id": 239,
+          "row": 4,
+          "column": 2,
+          "requires": [232, 233]
+        },
+        {
+          "id": 242,
+          "row": 5,
+          "column": 2,
+          "requires": [239]
+        },
+        {
+          "id": 243,
+          "row": 5,
+          "column": 3,
+          "requires": [233]
+        },
+        {
+          "id": 248,
+          "row": 6,
+          "column": 1,
+          "requires": [238]
+        }
+      ]
+    },
+    {
+      "classId": "druid",
+      "tree": 0,
+      "image": "images/planner/wowhead/trees/druid3.webp",
+      "skills": [
+        {
+          "id": 221,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 222,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 226,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 227,
+          "row": 2,
+          "column": 2,
+          "requires": [221]
+        },
+        {
+          "id": 231,
+          "row": 3,
+          "column": 3,
+          "requires": [222]
+        },
+        {
+          "id": 236,
+          "row": 4,
+          "column": 1,
+          "requires": [226]
+        },
+        {
+          "id": 237,
+          "row": 4,
+          "column": 2,
+          "requires": [226, 227]
+        },
+        {
+          "id": 241,
+          "row": 5,
+          "column": 3,
+          "requires": [243]
+        },
+        {
+          "id": 246,
+          "row": 6,
+          "column": 1,
+          "requires": [236]
+        },
+        {
+          "id": 247,
+          "row": 6,
+          "column": 2,
+          "requires": [237]
+        }
+      ]
+    },
+    {
+      "classId": "necromancer",
+      "tree": 2,
+      "image": "images/planner/wowhead/trees/necromancer1.webp",
+      "skills": [
+        {
+          "id": 69,
+          "row": 1,
+          "column": 1,
+          "requires": [70]
+        },
+        {
+          "id": 70,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 75,
+          "row": 2,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 79,
+          "row": 3,
+          "column": 1,
+          "requires": [75]
+        },
+        {
+          "id": 80,
+          "row": 3,
+          "column": 3,
+          "requires": [70]
+        },
+        {
+          "id": 85,
+          "row": 4,
+          "column": 2,
+          "requires": [75]
+        },
+        {
+          "id": 89,
+          "row": 5,
+          "column": 1,
+          "requires": [79]
+        },
+        {
+          "id": 90,
+          "row": 5,
+          "column": 2,
+          "requires": [85]
+        },
+        {
+          "id": 94,
+          "row": 6,
+          "column": 2,
+          "requires": [90]
+        },
+        {
+          "id": 95,
+          "row": 6,
+          "column": 3,
+          "requires": [80, 90]
+        }
+      ]
+    },
+    {
+      "classId": "necromancer",
+      "tree": 1,
+      "image": "images/planner/wowhead/trees/necromancer2.webp",
+      "skills": [
+        {
+          "id": 67,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 68,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 73,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 74,
+          "row": 2,
+          "column": 2,
+          "requires": [67]
+        },
+        {
+          "id": 78,
+          "row": 3,
+          "column": 3,
+          "requires": [68]
+        },
+        {
+          "id": 83,
+          "row": 4,
+          "column": 1,
+          "requires": [73, 74]
+        },
+        {
+          "id": 84,
+          "row": 4,
+          "column": 2,
+          "requires": [74]
+        },
+        {
+          "id": 88,
+          "row": 5,
+          "column": 3,
+          "requires": [78, 84]
+        },
+        {
+          "id": 92,
+          "row": 6,
+          "column": 1,
+          "requires": [83]
+        },
+        {
+          "id": 93,
+          "row": 6,
+          "column": 2,
+          "requires": [84]
+        }
+      ]
+    },
+    {
+      "classId": "necromancer",
+      "tree": 0,
+      "image": "images/planner/wowhead/trees/necromancer3.webp",
+      "skills": [
+        {
+          "id": 66,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 71,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 72,
+          "row": 2,
+          "column": 3,
+          "requires": [66]
+        },
+        {
+          "id": 76,
+          "row": 3,
+          "column": 2,
+          "requires": [66]
+        },
+        {
+          "id": 77,
+          "row": 3,
+          "column": 3,
+          "requires": [72]
+        },
+        {
+          "id": 81,
+          "row": 4,
+          "column": 1,
+          "requires": [71]
+        },
+        {
+          "id": 82,
+          "row": 4,
+          "column": 2,
+          "requires": [76]
+        },
+        {
+          "id": 86,
+          "row": 5,
+          "column": 1,
+          "requires": [81]
+        },
+        {
+          "id": 87,
+          "row": 5,
+          "column": 3,
+          "requires": [77]
+        },
+        {
+          "id": 91,
+          "row": 6,
+          "column": 2,
+          "requires": [82, 87]
+        }
+      ]
+    },
+    {
+      "classId": "paladin",
+      "tree": 2,
+      "image": "images/planner/wowhead/trees/paladin1.webp",
+      "skills": [
+        {
+          "id": 99,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 100,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 104,
+          "row": 2,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 105,
+          "row": 2,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 109,
+          "row": 3,
+          "column": 1,
+          "requires": [99]
+        },
+        {
+          "id": 110,
+          "row": 3,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 115,
+          "row": 4,
+          "column": 2,
+          "requires": [109, 104]
+        },
+        {
+          "id": 120,
+          "row": 5,
+          "column": 1,
+          "requires": [109]
+        },
+        {
+          "id": 124,
+          "row": 6,
+          "column": 2,
+          "requires": [115]
+        },
+        {
+          "id": 125,
+          "row": 6,
+          "column": 3,
+          "requires": []
+        }
+      ]
+    },
+    {
+      "classId": "paladin",
+      "tree": 1,
+      "image": "images/planner/wowhead/trees/paladin2.webp",
+      "skills": [
+        {
+          "id": 98,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 102,
+          "row": 2,
+          "column": 2,
+          "requires": [98]
+        },
+        {
+          "id": 103,
+          "row": 2,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 108,
+          "row": 3,
+          "column": 1,
+          "requires": [98]
+        },
+        {
+          "id": 113,
+          "row": 4,
+          "column": 1,
+          "requires": [108]
+        },
+        {
+          "id": 114,
+          "row": 4,
+          "column": 2,
+          "requires": [102]
+        },
+        {
+          "id": 118,
+          "row": 5,
+          "column": 2,
+          "requires": [114]
+        },
+        {
+          "id": 119,
+          "row": 5,
+          "column": 3,
+          "requires": [103, 114]
+        },
+        {
+          "id": 122,
+          "row": 6,
+          "column": 1,
+          "requires": [113]
+        },
+        {
+          "id": 123,
+          "row": 6,
+          "column": 3,
+          "requires": [119]
+        }
+      ]
+    },
+    {
+      "classId": "paladin",
+      "tree": 0,
+      "image": "images/planner/wowhead/trees/paladin3.webp",
+      "skills": [
+        {
+          "id": 96,
+          "row": 1,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 97,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 101,
+          "row": 2,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 106,
+          "row": 3,
+          "column": 1,
+          "requires": [96]
+        },
+        {
+          "id": 107,
+          "row": 3,
+          "column": 3,
+          "requires": [97]
+        },
+        {
+          "id": 111,
+          "row": 4,
+          "column": 1,
+          "requires": [106]
+        },
+        {
+          "id": 112,
+          "row": 4,
+          "column": 2,
+          "requires": [101]
+        },
+        {
+          "id": 116,
+          "row": 5,
+          "column": 1,
+          "requires": [111]
+        },
+        {
+          "id": 117,
+          "row": 5,
+          "column": 3,
+          "requires": [107, 112]
+        },
+        {
+          "id": 121,
+          "row": 6,
+          "column": 2,
+          "requires": [112, 116]
+        }
+      ]
+    },
+    {
+      "classId": "sorceress",
+      "tree": 2,
+      "image": "images/planner/wowhead/trees/sorceress1.webp",
+      "skills": [
+        {
+          "id": 39,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 40,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 44,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 45,
+          "row": 2,
+          "column": 2,
+          "requires": [39]
+        },
+        {
+          "id": 50,
+          "row": 3,
+          "column": 3,
+          "requires": [45, 40]
+        },
+        {
+          "id": 55,
+          "row": 4,
+          "column": 2,
+          "requires": [45]
+        },
+        {
+          "id": 59,
+          "row": 5,
+          "column": 1,
+          "requires": [44, 55]
+        },
+        {
+          "id": 60,
+          "row": 5,
+          "column": 3,
+          "requires": [50]
+        },
+        {
+          "id": 64,
+          "row": 6,
+          "column": 1,
+          "requires": [59]
+        },
+        {
+          "id": 65,
+          "row": 6,
+          "column": 2,
+          "requires": []
+        }
+      ]
+    },
+    {
+      "classId": "sorceress",
+      "tree": 1,
+      "image": "images/planner/wowhead/trees/sorceress2.webp",
+      "skills": [
+        {
+          "id": 38,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 42,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 43,
+          "row": 2,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 48,
+          "row": 3,
+          "column": 1,
+          "requires": [42]
+        },
+        {
+          "id": 49,
+          "row": 3,
+          "column": 2,
+          "requires": [38]
+        },
+        {
+          "id": 53,
+          "row": 4,
+          "column": 2,
+          "requires": [49]
+        },
+        {
+          "id": 54,
+          "row": 4,
+          "column": 3,
+          "requires": [43]
+        },
+        {
+          "id": 57,
+          "row": 5,
+          "column": 1,
+          "requires": [48, 53]
+        },
+        {
+          "id": 58,
+          "row": 5,
+          "column": 3,
+          "requires": [54, 53]
+        },
+        {
+          "id": 63,
+          "row": 6,
+          "column": 2,
+          "requires": []
+        }
+      ]
+    },
+    {
+      "classId": "sorceress",
+      "tree": 0,
+      "image": "images/planner/wowhead/trees/sorceress3.webp",
+      "skills": [
+        {
+          "id": 36,
+          "row": 1,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 37,
+          "row": 1,
+          "column": 3,
+          "requires": []
+        },
+        {
+          "id": 41,
+          "row": 2,
+          "column": 1,
+          "requires": []
+        },
+        {
+          "id": 46,
+          "row": 3,
+          "column": 1,
+          "requires": [41]
+        },
+        {
+          "id": 47,
+          "row": 3,
+          "column": 2,
+          "requires": [36]
+        },
+        {
+          "id": 51,
+          "row": 4,
+          "column": 1,
+          "requires": [46]
+        },
+        {
+          "id": 52,
+          "row": 4,
+          "column": 3,
+          "requires": [37, 47]
+        },
+        {
+          "id": 56,
+          "row": 5,
+          "column": 2,
+          "requires": [47, 51]
+        },
+        {
+          "id": 61,
+          "row": 6,
+          "column": 2,
+          "requires": []
+        },
+        {
+          "id": 62,
+          "row": 6,
+          "column": 3,
+          "requires": [52]
+        }
+      ]
+    }
+  ],
+  "icons": {
+    "10": "images/planner/wowhead/icons/jab.webp",
+    "14": "images/planner/wowhead/icons/power-strike.webp",
+    "15": "images/planner/wowhead/icons/poison-javelin.webp",
+    "19": "images/planner/wowhead/icons/impale.webp",
+    "20": "images/planner/wowhead/icons/lightning-bolt.webp",
+    "24": "images/planner/wowhead/icons/charged-strike.webp",
+    "25": "images/planner/wowhead/icons/plague-javelin.webp",
+    "30": "images/planner/wowhead/icons/fend.webp",
+    "34": "images/planner/wowhead/icons/lightning-strike.webp",
+    "35": "images/planner/wowhead/icons/lightning-fury.webp",
+    "8": "images/planner/wowhead/icons/inner-sight.webp",
+    "9": "images/planner/wowhead/icons/critical-strike.webp",
+    "13": "images/planner/wowhead/icons/dodge.webp",
+    "17": "images/planner/wowhead/icons/slow-missiles.webp",
+    "18": "images/planner/wowhead/icons/avoid.webp",
+    "23": "images/planner/wowhead/icons/penetrate.webp",
+    "28": "images/planner/wowhead/icons/dopplezon.webp",
+    "29": "images/planner/wowhead/icons/evade.webp",
+    "32": "images/planner/wowhead/icons/valkyrie.webp",
+    "33": "images/planner/wowhead/icons/pierce.webp",
+    "6": "images/planner/wowhead/icons/magic-arrow.webp",
+    "7": "images/planner/wowhead/icons/fire-arrow.webp",
+    "11": "images/planner/wowhead/icons/cold-arrow.webp",
+    "12": "images/planner/wowhead/icons/multiple-shot.webp",
+    "16": "images/planner/wowhead/icons/exploding-arrow.webp",
+    "21": "images/planner/wowhead/icons/ice-arrow.webp",
+    "22": "images/planner/wowhead/icons/guided-arrow.webp",
+    "26": "images/planner/wowhead/icons/strafe.webp",
+    "27": "images/planner/wowhead/icons/immolation-arrow.webp",
+    "31": "images/planner/wowhead/icons/freezing-arrow.webp",
+    "254": "images/planner/wowhead/icons/tiger-strike.webp",
+    "255": "images/planner/wowhead/icons/dragon-talon.webp",
+    "259": "images/planner/wowhead/icons/fists-of-fire.webp",
+    "260": "images/planner/wowhead/icons/dragon-claw.webp",
+    "265": "images/planner/wowhead/icons/cobra-strike.webp",
+    "269": "images/planner/wowhead/icons/claws-of-thunder.webp",
+    "270": "images/planner/wowhead/icons/dragon-tail.webp",
+    "274": "images/planner/wowhead/icons/blades-of-ice.webp",
+    "275": "images/planner/wowhead/icons/dragon-flight.webp",
+    "280": "images/planner/wowhead/icons/royal-strike.webp",
+    "252": "images/planner/wowhead/icons/claw-mastery.webp",
+    "253": "images/planner/wowhead/icons/psychic-hammer.webp",
+    "258": "images/planner/wowhead/icons/quickness.webp",
+    "263": "images/planner/wowhead/icons/weapon-block.webp",
+    "264": "images/planner/wowhead/icons/cloak-of-shadows.webp",
+    "267": "images/planner/wowhead/icons/fade.webp",
+    "268": "images/planner/wowhead/icons/shadow-warrior.webp",
+    "273": "images/planner/wowhead/icons/mind-blast.webp",
+    "278": "images/planner/wowhead/icons/venom.webp",
+    "279": "images/planner/wowhead/icons/shadow-master.webp",
+    "251": "images/planner/wowhead/icons/fire-trauma.webp",
+    "256": "images/planner/wowhead/icons/shock-field.webp",
+    "257": "images/planner/wowhead/icons/blade-sentinel.webp",
+    "261": "images/planner/wowhead/icons/charged-bolt-sentry.webp",
+    "262": "images/planner/wowhead/icons/wake-of-fire-sentry.webp",
+    "266": "images/planner/wowhead/icons/blade-fury.webp",
+    "271": "images/planner/wowhead/icons/lightning-sentry.webp",
+    "272": "images/planner/wowhead/icons/inferno-sentry.webp",
+    "276": "images/planner/wowhead/icons/death-sentry.webp",
+    "277": "images/planner/wowhead/icons/blade-shield.webp",
+    "130": "images/planner/wowhead/icons/howl.webp",
+    "131": "images/planner/wowhead/icons/find-potion.webp",
+    "137": "images/planner/wowhead/icons/taunt.webp",
+    "138": "images/planner/wowhead/icons/shout.webp",
+    "142": "images/planner/wowhead/icons/find-item.webp",
+    "146": "images/planner/wowhead/icons/battle-cry.webp",
+    "149": "images/planner/wowhead/icons/battle-orders.webp",
+    "150": "images/planner/wowhead/icons/grim-ward.webp",
+    "154": "images/planner/wowhead/icons/war-cry.webp",
+    "155": "images/planner/wowhead/icons/battle-command.webp",
+    "128": "images/planner/wowhead/icons/axe-mastery.webp",
+    "129": "images/planner/wowhead/icons/mace-mastery.webp",
+    "134": "images/planner/wowhead/icons/pole-arm-mastery.webp",
+    "135": "images/planner/wowhead/icons/throwing-mastery.webp",
+    "136": "images/planner/wowhead/icons/spear-mastery.webp",
+    "141": "images/planner/wowhead/icons/increased-stamina.webp",
+    "145": "images/planner/wowhead/icons/iron-skin.webp",
+    "148": "images/planner/wowhead/icons/increased-speed.webp",
+    "153": "images/planner/wowhead/icons/natural-resistance.webp",
+    "126": "images/planner/wowhead/icons/bash.webp",
+    "132": "images/planner/wowhead/icons/leap.webp",
+    "133": "images/planner/wowhead/icons/double-swing.webp",
+    "139": "images/planner/wowhead/icons/stun.webp",
+    "140": "images/planner/wowhead/icons/double-throw.webp",
+    "143": "images/planner/wowhead/icons/leap-attack.webp",
+    "144": "images/planner/wowhead/icons/concentrate.webp",
+    "147": "images/planner/wowhead/icons/frenzy.webp",
+    "151": "images/planner/wowhead/icons/whirlwind.webp",
+    "152": "images/planner/wowhead/icons/berserk.webp",
+    "225": "images/planner/wowhead/icons/firestorm.webp",
+    "229": "images/planner/wowhead/icons/molten-boulder.webp",
+    "230": "images/planner/wowhead/icons/arctic-blast.webp",
+    "234": "images/planner/wowhead/icons/eruption.webp",
+    "235": "images/planner/wowhead/icons/cyclone-armor.webp",
+    "240": "images/planner/wowhead/icons/twister.webp",
+    "244": "images/planner/wowhead/icons/volcano.webp",
+    "245": "images/planner/wowhead/icons/tornado.webp",
+    "249": "images/planner/wowhead/icons/armageddon.webp",
+    "250": "images/planner/wowhead/icons/hurricane.webp",
+    "223": "images/planner/wowhead/icons/wearwolf.webp",
+    "224": "images/planner/wowhead/icons/shape-shifting.webp",
+    "228": "images/planner/wowhead/icons/wearbear.webp",
+    "232": "images/planner/wowhead/icons/feral-rage.webp",
+    "233": "images/planner/wowhead/icons/maul.webp",
+    "238": "images/planner/wowhead/icons/rabies.webp",
+    "239": "images/planner/wowhead/icons/fire-claws.webp",
+    "242": "images/planner/wowhead/icons/hunger.webp",
+    "243": "images/planner/wowhead/icons/shock-wave.webp",
+    "248": "images/planner/wowhead/icons/fury.webp",
+    "221": "images/planner/wowhead/icons/raven.webp",
+    "222": "images/planner/wowhead/icons/plague-poppy.webp",
+    "226": "images/planner/wowhead/icons/oak-sage.webp",
+    "227": "images/planner/wowhead/icons/summon-spirit-wolf.webp",
+    "231": "images/planner/wowhead/icons/cycle-of-life.webp",
+    "236": "images/planner/wowhead/icons/heart-of-wolverine.webp",
+    "237": "images/planner/wowhead/icons/summon-fenris.webp",
+    "241": "images/planner/wowhead/icons/vines.webp",
+    "246": "images/planner/wowhead/icons/spirit-of-barbs.webp",
+    "247": "images/planner/wowhead/icons/summon-grizzly.webp",
+    "69": "images/planner/wowhead/icons/skeleton-mastery.webp",
+    "70": "images/planner/wowhead/icons/raise-skeleton.webp",
+    "75": "images/planner/wowhead/icons/clay-golem.webp",
+    "79": "images/planner/wowhead/icons/golem-mastery.webp",
+    "80": "images/planner/wowhead/icons/raise-skeletal-mage.webp",
+    "85": "images/planner/wowhead/icons/bloodgolem.webp",
+    "89": "images/planner/wowhead/icons/summon-resist.webp",
+    "90": "images/planner/wowhead/icons/irongolem.webp",
+    "94": "images/planner/wowhead/icons/firegolem.webp",
+    "95": "images/planner/wowhead/icons/revive.webp",
+    "67": "images/planner/wowhead/icons/teeth.webp",
+    "68": "images/planner/wowhead/icons/bone-armor.webp",
+    "73": "images/planner/wowhead/icons/poison-dagger.webp",
+    "74": "images/planner/wowhead/icons/corpse-explosion.webp",
+    "78": "images/planner/wowhead/icons/bone-wall.webp",
+    "83": "images/planner/wowhead/icons/poison-explosion.webp",
+    "84": "images/planner/wowhead/icons/bone-spear.webp",
+    "88": "images/planner/wowhead/icons/bone-prison.webp",
+    "92": "images/planner/wowhead/icons/poison-nova.webp",
+    "93": "images/planner/wowhead/icons/bone-spirit.webp",
+    "66": "images/planner/wowhead/icons/amplify-damage.webp",
+    "71": "images/planner/wowhead/icons/dim-vision.webp",
+    "72": "images/planner/wowhead/icons/weaken.webp",
+    "76": "images/planner/wowhead/icons/iron-maiden.webp",
+    "77": "images/planner/wowhead/icons/terror.webp",
+    "81": "images/planner/wowhead/icons/confuse.webp",
+    "82": "images/planner/wowhead/icons/life-tap.webp",
+    "86": "images/planner/wowhead/icons/attract.webp",
+    "87": "images/planner/wowhead/icons/decrepify.webp",
+    "91": "images/planner/wowhead/icons/lower-resist.webp",
+    "99": "images/planner/wowhead/icons/prayer.webp",
+    "100": "images/planner/wowhead/icons/resist-fire.webp",
+    "104": "images/planner/wowhead/icons/defiance.webp",
+    "105": "images/planner/wowhead/icons/resist-cold.webp",
+    "109": "images/planner/wowhead/icons/cleansing.webp",
+    "110": "images/planner/wowhead/icons/resist-lightning.webp",
+    "115": "images/planner/wowhead/icons/vigor.webp",
+    "120": "images/planner/wowhead/icons/meditation.webp",
+    "124": "images/planner/wowhead/icons/redemption.webp",
+    "125": "images/planner/wowhead/icons/salvation.webp",
+    "98": "images/planner/wowhead/icons/might.webp",
+    "102": "images/planner/wowhead/icons/holy-fire.webp",
+    "103": "images/planner/wowhead/icons/thorns.webp",
+    "108": "images/planner/wowhead/icons/blessed-aim.webp",
+    "113": "images/planner/wowhead/icons/concentration.webp",
+    "114": "images/planner/wowhead/icons/holy-freeze.webp",
+    "118": "images/planner/wowhead/icons/holy-shock.webp",
+    "119": "images/planner/wowhead/icons/sanctuary.webp",
+    "122": "images/planner/wowhead/icons/fanaticism.webp",
+    "123": "images/planner/wowhead/icons/conviction.webp",
+    "96": "images/planner/wowhead/icons/sacrifice.webp",
+    "97": "images/planner/wowhead/icons/smite.webp",
+    "101": "images/planner/wowhead/icons/holy-bolt.webp",
+    "106": "images/planner/wowhead/icons/zeal.webp",
+    "107": "images/planner/wowhead/icons/charge.webp",
+    "111": "images/planner/wowhead/icons/vengeance.webp",
+    "112": "images/planner/wowhead/icons/blessed-hammer.webp",
+    "116": "images/planner/wowhead/icons/conversion.webp",
+    "117": "images/planner/wowhead/icons/holy-shield.webp",
+    "121": "images/planner/wowhead/icons/fist-of-the-heavens.webp",
+    "39": "images/planner/wowhead/icons/ice-bolt.webp",
+    "40": "images/planner/wowhead/icons/frozen-armor.webp",
+    "44": "images/planner/wowhead/icons/frost-nova.webp",
+    "45": "images/planner/wowhead/icons/ice-blast.webp",
+    "50": "images/planner/wowhead/icons/shiver-armor.webp",
+    "55": "images/planner/wowhead/icons/glacial-spike.webp",
+    "59": "images/planner/wowhead/icons/blizzard.webp",
+    "60": "images/planner/wowhead/icons/chilling-armor.webp",
+    "64": "images/planner/wowhead/icons/frozen-orb.webp",
+    "65": "images/planner/wowhead/icons/cold-mastery.webp",
+    "38": "images/planner/wowhead/icons/charged-bolt.webp",
+    "42": "images/planner/wowhead/icons/static-field.webp",
+    "43": "images/planner/wowhead/icons/telekinesis.webp",
+    "48": "images/planner/wowhead/icons/nova.webp",
+    "49": "images/planner/wowhead/icons/lightning.webp",
+    "53": "images/planner/wowhead/icons/chain-lightning.webp",
+    "54": "images/planner/wowhead/icons/teleport.webp",
+    "57": "images/planner/wowhead/icons/thunder-storm.webp",
+    "58": "images/planner/wowhead/icons/energy-shield.webp",
+    "63": "images/planner/wowhead/icons/lightning-mastery.webp",
+    "36": "images/planner/wowhead/icons/fire-bolt.webp",
+    "37": "images/planner/wowhead/icons/warmth.webp",
+    "41": "images/planner/wowhead/icons/inferno.webp",
+    "46": "images/planner/wowhead/icons/blaze.webp",
+    "47": "images/planner/wowhead/icons/fire-ball.webp",
+    "51": "images/planner/wowhead/icons/fire-wall.webp",
+    "52": "images/planner/wowhead/icons/enchant.webp",
+    "56": "images/planner/wowhead/icons/meteor.webp",
+    "61": "images/planner/wowhead/icons/fire-mastery.webp",
+    "62": "images/planner/wowhead/icons/hydra.webp"
+  }
+}

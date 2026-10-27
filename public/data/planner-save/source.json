@@ -1,0 +1,93 @@
+{
+  "version": "Blizzless 1.3.2",
+  "manifestVersion": 1792771561313,
+  "characterCodec": "d2r-saver@0.2.0",
+  "itemCodec": "@d2runewizard/d2s@2.0.134",
+  "supplementalDataRevision": "7d0b319c68ae31d1d4d6a5e8b4ccdffe57bb29f2",
+  "files": {
+    "skilldesc": {
+      "sha256": "b8d3137e16bf8c72b34854ec659d92e77eb1459ad6b6db7ed9a3b976a6c9d6d9",
+      "size": 98287
+    },
+    "Weapons": {
+      "sha256": "79dc65b5df91ce215536e1c0f53a4aef5fc76004e48d1ebaf4e6d748441ba6db",
+      "size": 121543
+    },
+    "Armor": {
+      "sha256": "3a2f117a1a156eba6a13c906e8e069796ceebbed77a5e0aecea82072a32d4db2",
+      "size": 87492
+    },
+    "skills": {
+      "sha256": "acd30f649df831f7ddde8b2eedeafa8957e2fc5c253a11c4840ebbe133c64608",
+      "size": 366339
+    },
+    "itemtypes": {
+      "sha256": "eeaf22fb240f7bd43ea3a9025319ed10b04def1382105a4786d259b52f868cf2",
+      "size": 10601
+    },
+    "Misc": {
+      "sha256": "1e8e214548c7c33ac0f7053163b45709cfd90246b929c91c48e889901bc8c218",
+      "size": 72364
+    },
+    "itemStatCost": {
+      "sha256": "fdff0e5d911c121fbf9c3eea5b8409b1239403c1e2e2cce8f3c97b2033742663",
+      "size": 47587
+    },
+    "uniqueItems": {
+      "sha256": "f97a05cf7c53183288a2f3dfa8982177e52cd8f65f5eccff73a7cd9f242b8d2a",
+      "size": 123152
+    },
+    "sets": {
+      "sha256": "853d789f4b0e28ffab430b98460a95b4a94246ae03aefad8b3c20941880b73f4",
+      "size": 7312
+    },
+    "setItems": {
+      "sha256": "e0564da215b2d4c2240f4ddf2ee89bd43902e90b81632b05f72f56115457f2c4",
+      "size": 32018
+    },
+    "runes": {
+      "sha256": "ee99dbc8248010efbea6ef7ddf7dc65435a5fb512db4ea490f9d4f751928c228",
+      "size": 32679
+    },
+    "magicPrefix": {
+      "sha256": "ba61fa1ce24fa8fbcc0964a3095cb0156bda5e72311fbbc2d9066fbb3f7d11ec",
+      "size": 61252
+    },
+    "gems": {
+      "sha256": "caf1bda937f2207f58dc854b5c968d99e585c90c29794ffdc11ee37c6fc6fe75",
+      "size": 8016
+    },
+    "magicSuffix": {
+      "sha256": "b05f548ecd3deb1ce407f9cb753828021783cb74c6d28555dbf1b8bc0c8daf82",
+      "size": 69646
+    },
+    "properties": {
+      "sha256": "e62d651dd10a78646210c9824b3f820c52afe7058a3dd07a18b7b750667a9fc5",
+      "size": 39260
+    },
+    "charStats": {
+      "sha256": "0b4ab97796e2286cb11c3b810bb290b0dc27d862118d6e28d90fe02f5d4d3d13",
+      "size": 4127
+    },
+    "rarePrefix": {
+      "source": "unmodified base table from d2r-saver@0.2.0"
+    },
+    "rareSuffix": {
+      "source": "unmodified base table from d2r-saver@0.2.0"
+    },
+    "experience": {
+      "source": "unmodified base table from d2r-saver@0.2.0"
+    },
+    "hireling": {
+      "sha256": "a899a3c962e2a243cbb8ae5977c975442676c985e863146f2573f6b83eb68974",
+      "size": 45993
+    },
+    "qualityItems": {
+      "source": "unmodified base table from d2r-saver@0.2.0"
+    },
+    "autoMagic": {
+      "sha256": "8dd639ccfac4d10f9fa918a56d11797d06c91901f0613d0e378e17586e8872f9",
+      "size": 6749
+    }
+  }
+}

@@ -21,7 +21,11 @@
       @click="toggleOptions"
       @keydown="handleKeydown"
     >
-      <span class="ui-select__value">{{ displayValue }}</span>
+      <span class="ui-select__value">
+        <slot name="value" :option="selectedOption" :label="displayValue">
+          {{ displayValue }}
+        </slot>
+      </span>
       <svg
         class="ui-select__chevron"
         width="14"
@@ -39,12 +43,13 @@
         />
       </svg>
     </button>
-    <Teleport to="body">
+    <Teleport :to="teleportTarget">
       <ul
         v-if="isOpen"
         :id="dropdownId"
         ref="panel"
         class="ui-select__dropdown"
+        :class="dropdownClass"
         role="listbox"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledby"
@@ -62,7 +67,9 @@
           @pointerdown.prevent
           @click="selectOption(index)"
         >
-          <span>{{ option.label }}</span>
+          <slot name="option" :option="option">
+            <span>{{ option.label }}</span>
+          </slot>
           <svg
             v-if="option.value === modelValue"
             width="14"
@@ -107,6 +114,7 @@ const props = withDefaults(
     ariaLabelledby?: string;
     active?: boolean;
     disabled?: boolean;
+    dropdownClass?: string;
   }>(),
   {
     id: undefined,
@@ -114,8 +122,13 @@ const props = withDefaults(
     ariaLabelledby: undefined,
     active: false,
     disabled: false,
+    dropdownClass: undefined,
   }
 );
+defineSlots<{
+  option?(props: { option: SelectOption<T> }): unknown;
+  value?(props: { option: SelectOption<T> | undefined; label: string }): unknown;
+}>();
 const emit = defineEmits<{
   (e: "update:modelValue", value: T): void;
   (e: "change", value: T): void;
@@ -124,6 +137,8 @@ const selectId = useId();
 const dropdownId = `${selectId}-listbox`;
 const optionId = (index: number) => `${dropdownId}-option-${index}`;
 const root = ref<HTMLElement | null>(null);
+// Native modal dialogs make body portals inert and paint above them.
+const teleportTarget = ref<HTMLElement | string>("body");
 const trigger = ref<HTMLButtonElement | null>(null);
 const panel = ref<HTMLElement | null>(null);
 const isOpen = ref(false);
@@ -133,6 +148,7 @@ const selectedIndex = computed(() =>
   props.options.findIndex((option) => option.value === props.modelValue)
 );
 const displayValue = computed(() => props.options[selectedIndex.value]?.label ?? "");
+const selectedOption = computed(() => props.options[selectedIndex.value]);
 
 function positionDropdown() {
   if (!trigger.value) return;
@@ -282,6 +298,7 @@ watch(
   }
 );
 onMounted(() => {
+  teleportTarget.value = root.value?.closest("dialog") ?? "body";
   document.addEventListener("pointerdown", onOutside, true);
   document.addEventListener("focusin", onOutside);
   window.addEventListener("resize", onViewportChange);

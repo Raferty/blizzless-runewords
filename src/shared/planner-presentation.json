@@ -1,0 +1,220 @@
+{
+  "classes": [
+    {
+      "id": "amazon",
+      "name": {
+        "ru": "Амазонка",
+        "en": "Amazon"
+      },
+      "role": {
+        "ru": "Лук, копьё и молния",
+        "en": "Bow, spear & lightning"
+      },
+      "color": "#d0b477",
+      "icon": "bow",
+      "trees": [
+        {
+          "ru": "Лук и арбалет",
+          "en": "Bow & crossbow"
+        },
+        {
+          "ru": "Пассивные и магические",
+          "en": "Passive & magic"
+        },
+        {
+          "ru": "Дротики и копья",
+          "en": "Javelin & spear"
+        }
+      ]
+    },
+    {
+      "id": "sorceress",
+      "name": {
+        "ru": "Волшебница",
+        "en": "Sorceress"
+      },
+      "role": {
+        "ru": "Огонь, молния и холод",
+        "en": "Fire, lightning & cold"
+      },
+      "color": "#86bfe3",
+      "icon": "spark",
+      "trees": [
+        {
+          "ru": "Огонь",
+          "en": "Fire"
+        },
+        {
+          "ru": "Молния",
+          "en": "Lightning"
+        },
+        {
+          "ru": "Холод",
+          "en": "Cold"
+        }
+      ]
+    },
+    {
+      "id": "necromancer",
+      "name": {
+        "ru": "Некромант",
+        "en": "Necromancer"
+      },
+      "role": {
+        "ru": "Призыв, кости и проклятия",
+        "en": "Summons, bone & curses"
+      },
+      "color": "#9dbf93",
+      "icon": "skull",
+      "trees": [
+        {
+          "ru": "Проклятия",
+          "en": "Curses"
+        },
+        {
+          "ru": "Яд и кости",
+          "en": "Poison & bone"
+        },
+        {
+          "ru": "Призыв",
+          "en": "Summoning"
+        }
+      ]
+    },
+    {
+      "id": "paladin",
+      "name": {
+        "ru": "Паладин",
+        "en": "Paladin"
+      },
+      "role": {
+        "ru": "Священный воин и ауры",
+        "en": "Holy warrior & auras"
+      },
+      "color": "#d9c893",
+      "icon": "shield",
+      "trees": [
+        {
+          "ru": "Боевые навыки",
+          "en": "Combat skills"
+        },
+        {
+          "ru": "Боевые ауры",
+          "en": "Offensive auras"
+        },
+        {
+          "ru": "Защитные ауры",
+          "en": "Defensive auras"
+        }
+      ]
+    },
+    {
+      "id": "barbarian",
+      "name": {
+        "ru": "Варвар",
+        "en": "Barbarian"
+      },
+      "role": {
+        "ru": "Мастерство оружия и кличи",
+        "en": "Weapon mastery & warcries"
+      },
+      "color": "#ce9487",
+      "icon": "axes",
+      "trees": [
+        {
+          "ru": "Боевые навыки",
+          "en": "Combat skills"
+        },
+        {
+          "ru": "Мастерство боя",
+          "en": "Combat masteries"
+        },
+        {
+          "ru": "Боевые кличи",
+          "en": "Warcries"
+        }
+      ]
+    },
+    {
+      "id": "druid",
+      "name": {
+        "ru": "Друид",
+        "en": "Druid"
+      },
+      "role": {
+        "ru": "Стихии, звери и превращения",
+        "en": "Elements, beasts & shapeshifting"
+      },
+      "color": "#b2b77f",
+      "icon": "leaf",
+      "trees": [
+        {
+          "ru": "Призыв",
+          "en": "Summoning"
+        },
+        {
+          "ru": "Превращения",
+          "en": "Shapeshifting"
+        },
+        {
+          "ru": "Стихии",
+          "en": "Elemental"
+        }
+      ]
+    },
+    {
+      "id": "assassin",
+      "name": {
+        "ru": "Ассасин",
+        "en": "Assassin"
+      },
+      "role": {
+        "ru": "Ловушки и боевые искусства",
+        "en": "Traps & martial arts"
+      },
+      "color": "#b39aca",
+      "icon": "claw",
+      "trees": [
+        {
+          "ru": "Ловушки",
+          "en": "Traps"
+        },
+        {
+          "ru": "Теневые дисциплины",
+          "en": "Shadow disciplines"
+        },
+        {
+          "ru": "Боевые искусства",
+          "en": "Martial arts"
+        }
+      ]
+    },
+    {
+      "id": "warlock",
+      "name": {
+        "ru": "Чернокнижник",
+        "en": "Warlock"
+      },
+      "role": {
+        "ru": "Демоны, мистика и хаос",
+        "en": "Demons, eldritch & chaos"
+      },
+      "color": "#cc9479",
+      "icon": "sigil",
+      "trees": [
+        {
+          "ru": "Демоны",
+          "en": "Demon"
+        },
+        {
+          "ru": "Мистика",
+          "en": "Eldritch"
+        },
+        {
+          "ru": "Хаос",
+          "en": "Chaos"
+        }
+      ]
+    }
+  ]
+}

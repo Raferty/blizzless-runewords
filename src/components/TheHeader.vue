@@ -13,19 +13,31 @@
       <a href="#/recipes" :aria-current="section === 'recipes' ? 'page' : undefined">{{
         t("Рецепты", "Recipes")
       }}</a>
+      <a href="#/planner" :aria-current="section === 'planner' ? 'page' : undefined">{{
+        t("Планнер", "Planner")
+      }}</a>
     </nav>
     <SearchInput
+      v-if="section !== 'planner'"
       :model-value="search"
       :placeholder="searchPlaceholder"
       @update:model-value="$emit('update:search', $event)"
     />
-    <a
-      class="discord"
-      href="https://discord.gg/TJgm9ZAhwW"
-      target="_blank"
-      rel="noopener noreferrer"
-      >Discord ↗</a
-    >
+    <div v-else class="header__spacer" aria-hidden="true" />
+    <div class="header__links">
+      <a
+        href="https://discord.gg/TJgm9ZAhwW"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Discord ↗</a
+      >
+      <a
+        href="https://t.me/Raferty"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Bugs or suggestions ↗</a
+      >
+    </div>
     <div class="header__actions">
       <p class="header__date">
         {{ store.interface.header.updatedAt[store.currentLang] }}
@@ -114,10 +126,18 @@ small {
   background: #29270b;
   border-color: #756b1f;
 }
-.discord {
+.header__links {
+  display: flex;
+  gap: 14px;
+  align-items: center;
   font-size: 11px;
-  color: var(--color-muted);
   white-space: nowrap;
+}
+.header__links a {
+  color: var(--color-muted);
+}
+.header__links a:hover {
+  color: var(--color-title);
 }
 .header__actions {
   display: flex;
@@ -141,7 +161,7 @@ small {
     font-size: 15px;
   }
   small,
-  .discord {
+  .header__links {
     display: none;
   }
   .header__actions {
@@ -149,6 +169,9 @@ small {
   }
 }
 @media (max-width: 900px) {
+  .header__spacer {
+    display: none;
+  }
   .header {
     grid-template-columns: auto minmax(0, 1fr);
   }
