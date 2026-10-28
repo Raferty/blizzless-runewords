@@ -174,7 +174,7 @@
       :id="`${uid}-tooltip`"
       :skill="selected"
       :rank="store.build.skills[selected.id] ?? 0"
-      :bonus="treeBonus(selected.tree)"
+      :bonus="skillBonus(selected)"
       :can-learn="!!skillPlan(store.build, selected)"
       :interactive="tooltipMode === 'touch'"
       :anchor="tooltipAnchor"
@@ -242,9 +242,11 @@ const stats = computed(() => buildStats(store.build));
 const base = import.meta.env.BASE_URL;
 const treeBonus = (tree: number) =>
   stats.value.skillBonus + stats.value.treeBonuses[tree];
+const skillBonus = (skill: PlannerSkill) =>
+  treeBonus(skill.tree) + (stats.value.socketSkillBonuses[skill.id] ?? 0);
 function skillRank(skill: PlannerSkill) {
   const rank = store.build.skills[skill.id] ?? 0;
-  return rank + (rank && !showBaseRanks.value ? treeBonus(skill.tree) : 0);
+  return rank + (rank && !showBaseRanks.value ? skillBonus(skill) : 0);
 }
 function hasEquipmentBonus(skill: PlannerSkill) {
   return skillRank(skill) > (store.build.skills[skill.id] ?? 0);
@@ -253,7 +255,7 @@ function skillLabel(skill: PlannerSkill) {
   const rank = store.build.skills[skill.id] ?? 0;
   const name = skill.name[lang.value];
   return hasEquipmentBonus(skill)
-    ? `${name}: ${skillRank(skill)} (${t("вложено очков", "base skill level")}: ${rank}/${skill.maxPoints}, +${treeBonus(skill.tree)} ${t("от снаряжения", "from equipment")})`
+    ? `${name}: ${skillRank(skill)} (${t("вложено очков", "base skill level")}: ${rank}/${skill.maxPoints}, +${skillBonus(skill)} ${t("от снаряжения", "from equipment")})`
     : `${name}: ${skillRank(skill)}/${skill.maxPoints}`;
 }
 const treePoints = (tree: number) =>

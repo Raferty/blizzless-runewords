@@ -2,6 +2,7 @@ import type { GameSaveEntry, GameSaveExporter } from "./planner-game-save";
 import type { ClassId, PlannerBuild, PlannerItem } from "@/types/planner";
 import {
   resolvePropertyValues,
+  resolvePropertyGroups,
   propertyClasses,
   itemSkillClass,
 } from "./planner-properties";
@@ -281,7 +282,8 @@ export function catalogPropertyLines(
   roll: 0 | 1,
   characterLevel = 99,
   values: PlannerItem["propertyValues"] = {},
-  skillClass: ClassId = "amazon"
+  skillClass: ClassId = "amazon",
+  choices: PlannerItem["propertyChoices"] = {}
 ) {
   if (!item.catalogId || (item.quality !== "unique" && item.quality !== "set")) return [];
   const definition = (
@@ -294,7 +296,8 @@ export function catalogPropertyLines(
         roll,
         characterLevel,
         values,
-        skillClass
+        skillClass,
+        choices
       )
     : [];
 }
@@ -303,8 +306,12 @@ export function socketPropertyLines(
   native: GameSaveExporter,
   code: string,
   category: "weapon" | "helm" | "shield",
-  characterLevel = 99
+  characterLevel = 99,
+  values: PlannerItem["propertyValues"] = {}
 ) {
+  const jewel = native.gd.uniqueItems[code];
+  if (jewel && ["jew", "cjw"].includes(jewel.code))
+    return definitionPropertyLines(native, jewel, 1, characterLevel, values);
   const gem = native.gd.gems[code] as unknown as Record<string, unknown> | undefined;
   if (!gem) return [];
   const definition: Record<string, unknown> = {};
@@ -345,9 +352,14 @@ export function definitionPropertyLines(
   roll: 0 | 1,
   characterLevel: number,
   values: PlannerItem["propertyValues"] = {},
-  skillClass: ClassId = "amazon"
+  skillClass: ClassId = "amazon",
+  choices: PlannerItem["propertyChoices"] = {}
 ) {
-  definition = resolvePropertyValues(definition, native.gd.properties, values);
+  definition = resolvePropertyValues(
+    resolvePropertyGroups(definition, native.gd.propertyGroups, choices),
+    native.gd.properties,
+    values
+  );
   const lines: string[] = [];
   for (let i = 1; i <= 12; i++) {
     const code = String(definition[`prop${i}`] ?? "");
@@ -356,6 +368,15 @@ export function definitionPropertyLines(
     const min = Number(definition[`min${i}`] ?? 0),
       max = Number(definition[`max${i}`] ?? min);
     const par = String(definition[`par${i}`] ?? "");
+    if (code === "dmg-pois") {
+      const frames = Number(par);
+      const low = Math.round((min * frames) / 256),
+        high = Math.round((max * frames) / 256);
+      lines.push(
+        `Adds ${low === high ? low : `${low}–${high}`} Poison Damage Over ${frames / 25} Seconds`
+      );
+      continue;
+    }
     if (property.func1 === 36) {
       const index = Math.max(min, Math.min(max, propertyClasses.indexOf(skillClass)));
       lines.push(`+${property.val1} to ${plannerClasses[index].name.en} Skill Levels`);
@@ -432,7 +453,8 @@ export function itemPropertyLines(
     item.propertyRoll ?? 1,
     level,
     item.propertyValues,
-    itemSkillClass(item, fallback)
+    itemSkillClass(item, fallback),
+    item.propertyChoices
   );
   for (const code of native.itemRunes(item))
     lines.push(...socketPropertyLines(native, code, socketCategory(item), level));

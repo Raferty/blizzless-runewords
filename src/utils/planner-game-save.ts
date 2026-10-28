@@ -1,7 +1,8 @@
 import { D2RSaver, type BinaryParsedItem, type D2SCharacterProfile } from "d2r-saver";
 import { writeItem, type types as SaveTypes } from "@d2runewizard/d2s";
 import { constants as originalConstants } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
-import { plannerClasses } from "@/shared/planner";
+import { difficulties, plannerClasses } from "@/shared/planner";
+import { waypoints } from "@/shared/planner-waypoints";
 import { RUNEWORDS } from "@/shared/runewords";
 import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
 import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
@@ -19,6 +20,7 @@ import { affixStats, parseAffixes } from "./planner-affixes";
 import { layoutStashItems } from "./planner-stash";
 import {
   resolvePropertyValues,
+  resolvePropertyGroups,
   itemSkillClass,
   isClassCharm,
 } from "./planner-properties";
@@ -221,8 +223,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       (entry.owner === "mercenary" || classRestriction !== nativeClass)
     )
       return false;
-    if (entry.owner === "charm")
+    if (entry.owner === "charm") {
+      if (entry.item.quality === "unique")
+        return (
+          t.has("char") && base.invwidth <= 3 && base.invheight === (entry.height ?? 1)
+        );
       return code === { 1: "cm1", 2: "cm2", 3: "cm3" }[entry.height ?? 1];
+    }
     if (entry.slot) {
       const slot = slots[entry.slot].replace(/2$/, "");
       if (slot === "rarm" && !t.has("weap")) return false;
@@ -347,9 +354,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     base: string,
     roll: 0 | 1,
     values: PlannerItem["propertyValues"] = {},
-    skillClass: ClassId = "amazon"
+    skillClass: ClassId = "amazon",
+    propertyChoices: PlannerItem["propertyChoices"] = {}
   ) {
-    def = resolvePropertyValues(def, gd.properties, values);
+    def = resolvePropertyValues(
+      resolvePropertyGroups(def, gd.propertyGroups, propertyChoices),
+      gd.properties,
+      values
+    );
     const stats: Record<string, number> = {};
     const add = (key: string, value: number, param?: string | number) => {
       const k = param == null ? key : `${key}#${param}`;
@@ -451,13 +463,18 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     quality: "unique" | "set",
     roll: 0 | 1,
     values: PlannerItem["propertyValues"] = {},
-    skillClass: ClassId = "amazon"
+    skillClass: ClassId = "amazon",
+    propertyChoices: PlannerItem["propertyChoices"] = {}
   ) {
     const definition = (quality === "unique" ? gd.uniqueItems : gd.setItems)[id];
     if (!definition) throw new GameSaveError("base", id);
     // The summary only projects properties described by the current game tables.
     // The binary exporter retains its stricter validation of the full definition.
-    const supported = { ...definition } as Definition;
+    const supported = resolvePropertyGroups(
+      definition,
+      gd.propertyGroups,
+      propertyChoices
+    ) as Definition;
     for (let i = 1; i <= 12; i++)
       if (!gd.properties[String(supported[`prop${i}`] ?? "")])
         delete supported[`prop${i}`];
@@ -499,7 +516,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       item.baseCode ?? "",
       item.propertyRoll ?? 0,
       item.propertyValues,
-      itemSkillClass(item, fallback)
+      itemSkillClass(item, fallback),
+      item.propertyChoices
     );
     if (item.quality === "runeword") {
       const runeWord = word({
@@ -547,18 +565,33 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         )
       : [];
   }
-  function socketBonuses(code: string, category: "weapon" | "helm" | "shield") {
+  function socketBonuses(
+    code: string,
+    category: "weapon" | "helm" | "shield",
+    values: PlannerItem["propertyValues"] = {}
+  ) {
     const gem = gd.gems[code] as unknown as Definition | undefined;
-    if (!gem) throw new GameSaveError("property", code);
-    const def: Definition = {};
-    for (let i = 1; i <= 3; i++) {
+    const jewel = gd.uniqueItems[code] as unknown as Definition | undefined;
+    if (!gem && (!jewel || !["jew", "cjw"].includes(String(jewel.code))))
+      throw new GameSaveError("property", code);
+    const def: Definition = jewel ?? {};
+    for (let i = 1; gem && i <= 3; i++) {
       def[`prop${i}`] = gem[`${category}mod${i}code`];
       def[`par${i}`] = gem[`${category}mod${i}param`];
       def[`min${i}`] = gem[`${category}mod${i}min`];
       def[`max${i}`] = gem[`${category}mod${i}max`];
     }
-    const stats = definitionStats(def, "", 1);
+    const stats = definitionStats(def, String(jewel?.code ?? ""), 1, values);
     return {
+      skillBonuses: Object.fromEntries(
+        Object.entries(gd.skills).flatMap(([id, skill]) => {
+          const element = (
+            { fire: 1, ltng: 2, mag: 3, cold: 4, pois: 5 } as Record<string, number>
+          )[String((skill as unknown as Definition).etype)];
+          const bonus = element ? stats[`item_elemskill#${element}`] : 0;
+          return bonus ? [[id, bonus]] : [];
+        })
+      ),
       bonuses: Object.fromEntries(
         Object.entries(bonusStats).flatMap(([key, stat]) =>
           stats[stat] ? [[key, stats[stat]]] : []
@@ -675,7 +708,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         (data.experience as Record<string, { amazon: number }>)[build.level - 1]
           ?.amazon ?? 0
       ),
-      gold: 0,
+      gold: build.gold,
       goldbank: 0,
     };
     for (const [key, value] of Object.entries(profile.attributes)) {
@@ -736,6 +769,10 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     );
     const usedIds = new Set<number>();
     const itemAffixIds = new Map<number, string[]>();
+    const socketRolls = new Map<
+      number,
+      { roll: 0 | 1; values?: Record<string, number> }[]
+    >();
     function nextId() {
       let id: number;
       do {
@@ -786,7 +823,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           choice.base,
           roll,
           mode === "planned" ? entry.item.propertyValues : undefined,
-          itemSkillClass(entry.item, build.classId)
+          itemSkillClass(entry.item, build.classId),
+          entry.item.propertyChoices
         );
         maxSockets = Math.max(
           maxSockets,
@@ -886,9 +924,29 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         item.socketedItems = (entry.item.socketedItems ?? []).filter(
           (code): code is string => code !== null
         );
+        socketRolls.set(
+          item.itemId,
+          (entry.item.socketedItems ?? []).flatMap((code, index) =>
+            code
+              ? [
+                  {
+                    roll: options.rolls[entry.key] === 0 ? 0 : 1,
+                    values:
+                      options.rolls[entry.key] === "planned"
+                        ? entry.item.socketPropertyValues?.[index]
+                        : undefined,
+                  },
+                ]
+              : []
+          )
+        );
         if (
           item.socketedItems.length > item.sockets ||
-          item.socketedItems.some((code) => !gd.gems[String(code)])
+          item.socketedItems.some(
+            (code) =>
+              !gd.gems[String(code)] &&
+              !["jew", "cjw"].includes(gd.uniqueItems[String(code)]?.code)
+          )
         )
           throw new GameSaveError("base", entry.item.name);
         validateStats(item.stats);
@@ -1014,19 +1072,42 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       } as unknown as SaveTypes.IItem;
       if (native.max_durability > 0 && item.stats.item_indesctructible)
         native.max_durability = 0;
-      for (const code of item.socketedItems) {
+      for (const [index, code] of item.socketedItems.entries()) {
+        const jewel = gd.uniqueItems[String(code)];
+        const selected = socketRolls.get(item.itemId)?.[index];
+        const stats = jewel
+          ? definitionStats(
+              jewel as unknown as Definition,
+              jewel.code,
+              selected?.roll ?? 1,
+              selected?.values
+            )
+          : {};
+        validateStats(stats);
         const child = {
           ...native,
-          type: String(code),
-          quality: 2,
-          simple_item: 1,
+          id: nextId(),
+          type: jewel?.code ?? String(code),
+          type_id: 4,
+          categories: [],
+          level: 99,
+          quality: jewel ? 7 : 2,
+          unique_id: jewel ? Number(String(code).replace("unique", "")) : 0,
+          set_id: 0,
+          runeword_id: 0,
+          runeword_attributes: [],
+          quantity: 0,
+          defense_rating: 0,
+          max_durability: 0,
+          current_durability: 0,
+          simple_item: jewel ? 0 : 1,
           socketed: 0,
           given_runeword: 0,
           ethereal: 0,
           nr_of_items_in_sockets: 0,
           total_nr_of_sockets: 0,
           socketed_items: [],
-          magic_attributes: [],
+          magic_attributes: magicProperties(stats),
           location_id: 6,
           equipped_id: 0,
           alt_position_id: 0,
@@ -1113,6 +1194,17 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       ])
         header.setUint16(questStart + offset, 1, true);
     }
+    // v105: quest data ends at 701; WS has an 8-byte header, followed by
+    // three 24-byte blocks (2-byte prefix, 39 waypoint bits, padding).
+    if (bytes[701] !== 0x57 || bytes[702] !== 0x53)
+      throw new GameSaveError("validation");
+    difficulties.forEach(({ value }, index) => {
+      const start = 711 + index * 24;
+      bytes.fill(0, start, start + 5);
+      for (const { key, bit } of waypoints) {
+        if (build.waypoints[value][key]) bytes[start + (bit >> 3)] |= 1 << (bit & 7);
+      }
+    });
     bytes[20] = build.hardcore ? 4 : 0;
     bytes.fill(0, 152, 155);
     bytes[152 + ["normal", "nightmare", "hell"].indexOf(build.difficulty)] = 0x80;

@@ -45,7 +45,8 @@
                     native,
                     code,
                     socketCategory(item),
-                    store.build.level
+                    store.build.level,
+                    item.socketPropertyValues?.[index]
                   )"
                   :key="line"
                 >
@@ -151,7 +152,8 @@ const properties = computed(() => {
         props.item.propertyRoll ?? 1,
         store.build.level,
         props.item.propertyValues,
-        itemSkillClass(props.item, store.build.classId)
+        itemSkillClass(props.item, store.build.classId),
+        props.item.propertyChoices
       ).filter((line) => !line.startsWith("Socketed ("));
   }
   return [

@@ -18,6 +18,9 @@ try {
     "/src/utils/planner-game-save.ts"
   );
   const { RUNES } = await server.ssrLoadModule("/src/shared/constants.ts");
+  const { propertyRange } = await server.ssrLoadModule(
+    "/src/utils/planner-properties.ts"
+  );
   const native = createGameSaveExporter(data, locale);
   const families = {
     Amethyst: "Аметист",
@@ -60,6 +63,70 @@ try {
       };
     })
   );
+  const jewelNames = {
+    "Defender's Bile": "Желчь защитника",
+    "Guardian's Thunder": "Гром стража",
+    "Protector's Frost": "Мороз хранителя",
+    "Defender's Fire": "Огонь защитника",
+    "Protector's Stone": "Камень хранителя",
+    "Guardian's Light": "Свет стража",
+  };
+  for (const [code, definition] of Object.entries(data.uniqueItems)) {
+    if (!["jew", "cjw"].includes(definition.code) || !definition.enabled) continue;
+    const facet = definition.code === "jew";
+    const element = {
+      "dmg-ltng": ["Lightning", "Молния"],
+      "dmg-cold": ["Cold", "Холод"],
+      "dmg-fire": ["Fire", "Огонь"],
+      "dmg-pois": ["Poison", "Яд"],
+    }[definition.prop1];
+    const death = definition.prop4 === "death-skill";
+    const ranges = Object.fromEntries(
+      Array.from({ length: 12 }, (_, n) => {
+        const i = n + 1,
+          property = data.properties[definition[`prop${i}`]];
+        const range = property && propertyRange(definition, property, i);
+        return range ? [[i, range]] : [];
+      }).flat()
+    );
+    const effects = native.socketBonuses(code, "helm");
+    const rollEffects = Object.fromEntries(
+      Object.entries(ranges).map(([i, range]) => {
+        const low = native.socketBonuses(code, "helm", { [i]: range.min });
+        return [
+          i,
+          {
+            bonuses: Object.fromEntries(
+              Object.entries(effects.bonuses).map(([key, value]) => [
+                key,
+                (value - (low.bonuses[key] ?? 0)) / (range.max - range.min),
+              ])
+            ),
+            classBonuses: {},
+          },
+        ];
+      })
+    );
+    items.push({
+      code,
+      baseCode: definition.code,
+      group: facet ? "facet" : "jewel",
+      name: facet
+        ? {
+            en: `Rainbow Facet · ${element[0]} · ${death ? "Death" : "Level Up"}`,
+            ru: `Радужный фасет · ${element[1]} · ${death ? "Смерть" : "Новый уровень"}`,
+          }
+        : { en: definition.index, ru: jewelNames[definition.index] || definition.index },
+      requiredLevel: definition.lvlreq,
+      // Reuse the game's jewel artwork already bundled with the cube catalog.
+      image_url: "/images/cube/c42fa7a7a08d52a172.png",
+      effects: Object.fromEntries(
+        ["weapon", "helm", "shield"].map((category) => [category, effects])
+      ),
+      ranges,
+      rollEffects,
+    });
+  }
   const isType = (type, wanted, seen = new Set()) => {
     if (!type || seen.has(type)) return false;
     if (type === wanted) return true;

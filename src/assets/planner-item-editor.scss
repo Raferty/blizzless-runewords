@@ -282,6 +282,10 @@
   width: 230px;
   max-width: 100%;
 }
+.planner-item-unique-charm {
+  width: 230px;
+  max-width: 100%;
+}
 .planner-item-ethereal {
   display: flex;
   gap: 6px;
@@ -312,6 +316,9 @@
 .planner-item-properties .planner-rune-order {
   margin: 8px 0;
   font-size: 14px;
+}
+.planner-item-editor .planner-item-required-level {
+  margin-top: 8px;
 }
 .planner-item-sockets {
   display: flex;
@@ -434,6 +441,17 @@
   list-style: none;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333;
+}
+.planner-socket-options [data-kind="facet"],
+.planner-socket-options [data-kind="jewel"],
+.planner-socket-jewel-name {
+  color: #c7b377;
+}
+.planner-socket-properties > p {
+  margin: 4px 0;
+}
+.planner-socket-properties .planner-socket-jewel-name {
+  margin-top: 12px;
 }
 .planner-item-actions {
   display: flex;
@@ -643,10 +661,31 @@
   margin: 4px 0;
 }
 .planner-item-editor .planner-property-line input {
-  width: 84px;
+  box-sizing: border-box;
+  width: calc(var(--property-digits, 3) * 1ch + 10px);
+  min-width: 28px;
+  height: 24px;
+  min-height: 0;
+  padding: 1px 4px;
+  font: inherit;
+  font-size: 0.95em;
+  line-height: 20px;
   color: inherit;
   text-align: center;
-  border-color: currentcolor;
+  appearance: textfield;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: none;
+}
+.planner-item-editor .planner-property-line input:focus-visible {
+  outline: 1px solid #008cff;
+  outline-offset: 0;
+}
+.planner-property-line input::-webkit-inner-spin-button,
+.planner-property-line input::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
 }
 .planner-property-line small {
   margin-left: 4px;
@@ -656,4 +695,10 @@
 .planner-property-class {
   width: 170px;
   margin-left: 8px;
+}
+.planner-property-choice {
+  flex-basis: 100%;
+  max-width: 420px;
+  margin: 8px 8px 4px 0;
+  font-size: 14px;
 }

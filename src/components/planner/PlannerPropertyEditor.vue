@@ -4,6 +4,17 @@
     :class="{ 'planner-property-editor--runeword': item.quality === 'runeword' }"
   >
     <div v-for="row in rows" :key="row.index" class="planner-property-line">
+      <UiSelect
+        v-if="row.options.length"
+        class="planner-property-choice"
+        dropdown-class="planner-select-dropdown"
+        :model-value="String(item.propertyChoices?.[row.index] ?? row.options[0].value)"
+        :options="row.options"
+        :aria-label="t('Вариант бонуса', 'Bonus variant')"
+        @update:model-value="
+          emit('choices', { ...item.propertyChoices, [row.index]: Number($event) })
+        "
+      />
       <template v-if="row.range">
         <span>{{ row.before }}</span>
         <input
@@ -11,6 +22,12 @@
           :value="row.value"
           :min="row.range.min"
           :max="row.range.max"
+          :style="{
+            '--property-digits': Math.max(
+              String(row.range.min).length,
+              String(row.range.max).length
+            ),
+          }"
           step="1"
           required
           :aria-label="row.label"
@@ -45,7 +62,12 @@ import {
   definitionPropertyLines,
   socketPropertyLines,
 } from "@/utils/planner-item-catalog";
-import { propertyRange, itemSkillClass } from "@/utils/planner-properties";
+import {
+  propertyRange,
+  itemSkillClass,
+  propertyGroupOptions,
+  resolvePropertyGroups,
+} from "@/utils/planner-properties";
 import { socketCategory } from "@/utils/planner-sockets";
 import type { GameSaveExporter } from "@/utils/planner-game-save";
 import type { ClassId, PlannerItem } from "@/types/planner";
@@ -58,11 +80,17 @@ const props = defineProps<{
 }>();
 const emit = defineEmits<{
   values: [values: Record<string, number>];
+  choices: [choices: Record<string, number>];
   class: [classId: ClassId];
 }>();
 const t = useText();
 const rows = computed(() => {
-  const definition = props.native.itemDefinition(props.item) ?? {};
+  const raw = props.native.itemDefinition(props.item) ?? {};
+  const definition = resolvePropertyGroups(
+    raw,
+    props.native.gd.propertyGroups,
+    props.item.propertyChoices
+  );
   return Array.from({ length: 12 }, (_, n) => {
     const index = n + 1;
     const property = props.native.gd.properties[String(definition[`prop${index}`] ?? "")];
@@ -98,6 +126,22 @@ const rows = computed(() => {
         before: offset >= 0 ? label.slice(0, offset) : "",
         after: offset >= 0 ? label.slice(offset + String(value).length) : "",
         classSkill: property.func1 === 36,
+        options: propertyGroupOptions(
+          props.native.gd.propertyGroups?.[String(raw[`prop${index}`])]
+        ).map((choice) => ({
+          value: String(choice),
+          label: definitionPropertyLines(
+            props.native,
+            {
+              prop1: raw[`prop${index}`],
+            },
+            1,
+            props.characterLevel,
+            {},
+            props.characterClass,
+            { 1: choice }
+          ).join(" · "),
+        })),
       },
     ];
   }).flat();

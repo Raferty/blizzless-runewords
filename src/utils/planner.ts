@@ -16,7 +16,12 @@ import type {
   PlannerSkill,
 } from "@/types/planner";
 import { affixBonuses, parseAffixes, affixSockets } from "./planner-affixes";
-import { socketInsertByCode, socketedBonuses } from "./planner-sockets";
+import { waypoints } from "@/shared/planner-waypoints";
+import {
+  socketInsertByCode,
+  socketedBonuses,
+  parseSocketPropertyValues,
+} from "./planner-sockets";
 import {
   normalizeClassCharm,
   propertyClasses,
@@ -31,8 +36,15 @@ export function createBuild(classId: ClassId = "sorceress"): PlannerBuild {
     classId,
     level: 90,
     difficulty: "hell",
+    gold: 0,
     hardcore: false,
     weaponSet: 0,
+    waypoints: Object.fromEntries(
+      difficulties.map(({ value }) => [
+        value,
+        Object.fromEntries(waypoints.map(({ key }) => [key, true])),
+      ])
+    ) as PlannerBuild["waypoints"],
     quests: Object.fromEntries(
       difficulties.map(({ value }) => [
         value,
@@ -64,6 +76,7 @@ export function createBuild(classId: ClassId = "sorceress"): PlannerBuild {
 export const cloneBuild = (build: PlannerBuild): PlannerBuild =>
   JSON.parse(JSON.stringify(build));
 export const mercenaryLevelCap = (characterLevel: number) => Math.min(98, characterLevel);
+export const goldCapacity = (characterLevel: number) => characterLevel * 10000;
 export const spentSkills = (build: PlannerBuild) =>
   Object.values(build.skills).reduce((a, b) => a + b, 0);
 export const skillBudget = (build: PlannerBuild) =>
@@ -137,6 +150,7 @@ export function skillsAfterRemoval(
 export function buildAtLevel(build: PlannerBuild, level: number): PlannerBuild {
   const next = cloneBuild(build);
   next.level = integer(level, 1, 99);
+  next.gold = Math.min(next.gold ?? 0, goldCapacity(next.level));
   // Refund higher-tier skills first so their prerequisites can remain invested.
   const skills = plannerSkills
     .filter((skill) => skill.classId === next.classId)
@@ -188,7 +202,7 @@ export function charmFits(
     position >= 40 ||
     ![1, 2, 3].includes(height) ||
     Math.floor(position / 10) + height > 4 ||
-    ![1, 2].includes(width) ||
+    ![1, 2, 3].includes(width) ||
     (position % 10) + width > 10
   )
     return false;
@@ -199,7 +213,8 @@ export function charmFits(
     .flat()
     .every((cell) => !cells.has(cell));
 }
-export const inventoryWidth = (item: PlannerItem) => (item.baseCode === "box" ? 2 : 1);
+export const inventoryWidth = (item: PlannerItem) =>
+  item.baseCode === "box" ? 2 : item.baseCode === "cs2" ? 3 : 1;
 export const inventoryCells = (item: PlannerCharm) =>
   Array.from({ length: item.height }, (_, y) =>
     Array.from({ length: inventoryWidth(item) }, (_, x) => item.position + y * 10 + x)
@@ -335,6 +350,11 @@ export function buildStats(build: PlannerBuild) {
       mods.reduce((sum, mod) => sum + mod.treeBonuses[build.classId][tree], 0)
     ),
     skillBonus: bonuses.allSkills + classSkills,
+    socketSkillBonuses: insertBonuses.reduce<Record<string, number>>((result, insert) => {
+      for (const [id, value] of Object.entries(insert.skillBonuses ?? {}))
+        result[id] = (result[id] ?? 0) + value;
+      return result;
+    }, {}),
     life: Math.floor(
       character.life +
         (build.level - 1) * character.lifePerLevel +
@@ -441,6 +461,14 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       : { itemLevel: integer(item.itemLevel, 1, 99) }),
     ...(item.sockets === undefined ? {} : { sockets: integer(item.sockets, 0, 6) }),
     ...(socketedItems === undefined ? {} : { socketedItems }),
+    ...(item.socketPropertyValues === undefined
+      ? {}
+      : {
+          socketPropertyValues: parseSocketPropertyValues(
+            item.socketPropertyValues,
+            socketedItems
+          ),
+        }),
     ...(item.ethereal === undefined ? {} : { ethereal: item.ethereal as boolean }),
     ...(item.propertyRoll === undefined
       ? {}
@@ -464,6 +492,13 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       result.propertyValues[key] = integer(value, -100000, 100000);
     }
   }
+  if (item.propertyChoices !== undefined) {
+    result.propertyChoices = {};
+    for (const [key, value] of Object.entries(record(item.propertyChoices))) {
+      if (!/^(?:[1-9]|1[0-2])$/.test(key)) throw new Error("property group index");
+      result.propertyChoices[key] = integer(value, 1, 20);
+    }
+  }
   if (item.skillClass !== undefined) {
     if (!propertyClasses.includes(item.skillClass as ClassId))
       throw new Error("skill class");
@@ -478,12 +513,24 @@ export function parseBuild(value: unknown): PlannerBuild {
   const build = createBuild(raw.classId as ClassId);
   build.name = string(raw.name, 100);
   build.level = integer(raw.level, 1, 99);
+  build.gold = raw.gold === undefined ? 0 : integer(raw.gold, 0, goldCapacity(build.level));
   if (!difficulties.some((d) => d.value === raw.difficulty))
     throw new Error("difficulty");
   build.difficulty = raw.difficulty as PlannerBuild["difficulty"];
   if (typeof raw.hardcore !== "boolean") throw new Error("hardcore");
   build.hardcore = raw.hardcore;
   build.weaponSet = integer(raw.weaponSet, 0, 1) as 0 | 1;
+  // Older builds exported every waypoint as unlocked.
+  if (raw.waypoints !== undefined) {
+    const progress = record(raw.waypoints);
+    for (const { value: difficulty } of difficulties) {
+      const points = record(progress[difficulty]);
+      for (const { key } of waypoints) {
+        if (typeof points[key] !== "boolean") throw new Error("waypoint");
+        build.waypoints[difficulty][key] = points[key];
+      }
+    }
+  }
   const rawQuests = record(raw.quests);
   for (const { value: difficulty } of difficulties) {
     const quest = record(rawQuests[difficulty]);
@@ -547,6 +594,8 @@ export function parseBuild(value: unknown): PlannerBuild {
       !charm.id ||
       build.charms.some((c) => c.id === charm.id) ||
       (charm.baseCode === "box" && charm.height !== 2) ||
+      (charm.baseCode === "cs2" && charm.height !== 1) ||
+      (charm.baseCode === "cm4" && charm.height !== 3) ||
       !charmFits(
         build.charms,
         charm.position,

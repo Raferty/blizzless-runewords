@@ -180,6 +180,7 @@
             </p>
           </section>
         </template>
+        <PlannerWaypoints v-if="section === 'waypoints'" />
         <section v-if="section === 'quests'" class="planner-panel">
           <div class="planner-panel-heading">
             <div>
@@ -562,6 +563,7 @@ import PlannerMercenaryEquipment from "./planner/PlannerMercenaryEquipment.vue";
 import PlannerStash from "./planner/PlannerStash.vue";
 import PlannerPanel from "./planner/PlannerPanel.vue";
 import PlannerSkills from "./planner/PlannerSkills.vue";
+import PlannerWaypoints from "./planner/PlannerWaypoints.vue";
 import PlannerIcon from "./planner/PlannerIcon.vue";
 import PlannerItemEditor from "./planner/PlannerItemEditor.vue";
 import UiSelect from "./ui/UiSelect.vue";
@@ -605,6 +607,7 @@ const tabs = [
   { key: "equipment", ru: "Экипировка", en: "Equipment" },
   { key: "skills", ru: "Навыки", en: "Skills" },
   { key: "mercenary", ru: "Наёмник", en: "Mercenary" },
+  { key: "waypoints", ru: "Вейпоинты", en: "Waypoints" },
   { key: "quests", ru: "Задания", en: "Quests" },
   { key: "notes", ru: "Заметки", en: "Notes" },
 ];

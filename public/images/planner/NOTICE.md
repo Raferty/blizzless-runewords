@@ -17,11 +17,19 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   `scripts/sync-planner-items.mjs` resolves Blizzless inventory filenames through
   the `d2r-saver` artwork dictionary; positional unique/set IDs are not used as
   artwork identifiers. `src/shared/planner-item-art.json` records all 555 bases,
-  433 unique items, 140 set items and their normal/exceptional/elite variants.
+  445 unique items, 140 set items and their normal/exceptional/elite variants.
   Item-type `varinvgfx`/`invgfx1` selects real charm/jewelry artwork instead of
-  placeholder base graphics. The disabled `cs2` crafted-sunder placeholder has
-  no known invp10 asset and deliberately has no substitute weapon picture.
+  placeholder base graphics. The `cs2` crafted-sunder base (enabled in the planner
+  on 2026-10-28) still has no known invp10 asset and deliberately uses the text
+  fallback rather than a substitute weapon picture.
   Inventory dimensions and name aliases are also used by equipment previews.
+- RotW artwork corrected 2026-10-28: Hellwarden's Will and Measured Wrath use
+  `armor/helmet/unique_warlock_helm.webp` and `armor/grimoires/measured_wrath.webp`
+  from the same LootCube image source. Stable unique names take precedence over
+  shared legacy inventory filenames for these and Dreadfang, Wraithstep,
+  Gheed's Wager, Sling, Opalvein and Entropy Locket. Jewelry variants correspond to
+  the inventory graphics shown at https://d2emu.com/db/unique/sling,
+  https://d2emu.com/db/unique/opalvein and https://d2emu.com/db/unique/entropy-locket.
 - `items/classic/invhaxu.gif` and `items/classic/invuhms.gif`: original inventory
   graphics for the two unavailable HD resources, from Blizzard's Arreat Summit:
   https://classic.battle.net/images/battle/diablo2exp/images/items/uniques/thegnasher.gif

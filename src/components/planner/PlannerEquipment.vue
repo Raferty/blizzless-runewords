@@ -83,6 +83,28 @@
           />
         </div>
       </div>
+      <div class="planner-gold">
+        <label>
+          <span>{{ t("Золото", "Gold") }}</span>
+          <input
+            :value="store.build.gold ?? 0"
+            type="number"
+            inputmode="numeric"
+            min="0"
+            :max="maxGold"
+            step="1"
+            :title="`${t('Максимум', 'Maximum')}: ${maxGold.toLocaleString()}`"
+            @change="setGold"
+          />
+        </label>
+        <button
+          type="button"
+          :disabled="store.build.gold === maxGold"
+          @click="store.build.gold = maxGold"
+        >
+          {{ t("Максимум", "Max Gold") }}
+        </button>
+      </div>
     </section>
     <slot />
   </div>
@@ -96,7 +118,7 @@ import { equipmentSlots } from "@/shared/planner";
 import { paperdollCapacity, paperdollStyle } from "@/shared/planner-art";
 import type { EquipmentSlot } from "@/types/planner";
 import { itemRequiredLevel } from "@/utils/planner-sockets";
-import { inventoryWidth, inventoryCells } from "@/utils/planner";
+import { goldCapacity, inventoryWidth, inventoryCells } from "@/utils/planner";
 import { usePlannerItemDrag } from "@/composables/usePlannerItemDrag";
 defineEmits<{
   equip: [slot: EquipmentSlot];
@@ -104,6 +126,15 @@ defineEmits<{
 }>();
 const store = usePlannerStore();
 const t = useText();
+const maxGold = computed(() => goldCapacity(store.build.level));
+function setGold(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const value = input.valueAsNumber;
+  store.build.gold = Number.isFinite(value)
+    ? Math.max(0, Math.min(maxGold.value, Math.trunc(value)))
+    : 0;
+  input.value = String(store.build.gold);
+}
 const { start, end, over, leave, drop, preview, previewStyle, isSource } =
   usePlannerItemDrag("inventory");
 const activeSlot = (key: EquipmentSlot): EquipmentSlot =>
@@ -128,3 +159,38 @@ const emptyCells = computed(() => {
   return Array.from({ length: 40 }, (_, i) => i).filter((i) => !occupied.has(i));
 });
 </script>
+<style scoped lang="scss">
+@use "../../assets/planner-controls" as controls;
+
+.planner-gold {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding: 8px;
+  border-top: 1px solid #292929;
+  label {
+    display: flex;
+    flex: 1;
+    gap: 6px;
+    align-items: center;
+    min-width: 120px;
+  }
+  span {
+    color: #c7b377;
+  }
+  input {
+    @include controls.field;
+    width: 100%;
+    min-width: 64px;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text);
+    text-align: center;
+    background: #0c0c0c;
+    border: 1px solid #383838;
+  }
+  button {
+    flex-shrink: 0;
+  }
+}
+</style>

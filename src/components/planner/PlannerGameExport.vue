@@ -98,16 +98,16 @@
         <p class="planner-help">
           {{
             t(
-              "Сохраняются уровень, навыки, характеристики, награды заданий, экипировка, талисманы и наёмник. Режим «Из планнера» сохраняет введённые бонусы; остальные игровые свойства используют ролл, выбранный в редакторе предмета (для старых сборок — максимальный). Можно отдельно выбрать полный минимальный или максимальный ролл. Произвольные названия обычных, магических и редких вещей в игре заменяются названиями основы или аффиксов.",
-              "Includes level, skills, attributes, quest rewards, gear, charms and mercenary. From planner preserves entered bonuses; other game properties use the roll selected in the item editor (maximum for older builds). Full minimum and maximum presets are also available. Custom normal, magic and rare item names are replaced with game base or affix names."
+              "Сохраняются уровень, навыки, характеристики, золото, награды заданий, экипировка, талисманы и наёмник. Режим «Из планнера» сохраняет введённые бонусы; остальные игровые свойства используют ролл, выбранный в редакторе предмета (для старых сборок — максимальный). Можно отдельно выбрать полный минимальный или максимальный ролл. Произвольные названия обычных, магических и редких вещей в игре заменяются названиями основы или аффиксов.",
+              "Includes level, skills, attributes, gold, quest rewards, gear, charms and mercenary. From planner preserves entered bonuses; other game properties use the roll selected in the item editor (maximum for older builds). Full minimum and maximum presets are also available. Custom normal, magic and rare item names are replaced with game base or affix names."
             )
           }}
         </p>
         <p class="planner-help">
           {{
             t(
-              "Это персонаж для проверки сборки: все сложности и путевые точки открыты. Заметки и описание сборки остаются в JSON.",
-              "This is a build-testing character: all difficulties and waypoints are unlocked. Build notes and descriptions remain in JSON."
+              "Это персонаж для проверки сборки: все сложности и акты открыты, вейпоинты — по выбору во вкладке «Вейпоинты». Заметки и описание сборки остаются в JSON.",
+              "This is a build-testing character: all difficulties and acts are unlocked. Waypoints follow your selections in the Waypoints tab. Build notes and descriptions remain in JSON."
             )
           }}
         </p>

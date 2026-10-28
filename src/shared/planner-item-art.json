@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-27",
+  "checkedAt": "2026-10-28",
   "source": "https://lootcube.net/images/items/",
-  "gameDataSha256": "c176ba98069801f011553d5d7ee1358a754c98ad8f2f6e228be6a11fada640e7",
+  "gameDataSha256": "50e5145422d42dc4b907cd7ca2b44a3d2d2c411b0d53ffbf5a9d915385d8cea4",
   "bases": {
     "hax": "images/planner/items/weapon/axe/hand_axe.webp",
     "axe": "images/planner/items/weapon/axe/axe.webp",
@@ -2084,6 +2084,18 @@
     "unique490": "amu",
     "unique491": "utc",
     "unique492": "xsk",
+    "unique499": "cm3",
+    "unique500": "cs2",
+    "unique501": "cm3",
+    "unique502": "cm3",
+    "unique503": "cm3",
+    "unique504": "cm3",
+    "unique505": "cm3",
+    "unique506": "cs2",
+    "unique507": "cs2",
+    "unique508": "cs2",
+    "unique509": "cs2",
+    "unique510": "cs2",
     "unique696": "fmu",
     "unique697": "fmu",
     "unique698": "p10",
@@ -2741,6 +2753,30 @@
       "gheed's wager": "unique491",
       "unique warlock helm": "unique492",
       "hellwarden's will": "unique492",
+      "precrafted cold rupture": "unique499",
+      "latent cold rupture": "unique499",
+      "crafted cold rupture": "unique500",
+      "renewed cold rupture": "unique500",
+      "precrafted flame rift": "unique501",
+      "latent flame rift": "unique501",
+      "precrafted crack of the heavens": "unique502",
+      "latent crack of the heavens": "unique502",
+      "precrafted rotting fissure": "unique503",
+      "latent rotting fissure": "unique503",
+      "precrafted bone break": "unique504",
+      "latent bone break": "unique504",
+      "precrafted black cleft": "unique505",
+      "latent black cleft": "unique505",
+      "crafted flame rift": "unique506",
+      "renewed flame rift": "unique506",
+      "crafted crack of the heavens": "unique507",
+      "renewed crack of the heavens": "unique507",
+      "crafted rotting fissure": "unique508",
+      "renewed rotting fissure": "unique508",
+      "crafted bone break": "unique509",
+      "renewed bone break": "unique509",
+      "crafted black cleft": "unique510",
+      "renewed black cleft": "unique510",
       "the rising sun cr": "unique696",
       "atma's scarab cr": "unique697",
       "maul player": "unique698",
@@ -4932,19 +4968,19 @@
       "images/planner/items/armor/grimoires/oldbook.webp"
     ],
     "unique484": [
-      "images/planner/items/armor/grimoires/oldbook.webp",
-      "images/planner/items/armor/grimoires/oldbook.webp",
-      "images/planner/items/armor/grimoires/oldbook.webp"
+      "images/planner/items/armor/grimoires/measured_wrath.webp",
+      "images/planner/items/armor/grimoires/measured_wrath.webp",
+      "images/planner/items/armor/grimoires/measured_wrath.webp"
     ],
     "unique485": [
-      "images/planner/items/weapon/sword/shadowfang.webp",
-      "images/planner/items/weapon/sword/shadowfang.webp",
-      "images/planner/items/weapon/sword/shadowfang.webp"
+      "images/planner/items/weapon/sword/two_handed_sword.webp",
+      "images/planner/items/weapon/sword/two_handed_sword.webp",
+      "images/planner/items/weapon/sword/two_handed_sword.webp"
     ],
     "unique486": [
-      "images/planner/items/weapon/sword/shadowfang.webp",
-      "images/planner/items/weapon/sword/shadowfang.webp",
-      "images/planner/items/weapon/sword/shadowfang.webp"
+      "images/planner/items/armor/boot/light_plate_boots.webp",
+      "images/planner/items/armor/boot/light_plate_boots.webp",
+      "images/planner/items/armor/boot/light_plate_boots.webp"
     ],
     "unique487": [
       "images/planner/items/weapon/knife/dirk.webp",
@@ -4952,30 +4988,66 @@
       "images/planner/items/weapon/knife/dirk.webp"
     ],
     "unique488": [
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp"
+      "images/planner/items/misc/ring/ring2.webp",
+      "images/planner/items/misc/ring/ring2.webp",
+      "images/planner/items/misc/ring/ring2.webp"
     ],
     "unique489": [
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp"
+      "images/planner/items/misc/ring/ring3.webp",
+      "images/planner/items/misc/ring/ring3.webp",
+      "images/planner/items/misc/ring/ring3.webp"
     ],
     "unique490": [
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp"
+      "images/planner/items/misc/amulet/amulet1.webp",
+      "images/planner/items/misc/amulet/amulet1.webp",
+      "images/planner/items/misc/amulet/amulet1.webp"
     ],
     "unique491": [
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp"
+      "images/planner/items/armor/belt/heavy_belt.webp",
+      "images/planner/items/armor/belt/heavy_belt.webp",
+      "images/planner/items/armor/belt/heavy_belt.webp"
     ],
     "unique492": [
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp"
+      "images/planner/items/armor/helmet/unique_warlock_helm.webp",
+      "images/planner/items/armor/helmet/unique_warlock_helm.webp",
+      "images/planner/items/armor/helmet/unique_warlock_helm.webp"
     ],
+    "unique499": [
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp"
+    ],
+    "unique500": [null, null, null],
+    "unique501": [
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp"
+    ],
+    "unique502": [
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp"
+    ],
+    "unique503": [
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp"
+    ],
+    "unique504": [
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp"
+    ],
+    "unique505": [
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large.webp"
+    ],
+    "unique506": [null, null, null],
+    "unique507": [null, null, null],
+    "unique508": [null, null, null],
+    "unique509": [null, null, null],
+    "unique510": [null, null, null],
     "unique696": [
       "images/planner/items/misc/amulet/amulet2.webp",
       "images/planner/items/misc/amulet/amulet2.webp",
@@ -5072,9 +5144,9 @@
       "images/planner/items/armor/armor/full_plate_mail.webp"
     ],
     "unique730": [
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp"
+      "images/planner/items/armor/helmet/unique_warlock_helm.webp",
+      "images/planner/items/armor/helmet/unique_warlock_helm.webp",
+      "images/planner/items/armor/helmet/unique_warlock_helm.webp"
     ],
     "unique731": [
       "images/planner/items/armor/armor/victors_silk.webp",

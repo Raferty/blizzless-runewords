@@ -16,6 +16,8 @@ export function sourceItem(build: PlannerBuild, source: ItemSource) {
 export function inventoryItemSize(item: PlannerItem): [number, number] | undefined {
   const code = plannerItemIdentity(item).baseCode;
   if (code === "box") return [2, 2];
+  if (code === "cm4") return [1, 3];
+  if (code === "cs2") return [3, 1];
   if (code && /^cm[123]$/.test(code)) return [1, Number(code[2])];
   // Legacy planner charms may not have an explicit base yet.
   if ("height" in item && [1, 2, 3].includes(Number(item.height)))

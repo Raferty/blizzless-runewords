@@ -141,6 +141,23 @@
                     @update:model-value="changeQuality"
                   />
                 </label>
+                <label
+                  v-if="isCharm && item.quality === 'unique' && uniqueCharms.length"
+                  class="planner-label planner-item-unique-charm"
+                  >{{ t("Уникальный талисман", "Unique charm") }}
+                  <UiSelect
+                    dropdown-class="planner-select-dropdown"
+                    :model-value="item.catalogId ?? ''"
+                    :options="
+                      uniqueCharms.map((entry) => ({
+                        value: entry.catalogId!,
+                        label: entry.name,
+                      }))
+                    "
+                    :aria-label="t('Уникальный талисман', 'Unique charm')"
+                    @update:model-value="changeUniqueCharm"
+                  />
+                </label>
                 <label v-if="selectedBase?.kind" class="planner-item-ethereal"
                   ><input v-model="item.ethereal" type="checkbox" />
                   {{ t("Эфирный", "Ethereal") }}</label
@@ -186,6 +203,7 @@
               :character-level="store.build.level"
               :character-class="store.build.classId"
               @values="setPropertyValues"
+              @choices="setPropertyChoices"
               @class="setSkillClass"
             />
             <RunewordStats
@@ -239,8 +257,12 @@
             :native="native"
             :character-level="store.build.level"
             @update:model-value="item.socketedItems = $event"
+            @values="item.socketPropertyValues = $event"
           />
-          <p v-if="itemRequiredLevel(item) > item.requiredLevel" class="planner-muted">
+          <p
+            v-if="itemRequiredLevel(item) > item.requiredLevel"
+            class="planner-muted planner-item-required-level"
+          >
             {{
               t(
                 "Требуемый уровень со свойствами и вставками",
@@ -399,16 +421,18 @@ const qualityOptions = computed(() => [
 const canEditQuality = computed(
   () =>
     !!selectedBase.value &&
-    selectedBase.value.category !== "char" &&
     selectedBase.value.code !== "box" &&
-    ["normal", "magic", "rare"].includes(item.value.quality)
+    (isCharm.value
+      ? ["normal", "magic", "unique"].includes(item.value.quality)
+      : ["normal", "magic", "rare"].includes(item.value.quality))
 );
 const editableQualities = computed(() =>
-  qualityOptions.value.filter(
-    (q) =>
-      q.value === "normal" ||
-      q.value === "magic" ||
-      (q.value === "rare" && canBeRare(item.value.baseCode ?? ""))
+  qualityOptions.value.filter((q) =>
+    isCharm.value
+      ? q.value === "magic" || (q.value === "unique" && uniqueCharms.value.length > 0)
+      : q.value === "normal" ||
+        q.value === "magic" ||
+        (q.value === "rare" && canBeRare(item.value.baseCode ?? ""))
   )
 );
 const affixNotice = ref("");
@@ -428,9 +452,35 @@ function reconcileAffixes() {
   }
 }
 function changeQuality(value: string) {
-  if (!editableQualities.value.some((q) => q.value === value)) return;
+  if (
+    value === item.value.quality ||
+    !editableQualities.value.some((q) => q.value === value)
+  )
+    return;
+  if (isCharm.value) {
+    const entry =
+      value === "unique"
+        ? (uniqueCharms.value.find((entry) =>
+            entry.bases.includes(item.value.baseCode ?? "")
+          ) ?? uniqueCharms.value[0])
+        : catalog.value?.items.find(
+            (entry) => entry.id === "base:" + charmFamily(item.value.baseCode ?? "")
+          );
+    if (entry) chooseCharm(entry);
+    return;
+  }
   item.value.quality = value as PlannerItem["quality"];
   reconcileAffixes();
+}
+function chooseCharm(entry: CatalogItem) {
+  const { itemLevel, notes } = item.value;
+  chooseCatalogItem(entry);
+  item.value.itemLevel = itemLevel ?? 99;
+  item.value.notes = notes;
+}
+function changeUniqueCharm(id: string) {
+  const entry = uniqueCharms.value.find((entry) => entry.catalogId === id);
+  if (entry && id !== item.value.catalogId) chooseCharm(entry);
 }
 watch(
   () => item.value.itemLevel,
@@ -501,6 +551,24 @@ const selectedCatalog = computed(() =>
   )
 );
 const selectedBase = computed(() => catalog.value?.bases.get(item.value.baseCode ?? ""));
+const isCharm = computed(() => selectedBase.value?.category === "char");
+const charmFamily = (code: string) =>
+  ["cm3", "cm4", "cs2"].includes(code) ? "cm3" : code;
+const uniqueCharms = computed(() =>
+  isCharm.value
+    ? (catalog.value?.items.filter(
+        (entry) =>
+          entry.quality === "unique" &&
+          entry.bases.some((code) => {
+            const base = catalog.value?.bases.get(code);
+            return (
+              base?.category === "char" &&
+              charmFamily(code) === charmFamily(item.value.baseCode ?? "")
+            );
+          })
+      ) ?? [])
+    : []
+);
 watch(
   () => [selectedBase.value?.category, item.value.quality] as const,
   ([category, quality]) => {
@@ -560,6 +628,12 @@ watch(
   (count) => {
     if (Number.isInteger(count) && count! >= 0 && item.value.socketedItems)
       item.value.socketedItems = item.value.socketedItems.slice(0, count);
+    if (Number.isInteger(count) && count! >= 0 && item.value.socketPropertyValues)
+      item.value.socketPropertyValues = Object.fromEntries(
+        Object.entries(item.value.socketPropertyValues).filter(
+          ([index]) => Number(index) < count!
+        )
+      );
   }
 );
 const activeBonuses = computed(() =>
@@ -661,6 +735,13 @@ function setPropertyValues(values: Record<string, number>) {
   item.value.propertyValues = values;
   Object.assign(item.value, native.value!.itemBonuses(item.value, store.build.classId));
 }
+function setPropertyChoices(choices: Record<string, number>) {
+  for (const [index, choice] of Object.entries(choices))
+    if (item.value.propertyChoices?.[index] !== choice)
+      delete item.value.propertyValues?.[index];
+  item.value.propertyChoices = choices;
+  Object.assign(item.value, native.value!.itemBonuses(item.value, store.build.classId));
+}
 function setSkillClass(value: ClassId) {
   item.value.skillClass = value;
   Object.assign(item.value, native.value!.itemBonuses(item.value, store.build.classId));
@@ -683,7 +764,8 @@ function setRoll(value: 0 | 1) {
         item.value.quality,
         value,
         {},
-        item.value.skillClass ?? store.build.classId
+        item.value.skillClass ?? store.build.classId,
+        item.value.propertyChoices
       )
     );
   }

@@ -140,9 +140,11 @@ try {
       )
       .digest("hex")
   );
-  assert.equal(socketInserts.length, 72);
+  assert.equal(socketInserts.length, 86);
+  assert.equal(socketInserts.filter((insert) => insert.group === "facet").length, 8);
+  assert.equal(socketInserts.filter((insert) => insert.group === "jewel").length, 6);
   assert.equal(socketInserts.filter((insert) => insert.group === "gem").length, 35);
-  assert.equal(new Set(socketInserts.map((insert) => insert.code)).size, 72);
+  assert.equal(new Set(socketInserts.map((insert) => insert.code)).size, 86);
   for (const insert of socketInserts) {
     await access(new URL("../public" + insert.image_url, import.meta.url));
     for (const category of ["weapon", "helm", "shield"]) {

@@ -51,9 +51,11 @@
         class="ui-select__dropdown"
         :class="dropdownClass"
         role="listbox"
+        tabindex="-1"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledby"
         :style="floatingStyle"
+        @keydown="handleKeydown"
       >
         <li
           v-for="(option, index) in options"
@@ -143,6 +145,7 @@ const trigger = ref<HTMLButtonElement | null>(null);
 const panel = ref<HTMLElement | null>(null);
 const isOpen = ref(false);
 const activeIndex = ref(0);
+let pointerInDropdown = false;
 const floatingStyle = ref<CSSProperties>({});
 const selectedIndex = computed(() =>
   props.options.findIndex((option) => option.value === props.modelValue)
@@ -169,9 +172,16 @@ function positionDropdown() {
   };
 }
 function revealActiveOption() {
-  panel.value
-    ?.querySelectorAll<HTMLElement>("[role=option]")
-    [activeIndex.value]?.scrollIntoView({ block: "nearest" });
+  const dropdown = panel.value;
+  const option = dropdown?.querySelectorAll<HTMLElement>("[role=option]")[activeIndex.value];
+  if (!dropdown || !option) return;
+  // Only scroll the list: scrollIntoView can also move the page or its modal.
+  const bounds = dropdown.getBoundingClientRect();
+  const optionBounds = option.getBoundingClientRect();
+  const top = bounds.top + dropdown.clientTop;
+  const bottom = top + dropdown.clientHeight;
+  if (optionBounds.top < top) dropdown.scrollTop += optionBounds.top - top;
+  else if (optionBounds.bottom > bottom) dropdown.scrollTop += optionBounds.bottom - bottom;
 }
 function openOptions(index = selectedIndex.value >= 0 ? selectedIndex.value : 0) {
   if (props.disabled || !props.options.length) return;
@@ -182,6 +192,7 @@ function openOptions(index = selectedIndex.value >= 0 ? selectedIndex.value : 0)
 }
 function closeOptions(restoreFocus = true) {
   isOpen.value = false;
+  pointerInDropdown = false;
   typedText = "";
   if (restoreFocus) trigger.value?.focus({ preventScroll: true });
 }
@@ -245,16 +256,34 @@ function handleKeydown(event: KeyboardEvent) {
     if (!isOpen.value) openOptions();
     findTypedOption(event.key);
   }
+  if (isOpen.value) nextTick(revealActiveOption);
 }
-function onOutside(event: Event) {
-  const target = event.target as Node | null;
-  if (
-    isOpen.value &&
-    target &&
-    !root.value?.contains(target) &&
-    !panel.value?.contains(target)
-  )
-    closeOptions(false);
+function isInsideSelect(target: EventTarget | null) {
+  return (
+    target instanceof Node &&
+    (root.value?.contains(target) || panel.value?.contains(target))
+  );
+}
+function onPointerDown(event: PointerEvent) {
+  if (!isOpen.value) return;
+  const bounds = panel.value?.getBoundingClientRect();
+  // Native scrollbar events can be retargeted to the document or dialog.
+  pointerInDropdown =
+    !!bounds &&
+    event.clientX >= bounds.left &&
+    event.clientX <= bounds.right &&
+    event.clientY >= bounds.top &&
+    event.clientY <= bounds.bottom;
+  if (!pointerInDropdown && !isInsideSelect(event.target)) closeOptions(false);
+}
+function onFocusOutside(event: FocusEvent) {
+  if (isOpen.value && !pointerInDropdown && !isInsideSelect(event.target)) closeOptions(false);
+}
+function onPointerEnd() {
+  if (pointerInDropdown && isOpen.value && !isInsideSelect(document.activeElement)) {
+    trigger.value?.focus({ preventScroll: true });
+  }
+  pointerInDropdown = false;
 }
 function onViewportChange(event: Event) {
   if (
@@ -275,9 +304,6 @@ function onViewportChange(event: Event) {
   }
   positionDropdown();
 }
-watch(activeIndex, () => {
-  if (isOpen.value) nextTick(revealActiveOption);
-});
 watch(
   () => [props.modelValue, props.options] as const,
   () => {
@@ -299,14 +325,18 @@ watch(
 );
 onMounted(() => {
   teleportTarget.value = root.value?.closest("dialog") ?? "body";
-  document.addEventListener("pointerdown", onOutside, true);
-  document.addEventListener("focusin", onOutside);
+  document.addEventListener("pointerdown", onPointerDown, true);
+  document.addEventListener("pointerup", onPointerEnd, true);
+  document.addEventListener("pointercancel", onPointerEnd, true);
+  document.addEventListener("focusin", onFocusOutside);
   window.addEventListener("resize", onViewportChange);
   window.addEventListener("scroll", onViewportChange, true);
 });
 onBeforeUnmount(() => {
-  document.removeEventListener("pointerdown", onOutside, true);
-  document.removeEventListener("focusin", onOutside);
+  document.removeEventListener("pointerdown", onPointerDown, true);
+  document.removeEventListener("pointerup", onPointerEnd, true);
+  document.removeEventListener("pointercancel", onPointerEnd, true);
+  document.removeEventListener("focusin", onFocusOutside);
   window.removeEventListener("resize", onViewportChange);
   window.removeEventListener("scroll", onViewportChange, true);
 });

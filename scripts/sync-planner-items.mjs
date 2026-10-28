@@ -101,6 +101,18 @@ const strings = new Map(
 );
 const normalizedName = (name) =>
   name.normalize("NFKC").replace(/[’‘]/g, "'").trim().toLowerCase();
+// RotW items reuse legacy invfile names despite having different HD appearances.
+// Resolve these by stable item name, never by the client/server's positional IDs.
+const uniqueArtwork = {
+  "Measured Wrath": "armor/grimoires/measured_wrath",
+  Dreadfang: "weapon/sword/two_handed_sword",
+  Wraithstep: "armor/boot/light_plate_boots",
+  Sling: "misc/ring/ring2",
+  Opalvein: "misc/ring/ring3",
+  "Entropy Locket": "misc/amulet/amulet1",
+  "Gheed's Wager": "armor/belt/heavy_belt",
+  "Unique Warlock Helm": "armor/helmet/unique_warlock_helm",
+};
 for (const [quality, definitions] of [
   ["unique", data.uniqueItems],
   ["set", data.setItems],
@@ -113,6 +125,9 @@ for (const [quality, definitions] of [
     for (const name of [definition.index, strings.get(definition.index)])
       if (name) names[quality][normalizedName(name)] = id;
     qualityKeys[quality][id] = [0, 1, 2].map((index) => {
+      const uniqueImage =
+        quality === "unique" && uniqueArtwork[definition.index.replace(/ Player$/, "")];
+      if (uniqueImage) return uniqueImage;
       const upgradedCode = base.row[["normcode", "ubercode", "ultracode"][index]] || code;
       const upgraded = bases[upgradedCode] || base;
       const file =

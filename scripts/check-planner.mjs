@@ -33,6 +33,7 @@ try {
     spentAttributes,
     attributeBudget,
     mercenaryLevelCap,
+    goldCapacity,
   } = await server.ssrLoadModule("/src/utils/planner.ts");
   const { usePlannerStore } = await server.ssrLoadModule("/src/store/planner.ts");
   const { wowheadTreeArtwork, wowheadSkillSprite } = await server.ssrLoadModule(
@@ -240,6 +241,20 @@ try {
   assert.equal(wonder.bonuses.fireResist, 20);
   const temptation = runewordBonuses(runewordTemplates("Temptation")[0], 0);
   assert.equal(temptation.classBonuses.warlock, 3);
+  const goldBuild = createBuild();
+  assert.equal(goldBuild.gold, 0);
+  assert.equal(goldCapacity(1), 10000);
+  assert.equal(goldCapacity(99), 990000);
+  goldBuild.gold = 123456;
+  assert.equal(decodeBuild(encodeBuild(goldBuild)).gold, 123456);
+  assert.equal(buildAtLevel(goldBuild, 1).gold, 10000);
+  assert.equal(buildAtLevel(goldBuild, 99).gold, 123456);
+  const oldGoldBuild = { ...goldBuild };
+  delete oldGoldBuild.gold;
+  assert.equal(parseBuild(oldGoldBuild).gold, 0);
+  for (const gold of [-1, 1.5, 900001, Infinity, NaN, "123", null])
+    assert.throws(() => parseBuild({ ...goldBuild, gold }));
+
   const warlock = createBuild("warlock");
   warlock.equipment.offHand = {
     name: "Temptation",

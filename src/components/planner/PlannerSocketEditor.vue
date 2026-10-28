@@ -42,7 +42,9 @@
           ref="searchInput"
           v-model="search"
           type="search"
-          :placeholder="t('Поиск рун и камней…', 'Search runes and gems…')"
+          :placeholder="
+            t('Поиск рун, камней и фасетов…', 'Search runes, gems and jewels…')
+          "
           :aria-label="t('Поиск вставки', 'Search socket insert')"
         />
         <div class="planner-socket-filters" :aria-label="t('Тип вставки', 'Insert type')">
@@ -79,13 +81,27 @@
         </div>
       </div>
     </div>
-    <ul
-      v-if="!readonly && selectedProperties.length"
+    <div
+      v-if="!readonly && modelValue.some(Boolean)"
       class="planner-socket-properties"
       :aria-label="t('Свойства вставок', 'Socket insert properties')"
     >
-      <li v-for="(line, index) in selectedProperties" :key="index">{{ line }}</li>
-    </ul>
+      <template v-for="index in count" :key="index">
+        <template v-if="selected(index)">
+          <template v-if="jewelItem(index)">
+            <p class="planner-socket-jewel-name">{{ selected(index)!.name[lang] }}</p>
+            <PlannerPropertyEditor
+              :item="jewelItem(index)!"
+              :native="native"
+              :character-level="characterLevel"
+              character-class="amazon"
+              @values="setValues(index, $event)"
+            />
+          </template>
+          <p v-for="(line, n) in properties(index)" v-else :key="n">{{ line }}</p>
+        </template>
+      </template>
+    </div>
     <p v-if="readonly" class="planner-muted">
       {{
         t(
@@ -100,10 +116,12 @@
 import { computed, nextTick, ref, useId, watch } from "vue";
 import { useInfoStore } from "@/store";
 import { useText } from "@/composables/useText";
+import PlannerPropertyEditor from "./PlannerPropertyEditor.vue";
 import {
   socketInserts,
   socketInsertByCode,
   socketCategory,
+  socketInsertItem,
 } from "@/utils/planner-sockets";
 import { socketPropertyLines } from "@/utils/planner-item-catalog";
 import type { GameSaveExporter } from "@/utils/planner-game-save";
@@ -117,7 +135,10 @@ const props = defineProps<{
   characterLevel: number;
   readonly?: boolean;
 }>();
-const emit = defineEmits<{ "update:modelValue": [value: (string | null)[]] }>();
+const emit = defineEmits<{
+  "update:modelValue": [value: (string | null)[]];
+  values: [value: NonNullable<PlannerItem["socketPropertyValues"]>];
+}>();
 const info = useInfoStore();
 const lang = computed(() => info.currentLang);
 const t = useText();
@@ -132,6 +153,8 @@ const filters = [
   { key: "all", ru: "Все", en: "All" },
   { key: "rune", ru: "Руны", en: "Runes" },
   { key: "gem", ru: "Камни", en: "Gems" },
+  { key: "facet", ru: "Фасеты", en: "Facets" },
+  { key: "jewel", ru: "Новые самоцветы", en: "Colossal Jewels" },
 ];
 const options = computed(() =>
   socketInserts
@@ -146,29 +169,28 @@ const options = computed(() =>
       a.group === b.group
         ? b.requiredLevel - a.requiredLevel ||
           a.name[lang.value].localeCompare(b.name[lang.value], lang.value)
-        : a.group === "rune"
-          ? -1
-          : 1
+        : filters.findIndex((f) => f.key === a.group) -
+          filters.findIndex((f) => f.key === b.group)
     )
 );
 const selected = (index: number) =>
   socketInsertByCode.get(props.modelValue[index - 1] ?? "");
+const jewelItem = (index: number) =>
+  socketInsertItem(
+    props.modelValue[index - 1] ?? "",
+    props.item.socketPropertyValues?.[index - 1]
+  );
 const properties = (index: number) =>
   socketPropertyLines(
     props.native,
     props.modelValue[index - 1] ?? "",
     socketCategory(props.item),
-    props.characterLevel
+    props.characterLevel,
+    props.item.socketPropertyValues?.[index - 1]
   );
-const selectedProperties = computed(() =>
-  Array.from({ length: props.count }, (_, index) => index + 1).flatMap((index) => {
-    if (!selected(index)) return [];
-    const lines = properties(index);
-    return lines.length
-      ? lines
-      : [t("В этой основе не даёт бонусов.", "No bonuses in this base.")];
-  })
-);
+function setValues(index: number, values: Record<string, number>) {
+  emit("values", { ...props.item.socketPropertyValues, [index - 1]: values });
+}
 function close() {
   const previous = opened.value;
   opened.value = undefined;
@@ -191,6 +213,9 @@ function toggle(index: number) {
   nextTick(() => searchInput.value[0]?.focus());
 }
 function choose(index: number, code: string | null) {
+  const values = { ...props.item.socketPropertyValues };
+  delete values[index - 1];
+  emit("values", values);
   emit(
     "update:modelValue",
     Array.from({ length: props.count }, (_, i) =>

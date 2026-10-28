@@ -1,4 +1,5 @@
 import type { LocalizedName } from "./runeword";
+import type { WaypointId } from "@/shared/planner-waypoints";
 
 export type ClassId =
   | "amazon"
@@ -91,10 +92,12 @@ export interface PlannerItem {
   itemLevel?: number;
   sockets?: number;
   socketedItems?: (string | null)[];
+  socketPropertyValues?: Record<string, Record<string, number>>;
   affixes?: PlannerAffix[];
   ethereal?: boolean;
   propertyRoll?: 0 | 1;
   propertyValues?: Record<string, number>;
+  propertyChoices?: Record<string, number>;
   skillClass?: ClassId;
   stashPosition?: number;
 }
@@ -109,8 +112,10 @@ export interface PlannerBuild {
   classId: ClassId;
   level: number;
   difficulty: Difficulty;
+  gold: number;
   hardcore: boolean;
   weaponSet: 0 | 1;
+  waypoints: Record<Difficulty, Record<WaypointId, boolean>>;
   quests: Record<
     Difficulty,
     {

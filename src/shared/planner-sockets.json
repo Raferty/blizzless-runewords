@@ -1,5 +1,5 @@
 {
-  "gameDataSha256": "c176ba98069801f011553d5d7ee1358a754c98ad8f2f6e228be6a11fada640e7",
+  "gameDataSha256": "50e5145422d42dc4b907cd7ca2b44a3d2d2c411b0d53ffbf5a9d915385d8cea4",
   "items": [
     {
       "code": "gcv",
@@ -12,16 +12,19 @@
       "image_url": "/images/planner/sockets/gcv.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "strength": 3
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -38,16 +41,19 @@
       "image_url": "/images/planner/sockets/gfv.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "strength": 4
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -64,16 +70,19 @@
       "image_url": "/images/planner/sockets/gsv.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "strength": 6
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -90,16 +99,19 @@
       "image_url": "/images/planner/sockets/gzv.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "strength": 8
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -116,16 +128,19 @@
       "image_url": "/images/planner/sockets/gpv.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "strength": 10
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -142,16 +157,19 @@
       "image_url": "/images/planner/sockets/gcb.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "mana": 10
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "coldResist": 12
           },
@@ -170,16 +188,19 @@
       "image_url": "/images/planner/sockets/gfb.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "mana": 17
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "coldResist": 16
           },
@@ -198,16 +219,19 @@
       "image_url": "/images/planner/sockets/gsb.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "mana": 24
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "coldResist": 22
           },
@@ -226,16 +250,19 @@
       "image_url": "/images/planner/sockets/glb.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "mana": 31
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "coldResist": 28
           },
@@ -254,16 +281,19 @@
       "image_url": "/images/planner/sockets/gpb.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "mana": 38
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "coldResist": 40
           },
@@ -282,16 +312,19 @@
       "image_url": "/images/planner/sockets/gcg.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "dexterity": 3
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "poisonResist": 12
           },
@@ -310,16 +343,19 @@
       "image_url": "/images/planner/sockets/gfg.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "dexterity": 4
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "poisonResist": 16
           },
@@ -338,16 +374,19 @@
       "image_url": "/images/planner/sockets/gsg.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "dexterity": 6
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "poisonResist": 22
           },
@@ -366,16 +405,19 @@
       "image_url": "/images/planner/sockets/glg.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "dexterity": 8
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "poisonResist": 28
           },
@@ -394,16 +436,19 @@
       "image_url": "/images/planner/sockets/gpg.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "dexterity": 10
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "poisonResist": 40
           },
@@ -422,16 +467,19 @@
       "image_url": "/images/planner/sockets/gcr.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "life": 10
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 12
           },
@@ -450,16 +498,19 @@
       "image_url": "/images/planner/sockets/gfr.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "life": 17
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 16
           },
@@ -478,16 +529,19 @@
       "image_url": "/images/planner/sockets/gsr.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "life": 24
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 22
           },
@@ -506,16 +560,19 @@
       "image_url": "/images/planner/sockets/glr.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "life": 31
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 28
           },
@@ -534,16 +591,19 @@
       "image_url": "/images/planner/sockets/gpr.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "life": 38
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 40
           },
@@ -562,14 +622,17 @@
       "image_url": "/images/planner/sockets/gcw.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 6,
             "coldResist": 6,
@@ -591,14 +654,17 @@
       "image_url": "/images/planner/sockets/gfw.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 8,
             "coldResist": 8,
@@ -620,14 +686,17 @@
       "image_url": "/images/planner/sockets/gsw.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 11,
             "coldResist": 11,
@@ -649,14 +718,17 @@
       "image_url": "/images/planner/sockets/glw.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 14,
             "coldResist": 14,
@@ -678,14 +750,17 @@
       "image_url": "/images/planner/sockets/gpw.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 19,
             "coldResist": 19,
@@ -707,16 +782,19 @@
       "image_url": "/images/planner/sockets/gcy.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "magicFind": 9
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "lightningResist": 12
           },
@@ -735,16 +813,19 @@
       "image_url": "/images/planner/sockets/gfy.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "magicFind": 13
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "lightningResist": 16
           },
@@ -763,16 +844,19 @@
       "image_url": "/images/planner/sockets/gsy.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "magicFind": 16
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "lightningResist": 22
           },
@@ -791,16 +875,19 @@
       "image_url": "/images/planner/sockets/gly.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "magicFind": 20
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "lightningResist": 28
           },
@@ -819,16 +906,19 @@
       "image_url": "/images/planner/sockets/gpy.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "magicFind": 24
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "lightningResist": 40
           },
@@ -847,14 +937,17 @@
       "image_url": "/images/planner/sockets/skc.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -871,14 +964,17 @@
       "image_url": "/images/planner/sockets/skf.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -895,14 +991,17 @@
       "image_url": "/images/planner/sockets/sku.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -919,14 +1018,17 @@
       "image_url": "/images/planner/sockets/skl.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -943,14 +1045,17 @@
       "image_url": "/images/planner/sockets/skz.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -967,14 +1072,17 @@
       "image_url": "/images/el.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -991,14 +1099,17 @@
       "image_url": "/images/eld.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1015,14 +1126,17 @@
       "image_url": "/images/tir.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1039,14 +1153,17 @@
       "image_url": "/images/nef.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1063,14 +1180,17 @@
       "image_url": "/images/eth.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1087,14 +1207,17 @@
       "image_url": "/images/ith.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1111,16 +1234,19 @@
       "image_url": "/images/tal.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "poisonResist": 30
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "poisonResist": 35
           },
@@ -1139,16 +1265,19 @@
       "image_url": "/images/ral.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 30
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 35
           },
@@ -1167,16 +1296,19 @@
       "image_url": "/images/ort.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "lightningResist": 30
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "lightningResist": 35
           },
@@ -1195,16 +1327,19 @@
       "image_url": "/images/thul.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "coldResist": 30
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "coldResist": 35
           },
@@ -1223,14 +1358,17 @@
       "image_url": "/images/amn.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1247,14 +1385,17 @@
       "image_url": "/images/sol.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1271,18 +1412,21 @@
       "image_url": "/images/shael.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {
             "ias": 20
           },
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "fhr": 20
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1299,14 +1443,17 @@
       "image_url": "/images/dol.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1323,14 +1470,17 @@
       "image_url": "/images/hel.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1347,18 +1497,21 @@
       "image_url": "/images/io.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {
             "vitality": 10
           },
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "vitality": 10
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "vitality": 10
           },
@@ -1377,18 +1530,21 @@
       "image_url": "/images/lum.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {
             "energy": 10
           },
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "energy": 10
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "energy": 10
           },
@@ -1407,18 +1563,21 @@
       "image_url": "/images/ko.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {
             "dexterity": 10
           },
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "dexterity": 10
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "dexterity": 10
           },
@@ -1437,18 +1596,21 @@
       "image_url": "/images/fal.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {
             "strength": 10
           },
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "strength": 10
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "strength": 10
           },
@@ -1467,14 +1629,17 @@
       "image_url": "/images/lem.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1491,14 +1656,17 @@
       "image_url": "/images/pul.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1515,10 +1683,12 @@
       "image_url": "/images/um.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 15,
             "coldResist": 15,
@@ -1528,6 +1698,7 @@
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "fireResist": 22,
             "coldResist": 22,
@@ -1549,14 +1720,17 @@
       "image_url": "/images/mal.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1573,18 +1747,21 @@
       "image_url": "/images/ist.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {
             "magicFind": 30
           },
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {
             "magicFind": 25
           },
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "magicFind": 25
           },
@@ -1603,14 +1780,17 @@
       "image_url": "/images/gul.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1627,14 +1807,17 @@
       "image_url": "/images/vex.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1651,14 +1834,17 @@
       "image_url": "/images/ohm.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1675,14 +1861,17 @@
       "image_url": "/images/lo.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1699,14 +1888,17 @@
       "image_url": "/images/sur.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "mana": 50
           },
@@ -1725,14 +1917,17 @@
       "image_url": "/images/ber.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1749,14 +1944,17 @@
       "image_url": "/images/jah.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "life": 50
           },
@@ -1775,14 +1973,17 @@
       "image_url": "/images/cham.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1799,14 +2000,17 @@
       "image_url": "/images/zod.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1823,14 +2027,17 @@
       "image_url": "/images/nef.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1847,14 +2054,17 @@
       "image_url": "/images/dol.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         }
@@ -1871,14 +2081,17 @@
       "image_url": "/images/sur.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {
             "mana": 50
           },
@@ -1897,15 +2110,1367 @@
       "image_url": "/images/cham.webp",
       "effects": {
         "weapon": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "helm": {
+          "skillBonuses": {},
           "bonuses": {},
           "classBonuses": {}
         },
         "shield": {
+          "skillBonuses": {},
           "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique392",
+      "baseCode": "jew",
+      "group": "facet",
+      "name": {
+        "en": "Rainbow Facet · Lightning · Death",
+        "ru": "Радужный фасет · Молния · Смерть"
+      },
+      "requiredLevel": 49,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 3,
+          "max": 5
+        },
+        "3": {
+          "min": 3,
+          "max": 5
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "3": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique393",
+      "baseCode": "jew",
+      "group": "facet",
+      "name": {
+        "en": "Rainbow Facet · Cold · Death",
+        "ru": "Радужный фасет · Холод · Смерть"
+      },
+      "requiredLevel": 49,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 3,
+          "max": 5
+        },
+        "3": {
+          "min": 3,
+          "max": 5
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "3": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique394",
+      "baseCode": "jew",
+      "group": "facet",
+      "name": {
+        "en": "Rainbow Facet · Fire · Death",
+        "ru": "Радужный фасет · Огонь · Смерть"
+      },
+      "requiredLevel": 49,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 3,
+          "max": 5
+        },
+        "3": {
+          "min": 3,
+          "max": 5
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "3": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique395",
+      "baseCode": "jew",
+      "group": "facet",
+      "name": {
+        "en": "Rainbow Facet · Poison · Death",
+        "ru": "Радужный фасет · Яд · Смерть"
+      },
+      "requiredLevel": 49,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 3,
+          "max": 5
+        },
+        "3": {
+          "min": 3,
+          "max": 5
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "3": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique396",
+      "baseCode": "jew",
+      "group": "facet",
+      "name": {
+        "en": "Rainbow Facet · Lightning · Level Up",
+        "ru": "Радужный фасет · Молния · Новый уровень"
+      },
+      "requiredLevel": 49,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 3,
+          "max": 5
+        },
+        "3": {
+          "min": 3,
+          "max": 5
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "3": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique397",
+      "baseCode": "jew",
+      "group": "facet",
+      "name": {
+        "en": "Rainbow Facet · Cold · Level Up",
+        "ru": "Радужный фасет · Холод · Новый уровень"
+      },
+      "requiredLevel": 49,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 3,
+          "max": 5
+        },
+        "3": {
+          "min": 3,
+          "max": 5
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "3": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique398",
+      "baseCode": "jew",
+      "group": "facet",
+      "name": {
+        "en": "Rainbow Facet · Fire · Level Up",
+        "ru": "Радужный фасет · Огонь · Новый уровень"
+      },
+      "requiredLevel": 49,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 3,
+          "max": 5
+        },
+        "3": {
+          "min": 3,
+          "max": 5
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "3": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique399",
+      "baseCode": "jew",
+      "group": "facet",
+      "name": {
+        "en": "Rainbow Facet · Poison · Level Up",
+        "ru": "Радужный фасет · Яд · Новый уровень"
+      },
+      "requiredLevel": 49,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 3,
+          "max": 5
+        },
+        "3": {
+          "min": 3,
+          "max": 5
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {},
+          "classBonuses": {}
+        },
+        "3": {
+          "bonuses": {},
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique493",
+      "baseCode": "cjw",
+      "group": "jewel",
+      "name": {
+        "en": "Defender's Bile",
+        "ru": "Желчь защитника"
+      },
+      "requiredLevel": 75,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {
+            "15": 1,
+            "25": 1,
+            "73": 1,
+            "83": 1,
+            "92": 1,
+            "222": 1,
+            "238": 1,
+            "278": 1,
+            "640": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {
+            "15": 1,
+            "25": 1,
+            "73": 1,
+            "83": 1,
+            "92": 1,
+            "222": 1,
+            "238": 1,
+            "278": 1,
+            "640": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {
+            "15": 1,
+            "25": 1,
+            "73": 1,
+            "83": 1,
+            "92": 1,
+            "222": 1,
+            "238": 1,
+            "278": 1,
+            "640": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 5,
+          "max": 10
+        },
+        "4": {
+          "min": 5,
+          "max": 10
+        },
+        "5": {
+          "min": 3,
+          "max": 5
+        },
+        "6": {
+          "min": 15,
+          "max": 35
+        },
+        "7": {
+          "min": 25,
+          "max": 50
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "4": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "5": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "6": {
+          "bonuses": {
+            "magicFind": 1
+          },
+          "classBonuses": {}
+        },
+        "7": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique494",
+      "baseCode": "cjw",
+      "group": "jewel",
+      "name": {
+        "en": "Guardian's Thunder",
+        "ru": "Гром стража"
+      },
+      "requiredLevel": 75,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {
+            "14": 1,
+            "20": 1,
+            "24": 1,
+            "34": 1,
+            "35": 1,
+            "38": 1,
+            "42": 1,
+            "43": 1,
+            "48": 1,
+            "49": 1,
+            "53": 1,
+            "57": 1,
+            "63": 1,
+            "118": 1,
+            "121": 1,
+            "256": 1,
+            "261": 1,
+            "269": 1,
+            "271": 1,
+            "276": 1,
+            "280": 1,
+            "344": 1,
+            "369": 1,
+            "409": 1,
+            "414": 1,
+            "426": 1,
+            "638": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {
+            "14": 1,
+            "20": 1,
+            "24": 1,
+            "34": 1,
+            "35": 1,
+            "38": 1,
+            "42": 1,
+            "43": 1,
+            "48": 1,
+            "49": 1,
+            "53": 1,
+            "57": 1,
+            "63": 1,
+            "118": 1,
+            "121": 1,
+            "256": 1,
+            "261": 1,
+            "269": 1,
+            "271": 1,
+            "276": 1,
+            "280": 1,
+            "344": 1,
+            "369": 1,
+            "409": 1,
+            "414": 1,
+            "426": 1,
+            "638": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {
+            "14": 1,
+            "20": 1,
+            "24": 1,
+            "34": 1,
+            "35": 1,
+            "38": 1,
+            "42": 1,
+            "43": 1,
+            "48": 1,
+            "49": 1,
+            "53": 1,
+            "57": 1,
+            "63": 1,
+            "118": 1,
+            "121": 1,
+            "256": 1,
+            "261": 1,
+            "269": 1,
+            "271": 1,
+            "276": 1,
+            "280": 1,
+            "344": 1,
+            "369": 1,
+            "409": 1,
+            "414": 1,
+            "426": 1,
+            "638": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 5,
+          "max": 10
+        },
+        "4": {
+          "min": 5,
+          "max": 10
+        },
+        "5": {
+          "min": 3,
+          "max": 5
+        },
+        "6": {
+          "min": 15,
+          "max": 35
+        },
+        "7": {
+          "min": 25,
+          "max": 50
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "4": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "5": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "6": {
+          "bonuses": {
+            "magicFind": 1
+          },
+          "classBonuses": {}
+        },
+        "7": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique495",
+      "baseCode": "cjw",
+      "group": "jewel",
+      "name": {
+        "en": "Protector's Frost",
+        "ru": "Мороз хранителя"
+      },
+      "requiredLevel": 75,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {
+            "11": 1,
+            "21": 1,
+            "31": 1,
+            "39": 1,
+            "40": 1,
+            "44": 1,
+            "45": 1,
+            "50": 1,
+            "55": 1,
+            "59": 1,
+            "60": 1,
+            "64": 1,
+            "65": 1,
+            "111": 1,
+            "114": 1,
+            "227": 1,
+            "230": 1,
+            "250": 1,
+            "274": 1,
+            "318": 1,
+            "341": 1,
+            "343": 1,
+            "346": 1,
+            "347": 1,
+            "348": 1,
+            "365": 1,
+            "406": 1,
+            "408": 1,
+            "636": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {
+            "11": 1,
+            "21": 1,
+            "31": 1,
+            "39": 1,
+            "40": 1,
+            "44": 1,
+            "45": 1,
+            "50": 1,
+            "55": 1,
+            "59": 1,
+            "60": 1,
+            "64": 1,
+            "65": 1,
+            "111": 1,
+            "114": 1,
+            "227": 1,
+            "230": 1,
+            "250": 1,
+            "274": 1,
+            "318": 1,
+            "341": 1,
+            "343": 1,
+            "346": 1,
+            "347": 1,
+            "348": 1,
+            "365": 1,
+            "406": 1,
+            "408": 1,
+            "636": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {
+            "11": 1,
+            "21": 1,
+            "31": 1,
+            "39": 1,
+            "40": 1,
+            "44": 1,
+            "45": 1,
+            "50": 1,
+            "55": 1,
+            "59": 1,
+            "60": 1,
+            "64": 1,
+            "65": 1,
+            "111": 1,
+            "114": 1,
+            "227": 1,
+            "230": 1,
+            "250": 1,
+            "274": 1,
+            "318": 1,
+            "341": 1,
+            "343": 1,
+            "346": 1,
+            "347": 1,
+            "348": 1,
+            "365": 1,
+            "406": 1,
+            "408": 1,
+            "636": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 5,
+          "max": 10
+        },
+        "4": {
+          "min": 5,
+          "max": 10
+        },
+        "5": {
+          "min": 3,
+          "max": 5
+        },
+        "6": {
+          "min": 15,
+          "max": 35
+        },
+        "7": {
+          "min": 25,
+          "max": 50
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "4": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "5": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "6": {
+          "bonuses": {
+            "magicFind": 1
+          },
+          "classBonuses": {}
+        },
+        "7": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique496",
+      "baseCode": "cjw",
+      "group": "jewel",
+      "name": {
+        "en": "Defender's Fire",
+        "ru": "Огонь защитника"
+      },
+      "requiredLevel": 75,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {
+            "7": 1,
+            "16": 1,
+            "27": 1,
+            "36": 1,
+            "37": 1,
+            "41": 1,
+            "46": 1,
+            "47": 1,
+            "51": 1,
+            "52": 1,
+            "56": 1,
+            "61": 1,
+            "62": 1,
+            "74": 1,
+            "94": 1,
+            "102": 1,
+            "171": 1,
+            "225": 1,
+            "229": 1,
+            "234": 1,
+            "239": 1,
+            "244": 1,
+            "249": 1,
+            "251": 1,
+            "259": 1,
+            "262": 1,
+            "270": 1,
+            "272": 1,
+            "282": 1,
+            "289": 1,
+            "312": 1,
+            "316": 1,
+            "340": 1,
+            "342": 1,
+            "349": 1,
+            "351": 1,
+            "368": 1,
+            "376": 1,
+            "380": 1,
+            "394": 1,
+            "398": 1,
+            "400": 1,
+            "401": 1,
+            "403": 1,
+            "412": 1,
+            "413": 1,
+            "421": 1,
+            "422": 1,
+            "634": 1,
+            "641": 1,
+            "652": 1,
+            "666": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {
+            "7": 1,
+            "16": 1,
+            "27": 1,
+            "36": 1,
+            "37": 1,
+            "41": 1,
+            "46": 1,
+            "47": 1,
+            "51": 1,
+            "52": 1,
+            "56": 1,
+            "61": 1,
+            "62": 1,
+            "74": 1,
+            "94": 1,
+            "102": 1,
+            "171": 1,
+            "225": 1,
+            "229": 1,
+            "234": 1,
+            "239": 1,
+            "244": 1,
+            "249": 1,
+            "251": 1,
+            "259": 1,
+            "262": 1,
+            "270": 1,
+            "272": 1,
+            "282": 1,
+            "289": 1,
+            "312": 1,
+            "316": 1,
+            "340": 1,
+            "342": 1,
+            "349": 1,
+            "351": 1,
+            "368": 1,
+            "376": 1,
+            "380": 1,
+            "394": 1,
+            "398": 1,
+            "400": 1,
+            "401": 1,
+            "403": 1,
+            "412": 1,
+            "413": 1,
+            "421": 1,
+            "422": 1,
+            "634": 1,
+            "641": 1,
+            "652": 1,
+            "666": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {
+            "7": 1,
+            "16": 1,
+            "27": 1,
+            "36": 1,
+            "37": 1,
+            "41": 1,
+            "46": 1,
+            "47": 1,
+            "51": 1,
+            "52": 1,
+            "56": 1,
+            "61": 1,
+            "62": 1,
+            "74": 1,
+            "94": 1,
+            "102": 1,
+            "171": 1,
+            "225": 1,
+            "229": 1,
+            "234": 1,
+            "239": 1,
+            "244": 1,
+            "249": 1,
+            "251": 1,
+            "259": 1,
+            "262": 1,
+            "270": 1,
+            "272": 1,
+            "282": 1,
+            "289": 1,
+            "312": 1,
+            "316": 1,
+            "340": 1,
+            "342": 1,
+            "349": 1,
+            "351": 1,
+            "368": 1,
+            "376": 1,
+            "380": 1,
+            "394": 1,
+            "398": 1,
+            "400": 1,
+            "401": 1,
+            "403": 1,
+            "412": 1,
+            "413": 1,
+            "421": 1,
+            "422": 1,
+            "634": 1,
+            "641": 1,
+            "652": 1,
+            "666": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 5,
+          "max": 10
+        },
+        "4": {
+          "min": 5,
+          "max": 10
+        },
+        "5": {
+          "min": 3,
+          "max": 5
+        },
+        "6": {
+          "min": 15,
+          "max": 35
+        },
+        "7": {
+          "min": 25,
+          "max": 50
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "4": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "5": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "6": {
+          "bonuses": {
+            "magicFind": 1
+          },
+          "classBonuses": {}
+        },
+        "7": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique497",
+      "baseCode": "cjw",
+      "group": "jewel",
+      "name": {
+        "en": "Protector's Stone",
+        "ru": "Камень хранителя"
+      },
+      "requiredLevel": 75,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 80,
+          "max": 100
+        },
+        "4": {
+          "min": 5,
+          "max": 10
+        },
+        "5": {
+          "min": 3,
+          "max": 5
+        },
+        "6": {
+          "min": 15,
+          "max": 35
+        },
+        "7": {
+          "min": 25,
+          "max": 50
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "4": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "5": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "6": {
+          "bonuses": {
+            "magicFind": 1
+          },
+          "classBonuses": {}
+        },
+        "7": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "unique498",
+      "baseCode": "cjw",
+      "group": "jewel",
+      "name": {
+        "en": "Guardian's Light",
+        "ru": "Свет стража"
+      },
+      "requiredLevel": 75,
+      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {
+            "6": 1,
+            "67": 1,
+            "84": 1,
+            "93": 1,
+            "101": 1,
+            "112": 1,
+            "119": 1,
+            "144": 1,
+            "147": 1,
+            "152": 1,
+            "194": 1,
+            "253": 1,
+            "317": 1,
+            "345": 1,
+            "384": 1,
+            "385": 1,
+            "388": 1,
+            "389": 1,
+            "390": 1,
+            "395": 1,
+            "399": 1,
+            "402": 1,
+            "418": 1,
+            "428": 1,
+            "631": 1,
+            "667": 1,
+            "669": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {
+            "6": 1,
+            "67": 1,
+            "84": 1,
+            "93": 1,
+            "101": 1,
+            "112": 1,
+            "119": 1,
+            "144": 1,
+            "147": 1,
+            "152": 1,
+            "194": 1,
+            "253": 1,
+            "317": 1,
+            "345": 1,
+            "384": 1,
+            "385": 1,
+            "388": 1,
+            "389": 1,
+            "390": 1,
+            "395": 1,
+            "399": 1,
+            "402": 1,
+            "418": 1,
+            "428": 1,
+            "631": 1,
+            "667": 1,
+            "669": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {
+            "6": 1,
+            "67": 1,
+            "84": 1,
+            "93": 1,
+            "101": 1,
+            "112": 1,
+            "119": 1,
+            "144": 1,
+            "147": 1,
+            "152": 1,
+            "194": 1,
+            "253": 1,
+            "317": 1,
+            "345": 1,
+            "384": 1,
+            "385": 1,
+            "388": 1,
+            "389": 1,
+            "390": 1,
+            "395": 1,
+            "399": 1,
+            "402": 1,
+            "418": 1,
+            "428": 1,
+            "631": 1,
+            "667": 1,
+            "669": 1
+          },
+          "bonuses": {
+            "magicFind": 35
+          },
+          "classBonuses": {}
+        }
+      },
+      "ranges": {
+        "2": {
+          "min": 10,
+          "max": 15
+        },
+        "5": {
+          "min": 3,
+          "max": 5
+        },
+        "6": {
+          "min": 15,
+          "max": 35
+        },
+        "7": {
+          "min": 25,
+          "max": 50
+        }
+      },
+      "rollEffects": {
+        "2": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "5": {
+          "bonuses": {
+            "magicFind": 0
+          },
+          "classBonuses": {}
+        },
+        "6": {
+          "bonuses": {
+            "magicFind": 1
+          },
+          "classBonuses": {}
+        },
+        "7": {
+          "bonuses": {
+            "magicFind": 0
+          },
           "classBonuses": {}
         }
       }

@@ -11,6 +11,38 @@ export const propertyClasses: ClassId[] = [
   "warlock",
 ];
 
+type PropertyGroups = Record<string, { [key: string]: unknown }>;
+
+export function propertyGroupOptions(group: PropertyGroups[string] | undefined) {
+  if (!group || group.pickmode !== 2) return [];
+  return Array.from({ length: 20 }, (_, n) => n + 1).filter(
+    (option) => group[`prop${option}`] && Number(group[`chance${option}`] ?? 0) > 0
+  );
+}
+
+export function resolvePropertyGroups(
+  definition: Record<string, unknown>,
+  groups: PropertyGroups = {},
+  choices: PlannerItem["propertyChoices"] = {}
+) {
+  const result = { ...definition };
+  for (const key of Object.keys(choices))
+    if (!/^(?:[1-9]|1[0-2])$/.test(key) || !groups[String(definition[`prop${key}`])])
+      throw new Error("Invalid property group");
+  for (let index = 1; index <= 12; index++) {
+    const group = groups[String(definition[`prop${index}`])];
+    if (!group) continue;
+    const options = propertyGroupOptions(group);
+    const selected = choices[index] ?? options[0];
+    if (!options.includes(selected)) throw new Error("Invalid property choice");
+    result[`prop${index}`] = group[`prop${selected}`];
+    result[`par${index}`] = group[`modparam${selected}`];
+    result[`min${index}`] = group[`modmin${selected}`];
+    result[`max${index}`] = group[`modmax${selected}`];
+  }
+  return result;
+}
+
 export function propertyRange(
   definition: Record<string, unknown>,
   property: object,

@@ -124,6 +124,10 @@ function readTable(text) {
     });
 }
 const current = {};
+const enabledSunder = (row) =>
+  /^(PreCrafted|Crafted) (Cold Rupture|Flame Rift|Crack of the Heavens|Rotting Fissure|Bone Break|Black Cleft)$/.test(
+    row.index ?? ""
+  );
 for (const name of tableNames) {
   if (provenance[name].sha256)
     current[name.toLowerCase()] = readTable(
@@ -182,9 +186,24 @@ for (const name of tableNames) {
         id = row.class?.slice(0, 3).toLowerCase();
         break;
       case "uniqueItems":
-        if (!row.index || !row.spawnable) return;
+        // Colossal jewels are boss rewards, so they have no random-drop flag.
+        // Latent/Renewed variants are explicitly enabled for offline planning.
+        if (!row.index || (!row.spawnable && row.code !== "cjw" && !enabledSunder(row)))
+          return;
         id = `unique${String(row.id ?? index).padStart(3, "0")}`;
-        row.enabled = row.spawnable;
+        row.enabled = row.code === "cjw" || enabledSunder(row) ? 1 : row.spawnable;
+        if (enabledSunder(row)) {
+          row.disabled = 0;
+          row.spawnable = 1;
+          // Cold's unused fifth group is a dangling reference in the launcher;
+          // all other Renewed definitions already omit this empty slot.
+          if (row.prop7 === "Gelid-Affix5" && !raw.propertyGroups?.[row.prop7]) {
+            for (const field of ["prop7", "par7", "min7", "max7"]) delete row[field];
+          }
+        }
+        if (row.code === "cjw")
+          for (let i = 1; i <= 12; i++)
+            if (row[`prop${i}`]) row[`prop${i}`] = row[`prop${i}`].toLowerCase();
         break;
       case "setItems":
         if (!row.index) return;
@@ -221,7 +240,9 @@ for (const name of tableNames) {
     if (id === undefined) return;
     // Blank affix cells mean no property/restriction, not a fallback to another patch.
     result[id] =
-      key === "magicPrefix" || key === "magicSuffix"
+      key === "magicPrefix" ||
+      key === "magicSuffix" ||
+      (key === "uniqueItems" && (row.code === "cjw" || enabledSunder(row)))
         ? { ...row }
         : { ...raw[key]?.[id], ...row };
   });
@@ -249,6 +270,12 @@ await writeFile(
       characterCodec: "d2r-saver@0.2.0",
       itemCodec: "@d2runewizard/d2s@2.0.134",
       supplementalDataRevision: revision,
+      plannerOverrides: {
+        enabledSunderVariants: Object.entries(raw.uniqueItems)
+          .filter(([, row]) => enabledSunder(row))
+          .map(([id]) => id),
+        omittedUndefinedProperties: { unique500: ["Gelid-Affix5"] },
+      },
       files: provenance,
     },
     null,

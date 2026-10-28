@@ -16,7 +16,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,vue,js,json,scss,css}\"",
     "stylelint": "stylelint \"src/**/*.{vue,scss,css}\"",
     "stylelint:fix": "stylelint \"src/**/*.{vue,scss,css}\" --fix",
-    "test": "node scripts/check-catalog.mjs && node scripts/check-cube.mjs && node scripts/check-planner.mjs && node scripts/check-planner-items.mjs && node scripts/check-planner-affixes.mjs && node scripts/check-planner-game-save.mjs",
+    "test": "node scripts/check-catalog.mjs && node scripts/check-cube.mjs && node scripts/check-planner.mjs && node scripts/check-planner-items.mjs && node scripts/check-planner-affixes.mjs && node scripts/check-planner-game-save.mjs && node scripts/check-planner-sockets.mjs && node scripts/check-planner-waypoints.mjs",
     "sync:planner": "node scripts/sync-planner.mjs && prettier --write src/shared/planner-catalog.json src/shared/planner-runewords.json",
     "sync:planner-save": "node scripts/sync-planner-save.mjs",
     "sync:planner-sockets": "node scripts/sync-planner-sockets.mjs && prettier --write src/shared/planner-sockets.json",

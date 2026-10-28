@@ -56,6 +56,7 @@ try {
     );
     assert.equal(read.header.level, build.level);
     assert.equal(read.header.status.hardcore, build.hardcore);
+    assert.equal(read.attributes.gold, build.gold);
     assert.equal(
       read.attributes.unused_stats,
       planner.attributeBudget(build) - planner.spentAttributes(build)
@@ -72,6 +73,7 @@ try {
     for (const level of [1, 2, 90, 99]) {
       const build = planner.createBuild(c.id);
       build.level = level;
+      build.gold = level === 1 ? 0 : level === 90 ? 123456 : planner.goldCapacity(level);
       build.mercenary.level = Math.min(98, level);
       build.hardcore = level % 2 === 1;
       const { read } = await verify(build);
