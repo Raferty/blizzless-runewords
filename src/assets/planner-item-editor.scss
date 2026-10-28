@@ -673,10 +673,14 @@
   color: inherit;
   text-align: center;
   appearance: textfield;
-  background: transparent;
-  border: 1px solid transparent;
+  background: rgb(255 255 255 / 5%);
+  border: 1px solid rgb(255 255 255 / 20%);
   border-radius: 3px;
   box-shadow: none;
+}
+.planner-item-editor .planner-property-line input:hover {
+  background: rgb(255 255 255 / 8%);
+  border-color: rgb(255 255 255 / 35%);
 }
 .planner-item-editor .planner-property-line input:focus-visible {
   outline: 1px solid #008cff;

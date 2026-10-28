@@ -36,6 +36,23 @@
           )
         }}</small>
       </label>
+      <label class="planner-label">
+        {{ t("Режим игры", "Game mode") }}
+        <UiSelect
+          v-model="gameMode"
+          dropdown-class="planner-select-dropdown"
+          :options="gameModes"
+          :aria-label="t('Режим игры', 'Game mode')"
+        />
+        <small v-if="gameMode === 'rotw'">
+          {{
+            t(
+              "Для загрузки персонажа нужно дополнение Reign of the Warlock.",
+              "Loading this character requires Reign of the Warlock."
+            )
+          }}
+        </small>
+      </label>
       <p v-if="loading" role="status" class="planner-help">
         {{ t("Загружаю игровые данные…", "Loading game data…") }}
       </p>
@@ -147,16 +164,25 @@ import { usePlannerStore } from "@/store/planner";
 import { equipmentSlots, plannerClasses } from "@/shared/planner";
 import {
   GameSaveError,
+  defaultGameSaveMode,
   gameSaveEntries,
   loadGameSaveExporter,
   validCharacterName,
   type GameSaveEntry,
   type GameSaveExporter,
   type GameSaveRoll,
+  type GameSaveMode,
 } from "@/utils/planner-game-save";
 defineEmits<{ close: []; backup: [] }>();
 const store = usePlannerStore();
 const t = useText();
+const gameMode = ref(defaultGameSaveMode(store.build.classId));
+const gameModes = computed<{ value: GameSaveMode; label: string }[]>(() => [
+  ...(store.build.classId === "warlock"
+    ? []
+    : [{ value: "expansion" as const, label: "Expansion (Lord of Destruction)" }]),
+  { value: "rotw", label: "Reign of the Warlock" },
+]);
 const name = ref(
   validCharacterName(store.build.name)
     ? store.build.name
@@ -224,6 +250,7 @@ async function download() {
       name: characterName,
       choices: choices.value,
       rolls: rolls.value,
+      gameMode: gameMode.value,
     });
     const url = URL.createObjectURL(
       new Blob([Uint8Array.from(bytes).buffer], { type: "application/octet-stream" })
@@ -238,6 +265,10 @@ async function download() {
     const code = cause instanceof GameSaveError ? cause.code : "validation";
     const messages: Record<string, [string, string]> = {
       name: ["Проверьте имя персонажа.", "Check the character name."],
+      gameMode: [
+        "Для варлока нужен режим Reign of the Warlock.",
+        "Warlock requires Reign of the Warlock mode.",
+      ],
       base: [
         "Выберите подходящие основы для всех предметов.",
         "Choose compatible bases for every item.",

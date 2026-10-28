@@ -417,7 +417,12 @@ export function definitionPropertyLines(
         : roll
           ? max
           : min;
-    text = text.replace(/#/g, String(value));
+    // Tooltip templates can include a sign even when the stored roll is
+    // already negative (e.g. pois-dur: "-#%", value -50). Render one sign
+    // without changing the signed value used by the editor or game export.
+    text = text.replace(/([+-]?)#/g, (_, sign: string) =>
+      value < 0 ? String(value) : `${sign}${value}`
+    );
     const skill = native.gd.skills[par];
     const tree = plannerClasses[Math.floor(Number(par) / 3)]?.trees[Number(par) % 3];
     text = text.replace(/\[Class Skill Tab\] Skills/g, tree?.en ?? "Skill Tree");

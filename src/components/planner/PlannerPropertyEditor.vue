@@ -31,11 +31,11 @@
           step="1"
           required
           :aria-label="row.label"
-          :title="`${row.range.min}–${row.range.max}`"
+          :title="`${row.range.min} … ${row.range.max}`"
           @change="change(row.index, $event, row.range)"
         />
         <span>{{ row.after }}</span>
-        <small>{{ row.range.min }}–{{ row.range.max }}</small>
+        <small>{{ row.range.min }} … {{ row.range.max }}</small>
       </template>
       <template v-else>{{ row.label }}</template>
       <UiSelect

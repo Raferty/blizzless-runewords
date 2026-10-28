@@ -93,9 +93,36 @@
           </button>
         </div>
       </template>
-      <button :disabled="store.build.stash.length >= 100" @click="$emit('edit', -1)">
-        + {{ t("Добавить предмет", "Add item") }}
-      </button>
+      <div class="planner-stash-kits">
+        <button
+          :disabled="!keySetItems"
+          :title="
+            keySetItems
+              ? t(
+                  'Добавить по 3 ключа Hate, Terror и Destruction',
+                  'Add 3 keys each of Hate, Terror and Destruction'
+                )
+              : t('Недостаточно места для 9 ключей', 'Not enough room for 9 keys')
+          "
+          @click="addKeySet"
+        >
+          3x3 key set
+        </button>
+        <button
+          :disabled="!ancientsSetItems"
+          :title="
+            ancientsSetItems
+              ? t(
+                  'Добавить 5 статуэток для вызова Древних',
+                  'Add all 5 statues to summon the Ancients'
+                )
+              : t('Недостаточно места для 5 статуэток', 'Not enough room for 5 statues')
+          "
+          @click="addAncientsSet"
+        >
+          Ancients set
+        </button>
+      </div>
       <p class="planner-help">
         {{
           t(
@@ -114,7 +141,7 @@ import PlannerItemSlot from "./PlannerItemSlot.vue";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import { plannerItemDimensions } from "@/utils/planner-item-art";
-import { stashSize } from "@/utils/planner-stash";
+import { placeStashItem, stashSize } from "@/utils/planner-stash";
 import { inventoryItemSize, stashItemLayout } from "@/utils/planner-item-movement";
 import { usePlannerItemDrag } from "@/composables/usePlannerItemDrag";
 import type { PlannerItem } from "@/types/planner";
@@ -146,6 +173,67 @@ const layout = computed(() => {
   ).filter((cell) => !occupied.has(cell));
   return { placed, unplaced, emptyCells };
 });
+const keySetItems = computed(() => {
+  if (store.build.stash.length + 9 > 100) return;
+  const { occupied } = stashItemLayout(store.build);
+  const items: PlannerItem[] = [];
+  // Blizzless keys are unique 1×2 containers, not the legacy pk1/pk2/pk3 bases.
+  for (const [catalogId, name] of [
+    ["unique448", "Key of Hate"],
+    ["unique449", "Key of Terror"],
+    ["unique447", "Key of Destruction"],
+  ]) {
+    for (let count = 0; count < 3; count++) {
+      const position = placeStashItem(occupied, 1, 2);
+      if (!position) return;
+      items.push({
+        name,
+        quality: "unique",
+        catalogId,
+        baseCode: "bg2",
+        itemLevel: 99,
+        requiredLevel: 1,
+        bonuses: {},
+        notes: "",
+        stashPosition: position.y * stashSize.columns + position.x,
+      });
+    }
+  }
+  return items;
+});
+function addKeySet() {
+  if (keySetItems.value) store.build.stash.push(...keySetItems.value);
+}
+const ancientsSetItems = computed(() => {
+  if (store.build.stash.length + 5 > 100) return;
+  const { occupied } = stashItemLayout(store.build);
+  const items: PlannerItem[] = [];
+  // The Colossal Summit recipe consumes ua1–ua5, not their stack containers.
+  for (const [baseCode, name] of [
+    ["ua1", "Talic's Anguish"],
+    ["ua2", "Korlic's Pain"],
+    ["ua3", "Madawc's Ire"],
+    ["ua4", "Bul-Kathos' Nightmare"],
+    ["ua5", "Worusk's End"],
+  ]) {
+    const position = placeStashItem(occupied, 1, 2);
+    if (!position) return;
+    items.push({
+      name,
+      quality: "normal",
+      baseCode,
+      itemLevel: 99,
+      requiredLevel: 1,
+      bonuses: {},
+      notes: "",
+      stashPosition: position.y * stashSize.columns + position.x,
+    });
+  }
+  return items;
+});
+function addAncientsSet() {
+  if (ancientsSetItems.value) store.build.stash.push(...ancientsSetItems.value);
+}
 function remove(index: number) {
   store.build.stash.splice(index, 1);
 }

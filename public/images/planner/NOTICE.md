@@ -16,13 +16,27 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   Source example: https://lootcube.net/en/sets/aldurs-watchtower
   `scripts/sync-planner-items.mjs` resolves Blizzless inventory filenames through
   the `d2r-saver` artwork dictionary; positional unique/set IDs are not used as
-  artwork identifiers. `src/shared/planner-item-art.json` records all 555 bases,
-  445 unique items, 140 set items and their normal/exceptional/elite variants.
+  artwork identifiers. `src/shared/planner-item-art.json` records item images,
+  unique/set identities and their normal/exceptional/elite variants.
   Item-type `varinvgfx`/`invgfx1` selects real charm/jewelry artwork instead of
   placeholder base graphics. The `cs2` crafted-sunder base (enabled in the planner
   on 2026-10-28) still has no known invp10 asset and deliberately uses the text
   fallback rather than a substitute weapon picture.
-  Inventory dimensions and name aliases are also used by equipment previews.
+  Inventory dimensions cover all game bases, including miscellaneous items without
+  artwork; stash placement does not depend on image coverage.
+- `items/misc/key/mephisto_sta.png`, `mephisto_stb.png`, `mephisto_stc.png`:
+  original Blizzless Key of Destruction, Hate and Terror inventory sprites,
+  downloaded 2026-10-28 from https://blizzless.info/api/launcher-mods/manifest.
+  The corresponding `data/hd/global/ui/items/misc/key/*.sprite` files are fetched
+  through `/api/launcher-mods/blobs/{sha256}`; hashes are pinned in
+  `scripts/sync-planner-items.mjs` and recorded in the artwork manifest.
+  Their original 98×196 RGBA pixels are losslessly encoded as PNG, with no cropping
+  or repainting. Format reference: https://github.com/dzik87/d2r-sprites.
+- `items/misc/shard/cont_ua1.png` through `cont_ua5.png`: the five Ancients
+  summon statues from the same Blizzless launcher manifest and blob endpoint
+  (2026-10-28). Original 99×196 RGBA pixels are losslessly encoded as PNG.
+  SHA-256 values and the explicit `ua1`–`ua5` base mapping are maintained by
+  `scripts/sync-planner-items.mjs`.
 - RotW artwork corrected 2026-10-28: Hellwarden's Will and Measured Wrath use
   `armor/helmet/unique_warlock_helm.webp` and `armor/grimoires/measured_wrath.webp`
   from the same LootCube image source. Stable unique names take precedence over

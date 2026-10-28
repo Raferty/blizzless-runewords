@@ -75,7 +75,7 @@ import PlannerSetBonuses from "./PlannerSetBonuses.vue";
 import { useInfoStore, useRunewordsStore } from "@/store";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
-import { plannerItemIdentity } from "@/utils/planner-item-art";
+import { isContainerBase, plannerItemIdentity } from "@/utils/planner-item-art";
 import {
   itemBonusLines,
   itemRuneword,
@@ -109,6 +109,7 @@ const lang = computed(() => info.currentLang);
 const native = shallowRef<GameSaveExporter>();
 const identity = computed(() => plannerItemIdentity(props.item));
 const baseName = computed(() => {
+  if (isContainerBase(identity.value.baseCode)) return "";
   const base = native.value?.gd.items[identity.value.baseCode || ""];
   return base ? native.value?.gd.locale.strings[base.namestr] || base.name : "";
 });

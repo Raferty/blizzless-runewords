@@ -12,6 +12,9 @@ type BaseTier = "normal" | "exceptional" | "elite";
 type AppearanceItem = Pick<PlannerItem, "baseCode" | "quality" | "catalogId"> &
   Partial<Pick<PlannerItem, "name">>;
 
+// Blizzless uses these internal bases for keys and other stackable quest items.
+export const isContainerBase = (code?: string) => code === "bg1" || code === "bg2";
+
 function appearanceReference(item: AppearanceItem) {
   const quality =
     item.quality === "unique" || item.quality === "set" ? item.quality : undefined;

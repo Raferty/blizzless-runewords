@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { Buffer } from "node:buffer";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { deflateSync } from "node:zlib";
 
 const root = new URL("../", import.meta.url);
 const dataBytes = await readFile(new URL("public/data/planner-save/data.json", root));
@@ -29,7 +30,15 @@ function hasType(type, wanted, seen = new Set()) {
   );
 }
 for (const [code, row] of Object.entries(data.misc))
-  if (hasType(row.type, ["ring", "amul", "char"])) bases[code] = { row, group: "misc" };
+  if (hasType(row.type, ["ring", "amul", "char"]) || /^ua[1-5]$/.test(code))
+    bases[code] = { row, group: "misc" };
+// Stash placement and saved-item identity must not depend on artwork availability.
+const allBases = {
+  ...bases,
+  ...Object.fromEntries(
+    Object.entries(data.misc).map(([code, row]) => [code, { row, group: "misc" }])
+  ),
+};
 const tier = (row, code) => {
   return row?.ultracode === code ? 2 : row?.ubercode === code ? 1 : 0;
 };
@@ -92,7 +101,9 @@ for (const [quality, definitions] of [
 }
 const baseKeys = {};
 for (const [code, { row }] of Object.entries(bases))
-  baseKeys[code] = aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null;
+  baseKeys[code] = /^ua[1-5]$/.test(code)
+    ? `misc/shard/cont_${code}`
+    : aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null;
 const qualityKeys = { unique: {}, set: {} };
 const names = { unique: {}, set: {} };
 const catalogBases = {};
@@ -112,6 +123,9 @@ const uniqueArtwork = {
   "Entropy Locket": "misc/amulet/amulet1",
   "Gheed's Wager": "armor/belt/heavy_belt",
   "Unique Warlock Helm": "armor/helmet/unique_warlock_helm",
+  mephisto_sta: "misc/key/mephisto_sta",
+  mephisto_stb: "misc/key/mephisto_stb",
+  mephisto_stc: "misc/key/mephisto_stc",
 };
 for (const [quality, definitions] of [
   ["unique", data.uniqueItems],
@@ -119,7 +133,7 @@ for (const [quality, definitions] of [
 ]) {
   for (const [id, definition] of Object.entries(definitions)) {
     const code = definition.code || definition.item;
-    const base = bases[code];
+    const base = allBases[code];
     if (!base) continue;
     catalogBases[id] = code;
     for (const name of [definition.index, strings.get(definition.index)])
@@ -128,6 +142,7 @@ for (const [quality, definitions] of [
       const uniqueImage =
         quality === "unique" && uniqueArtwork[definition.index.replace(/ Player$/, "")];
       if (uniqueImage) return uniqueImage;
+      if (!bases[code]) return null;
       const upgradedCode = base.row[["normcode", "ubercode", "ultracode"][index]] || code;
       const upgraded = bases[upgradedCode] || base;
       const file =
@@ -149,6 +164,72 @@ const keys = [
 ].sort();
 const images = new Map();
 const missing = [];
+// Original Blizzless key/statue sprites, pinned to the launcher manifest.
+// Shared invfile names cannot identify them; preserve their original RGBA pixels.
+const keySprites = {
+  "misc/key/mephisto_sta":
+    "4f2ab490fd1f5088e93a753c3bbb2d85934d4341a7a2dfcc8c61f62db3c9449b",
+  "misc/key/mephisto_stb":
+    "35cbf85f2269327c9e5a9e8e8afc9181968740cf1138d59e8dba60ac5bc40f6e",
+  "misc/key/mephisto_stc":
+    "229fdc3701750f60080481554745da169ca94627c19063808fa9f813d00244bc",
+  "misc/shard/cont_ua1":
+    "568d18fd85b1518503eba4cc333e0e0ae653e275b695ae9357b89d57ef0682f6",
+  "misc/shard/cont_ua2":
+    "53895807e7a5c41dc6c1637ddd24ecdbd6b568112b2739108a2a0a37a78a805d",
+  "misc/shard/cont_ua3":
+    "985fd7f3fc5818e7fab2077f72a493d6ce06163b6cb8b4e01513ad00d344a5ba",
+  "misc/shard/cont_ua4":
+    "f5f7cb88b5fd59ba0e269d1f91d27d2c478f968cb1d680b5755d7911108ec3bf",
+  "misc/shard/cont_ua5":
+    "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85",
+};
+function spritePng(bytes) {
+  const width = bytes.readUInt32LE(8),
+    height = bytes.readUInt32LE(12);
+  if (
+    bytes.toString("ascii", 0, 4) !== "SpA1" ||
+    bytes.readUInt16LE(4) !== 31 ||
+    bytes.readUInt32LE(20) !== 1 ||
+    bytes.readUInt16LE(6) !== width ||
+    !width ||
+    !height ||
+    bytes.length !== 40 + width * height * 4
+  )
+    throw new Error("Unsupported key sprite format");
+  const chunk = (type, data) => {
+    const body = Buffer.concat([Buffer.from(type), data]);
+    let crc = 0xffffffff;
+    for (const byte of body) {
+      crc ^= byte;
+      for (let bit = 0; bit < 8; bit++) crc = (crc >>> 1) ^ (crc & 1 ? 0xedb88320 : 0);
+    }
+    const length = Buffer.alloc(4),
+      checksum = Buffer.alloc(4);
+    length.writeUInt32BE(data.length);
+    checksum.writeUInt32BE((crc ^ 0xffffffff) >>> 0);
+    return Buffer.concat([length, body, checksum]);
+  };
+  const header = Buffer.alloc(13);
+  header.writeUInt32BE(width);
+  header.writeUInt32BE(height, 4);
+  header[8] = 8;
+  header[9] = 6; // RGBA
+  const rows = Buffer.alloc(height * (1 + width * 4));
+  for (let y = 0; y < height; y++)
+    bytes.copy(
+      rows,
+      y * (1 + width * 4) + 1,
+      40 + y * width * 4,
+      40 + (y + 1) * width * 4
+    );
+  return Buffer.concat([
+    Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]),
+    chunk("IHDR", header),
+    chunk("IDAT", deflateSync(rows)),
+    chunk("IEND", Buffer.alloc(0)),
+  ]);
+}
 const classicFallbacks = {
   "weapon/axe/butchers_cleaver": {
     url: "https://classic.battle.net/images/battle/diablo2exp/images/items/uniques/thegnasher.gif",
@@ -170,6 +251,21 @@ await Promise.all(
       const key = keys[cursor++];
       if (!/^(weapon|armor|misc)\/[a-z0-9_/-]+$/.test(key))
         throw new Error(`Invalid item image key: ${key}`);
+      if (keySprites[key]) {
+        const response = await fetch(
+          "https://blizzless.info/api/launcher-mods/blobs/" + keySprites[key],
+          { signal: AbortSignal.timeout(20000) }
+        );
+        if (!response.ok) throw new Error(`Key sprite: HTTP ${response.status}`);
+        const sprite = Buffer.from(await response.arrayBuffer());
+        if (createHash("sha256").update(sprite).digest("hex") !== keySprites[key])
+          throw new Error(`Key sprite checksum mismatch: ${key}`);
+        const file = new URL(key + ".png", destination);
+        await mkdir(new URL(".", file), { recursive: true });
+        await writeFile(file, spritePng(sprite));
+        images.set(key, "images/planner/items/" + key + ".png");
+        continue;
+      }
       const file = new URL(key + ".webp", destination);
       let localPath = "images/planner/items/" + key + ".webp";
       let bytes;
@@ -239,6 +335,8 @@ const image = (key) => images.get(key) || null;
 const manifest = {
   checkedAt: new Date().toISOString().slice(0, 10),
   source: origin,
+  keySpriteSource: "https://blizzless.info/api/launcher-mods/blobs/",
+  keySprites,
   gameDataSha256: createHash("sha256").update(dataBytes).digest("hex"),
   bases: Object.fromEntries(
     Object.entries(baseKeys).map(([code, key]) => [code, image(key)])
@@ -247,7 +345,7 @@ const manifest = {
     Object.entries(bases).map(([code, { row }]) => [code, tier(row, code)])
   ),
   dimensions: Object.fromEntries(
-    Object.entries(bases).map(([code, { row }]) => [
+    Object.entries(allBases).map(([code, { row }]) => [
       code,
       [Math.max(1, row.invwidth || 1), Math.max(1, row.invheight || 1)],
     ])

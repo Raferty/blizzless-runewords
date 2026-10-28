@@ -93,9 +93,14 @@
             <div class="planner-item-identity">
               <h2 :data-quality="item.quality">
                 {{ item.name || t("Новый предмет", "New item") }}
-                <small v-if="selectedBase && item.name !== selectedBase.name">{{
-                  selectedBase.name
-                }}</small>
+                <small
+                  v-if="
+                    selectedBase &&
+                    !isContainerBase(selectedBase.code) &&
+                    item.name !== selectedBase.name
+                  "
+                  >{{ selectedBase.name }}</small
+                >
               </h2>
               <div class="planner-item-tools">
                 <button type="button" @click="tab = 'select'">
@@ -122,7 +127,9 @@
                     max="99"
                     required
                 /></label>
-                <label v-if="baseOptions.length" class="planner-label"
+                <label
+                  v-if="baseOptions.length && !isContainerBase(item.baseCode)"
+                  class="planner-label"
                   >{{ t("Основа", "Base")
                   }}<UiSelect
                     dropdown-class="planner-select-dropdown"
@@ -326,7 +333,7 @@ import { bonusFields } from "@/shared/planner";
 import { RUNES } from "@/shared/constants";
 import { matchesItemType } from "@/utils/runeword";
 import { parsePlannerItem, charmFits, inventoryWidth } from "@/utils/planner";
-import { plannerItemImage } from "@/utils/planner-item-art";
+import { isContainerBase, plannerItemImage } from "@/utils/planner-item-art";
 import { itemRuneword } from "@/utils/planner-item-presentation";
 import type { ClassId, EquipmentSlot, PlannerItem, PlannerAffix } from "@/types/planner";
 import { runewordBonuses, runewordTemplates } from "@/utils/planner-runewords";

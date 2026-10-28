@@ -56,6 +56,11 @@ try {
     );
     assert.equal(read.header.level, build.level);
     assert.equal(read.header.status.hardcore, build.hardcore);
+    assert.equal(read.header.status.expansion, true);
+    assert.equal(
+      bytes[248],
+      (options.gameMode ?? native.defaultGameSaveMode(build.classId)) === "rotw" ? 3 : 2
+    );
     assert.equal(read.attributes.gold, build.gold);
     assert.equal(
       read.attributes.unused_stats,

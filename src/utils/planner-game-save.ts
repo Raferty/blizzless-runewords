@@ -89,7 +89,11 @@ export interface GameSaveOptions {
   name: string;
   choices: Record<string, string>;
   rolls: Record<string, GameSaveRoll>;
+  gameMode?: GameSaveMode;
 }
+export type GameSaveMode = "expansion" | "rotw";
+export const defaultGameSaveMode = (classId: ClassId): GameSaveMode =>
+  classId === "warlock" ? "rotw" : "expansion";
 export type GameSaveRoll = 0 | 1 | "planned";
 export class GameSaveError extends Error {
   constructor(
@@ -199,6 +203,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   function permitted(code: string, entry: GameSaveEntry, build: PlannerBuild) {
     const base = gd.items[code];
     if (!base || !/^[a-z0-9]{3}$/.test(code)) return false;
+    // These non-dropping bases are still the inputs to the Colossal Summit recipe.
+    if (/^ua[1-5]$/.test(code))
+      return entry.owner === "stash" && entry.item.quality === "normal";
     if (
       /^unused$/i.test(base.name) ||
       (!base.spawnable &&
@@ -276,13 +283,16 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         .flatMap(([unique, definition]) => {
           const d = definition as unknown as Definition;
           const base = String(d.code ?? d.item ?? "");
+          const name = gd.locale.strings[String(d.index)] || d.index;
           return permitted(base, entry, build)
             ? [
                 {
                   value: unique,
                   unique,
                   base,
-                  label: `${gd.locale.strings[String(d.index)] || d.index} · ${label(base)}`,
+                  label: ["bg1", "bg2"].includes(base)
+                    ? String(name)
+                    : `${name} · ${label(base)}`,
                 },
               ]
             : [];
@@ -300,6 +310,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             types(code).has("ring") ||
             types(code).has("amul") ||
             types(code).has("char") ||
+            /^ua[1-5]$/.test(code) ||
             code === "box")
       )
       .map((base) => ({ value: base, base, label: `${label(base)} [${base}]` }))
@@ -648,6 +659,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   ): Promise<Uint8Array> {
     const build = parseBuild(input);
     if (!validCharacterName(options.name)) throw new GameSaveError("name");
+    const gameMode = options.gameMode ?? defaultGameSaveMode(build.classId);
+    if (
+      !["expansion", "rotw"].includes(gameMode) ||
+      (build.classId === "warlock" && gameMode !== "rotw")
+    )
+      throw new GameSaveError("gameMode");
     const character = plannerClasses.find((c) => c.id === build.classId)!;
     const classIndex = classes.indexOf(build.classId);
     const profile: D2SCharacterProfile = {
@@ -1175,7 +1192,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       ...(await list(false)),
       new Uint8Array([74, 77, 0, 0, 106, 102]),
       ...(profile.merc ? await list(true) : []),
-      new Uint8Array([107, 102, 0, 1, 0, 108, 102, 0, 0]),
+      new Uint8Array([107, 102, 0]),
+      // Bound-demon data belongs only to Reign of the Warlock saves.
+      ...(gameMode === "rotw" ? [new Uint8Array([1, 0, 108, 102, 0, 0])] : []),
     ];
     const bytes = new Uint8Array(pieces.reduce((n, piece) => n + piece.length, 0));
     let offset = 0;
@@ -1196,8 +1215,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     }
     // v105: quest data ends at 701; WS has an 8-byte header, followed by
     // three 24-byte blocks (2-byte prefix, 39 waypoint bits, padding).
-    if (bytes[701] !== 0x57 || bytes[702] !== 0x53)
-      throw new GameSaveError("validation");
+    if (bytes[701] !== 0x57 || bytes[702] !== 0x53) throw new GameSaveError("validation");
     difficulties.forEach(({ value }, index) => {
       const start = 711 + index * 24;
       bytes.fill(0, start, start + 5);
@@ -1205,7 +1223,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         if (build.waypoints[value][key]) bytes[start + (bit >> 3)] |= 1 << (bit & 7);
       }
     });
-    bytes[20] = build.hardcore ? 4 : 0;
+    // d2r-saver 0.2.0 hardcodes RotW (3) for every class. In v105 the
+    // actual game mode is PreviewData.GameVersion at 0xF8, independently
+    // of the legacy Expansion status bit at 0x14. Keep both consistent.
+    // https://github.com/ResurrectedTrader/D2SSharp/blob/main/src/D2SSharp/Model/PreviewData.cs
+    bytes[20] = 0x20 | (build.hardcore ? 4 : 0);
+    bytes[248] = gameMode === "rotw" ? 3 : 2;
     bytes.fill(0, 152, 155);
     bytes[152 + ["normal", "nightmare", "hell"].indexOf(build.difficulty)] = 0x80;
     if (profile.merc) {
