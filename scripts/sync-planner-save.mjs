@@ -191,6 +191,9 @@ for (const name of tableNames) {
         if (!row.index || (!row.spawnable && row.code !== "cjw" && !enabledSunder(row)))
           return;
         id = `unique${String(row.id ?? index).padStart(3, "0")}`;
+        // *ID is a comment, not the binary record number. Keep catalog IDs stable
+        // for saved builds, but count every game row (including section headings).
+        row.saveId = index;
         row.enabled = row.code === "cjw" || enabledSunder(row) ? 1 : row.spawnable;
         if (enabledSunder(row)) {
           row.disabled = 0;
@@ -208,6 +211,7 @@ for (const name of tableNames) {
       case "setItems":
         if (!row.index) return;
         id = `set${String(row.id ?? index).padStart(3, "0")}`;
+        row.saveId = index;
         break;
       case "sets":
         id = row.index;
@@ -238,11 +242,12 @@ for (const name of tableNames) {
         id = row.id ?? index;
     }
     if (id === undefined) return;
-    // Blank affix cells mean no property/restriction, not a fallback to another patch.
+    // Blank cells mean no property, not a fallback to a different patch/record.
     result[id] =
       key === "magicPrefix" ||
       key === "magicSuffix" ||
-      (key === "uniqueItems" && (row.code === "cjw" || enabledSunder(row)))
+      key === "uniqueItems" ||
+      key === "setItems"
         ? { ...row }
         : { ...raw[key]?.[id], ...row };
   });

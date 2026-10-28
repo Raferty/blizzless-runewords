@@ -90,7 +90,7 @@ try {
     const [child, rune] = parent.socketed_items;
     assert.equal(child.type, insert.baseCode);
     assert.equal(child.quality, 7);
-    assert.equal(child.unique_id, Number(insert.code.slice(6)));
+    assert.equal(child.unique_id, data.uniqueItems[insert.code].saveId);
     assert.equal(child.simple_item, 0);
     assert(child.magic_attributes.length >= 4);
     assert.equal(rune.type, "r22");

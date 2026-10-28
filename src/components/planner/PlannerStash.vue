@@ -141,7 +141,7 @@ import PlannerItemSlot from "./PlannerItemSlot.vue";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import { plannerItemDimensions } from "@/utils/planner-item-art";
-import { placeStashItem, stashSize } from "@/utils/planner-stash";
+import { createUberKeySet, placeStashItem, stashSize } from "@/utils/planner-stash";
 import { inventoryItemSize, stashItemLayout } from "@/utils/planner-item-movement";
 import { usePlannerItemDrag } from "@/composables/usePlannerItemDrag";
 import type { PlannerItem } from "@/types/planner";
@@ -176,30 +176,7 @@ const layout = computed(() => {
 const keySetItems = computed(() => {
   if (store.build.stash.length + 9 > 100) return;
   const { occupied } = stashItemLayout(store.build);
-  const items: PlannerItem[] = [];
-  // Blizzless keys are unique 1×2 containers, not the legacy pk1/pk2/pk3 bases.
-  for (const [catalogId, name] of [
-    ["unique448", "Key of Hate"],
-    ["unique449", "Key of Terror"],
-    ["unique447", "Key of Destruction"],
-  ]) {
-    for (let count = 0; count < 3; count++) {
-      const position = placeStashItem(occupied, 1, 2);
-      if (!position) return;
-      items.push({
-        name,
-        quality: "unique",
-        catalogId,
-        baseCode: "bg2",
-        itemLevel: 99,
-        requiredLevel: 1,
-        bonuses: {},
-        notes: "",
-        stashPosition: position.y * stashSize.columns + position.x,
-      });
-    }
-  }
-  return items;
+  return createUberKeySet(occupied);
 });
 function addKeySet() {
   if (keySetItems.value) store.build.stash.push(...keySetItems.value);

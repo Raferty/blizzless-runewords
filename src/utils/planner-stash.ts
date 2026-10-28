@@ -1,5 +1,33 @@
+import type { PlannerItem } from "@/types/planner";
+
 // Personal stash dimensions from the bundled Blizzless data.json (info.stash).
 export const stashSize = { columns: 16, rows: 13 };
+
+export function createUberKeySet(occupied: Set<number>): PlannerItem[] | undefined {
+  const cells = new Set(occupied);
+  const items: PlannerItem[] = [];
+  for (const [baseCode, name] of [
+    ["pk2", "Key of Hate"],
+    ["pk1", "Key of Terror"],
+    ["pk3", "Key of Destruction"],
+  ]) {
+    for (let count = 0; count < 3; count++) {
+      const position = placeStashItem(cells, 1, 2);
+      if (!position) return;
+      items.push({
+        name,
+        quality: "normal",
+        baseCode,
+        itemLevel: 99,
+        requiredLevel: 1,
+        bonuses: {},
+        notes: "",
+        stashPosition: position.y * stashSize.columns + position.x,
+      });
+    }
+  }
+  return items;
+}
 
 export function gridItemCells(
   position: number,

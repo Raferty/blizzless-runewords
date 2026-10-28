@@ -12,7 +12,7 @@
     "misc/shard/cont_ua4": "f5f7cb88b5fd59ba0e269d1f91d27d2c478f968cb1d680b5755d7911108ec3bf",
     "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85"
   },
-  "gameDataSha256": "50e5145422d42dc4b907cd7ca2b44a3d2d2c411b0d53ffbf5a9d915385d8cea4",
+  "gameDataSha256": "633fa72e0255f3fe0abae551dab84e8e8eb7c1c76827ba6f328fb98711588f49",
   "bases": {
     "hax": "images/planner/items/weapon/axe/hand_axe.webp",
     "axe": "images/planner/items/weapon/axe/axe.webp",
@@ -563,17 +563,20 @@
     "cm1": "images/planner/items/misc/charm/charm_small.webp",
     "cm2": "images/planner/items/misc/charm/charm_medium.webp",
     "cm3": "images/planner/items/misc/charm/charm_large.webp",
+    "pk1": "images/planner/items/misc/key/mephisto_stc.png",
+    "pk2": "images/planner/items/misc/key/mephisto_stb.png",
+    "pk3": "images/planner/items/misc/key/mephisto_sta.png",
+    "ua1": "images/planner/items/misc/shard/cont_ua1.png",
+    "ua2": "images/planner/items/misc/shard/cont_ua2.png",
+    "ua3": "images/planner/items/misc/shard/cont_ua3.png",
+    "ua4": "images/planner/items/misc/shard/cont_ua4.png",
+    "ua5": "images/planner/items/misc/shard/cont_ua5.png",
     "cs2": null,
     "cm4": "images/planner/items/misc/charm/charm_large.webp",
     "cm5": "images/planner/items/misc/charm/charm_small.webp",
     "fin": "images/planner/items/misc/ring/ring1.webp",
     "fmu": "images/planner/items/misc/amulet/amulet1.webp",
-    "p15": "images/planner/items/misc/amulet/amulet1.webp",
-    "ua1": "images/planner/items/misc/shard/cont_ua1.png",
-    "ua2": "images/planner/items/misc/shard/cont_ua2.png",
-    "ua3": "images/planner/items/misc/shard/cont_ua3.png",
-    "ua4": "images/planner/items/misc/shard/cont_ua4.png",
-    "ua5": "images/planner/items/misc/shard/cont_ua5.png"
+    "p15": "images/planner/items/misc/amulet/amulet1.webp"
   },
   "tiers": {
     "hax": 0,
@@ -1125,17 +1128,20 @@
     "cm1": 0,
     "cm2": 0,
     "cm3": 0,
+    "pk1": 0,
+    "pk2": 0,
+    "pk3": 0,
+    "ua1": 0,
+    "ua2": 0,
+    "ua3": 0,
+    "ua4": 0,
+    "ua5": 0,
     "cs2": 0,
     "cm4": 0,
     "cm5": 0,
     "fin": 0,
     "fmu": 0,
-    "p15": 0,
-    "ua1": 0,
-    "ua2": 0,
-    "ua3": 0,
-    "ua4": 0,
-    "ua5": 0
+    "p15": 0
   },
   "dimensions": {
     "hax": [1, 3],
@@ -1687,6 +1693,14 @@
     "cm1": [1, 1],
     "cm2": [1, 2],
     "cm3": [1, 3],
+    "pk1": [1, 2],
+    "pk2": [1, 2],
+    "pk3": [1, 2],
+    "ua1": [1, 2],
+    "ua2": [1, 2],
+    "ua3": [1, 2],
+    "ua4": [1, 2],
+    "ua5": [1, 2],
     "cs2": [3, 1],
     "cm4": [1, 3],
     "cm5": [1, 1],
@@ -1826,9 +1840,6 @@
     "ice": [1, 1],
     "0sc": [1, 1],
     "tr2": [2, 2],
-    "pk1": [1, 2],
-    "pk2": [1, 2],
-    "pk3": [1, 2],
     "dhn": [1, 1],
     "bey": [1, 1],
     "mbr": [1, 1],
@@ -1843,11 +1854,6 @@
     "xa3": [1, 1],
     "xa4": [1, 1],
     "xa5": [1, 1],
-    "ua1": [1, 2],
-    "ua2": [1, 2],
-    "ua3": [1, 2],
-    "ua4": [1, 2],
-    "ua5": [1, 2],
     "um1": [1, 1],
     "um2": [1, 1],
     "um3": [1, 1],
@@ -3392,7 +3398,9 @@
       "horazon's secrets": "set139"
     }
   },
-  "unresolvedBaseFiles": { "cs2": "invp10" },
+  "unresolvedBaseFiles": {
+    "cs2": "invp10"
+  },
   "unique": {
     "unique000": [
       "images/planner/items/classic/invhaxu.gif",
@@ -5599,9 +5607,9 @@
       "images/planner/items/weapon/axe/axe.webp"
     ],
     "unique703": [
-      "images/planner/items/weapon/axe/axe.webp",
-      "images/planner/items/weapon/axe/axe.webp",
-      "images/planner/items/weapon/axe/axe.webp"
+      "images/planner/items/weapon/javelin/pilum.webp",
+      "images/planner/items/weapon/javelin/pilum.webp",
+      "images/planner/items/weapon/javelin/pilum.webp"
     ],
     "unique704": [
       "images/planner/items/weapon/javelin/javelin.webp",
@@ -5624,9 +5632,9 @@
       "images/planner/items/weapon/bow/hunters_bow.webp"
     ],
     "unique708": [
-      "images/planner/items/weapon/bow/hunters_bow.webp",
-      "images/planner/items/weapon/bow/hunters_bow.webp",
-      "images/planner/items/weapon/bow/hunters_bow.webp"
+      "images/planner/items/weapon/staff/short_staff.webp",
+      "images/planner/items/weapon/staff/short_staff.webp",
+      "images/planner/items/weapon/staff/short_staff.webp"
     ],
     "unique709": [
       "images/planner/items/weapon/staff/long_staff.webp",

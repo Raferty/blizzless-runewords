@@ -148,6 +148,31 @@ export function saveChecksum(bytes: Uint8Array) {
 export function createGameSaveExporter(data: RawData, locale: Locale) {
   const saver = D2RSaver.fromData(structuredClone(data), locale);
   const gd = saver.gd;
+  const saveId = (kind: "uniqueItems" | "setItems", id?: string) => {
+    if (!id) return 0;
+    const value = (gd[kind][id] as unknown as Definition | undefined)?.saveId;
+    if (typeof value !== "number" || !Number.isInteger(value) || value < 0)
+      throw new GameSaveError("validation", `Missing game record ID: ${id}`);
+    return value;
+  };
+  // UI/catalog IDs are stable across patches; the binary reader needs game row IDs.
+  let reader: D2RSaver | undefined;
+  function readCharacter(bytes: Uint8Array) {
+    if (!reader) {
+      const readData = structuredClone(data);
+      for (const kind of ["uniqueItems", "setItems"] as const) {
+        const prefix = kind === "uniqueItems" ? "unique" : "set";
+        readData[kind] = Object.fromEntries(
+          Object.entries(readData[kind]).map(([id, row]) => [
+            `${prefix}${String(saveId(kind, id)).padStart(3, "0")}`,
+            row,
+          ])
+        );
+      }
+      reader = D2RSaver.fromData(readData, locale);
+    }
+    return reader.readD2S(bytes);
+  }
   const constants = structuredClone(originalConstants) as SaveTypes.IConstantData;
   for (const [name, stat] of Object.entries(gd.itemStatCost)) {
     constants.magical_properties[stat.id] = {
@@ -203,8 +228,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   function permitted(code: string, entry: GameSaveEntry, build: PlannerBuild) {
     const base = gd.items[code];
     if (!base || !/^[a-z0-9]{3}$/.test(code)) return false;
-    // These non-dropping bases are still the inputs to the Colossal Summit recipe.
-    if (/^ua[1-5]$/.test(code))
+    // Cube recipes consume these non-dropping bases, not their empty containers.
+    if (/^(?:ua[1-5]|pk[1-3])$/.test(code))
       return entry.owner === "stash" && entry.item.quality === "normal";
     if (
       /^unused$/i.test(base.name) ||
@@ -282,7 +307,17 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       return Object.entries(definitions)
         .flatMap(([unique, definition]) => {
           const d = definition as unknown as Definition;
-          const base = String(d.code ?? d.item ?? "");
+          const original = String(d.code ?? d.item ?? "");
+          const family = gd.items[original] as unknown as Definition | undefined;
+          const selected =
+            entry.item.catalogId === unique ? entry.item.baseCode : undefined;
+          const base =
+            selected &&
+            [original, family?.normcode, family?.ubercode, family?.ultracode].includes(
+              selected
+            )
+              ? selected
+              : original;
           const name = gd.locale.strings[String(d.index)] || d.index;
           return permitted(base, entry, build)
             ? [
@@ -310,7 +345,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             types(code).has("ring") ||
             types(code).has("amul") ||
             types(code).has("char") ||
-            /^ua[1-5]$/.test(code) ||
+            /^(?:ua[1-5]|pk[1-3])$/.test(code) ||
             code === "box")
       )
       .map((base) => ({ value: base, base, label: `${label(base)} [${base}]` }))
@@ -380,7 +415,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     };
     for (let i = 1; i <= 12; i++) {
       const code = String(def[`prop${i}`] ?? "");
-      if (!code) continue;
+      // Asterisk-prefixed cells are disabled properties in the game tables.
+      if (!code || code.startsWith("*")) continue;
       const p = gd.properties[code] as unknown as Definition;
       if (!p) throw new GameSaveError("property", code);
       const min = Number(def[`min${i}`] ?? 0),
@@ -947,9 +983,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             code
               ? [
                   {
-                    roll: options.rolls[entry.key] === 0 ? 0 : 1,
+                    roll,
                     values:
-                      options.rolls[entry.key] === "planned"
+                      mode === "planned"
                         ? entry.item.socketPropertyValues?.[index]
                         : undefined,
                   },
@@ -1078,8 +1114,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         ),
         multiple_pictures: 0,
         class_specific: 0,
-        unique_id: Number(item.unique?.replace("unique", "") ?? 0),
-        set_id: Number(item.unique?.replace("set", "") ?? 0),
+        unique_id: item.quality === 7 ? saveId("uniqueItems", item.unique) : 0,
+        set_id: item.quality === 5 ? saveId("setItems", item.unique) : 0,
         runeword_id: storedRunewordIds[canonicalRunewordId] ?? canonicalRunewordId,
         magic_attributes: magicProperties(item.stats),
         runeword_attributes: rw ? magicProperties(rw) : undefined,
@@ -1109,7 +1145,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           categories: [],
           level: 99,
           quality: jewel ? 7 : 2,
-          unique_id: jewel ? Number(String(code).replace("unique", "")) : 0,
+          unique_id: jewel ? saveId("uniqueItems", String(code)) : 0,
           set_id: 0,
           runeword_id: 0,
           runeword_attributes: [],
@@ -1237,7 +1273,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       header.setUint32(171, mercXP, true);
     }
     header.setUint32(12, saveChecksum(bytes), true);
-    const check = saver.readD2S(bytes);
+    const check = readCharacter(bytes);
     if (
       check.warnings.length ||
       check.profile.class !== profile.class ||
@@ -1263,6 +1299,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     socketBonuses,
     propertyStats: definitionStats,
     exportCharacter,
+    readCharacter,
     saver,
     gd,
   };
@@ -1273,7 +1310,8 @@ export function loadGameSaveExporter() {
   return (exporter ??= Promise.all(
     ["data.json", "strings.json"].map(async (name) => {
       const response = await fetch(
-        `${import.meta.env.BASE_URL}data/planner-save/${name}`
+        `${import.meta.env.BASE_URL}data/planner-save/${name}`,
+        { cache: "no-cache" }
       );
       if (!response.ok) throw new GameSaveError("load");
       return response.json();

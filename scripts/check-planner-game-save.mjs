@@ -72,7 +72,7 @@ try {
     );
     assert.equal(JSON.stringify(build), original, "Export must not mutate the planner");
     assertions++;
-    return { bytes, read, raw: codec.saver.readD2S(bytes) };
+    return { bytes, read, raw: codec.readCharacter(bytes) };
   }
   for (const c of plannerClasses)
     for (const level of [1, 2, 90, 99]) {

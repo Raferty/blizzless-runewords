@@ -30,7 +30,7 @@ function hasType(type, wanted, seen = new Set()) {
   );
 }
 for (const [code, row] of Object.entries(data.misc))
-  if (hasType(row.type, ["ring", "amul", "char"]) || /^ua[1-5]$/.test(code))
+  if (hasType(row.type, ["ring", "amul", "char"]) || /^(?:ua[1-5]|pk[1-3])$/.test(code))
     bases[code] = { row, group: "misc" };
 // Stash placement and saved-item identity must not depend on artwork availability.
 const allBases = {
@@ -103,7 +103,9 @@ const baseKeys = {};
 for (const [code, { row }] of Object.entries(bases))
   baseKeys[code] = /^ua[1-5]$/.test(code)
     ? `misc/shard/cont_${code}`
-    : aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null;
+    : /^pk[1-3]$/.test(code)
+      ? `misc/key/mephisto_st${{ pk1: "c", pk2: "b", pk3: "a" }[code]}`
+      : aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null;
 const qualityKeys = { unique: {}, set: {} };
 const names = { unique: {}, set: {} };
 const catalogBases = {};

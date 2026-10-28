@@ -66,6 +66,7 @@ import {
   propertyRange,
   itemSkillClass,
   propertyGroupOptions,
+  propertyGroupFor,
   resolvePropertyGroups,
 } from "@/utils/planner-properties";
 import { socketCategory } from "@/utils/planner-sockets";
@@ -127,13 +128,16 @@ const rows = computed(() => {
         after: offset >= 0 ? label.slice(offset + String(value).length) : "",
         classSkill: property.func1 === 36,
         options: propertyGroupOptions(
-          props.native.gd.propertyGroups?.[String(raw[`prop${index}`])]
+          propertyGroupFor(raw, index, props.native.gd.propertyGroups)
         ).map((choice) => ({
           value: String(choice),
           label: definitionPropertyLines(
             props.native,
             {
               prop1: raw[`prop${index}`],
+              par1: raw[`par${index}`],
+              min1: raw[`min${index}`],
+              max1: raw[`max${index}`],
             },
             1,
             props.characterLevel,

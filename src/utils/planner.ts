@@ -496,7 +496,7 @@ export function parsePlannerItem(value: unknown): PlannerItem {
     result.propertyChoices = {};
     for (const [key, value] of Object.entries(record(item.propertyChoices))) {
       if (!/^(?:[1-9]|1[0-2])$/.test(key)) throw new Error("property group index");
-      result.propertyChoices[key] = integer(value, 1, 20);
+      result.propertyChoices[key] = integer(value, 1, 1024);
     }
   }
   if (item.skillClass !== undefined) {
@@ -513,7 +513,8 @@ export function parseBuild(value: unknown): PlannerBuild {
   const build = createBuild(raw.classId as ClassId);
   build.name = string(raw.name, 100);
   build.level = integer(raw.level, 1, 99);
-  build.gold = raw.gold === undefined ? 0 : integer(raw.gold, 0, goldCapacity(build.level));
+  build.gold =
+    raw.gold === undefined ? 0 : integer(raw.gold, 0, goldCapacity(build.level));
   if (!difficulties.some((d) => d.value === raw.difficulty))
     throw new Error("difficulty");
   build.difficulty = raw.difficulty as PlannerBuild["difficulty"];
