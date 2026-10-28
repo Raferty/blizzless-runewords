@@ -2519,7 +2519,7 @@
         "ru": "Желчь защитника"
       },
       "requiredLevel": 75,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/sockets/colossal_jewel_talic.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -2637,7 +2637,7 @@
         "ru": "Гром стража"
       },
       "requiredLevel": 75,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/sockets/colossal_jewel_madawc.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -2809,7 +2809,7 @@
         "ru": "Мороз хранителя"
       },
       "requiredLevel": 75,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/sockets/colossal_jewel_korlic.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -2987,7 +2987,7 @@
         "ru": "Огонь защитника"
       },
       "requiredLevel": 75,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/sockets/colossal_jewel_talic.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -3234,7 +3234,7 @@
         "ru": "Камень хранителя"
       },
       "requiredLevel": 75,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/sockets/colossal_jewel_korlic.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -3322,7 +3322,7 @@
         "ru": "Свет стража"
       },
       "requiredLevel": 75,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/sockets/colossal_jewel_madawc.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {

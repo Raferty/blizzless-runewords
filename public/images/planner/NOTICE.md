@@ -73,6 +73,11 @@ Socket insert artwork (added 2026-10-27):
   `https://lootcube.net/images/items/misc/{hd}.webp` using the `misc[code].hd`
   mapping in the bundled Blizzless game tables. No screenshot crops are used.
 - Rune and pure-rune images reuse the existing local `../{rune}.webp` assets.
+- `sockets/colossal_jewel_{talic,korlic,madawc}.webp`: original Colossal Jewel
+  bust artwork from `https://lootcube.net/images/items/misc/gem/` (2026-10-28).
+  Defender's Bile/Fire use Talic; Protector's Frost/Stone use Korlic;
+  Guardian's Thunder/Light use Madawc. The named mapping follows LootCube's
+  `spriteOverride` item definitions and image manifest, not positional unique IDs.
 - `scripts/sync-planner-sockets.mjs` regenerates artwork and
   `src/shared/planner-sockets.json` from the bundled game data, with its SHA-256.
 

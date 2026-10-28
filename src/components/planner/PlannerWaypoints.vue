@@ -1,11 +1,14 @@
 <template>
-  <section class="planner-waypoints" :aria-label="t('Вейпоинты', 'Waypoints')">
+  <section class="planner-panel planner-waypoints" :aria-label="t('Вейпоинты', 'Waypoints')">
     <div class="planner-waypoints-toolbar">
-      <span class="planner-muted">
-        {{ t("Открыто", "Unlocked") }} {{ total }} /
-        {{ waypoints.length * difficulties.length }}
-      </span>
       <div>
+        <h3>{{ t("Вейпоинты", "Waypoints") }}</h3>
+        <span class="planner-muted">
+          {{ t("Открыто", "Unlocked") }} {{ total }} /
+          {{ waypoints.length * difficulties.length }}
+        </span>
+      </div>
+      <div class="planner-waypoints-actions">
         <button type="button" @click="setAll(true)">
           {{ t("Отметить все", "Mark all") }}
         </button>
@@ -14,41 +17,39 @@
         </button>
       </div>
     </div>
-    <PlannerPanel
-      v-for="difficulty in difficulties"
-      :key="difficulty.value"
-      v-model:open="expanded[difficulty.value]"
-      :title="t(difficulty.ru, difficulty.en)"
-    >
-      <template #actions>
-        <span class="planner-waypoints-count"
-          >{{ count(difficulty.value) }} / {{ waypoints.length }}</span
+    <div class="planner-quest-table">
+      <div class="planner-quest-row planner-quest-row--heading">
+        <span>{{ t("Вейпоинт", "Waypoint") }}</span>
+        <span v-for="difficulty in difficulties" :key="difficulty.value">
+          {{ t(difficulty.ru, difficulty.en) }}
+        </span>
+      </div>
+      <section v-for="act in waypointActs" :key="act.act" class="planner-waypoint-act">
+        <h4>{{ t("Акт", "Act") }} {{ act.act }}</h4>
+        <div
+          v-for="waypoint in act.waypoints"
+          :key="waypoint.key"
+          class="planner-quest-row"
         >
-      </template>
-      <div class="planner-waypoint-acts">
-        <section v-for="act in waypointActs" :key="act.act" class="planner-waypoint-act">
-          <h4>{{ t("Акт", "Act") }} {{ act.act }}</h4>
+          <span>{{ t(waypoint.ru, waypoint.en) }}</span>
           <label
-            v-for="waypoint in act.waypoints"
-            :key="waypoint.key"
-            class="planner-waypoint"
+            v-for="difficulty in difficulties"
+            :key="difficulty.value"
           >
             <input
               v-model="store.build.waypoints[difficulty.value][waypoint.key]"
               type="checkbox"
               :aria-label="`${t(waypoint.ru, waypoint.en)} · ${t(difficulty.ru, difficulty.en)}`"
             />
-            <span>{{ t(waypoint.ru, waypoint.en) }}</span>
           </label>
-        </section>
-      </div>
-    </PlannerPanel>
+        </div>
+      </section>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import PlannerPanel from "./PlannerPanel.vue";
+import { computed } from "vue";
 import { useText } from "@/composables/useText";
 import { usePlannerStore } from "@/store/planner";
 import { difficulties } from "@/shared/planner";
@@ -57,7 +58,6 @@ import type { Difficulty } from "@/types/planner";
 
 const t = useText();
 const store = usePlannerStore();
-const expanded = ref({ normal: true, nightmare: false, hell: false });
 const count = (difficulty: Difficulty) =>
   waypoints.filter(({ key }) => store.build.waypoints[difficulty][key]).length;
 const total = computed(() =>
@@ -71,9 +71,27 @@ function setAll(checked: boolean) {
 
 <style scoped lang="scss">
 .planner-waypoints {
-  display: grid;
-  gap: 8px;
   min-width: 0;
+  .planner-quest-table {
+    margin-top: 12px;
+  }
+  .planner-quest-row {
+    padding: 6px 0;
+    > span:first-child {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      cursor: pointer;
+    }
+    input {
+      margin: 0;
+    }
+  }
 }
 .planner-waypoints-toolbar {
   display: flex;
@@ -81,58 +99,24 @@ function setAll(checked: boolean) {
   gap: 8px;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 0;
   font-size: 12px;
-  > div {
-    display: flex;
-    gap: 6px;
-  }
-}
-.planner-waypoints-count {
-  padding-right: 8px;
-  font-size: 12px;
-  color: #999;
-  white-space: nowrap;
-}
-.planner-waypoint-acts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 155px), 1fr));
-  gap: 8px;
-  align-items: start;
-  padding: 0 10px 10px;
-}
-.planner-waypoint-act {
-  min-width: 0;
-  padding: 8px;
-  background: #0c0c0c;
-  border: 1px solid #242424;
-  border-radius: 5px;
-  h4 {
-    margin: 0 0 6px;
-    font-size: 12px;
+  h3 {
+    margin: 0 0 4px;
+    font-size: 14px;
     text-transform: uppercase;
   }
 }
-.planner-waypoint {
+.planner-waypoints-actions {
   display: flex;
-  gap: 7px;
-  align-items: center;
-  min-height: 40px;
-  padding: 5px 2px;
-  font-size: 12px;
-  line-height: 1.35;
-  cursor: pointer;
-  border-radius: 3px;
-  &:hover {
-    background: #1c1c1c;
-  }
-  input {
-    flex-shrink: 0;
-    margin: 0;
-  }
-  span {
-    min-width: 0;
-    overflow-wrap: anywhere;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.planner-waypoint-act {
+  h4 {
+    margin: 16px 0 4px;
+    font-size: 12px;
+    color: #c5bb83;
+    text-transform: uppercase;
   }
 }
 </style>

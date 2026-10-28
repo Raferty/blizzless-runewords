@@ -71,6 +71,16 @@ try {
     "Protector's Stone": "Камень хранителя",
     "Guardian's Light": "Свет стража",
   };
+  // Colossal jewels use the corresponding Ancient's bust, not generic jewel art.
+  // Map by name because Blizzless and client positional unique IDs differ.
+  const jewelArtwork = {
+    "Defender's Bile": "colossal_jewel_talic",
+    "Defender's Fire": "colossal_jewel_talic",
+    "Guardian's Thunder": "colossal_jewel_madawc",
+    "Guardian's Light": "colossal_jewel_madawc",
+    "Protector's Frost": "colossal_jewel_korlic",
+    "Protector's Stone": "colossal_jewel_korlic",
+  };
   for (const [code, definition] of Object.entries(data.uniqueItems)) {
     if (!["jew", "cjw"].includes(definition.code) || !definition.enabled) continue;
     const facet = definition.code === "jew";
@@ -118,8 +128,9 @@ try {
           }
         : { en: definition.index, ru: jewelNames[definition.index] || definition.index },
       requiredLevel: definition.lvlreq,
-      // Reuse the game's jewel artwork already bundled with the cube catalog.
-      image_url: "/images/cube/c42fa7a7a08d52a172.png",
+      image_url: facet
+        ? "/images/cube/c42fa7a7a08d52a172.png"
+        : `/images/planner/sockets/${jewelArtwork[definition.index]}.webp`,
       effects: Object.fromEntries(
         ["weapon", "helm", "shield"].map((category) => [category, effects])
       ),
@@ -147,12 +158,19 @@ try {
     )
   );
   const gems = items.filter((i) => i.group === "gem");
+  const artwork = [
+    ...new Map(
+      items
+        .filter((item) => item.group === "gem" || item.group === "jewel")
+        .map((item) => [item.image_url, item])
+    ).values(),
+  ];
   await mkdir(new URL("public/images/planner/sockets/", root), { recursive: true });
   let cursor = 0;
   await Promise.all(
     Array.from({ length: 6 }, async () => {
-      while (cursor < gems.length) {
-        const item = gems[cursor++];
+      while (cursor < artwork.length) {
+        const item = artwork[cursor++];
         const path = new URL(`public${item.image_url}`, root);
         let cached;
         try {
@@ -161,7 +179,10 @@ try {
           /* Not downloaded yet. */
         }
         if (cached?.subarray(0, 4).toString() === "RIFF") continue;
-        const hd = data.misc[item.code].hd;
+        const hd =
+          item.group === "gem"
+            ? data.misc[item.code].hd
+            : `gem/${jewelArtwork[item.name.en]}`;
         if (!/^[a-z0-9_/-]+$/.test(hd)) throw new Error(`Invalid artwork ${hd}`);
         const response = await fetch(
           `https://lootcube.net/images/items/misc/${hd}.webp`,
@@ -187,7 +208,7 @@ try {
     ) + "\n"
   );
   console.log(
-    `Socket catalog: ${items.length} inserts, ${gems.length} gem images, ${Object.keys(bases).length} base contexts.`
+    `Socket catalog: ${items.length} inserts, ${gems.length} gem images, ${artwork.length - gems.length} colossal jewel images, ${Object.keys(bases).length} base contexts.`
   );
 } finally {
   await server.close();
