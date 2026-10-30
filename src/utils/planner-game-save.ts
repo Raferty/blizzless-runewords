@@ -18,6 +18,7 @@ import type { ClassId, EquipmentSlot, PlannerBuild, PlannerItem } from "@/types/
 
 import { affixStats, parseAffixes } from "./planner-affixes";
 import { layoutStashItems } from "./planner-stash";
+import { isContainerBase } from "./planner-item-art";
 import {
   resolvePropertyValues,
   resolvePropertyGroups,
@@ -228,8 +229,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   function permitted(code: string, entry: GameSaveEntry, build: PlannerBuild) {
     const base = gd.items[code];
     if (!base || !/^[a-z0-9]{3}$/.test(code)) return false;
-    // Cube recipes consume these non-dropping bases, not their empty containers.
-    if (/^(?:ua[1-5]|pk[1-3])$/.test(code))
+    // Non-dropping quest ingredients and rejuvenation potions are normal stash items.
+    if (/^(?:ua[1-5]|pk[1-3]|rv[sl])$/.test(code))
       return entry.owner === "stash" && entry.item.quality === "normal";
     if (
       /^unused$/i.test(base.name) ||
@@ -325,9 +326,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
                   value: unique,
                   unique,
                   base,
-                  label: ["bg1", "bg2"].includes(base)
-                    ? String(name)
-                    : `${name} · ${label(base)}`,
+                  label: `${name} · ${label(base)}`,
                 },
               ]
             : [];
@@ -345,7 +344,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             types(code).has("ring") ||
             types(code).has("amul") ||
             types(code).has("char") ||
-            /^(?:ua[1-5]|pk[1-3])$/.test(code) ||
+            /^(?:ua[1-5]|pk[1-3]|rv[sl])$/.test(code) ||
             code === "box")
       )
       .map((base) => ({ value: base, base, label: `${label(base)} [${base}]` }))
@@ -538,10 +537,24 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     };
   }
   function itemDefinition(item: PlannerItem): Definition | undefined {
-    if (item.catalogId && (item.quality === "unique" || item.quality === "set"))
-      return (item.quality === "unique" ? gd.uniqueItems : gd.setItems)[
+    if (item.catalogId && (item.quality === "unique" || item.quality === "set")) {
+      const definition = (item.quality === "unique" ? gd.uniqueItems : gd.setItems)[
         item.catalogId
       ] as unknown as Definition;
+      if (item.containerQuantity === undefined) return definition;
+      if (
+        !definition ||
+        !isContainerBase(String(definition.code)) ||
+        definition.prop1 !== "Add_one"
+      )
+        throw new GameSaveError("base", item.name);
+      return {
+        ...definition,
+        par1: item.containerQuantity,
+        min1: item.containerQuantity,
+        max1: item.containerQuantity,
+      };
+    }
     if (item.quality !== "runeword") return;
     const runeWord = word({ key: "properties", item, owner: "stash" })?.[1] as unknown as
       Definition | undefined;
@@ -869,8 +882,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       let maxSockets = base.gemsockets || 0;
       if (choice.unique) {
         item.unique = choice.unique;
-        const definition = (gd.uniqueItems[choice.unique] ??
-          gd.setItems[choice.unique]) as unknown as Definition;
+        const definition = itemDefinition({ ...entry.item, catalogId: choice.unique })!;
         item.stats = definitionStats(
           definition,
           choice.base,

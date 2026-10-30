@@ -22,7 +22,9 @@
           height="32"
           loading="lazy"
         />
-        <span v-else class="cube-ingredient__placeholder" aria-hidden="true">◆</span>
+        <span v-else class="cube-ingredient__placeholder" aria-hidden="true"
+          ><UiIcon name="diamond" :size="20" filled
+        /></span>
         <div>
           <p>
             <b v-if="item.count !== 1" class="cube-ingredient__count"
@@ -35,7 +37,9 @@
         </div>
       </div>
     </div>
-    <div class="cube-formula__arrow" :aria-label="t('Получается', 'Creates')">↓</div>
+    <div class="cube-formula__arrow" :aria-label="t('Получается', 'Creates')">
+      <UiIcon name="arrow-down" :size="20" />
+    </div>
     <div class="cube-formula__results" :aria-label="t('Результат', 'Result')">
       <div
         v-for="(item, index) in result"
@@ -51,15 +55,25 @@
           height="48"
           loading="lazy"
         />
-        <span v-else class="cube-ingredient__placeholder" aria-hidden="true">◆</span>
+        <span v-else class="cube-ingredient__placeholder" aria-hidden="true"
+          ><UiIcon name="diamond" :size="20" filled
+        /></span>
         <div>
           <p>
             <b v-if="item.count !== 1" class="cube-ingredient__count"
               >{{ item.count }} × </b
             >{{ label(item.key) }}
           </p>
-          <p v-if="text(item.notes)" class="cube-ingredient__note">
-            {{ text(item.notes) }}
+          <p v-if="resultNotes(item)" class="cube-ingredient__note">
+            {{ resultNotes(item) }}
+          </p>
+          <p v-if="isCrafted(item)" class="cube-ingredient__affixes">
+            {{
+              t(
+                "+ 1–4 случайных аффикса (префиксы/суффиксы)",
+                "+ 1–4 random crafted affixes (prefixes/suffixes)"
+              )
+            }}
           </p>
         </div>
       </div>
@@ -67,17 +81,31 @@
   </div>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { useInfoStore } from "@/store";
 import { useText } from "@/composables/useText";
-import { cubeIngredients, cubeResultQuality, cubeText } from "@/utils/cube";
+import {
+  cubeIngredients,
+  cubeResultQuality,
+  cubeText,
+  isCubeCraftingResult,
+} from "@/utils/cube";
 import type { CubeRecipeItem } from "@/types/cube";
 import type { LocalizedName } from "@/types/runeword";
-defineProps<{ ingredients: CubeRecipeItem[]; result: CubeRecipeItem[] }>();
+const props = defineProps<{ ingredients: CubeRecipeItem[]; result: CubeRecipeItem[] }>();
 const info = useInfoStore();
 const t = useText();
 const base = import.meta.env.BASE_URL;
 const ingredient = (key: string) => cubeIngredients.get(key);
 const text = (value: LocalizedName) => cubeText(value, info.currentLang);
+const isCrafted = (item: CubeRecipeItem) =>
+  isCubeCraftingResult(item.key, props.ingredients);
+function resultNotes(item: CubeRecipeItem) {
+  const notes = text(item.notes);
+  return isCrafted(item)
+    ? notes.replace(/^\s*Random rare affixes\.?\s*$/gim, "").trim()
+    : notes;
+}
 function label(key: string) {
   if (key === "regular_shield") return t("Обычный щит", "Regular Shield");
   return ingredient(key)
@@ -161,6 +189,15 @@ function label(key: string) {
   font-size: 11px;
   line-height: 1.6;
   white-space: pre-line;
+}
+.cube-ingredient__affixes {
+  padding-top: 6px;
+  margin-top: 6px;
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--color-muted);
+  border-top: 1px var(--border-style) var(--result-border, var(--color-border));
 }
 .cube-formula__arrow {
   padding: 7px;

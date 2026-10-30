@@ -10,7 +10,7 @@
           :aria-label="`${open ? t('Свернуть', 'Collapse') : t('Развернуть', 'Expand')} ${title}`"
           @click="open = !open"
         >
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg>
+          <UiIcon name="chevron-down" />
           {{ title }}
         </button>
       </h3>
@@ -20,6 +20,7 @@
   </section>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { useId } from "vue";
 import { useText } from "@/composables/useText";
 defineProps<{ title: string }>();

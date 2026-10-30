@@ -15,6 +15,12 @@
         class="runelist__item"
         @click="toggle(rune.id)"
       >
+        <UiIcon
+          v-if="words.selectedRunes.includes(rune.id)"
+          name="check"
+          :size="11"
+          class="runelist__check"
+        />
         <span class="runelist__rank" aria-hidden="true">{{
           String(rune.id).padStart(2, "0")
         }}</span>
@@ -28,11 +34,12 @@
       </button>
     </div>
     <button class="runelist__clear" @click="words.setSelectedRunes([])">
-      {{ t("Сбросить выбор", "Clear selection") }} ↺
+      {{ t("Сбросить выбор", "Clear selection") }} <UiIcon name="reset" :size="12" />
     </button>
   </div>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { useInfoStore, useRunewordsStore } from "@/store";
 import { useText } from "@/composables/useText";
 const info = useInfoStore();
@@ -104,13 +111,12 @@ h2 {
   background: #29270b;
   border-color: #ffdf00;
 }
-.runelist__item[aria-pressed="true"]::before {
+.runelist__check {
   position: absolute;
   top: 2px;
   left: 4px;
   font-size: 9px;
   color: #ffdf00;
-  content: "✓";
 }
 .runelist__clear {
   width: 100%;

@@ -32,14 +32,14 @@
             :title="t('Избранное', 'Favorites')"
             @click="words.favoritesOnly = !words.favoritesOnly"
           >
-            {{ words.favoritesOnly ? "★" : "☆" }}
+            <UiIcon name="star" :filled="words.favoritesOnly" :size="18" />
           </button>
         </div>
       </div>
       <RunewordsTable v-if="view === 'table' && visibleCount" @select="openRuneword" />
       <RunewordsList v-else-if="visibleCount" @select="openRuneword" />
       <div v-else class="empty-state">
-        <span aria-hidden="true">⌕</span>
+        <UiIcon name="search" :size="40" />
         <h2>{{ t("Ничего не найдено", "No runewords found") }}</h2>
         <p>
           {{
@@ -89,13 +89,17 @@
           "
           @click="words.toggleFavorite(selectedRuneword.id)"
         >
-          {{ words.favorites.includes(selectedRuneword.id) ? "★" : "☆" }}</button
+          <UiIcon
+            name="star"
+            :filled="words.favorites.includes(selectedRuneword.id)"
+            :size="18"
+          /></button
         ><button
           autofocus
           :aria-label="t('Закрыть', 'Close')"
           @click="selectedRuneword = null"
         >
-          ×
+          <UiIcon name="close" />
         </button>
       </div>
       <RuneWordCard :key="selectedRuneword.id" :runeword="selectedRuneword" show-old />
@@ -103,6 +107,7 @@
   </UiModal>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref, watch } from "vue";
 import { storeToRefs } from "pinia";
 import { useDebouncedRef } from "@/composables/useDebouncedRef";
@@ -218,7 +223,7 @@ function openRuneword(item: RunewordTableItem) {
   color: var(--color-muted);
   text-align: center;
 }
-.empty-state > span {
+.empty-state > .ui-icon {
   font-size: 42px;
   color: var(--color-accent);
 }

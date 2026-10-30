@@ -85,9 +85,10 @@
     </details>
     <template v-if="showOld">
       <button class="runeword__copy" @click="copyRecipe">
+        <UiIcon :name="copyState === 'copied' ? 'check' : 'copy'" />
         {{
           copyState === "copied"
-            ? t("Скопировано ✓", "Copied ✓")
+            ? t("Скопировано", "Copied")
             : copyState === "error"
               ? t("Не удалось скопировать", "Could not copy")
               : t("Скопировать рецепт", "Copy recipe")
@@ -109,12 +110,13 @@
         :aria-label="t('Открыть рунное слово', 'Open runeword')"
         @click="$emit('select')"
       >
-        ↗
+        <UiIcon name="arrow-up-right" />
       </button>
     </div>
   </article>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref } from "vue";
 import { useInfoStore, useRunewordsStore } from "@/store";
 import { useRunes } from "@/composables/useRunes";

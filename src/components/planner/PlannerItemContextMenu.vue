@@ -12,7 +12,7 @@
       @keydown="keydown"
     >
       <button type="button" role="menuitem" tabindex="-1" @click="$emit('edit', $event)">
-        {{ t("Редактировать", "Edit") }}
+        <UiIcon name="edit" /> {{ t("Редактировать", "Edit") }}
       </button>
       <button
         type="button"
@@ -21,12 +21,13 @@
         class="planner-danger"
         @click="$emit('remove')"
       >
-        {{ t("Удалить", "Delete") }}
+        <UiIcon name="trash" /> {{ t("Удалить", "Delete") }}
       </button>
     </div>
   </Teleport>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import {
   nextTick,
   onBeforeUnmount,

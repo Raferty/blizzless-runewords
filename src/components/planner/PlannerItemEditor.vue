@@ -40,7 +40,7 @@
           :aria-label="t('Закрыть', 'Close')"
           @click="$emit('close')"
         >
-          ×
+          <UiIcon name="close" />
         </button>
       </header>
       <div
@@ -104,17 +104,17 @@
               </h2>
               <div class="planner-item-tools">
                 <button type="button" @click="tab = 'select'">
-                  ↻ {{ t("Заменить", "Change Item") }}
+                  <UiIcon name="refresh" /> {{ t("Заменить", "Change Item") }}
                 </button>
                 <button
                   v-if="removable && owner !== 'stash'"
                   type="button"
                   @click="$emit('stash')"
                 >
-                  ↗ {{ t("В сундук", "Unequip") }}
+                  <UiIcon name="arrow-up-right" /> {{ t("В сундук", "Unequip") }}
                 </button>
                 <button v-if="removable" type="button" @click="$emit('remove')">
-                  × {{ t("Удалить", "Delete") }}
+                  <UiIcon name="trash" /> {{ t("Удалить", "Delete") }}
                 </button>
               </div>
               <div class="planner-item-base-controls">
@@ -304,6 +304,7 @@
 import { computed, onMounted, ref, shallowRef, useId, watch } from "vue";
 import PlannerItemBrowser from "./PlannerItemBrowser.vue";
 import PlannerIcon from "./PlannerIcon.vue";
+import UiIcon from "@/components/ui/UiIcon.vue";
 import PlannerSetBonuses from "./PlannerSetBonuses.vue";
 import PlannerAffixEditor from "./PlannerAffixEditor.vue";
 import PlannerPropertyEditor from "./PlannerPropertyEditor.vue";
@@ -429,6 +430,7 @@ const canEditQuality = computed(
   () =>
     !!selectedBase.value &&
     selectedBase.value.code !== "box" &&
+    selectedBase.value.category !== "rpot" &&
     (isCharm.value
       ? ["normal", "magic", "unique"].includes(item.value.quality)
       : ["normal", "magic", "rare"].includes(item.value.quality))

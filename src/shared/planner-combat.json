@@ -1,0 +1,1047 @@
+{
+  "source": {
+    "url": "https://blizzless.info/api/launcher-mods/blobs/d121311e24e9c73e027a656a58489e08cbdc8d3fc79e1dc8e46f66446ff1cb47",
+    "sha256": "d121311e24e9c73e027a656a58489e08cbdc8d3fc79e1dc8e46f66446ff1cb47",
+    "manifestVersion": 1792771561313
+  },
+  "classes": {
+    "amazon": "AM",
+    "sorceress": "SO",
+    "necromancer": "NE",
+    "paladin": "PA",
+    "barbarian": "BA",
+    "druid": "DZ",
+    "assassin": "AI",
+    "warlock": "WK"
+  },
+  "animations": {
+    "DZSC1HS": {
+      "frames": 15,
+      "speed": 208
+    },
+    "BASCBOW": {
+      "frames": 14,
+      "speed": 256
+    },
+    "DZA1XBW": {
+      "frames": 20,
+      "speed": 256
+    },
+    "DZSC1HT": {
+      "frames": 15,
+      "speed": 208
+    },
+    "DZSC2HS": {
+      "frames": 15,
+      "speed": 208
+    },
+    "SOA1STF": {
+      "frames": 18,
+      "speed": 256
+    },
+    "WKA1STF": {
+      "frames": 17,
+      "speed": 256
+    },
+    "DZSC2HT": {
+      "frames": 15,
+      "speed": 208
+    },
+    "SOA2STF": {
+      "frames": 18,
+      "speed": 256
+    },
+    "WKA2STF": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AMS1XBW": {
+      "frames": 9,
+      "speed": 256
+    },
+    "AISCHTH": {
+      "frames": 17,
+      "speed": 256
+    },
+    "NES1STF": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOSC1HS": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKSC1HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOA1XBW": {
+      "frames": 20,
+      "speed": 256
+    },
+    "SOSC1HT": {
+      "frames": 14,
+      "speed": 256
+    },
+    "SOSC2HS": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKA1XBW": {
+      "frames": 18,
+      "speed": 256
+    },
+    "WKSC1HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "WKSC2HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BASCSTF": {
+      "frames": 14,
+      "speed": 256
+    },
+    "DZS1HTH": {
+      "frames": 15,
+      "speed": 256
+    },
+    "SOSC2HT": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKSC2HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AISCBOW": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AMSCHTH": {
+      "frames": 20,
+      "speed": 256
+    },
+    "NES1XBW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BASCXBW": {
+      "frames": 14,
+      "speed": 256
+    },
+    "DZS1BOW": {
+      "frames": 15,
+      "speed": 208
+    },
+    "SOS1HTH": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKS1HTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "PASCHTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AMSCBOW": {
+      "frames": 20,
+      "speed": 256
+    },
+    "AISCSTF": {
+      "frames": 17,
+      "speed": 256
+    },
+    "NESCHTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOS1BOW": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKS1BOW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "DZS1STF": {
+      "frames": 15,
+      "speed": 208
+    },
+    "PASCBOW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AISCXBW": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AMSCSTF": {
+      "frames": 20,
+      "speed": 256
+    },
+    "NESCBOW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "DZS1XBW": {
+      "frames": 15,
+      "speed": 256
+    },
+    "SOS1STF": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKS1STF": {
+      "frames": 16,
+      "speed": 256
+    },
+    "PASCSTF": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AMSCXBW": {
+      "frames": 20,
+      "speed": 256
+    },
+    "NESCSTF": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOS1XBW": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKS1XBW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "DZSCHTH": {
+      "frames": 15,
+      "speed": 208
+    },
+    "PASCXBW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "NESCXBW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "DZSCBOW": {
+      "frames": 15,
+      "speed": 208
+    },
+    "SOSCHTH": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKSCHTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOSCBOW": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKSCBOW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "DZSCSTF": {
+      "frames": 15,
+      "speed": 208
+    },
+    "DZSCXBW": {
+      "frames": 15,
+      "speed": 208
+    },
+    "SOSCSTF": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKSCSTF": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOSCXBW": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKSCXBW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA11HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA11HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA12HS": {
+      "frames": 18,
+      "speed": 256
+    },
+    "BAA21HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA11JS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA12HT": {
+      "frames": 19,
+      "speed": 256
+    },
+    "BAA21HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA22HS": {
+      "frames": 18,
+      "speed": 256
+    },
+    "BAA11JT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA21JS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA22HT": {
+      "frames": 19,
+      "speed": 256
+    },
+    "BAA21JT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AIA11HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIA11HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIA12HS": {
+      "frames": 23,
+      "speed": 256
+    },
+    "AIA1HT1": {
+      "frames": 11,
+      "speed": 208
+    },
+    "AIA21HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIA12HT": {
+      "frames": 23,
+      "speed": 256
+    },
+    "AIA1HT2": {
+      "frames": 11,
+      "speed": 208
+    },
+    "AIA21HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIA22HS": {
+      "frames": 23,
+      "speed": 256
+    },
+    "AIA2HT1": {
+      "frames": 12,
+      "speed": 227
+    },
+    "AIA22HT": {
+      "frames": 23,
+      "speed": 256
+    },
+    "AIA2HT2": {
+      "frames": 12,
+      "speed": 227
+    },
+    "AMA11HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA11SS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AMA11HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AMA12HS": {
+      "frames": 20,
+      "speed": 256
+    },
+    "AMA21HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA11ST": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA21SS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AMA12HT": {
+      "frames": 18,
+      "speed": 256
+    },
+    "AMA21HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AMA22HS": {
+      "frames": 20,
+      "speed": 256
+    },
+    "BAA21ST": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AMA22HT": {
+      "frames": 18,
+      "speed": 256
+    },
+    "PAA11HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "PAA11HT": {
+      "frames": 17,
+      "speed": 256
+    },
+    "PAA12HS": {
+      "frames": 18,
+      "speed": 256
+    },
+    "PAA21HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "NEA11HS": {
+      "frames": 19,
+      "speed": 256
+    },
+    "PAA12HT": {
+      "frames": 20,
+      "speed": 256
+    },
+    "PAA21HT": {
+      "frames": 17,
+      "speed": 256
+    },
+    "PAA22HS": {
+      "frames": 19,
+      "speed": 256
+    },
+    "NEA11HT": {
+      "frames": 19,
+      "speed": 256
+    },
+    "NEA12HS": {
+      "frames": 23,
+      "speed": 256
+    },
+    "NEA21HS": {
+      "frames": 19,
+      "speed": 256
+    },
+    "PAA22HT": {
+      "frames": 20,
+      "speed": 256
+    },
+    "BAS11HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "NEA12HT": {
+      "frames": 24,
+      "speed": 256
+    },
+    "NEA21HT": {
+      "frames": 19,
+      "speed": 256
+    },
+    "NEA22HS": {
+      "frames": 23,
+      "speed": 256
+    },
+    "BAS11HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "BAS12HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "NEA22HT": {
+      "frames": 24,
+      "speed": 256
+    },
+    "BAS11JS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "BAS12HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "BAS11JT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "BAA1HTH": {
+      "frames": 12,
+      "speed": 256
+    },
+    "AIS11HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIS11HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIS12HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIS1HT1": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AIS12HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIS1HT2": {
+      "frames": 15,
+      "speed": 256
+    },
+    "DZA11HS": {
+      "frames": 19,
+      "speed": 256
+    },
+    "BAA1BOW": {
+      "frames": 15,
+      "speed": 256
+    },
+    "DZA11HT": {
+      "frames": 19,
+      "speed": 256
+    },
+    "DZA12HS": {
+      "frames": 21,
+      "speed": 256
+    },
+    "DZA21HS": {
+      "frames": 19,
+      "speed": 256
+    },
+    "AMS11HS": {
+      "frames": 9,
+      "speed": 256
+    },
+    "BAS11SS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "DZA12HT": {
+      "frames": 23,
+      "speed": 256
+    },
+    "DZA21HT": {
+      "frames": 19,
+      "speed": 256
+    },
+    "DZA22HS": {
+      "frames": 21,
+      "speed": 256
+    },
+    "AMS11HT": {
+      "frames": 9,
+      "speed": 256
+    },
+    "AMS12HS": {
+      "frames": 9,
+      "speed": 256
+    },
+    "BAS11ST": {
+      "frames": 15,
+      "speed": 256
+    },
+    "DZA22HT": {
+      "frames": 23,
+      "speed": 256
+    },
+    "AIA1HTH": {
+      "frames": 11,
+      "speed": 256
+    },
+    "AMS12HT": {
+      "frames": 9,
+      "speed": 256
+    },
+    "SOA11HS": {
+      "frames": 20,
+      "speed": 256
+    },
+    "WKA11HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AIA2HTH": {
+      "frames": 12,
+      "speed": 256
+    },
+    "PAS11HS": {
+      "frames": 12,
+      "speed": 256
+    },
+    "SOA11HT": {
+      "frames": 19,
+      "speed": 256
+    },
+    "SOA12HS": {
+      "frames": 24,
+      "speed": 256
+    },
+    "SOA21HS": {
+      "frames": 20,
+      "speed": 256
+    },
+    "WKA11HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "WKA12HS": {
+      "frames": 19,
+      "speed": 256
+    },
+    "WKA21HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA1STF": {
+      "frames": 19,
+      "speed": 256
+    },
+    "PAS11HT": {
+      "frames": 12,
+      "speed": 256
+    },
+    "SOA12HT": {
+      "frames": 23,
+      "speed": 256
+    },
+    "SOA21HT": {
+      "frames": 19,
+      "speed": 256
+    },
+    "SOA22HS": {
+      "frames": 24,
+      "speed": 256
+    },
+    "WKA12HT": {
+      "frames": 21,
+      "speed": 256
+    },
+    "WKA21HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "WKA22HS": {
+      "frames": 19,
+      "speed": 256
+    },
+    "BAA2STF": {
+      "frames": 19,
+      "speed": 256
+    },
+    "NES11HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOA22HT": {
+      "frames": 23,
+      "speed": 256
+    },
+    "WKA22HT": {
+      "frames": 23,
+      "speed": 256
+    },
+    "AIA1BOW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AMA1HTH": {
+      "frames": 13,
+      "speed": 256
+    },
+    "NES11HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "NES12HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AMA2HTH": {
+      "frames": 13,
+      "speed": 256
+    },
+    "BASC1HS": {
+      "frames": 14,
+      "speed": 256
+    },
+    "NES12HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAA1XBW": {
+      "frames": 20,
+      "speed": 256
+    },
+    "BASC1HT": {
+      "frames": 14,
+      "speed": 256
+    },
+    "BASC2HS": {
+      "frames": 14,
+      "speed": 256
+    },
+    "BASC1JS": {
+      "frames": 14,
+      "speed": 256
+    },
+    "BASC2HT": {
+      "frames": 14,
+      "speed": 256
+    },
+    "PAA1HTH": {
+      "frames": 14,
+      "speed": 256
+    },
+    "AMA1BOW": {
+      "frames": 14,
+      "speed": 256
+    },
+    "BASC1JT": {
+      "frames": 14,
+      "speed": 256
+    },
+    "PAA2HTH": {
+      "frames": 14,
+      "speed": 256
+    },
+    "AIA1STF": {
+      "frames": 19,
+      "speed": 256
+    },
+    "NEA1HTH": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AIA2STF": {
+      "frames": 19,
+      "speed": 256
+    },
+    "NEA2HTH": {
+      "frames": 15,
+      "speed": 256
+    },
+    "BAS1HTH": {
+      "frames": 15,
+      "speed": 256
+    },
+    "PAA1BOW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AISC1HS": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AIA1XBW": {
+      "frames": 21,
+      "speed": 256
+    },
+    "AISC1HT": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AISC2HS": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AISCHT1": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AMA1STF": {
+      "frames": 20,
+      "speed": 256
+    },
+    "NEA1BOW": {
+      "frames": 18,
+      "speed": 256
+    },
+    "AISC2HT": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AISCHT2": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AMA2STF": {
+      "frames": 20,
+      "speed": 256
+    },
+    "DZS11HS": {
+      "frames": 15,
+      "speed": 256
+    },
+    "BAS1BOW": {
+      "frames": 15,
+      "speed": 256
+    },
+    "DZS11HT": {
+      "frames": 15,
+      "speed": 256
+    },
+    "DZS12HS": {
+      "frames": 15,
+      "speed": 208
+    },
+    "AMSC1HS": {
+      "frames": 20,
+      "speed": 256
+    },
+    "BASC1SS": {
+      "frames": 14,
+      "speed": 256
+    },
+    "DZS12HT": {
+      "frames": 15,
+      "speed": 208
+    },
+    "PAA1STF": {
+      "frames": 18,
+      "speed": 256
+    },
+    "AMA1XBW": {
+      "frames": 20,
+      "speed": 256
+    },
+    "AMSC1HT": {
+      "frames": 20,
+      "speed": 256
+    },
+    "AMSC2HS": {
+      "frames": 20,
+      "speed": 256
+    },
+    "BASC1ST": {
+      "frames": 14,
+      "speed": 256
+    },
+    "PAA2STF": {
+      "frames": 18,
+      "speed": 256
+    },
+    "AIS1HTH": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AMSC2HT": {
+      "frames": 20,
+      "speed": 256
+    },
+    "NEA1STF": {
+      "frames": 20,
+      "speed": 256
+    },
+    "SOS11HS": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKS11HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "NEA2STF": {
+      "frames": 20,
+      "speed": 256
+    },
+    "PASC1HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOS11HT": {
+      "frames": 14,
+      "speed": 256
+    },
+    "SOS12HS": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKS11HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "WKS12HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAS1STF": {
+      "frames": 15,
+      "speed": 256
+    },
+    "DZA1HTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "PAA1XBW": {
+      "frames": 20,
+      "speed": 256
+    },
+    "PASC1HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "PASC2HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOS12HT": {
+      "frames": 14,
+      "speed": 256
+    },
+    "WKS12HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "NESC1HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "PASC2HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AIS1BOW": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AMS1HTH": {
+      "frames": 9,
+      "speed": 256
+    },
+    "NEA1XBW": {
+      "frames": 20,
+      "speed": 256
+    },
+    "NESC1HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "NESC2HS": {
+      "frames": 16,
+      "speed": 256
+    },
+    "NESC2HT": {
+      "frames": 16,
+      "speed": 256
+    },
+    "BAS1XBW": {
+      "frames": 15,
+      "speed": 256
+    },
+    "DZA1BOW": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOA1HTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "WKA1HTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "PAS1HTH": {
+      "frames": 12,
+      "speed": 256
+    },
+    "SOA2HTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "WKA2HTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "AMS1BOW": {
+      "frames": 9,
+      "speed": 256
+    },
+    "AIS1STF": {
+      "frames": 15,
+      "speed": 256
+    },
+    "NES1HTH": {
+      "frames": 16,
+      "speed": 256
+    },
+    "SOA1BOW": {
+      "frames": 17,
+      "speed": 256
+    },
+    "WKA1BOW": {
+      "frames": 17,
+      "speed": 256
+    },
+    "BASCHTH": {
+      "frames": 14,
+      "speed": 256
+    },
+    "DZA1STF": {
+      "frames": 17,
+      "speed": 256
+    },
+    "DZA2STF": {
+      "frames": 17,
+      "speed": 256
+    },
+    "AIS1XBW": {
+      "frames": 15,
+      "speed": 256
+    },
+    "AMS1STF": {
+      "frames": 9,
+      "speed": 256
+    },
+    "NES1BOW": {
+      "frames": 16,
+      "speed": 256
+    }
+  }
+}

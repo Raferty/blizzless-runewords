@@ -33,7 +33,8 @@
           :aria-expanded="filtersOpen"
           @click="filtersOpen = !filtersOpen"
         >
-          {{ t("Фильтры", "Filters") }} <span aria-hidden="true">⌄</span>
+          {{ t("Фильтры", "Filters") }}
+          <UiIcon :name="filtersOpen ? 'chevron-up' : 'chevron-down'" />
         </button>
       </div>
       <div v-if="filtersOpen" class="planner-item-filters">
@@ -94,6 +95,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref } from "vue";
 import { useText } from "@/composables/useText";
 import { useInfoStore } from "@/store";

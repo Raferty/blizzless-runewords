@@ -130,6 +130,13 @@ const wordLines = computed(() =>
 );
 const properties = computed(() => {
   const { catalogId } = identity.value;
+  if (native.value && props.item.containerQuantity !== undefined)
+    return itemPropertyLines(
+      native.value,
+      props.item,
+      store.build.level,
+      store.build.classId
+    );
   if (
     native.value &&
     catalogId &&

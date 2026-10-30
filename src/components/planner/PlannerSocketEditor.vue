@@ -20,9 +20,10 @@
             ><small>{{ t("Сокет", "Socket") }} {{ index }}</small
             >{{ selected(index)?.name[lang] || t("Пустой сокет", "Empty Socket") }}</span
           >
-          <span v-if="!readonly" aria-hidden="true">{{
-            opened === index ? "⌃" : "⌄"
-          }}</span>
+          <UiIcon
+            v-if="!readonly"
+            :name="opened === index ? 'chevron-up' : 'chevron-down'"
+          />
         </button>
         <button
           v-if="selected(index) && !readonly"
@@ -30,7 +31,7 @@
           :aria-label="`${t('Удалить вставку из сокета', 'Remove insert from socket')} ${index}`"
           @click="choose(index, null)"
         >
-          ×
+          <UiIcon name="close" />
         </button>
       </div>
       <div
@@ -113,6 +114,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, nextTick, ref, useId, watch } from "vue";
 import { useInfoStore } from "@/store";
 import { useText } from "@/composables/useText";

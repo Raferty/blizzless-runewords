@@ -1,5 +1,10 @@
 import data from "@/shared/cube-catalog.json";
-import type { CubeCatalog, CubeIngredient, CubeRecipe } from "@/types/cube";
+import type {
+  CubeCatalog,
+  CubeIngredient,
+  CubeRecipe,
+  CubeRecipeItem,
+} from "@/types/cube";
 import type { Lang } from "@/types";
 import type { LocalizedName } from "@/types/runeword";
 
@@ -38,6 +43,16 @@ export function cubeResultQuality(
 }
 export function cubeText(value: LocalizedName, lang: Lang, fallback = ""): string {
   return value[lang] || value.en || value.ru || fallback;
+}
+/** Creating a crafted item rolls affixes; upgrading one preserves its affixes. */
+export function isCubeCraftingResult(
+  key: string,
+  ingredients: CubeRecipeItem[]
+): boolean {
+  return (
+    cubeResultQuality(key) === "crafted" &&
+    !ingredients.some((item) => cubeResultQuality(item.key) === "crafted")
+  );
 }
 export const normalizeCubeSearch = (text: string) =>
   text.toLowerCase().replace(/ё/g, "е").replace(/\s+/g, " ").trim();

@@ -74,6 +74,132 @@ try {
     assertions++;
     return { bytes, read, raw: codec.readCharacter(bytes) };
   }
+  {
+    const { createItemCatalog } = await server.ssrLoadModule(
+      "/src/utils/planner-item-catalog.ts"
+    );
+    const { plannerItemImage, plannerItemDimensions } = await server.ssrLoadModule(
+      "/src/utils/planner-item-art.ts"
+    );
+    const build = planner.createBuild("paladin");
+    const catalog = createItemCatalog(codec, build, { key: "stash", owner: "stash" }, []);
+    for (const [index, code] of ["rvs", "rvl"].entries()) {
+      const entry = catalog.items.find((item) => item.id === `base:${code}`);
+      assert(entry, `${code} is available in the stash catalog`);
+      assert.equal(catalog.bases.get(code).category, "rpot");
+      const item = {
+        name: entry.name,
+        quality: "normal",
+        baseCode: code,
+        requiredLevel: 1,
+        bonuses: {},
+        notes: "",
+        stashPosition: index * 17,
+      };
+      assert(plannerItemImage(item), `${code} has inventory artwork`);
+      assert.deepEqual(plannerItemDimensions(item), [1, 1]);
+      assert(
+        !codec
+          .choices({ key: "charm", owner: "charm", item }, build)
+          .some((choice) => choice.base === code),
+        "Potions cannot occupy charm slots"
+      );
+      assert(
+        !codec
+          .choices(
+            { key: "stash", owner: "stash", item: { ...item, quality: "magic" } },
+            build
+          )
+          .some((choice) => choice.base === code),
+        "Potions retain normal quality"
+      );
+      build.stash.push(item);
+    }
+    const restored = planner.decodeBuild(planner.encodeBuild(build));
+    assert.deepEqual(
+      restored.stash.map((item) => item.baseCode),
+      ["rvs", "rvl"]
+    );
+    const choices = Object.fromEntries(
+      native
+        .gameSaveEntries(restored)
+        .map((entry) => [entry.key, codec.defaultChoice(entry, restored)])
+    );
+    const { read } = await verify(restored, { ...opts, choices });
+    assert.deepEqual(
+      read.items.map((item) => item.type),
+      ["rvs", "rvl"]
+    );
+    read.items.forEach((item, index) => {
+      assert.equal(item.simple_item, 1);
+      assert.equal(item.alt_position_id, 5);
+      assert.equal(item.position_x, index);
+      assert.equal(item.position_y, index);
+    });
+  }
+  {
+    const { createFullRejuvenationContainer } = await server.ssrLoadModule(
+      "/src/utils/planner-stash.ts"
+    );
+    const { itemPropertyLines } = await server.ssrLoadModule(
+      "/src/utils/planner-item-catalog.ts"
+    );
+    const { plannerItemImage, plannerItemDimensions } = await server.ssrLoadModule(
+      "/src/utils/planner-item-art.ts"
+    );
+    const occupied = new Set([0, 1]);
+    const container = createFullRejuvenationContainer(occupied);
+    assert.equal(occupied.size, 2, "Availability checks must not reserve stash space");
+    assert.equal(container.stashPosition, 2);
+    assert.equal(container.containerQuantity, 100);
+    assert.deepEqual(plannerItemDimensions(container), [1, 1]);
+    assert(plannerItemImage(container)?.endsWith("/quest/cont_rvl.png"));
+    assert.equal(
+      createFullRejuvenationContainer(new Set(Array.from({ length: 208 }, (_, i) => i))),
+      undefined,
+      "A full stash cannot receive a container"
+    );
+    for (const invalid of [-1, 1.5, 2038])
+      assert.throws(() =>
+        planner.parsePlannerItem({ ...container, containerQuantity: invalid })
+      );
+    assert.throws(() => planner.parsePlannerItem({ ...container, baseCode: "rvl" }));
+    const build = planner.createBuild("paladin");
+    build.stash = [container];
+    const restored = planner.decodeBuild(planner.encodeBuild(build));
+    assert.equal(restored.stash[0].containerQuantity, 100);
+    assert.equal(data.uniqueItems[container.catalogId].index, "cont_rvl");
+    const key = native.gameSaveEntries(restored)[0].key;
+    const choices = {
+      [key]: codec.defaultChoice(native.gameSaveEntries(restored)[0], restored),
+    };
+    assert.equal(choices[key], "unique456");
+    for (const roll of ["planned", 0, 1]) {
+      const { read } = await verify(restored, {
+        ...opts,
+        choices,
+        rolls: { [key]: roll },
+      });
+      assert.equal(read.items.length, 1, "The kit adds one container");
+      const item = read.items[0];
+      assert.equal(item.type, "bg1");
+      assert.equal(item.quality, 7);
+      assert.equal(item.unique_id, data.uniqueItems.unique456.saveId);
+      assert.equal(item.alt_position_id, 5);
+      assert.equal(item.position_x, 2);
+      assert.deepEqual(
+        item.magic_attributes.find((stat) => stat.id === data.itemStatCost.Add_one.id)
+          .values,
+        [100],
+        "All export roll modes preserve the 100 potions inside"
+      );
+    }
+    assert(
+      itemPropertyLines(codec, container, build.level, build.classId).includes(
+        "Items inside: 100"
+      )
+    );
+  }
   for (const c of plannerClasses)
     for (const level of [1, 2, 90, 99]) {
       const build = planner.createBuild(c.id);

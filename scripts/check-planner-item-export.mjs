@@ -1,5 +1,6 @@
 // Compare binary identities against the launcher's actual record order, not *ID.
 import assert from "node:assert/strict";
+import { Buffer } from "node:buffer";
 import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { createServer } from "vite";

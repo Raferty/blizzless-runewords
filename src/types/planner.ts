@@ -100,6 +100,7 @@ export interface PlannerItem {
   propertyChoices?: Record<string, number>;
   skillClass?: ClassId;
   stashPosition?: number;
+  containerQuantity?: number;
 }
 export interface PlannerCharm extends PlannerItem {
   id: string;

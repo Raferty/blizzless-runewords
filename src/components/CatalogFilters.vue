@@ -74,11 +74,12 @@
       :aria-label="`${t('Убрать фильтр', 'Remove filter')}: ${filter.label}`"
       @click="filter.clear()"
     >
-      {{ filter.label }} <span aria-hidden="true">×</span>
+      {{ filter.label }} <UiIcon name="close" :size="12" />
     </button>
   </div>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed } from "vue";
 import UiSelect from "@/components/ui/UiSelect.vue";
 import type { SelectOption } from "@/types/select";

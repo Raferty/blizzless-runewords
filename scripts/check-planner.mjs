@@ -18,6 +18,7 @@ try {
     await server.ssrLoadModule("/src/shared/planner.ts");
   const {
     createBuild,
+    createDefaultBuild,
     parsePlannerItem,
     parseBuild,
     encodeBuild,
@@ -674,10 +675,32 @@ try {
   );
   setActivePinia(createPinia());
   const migrated = usePlannerStore();
-  assert.deepEqual(JSON.parse(JSON.stringify(migrated.build)), normalizedMercenary);
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(migrated.build)),
+    {
+      ...normalizedMercenary,
+      charms: createDefaultBuild(legacyMercenary.classId).charms,
+    },
+    "Unversioned drafts receive the starter inventory during migration"
+  );
   assert.deepEqual(
     JSON.parse(JSON.stringify(migrated.saved[0].build)),
     normalizedMercenary
+  );
+  memory.set(
+    "blizzless-planner-v1",
+    JSON.stringify({
+      active: legacyMercenary.classId,
+      defaultInventoryVersion: 1,
+      drafts: { [legacyMercenary.classId]: legacyMercenary },
+      saved: [],
+    })
+  );
+  setActivePinia(createPinia());
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(usePlannerStore().build)),
+    normalizedMercenary,
+    "Versioned drafts preserve a deliberately empty inventory"
   );
   memory.set(
     "blizzless-planner-v1",

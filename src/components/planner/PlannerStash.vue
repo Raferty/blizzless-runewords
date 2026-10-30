@@ -6,7 +6,16 @@
         :aria-label="t('Управление сундуком', 'Manage stash')"
         @click="$emit('manage')"
       >
-        ↗
+        <UiIcon name="arrow-up-right" />
+      </button>
+      <button
+        type="button"
+        :disabled="!store.build.stash.length"
+        :aria-label="t('Очистить сундук', 'Clear stash')"
+        :title="t('Очистить сундук', 'Clear stash')"
+        @click="store.build.stash = []"
+      >
+        <UiIcon name="reset" />
       </button>
     </template>
     <div class="planner-stash-body">
@@ -89,7 +98,7 @@
             :aria-label="t('Удалить предмет', 'Delete item')"
             @click="remove(entry.index)"
           >
-            ×
+            <UiIcon name="trash" />
           </button>
         </div>
       </template>
@@ -122,6 +131,20 @@
         >
           Ancients set
         </button>
+        <button
+          :disabled="!rejuvenationContainer"
+          :title="
+            rejuvenationContainer
+              ? t(
+                  'Добавить контейнер со 100 Full Rejuvenation Potion',
+                  'Add a container with 100 Full Rejuvenation Potions'
+                )
+              : t('В сундуке нет места', 'No room in the stash')
+          "
+          @click="addRejuvenationContainer"
+        >
+          {{ t("Добавить реджувы ×100", "Add rejuvs ×100") }}
+        </button>
       </div>
       <p class="planner-help">
         {{
@@ -138,10 +161,16 @@
 import { computed } from "vue";
 import PlannerPanel from "./PlannerPanel.vue";
 import PlannerItemSlot from "./PlannerItemSlot.vue";
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import { plannerItemDimensions } from "@/utils/planner-item-art";
-import { createUberKeySet, placeStashItem, stashSize } from "@/utils/planner-stash";
+import {
+  createFullRejuvenationContainer,
+  createUberKeySet,
+  placeStashItem,
+  stashSize,
+} from "@/utils/planner-stash";
 import { inventoryItemSize, stashItemLayout } from "@/utils/planner-item-movement";
 import { usePlannerItemDrag } from "@/composables/usePlannerItemDrag";
 import type { PlannerItem } from "@/types/planner";
@@ -210,6 +239,14 @@ const ancientsSetItems = computed(() => {
 });
 function addAncientsSet() {
   if (ancientsSetItems.value) store.build.stash.push(...ancientsSetItems.value);
+}
+const rejuvenationContainer = computed(() => {
+  if (store.build.stash.length >= 100) return;
+  const { occupied } = stashItemLayout(store.build);
+  return createFullRejuvenationContainer(occupied);
+});
+function addRejuvenationContainer() {
+  if (rejuvenationContainer.value) store.build.stash.push(rejuvenationContainer.value);
 }
 function remove(index: number) {
   store.build.stash.splice(index, 1);

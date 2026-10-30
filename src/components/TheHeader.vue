@@ -25,18 +25,12 @@
     />
     <div v-else class="header__spacer" aria-hidden="true" />
     <div class="header__links">
-      <a
-        href="https://discord.gg/TJgm9ZAhwW"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Discord ↗</a
-      >
-      <a
-        href="https://t.me/Raferty"
-        target="_blank"
-        rel="noopener noreferrer"
-        >Bugs or suggestions ↗</a
-      >
+      <a href="https://discord.gg/TJgm9ZAhwW" target="_blank" rel="noopener noreferrer"
+        >Discord <UiIcon name="arrow-up-right" :size="12"
+      /></a>
+      <a href="https://t.me/Raferty" target="_blank" rel="noopener noreferrer"
+        >Bugs or suggestions <UiIcon name="arrow-up-right" :size="12"
+      /></a>
     </div>
     <div class="header__actions">
       <p class="header__date">
@@ -48,6 +42,7 @@
   </header>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import LangSwitcher from "@/components/LangSwitcher.vue";
 import SearchInput from "@/components/SearchInput.vue";
 import { useInfoStore } from "@/store";

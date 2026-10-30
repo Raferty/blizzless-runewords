@@ -31,7 +31,7 @@
             :aria-label="t('Наборы сборки', 'Build sets')"
           >
             <button @click="store.saveBuild">
-              + {{ t("Сохранить набор", "Save set") }}
+              <UiIcon name="plus" /> {{ t("Сохранить набор", "Save set") }}
             </button>
           </div>
         </div>
@@ -41,7 +41,8 @@
           ><button @click="libraryOpen = true">
             {{ t("Мои сборки", "My builds") }}
             <small>{{ store.saved.length }}</small></button
-          ><button @click="shareBuild">{{ t("Ссылка", "Share") }} ↗</button
+          ><button @click="shareBuild">
+            {{ t("Ссылка", "Share") }} <UiIcon name="arrow-up-right" /></button
           ><button @click="exportOpen = true">{{ t("Экспорт", "Export") }}</button
           ><button @click="importInput?.click()">{{ t("Импорт", "Import") }}</button
           ><input
@@ -60,7 +61,7 @@
         :aria-label="t('Скрыть сообщение', 'Dismiss message')"
         @click="store.message = ''"
       >
-        ×
+        <UiIcon name="close" />
       </button>
     </div>
     <p v-if="!store.storageAvailable" class="planner-error">
@@ -108,7 +109,11 @@
           @configure="section = 'mercenary'"
           @type="setMercenary"
         >
-          <PlannerMercenaryEquipment v-if="mercenary.act" @equip="editMercenary" />
+          <PlannerMercenaryEquipment
+            v-if="mercenary.act"
+            :show-reset="false"
+            @equip="editMercenary"
+          />
         </PlannerMercenary>
         <PlannerStash
           v-if="section === 'overview'"
@@ -117,7 +122,7 @@
         />
       </PlannerEquipment>
       <div v-if="section !== 'equipment'" class="planner-main-column">
-        <PlannerSkills v-if="section === 'overview' || section === 'skills'" />
+        <PlannerSkillPanel v-if="section === 'overview' || section === 'skills'" />
         <template v-if="section === 'mercenary'">
           <section class="planner-panel">
             <div class="planner-panel-heading">
@@ -274,6 +279,7 @@
             </div>
           </div>
         </PlannerPanel>
+        <PlannerWaypoints v-if="section === 'overview'" />
         <PlannerPanel
           v-if="section === 'notes' || section === 'overview'"
           v-model:open="notesOpen"
@@ -288,7 +294,7 @@
                 notesOpen = true;
               "
             >
-              ✎ {{ t("Изменить", "Edit") }}
+              <UiIcon name="edit" /> {{ t("Изменить", "Edit") }}
             </button>
             <span v-else class="planner-muted">{{
               t("Сохраняется со сборкой", "Saved with your build")
@@ -353,7 +359,7 @@
                 "Author, strengths and loot filter"
               )
             }}
-            ↗
+            <UiIcon name="arrow-up-right" />
           </button>
         </PlannerPanel>
       </div>
@@ -427,7 +433,7 @@
             :aria-label="t('Закрыть', 'Close')"
             @click="libraryOpen = false"
           >
-            ×
+            <UiIcon name="close" />
           </button>
         </div>
         <p class="planner-help">
@@ -462,7 +468,7 @@
             :aria-label="t('Удалить сохранённую сборку', 'Delete saved build')"
             @click="store.saved = store.saved.filter((s) => s.id !== entry.id)"
           >
-            ×
+            <UiIcon name="trash" />
           </button>
         </div>
         <p v-if="!store.saved.length" class="planner-empty">
@@ -490,7 +496,7 @@
             :aria-label="t('Закрыть', 'Close')"
             @click="stashOpen = false"
           >
-            ×
+            <UiIcon name="close" />
           </button>
         </div>
         <p class="planner-help">
@@ -533,14 +539,14 @@
             :aria-label="t('Удалить предмет из сундука', 'Remove stash item')"
             @click="store.build.stash.splice(index, 1)"
           >
-            ×
+            <UiIcon name="trash" />
           </button>
         </div>
         <p v-if="!store.build.stash.length" class="planner-empty">
           {{ t("Сундук пуст", "Your stash is empty") }}
         </p>
         <button :disabled="store.build.stash.length >= 100" @click="editStash(-1)">
-          + {{ t("Добавить предмет", "Add item") }}
+          <UiIcon name="plus" /> {{ t("Добавить предмет", "Add item") }}
         </button>
       </div></UiModal
     >
@@ -562,9 +568,10 @@ import PlannerMercenary from "./planner/PlannerMercenary.vue";
 import PlannerMercenaryEquipment from "./planner/PlannerMercenaryEquipment.vue";
 import PlannerStash from "./planner/PlannerStash.vue";
 import PlannerPanel from "./planner/PlannerPanel.vue";
-import PlannerSkills from "./planner/PlannerSkills.vue";
+import PlannerSkillPanel from "./planner/PlannerSkillPanel.vue";
 import PlannerWaypoints from "./planner/PlannerWaypoints.vue";
 import PlannerIcon from "./planner/PlannerIcon.vue";
+import UiIcon from "./ui/UiIcon.vue";
 import PlannerItemEditor from "./planner/PlannerItemEditor.vue";
 import UiSelect from "./ui/UiSelect.vue";
 import UiModal from "./ui/UiModal.vue";

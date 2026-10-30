@@ -9,7 +9,7 @@
       <div class="planner-modal-heading">
         <h2>{{ t("Экспорт персонажа", "Export character") }}</h2>
         <button type="button" :aria-label="t('Закрыть', 'Close')" @click="$emit('close')">
-          ×
+          <UiIcon name="close" />
         </button>
       </div>
       <p class="planner-help">
@@ -156,6 +156,7 @@
   </UiModal>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, onMounted, ref, shallowRef } from "vue";
 import UiModal from "@/components/ui/UiModal.vue";
 import UiSelect from "@/components/ui/UiSelect.vue";

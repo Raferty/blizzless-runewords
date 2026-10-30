@@ -43,8 +43,8 @@
               v-if="words.favorites.includes(item.id)"
               class="favorite"
               :aria-label="t('В избранном', 'Favorite')"
-              >★</span
-            >
+              ><UiIcon name="star" :size="12" filled
+            /></span>
           </td>
           <td class="table__recipe">
             <template v-for="(rune, index) in item.runes" :key="index"
@@ -71,6 +71,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed } from "vue";
 import { useInfoStore, useRunewordsStore } from "@/store";
 import { useRunes } from "@/composables/useRunes";
@@ -142,8 +143,8 @@ th {
 .table__sort-icon {
   display: block;
   flex-shrink: 0;
-  width: 7px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
 }
 th:first-child {
   width: 28%;

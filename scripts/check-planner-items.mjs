@@ -369,11 +369,14 @@ try {
       `images/planner/items/misc/charm/charm_${size}.webp`,
       "Charm appearance comes from item-type variants, not placeholder weapons"
     );
-  for (const code of stash.bases.keys()) {
-    assert(Object.hasOwn(art.bases, code), `Artwork lookup covers ${code}`);
-    const source = data.weapons[code] || data.armor[code] || data.misc[code];
-    if (source.spawnable !== 0)
-      assert(art.bases[code], `Spawnable base ${code} has artwork`);
+  // Hidden quest records are not selectable. Unique containers use their own
+  // artwork (verified above), rather than a normal-base image.
+  for (const code of new Set(
+    stash.items.filter((item) => item.quality === "normal").flatMap((item) => item.bases)
+  )) {
+    const image = baseItemImage(code);
+    assert(image, `Selectable normal base ${code} has artwork`);
+    await access(new URL("../public/" + image, import.meta.url));
   }
   assert.equal(
     baseItemImage("cs2"),
@@ -386,7 +389,7 @@ try {
     { key: "test", owner: "charm", height: 1 },
     []
   );
-  assert.deepEqual([...charms.availableBases].sort(), ["cm1", "cm2", "cm3"]);
+  assert.deepEqual([...charms.availableBases].sort(), ["box", "cm1", "cm2", "cm3"]);
   const crafted = {
     name: "Custom craft",
     quality: "crafted",

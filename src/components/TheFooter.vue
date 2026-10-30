@@ -2,16 +2,18 @@
   <footer class="footer">
     <span>BLIZZLESS · DIABLO II: RESURRECTED</span
     ><a :href="sourceUrl" target="_blank" rel="noopener noreferrer"
-      >{{ t("Данные Blizzless", "Blizzless data") }} ↗</a
+      >{{ t("Данные Blizzless", "Blizzless data") }}
+      <UiIcon name="arrow-up-right" :size="12" /></a
     ><a
       href="https://github.com/fabd/diablo2-runewizard"
       target="_blank"
       rel="noopener noreferrer"
-      >Inspired by Rune Wizard ↗</a
-    >
+      >Inspired by Rune Wizard <UiIcon name="arrow-up-right" :size="12"
+    /></a>
   </footer>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { useText } from "@/composables/useText";
 const t = useText();
 withDefaults(defineProps<{ sourceUrl?: string }>(), {

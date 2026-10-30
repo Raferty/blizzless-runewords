@@ -18,7 +18,7 @@
         :aria-label="t('Закрыть описание навыка', 'Close skill description')"
         @click="$emit('close')"
       >
-        ×
+        <UiIcon name="close" />
       </button>
       <p class="planner-tooltip-status">
         {{
@@ -78,6 +78,7 @@
   </Teleport>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import { useInfoStore } from "@/store";
 import { useText } from "@/composables/useText";

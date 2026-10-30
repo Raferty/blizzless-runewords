@@ -8,7 +8,7 @@ import {
 } from "./planner-properties";
 import { socketCategory } from "./planner-sockets";
 import type { RunewordTableItem } from "@/types";
-import { baseItemImage } from "./planner-item-art";
+import { baseItemImage, isContainerBase } from "./planner-item-art";
 import { runewordTemplates } from "./planner-runewords";
 import { plannerClasses } from "@/shared/planner";
 
@@ -141,6 +141,7 @@ export const itemCategories = [
   { code: "amul", group: "other", ru: "Амулеты", en: "Amulets" },
   { code: "ring", group: "other", ru: "Кольца", en: "Rings" },
   { code: "char", group: "other", ru: "Талисманы", en: "Charms" },
+  { code: "rpot", group: "other", ru: "Зелья омоложения", en: "Rejuvenation Potions" },
   { code: "ques", group: "other", ru: "Квестовые предметы", en: "Quest Items" },
 ] as const;
 
@@ -237,7 +238,9 @@ export function createItemCatalog(
       if (def.enabled === 0 || def.spawnable === 0) continue;
       items.push({
         id: `${quality}:${choice.value}`,
-        name: gd.locale.strings[def.index] || def.index,
+        name: isContainerBase(choice.base)
+          ? choice.label
+          : gd.locale.strings[def.index] || def.index,
         quality,
         level: Math.max(1, def.lvlreq || 1),
         bases: [choice.base],
@@ -368,6 +371,16 @@ export function definitionPropertyLines(
     const min = Number(definition[`min${i}`] ?? 0),
       max = Number(definition[`max${i}`] ?? min);
     const par = String(definition[`par${i}`] ?? "");
+    if (code === "Add_one") {
+      const quantity = Number(par || (roll ? max : min));
+      lines.push(
+        (native.gd.locale.strings.Quantityadd1 || "Items inside: %d").replace(
+          "%d",
+          String(quantity)
+        )
+      );
+      continue;
+    }
     if (code === "dmg-pois") {
       const frames = Number(par);
       const low = Math.round((min * frames) / 256),

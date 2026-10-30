@@ -1,22 +1,22 @@
 <template>
-  <section class="planner-panel planner-waypoints" :aria-label="t('Вейпоинты', 'Waypoints')">
-    <div class="planner-waypoints-toolbar">
-      <div>
-        <h3>{{ t("Вейпоинты", "Waypoints") }}</h3>
-        <span class="planner-muted">
-          {{ t("Открыто", "Unlocked") }} {{ total }} /
-          {{ waypoints.length * difficulties.length }}
-        </span>
-      </div>
-      <div class="planner-waypoints-actions">
-        <button type="button" @click="setAll(true)">
-          {{ t("Отметить все", "Mark all") }}
-        </button>
-        <button type="button" @click="setAll(false)">
-          {{ t("Снять все", "Unmark all") }}
-        </button>
-      </div>
-    </div>
+  <PlannerPanel
+    v-model:open="open"
+    class="planner-waypoints"
+    :title="t('Вейпоинты', 'Waypoints')"
+    :aria-label="t('Вейпоинты', 'Waypoints')"
+  >
+    <template #actions>
+      <button type="button" @click="setAll(true)">
+        {{ t("Отметить все", "Mark all") }}
+      </button>
+      <button type="button" @click="setAll(false)">
+        {{ t("Снять все", "Unmark all") }}
+      </button>
+    </template>
+    <p class="planner-muted planner-waypoints-count">
+      {{ t("Открыто", "Unlocked") }} {{ total }} /
+      {{ waypoints.length * difficulties.length }}
+    </p>
     <div class="planner-quest-table">
       <div class="planner-quest-row planner-quest-row--heading">
         <span>{{ t("Вейпоинт", "Waypoint") }}</span>
@@ -32,10 +32,7 @@
           class="planner-quest-row"
         >
           <span>{{ t(waypoint.ru, waypoint.en) }}</span>
-          <label
-            v-for="difficulty in difficulties"
-            :key="difficulty.value"
-          >
+          <label v-for="difficulty in difficulties" :key="difficulty.value">
             <input
               v-model="store.build.waypoints[difficulty.value][waypoint.key]"
               type="checkbox"
@@ -45,11 +42,12 @@
         </div>
       </section>
     </div>
-  </section>
+  </PlannerPanel>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import PlannerPanel from "./PlannerPanel.vue";
 import { useText } from "@/composables/useText";
 import { usePlannerStore } from "@/store/planner";
 import { difficulties } from "@/shared/planner";
@@ -58,6 +56,7 @@ import type { Difficulty } from "@/types/planner";
 
 const t = useText();
 const store = usePlannerStore();
+const open = ref(false);
 const count = (difficulty: Difficulty) =>
   waypoints.filter(({ key }) => store.build.waypoints[difficulty][key]).length;
 const total = computed(() =>
@@ -72,11 +71,11 @@ function setAll(checked: boolean) {
 <style scoped lang="scss">
 .planner-waypoints {
   min-width: 0;
-  .planner-quest-table {
-    margin-top: 12px;
+  .planner-waypoints-count {
+    padding: 4px 12px 8px;
+    font-size: 12px;
   }
   .planner-quest-row {
-    padding: 6px 0;
     > span:first-child {
       min-width: 0;
       overflow-wrap: anywhere;
@@ -92,24 +91,6 @@ function setAll(checked: boolean) {
       margin: 0;
     }
   }
-}
-.planner-waypoints-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  h3 {
-    margin: 0 0 4px;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-}
-.planner-waypoints-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
 }
 .planner-waypoint-act {
   h4 {

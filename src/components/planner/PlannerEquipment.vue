@@ -4,6 +4,21 @@
       class="planner-panel planner-equipment-panel"
       :aria-label="t('Экипировка', 'Equipment')"
     >
+      <div class="planner-inventory-actions">
+        <button
+          type="button"
+          :disabled="!hasItems"
+          :title="
+            t(
+              'Снять всю экипировку в обоих комплектах оружия и очистить сумку.',
+              'Remove all equipment from both weapon sets and empty the inventory.'
+            )
+          "
+          @click="resetInventory"
+        >
+          <UiIcon name="reset" /> {{ t("Сбросить инвентарь", "Reset inventory") }}
+        </button>
+      </div>
       <div class="planner-equipment-art">
         <div
           v-for="side in ['left', 'right']"
@@ -110,6 +125,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed } from "vue";
 import PlannerItemSlot from "./PlannerItemSlot.vue";
 import { usePlannerStore } from "@/store/planner";
@@ -126,6 +142,14 @@ defineEmits<{
 }>();
 const store = usePlannerStore();
 const t = useText();
+const hasItems = computed(
+  () =>
+    store.build.charms.length > 0 || Object.values(store.build.equipment).some(Boolean)
+);
+function resetInventory() {
+  store.build.equipment = {};
+  store.build.charms = [];
+}
 const maxGold = computed(() => goldCapacity(store.build.level));
 function setGold(event: Event) {
   const input = event.target as HTMLInputElement;

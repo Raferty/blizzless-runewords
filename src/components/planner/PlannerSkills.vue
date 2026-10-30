@@ -165,7 +165,7 @@
           >{{ t("Свободных очков", "Remaining points") }}:
           {{ skillBudget(store.build) - spentSkills(store.build) }}</strong
         ><button @click="store.build.skills = {}">
-          ↶ {{ t("Сбросить навыки", "Reset skills") }}
+          <UiIcon name="reset" /> {{ t("Сбросить навыки", "Reset skills") }}
         </button>
       </div>
     </div>
@@ -185,6 +185,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, useId, watch } from "vue";
 import PlannerSkillBackground from "./PlannerSkillBackground.vue";
+import UiIcon from "@/components/ui/UiIcon.vue";
 import PlannerSkillBranches from "./PlannerSkillBranches.vue";
 import PlannerNativeSkillBranches from "./PlannerNativeSkillBranches.vue";
 import { nativeSkillTreeArtwork } from "@/utils/planner-native-skill-art";

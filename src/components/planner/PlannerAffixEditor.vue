@@ -26,7 +26,7 @@
           :aria-label="`${t('Удалить свойство', 'Remove mod')} ${affixById.get(selected.id)!.name}`"
           @click="remove(index)"
         >
-          ×
+          <UiIcon name="close" />
         </button>
       </div>
       <div
@@ -61,7 +61,7 @@
       @click="toggle"
     >
       {{ t("Добавить свойство", "Add Mod") }}
-      <span aria-hidden="true">{{ opened ? "⌃" : "⌄" }}</span>
+      <UiIcon :name="opened ? 'chevron-up' : 'chevron-down'" />
     </button>
     <div v-if="opened" :id="uid + '-picker'" class="planner-affix-picker">
       <input
@@ -104,6 +104,7 @@
   </section>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, nextTick, ref, useId } from "vue";
 import { bonusFields, plannerClasses } from "@/shared/planner";
 import { affixBonuses } from "@/utils/planner-affixes";

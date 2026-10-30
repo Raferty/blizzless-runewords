@@ -62,11 +62,15 @@ const fallback = computed(() => ({
 const image = computed(
   () => plannerItemImage(props.item) || plannerItemImage(fallback.value)
 );
-const size = computed(
-  () =>
-    plannerItemDimensions(props.item) ||
-    plannerItemDimensions(fallback.value) ||
-    props.capacity
+const equipmentRuneword = computed(
+  () => !!props.equipmentSlot && props.item.quality === "runeword"
+);
+const size = computed(() =>
+  equipmentRuneword.value
+    ? props.capacity
+    : plannerItemDimensions(props.item) ||
+      plannerItemDimensions(fallback.value) ||
+      props.capacity
 );
 const imageStyle = computed(() => {
   return {
@@ -84,8 +88,12 @@ const socketLayout = computed(() => {
   const columnWidth = (width * 0.88) / columns;
   const rowHeight = (height * 0.9) / rows;
   const radius = Math.min(40, columnWidth * 0.43, rowHeight * 0.43);
-  // Filled sockets use almost one inventory cell, independent of the empty hole.
-  const filledSize = Math.min(90, columnWidth * 0.94, rowHeight * 0.94);
+  // Equipment runewords use the slot's space; other inserts keep inventory scale.
+  const filledSize = Math.min(
+    equipmentRuneword.value ? 140 : 90,
+    columnWidth * 0.94,
+    rowHeight * 0.94
+  );
   const positions = Array.from({ length: count }, (_, index) => {
     if (helmetTriangle && index === 2)
       return { x: width / 2, y: height * 0.05 + rowHeight * 1.5 };

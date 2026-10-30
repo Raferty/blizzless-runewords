@@ -26,22 +26,7 @@
           {{ displayValue }}
         </slot>
       </span>
-      <svg
-        class="ui-select__chevron"
-        width="14"
-        height="14"
-        viewBox="0 0 16 16"
-        fill="none"
-        aria-hidden="true"
-      >
-        <path
-          d="m4 6 4 4 4-4"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
+      <UiIcon name="chevron-down" :size="14" class="ui-select__chevron" />
     </button>
     <Teleport :to="teleportTarget">
       <ul
@@ -72,22 +57,7 @@
           <slot name="option" :option="option">
             <span>{{ option.label }}</span>
           </slot>
-          <svg
-            v-if="option.value === modelValue"
-            width="14"
-            height="14"
-            viewBox="0 0 16 16"
-            fill="none"
-            aria-hidden="true"
-          >
-            <path
-              d="m3 8 3 3 7-7"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+          <UiIcon v-if="option.value === modelValue" name="check" :size="14" />
         </li>
       </ul>
     </Teleport>
@@ -104,6 +74,7 @@ import {
   watch,
   type CSSProperties,
 } from "vue";
+import UiIcon from "./UiIcon.vue";
 import type { SelectOption, SelectValue } from "@/types/select";
 
 // Single-selection adaptation of dominant-ui's UiSelect combobox/listbox pattern.
@@ -173,7 +144,8 @@ function positionDropdown() {
 }
 function revealActiveOption() {
   const dropdown = panel.value;
-  const option = dropdown?.querySelectorAll<HTMLElement>("[role=option]")[activeIndex.value];
+  const option =
+    dropdown?.querySelectorAll<HTMLElement>("[role=option]")[activeIndex.value];
   if (!dropdown || !option) return;
   // Only scroll the list: scrollIntoView can also move the page or its modal.
   const bounds = dropdown.getBoundingClientRect();
@@ -181,7 +153,8 @@ function revealActiveOption() {
   const top = bounds.top + dropdown.clientTop;
   const bottom = top + dropdown.clientHeight;
   if (optionBounds.top < top) dropdown.scrollTop += optionBounds.top - top;
-  else if (optionBounds.bottom > bottom) dropdown.scrollTop += optionBounds.bottom - bottom;
+  else if (optionBounds.bottom > bottom)
+    dropdown.scrollTop += optionBounds.bottom - bottom;
 }
 function openOptions(index = selectedIndex.value >= 0 ? selectedIndex.value : 0) {
   if (props.disabled || !props.options.length) return;
@@ -277,7 +250,8 @@ function onPointerDown(event: PointerEvent) {
   if (!pointerInDropdown && !isInsideSelect(event.target)) closeOptions(false);
 }
 function onFocusOutside(event: FocusEvent) {
-  if (isOpen.value && !pointerInDropdown && !isInsideSelect(event.target)) closeOptions(false);
+  if (isOpen.value && !pointerInDropdown && !isInsideSelect(event.target))
+    closeOptions(false);
 }
 function onPointerEnd() {
   if (pointerInDropdown && isOpen.value && !isInsideSelect(document.activeElement)) {

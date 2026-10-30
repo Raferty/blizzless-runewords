@@ -5,7 +5,17 @@
         :aria-label="t('Настроить наёмника', 'Configure mercenary')"
         @click="$emit('configure')"
       >
-        ↗
+        <UiIcon name="arrow-up-right" />
+      </button>
+      <button
+        v-if="store.build.mercenary.type !== 'none'"
+        type="button"
+        :disabled="!hasEquipment"
+        :aria-label="t('Сбросить экипировку наёмника', 'Reset mercenary equipment')"
+        :title="t('Сбросить экипировку', 'Reset equipment')"
+        @click="store.build.mercenary.equipment = {}"
+      >
+        <UiIcon name="reset" />
       </button>
     </template>
     <div class="planner-mercenary-controls">
@@ -34,14 +44,19 @@
   </PlannerPanel>
 </template>
 <script setup lang="ts">
+import { computed } from "vue";
 import PlannerPanel from "./PlannerPanel.vue";
 import UiSelect from "@/components/ui/UiSelect.vue";
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import { mercenaries } from "@/shared/planner";
 defineEmits<{ configure: []; type: [value: string] }>();
 const store = usePlannerStore();
 const t = useText();
+const hasEquipment = computed(() =>
+  Object.values(store.build.mercenary.equipment).some(Boolean)
+);
 function setMercLevel(event: Event) {
   const input = event.target as HTMLInputElement;
   store.setMercenaryLevel(Number(input.value));

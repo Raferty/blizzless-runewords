@@ -59,7 +59,7 @@
         :aria-label="`${t('Убрать фильтр', 'Remove filter')}: ${tag.label}`"
         @click="recipes.removeTag(tag.kind, tag.key)"
       >
-        {{ tag.label }} ×
+        {{ tag.label }} <UiIcon name="close" :size="12" />
       </button>
     </div>
     <p class="recipes-count" role="status">
@@ -97,13 +97,14 @@
       ><div class="recipe-modal-bar">
         <span>{{ t("Рецепт Куба", "Cube recipe") }}</span
         ><button autofocus :aria-label="t('Закрыть', 'Close')" @click="selected = null">
-          ×
+          <UiIcon name="close" />
         </button>
       </div>
       <CubeRecipeCard :recipe="selected" detailed /></template
   ></UiModal>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref, watch } from "vue";
 import { useInfoStore } from "@/store";
 import { useRecipesStore } from "@/store/recipes";

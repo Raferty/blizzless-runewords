@@ -30,7 +30,10 @@ function hasType(type, wanted, seen = new Set()) {
   );
 }
 for (const [code, row] of Object.entries(data.misc))
-  if (hasType(row.type, ["ring", "amul", "char"]) || /^(?:ua[1-5]|pk[1-3])$/.test(code))
+  if (
+    hasType(row.type, ["ring", "amul", "char", "key"]) ||
+    /^(?:ua[1-5]|pk[1-3]|rv[sl]|bkd)$/.test(code)
+  )
     bases[code] = { row, group: "misc" };
 // Stash placement and saved-item identity must not depend on artwork availability.
 const allBases = {
@@ -103,8 +106,8 @@ const baseKeys = {};
 for (const [code, { row }] of Object.entries(bases))
   baseKeys[code] = /^ua[1-5]$/.test(code)
     ? `misc/shard/cont_${code}`
-    : /^pk[1-3]$/.test(code)
-      ? `misc/key/mephisto_st${{ pk1: "c", pk2: "b", pk3: "a" }[code]}`
+    : row.type === "key" || /^pk[1-3]$/.test(code) || code === "bkd"
+      ? `misc/${row.hd}`
       : aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null;
 const qualityKeys = { unique: {}, set: {} };
 const names = { unique: {}, set: {} };
@@ -128,6 +131,7 @@ const uniqueArtwork = {
   mephisto_sta: "misc/key/mephisto_sta",
   mephisto_stb: "misc/key/mephisto_stb",
   mephisto_stc: "misc/key/mephisto_stc",
+  cont_rvl: "misc/quest/cont_rvl",
 };
 for (const [quality, definitions] of [
   ["unique", data.uniqueItems],
@@ -169,6 +173,14 @@ const missing = [];
 // Original Blizzless key/statue sprites, pinned to the launcher manifest.
 // Shared invfile names cannot identify them; preserve their original RGBA pixels.
 const keySprites = {
+  "misc/quest/cont_rvl":
+    "f8059926648c49c6913b2920ae40a1854082498a577a19df1738a770283e51c7",
+  "misc/key/mephisto_key":
+    "904288fe2a8ef731e175462581565f8752780de3e6104f63901f86001b92af1e",
+  "misc/key/mephisto_key2":
+    "d797b93a1d337236419c8e8021bdd18d58b8e5a9240ed8f15276304b8a144177",
+  "misc/key/mephisto_key3":
+    "e0448767fa53aeb0af1ee5626da09451c907ecf5e1563d09360d923e07c0accf",
   "misc/key/mephisto_sta":
     "4f2ab490fd1f5088e93a753c3bbb2d85934d4341a7a2dfcc8c61f62db3c9449b",
   "misc/key/mephisto_stb":
@@ -190,7 +202,7 @@ function spritePng(bytes) {
   const width = bytes.readUInt32LE(8),
     height = bytes.readUInt32LE(12);
   if (
-    bytes.toString("ascii", 0, 4) !== "SpA1" ||
+    !["SpA1", "SPa1"].includes(bytes.toString("ascii", 0, 4)) ||
     bytes.readUInt16LE(4) !== 31 ||
     bytes.readUInt32LE(20) !== 1 ||
     bytes.readUInt16LE(6) !== width ||

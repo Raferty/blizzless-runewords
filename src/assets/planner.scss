@@ -261,6 +261,13 @@
 .planner-panel-heading > .planner-muted {
   font-size: 10px;
 }
+.planner-page button:where(:has(> .ui-icon)),
+.planner-editor button:where(:has(> .ui-icon)) {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
 .planner-panel-heading:has(.planner-panel-toggle) {
   flex-shrink: 0;
   gap: 6px;
@@ -684,6 +691,12 @@
 }
 .planner-charm-item span {
   font-size: 7px;
+}
+.planner-inventory-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+  border-bottom: 1px solid #292929;
 }
 .planner-mercenary-controls {
   display: grid;
@@ -1451,7 +1464,7 @@
   align-items: center;
   padding: 12px 0;
   border-bottom: 1px dashed var(--color-border);
-  svg {
+  > svg {
     flex-shrink: 0;
     width: 30px;
     color: #a2becb;
@@ -1502,8 +1515,8 @@
   cursor: grab;
 }
 .planner-item-dragging {
-  opacity: 0.4;
   cursor: grabbing !important;
+  opacity: 0.4;
 }
 .planner-drop-preview {
   position: absolute;
@@ -1522,8 +1535,8 @@
   display: grid;
   place-items: center;
   min-width: 0;
-  min-height: 0;
   height: 100%;
+  min-height: 0;
   padding: 1px;
   background: transparent;
   border: 0;
@@ -1568,24 +1581,28 @@
 .planner-main-column
   > .planner-panel:not(.planner-skills-panel):not(.planner-notes):not(
     .planner-quests-compact
-  ) {
+  ):not(.planner-waypoints) {
   padding: 16px;
 }
-.planner-quests-compact .planner-quest-table {
-  margin: 0;
+.planner-quests-compact .planner-quest-table,
+.planner-waypoints .planner-quest-table {
   padding: 0 12px 8px;
+  margin: 0;
 }
-.planner-quests-compact .planner-quest-row {
+.planner-quests-compact .planner-quest-row,
+.planner-waypoints .planner-quest-row {
   grid-template-columns: minmax(120px, 1fr) repeat(3, minmax(54px, 0.25fr));
   gap: 4px;
   padding: 5px 0;
   font-size: 11px;
   border-bottom-style: solid;
 }
-.planner-quests-compact .planner-quest-row:last-child {
+.planner-quests-compact .planner-quest-row:last-child,
+.planner-waypoints .planner-quest-row:last-child {
   border-bottom: 0;
 }
-.planner-quests-compact .planner-panel-heading {
+.planner-quests-compact .planner-panel-heading,
+.planner-waypoints .planner-panel-heading {
   flex-wrap: wrap;
 }
 .planner-notes {

@@ -1,4 +1,14 @@
 <template>
+  <div v-if="showReset" class="planner-inventory-actions">
+    <button
+      type="button"
+      :disabled="!hasEquipment"
+      :aria-label="t('Сбросить экипировку наёмника', 'Reset mercenary equipment')"
+      @click="store.build.mercenary.equipment = {}"
+    >
+      <UiIcon name="reset" /> {{ t("Сбросить экипировку", "Reset equipment") }}
+    </button>
+  </div>
   <div
     class="planner-equipment-art planner-mercenary-art"
     :aria-label="t('Экипировка наёмника', 'Mercenary equipment')"
@@ -32,13 +42,19 @@
   </div>
 </template>
 <script setup lang="ts">
+import { computed } from "vue";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import { paperdollCapacity } from "@/shared/planner-art";
 import PlannerItemSlot from "./PlannerItemSlot.vue";
+import UiIcon from "@/components/ui/UiIcon.vue";
+withDefaults(defineProps<{ showReset?: boolean }>(), { showReset: true });
 defineEmits<{ equip: [slot: "head" | "mainHand" | "armor"] }>();
 const store = usePlannerStore();
 const t = useText();
+const hasEquipment = computed(() =>
+  Object.values(store.build.mercenary.equipment).some(Boolean)
+);
 const texture = import.meta.env.BASE_URL + "images/planner/mercenary.webp";
 const slots = [
   { key: "head", ru: "Шлем", en: "Helm", x: 402, y: 30, width: 232, height: 230 },

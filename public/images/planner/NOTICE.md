@@ -24,14 +24,22 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   fallback rather than a substitute weapon picture.
   Inventory dimensions cover all game bases, including miscellaneous items without
   artwork; stash placement does not depend on image coverage.
-- `items/misc/key/mephisto_sta.png`, `mephisto_stb.png`, `mephisto_stc.png`:
+- `items/misc/key/mephisto_key.png`, `mephisto_key2.png`, `mephisto_key3.png`:
   original Blizzless Key of Destruction, Hate and Terror inventory sprites,
-  downloaded 2026-10-28 from https://blizzless.info/api/launcher-mods/manifest.
+  downloaded 2026-10-30 from https://blizzless.info/api/launcher-mods/manifest.
+  These map to `pk3`, `pk2`, `pk1` respectively via the game tables' `hd` field;
+  the Black Tower Key (`luv`) also uses `mephisto_key`, as specified in the tables.
+  `mephisto_sta.png`, `mephisto_stb.png`, `mephisto_stc.png` are the distinct
+  container sprites for `unique447`, `unique448`, `unique449` on the `bg2` base.
   The corresponding `data/hd/global/ui/items/misc/key/*.sprite` files are fetched
   through `/api/launcher-mods/blobs/{sha256}`; hashes are pinned in
   `scripts/sync-planner-items.mjs` and recorded in the artwork manifest.
   Their original 98×196 RGBA pixels are losslessly encoded as PNG, with no cropping
   or repainting. Format reference: https://github.com/dzik87/d2r-sprites.
+- `items/misc/key/skeleton_key.webp` and
+  `items/misc/scroll/deciphered_bark_scroll.webp`: ordinary Key (`key`) and
+  Key to the Cairn Stones (`bkd`) artwork downloaded 2026-10-30 from
+  `https://lootcube.net/images/items/misc/`, following the game tables' `hd` field.
 - `items/misc/shard/cont_ua1.png` through `cont_ua5.png`: the five Ancients
   summon statues from the same Blizzless launcher manifest and blob endpoint
   (2026-10-28). Original 99×196 RGBA pixels are losslessly encoded as PNG.
@@ -60,6 +68,10 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   The source's unavailable `blade-mastery.webp` uses the Blizzless icon instead.
 - Skill icons in `../skills/`: Blizzless Glossary skill dataset, imported by
   `scripts/sync-planner.mjs`.
+  The common Attack skill uses `../skills/skillicon_2.88c7e55dccaa.avif`,
+  downloaded 2026-10-30 from
+  https://blizzless.info/media/skills/icons/skillicon_2.88c7e55dccaa.avif.
+  The Blizzless skill dataset identifies Attack as game ID 0, icon cell 2.
 
 The equipment panel and skill trees are displayed through CSS/SVG viewports
 of the unmodified online assets. All text, interactive controls, skill-tree
@@ -101,3 +113,15 @@ https://maxroll.gg/d2/d2planner
 
 - `items/horadric-cube.webp`: https://lootcube.net/images/items/misc/quest/horadric_cube.webp
   Downloaded 2026-10-28; inventory size 2×2 from bundled Blizzless `misc.box`.
+
+# Rejuvenation potions
+
+- `items/misc/quest/cont_rvl.png`: original Blizzless full rejuvenation potion
+  container sprite, downloaded 2026-10-30 from the launcher manifest/blob API.
+  SHA-256 `f8059926648c49c6913b2920ae40a1854082498a577a19df1738a770283e51c7`;
+  original 98×98 RGBA pixels are losslessly encoded as PNG. This is the
+  `cont_rvl` unique container (`unique456`, base `bg1`), not a loose potion.
+- `items/misc/potion/rejuv_potion.webp` and `full_rejuv_potion.webp`:
+  downloaded 2026-10-30 from `https://lootcube.net/images/items/misc/potion/`.
+  Names, artwork mapping and 1×1 inventory sizes come from bundled Blizzless
+  `misc.rvs` and `misc.rvl`.

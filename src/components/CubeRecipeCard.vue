@@ -39,11 +39,14 @@
     </div>
     <div v-if="!detailed" class="cube-card__footer">
       <span>{{ t("Рецепт Куба", "Cube recipe") }}</span
-      ><span>{{ t("Подробнее", "Details") }} ↗</span>
+      ><span
+        >{{ t("Подробнее", "Details") }} <UiIcon name="arrow-up-right" :size="14"
+      /></span>
     </div>
   </article>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { useInfoStore } from "@/store";
 import { useText } from "@/composables/useText";
 import { cubeCatalog, cubeText } from "@/utils/cube";

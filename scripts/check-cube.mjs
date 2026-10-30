@@ -8,7 +8,7 @@ const server = await createServer({
   appType: "custom",
 });
 try {
-  const { cubeCatalog, cubeIngredients, cubeText } =
+  const { cubeCatalog, cubeIngredients, cubeText, isCubeCraftingResult } =
     await server.ssrLoadModule("/src/utils/cube.ts");
   const { useRecipesStore } = await server.ssrLoadModule("/src/store/recipes.ts");
   const { parseCatalogHash } = await server.ssrLoadModule("/src/utils/navigation.ts");
@@ -60,6 +60,20 @@ try {
     await access(new URL(`../public/${image}`, import.meta.url));
   }
   const find = (key) => cubeCatalog.recipes.find((recipe) => recipe.key === key);
+  const crafting = cubeCatalog.recipes.filter((recipe) =>
+    recipe.result.some((item) => isCubeCraftingResult(item.key, recipe.ingredients))
+  );
+  assert.equal(crafting.length, 56, "Fresh crafts explain their random affixes");
+  for (const key of ["caster_belt", "hp_helm", "weapon", "great_cast_amu"])
+    assert(crafting.includes(find(key)), key);
+  for (const key of [
+    "upgrade_craft_normal_armor",
+    "upgrade_armor_except_craft",
+    "upgrade_craft_normal_weapon",
+    "upgrade_crafted_exceptional_weapon",
+    "mara_seraph",
+  ])
+    assert(!crafting.includes(find(key)), `${key} does not roll crafted affixes`);
   assert.equal(
     find("amulet").blizzlessVersion,
     2,

@@ -3,6 +3,25 @@ import type { PlannerItem } from "@/types/planner";
 // Personal stash dimensions from the bundled Blizzless data.json (info.stash).
 export const stashSize = { columns: 16, rows: 13 };
 
+export function createFullRejuvenationContainer(
+  occupied: Set<number>
+): PlannerItem | undefined {
+  const position = placeStashItem(new Set(occupied), 1, 1);
+  if (!position) return;
+  return {
+    name: "Full Rejuvenation Potion · Container",
+    quality: "unique",
+    baseCode: "bg1",
+    catalogId: "unique456",
+    containerQuantity: 100,
+    itemLevel: 99,
+    requiredLevel: 1,
+    bonuses: {},
+    notes: "",
+    stashPosition: position.y * stashSize.columns + position.x,
+  };
+}
+
 export function createUberKeySet(occupied: Set<number>): PlannerItem[] | undefined {
   const cells = new Set(occupied);
   const items: PlannerItem[] = [];

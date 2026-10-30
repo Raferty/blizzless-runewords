@@ -504,6 +504,12 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       throw new Error("skill class");
     result.skillClass = item.skillClass as ClassId;
   }
+  if (item.containerQuantity !== undefined) {
+    if (item.quality !== "unique" || !["bg1", "bg2"].includes(String(item.baseCode)))
+      throw new Error("container quantity");
+    // Add_one uses 11 save bits with SaveAdd=10 in the Blizzless tables.
+    result.containerQuantity = integer(item.containerQuantity, 0, 2037);
+  }
   return result;
 }
 export function parseBuild(value: unknown): PlannerBuild {

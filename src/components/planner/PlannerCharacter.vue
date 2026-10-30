@@ -2,7 +2,9 @@
   <aside class="planner-character">
     <PlannerPanel class="planner-stats-panel" :title="t('Характеристики', 'Stats')">
       <template #actions>
-        <button @click="$emit('quests')">▣ {{ t("Задания", "Quests") }}</button>
+        <button @click="$emit('quests')">
+          <UiIcon name="quests" /> {{ t("Задания", "Quests") }}
+        </button>
       </template>
       <div class="planner-stats-difficulty">
         <button
@@ -16,8 +18,7 @@
       </div>
       <PlannerClassSelect />
       <label class="planner-stat-search"
-        ><span aria-hidden="true">⌕</span
-        ><input
+        ><UiIcon name="search" /><input
           v-model="query"
           type="search"
           :placeholder="t('Поиск характеристик', 'Search stats')"
@@ -85,14 +86,14 @@
           :disabled="!store.build.attributes[attribute.key]"
           @click="store.changeAttribute(attribute.key, $event.shiftKey ? -10 : -1)"
         >
-          −
+          <UiIcon name="minus" />
         </button>
         <button
           :aria-label="`${t('Увеличить', 'Increase')} ${t(attribute.ru, attribute.en)}`"
           :disabled="!remainingAttributes"
           @click="store.changeAttribute(attribute.key, $event.shiftKey ? 10 : 1)"
         >
-          +
+          <UiIcon name="plus" />
         </button>
       </div>
       <div class="planner-point-budget">
@@ -152,6 +153,7 @@
   </aside>
 </template>
 <script setup lang="ts">
+import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref } from "vue";
 import PlannerClassSelect from "./PlannerClassSelect.vue";
 import PlannerPanel from "./PlannerPanel.vue";

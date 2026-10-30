@@ -1,21 +1,6 @@
 <template>
   <div class="search">
-    <svg
-      class="search__icon"
-      aria-hidden="true"
-      focusable="false"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.35-4.35" />
-    </svg>
+    <UiIcon name="search" class="search__icon" />
     <input
       ref="input"
       :value="modelValue"
@@ -31,7 +16,7 @@
       :aria-label="t('Очистить поиск', 'Clear search')"
       @click="$emit('update:modelValue', '')"
     >
-      ×
+      <UiIcon name="close" />
     </button>
     <kbd aria-hidden="true">/</kbd>
   </div>
@@ -39,6 +24,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useText } from "@/composables/useText";
+import UiIcon from "@/components/ui/UiIcon.vue";
 defineProps<{ modelValue: string; placeholder?: string }>();
 defineEmits<{ (e: "update:modelValue", value: string): void }>();
 const t = useText();

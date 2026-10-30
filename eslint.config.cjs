@@ -12,6 +12,7 @@ module.exports = [
       "dist/",
       "dist-ssr/",
       "coverage/",
+      "docs/",
       "eslint.config.cjs",
       "stylelint.config.cjs",
     ],
