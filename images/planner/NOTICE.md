@@ -125,3 +125,23 @@ https://maxroll.gg/d2/d2planner
   downloaded 2026-10-30 from `https://lootcube.net/images/items/misc/potion/`.
   Names, artwork mapping and 1×1 inventory sizes come from bundled Blizzless
   `misc.rvs` and `misc.rvl`.
+
+# Inventory tomes
+
+- `items/misc/book/town_portal_book.webp` and `identify_book.webp`: downloaded
+  2026-10-30 from https://lootcube.net/images/items/misc/book/, using the native
+  `tbk` / `ibk` records' `hd` fields. Original D2R inventory images, 1×2 cells.
+
+# Loose recipe materials, runes, gems and quest items
+
+- Added 2026-10-30: native inventory images from LootCube under
+  `items/misc/{rune,gem,body_part,potion,quiver,scroll,quest}` and quest weapons
+  under `items/weapon/{staff,mace}`. Mappings use native `hd`, not item/container names.
+- `items/misc/quest/parts_1.png`, `parts_2.png`, `parts_3.png` and `jewel_dis.png`
+  preserve original Blizzless sprite RGBA pixels, losslessly encoded as PNG.
+  Source: https://blizzless.info/api/launcher-mods/blobs/; exact pinned SHA-256
+  values are recorded in `src/shared/planner-item-art.json` and the sync script.
+  These are loose Blacksmith Ingot, Horadric Sphere, Resplendent Spark and
+  Disenchanted Jewel, separate from their stack containers.
+- Rainbow Facet reuses the original Jewel graphic already bundled by the Cube
+  and socket catalogs (`images/cube/c42fa7a7a08d52a172.png`).
