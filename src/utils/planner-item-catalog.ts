@@ -11,6 +11,8 @@ import type { RunewordTableItem } from "@/types";
 import { baseItemImage, isContainerBase } from "./planner-item-art";
 import { runewordTemplates } from "./planner-runewords";
 import { plannerClasses } from "@/shared/planner";
+import { plannerCrafts } from "./planner-crafts";
+import { stashSupplies } from "./planner-supplies";
 
 export const itemCategories = [
   {
@@ -141,7 +143,15 @@ export const itemCategories = [
   { code: "amul", group: "other", ru: "Амулеты", en: "Amulets" },
   { code: "ring", group: "other", ru: "Кольца", en: "Rings" },
   { code: "char", group: "other", ru: "Талисманы", en: "Charms" },
+  { code: "book", group: "other", ru: "Томы", en: "Tomes" },
   { code: "rpot", group: "other", ru: "Зелья омоложения", en: "Rejuvenation Potions" },
+  { code: "rune", group: "other", ru: "Руны", en: "Runes" },
+  { code: "gem", group: "other", ru: "Самоцветы", en: "Gems" },
+  { code: "material", group: "other", ru: "Материалы рецептов", en: "Recipe Materials" },
+  { code: "jewl", group: "other", ru: "Драгоценности", en: "Jewels" },
+  { code: "poti", group: "other", ru: "Зелья", en: "Potions" },
+  { code: "scro", group: "other", ru: "Свитки", en: "Scrolls" },
+  { code: "ammo", group: "other", ru: "Боеприпасы", en: "Ammunition" },
   { code: "ques", group: "other", ru: "Квестовые предметы", en: "Quest Items" },
 ] as const;
 
@@ -163,6 +173,7 @@ export interface CatalogItem {
   level: number;
   bases: string[];
   catalogId?: string;
+  craftId?: string;
   word?: RunewordTableItem;
   existing?: PlannerItem;
 }
@@ -184,7 +195,9 @@ export function createItemCatalog(
       visit(gd.itemTypes[type]?.equiv2);
     };
     visit(item.type);
-    const category = itemCategories.find((c) => types.has(c.code));
+    const category =
+      itemCategories.find((c) => c.code === stashSupplies[code]?.category) ??
+      itemCategories.find((c) => types.has(c.code));
     if (!category) continue;
     bases.set(code, {
       code,
@@ -231,6 +244,21 @@ export function createItemCatalog(
     level: bases.get(base)!.level,
     bases: [base],
   }));
+  const available = new Set(availableBases.map((row) => row.base));
+  for (const craft of plannerCrafts) {
+    const codes = [...new Set(craft.variants.flatMap((row) => row.bases))].filter(
+      (code) => available.has(code)
+    );
+    if (codes.length)
+      items.push({
+        id: `craft:${craft.id}`,
+        craftId: craft.id,
+        name: craft.name.en,
+        quality: "crafted",
+        level: Math.max(10, Math.min(...codes.map((code) => bases.get(code)!.level))),
+        bases: codes,
+      });
+  }
   for (const quality of ["unique", "set"] as const) {
     const definitions = quality === "unique" ? gd.uniqueItems : gd.setItems;
     for (const choice of choices({ ...empty, quality })) {

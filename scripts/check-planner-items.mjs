@@ -389,7 +389,14 @@ try {
     { key: "test", owner: "charm", height: 1 },
     []
   );
-  assert.deepEqual([...charms.availableBases].sort(), ["box", "cm1", "cm2", "cm3"]);
+  assert.deepEqual([...charms.availableBases].sort(), [
+    "box",
+    "cm1",
+    "cm2",
+    "cm3",
+    "ibk",
+    "tbk",
+  ]);
   const crafted = {
     name: "Custom craft",
     quality: "crafted",

@@ -37,7 +37,7 @@ export const affixById = new Map(itemAffixes.map((affix) => [affix.id, affix]));
 const bases = data.bases as Record<string, AffixBase>;
 export const canBeRare = (code: string) => !!bases[code]?.rare;
 export const editableQuality = (quality: PlannerItem["quality"]) =>
-  quality === "magic" || quality === "rare";
+  quality === "magic" || quality === "rare" || quality === "crafted";
 export function affixLevel(item: PlannerItem) {
   const base = bases[item.baseCode ?? ""];
   if (!base) return 0;
@@ -57,7 +57,7 @@ export function affixFits(affix: ItemAffix, item: PlannerItem) {
   return (
     !!base &&
     editableQuality(item.quality) &&
-    (item.quality !== "rare" || (base.rare && affix.rare)) &&
+    (item.quality === "magic" || (base.rare && affix.rare)) &&
     affix.level <= level &&
     (!affix.maxLevel || level <= affix.maxLevel) &&
     (!affix.classSpecific ||
@@ -71,6 +71,7 @@ export function canAddAffix(affix: ItemAffix, item: PlannerItem) {
   const selected = (item.affixes ?? []).map((a) => affixById.get(a.id)!);
   return (
     affixFits(affix, item) &&
+    (item.quality !== "crafted" || selected.length < 4) &&
     selected.filter((a) => a.kind === affix.kind).length <
       (item.quality === "magic" ? 1 : 3) &&
     !selected.some((a) => a.kind === affix.kind && a.group === affix.group)
@@ -190,10 +191,13 @@ export function affixBonuses(item: PlannerItem, level: number) {
   };
 }
 export function affixRequiredLevel(item: PlannerItem) {
-  return Math.max(
-    1,
+  const level = Math.max(
+    0,
     ...(item.affixes ?? []).map((a) => affixById.get(a.id)?.requiredLevel ?? 1)
   );
+  return item.quality === "crafted"
+    ? Math.min(98, level + 10 + 3 * (item.affixes?.length ?? 0))
+    : Math.max(1, level);
 }
 export function affixSockets(item: PlannerItem) {
   return Math.min(

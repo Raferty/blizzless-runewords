@@ -1,10 +1,19 @@
 <template>
   <section class="planner-affix-editor" @keydown.esc="escape">
     <header>
-      <h3 :data-quality="item.quality">{{ t("Свойства", "Regular Mods") }}</h3>
+      <h3 :data-quality="item.quality">
+        {{
+          item.quality === "crafted"
+            ? t("Случайные аффиксы", "Random affixes")
+            : t("Свойства", "Regular Mods")
+        }}
+      </h3>
       <span class="planner-muted"
         >{{ t("Префиксы", "Prefixes") }} {{ counts.prefix }}/{{ limit }} ·
         {{ t("Суффиксы", "Suffixes") }} {{ counts.suffix }}/{{ limit }}</span
+      >
+      <span v-if="item.quality === 'crafted'" class="planner-muted"
+        >{{ t("Всего", "Total") }} {{ item.affixes?.length ?? 0 }}/4</span
       >
     </header>
     <div
@@ -57,7 +66,10 @@
       class="planner-affix-add"
       :aria-expanded="opened"
       :aria-controls="uid + '-picker'"
-      :disabled="counts.prefix >= limit && counts.suffix >= limit"
+      :disabled="
+        (counts.prefix >= limit && counts.suffix >= limit) ||
+        (item.quality === 'crafted' && (item.affixes?.length ?? 0) >= 4)
+      "
       @click="toggle"
     >
       {{ t("Добавить свойство", "Add Mod") }}

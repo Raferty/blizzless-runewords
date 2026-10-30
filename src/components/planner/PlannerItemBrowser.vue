@@ -76,7 +76,13 @@
           :data-quality="entry.quality"
           @click="$emit('choose', entry)"
         >
-          <span>{{ entry.word ? entry.word.name[lang] : entry.name }}</span
+          <span>{{
+            entry.word
+              ? entry.word.name[lang]
+              : entry.craftId
+                ? craftById.get(entry.craftId)?.name[lang] || entry.name
+                : entry.name
+          }}</span
           ><small>{{ t("Ур.", "Lvl") }} {{ entry.level }}</small>
         </button>
         <p v-if="!filtered.length" class="planner-item-empty">
@@ -99,6 +105,7 @@ import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref } from "vue";
 import { useText } from "@/composables/useText";
 import { useInfoStore } from "@/store";
+import { craftById } from "@/utils/planner-crafts";
 import {
   itemCategories,
   type CatalogItem,
@@ -150,11 +157,7 @@ const groups = computed(() =>
 );
 const filtered = computed(() => {
   const search = query.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
-  return (
-    quality.value === "existing" || quality.value === "crafted"
-      ? props.existing
-      : props.items
-  ).filter(
+  return (quality.value === "existing" ? props.existing : props.items).filter(
     (item) =>
       (quality.value === "all" ||
         quality.value === "existing" ||
@@ -169,6 +172,7 @@ const filtered = computed(() => {
         [
           item.name,
           item.word?.name.ru,
+          item.craftId ? craftById.get(item.craftId)?.name.ru : "",
           ...item.bases.map((code) => props.bases.get(code)?.name),
         ]
           .join(" ")

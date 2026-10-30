@@ -89,6 +89,7 @@ export interface PlannerItem {
   baseKind?: "weapon" | "armor" | "shield";
   baseCode?: string;
   catalogId?: string;
+  craftId?: string;
   itemLevel?: number;
   sockets?: number;
   socketedItems?: (string | null)[];
@@ -101,6 +102,7 @@ export interface PlannerItem {
   skillClass?: ClassId;
   stashPosition?: number;
   containerQuantity?: number;
+  quantity?: number;
 }
 export interface PlannerCharm extends PlannerItem {
   id: string;

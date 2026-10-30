@@ -81,6 +81,97 @@ try {
     const { plannerItemImage, plannerItemDimensions } = await server.ssrLoadModule(
       "/src/utils/planner-item-art.ts"
     );
+    const { inventoryItemSize, canMoveItem, moveItem } = await server.ssrLoadModule(
+      "/src/utils/planner-item-movement.ts"
+    );
+    for (const quantity of [undefined, 0, 7, 20]) {
+      const build = planner.createBuild("sorceress");
+      const catalog = createItemCatalog(
+        codec,
+        build,
+        { key: "inventory", owner: "charm", height: 2 },
+        []
+      );
+      for (const [index, code] of ["tbk", "ibk"].entries()) {
+        const entry = catalog.items.find((item) => item.id === `base:${code}`);
+        assert(entry, `${code} is selectable in inventory`);
+        assert.equal(catalog.bases.get(code).category, "book");
+        const item = {
+          name: entry.name,
+          quality: "normal",
+          baseCode: code,
+          requiredLevel: 1,
+          bonuses: {},
+          notes: "",
+          ...(quantity === undefined ? {} : { quantity }),
+        };
+        assert(plannerItemImage(item));
+        assert.deepEqual(plannerItemDimensions(item), [1, 2]);
+        assert.deepEqual(inventoryItemSize(item), [1, 2]);
+        assert(
+          !codec
+            .choices(
+              { key: "hero.mainHand", owner: "hero", slot: "mainHand", item },
+              build
+            )
+            .some((row) => row.base === code)
+        );
+        assert(
+          !codec
+            .choices(
+              { key: "stash", owner: "stash", item: { ...item, quality: "magic" } },
+              build
+            )
+            .some((row) => row.base === code)
+        );
+        for (const invalid of [-1, 21, 1.5])
+          assert.throws(() => planner.parsePlannerItem({ ...item, quantity: invalid }));
+        build.charms.push({ ...item, id: `tome-${code}`, height: 2, position: index });
+        build.stash.push({ ...item, stashPosition: index });
+      }
+      const restored = planner.decodeBuild(planner.encodeBuild(build));
+      assert.deepEqual(restored, build);
+      assert.throws(() =>
+        planner.parseBuild({ ...build, charms: [{ ...build.charms[0], height: 1 }] })
+      );
+      assert.throws(() =>
+        planner.parseBuild({ ...build, charms: [{ ...build.charms[0], position: 30 }] })
+      );
+      const choices = Object.fromEntries(
+        native
+          .gameSaveEntries(restored)
+          .map((entry) => [entry.key, codec.defaultChoice(entry, restored)])
+      );
+      const { read } = await verify(restored, { ...opts, choices });
+      assert.equal(read.items.length, 4);
+      for (const item of read.items) {
+        assert(["ibk", "tbk"].includes(item.type));
+        assert.equal(item.quality, 2);
+        assert.equal(item.quantity, quantity ?? 20);
+      }
+      const moved = structuredClone(build);
+      assert(
+        !canMoveItem(
+          moved,
+          { owner: "stash", index: 0 },
+          { owner: "inventory", position: 30 }
+        )
+      );
+      assert(
+        moveItem(moved, { owner: "stash", index: 0 }, { owner: "inventory", position: 2 })
+      );
+      assert.equal(moved.charms.at(-1).quantity, quantity);
+      assert.equal(moved.charms.at(-1).height, 2);
+      assert.equal(moved.charms.at(-1).baseCode, "tbk");
+    }
+  }
+  {
+    const { createItemCatalog } = await server.ssrLoadModule(
+      "/src/utils/planner-item-catalog.ts"
+    );
+    const { plannerItemImage, plannerItemDimensions } = await server.ssrLoadModule(
+      "/src/utils/planner-item-art.ts"
+    );
     const build = planner.createBuild("paladin");
     const catalog = createItemCatalog(codec, build, { key: "stash", owner: "stash" }, []);
     for (const [index, code] of ["rvs", "rvl"].entries()) {

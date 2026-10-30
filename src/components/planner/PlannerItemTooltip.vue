@@ -19,6 +19,9 @@
       </p>
       <p>{{ t("Требуемый уровень", "Required level") }}: {{ itemRequiredLevel(item) }}</p>
       <p v-if="item.ethereal">{{ t("Эфирный", "Ethereal") }}</p>
+      <p v-if="isTome(item.baseCode)">
+        {{ t("Свитков внутри", "Scrolls inside") }}: {{ item.quantity ?? 20 }} / 20
+      </p>
       <div v-if="word" class="planner-item-tooltip-properties">
         <RunewordStats :lines="wordLines" />
       </div>
@@ -75,7 +78,7 @@ import PlannerSetBonuses from "./PlannerSetBonuses.vue";
 import { useInfoStore, useRunewordsStore } from "@/store";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
-import { isContainerBase, plannerItemIdentity } from "@/utils/planner-item-art";
+import { isContainerBase, plannerItemIdentity, isTome } from "@/utils/planner-item-art";
 import {
   itemBonusLines,
   itemRuneword,
@@ -165,7 +168,14 @@ const properties = computed(() => {
       ).filter((line) => !line.startsWith("Socketed ("));
   }
   return [
-    ...itemBonusLines(props.item, lang.value),
+    ...(native.value && props.item.craftId
+      ? itemPropertyLines(
+          native.value,
+          props.item,
+          store.build.level,
+          store.build.classId
+        )
+      : itemBonusLines(props.item, lang.value)),
     ...(props.item.affixes ?? []).flatMap((row) => {
       const affix = affixById.get(row.id);
       return native.value && affix

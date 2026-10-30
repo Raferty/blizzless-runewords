@@ -28,6 +28,8 @@ import {
   isClassCharm,
   itemSkillClass,
 } from "./planner-properties";
+import { craftDefinition } from "./planner-crafts";
+import { isTome } from "./planner-item-art";
 
 export function createBuild(classId: ClassId = "sorceress"): PlannerBuild {
   return {
@@ -485,6 +487,10 @@ export function parsePlannerItem(value: unknown): PlannerItem {
     result.affixes = parseAffixes(item.affixes, result);
     if ((result.sockets ?? 0) < affixSockets(result)) throw new Error("affix sockets");
   }
+  if (item.craftId !== undefined) {
+    result.craftId = string(item.craftId, 120);
+    craftDefinition(result);
+  }
   if (item.propertyValues !== undefined) {
     result.propertyValues = {};
     for (const [key, value] of Object.entries(record(item.propertyValues))) {
@@ -509,6 +515,11 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       throw new Error("container quantity");
     // Add_one uses 11 save bits with SaveAdd=10 in the Blizzless tables.
     result.containerQuantity = integer(item.containerQuantity, 0, 2037);
+  }
+  if (item.quantity !== undefined) {
+    if (!isTome(result.baseCode) || result.quality !== "normal")
+      throw new Error("tome quantity");
+    result.quantity = integer(item.quantity, 0, 20);
   }
   return result;
 }
@@ -601,6 +612,7 @@ export function parseBuild(value: unknown): PlannerBuild {
       !charm.id ||
       build.charms.some((c) => c.id === charm.id) ||
       (charm.baseCode === "box" && charm.height !== 2) ||
+      (isTome(charm.baseCode) && charm.height !== 2) ||
       (charm.baseCode === "cs2" && charm.height !== 1) ||
       (charm.baseCode === "cm4" && charm.height !== 3) ||
       !charmFits(

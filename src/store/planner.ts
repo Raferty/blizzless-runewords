@@ -1,6 +1,7 @@
 import { computed, ref, watch } from "vue";
 import { defineStore } from "pinia";
 import { plannerClasses, plannerSkills } from "@/shared/planner";
+import { stageStashItems } from "@/utils/planner-stash";
 import {
   attributeBudget,
   addDefaultInventory,
@@ -21,6 +22,7 @@ import type {
   PlannerBuild,
   PlannerSkill,
   SavedBuild,
+  PlannerItem,
 } from "@/types/planner";
 
 const storageKey = "blizzless-planner-v1";
@@ -149,6 +151,12 @@ export const usePlannerStore = defineStore("planner", () => {
         skills = skillsAfterRemoval({ ...build.value, skills }, skill.id, true);
     build.value.skills = skills;
   }
+  function addStashItems(items: PlannerItem[]) {
+    const stash = stageStashItems(build.value, items);
+    if (!stash) return false;
+    build.value.stash = stash;
+    return true;
+  }
   function saveBuild() {
     if (saved.value.length >= 50) {
       message.value = "limit";
@@ -208,6 +216,7 @@ export const usePlannerStore = defineStore("planner", () => {
     addSkill,
     removeSkill,
     resetSkillTree,
+    addStashItems,
     saveBuild,
     loadBuild,
     loadSharedHash,

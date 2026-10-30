@@ -1628,6 +1628,19 @@
   color: #d4d4d4;
   background: #141414;
 }
+.planner-craft-recipe {
+  margin-bottom: 12px;
+  font-size: 12px;
+  line-height: 1.7;
+  summary {
+    color: #b9cbd0;
+    cursor: pointer;
+  }
+  p {
+    margin: 8px 0;
+    overflow-wrap: anywhere;
+  }
+}
 .planner-game-export {
   display: grid;
   gap: 12px;

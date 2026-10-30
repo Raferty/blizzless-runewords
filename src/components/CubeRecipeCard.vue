@@ -27,6 +27,7 @@
     </ul>
     <p v-if="text(recipe.notes)" class="cube-card__notes">{{ text(recipe.notes) }}</p>
     <CubeFormula :ingredients="recipe.ingredients" :result="recipe.result" />
+    <PlannerRecipeIngredients v-if="detailed" :recipe="recipe" />
     <div v-if="recipe.original && detailed" class="cube-card__original">
       <h4>{{ t("Оригинальная версия", "Original version") }}</h4>
       <p v-if="text(recipe.original.notes)" class="cube-card__notes">
@@ -46,6 +47,7 @@
   </article>
 </template>
 <script setup lang="ts">
+import { defineAsyncComponent } from "vue";
 import UiIcon from "@/components/ui/UiIcon.vue";
 import { useInfoStore } from "@/store";
 import { useText } from "@/composables/useText";
@@ -53,6 +55,9 @@ import { cubeCatalog, cubeText } from "@/utils/cube";
 import type { CubeRecipe } from "@/types/cube";
 import type { LocalizedName } from "@/types/runeword";
 import CubeFormula from "@/components/CubeFormula.vue";
+const PlannerRecipeIngredients = defineAsyncComponent(
+  () => import("@/components/planner/PlannerRecipeIngredients.vue")
+);
 withDefaults(defineProps<{ recipe: CubeRecipe; detailed?: boolean }>(), {
   detailed: false,
 });

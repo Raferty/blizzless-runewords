@@ -1,7 +1,37 @@
-import type { PlannerItem } from "@/types/planner";
+import type { PlannerItem, PlannerBuild } from "@/types/planner";
+import { plannerItemDimensions } from "./planner-item-art";
 
 // Personal stash dimensions from the bundled Blizzless data.json (info.stash).
 export const stashSize = { columns: 16, rows: 13 };
+
+// Stage a whole kit before changing the build. Never add half a recipe on overflow.
+export function stageStashItems(build: PlannerBuild, items: PlannerItem[]) {
+  if (!items.length || build.stash.length + items.length > 100) return;
+  const { occupied, positions } = layoutStashItems(
+    build.stash.map((item) => ({
+      size: plannerItemDimensions(item),
+      position: item.stashPosition,
+    }))
+  );
+  if (positions.some((position) => !position)) return;
+  const additions: PlannerItem[] = [];
+  for (const item of items) {
+    const size = plannerItemDimensions(item);
+    const position = size && placeStashItem(occupied, ...size);
+    if (!position) return;
+    additions.push({
+      ...item,
+      stashPosition: position.y * stashSize.columns + position.x,
+    });
+  }
+  return [
+    ...build.stash.map((item, index) => ({
+      ...item,
+      stashPosition: positions[index]!.y * stashSize.columns + positions[index]!.x,
+    })),
+    ...additions,
+  ];
+}
 
 export function createFullRejuvenationContainer(
   occupied: Set<number>

@@ -145,7 +145,25 @@
         >
           {{ t("Добавить реджувы ×100", "Add rejuvs ×100") }}
         </button>
+        <button
+          v-for="kit in supplyKits"
+          :key="kit.id"
+          type="button"
+          :disabled="!kit.fits"
+          :title="
+            kit.fits
+              ? kit.items.map((item) => item.name).join(' + ')
+              : t(
+                  'В сундуке нет места для всего набора',
+                  'No room for the full set in the stash'
+                )
+          "
+          @click="addSupplyKit(kit.items)"
+        >
+          {{ t(kit.ru, kit.en) }}
+        </button>
       </div>
+      <p v-if="supplyMessage" class="planner-help" role="status">{{ supplyMessage }}</p>
       <p class="planner-help">
         {{
           t(
@@ -158,7 +176,7 @@
   </PlannerPanel>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, shallowRef, ref } from "vue";
 import PlannerPanel from "./PlannerPanel.vue";
 import PlannerItemSlot from "./PlannerItemSlot.vue";
 import UiIcon from "@/components/ui/UiIcon.vue";
@@ -170,7 +188,10 @@ import {
   createUberKeySet,
   placeStashItem,
   stashSize,
+  stageStashItems,
 } from "@/utils/planner-stash";
+import { stashKits, createStashSupply } from "@/utils/planner-supplies";
+import type { GameSaveExporter } from "@/utils/planner-game-save";
 import { inventoryItemSize, stashItemLayout } from "@/utils/planner-item-movement";
 import { usePlannerItemDrag } from "@/composables/usePlannerItemDrag";
 import type { PlannerItem } from "@/types/planner";
@@ -178,6 +199,32 @@ import type { PlannerItem } from "@/types/planner";
 defineEmits<{ edit: [index: number]; manage: [] }>();
 const store = usePlannerStore();
 const t = useText();
+const native = shallowRef<GameSaveExporter>();
+const supplyMessage = ref("");
+onMounted(async () => {
+  try {
+    native.value = await (
+      await import("@/utils/planner-game-save")
+    ).loadGameSaveExporter();
+  } catch {
+    supplyMessage.value = t("Не удалось загрузить наборы.", "Could not load sets.");
+  }
+});
+const supplyKits = computed(() =>
+  stashKits.map((kit) => {
+    const items = native.value
+      ? kit.codes.map((code) => createStashSupply(native.value!, code))
+      : [];
+    return { ...kit, items, fits: !!stageStashItems(store.build, items) };
+  })
+);
+function addSupplyKit(items: PlannerItem[]) {
+  if (store.addStashItems(items))
+    supplyMessage.value = t(
+      `Добавлено предметов: ${items.length}.`,
+      `Added ${items.length} items.`
+    );
+}
 const { start, end, over, leave, drop, preview, previewStyle, isSource } =
   usePlannerItemDrag("stash");
 const layout = computed(() => {

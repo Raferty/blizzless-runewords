@@ -6,6 +6,9 @@ import { deflateSync } from "node:zlib";
 const root = new URL("../", import.meta.url);
 const dataBytes = await readFile(new URL("public/data/planner-save/data.json", root));
 const data = JSON.parse(dataBytes);
+const supplies = JSON.parse(
+  await readFile(new URL("src/shared/planner-supplies.json", root))
+).supplies;
 // HD names are an artwork lookup only. Positional unique/set IDs can differ
 // between Blizzless and the upstream client, so resolve the actual inventory file.
 const artData = JSON.parse(
@@ -31,7 +34,8 @@ function hasType(type, wanted, seen = new Set()) {
 }
 for (const [code, row] of Object.entries(data.misc))
   if (
-    hasType(row.type, ["ring", "amul", "char", "key"]) ||
+    supplies[code] ||
+    hasType(row.type, ["ring", "amul", "char", "key", "book", "jewl"]) ||
     /^(?:ua[1-5]|pk[1-3]|rv[sl]|bkd)$/.test(code)
   )
     bases[code] = { row, group: "misc" };
@@ -103,12 +107,18 @@ for (const [quality, definitions] of [
   }
 }
 const baseKeys = {};
-for (const [code, { row }] of Object.entries(bases))
+for (const [code, { row, group }] of Object.entries(bases))
   baseKeys[code] = /^ua[1-5]$/.test(code)
     ? `misc/shard/cont_${code}`
-    : row.type === "key" || /^pk[1-3]$/.test(code) || code === "bkd"
-      ? `misc/${row.hd}`
-      : aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null;
+    : supplies[code] ||
+        row.type === "key" ||
+        row.type === "book" ||
+        /^pk[1-3]$/.test(code) ||
+        code === "bkd"
+      ? `${group}/${row.hd}`
+      : hasType(row.type, ["jewl"])
+        ? `${group}/${row.hd}`
+        : aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null;
 const qualityKeys = { unique: {}, set: {} };
 const names = { unique: {}, set: {} };
 const catalogBases = {};
@@ -148,6 +158,7 @@ for (const [quality, definitions] of [
       const uniqueImage =
         quality === "unique" && uniqueArtwork[definition.index.replace(/ Player$/, "")];
       if (uniqueImage) return uniqueImage;
+      if (supplies[code]?.catalogId === id) return `${base.group}/${base.row.hd}`;
       if (!bases[code]) return null;
       const upgradedCode = base.row[["normcode", "ubercode", "ultracode"][index]] || code;
       const upgraded = bases[upgradedCode] || base;
@@ -173,6 +184,14 @@ const missing = [];
 // Original Blizzless key/statue sprites, pinned to the launcher manifest.
 // Shared invfile names cannot identify them; preserve their original RGBA pixels.
 const keySprites = {
+  "misc/quest/jewel_dis":
+    "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
+  "misc/quest/parts_1":
+    "1aa22d0d5cb9a02f0af89c44f34e6446d68bb9cccff0fff038ce7eec50e6e97e",
+  "misc/quest/parts_2":
+    "fa991baba93ef9cdce010f5029f5b24bd1cad35ccfc617ebfda49bf058f27f3c",
+  "misc/quest/parts_3":
+    "c8f59b04d4b47cfa1d297399291b3d4421696caf033684c49a397c27322e9af9",
   "misc/quest/cont_rvl":
     "f8059926648c49c6913b2920ae40a1854082498a577a19df1738a770283e51c7",
   "misc/key/mephisto_key":
@@ -254,6 +273,15 @@ const classicFallbacks = {
     file: "classic/invuhms.gif",
   },
 };
+// The existing Cube/socket catalog already bundles the original Jewel graphic.
+const socketArt = JSON.parse(
+  await readFile(new URL("src/shared/planner-sockets.json", root))
+);
+const bundledImages = {
+  "misc/gem/light_facet": socketArt.items
+    .find((item) => item.code === "unique392")
+    .image_url.slice(1),
+};
 let cursor = 0;
 const isWebp = (bytes) =>
   bytes.length > 12 &&
@@ -265,13 +293,26 @@ await Promise.all(
       const key = keys[cursor++];
       if (!/^(weapon|armor|misc)\/[a-z0-9_/-]+$/.test(key))
         throw new Error(`Invalid item image key: ${key}`);
+      if (bundledImages[key]) {
+        await readFile(new URL("public/" + bundledImages[key], root));
+        images.set(key, bundledImages[key]);
+        continue;
+      }
       if (keySprites[key]) {
-        const response = await fetch(
-          "https://blizzless.info/api/launcher-mods/blobs/" + keySprites[key],
-          { signal: AbortSignal.timeout(20000) }
-        );
-        if (!response.ok) throw new Error(`Key sprite: HTTP ${response.status}`);
-        const sprite = Buffer.from(await response.arrayBuffer());
+        let sprite;
+        for (let attempt = 0; attempt < 3; attempt++) {
+          try {
+            const response = await fetch(
+              "https://blizzless.info/api/launcher-mods/blobs/" + keySprites[key],
+              { signal: AbortSignal.timeout(20000) }
+            );
+            if (!response.ok) throw new Error(`Native sprite: HTTP ${response.status}`);
+            sprite = Buffer.from(await response.arrayBuffer());
+            break;
+          } catch (error) {
+            if (attempt === 2) throw error;
+          }
+        }
         if (createHash("sha256").update(sprite).digest("hex") !== keySprites[key])
           throw new Error(`Key sprite checksum mismatch: ${key}`);
         const file = new URL(key + ".png", destination);

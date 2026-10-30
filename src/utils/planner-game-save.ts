@@ -18,7 +18,9 @@ import type { ClassId, EquipmentSlot, PlannerBuild, PlannerItem } from "@/types/
 
 import { affixStats, parseAffixes } from "./planner-affixes";
 import { layoutStashItems } from "./planner-stash";
-import { isContainerBase } from "./planner-item-art";
+import { isContainerBase, isTome } from "./planner-item-art";
+import { craftDefinition, craftVariant, craftAffixMinimum } from "./planner-crafts";
+import { stashSupplies } from "./planner-supplies";
 import {
   resolvePropertyValues,
   resolvePropertyGroups,
@@ -229,9 +231,22 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   function permitted(code: string, entry: GameSaveEntry, build: PlannerBuild) {
     const base = gd.items[code];
     if (!base || !/^[a-z0-9]{3}$/.test(code)) return false;
-    // Non-dropping quest ingredients and rejuvenation potions are normal stash items.
-    if (/^(?:ua[1-5]|pk[1-3]|rv[sl])$/.test(code))
-      return entry.owner === "stash" && entry.item.quality === "normal";
+    if (
+      entry.item.craftId &&
+      (entry.item.quality !== "crafted" ||
+        !craftVariant({ ...entry.item, baseCode: code }))
+    )
+      return false;
+    // Loose supplies are separate from bg1/bg2 containers and cannot be equipped.
+    const supply = stashSupplies[code];
+    if (supply)
+      return (
+        entry.owner === "stash" &&
+        entry.item.quality === (supply.catalogId ? "unique" : "normal") &&
+        (!supply.catalogId ||
+          !entry.item.catalogId ||
+          entry.item.catalogId === supply.catalogId)
+      );
     if (
       /^unused$/i.test(base.name) ||
       (!base.spawnable &&
@@ -242,6 +257,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const t = types(code);
     if (code === "box")
       return ["charm", "stash"].includes(entry.owner) && entry.item.quality === "normal";
+    if (isTome(code))
+      return (
+        entry.item.quality === "normal" &&
+        (entry.owner === "stash" || (entry.owner === "charm" && entry.height === 2))
+      );
     if (entry.item.baseKind === "weapon" && !t.has("weap")) return false;
     if (entry.item.baseKind === "shield" && !t.has("shld")) return false;
     if (entry.item.baseKind === "armor" && (!t.has("armo") || t.has("shld")))
@@ -344,7 +364,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             types(code).has("ring") ||
             types(code).has("amul") ||
             types(code).has("char") ||
-            /^(?:ua[1-5]|pk[1-3]|rv[sl])$/.test(code) ||
+            types(code).has("jewl") ||
+            isTome(code) ||
+            !!stashSupplies[code] ||
             code === "box")
       )
       .map((base) => ({ value: base, base, label: `${label(base)} [${base}]` }))
@@ -537,6 +559,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     };
   }
   function itemDefinition(item: PlannerItem): Definition | undefined {
+    if (item.craftId) return craftDefinition(item);
     if (item.catalogId && (item.quality === "unique" || item.quality === "set")) {
       const definition = (item.quality === "unique" ? gd.uniqueItems : gd.setItems)[
         item.catalogId
@@ -835,6 +858,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     );
     const usedIds = new Set<number>();
     const itemAffixIds = new Map<number, string[]>();
+    const itemQuantities = new Map<number, number>();
     const socketRolls = new Map<
       number,
       { roll: 0 | 1; values?: Record<string, number> }[]
@@ -848,6 +872,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       return id;
     }
     for (const { entry, choice, base } of entries) {
+      if (
+        entry.item.craftId &&
+        (entry.item.affixes?.length ?? 0) < craftAffixMinimum(entry.item.itemLevel ?? 99)
+      )
+        throw new GameSaveError(
+          "property",
+          `${entry.item.name}: select the random craft affixes`
+        );
       if (entry.item.affixes?.length)
         parseAffixes(entry.item.affixes, { ...entry.item, baseCode: choice.base });
       const item: BinaryParsedItem = {
@@ -877,12 +909,17 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         item.itemId,
         (entry.item.affixes ?? []).map((a) => a.id)
       );
+      if (isTome(choice.base)) itemQuantities.set(item.itemId, entry.item.quantity ?? 20);
       const mode = options.rolls[entry.key] ?? "planned";
       const roll = mode === "planned" ? (entry.item.propertyRoll ?? 1) : mode;
       let maxSockets = base.gemsockets || 0;
-      if (choice.unique) {
-        item.unique = choice.unique;
-        const definition = itemDefinition({ ...entry.item, catalogId: choice.unique })!;
+      if (choice.unique || entry.item.craftId) {
+        if (choice.unique) item.unique = choice.unique;
+        const definition = itemDefinition({
+          ...entry.item,
+          baseCode: choice.base,
+          catalogId: choice.unique,
+        })!;
         item.stats = definitionStats(
           definition,
           choice.base,
@@ -896,6 +933,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           definitionStats(definition, choice.base, 1).item_numsockets || 0
         );
       }
+      if (entry.item.quality === "crafted")
+        maxSockets = Math.min(
+          maxSockets,
+          Math.max(1, affixStats(entry.item).item_numsockets ?? 0)
+        );
       if (entry.item.quality === "runeword") {
         const rw = word(entry);
         if (!rw) throw new GameSaveError("base", entry.item.name);
@@ -961,12 +1003,16 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         runewordProperties.set(item.itemId, stats);
       } else {
         for (const [key, value] of Object.entries(entry.item.bonuses))
-          if ((mode === "planned" && !entry.item.propertyValues) || !choice.unique)
+          if (
+            (mode === "planned" && !entry.item.propertyValues) ||
+            (!choice.unique && !entry.item.craftId)
+          )
             item.stats[bonusStats[key as keyof typeof bonusStats]] = value!;
         for (const [id, value] of Object.entries(entry.item.classBonuses ?? {}))
           if (
             !isClassCharm(entry.item) &&
-            ((mode === "planned" && !entry.item.propertyValues) || !choice.unique)
+            ((mode === "planned" && !entry.item.propertyValues) ||
+              (!choice.unique && !entry.item.craftId))
           )
             item.stats[`item_addclassskills#${classes.indexOf(id as ClassId)}`] = value;
         for (const [stat, value] of Object.entries(affixStats(entry.item)))
@@ -1055,7 +1101,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     ): Promise<Uint8Array> {
       const t = types(item.base),
         base = gd.items[item.base];
-      const simple = t.has("rune") || t.has("gem") || t.has("poti");
+      const simple =
+        ("compactsave" in base && base.compactsave === 1) ||
+        t.has("rune") ||
+        t.has("gem") ||
+        t.has("poti");
+      const questItem =
+        t.has("ques") && "questdiffcheck" in base && !!base.questdiffcheck;
       const rw = runewordProperties.get(item.itemId);
       const canonicalRunewordId = rw ? Number(item.unique!.replace("runeword", "")) : 0;
       // Stored v105 aliases documented by the codecs; Nightfall=1396 is
@@ -1096,7 +1148,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         position_y: location.y ?? 0,
         alt_position_id: location.storage ?? 0,
         type_id: t.has("armo") ? 1 : t.has("weap") ? 3 : 4,
-        categories: t.has("armo") ? ["Any Armor"] : t.has("weap") ? ["Weapon"] : [],
+        categories: [
+          ...(t.has("armo") ? ["Any Armor"] : t.has("weap") ? ["Weapon"] : []),
+          ...(questItem ? ["Quest"] : []),
+        ],
+        quest_difficulty: difficulties.findIndex(
+          (difficulty) => difficulty.value === build.difficulty
+        ),
         nr_of_items_in_sockets: item.socketedItems.length,
         total_nr_of_sockets: item.sockets,
         defense_rating: item.defense ?? 0,
@@ -1132,7 +1190,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         magic_attributes: magicProperties(item.stats),
         runeword_attributes: rw ? magicProperties(rw) : undefined,
         socketed_items: [],
-        quantity: base.stackable ? 1 : 0,
+        quantity: base.stackable ? (itemQuantities.get(item.itemId) ?? 1) : 0,
         _unknown_data: {},
       } as unknown as SaveTypes.IItem;
       if (native.max_durability > 0 && item.stats.item_indesctructible)

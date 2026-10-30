@@ -96,6 +96,7 @@
                 <small
                   v-if="
                     selectedBase &&
+                    !item.craftId &&
                     !isContainerBase(selectedBase.code) &&
                     item.name !== selectedBase.name
                   "
@@ -138,6 +139,15 @@
                     :aria-label="t('Основа предмета', 'Item base')"
                     @update:model-value="changeBase"
                 /></label>
+                <label v-if="isTome(item.baseCode)" class="planner-label"
+                  >{{ t("Свитков внутри", "Scrolls inside")
+                  }}<input
+                    v-model.number="item.quantity"
+                    type="number"
+                    min="0"
+                    max="20"
+                    required
+                /></label>
                 <label v-if="canEditQuality" class="planner-label planner-item-quality"
                   >{{ t("Качество", "Quality") }}
                   <UiSelect
@@ -166,14 +176,18 @@
                   />
                 </label>
                 <label v-if="selectedBase?.kind" class="planner-item-ethereal"
-                  ><input v-model="item.ethereal" type="checkbox" />
+                  ><input
+                    v-model="item.ethereal"
+                    type="checkbox"
+                    :disabled="!!selectedCraft && !canToggleCraftEthereal"
+                  />
                   {{ t("Эфирный", "Ethereal") }}</label
                 >
               </div>
             </div>
           </div>
           <div
-            v-if="templates.length || selectedCatalog?.catalogId"
+            v-if="templates.length || selectedCatalog?.catalogId || selectedCraft"
             class="planner-template-controls"
           >
             <button type="button" @click="setRoll(0)">
@@ -183,6 +197,52 @@
             </button>
           </div>
           <p v-if="affixNotice" class="planner-muted" role="status">{{ affixNotice }}</p>
+          <section v-if="selectedCraft && native" class="planner-item-properties">
+            <h3 data-quality="crafted">
+              {{ t("Свойства рецепта", "Recipe properties") }}
+            </h3>
+            <details v-if="selectedRecipe" class="planner-craft-recipe">
+              <summary>
+                {{ t("Ингредиенты", "Ingredients") }} · {{ selectedCraft.name[lang] }}
+              </summary>
+              <p>
+                {{
+                  selectedRecipe.ingredients
+                    .map(
+                      (part) =>
+                        `${part.count} × ${cubeIngredients.get(part.key)?.name[lang] || cubeIngredients.get(part.key)?.name.en || part.key}`
+                    )
+                    .join(" + ")
+                }}
+              </p>
+              <PlannerRecipeIngredients
+                :recipe="selectedRecipe"
+                :base-code="item.baseCode"
+                :ethereal="!!item.ethereal"
+              />
+            </details>
+            <PlannerPropertyEditor
+              :native="native"
+              :item="item"
+              :character-level="store.build.level"
+              :character-class="store.build.classId"
+              @values="setPropertyValues"
+              @choices="setPropertyChoices"
+              @class="setSkillClass"
+            />
+            <p class="planner-muted">
+              {{
+                t(
+                  "К этим бонусам добавляются случайные аффиксы. Уровень предмета — уровень результата крафта.",
+                  "Random affixes are added to these bonuses. Item level is the level of the crafted result."
+                )
+              }}
+            </p>
+            <p v-if="preferredCraftAffixes.length" class="planner-muted">
+              {{ t("Приоритетные аффиксы рецепта", "Recipe preferred affixes") }}:
+              {{ preferredCraftAffixes.join(", ") }}
+            </p>
+          </section>
           <PlannerAffixEditor
             v-if="native && editableQuality(item.quality)"
             :item="item"
@@ -190,7 +250,12 @@
             :character-level="store.build.level"
             @update:affixes="updateAffixes"
           />
-          <section v-else class="planner-item-properties">
+          <p v-if="!craftAffixesComplete" class="planner-muted" role="status">
+            {{ t("Нужно случайных аффиксов", "Required random affixes") }}:
+            {{ craftAffixMinimum(item.itemLevel ?? 99) }} ({{ t("сейчас", "selected") }}
+            {{ item.affixes?.length ?? 0 }}).
+          </p>
+          <section v-if="!editableQuality(item.quality)" class="planner-item-properties">
             <h3 :data-quality="item.quality">
               {{ qualityOptions.find((q) => q.value === item.quality)?.label }}
             </h3>
@@ -292,7 +357,7 @@
         ><button
           type="submit"
           class="planner-primary"
-          :disabled="!item.name.trim() || !inventoryFits"
+          :disabled="!item.name.trim() || !inventoryFits || !craftAffixesComplete"
         >
           {{ t("Применить", "Apply") }}
         </button>
@@ -310,10 +375,20 @@ import PlannerAffixEditor from "./PlannerAffixEditor.vue";
 import PlannerPropertyEditor from "./PlannerPropertyEditor.vue";
 import { isClassCharm, normalizeClassCharm } from "@/utils/planner-properties";
 import {
+  craftById,
+  craftVariant,
+  createCraftedItem,
+  craftAffixMinimum,
+} from "@/utils/planner-crafts";
+import { cubeCatalog, cubeIngredients } from "@/utils/cube";
+import PlannerRecipeIngredients from "./PlannerRecipeIngredients.vue";
+import { stashSupplies } from "@/utils/planner-supplies";
+import {
   editableQuality,
   canBeRare,
   retainCompatibleAffixes,
   affixSockets,
+  affixById,
 } from "@/utils/planner-affixes";
 import PlannerSocketEditor from "./PlannerSocketEditor.vue";
 import { itemRequiredLevel } from "@/utils/planner-sockets";
@@ -334,7 +409,7 @@ import { bonusFields } from "@/shared/planner";
 import { RUNES } from "@/shared/constants";
 import { matchesItemType } from "@/utils/runeword";
 import { parsePlannerItem, charmFits, inventoryWidth } from "@/utils/planner";
-import { isContainerBase, plannerItemImage } from "@/utils/planner-item-art";
+import { isContainerBase, plannerItemImage, isTome } from "@/utils/planner-item-art";
 import { itemRuneword } from "@/utils/planner-item-presentation";
 import type { ClassId, EquipmentSlot, PlannerItem, PlannerAffix } from "@/types/planner";
 import { runewordBonuses, runewordTemplates } from "@/utils/planner-runewords";
@@ -430,6 +505,8 @@ const canEditQuality = computed(
   () =>
     !!selectedBase.value &&
     selectedBase.value.code !== "box" &&
+    !isTome(selectedBase.value.code) &&
+    !stashSupplies[selectedBase.value.code] &&
     selectedBase.value.category !== "rpot" &&
     (isCharm.value
       ? ["normal", "magic", "unique"].includes(item.value.quality)
@@ -552,15 +629,61 @@ function chooseWord(word: RunewordTableItem) {
 }
 const selectedCatalog = computed(() =>
   catalog.value?.items.find((entry) =>
-    item.value.catalogId
-      ? entry.catalogId === item.value.catalogId && entry.quality === item.value.quality
-      : item.value.runewordId
-        ? entry.word?.id === item.value.runewordId
-        : item.value.quality === "normal" && entry.id === "base:" + item.value.baseCode
+    item.value.craftId
+      ? entry.craftId === item.value.craftId
+      : item.value.catalogId
+        ? entry.catalogId === item.value.catalogId && entry.quality === item.value.quality
+        : item.value.runewordId
+          ? entry.word?.id === item.value.runewordId
+          : item.value.quality === "normal" && entry.id === "base:" + item.value.baseCode
   )
+);
+const selectedCraft = computed(() => craftById.get(item.value.craftId ?? ""));
+const selectedRecipe = computed(() =>
+  cubeCatalog.recipes.find((recipe) => recipe.key === item.value.craftId)
+);
+const preferredCraftAffixes = computed(() =>
+  (craftVariant(item.value)?.preferredAffixes ?? [])
+    .map((id) => affixById.get(id)?.name)
+    .filter(Boolean)
+);
+const craftAffixesComplete = computed(
+  () =>
+    !item.value.craftId ||
+    (item.value.affixes?.length ?? 0) >= craftAffixMinimum(item.value.itemLevel ?? 99)
+);
+const canToggleCraftEthereal = computed(
+  () =>
+    !!selectedCraft.value?.variants.some(
+      (variant) =>
+        variant.ethereal !== !!item.value.ethereal &&
+        variant.bases.includes(item.value.baseCode ?? "")
+    )
+);
+watch(
+  () => item.value.ethereal,
+  (value, previous) => {
+    if (!!value === !!previous) return;
+    if (!selectedCraft.value || !native.value) return;
+    if (!craftVariant(item.value)) {
+      item.value.ethereal = previous;
+      return;
+    }
+    delete item.value.propertyValues;
+    delete item.value.propertyChoices;
+    Object.assign(item.value, native.value.itemBonuses(item.value, store.build.classId));
+  }
 );
 const selectedBase = computed(() => catalog.value?.bases.get(item.value.baseCode ?? ""));
 const isCharm = computed(() => selectedBase.value?.category === "char");
+watch(
+  () => item.value.baseCode,
+  (code) => {
+    if (isTome(code)) item.value.quantity ??= 20;
+    else delete item.value.quantity;
+  },
+  { immediate: true }
+);
 const charmFamily = (code: string) =>
   ["cm3", "cm4", "cs2"].includes(code) ? "cm3" : code;
 const uniqueCharms = computed(() =>
@@ -592,7 +715,12 @@ const maxSockets = computed(() =>
   Math.min(
     6,
     Math.max(
-      selectedBase.value?.maxSockets ?? 0,
+      item.value.quality === "crafted"
+        ? Math.min(
+            selectedBase.value?.maxSockets ?? 0,
+            Math.max(1, affixSockets(item.value))
+          )
+        : (selectedBase.value?.maxSockets ?? 0),
       native.value &&
         item.value.catalogId &&
         (item.value.quality === "unique" || item.value.quality === "set")
@@ -725,11 +853,21 @@ async function loadCatalog() {
 function changeBase(code: string) {
   const base = catalog.value?.bases.get(code);
   if (!base) return;
+  if (selectedCraft.value) {
+    const variant =
+      selectedCraft.value.variants.find(
+        (row) => row.ethereal === !!item.value.ethereal && row.bases.includes(code)
+      ) ?? selectedCraft.value.variants.find((row) => row.bases.includes(code));
+    if (!variant) return;
+    item.value.ethereal = variant.ethereal;
+    delete item.value.propertyValues;
+    delete item.value.propertyChoices;
+  }
   item.value.baseCode = code;
   item.value.baseKind = base.kind;
   if (props.charmMode) height.value = base.height;
   if (item.value.quality === "normal" || editableQuality(item.value.quality)) {
-    item.value.name = base.name;
+    item.value.name = selectedCraft.value?.name.en ?? base.name;
     item.value.requiredLevel = base.level;
   }
   if (item.value.quality === "runeword") {
@@ -737,7 +875,7 @@ function changeBase(code: string) {
     item.value.requiredLevel = Math.max(selectedWord.value?.level ?? 1, base.level);
   } else item.value.sockets = Math.min(item.value.sockets ?? 0, maxSockets.value);
   reconcileAffixes();
-  if (item.value.propertyValues && native.value)
+  if ((item.value.propertyValues || selectedCraft.value) && native.value)
     Object.assign(item.value, native.value.itemBonuses(item.value, store.build.classId));
 }
 function setPropertyValues(values: Record<string, number>) {
@@ -760,6 +898,8 @@ function setRoll(value: 0 | 1) {
   item.value.propertyRoll = value;
   delete item.value.propertyValues;
   if (selectedWord.value) applyTemplate(value);
+  else if (selectedCraft.value && native.value)
+    Object.assign(item.value, native.value.itemBonuses(item.value, store.build.classId));
   else if (
     native.value &&
     item.value.catalogId &&
@@ -785,6 +925,18 @@ function chooseCatalogItem(entry: CatalogItem) {
     item.value = JSON.parse(JSON.stringify(entry.existing));
     roll.value = item.value.propertyRoll ?? 0;
   } else if (entry.word) chooseWord(entry.word);
+  else if (entry.craftId && native.value)
+    item.value = createCraftedItem(
+      native.value,
+      entry.craftId,
+      [...entry.bases].sort(
+        (a, b) =>
+          (catalog.value?.bases.get(a)?.level ?? 0) -
+          (catalog.value?.bases.get(b)?.level ?? 0)
+      )[0],
+      store.build.level,
+      store.build.classId
+    );
   else
     item.value = {
       name: entry.name,
@@ -815,7 +967,8 @@ function chooseCatalogItem(entry: CatalogItem) {
 }
 onMounted(loadCatalog);
 function save() {
-  if (!item.value.name.trim() || !inventoryFits.value) return;
+  if (!item.value.name.trim() || !inventoryFits.value || !craftAffixesComplete.value)
+    return;
   emit(
     "save",
     parsePlannerItem({ ...item.value, name: item.value.name.trim() }),
