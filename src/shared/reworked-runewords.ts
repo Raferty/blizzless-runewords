@@ -412,9 +412,7 @@ export const REWORKED_RUNEWORDS = [
   },
 
   /**
-   * Unbending Will (id 36) — сверено со скрином вики/UI (март 2026).
-   * Руны Fal–Io–Ith–Hel, ур. 41, patch 2.4, мечи.
-   * Прок Taunt 10% (не 18%); порядок: ED → IAS → лайфстил → PMH → Damage reduced → STR/VIT → +9 Max → Req.
+   * Unbending Will (id 36) — активная изменённая версия сайта (ноябрь 2026).
    */
   {
     id: 36,
@@ -432,30 +430,22 @@ export const REWORKED_RUNEWORDS = [
     reworked: true,
     stats: {
       ru: [
-        "Вероятность 10% применить умение «Провокация» 18-го уровня при ударе",
+        "Вероятность 18% применить умение «Провокация» 18-го уровня при ударе",
         "+3 к боевым умениям (только для варваров)",
         "+<span class='varies'>300-350</span>% к урону",
         "+<span class='varies'>20-30</span>% к скорости атаки",
         "Похищает <span class='varies'>8-10</span>% здоровья за удар",
         "Запрещает монстрам лечиться",
         "Урон уменьшен на 8",
-        "+10 к силе",
-        "+10 к живучести",
-        "+9 к максимальному урону",
-        "Требования -20%",
       ],
       en: [
-        "10% Chance To Cast Level 18 Taunt On Striking",
+        "18% Chance To Cast Level 18 Taunt On Striking",
         "+3 To Combat Skills (Barbarian) (Barbarian Only)",
         "+<span class='varies'>300-350</span>% Enhanced Damage (varies)",
         "+<span class='varies'>20-30</span>% Increased Attack Speed (varies)",
         "+<span class='varies'>8-10</span>% Life Stolen Per Hit (varies)",
         "Prevent Monster Heal",
         "Damage Reduced By 8",
-        "+10 To Strength",
-        "+10 To Vitality",
-        "+9 To Maximum Damage",
-        "Requirements -20%",
       ],
     },
     complete: false,
@@ -521,29 +511,19 @@ export const REWORKED_RUNEWORDS = [
     },
     stats: {
       ru: [
+        "+<span class='varies'>1-6</span> к умению «Берсерк» (только для варваров)",
+        "+<span class='varies'>1-6</span> к умению «Истовость» (только для паладинов)",
         "+25% к скорости атаки",
-        "+3.06 к максимальному урону за уровень персонажа (зависит от уровня персонажа)",
+        "+<span class='varies'>160-210</span> к максимальному урону за уровень персонажа",
         "+<span class='varies'>50-80</span>% к рейтингу атаки",
-        "+75% урона по нежити",
-        "+50 к рейтингу атаки против нежити",
-        "+1-50 урона от молнии",
-        "+<span class='varies'>1-6</span> к умению «Берсерк»",
-        "+<span class='varies'>1-6</span> к умению «Истовость»",
-        "+25% к вероятности обратить монстра в бегство при ударе",
-        "+75% к золоту за убийство монстров",
         "«Сердце росомахи» 3-го уровня (12 зарядов)",
       ],
       en: [
+        "+<span class='varies'>1-6</span> To Berserk (Barbarian Only, varies)",
+        "+<span class='varies'>1-6</span> To Zeal (Paladin Only, varies)",
         "+25% Increased Attack Speed",
-        "+3.06 per Character Lvl Maximum Damage (Based on Character Level)",
-        "<span class='varies'>50-80</span>% Bonus To Attack Rating (varies)",
-        "+75% Damage To Undead",
-        "+50 To Attack Rating Against Undead",
-        "Adds 1-50 Lightning Damage",
-        "+<span class='varies'>1-6</span> To Berserk (varies)",
-        "+<span class='varies'>1-6</span> To Zeal (varies)",
-        "Hit Causes Monster To Flee 25%",
-        "75% Extra Gold From Monsters",
+        "+<span class='varies'>160-210</span> Maximum Damage per Character Level (varies)",
+        "+<span class='varies'>50-80</span>% Bonus To Attack Rating (varies)",
         "Level 3 Heart of Wolverine (12 Charges)",
       ],
     },
@@ -666,9 +646,7 @@ export const REWORKED_RUNEWORDS = [
   },
 
   /**
-   * Voice of Reason (id 40) — сверено со скрином вики/UI (март 2026).
-   * Руны Lem–Ko–El–Eld, ур. 43, patch 1.10, мечи и булавы (без скипетров на скрине).
-   * Порядок и диапазоны: ED 150–200, демоны 220–350, нежить 430–450.
+   * Voice of Reason (id 40) — активная изменённая версия сайта (ноябрь 2026).
    */
   {
     id: 40,
@@ -694,28 +672,18 @@ export const REWORKED_RUNEWORDS = [
         "-24% к сопротивлению льду у врага",
         "+<span class='varies'>150-200</span>% к урону",
         "+<span class='varies'>220-350</span>% к урону по демонам",
-        "+<span class='varies'>430-450</span>% урона по нежети",
+        "+<span class='varies'>280-300</span>% урона по нежети",
         "Нельзя заморозить",
         "+100-220 урона от льда",
-        "75% к золоту за убийство монстров",
-        "+10 к ловкости",
-        "+50 к рейтингу атаки",
-        "+1 к радиусу обзора",
-        "+50 к рейтингу атаки против нежити",
       ],
       en: [
         "+30% Faster Cast Rate",
         "-24% To Enemy Cold Resistance",
         "+<span class='varies'>150-200</span>% Enhanced Damage (varies)",
         "+<span class='varies'>220-350</span>% To Damage to Demons (varies)",
-        "+<span class='varies'>430-450</span>% To Damage to Undead (varies)",
+        "+<span class='varies'>280-300</span>% To Damage to Undead (varies)",
         "Cannot Be Frozen",
         "Adds 100-220 Cold Damage",
-        "75% Extra Gold From Monsters",
-        "+10 To Dexterity",
-        "+50 To Attack Rating",
-        "+1 To Light Radius",
-        "+50 To Attack Rating Against Undead",
       ],
     },
     complete: false,
@@ -1870,8 +1838,7 @@ export const REWORKED_RUNEWORDS = [
   },
 
   /**
-   * Wind (id 69) — сверено со скрином вики/UI (март 2026).
-   * Руны Sur–El, ур. 61, patch 1.10, оружие ближнего боя. Порядок: +skills → FCR → flat dmg → IAS → FRW → …
+   * Wind (id 69) — активная изменённая версия сайта (ноябрь 2026).
    */
   {
     id: 69,
@@ -1905,9 +1872,6 @@ export const REWORKED_RUNEWORDS = [
         "Вероятность 10% применить умение «Порча: Очищение» 11-го уровня при получении урона",
         "-50% к защите цели",
         "Вероятность 25% применить умение Смерч 9-го уровня при ударе",
-        "При ударе ослепляет цель",
-        "+50 к рейтингу атаки",
-        "+1 к радиусу обзора",
       ],
       en: [
         "+1 To All Skills",
@@ -1917,9 +1881,6 @@ export const REWORKED_RUNEWORDS = [
         "10% Chance To Cast Level 11 Hex: Purge When Struck",
         "-50% Target Defense",
         "25% Chance To Cast Level 9 Twister On Striking",
-        "Hit Blinds Target",
-        "+50 To Attack Rating",
-        "+1 To Light Radius",
       ],
     },
     complete: false,
@@ -2030,9 +1991,7 @@ export const REWORKED_RUNEWORDS = [
   },
 
   /**
-   * Eternity (id 73) — сверено со скрином вики/UI (март 2026).
-   * Руны Amn–Ber–Ist–Sol–Sur, ур. 63, patch 1.10, оружие ближнего боя.
-   * В данных: ED 310–350 (varies), +1 Teleport — по скрину +350% ED и +6 Teleport; порядок строк как на скрине.
+   * Eternity (id 73) — активная изменённая версия сайта (ноябрь 2026).
    */
   {
     id: 73,
@@ -2053,28 +2012,18 @@ export const REWORKED_RUNEWORDS = [
         "Не теряет прочности",
         "+350% к урону",
         "Замедляет цель на 33%",
-        "+6 к умению «Чары»",
         "+6 к умению «Оживление»",
         "+25% к скорости применения умений",
-        "Похищает 7% здоровья за удар",
-        "20% к вероятности нанести сокрушающий удар",
-        "30% к вероятности найти магический предмет",
-        "+9 к минимальному урону",
-        "При ударе ослепляет цель",
+        "+1.5 к максимальному урону за уровень персонажа",
       ],
       en: [
         "+6 To Teleport",
         "Indestructible",
         "+350% Enhanced Damage",
         "Slows Target By 33%",
-        "+6 To Enchant",
         "+6 To Revive",
         "+25% Faster Cast Rate",
-        "7% Life Stolen Per Hit",
-        "20% Chance of Crushing Blow",
-        "30% Better Chance Of Getting Magic Items",
-        "+9 To Minimum Damage",
-        "Hit Blinds Target",
+        "+1.5 Maximum Damage per Character Level",
       ],
     },
     complete: false,
@@ -2114,9 +2063,7 @@ export const REWORKED_RUNEWORDS = [
   },
 
   /**
-   * Wrath (id 75) — сверено со скрином вики/UI (март 2026).
-   * Руны Pul–Lum–Ber–Mal, ур. 63, patch 1.10, оружие дальнего боя (лук/арбалет).
-   * На скрине нет прока Life Tap — только Amplify Damage 15% / 14; ED +340%, CB +30%.
+   * Wrath (id 75) — активная изменённая версия сайта (ноябрь 2026).
    */
   {
     id: 75,
@@ -2134,27 +2081,21 @@ export const REWORKED_RUNEWORDS = [
     stats: {
       ru: [
         "Вероятность 15% применить умение «Усиление урона» 14-го уровня при ударе",
-        "+30% к вероятности нанести сокрушающий удар",
+        "+10% к вероятности нанести сокрушающий удар",
         "+1 к умению «Залп»",
         "+20% к скорости атаки",
-        "+340% к урону",
+        "+<span class='varies'>300-400</span>% к урону",
         "Нельзя заморозить",
-        "+75% к урону по демонам",
-        "+100 к рейтингу атаки против демонов",
-        "+10 к энергии",
-        "Запрещает монстрам лечиться",
+        "+<span class='varies'>6-18</span> к умению «Чары»",
       ],
       en: [
         "15% Chance To Cast Level 14 Amplify Damage On Striking",
-        "+30% Chance of Crushing Blow",
+        "+10% Chance of Crushing Blow",
         "+1 To Multiple Shot",
         "+20% Increased Attack Speed",
-        "+340% Enhanced Damage",
+        "+<span class='varies'>300-400</span>% Enhanced Damage (varies)",
         "Cannot Be Frozen",
-        "+75% To Damage to Demons",
-        "+100 To Attack Rating Against Demons",
-        "+10 To Energy",
-        "Prevent Monster Heal",
+        "+<span class='varies'>6-18</span> To Enchant (varies)",
       ],
     },
     complete: false,
@@ -2271,8 +2212,7 @@ export const REWORKED_RUNEWORDS = [
   },
 
   /**
-   * Brand (id 79) — сверено со скрином вики/UI (март 2026).
-   * Руны Jah–Lo–Mal–Gul, ур. 65, Missile Weapons; ED 380–400; без взрывных стрел; есть Cannot Be Frozen; порядок как на скрине.
+   * Brand (id 79) — активная изменённая версия сайта (ноябрь 2026).
    */
   {
     id: 79,
@@ -2290,27 +2230,21 @@ export const REWORKED_RUNEWORDS = [
     stats: {
       ru: [
         "Вероятность 30% применить умение «Одряхление» 1-го уровня при ударе",
-        "Вероятность 100% применить умение «Костяное копье» 18-го уровня при ударе",
-        "+<span class='varies'>380-400</span>% к урону",
-        "+<span class='varies'>280-330</span>% к урону по демонам",
+        "Вероятность 25% применить умение «Костяное копье» 18-го уровня при ударе",
+        "+<span class='varies'>350-450</span>% к урону",
         "Отбрасывание врагов",
         "Нельзя заморозить",
-        "+50% к вероятности нанести смертельный удар",
-        "Игнорирует защиту цели",
-        "Запрещает монстрам лечиться",
-        "+20% бонус к рейтингу атаки",
+        "+30% к вероятности нанести смертельный удар",
+        "+30% к скорости атаки",
       ],
       en: [
         "30% Chance To Cast Level 1 Decrepify On Striking",
-        "100% Chance To Cast Level 18 Bone Spear On Striking",
-        "+<span class='varies'>380-400</span>% Enhanced Damage (varies)",
-        "+<span class='varies'>280-330</span>% Damage To Demons (varies)",
+        "25% Chance To Cast Level 18 Bone Spear On Striking",
+        "+<span class='varies'>350-450</span>% Enhanced Damage (varies)",
         "Knockback",
         "Cannot Be Frozen",
-        "50% Deadly Strike",
-        "Ignore Target Defense",
-        "Prevent Monster Heal",
-        "+20% Bonus To Attack Rating",
+        "30% Deadly Strike",
+        "+30% Increased Attack Speed",
       ],
     },
     complete: false,
