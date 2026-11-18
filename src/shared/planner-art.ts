@@ -16,9 +16,40 @@ export const paperdollPositions: Partial<
   ringRight: [61.9, 52.8, 11.3, 10.3],
   boots: [74.9, 44.3, 20.8, 18.8],
 };
+// Insets to the interior of each painted frame, in original inventory pixels.
+const paperdollInsets: Partial<Record<EquipmentSlot, [number, number, number, number]>> =
+  {
+    head: [11, 12, 14, 11],
+    amulet: [13, 12, 14, 12],
+    mainHand: [9, 14, 11, 12],
+    armor: [10, 13, 14, 12],
+    offHand: [9, 12, 11, 14],
+    gloves: [13, 14, 11, 12],
+    ringLeft: [11, 12, 11, 13],
+    belt: [11, 13, 11, 12],
+    ringRight: [11, 13, 11, 13],
+    boots: [13, 12, 11, 14],
+  };
+export function slotBackgroundInset(
+  width: number,
+  height: number,
+  [top, right, bottom, left]: readonly [number, number, number, number]
+) {
+  return `${(top / height) * 100}% ${(right / width) * 100}% ${(bottom / height) * 100}% ${(left / width) * 100}%`;
+}
 export function paperdollStyle(slot: EquipmentSlot) {
   const [left, top, width, height] = paperdollPositions[slot]!;
-  return { left: `${left}%`, top: `${top}%`, width: `${width}%`, height: `${height}%` };
+  return {
+    left: `${left}%`,
+    top: `${top}%`,
+    width: `${width}%`,
+    height: `${height}%`,
+    "--planner-slot-inset": slotBackgroundInset(
+      width * 10.66,
+      height * 11.6,
+      paperdollInsets[slot]!
+    ),
+  };
 }
 
 export const paperdollCapacity: Record<EquipmentSlot, [number, number]> = {

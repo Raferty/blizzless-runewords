@@ -139,13 +139,9 @@
             <div class="planner-form-grid">
               <label class="planner-label"
                 >{{ t("Тип и специализация", "Type and specialization")
-                }}<UiSelect
-                  dropdown-class="planner-select-dropdown"
+                }}<PlannerMercenarySelect
                   :model-value="store.build.mercenary.type"
-                  :options="
-                    mercenaries.map((m) => ({ value: m.value, label: t(m.ru, m.en) }))
-                  "
-                  :aria-label="t('Наёмник', 'Mercenary')"
+                  :label="t('Наёмник', 'Mercenary')"
                   @update:model-value="setMercenary" /></label
               ><label class="planner-label"
                 >{{ t("Уровень наёмника", "Mercenary level")
@@ -566,6 +562,7 @@ import PlannerClassSelect from "./planner/PlannerClassSelect.vue";
 import PlannerEquipment from "./planner/PlannerEquipment.vue";
 import PlannerMercenary from "./planner/PlannerMercenary.vue";
 import PlannerMercenaryEquipment from "./planner/PlannerMercenaryEquipment.vue";
+import PlannerMercenarySelect from "./planner/PlannerMercenarySelect.vue";
 import PlannerStash from "./planner/PlannerStash.vue";
 import PlannerPanel from "./planner/PlannerPanel.vue";
 import PlannerSkillPanel from "./planner/PlannerSkillPanel.vue";

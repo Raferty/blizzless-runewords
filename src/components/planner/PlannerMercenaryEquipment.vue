@@ -31,6 +31,7 @@
         top: (slot.y / 626) * 100 + '%',
         width: (slot.width / 1036) * 100 + '%',
         height: (slot.height / 626) * 100 + '%',
+        '--planner-slot-inset': slotBackgroundInset(slot.width, slot.height, slot.insets),
       }"
       :item="store.build.mercenary.equipment[slot.key]"
       :capacity="paperdollCapacity[slot.key]"
@@ -45,7 +46,7 @@
 import { computed } from "vue";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
-import { paperdollCapacity } from "@/shared/planner-art";
+import { paperdollCapacity, slotBackgroundInset } from "@/shared/planner-art";
 import PlannerItemSlot from "./PlannerItemSlot.vue";
 import UiIcon from "@/components/ui/UiIcon.vue";
 withDefaults(defineProps<{ showReset?: boolean }>(), { showReset: true });
@@ -57,8 +58,26 @@ const hasEquipment = computed(() =>
 );
 const texture = import.meta.env.BASE_URL + "images/planner/mercenary.webp";
 const slots = [
-  { key: "head", ru: "Шлем", en: "Helm", x: 402, y: 30, width: 232, height: 230 },
-  { key: "mainHand", ru: "Оружие", en: "Weapon", x: 28, y: 174, width: 230, height: 430 },
+  {
+    key: "head",
+    ru: "Шлем",
+    en: "Helm",
+    x: 402,
+    y: 30,
+    width: 232,
+    height: 230,
+    insets: [18, 17, 17, 18],
+  },
+  {
+    key: "mainHand",
+    ru: "Оружие",
+    en: "Weapon",
+    x: 28,
+    y: 174,
+    width: 230,
+    height: 430,
+    insets: [24, 18, 22, 20],
+  },
   {
     key: "armor",
     ru: "Доспех",
@@ -67,6 +86,7 @@ const slots = [
     y: 269,
     width: 232,
     height: 333,
+    insets: [20, 18, 19, 17],
   },
 ] as const;
 </script>

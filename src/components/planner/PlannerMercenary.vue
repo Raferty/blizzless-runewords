@@ -19,11 +19,9 @@
       </button>
     </template>
     <div class="planner-mercenary-controls">
-      <UiSelect
-        dropdown-class="planner-select-dropdown"
+      <PlannerMercenarySelect
         :model-value="store.build.mercenary.type"
-        :options="mercenaries.map((m) => ({ value: m.value, label: t(m.ru, m.en) }))"
-        :aria-label="t('Тип наёмника', 'Mercenary type')"
+        :label="t('Тип наёмника', 'Mercenary type')"
         @update:model-value="$emit('type', $event)"
       /><input
         :value="store.build.mercenary.level"
@@ -46,11 +44,10 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import PlannerPanel from "./PlannerPanel.vue";
-import UiSelect from "@/components/ui/UiSelect.vue";
+import PlannerMercenarySelect from "./PlannerMercenarySelect.vue";
 import UiIcon from "@/components/ui/UiIcon.vue";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
-import { mercenaries } from "@/shared/planner";
 defineEmits<{ configure: []; type: [value: string] }>();
 const store = usePlannerStore();
 const t = useText();

@@ -11,6 +11,12 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   The unmodified 1036×790 image is displayed through an SVG viewport without its header/footer.
 - `classes/*.png`: class portraits from Blizzless Glossary:
   https://blizzless.info/media/chars/hd/{classId}.png
+- `mercenaries/act{1,2,3,5}.png`: the four original hireling portraits from
+  Blizzless Glossary, downloaded unchanged on 2026-11-18:
+  https://blizzless.info/media/mercs/act{1,2,3,5}merc.png
+  Source page: https://blizzless.info/breakpoints (Hit Recovery / Blocking tables).
+  Specialization icons reuse the local Blizzless skill artwork listed below;
+  `mercenaries[].skillId` identifies the native hireling's skill or aura.
 - `items/{weapon,armor,misc}/**/*.webp`: 254 referenced original D2R inventory images from
   https://lootcube.net/images/items/, downloaded 2026-10-27.
   Source example: https://lootcube.net/en/sets/aldurs-watchtower
