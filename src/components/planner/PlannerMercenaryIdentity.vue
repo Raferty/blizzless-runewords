@@ -14,8 +14,8 @@
       class="planner-mercenary-specialization"
       :src="`${base}${skill.icon}`"
       alt=""
-      width="22"
-      height="22"
+      width="26"
+      height="26"
     />
     <span class="planner-mercenary-name">{{ label }}</span>
   </span>
