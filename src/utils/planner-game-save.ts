@@ -301,14 +301,16 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const makeItem = (native: BinaryParsedItem): PlannerItem => {
       const base = gd.items[native.base];
       const itemQuality = quality[native.quality] ?? "normal";
-      const prefix = native.magicPrefixCode
+      const prefixKey = native.magicPrefixCode
         ? (gd.magicPrefix[native.magicPrefixCode] as unknown as Definition | undefined)
             ?.name
         : undefined;
-      const suffix = native.magicSuffixCode
+      const suffixKey = native.magicSuffixCode
         ? (gd.magicSuffix[native.magicSuffixCode] as unknown as Definition | undefined)
             ?.name
         : undefined;
+      const prefix = prefixKey ? gd.locale.strings[prefixKey] || prefixKey : undefined;
+      const suffix = suffixKey ? gd.locale.strings[suffixKey] || suffixKey : undefined;
       const bonuses: PlannerItem["bonuses"] = {};
       for (const [stat, key] of Object.entries(statBonuses)) {
         const value = native.stats[stat];

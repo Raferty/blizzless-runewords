@@ -170,6 +170,8 @@ try {
       { id: "ms677", values: [3] },
     ],
     [a.newAffix(skillAffix), { id: "ms338", values: [45] }],
+    [a.newAffix(a.affixById.get("mp430")), { id: "ms338", values: [45] }],
+    [a.newAffix(a.affixById.get("mp491")), a.newAffix(a.affixById.get("ms334"))],
   ];
   const charmBuild = p.createBuild("barbarian");
   charmBuild.charms = grandCharms.map((affixes, position) => ({
@@ -197,10 +199,23 @@ try {
     );
     assert.deepEqual(a.affixStats(charm), a.affixStats(original));
     assert.deepEqual(charm.bonuses, {}, "Affix bonuses must only be counted once");
-    assert.equal(itemRequiredLevel(charm), index === 2 ? 63 : 83);
+    assert.equal(itemRequiredLevel(charm), itemRequiredLevel(original));
+    const prefix = original.affixes.find(
+      ({ id }) => a.affixById.get(id).kind === "prefix"
+    );
+    const suffix = original.affixes.find(
+      ({ id }) => a.affixById.get(id).kind === "suffix"
+    );
+    assert.equal(
+      charm.name,
+      `${a.affixById.get(prefix.id).name} Grand Charm ${a.affixById.get(suffix.id).name}`,
+      "Imported names must resolve the same game strings as the affix editor"
+    );
   });
   assert.deepEqual(imported[0].affixes, grandCharms[0]);
   assert.deepEqual(imported[1].affixes, grandCharms[1]);
+  assert.equal(imported[4].name, "Acrobatic Grand Charm of Vita");
+  assert.equal(imported[5].name, "Natural Grand Charm of Sustenance");
   assert.deepEqual(
     imported[0].affixes.flatMap(({ id, values }) =>
       definitionPropertyLines(
