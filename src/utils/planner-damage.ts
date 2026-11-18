@@ -110,7 +110,7 @@ export function combatItemStats(
     : {};
   const addInsert = (code: string, index: number) => {
     const gem = native.gd.gems[code] as unknown as Row | undefined;
-    const jewel = native.gd.uniqueItems[code] as unknown as Row | undefined;
+    const jewel = native.socketJewelDefinition(code);
     const props: Row = jewel ? { ...jewel } : {};
     if (gem)
       for (let i = 1; i <= 3; i++) {

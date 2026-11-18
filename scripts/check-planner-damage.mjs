@@ -7,7 +7,11 @@ const server = await createServer({
   appType: "custom",
 });
 try {
-  const { createBuild } = await server.ssrLoadModule("/src/utils/planner.ts");
+  const { createBuild: createStarterBuild } = await server.ssrLoadModule(
+    "/src/utils/planner.ts"
+  );
+  // Damage fixtures isolate the listed gear and skill ranks from starter charms.
+  const createBuild = (classId) => ({ ...createStarterBuild(classId), charms: [] });
   const { plannerSkills, plannerClasses } = await server.ssrLoadModule(
     "/src/shared/planner.ts"
   );

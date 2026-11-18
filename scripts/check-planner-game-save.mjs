@@ -11,7 +11,12 @@ const server = await createServer({
 });
 try {
   const native = await server.ssrLoadModule("/src/utils/planner-game-save.ts");
-  const planner = await server.ssrLoadModule("/src/utils/planner.ts");
+  const plannerModule = await server.ssrLoadModule("/src/utils/planner.ts");
+  // Each save fixture specifies its own items and native base choices.
+  const planner = {
+    ...plannerModule,
+    createBuild: (classId) => ({ ...plannerModule.createBuild(classId), charms: [] }),
+  };
   const { plannerClasses, plannerSkills, mercenaries } = await server.ssrLoadModule(
     "/src/shared/planner.ts"
   );
@@ -71,6 +76,10 @@ try {
       planner.skillBudget(build) - planner.spentSkills(build)
     );
     assert.equal(JSON.stringify(build), original, "Export must not mutate the planner");
+    const imported = codec.importCharacter(bytes);
+    assert.equal(imported.classId, build.classId, "Native import keeps class");
+    assert.equal(imported.level, build.level, "Native import keeps level");
+    assert.equal(imported.name, options.name, "Native import keeps character name");
     assertions++;
     return { bytes, read, raw: codec.readCharacter(bytes) };
   }

@@ -21,6 +21,7 @@ import {
   socketInsertByCode,
   socketedBonuses,
   parseSocketPropertyValues,
+  parseSocketIconIndices,
 } from "./planner-sockets";
 import {
   normalizeClassCharm,
@@ -63,7 +64,7 @@ export function createBuild(classId: ClassId = "sorceress"): PlannerBuild {
     attributes: { strength: 0, dexterity: 0, vitality: 0, energy: 0 },
     skills: {},
     equipment: {},
-    charms: [],
+    charms: defaultInventory(classId),
     stash: [],
     primarySkills: [],
     mercenary: { type: "none", level: 90, equipment: {} },
@@ -244,7 +245,21 @@ export function defaultInventory(classId: ClassId): PlannerCharm[] {
       requiredLevel: 1,
       bonuses: {},
       height: 2,
+      // Keep utility items along the left edge. The open area to their right
+      // is reserved for charms on every new character.
       position: 0,
+    },
+    {
+      ...common,
+      id: `default-tome-${classId}`,
+      name: "Tome of Town Portal",
+      quality: "normal",
+      baseCode: "tbk",
+      requiredLevel: 1,
+      bonuses: {},
+      quantity: 20,
+      height: 2,
+      position: 20,
     },
     {
       ...common,
@@ -256,7 +271,7 @@ export function defaultInventory(classId: ClassId): PlannerCharm[] {
       requiredLevel: 70,
       bonuses: { ...stats, allSkills: 1 },
       height: 1,
-      position: 2,
+      position: 32,
     },
     {
       ...common,
@@ -270,7 +285,7 @@ export function defaultInventory(classId: ClassId): PlannerCharm[] {
       classBonuses: { [classId]: 3 },
       skillClass: classId,
       height: 2,
-      position: 3,
+      position: 21,
     },
   ];
 }
@@ -461,8 +476,17 @@ export function parsePlannerItem(value: unknown): PlannerItem {
     ...(item.itemLevel === undefined
       ? {}
       : { itemLevel: integer(item.itemLevel, 1, 99) }),
+    ...(item.iconIndex === undefined ? {} : { iconIndex: integer(item.iconIndex, 0, 7) }),
     ...(item.sockets === undefined ? {} : { sockets: integer(item.sockets, 0, 6) }),
     ...(socketedItems === undefined ? {} : { socketedItems }),
+    ...(item.socketIconIndices === undefined
+      ? {}
+      : {
+          socketIconIndices: parseSocketIconIndices(
+            item.socketIconIndices,
+            socketedItems
+          ),
+        }),
     ...(item.socketPropertyValues === undefined
       ? {}
       : {

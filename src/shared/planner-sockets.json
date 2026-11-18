@@ -2135,7 +2135,7 @@
         "ru": "Радужный фасет · Молния · Смерть"
       },
       "requiredLevel": 49,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/items/misc/gem/light_facet.png",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -2183,7 +2183,7 @@
         "ru": "Радужный фасет · Холод · Смерть"
       },
       "requiredLevel": 49,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/items/misc/gem/cold_facet.png",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -2231,7 +2231,7 @@
         "ru": "Радужный фасет · Огонь · Смерть"
       },
       "requiredLevel": 49,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/items/misc/gem/fire_facet.png",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -2279,7 +2279,7 @@
         "ru": "Радужный фасет · Яд · Смерть"
       },
       "requiredLevel": 49,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/items/misc/gem/pois_facet.png",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -2327,7 +2327,7 @@
         "ru": "Радужный фасет · Молния · Новый уровень"
       },
       "requiredLevel": 49,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/items/misc/gem/light_facet.png",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -2375,7 +2375,7 @@
         "ru": "Радужный фасет · Холод · Новый уровень"
       },
       "requiredLevel": 49,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/items/misc/gem/cold_facet.png",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -2423,7 +2423,7 @@
         "ru": "Радужный фасет · Огонь · Новый уровень"
       },
       "requiredLevel": 49,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/items/misc/gem/fire_facet.png",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -2471,7 +2471,7 @@
         "ru": "Радужный фасет · Яд · Новый уровень"
       },
       "requiredLevel": 49,
-      "image_url": "/images/cube/c42fa7a7a08d52a172.png",
+      "image_url": "/images/planner/items/misc/gem/pois_facet.png",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -2519,7 +2519,7 @@
         "ru": "Желчь защитника"
       },
       "requiredLevel": 75,
-      "image_url": "/images/planner/sockets/colossal_jewel_talic.webp",
+      "image_url": "/images/planner/items/misc/body_part/fragment_poison.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -2637,7 +2637,7 @@
         "ru": "Гром стража"
       },
       "requiredLevel": 75,
-      "image_url": "/images/planner/sockets/colossal_jewel_madawc.webp",
+      "image_url": "/images/planner/items/misc/body_part/fragment_lightning.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -2809,7 +2809,7 @@
         "ru": "Мороз хранителя"
       },
       "requiredLevel": 75,
-      "image_url": "/images/planner/sockets/colossal_jewel_korlic.webp",
+      "image_url": "/images/planner/items/misc/body_part/fragment_cold.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -2987,7 +2987,7 @@
         "ru": "Огонь защитника"
       },
       "requiredLevel": 75,
-      "image_url": "/images/planner/sockets/colossal_jewel_talic.webp",
+      "image_url": "/images/planner/items/misc/body_part/fragment_fire.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -3234,7 +3234,7 @@
         "ru": "Камень хранителя"
       },
       "requiredLevel": 75,
-      "image_url": "/images/planner/sockets/colossal_jewel_korlic.webp",
+      "image_url": "/images/planner/items/misc/body_part/fragment_physical.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {},
@@ -3322,7 +3322,7 @@
         "ru": "Свет стража"
       },
       "requiredLevel": 75,
-      "image_url": "/images/planner/sockets/colossal_jewel_madawc.webp",
+      "image_url": "/images/planner/items/misc/body_part/fragment_magic.webp",
       "effects": {
         "weapon": {
           "skillBonuses": {
@@ -3470,6 +3470,77 @@
         "7": {
           "bonuses": {
             "magicFind": 0
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "j15fr",
+      "baseCode": "jew",
+      "group": "jewel",
+      "name": {
+        "en": "Ruby Jewel of Fervor",
+        "ru": "Рубиновый самоцвет стремительности"
+      },
+      "requiredLevel": 31,
+      "image_url": "/images/planner/items/misc/gem/perfect_diamond1.webp",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {
+            "fireResist": 30,
+            "ias": 15
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {
+            "fireResist": 30,
+            "ias": 15
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {
+            "fireResist": 30,
+            "ias": 15
+          },
+          "classBonuses": {}
+        }
+      }
+    },
+    {
+      "code": "j15ar",
+      "baseCode": "jew",
+      "group": "jewel",
+      "name": {
+        "en": "Jewel of Fervor and Accuracy",
+        "ru": "Самоцвет стремительности и меткости"
+      },
+      "requiredLevel": 31,
+      "image_url": "/images/planner/items/misc/gem/perfect_diamond1.webp",
+      "effects": {
+        "weapon": {
+          "skillBonuses": {},
+          "bonuses": {
+            "ias": 15
+          },
+          "classBonuses": {}
+        },
+        "helm": {
+          "skillBonuses": {},
+          "bonuses": {
+            "ias": 15
+          },
+          "classBonuses": {}
+        },
+        "shield": {
+          "skillBonuses": {},
+          "bonuses": {
+            "ias": 15
           },
           "classBonuses": {}
         }

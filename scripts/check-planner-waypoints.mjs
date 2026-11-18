@@ -22,6 +22,7 @@ try {
     );
   const exporter = createGameSaveExporter(await load("data"), await load("strings"));
   const build = createBuild();
+  build.charms = [];
   assert.equal(waypoints.length, 39);
   assert.equal(new Set(waypoints.map((point) => point.key)).size, 39);
   assert.deepEqual(

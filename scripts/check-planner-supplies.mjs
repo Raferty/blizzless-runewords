@@ -115,6 +115,16 @@ try {
       ownItems.map((item) => item.base),
       staged.map((item) => item.baseCode)
     );
+    const statues = staged.filter((item) => /^ua[1-5]$/.test(item.baseCode));
+    if (statues.length) {
+      const imported = native.importCharacter(output);
+      const restored = imported.stash.filter((item) => /^ua[1-5]$/.test(item.baseCode));
+      assert.deepEqual(
+        restored.map((item) => [item.baseCode, item.stashPosition]),
+        statues.map((item) => [item.baseCode, item.stashPosition]),
+        "All five Ancients statues survive native import, including their cells"
+      );
+    }
     assert.equal(
       JSON.stringify(build),
       original,
@@ -125,6 +135,19 @@ try {
   }
   const build = planner.createBuild("sorceress");
   build.level = 99;
+  build.charms = [];
+  await verify(
+    build,
+    ["ua1", "ua2", "ua3", "ua4", "ua5"].map((baseCode) => ({
+      name: baseCode,
+      baseCode,
+      quality: "normal",
+      itemLevel: 99,
+      requiredLevel: 1,
+      bonuses: {},
+      notes: "",
+    }))
+  );
   const catalog = createItemCatalog(native, build, { key: "stash", owner: "stash" }, []);
   const loose = Object.keys(supplies.stashSupplies).map((code) => {
     const item = supplies.createStashSupply(native, code);

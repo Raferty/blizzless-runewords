@@ -24,6 +24,9 @@ try {
   const art = JSON.parse(
     await readFile(new URL("../src/shared/planner-item-art.json", import.meta.url))
   );
+  const nativeArt = JSON.parse(
+    await readFile(new URL("../src/shared/planner-native-art.json", import.meta.url))
+  );
   for (const image of new Set(
     [
       ...Object.values(art.bases),
@@ -140,11 +143,11 @@ try {
       )
       .digest("hex")
   );
-  assert.equal(socketInserts.length, 86);
+  assert.equal(socketInserts.length, 88);
   assert.equal(socketInserts.filter((insert) => insert.group === "facet").length, 8);
-  assert.equal(socketInserts.filter((insert) => insert.group === "jewel").length, 6);
+  assert.equal(socketInserts.filter((insert) => insert.baseCode === "cjw").length, 6);
   assert.equal(socketInserts.filter((insert) => insert.group === "gem").length, 35);
-  assert.equal(new Set(socketInserts.map((insert) => insert.code)).size, 86);
+  assert.equal(new Set(socketInserts.map((insert) => insert.code)).size, 88);
   for (const insert of socketInserts) {
     await access(new URL("../public" + insert.image_url, import.meta.url));
     for (const category of ["weapon", "helm", "shield"]) {
@@ -350,6 +353,45 @@ try {
     "Legacy items resolve their artwork without changing saved data"
   );
   assert(plannerItemImage({ name: "Arcanna's Head", quality: "set" }));
+  const jewelryAndJewels = stash.items.filter(
+    (item) =>
+      item.quality === "unique" &&
+      ["ring", "amul", "jewl"].includes(stash.bases.get(item.bases[0])?.category)
+  );
+  assert.equal(jewelryAndJewels.length, 48);
+  for (const item of jewelryAndJewels) {
+    const key = nativeArt.unique[data.uniqueItems[item.catalogId].index];
+    assert(key, item.name);
+    const expected = `images/planner/items/${key}.${nativeArt.sprites[key] ? "png" : "webp"}`;
+    assert.equal(
+      plannerItemImage({
+        baseCode: item.bases[0],
+        quality: "unique",
+        catalogId: item.catalogId,
+      }),
+      expected
+    );
+    assert.deepEqual(art.unique[item.catalogId], Array(3).fill(expected));
+  }
+  assert.equal(new Set(art.variants.jew).size, 6);
+  for (let iconIndex = 0; iconIndex < 6; iconIndex++) {
+    const image = plannerItemImage({ baseCode: "jew", quality: "magic", iconIndex });
+    assert.equal(
+      image,
+      `images/planner/items/misc/gem/perfect_diamond${iconIndex + 1}.webp`
+    );
+    await access(new URL("../public/" + image, import.meta.url));
+  }
+  for (const item of [
+    { baseCode: "amu", quality: "unique", catalogId: "unique276" },
+    { baseCode: "fmu", quality: "unique", catalogId: "unique464" },
+    { name: "Highlord’s Wrath", quality: "unique" },
+  ])
+    assert.equal(
+      plannerItemImage(item),
+      "images/planner/items/misc/amulet/highlords_wrath.png",
+      "Highlord's Wrath uses its native Blizzless artwork for catalog and legacy items"
+    );
   assert.deepEqual(
     plannerItemDimensions({ name: "Aldur's Deception", quality: "set" }),
     [2, 3]

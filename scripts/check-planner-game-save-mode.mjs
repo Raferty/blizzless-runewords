@@ -14,7 +14,11 @@ const server = await createServer({
   appType: "custom",
 });
 try {
-  const { createBuild } = await server.ssrLoadModule("/src/utils/planner.ts");
+  const { createBuild: createStarterBuild } = await server.ssrLoadModule(
+    "/src/utils/planner.ts"
+  );
+  // Header fixtures have no item choices; inventory contents are tested separately.
+  const createBuild = (classId) => ({ ...createStarterBuild(classId), charms: [] });
   const { plannerClasses } = await server.ssrLoadModule("/src/shared/planner.ts");
   const { createGameSaveExporter, saveChecksum } = await server.ssrLoadModule(
     "/src/utils/planner-game-save.ts"

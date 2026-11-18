@@ -1,7 +1,7 @@
 import { D2RSaver, type BinaryParsedItem, type D2SCharacterProfile } from "d2r-saver";
 import { writeItem, type types as SaveTypes } from "@d2runewizard/d2s";
 import { constants as originalConstants } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
-import { difficulties, plannerClasses } from "@/shared/planner";
+import { difficulties, plannerClasses, plannerSkills } from "@/shared/planner";
 import { waypoints } from "@/shared/planner-waypoints";
 import { RUNEWORDS } from "@/shared/runewords";
 import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
@@ -9,6 +9,7 @@ import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
 import { REWORKED_RUNEWORDS } from "@/shared/reworked-runewords";
 import {
   attributeBudget,
+  createBuild,
   parseBuild,
   skillBudget,
   spentAttributes,
@@ -16,9 +17,14 @@ import {
 } from "./planner";
 import type { ClassId, EquipmentSlot, PlannerBuild, PlannerItem } from "@/types/planner";
 
-import { affixStats, parseAffixes } from "./planner-affixes";
+import { affixStats, parseAffixes, restoreMagicAffixes } from "./planner-affixes";
 import { layoutStashItems } from "./planner-stash";
 import { isContainerBase, isTome } from "./planner-item-art";
+import {
+  baseSupportsSockets,
+  magicSocketJewels,
+  parseSocketIconIndices,
+} from "./planner-sockets";
 import { craftDefinition, craftVariant, craftAffixMinimum } from "./planner-crafts";
 import { stashSupplies } from "./planner-supplies";
 import {
@@ -175,6 +181,277 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       reader = D2RSaver.fromData(readData, locale);
     }
     return reader.readD2S(bytes);
+  }
+
+  /**
+   * Turn a native v105 character save into a planner draft.  This deliberately
+   * favours keeping a usable character over rejecting saves with an item the
+   * catalogue does not know yet: such an item is represented by its base and
+   * decoded stats.  Unique/set IDs are restored when the local game data has a
+   * matching save id, so exported planner saves round-trip losslessly enough
+   * for editing and re-exporting.
+   */
+  function importCharacter(bytes: Uint8Array): PlannerBuild {
+    const { profile, items } = readCharacter(bytes);
+    // The reader also uses string base codes for preset inventory/stash supplies.
+    const parsedItems = items as Record<number | string, BinaryParsedItem>;
+    const classIndex = nativeClasses.indexOf(
+      profile.class as (typeof nativeClasses)[number]
+    );
+    if (classIndex < 0) throw new GameSaveError("validation", "class");
+    const classId = classes[classIndex];
+    const build = createBuild(classId);
+    // A native save owns its inventory; do not retain the new-character defaults.
+    build.charms = [];
+    build.name = profile.name;
+    build.level = Math.max(1, Math.min(99, profile.level));
+    build.weaponSet = profile.weaponSet === 1 ? 1 : 0;
+    build.gold = Math.max(0, Math.min(build.level * 10000, profile.gold ?? 0));
+    const character = plannerClasses.find((entry) => entry.id === classId)!;
+    build.attributes = {
+      strength: Math.max(
+        0,
+        (profile.attributes?.strength ?? profile.stats.str) - character.base.strength
+      ),
+      dexterity: Math.max(
+        0,
+        (profile.attributes?.dexterity ?? profile.stats.dex) - character.base.dexterity
+      ),
+      vitality: Math.max(
+        0,
+        (profile.attributes?.vitality ?? profile.stats.vit) - character.base.vitality
+      ),
+      energy: Math.max(
+        0,
+        (profile.attributes?.energy ?? profile.stats.int) - character.base.energy
+      ),
+    };
+    build.skills = Object.fromEntries(
+      Object.entries(profile.skills)
+        .filter(
+          ([id, points]) =>
+            plannerClasses &&
+            plannerSkills.some(
+              (skill) => skill.id === Number(id) && skill.classId === classId
+            ) &&
+            points > 0
+        )
+        .map(([id, points]) => [Number(id), Math.min(20, points)])
+    );
+
+    const quality: Record<number, PlannerItem["quality"]> = {
+      1: "normal",
+      2: "normal",
+      3: "normal",
+      4: "magic",
+      5: "set",
+      6: "rare",
+      7: "unique",
+      8: "crafted",
+      9: "runeword",
+    };
+    const statBonuses: Record<string, keyof PlannerItem["bonuses"]> = {
+      strength: "strength",
+      dexterity: "dexterity",
+      vitality: "vitality",
+      energy: "energy",
+      maxhp: "life",
+      maxmana: "mana",
+      fireresist: "fireResist",
+      coldresist: "coldResist",
+      lightresist: "lightningResist",
+      poisonresist: "poisonResist",
+      item_allskills: "allSkills",
+      item_fastercastrate: "fcr",
+      item_fastergethitrate: "fhr",
+      item_fasterattackrate: "ias",
+      item_fastermovevelocity: "frw",
+      item_magicbonus: "magicFind",
+    };
+    const findCatalogId = (kind: "uniqueItems" | "setItems", id?: string) => {
+      if (!id) return undefined;
+      const prefix = kind === "uniqueItems" ? "unique" : "set";
+      const savedId = Number(id.slice(prefix.length));
+      return Object.entries(gd[kind]).find(([, value]) => {
+        const saved = (value as unknown as Definition).saveId;
+        return typeof saved === "number" && saved === savedId;
+      })?.[0];
+    };
+    const makeItem = (native: BinaryParsedItem): PlannerItem => {
+      const base = gd.items[native.base];
+      const itemQuality = quality[native.quality] ?? "normal";
+      const prefix = native.magicPrefixCode
+        ? (gd.magicPrefix[native.magicPrefixCode] as unknown as Definition | undefined)
+            ?.name
+        : undefined;
+      const suffix = native.magicSuffixCode
+        ? (gd.magicSuffix[native.magicSuffixCode] as unknown as Definition | undefined)
+            ?.name
+        : undefined;
+      const bonuses: PlannerItem["bonuses"] = {};
+      for (const [stat, key] of Object.entries(statBonuses)) {
+        const value = native.stats[stat];
+        if (typeof value === "number")
+          // Item life/mana stats returned by d2r-saver are already expressed in
+          // display points (unlike the fixed-point character resource fields).
+          bonuses[key] = value;
+      }
+      const catalogId =
+        itemQuality === "unique"
+          ? findCatalogId("uniqueItems", native.unique)
+          : itemQuality === "set"
+            ? findCatalogId("setItems", native.unique)
+            : undefined;
+      const nativeRuneword =
+        itemQuality === "runeword" ? gd.runes[native.unique ?? ""] : undefined;
+      const runewordName = nativeRuneword?.name;
+      const runewordId =
+        typeof runewordName === "string"
+          ? [
+              ...RUNEWORDS,
+              ...REWORKED_RUNEWORDS,
+              ...CUSTOM_RUNEWORDS,
+              ...ROTW_RUNEWORDS,
+            ].find((word) => normalize(word.name.en) === normalize(runewordName))?.id
+          : undefined;
+      const baseTypes = types(native.base);
+      const item: PlannerItem = {
+        name: catalogId
+          ? gd.locale.strings[
+              (itemQuality === "set" ? gd.setItems : gd.uniqueItems)[catalogId].index
+            ] || (itemQuality === "set" ? gd.setItems : gd.uniqueItems)[catalogId].index
+          : runewordName ||
+            (itemQuality === "magic" && (prefix || suffix)
+              ? `${prefix ? `${prefix} ` : ""}${gd.locale.strings[base?.namestr ?? ""] || base?.name || native.base}${suffix ? ` ${suffix}` : ""}`
+              : gd.locale.strings[base?.namestr ?? ""] || base?.name || native.base),
+        quality: itemQuality,
+        requiredLevel: Math.max(1, base?.levelreq || 1),
+        notes: "",
+        bonuses,
+        ...(catalogId ? { catalogId } : {}),
+        ...(Number.isInteger(runewordId) && runewordId! > 0 ? { runewordId } : {}),
+        ...(itemQuality === "runeword"
+          ? {
+              baseKind: baseTypes.has("weap")
+                ? "weapon"
+                : baseTypes.has("shld")
+                  ? "shield"
+                  : "armor",
+            }
+          : {}),
+        baseCode: native.base,
+        itemLevel: Math.max(1, Math.min(99, native.ilvl || 1)),
+        ...(native.iconIndex === undefined ? {} : { iconIndex: native.iconIndex }),
+        ...(native.sockets ? { sockets: native.sockets } : {}),
+        ...(itemQuality !== "runeword" && native.socketedItems.length
+          ? {
+              socketedItems: native.socketedItems.map((value) =>
+                typeof value === "string"
+                  ? value
+                  : items[value]?.quality === 7
+                    ? (findCatalogId("uniqueItems", items[value]?.unique) ?? null)
+                    : items[value]?.base === "jew" &&
+                        items[value]?.stats.item_fasterattackrate === 15
+                      ? items[value]?.stats.fireresist === 30
+                        ? "j15fr"
+                        : "j15ar"
+                      : (items[value]?.base ?? null)
+              ),
+            }
+          : {}),
+        ...(native.ethereal ? { ethereal: true } : {}),
+        // The planner only models quantities for Town Portal / Identify tomes.
+        // Other stack sizes (keys, scrolls, potions, etc.) are game-save details
+        // and would make the imported planner item fail validation.
+        ...(native.quantity && ["tbk", "ibk"].includes(native.base)
+          ? { quantity: native.quantity }
+          : {}),
+      };
+      const socketIcons = Object.fromEntries(
+        native.socketedItems.flatMap((value, index) => {
+          const child = typeof value === "number" ? parsedItems[value] : undefined;
+          return child?.base === "jew" &&
+            child.quality === 4 &&
+            child.iconIndex !== undefined
+            ? [[index, child.iconIndex]]
+            : [];
+        })
+      );
+      if (Object.keys(socketIcons).length) item.socketIconIndices = socketIcons;
+      if (native.base === "cm3" && itemQuality === "magic") {
+        const affixes = restoreMagicAffixes(
+          item,
+          [native.magicPrefixCode, native.magicSuffixCode],
+          native.stats
+        );
+        if (affixes.length) {
+          item.affixes = affixes;
+          for (const stat of Object.keys(affixStats(item))) {
+            const key = statBonuses[stat];
+            if (key) delete bonuses[key];
+          }
+        }
+      }
+      return item;
+    };
+    const slotByGame: Record<string, EquipmentSlot> = Object.fromEntries(
+      Object.entries(slots).map(([slot, game]) => [game, slot as EquipmentSlot])
+    );
+    for (const [gameSlot, id] of Object.entries(profile.items)) {
+      const native = typeof id === "number" ? items[id] : undefined;
+      const slot = slotByGame[gameSlot];
+      if (native && slot) build.equipment[slot] = makeItem(native);
+    }
+    if (profile.merc) {
+      build.mercenary = {
+        // Current v105 save profiles do not retain the UI aura key. Desert Might
+        // is the default Act II export option and preserves its equipment.
+        type: "desert-might",
+        level: Math.max(1, Math.min(98, profile.mercLevel ?? build.level)),
+        equipment: {},
+      };
+      for (const [gameSlot, id] of Object.entries(profile.mercItems)) {
+        const native = typeof id === "number" ? items[id] : undefined;
+        const slot = slotByGame[gameSlot];
+        if (native && slot && ["head", "armor", "mainHand", "offHand"].includes(slot))
+          build.mercenary.equipment[slot as "head" | "armor" | "mainHand" | "offHand"] =
+            makeItem(native);
+      }
+    }
+    for (const [position, id] of profile.inventory.entries()) {
+      if (id === "box") {
+        build.charms.push({
+          id: `d2s-cube-${position}`,
+          position,
+          height: 2,
+          name: "Horadric Cube",
+          quality: "normal",
+          requiredLevel: 1,
+          notes: "",
+          bonuses: {},
+          baseCode: "box",
+          itemLevel: 1,
+        });
+        continue;
+      }
+      const native = id === undefined ? undefined : parsedItems[id];
+      if (!native) continue;
+      const item = makeItem(native);
+      const height = Math.max(1, Math.min(3, gd.items[native.base]?.invheight || 1));
+      build.charms.push({
+        ...item,
+        id: `d2s-${native.guid ?? native.itemId}`,
+        position,
+        height,
+      });
+    }
+    for (const [position, id] of profile.stash.entries()) {
+      // Preset supplies, including ua1–ua5, are keyed by their base code.
+      const native = id === undefined ? undefined : parsedItems[id];
+      if (!native) continue;
+      build.stash.push({ ...makeItem(native), stashPosition: position });
+    }
+    return parseBuild(build);
   }
   const constants = structuredClone(originalConstants) as SaveTypes.IConstantData;
   for (const [name, stat] of Object.entries(gd.itemStatCost)) {
@@ -648,15 +925,23 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         )
       : [];
   }
+  function socketJewelDefinition(code: string): Definition | undefined {
+    const unique = gd.uniqueItems[code];
+    return (
+      magicSocketJewels[code]?.definition ??
+      (unique && ["jew", "cjw"].includes(unique.code)
+        ? (unique as Definition)
+        : undefined)
+    );
+  }
   function socketBonuses(
     code: string,
     category: "weapon" | "helm" | "shield",
     values: PlannerItem["propertyValues"] = {}
   ) {
     const gem = gd.gems[code] as unknown as Definition | undefined;
-    const jewel = gd.uniqueItems[code] as unknown as Definition | undefined;
-    if (!gem && (!jewel || !["jew", "cjw"].includes(String(jewel.code))))
-      throw new GameSaveError("property", code);
+    const jewel = socketJewelDefinition(code);
+    if (!gem && !jewel) throw new GameSaveError("property", code);
     const def: Definition = jewel ?? {};
     for (let i = 1; gem && i <= 3; i++) {
       def[`prop${i}`] = gem[`${category}mod${i}code`];
@@ -798,7 +1083,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           ?.amazon ?? 0
       ),
       gold: build.gold,
-      goldbank: 0,
+      // The v105 stash accepts up to 2.5M gold; the usual level-scaled cap reaches
+      // 2,475,000 at level 99.
+      goldbank: Math.min(2_500_000, build.level * 25_000),
     };
     for (const [key, value] of Object.entries(profile.attributes)) {
       const bits = gd.itemStatCost[key]?.csvbits;
@@ -861,7 +1148,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const itemQuantities = new Map<number, number>();
     const socketRolls = new Map<
       number,
-      { roll: 0 | 1; values?: Record<string, number> }[]
+      { roll: 0 | 1; values?: Record<string, number>; iconIndex?: number }[]
     >();
     function nextId() {
       let id: number;
@@ -872,6 +1159,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       return id;
     }
     for (const { entry, choice, base } of entries) {
+      if (
+        entry.item.iconIndex !== undefined &&
+        (!Number.isInteger(entry.item.iconIndex) ||
+          entry.item.iconIndex < 0 ||
+          entry.item.iconIndex >= (gd.itemTypes[base.type]?.varinvgfx || 0))
+      )
+        throw new GameSaveError("base", entry.item.name);
       if (
         entry.item.craftId &&
         (entry.item.affixes?.length ?? 0) < craftAffixMinimum(entry.item.itemLevel ?? 99)
@@ -895,6 +1189,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           crafted: 8,
         }[entry.item.quality],
         ilvl: entry.item.itemLevel ?? 99,
+        ...(entry.item.iconIndex === undefined
+          ? {}
+          : { iconIndex: entry.item.iconIndex }),
         unidentified: false,
         ethereal: entry.item.ethereal ?? false,
         socketed: false,
@@ -932,6 +1229,15 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           maxSockets,
           definitionStats(definition, choice.base, 1).item_numsockets || 0
         );
+      }
+      if (!baseSupportsSockets(choice.base)) {
+        maxSockets = 0;
+        if (
+          (entry.item.sockets ?? 0) > 0 ||
+          entry.item.socketedItems?.some(Boolean) ||
+          item.stats.item_numsockets
+        )
+          throw new GameSaveError("base", entry.item.name);
       }
       if (entry.item.quality === "crafted")
         maxSockets = Math.min(
@@ -1035,6 +1341,10 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         item.socketedItems = (entry.item.socketedItems ?? []).filter(
           (code): code is string => code !== null
         );
+        const socketIcons = parseSocketIconIndices(
+          entry.item.socketIconIndices ?? {},
+          entry.item.socketedItems
+        );
         socketRolls.set(
           item.itemId,
           (entry.item.socketedItems ?? []).flatMap((code, index) =>
@@ -1042,6 +1352,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
               ? [
                   {
                     roll,
+                    iconIndex: socketIcons[index],
                     values:
                       mode === "planned"
                         ? entry.item.socketPropertyValues?.[index]
@@ -1054,9 +1365,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         if (
           item.socketedItems.length > item.sockets ||
           item.socketedItems.some(
-            (code) =>
-              !gd.gems[String(code)] &&
-              !["jew", "cjw"].includes(gd.uniqueItems[String(code)]?.code)
+            (code) => !gd.gems[String(code)] && !socketJewelDefinition(String(code))
           )
         )
           throw new GameSaveError("base", entry.item.name);
@@ -1182,7 +1491,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
               [Math.floor(i / 2)]?.slice(2) ?? 0
           )
         ),
-        multiple_pictures: 0,
+        multiple_pictures: item.iconIndex === undefined ? 0 : 1,
+        picture_id: item.iconIndex ?? 0,
         class_specific: 0,
         unique_id: item.quality === 7 ? saveId("uniqueItems", item.unique) : 0,
         set_id: item.quality === 5 ? saveId("setItems", item.unique) : 0,
@@ -1195,13 +1505,16 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       } as unknown as SaveTypes.IItem;
       if (native.max_durability > 0 && item.stats.item_indesctructible)
         native.max_durability = 0;
-      for (const [index, code] of item.socketedItems.entries()) {
-        const jewel = gd.uniqueItems[String(code)];
+      for (const [index, insert] of item.socketedItems.entries()) {
+        const code = String(insert);
+        const jewel = gd.uniqueItems[code];
+        const customJewel = magicSocketJewels[code];
+        const definition = socketJewelDefinition(code);
         const selected = socketRolls.get(item.itemId)?.[index];
-        const stats = jewel
+        const stats = definition
           ? definitionStats(
-              jewel as unknown as Definition,
-              jewel.code,
+              definition,
+              jewel?.code ?? "jew",
               selected?.roll ?? 1,
               selected?.values
             )
@@ -1210,12 +1523,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         const child = {
           ...native,
           id: nextId(),
-          type: jewel?.code ?? String(code),
+          type: jewel?.code ?? (customJewel ? "jew" : code),
           type_id: 4,
           categories: [],
           level: 99,
-          quality: jewel ? 7 : 2,
-          unique_id: jewel ? saveId("uniqueItems", String(code)) : 0,
+          quality: jewel ? 7 : customJewel ? 4 : 2,
+          multiple_pictures: selected?.iconIndex === undefined ? 0 : 1,
+          picture_id: selected?.iconIndex ?? 0,
+          unique_id: jewel ? saveId("uniqueItems", code) : 0,
           set_id: 0,
           runeword_id: 0,
           runeword_attributes: [],
@@ -1223,7 +1538,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           defense_rating: 0,
           max_durability: 0,
           current_durability: 0,
-          simple_item: jewel ? 0 : 1,
+          simple_item: jewel || customJewel ? 0 : 1,
           socketed: 0,
           given_runeword: 0,
           ethereal: 0,
@@ -1367,9 +1682,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     itemBonuses,
     itemRunes,
     socketBonuses,
+    socketJewelDefinition,
     propertyStats: definitionStats,
     exportCharacter,
     readCharacter,
+    importCharacter,
     saver,
     gd,
   };

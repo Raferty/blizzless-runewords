@@ -121,7 +121,7 @@ import { useText } from "@/composables/useText";
 import PlannerPropertyEditor from "./PlannerPropertyEditor.vue";
 import {
   socketInserts,
-  socketInsertByCode,
+  socketInsertVisual,
   socketCategory,
   socketInsertItem,
 } from "@/utils/planner-sockets";
@@ -140,6 +140,7 @@ const props = defineProps<{
 const emit = defineEmits<{
   "update:modelValue": [value: (string | null)[]];
   values: [value: NonNullable<PlannerItem["socketPropertyValues"]>];
+  icons: [value: NonNullable<PlannerItem["socketIconIndices"]>];
 }>();
 const info = useInfoStore();
 const lang = computed(() => info.currentLang);
@@ -176,7 +177,10 @@ const options = computed(() =>
     )
 );
 const selected = (index: number) =>
-  socketInsertByCode.get(props.modelValue[index - 1] ?? "");
+  socketInsertVisual(
+    props.modelValue[index - 1] ?? "",
+    props.item.socketIconIndices?.[index - 1]
+  );
 const jewelItem = (index: number) =>
   socketInsertItem(
     props.modelValue[index - 1] ?? "",
@@ -218,6 +222,9 @@ function choose(index: number, code: string | null) {
   const values = { ...props.item.socketPropertyValues };
   delete values[index - 1];
   emit("values", values);
+  const icons = { ...props.item.socketIconIndices };
+  delete icons[index - 1];
+  emit("icons", icons);
   emit(
     "update:modelValue",
     Array.from({ length: props.count }, (_, i) =>

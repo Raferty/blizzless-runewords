@@ -24,10 +24,10 @@
         <image
           v-if="rune"
           :href="base + rune.image_url.slice(1)"
-          :x="socketLayout.positions[index].x - socketLayout.filledSize / 2"
-          :y="socketLayout.positions[index].y - socketLayout.filledSize / 2"
-          :width="socketLayout.filledSize"
-          :height="socketLayout.filledSize"
+          :x="socketLayout.positions[index].x - socketImageSize(rune) / 2"
+          :y="socketLayout.positions[index].y - socketImageSize(rune) / 2"
+          :width="socketImageSize(rune)"
+          :height="socketImageSize(rune)"
           preserveAspectRatio="xMidYMid meet"
         />
       </g>
@@ -41,6 +41,7 @@
 import { computed } from "vue";
 import { plannerItemDimensions, plannerItemImage } from "@/utils/planner-item-art";
 import { itemSockets } from "@/utils/planner-item-presentation";
+import { socketCategory } from "@/utils/planner-sockets";
 import { useRunewordsStore } from "@/store";
 import type { EquipmentSlot, PlannerItem } from "@/types/planner";
 
@@ -78,12 +79,81 @@ const imageStyle = computed(() => {
     height: `${Math.min(size.value[1] / props.capacity[1], 1) * 100}%`,
   };
 });
+const verticalItemSockets = computed(() => {
+  const itemSize = plannerItemDimensions(props.item);
+  return (
+    sockets.value.length === 4 &&
+    ["weapon", "shield"].includes(socketCategory(props.item)) &&
+    itemSize?.[1] === 4 &&
+    itemSize[0] <= 2
+  );
+});
 const socketLayout = computed(() => {
   const width = size.value[0] * 100;
   const height = size.value[1] * 100;
   const count = sockets.value.length;
+  const itemSize = plannerItemDimensions(props.item);
+  const smallShieldTriangle =
+    count === 3 &&
+    socketCategory(props.item) === "shield" &&
+    itemSize?.[0] === 2 &&
+    itemSize[1] === 2;
+  if (smallShieldTriangle) {
+    // Square shields keep two inserts above one centred below, including in
+    // the stash. Centre the triangle on the artwork in a tall equipment slot.
+    const shieldHeight = Math.min(width, height);
+    const top = (height - shieldHeight) / 2;
+    const filledSize = Math.min(84, width * 0.38, shieldHeight * 0.38);
+    return {
+      viewBox: `0 0 ${width} ${height}`,
+      radius: filledSize * 0.46,
+      filledSize,
+      positions: [
+        { x: width * 0.28, y: top + shieldHeight * 0.3 },
+        { x: width * 0.72, y: top + shieldHeight * 0.3 },
+        { x: width * 0.5, y: top + shieldHeight * 0.7 },
+      ],
+    };
+  }
+  const compactShield =
+    props.equipmentSlot === "offHand" &&
+    !verticalItemSockets.value &&
+    count >= 3 &&
+    count <= 4;
+  if (compactShield) {
+    // D2 keeps shield inserts clustered over the centre of the shield instead
+    // of placing them against the corners of the paperdoll slot.
+    const positions =
+      count === 3
+        ? [
+            { x: width * 0.5, y: height * 0.33 },
+            { x: width * 0.29, y: height * 0.67 },
+            { x: width * 0.71, y: height * 0.67 },
+          ]
+        : [
+            { x: width * 0.28, y: height * 0.36 },
+            { x: width * 0.72, y: height * 0.36 },
+            { x: width * 0.28, y: height * 0.64 },
+            { x: width * 0.72, y: height * 0.64 },
+          ];
+    const filledSize = Math.min(90, width * 0.42, height * 0.23);
+    return {
+      viewBox: `0 0 ${width} ${height}`,
+      radius: filledSize * 0.46,
+      filledSize,
+      positions,
+    };
+  }
   const helmetTriangle = props.equipmentSlot === "head" && count === 3;
-  const columns = count > 3 || helmetTriangle ? 2 : 1;
+  // Four sockets on tall weapons and shields follow a vertical line in every view.
+  const verticalWeaponSockets =
+    props.equipmentSlot === "mainHand" && count === 4 && height > width * 1.5;
+  const columns =
+    verticalItemSockets.value || verticalWeaponSockets
+      ? 1
+      : count > 3 || helmetTriangle
+        ? 2
+        : 1;
   const rows = Math.max(1, Math.ceil(count / columns));
   const columnWidth = (width * 0.88) / columns;
   const rowHeight = (height * 0.9) / rows;
@@ -106,4 +176,29 @@ const socketLayout = computed(() => {
   });
   return { viewBox: `0 0 ${width} ${height}`, radius, filledSize, positions };
 });
+// Headgear uses the rune scale for every insert, in equipment and in the stash.
+const helmetSockets = computed(() => {
+  const itemSize = plannerItemDimensions(props.item);
+  return (
+    props.equipmentSlot === "head" ||
+    (socketCategory(props.item) === "helm" && itemSize?.[0] === 2 && itemSize[1] === 2)
+  );
+});
+// Keep jewels compact on the other item shapes.
+const socketImageSize = (socket: (typeof sockets.value)[number] | undefined) => {
+  if (helmetSockets.value || !socket || !("group" in socket))
+    return socketLayout.value.filledSize;
+  if (socket.group === "jewel") return socketLayout.value.filledSize * 0.75;
+  const compactFacetShield =
+    socket.group === "facet" &&
+    props.equipmentSlot === "offHand" &&
+    !verticalItemSockets.value &&
+    sockets.value.length >= 3 &&
+    sockets.value.length <= 4;
+  return compactFacetShield
+    ? socketLayout.value.filledSize * 1.6
+    : socket.group === "facet"
+      ? socketLayout.value.filledSize * 0.65
+      : socketLayout.value.filledSize;
+};
 </script>

@@ -6,6 +6,9 @@ import { deflateSync } from "node:zlib";
 const root = new URL("../", import.meta.url);
 const dataBytes = await readFile(new URL("public/data/planner-save/data.json", root));
 const data = JSON.parse(dataBytes);
+const nativeArt = JSON.parse(
+  await readFile(new URL("src/shared/planner-native-art.json", root))
+);
 const supplies = JSON.parse(
   await readFile(new URL("src/shared/planner-supplies.json", root))
 ).supplies;
@@ -108,17 +111,19 @@ for (const [quality, definitions] of [
 }
 const baseKeys = {};
 for (const [code, { row, group }] of Object.entries(bases))
-  baseKeys[code] = /^ua[1-5]$/.test(code)
-    ? `misc/shard/cont_${code}`
-    : supplies[code] ||
-        row.type === "key" ||
-        row.type === "book" ||
-        /^pk[1-3]$/.test(code) ||
-        code === "bkd"
-      ? `${group}/${row.hd}`
-      : hasType(row.type, ["jewl"])
+  baseKeys[code] =
+    nativeArt.variants[code]?.[0] ||
+    (/^ua[1-5]$/.test(code)
+      ? `misc/shard/cont_${code}`
+      : supplies[code] ||
+          row.type === "key" ||
+          row.type === "book" ||
+          /^pk[1-3]$/.test(code) ||
+          code === "bkd"
         ? `${group}/${row.hd}`
-        : aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null;
+        : hasType(row.type, ["jewl"])
+          ? `${group}/${row.hd}`
+          : aliases.get(defaultInventoryFile(row)?.toLowerCase()) || null);
 const qualityKeys = { unique: {}, set: {} };
 const names = { unique: {}, set: {} };
 const catalogBases = {};
@@ -130,12 +135,10 @@ const normalizedName = (name) =>
 // RotW items reuse legacy invfile names despite having different HD appearances.
 // Resolve these by stable item name, never by the client/server's positional IDs.
 const uniqueArtwork = {
+  ...nativeArt.unique,
   "Measured Wrath": "armor/grimoires/measured_wrath",
   Dreadfang: "weapon/sword/two_handed_sword",
   Wraithstep: "armor/boot/light_plate_boots",
-  Sling: "misc/ring/ring2",
-  Opalvein: "misc/ring/ring3",
-  "Entropy Locket": "misc/amulet/amulet1",
   "Gheed's Wager": "armor/belt/heavy_belt",
   "Unique Warlock Helm": "armor/helmet/unique_warlock_helm",
   mephisto_sta: "misc/key/mephisto_sta",
@@ -176,14 +179,16 @@ const keys = [
       ...Object.values(baseKeys),
       ...Object.values(qualityKeys.unique).flat(),
       ...Object.values(qualityKeys.set).flat(),
+      ...Object.values(nativeArt.variants).flat(),
     ].filter(Boolean)
   ),
 ].sort();
 const images = new Map();
 const missing = [];
-// Original Blizzless key/statue sprites, pinned to the launcher manifest.
+// Original Blizzless inventory sprites, pinned to the launcher manifest.
 // Shared invfile names cannot identify them; preserve their original RGBA pixels.
 const keySprites = {
+  ...nativeArt.sprites,
   "misc/quest/jewel_dis":
     "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
   "misc/quest/parts_1":
@@ -273,15 +278,6 @@ const classicFallbacks = {
     file: "classic/invuhms.gif",
   },
 };
-// The existing Cube/socket catalog already bundles the original Jewel graphic.
-const socketArt = JSON.parse(
-  await readFile(new URL("src/shared/planner-sockets.json", root))
-);
-const bundledImages = {
-  "misc/gem/light_facet": socketArt.items
-    .find((item) => item.code === "unique392")
-    .image_url.slice(1),
-};
 let cursor = 0;
 const isWebp = (bytes) =>
   bytes.length > 12 &&
@@ -293,11 +289,6 @@ await Promise.all(
       const key = keys[cursor++];
       if (!/^(weapon|armor|misc)\/[a-z0-9_/-]+$/.test(key))
         throw new Error(`Invalid item image key: ${key}`);
-      if (bundledImages[key]) {
-        await readFile(new URL("public/" + bundledImages[key], root));
-        images.set(key, bundledImages[key]);
-        continue;
-      }
       if (keySprites[key]) {
         let sprite;
         for (let attempt = 0; attempt < 3; attempt++) {
@@ -324,9 +315,16 @@ await Promise.all(
       const file = new URL(key + ".webp", destination);
       let localPath = "images/planner/items/" + key + ".webp";
       let bytes;
+      const expectedHash = nativeArt.externalImages[key]?.sha256;
       try {
         bytes = await readFile(file);
         if (!isWebp(bytes)) bytes = undefined;
+        if (
+          bytes &&
+          expectedHash &&
+          createHash("sha256").update(bytes).digest("hex") !== expectedHash
+        )
+          bytes = undefined;
       } catch {
         /* Download uncached artwork. */
       }
@@ -342,6 +340,11 @@ await Promise.all(
             }
             const downloaded = Buffer.from(await response.arrayBuffer());
             if (!isWebp(downloaded)) throw new Error("Not a WebP image");
+            if (
+              expectedHash &&
+              createHash("sha256").update(downloaded).digest("hex") !== expectedHash
+            )
+              throw new Error(`Artwork checksum mismatch: ${key}`);
             bytes = downloaded;
             await mkdir(new URL(".", file), { recursive: true });
             await writeFile(file, bytes);
@@ -392,6 +395,10 @@ const manifest = {
   source: origin,
   keySpriteSource: "https://blizzless.info/api/launcher-mods/blobs/",
   keySprites,
+  nativeArtSource: nativeArt.source,
+  variants: Object.fromEntries(
+    Object.entries(nativeArt.variants).map(([code, keys]) => [code, keys.map(image)])
+  ),
   gameDataSha256: createHash("sha256").update(dataBytes).digest("hex"),
   bases: Object.fromEntries(
     Object.entries(baseKeys).map(([code, key]) => [code, image(key)])

@@ -6,11 +6,12 @@ const unique: Record<string, (string | null)[]> = artwork.unique;
 const sets: Record<string, (string | null)[]> = artwork.set;
 const tiers: Record<string, number> = artwork.tiers;
 const dimensions: Record<string, number[]> = artwork.dimensions;
+const variants: Record<string, string[]> = artwork.variants;
 const catalogBases: Record<string, string> = artwork.catalogBases;
 const names: Record<"unique" | "set", Record<string, string>> = artwork.names;
 type BaseTier = "normal" | "exceptional" | "elite";
 type AppearanceItem = Pick<PlannerItem, "baseCode" | "quality" | "catalogId"> &
-  Partial<Pick<PlannerItem, "name">>;
+  Partial<Pick<PlannerItem, "name" | "iconIndex">>;
 
 // Blizzless uses these internal bases for keys and other stackable quest items.
 export const isContainerBase = (code?: string) => code === "bg1" || code === "bg2";
@@ -52,7 +53,7 @@ export function plannerItemImage(
           : (tiers[baseCode || ""] ?? 0)
       ] || undefined
     );
-  return baseItemImage(baseCode || "");
+  return variants[baseCode || ""]?.[item.iconIndex ?? 0] || baseItemImage(baseCode || "");
 }
 
 export function plannerItemDimensions(

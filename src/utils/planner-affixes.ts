@@ -116,21 +116,66 @@ export function retainCompatibleAffixes(item: PlannerItem) {
   }
   return result;
 }
+function affixModStats(mod: AffixMod, value: number) {
+  const ratio = mod.variable ? (value - mod.min) / (mod.max - mod.min) : 0;
+  return [...new Set([...Object.keys(mod.low), ...Object.keys(mod.high)])].map((key) => {
+    const low = mod.low[key] ?? 0;
+    const high = mod.high[key] ?? 0;
+    return [key, Math.round(low + (high - low) * ratio)] as const;
+  });
+}
 export function affixStats(item: PlannerItem) {
   const stats: Record<string, number> = {};
   for (const row of item.affixes ?? []) {
     const affix = affixById.get(row.id);
     if (!affix) continue;
     affix.mods.forEach((mod, i) => {
-      const ratio = mod.variable ? (row.values[i] - mod.min) / (mod.max - mod.min) : 0;
-      for (const key of new Set([...Object.keys(mod.low), ...Object.keys(mod.high)])) {
-        const low = mod.low[key] ?? 0,
-          high = mod.high[key] ?? 0;
-        stats[key] = (stats[key] ?? 0) + Math.round(low + (high - low) * ratio);
-      }
+      for (const [key, value] of affixModStats(mod, row.values[i]))
+        stats[key] = (stats[key] ?? 0) + value;
     });
   }
   return stats;
+}
+
+export function restoreMagicAffixes(
+  item: PlannerItem,
+  ids: (string | undefined)[],
+  savedStats: Record<string, number>
+): PlannerAffix[] {
+  const definitions = ids.flatMap((id) => {
+    const affix = affixById.get(id ?? "");
+    return affix && affixFits(affix, item) ? [affix] : [];
+  });
+  const rows = definitions.map(newAffix);
+  const mods = definitions.flatMap((affix, affixIndex) =>
+    affix.mods.map((mod, modIndex) => ({ mod, affixIndex, modIndex }))
+  );
+  const lastMod = new Map<string, number>();
+  mods.forEach(({ mod }, index) => {
+    for (const [stat] of affixModStats(mod, mod.min)) lastMod.set(stat, index);
+  });
+
+  // A save stores the total for stats supplied by both affixes.
+  function match(index: number, remaining: Record<string, number>): boolean {
+    const entry = mods[index];
+    if (!entry) return true;
+    const { mod, affixIndex, modIndex } = entry;
+    const min = mod.variable ? mod.min : 0;
+    const max = mod.variable ? mod.max : 0;
+    for (let roll = min; roll <= max; roll++) {
+      const next = { ...remaining };
+      const contributions = affixModStats(mod, roll);
+      for (const [stat, value] of contributions) next[stat] = (next[stat] ?? 0) - value;
+      if (contributions.some(([stat]) => lastMod.get(stat) === index && next[stat] !== 0))
+        continue;
+      if (match(index + 1, next)) {
+        rows[affixIndex].values[modIndex] = roll;
+        return true;
+      }
+    }
+    return false;
+  }
+  return match(0, savedStats) ? rows : [];
 }
 const bonusStats = {
   strength: "strength",

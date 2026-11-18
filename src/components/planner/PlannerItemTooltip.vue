@@ -41,7 +41,7 @@
         <template v-if="!word && native">
           <template v-for="(code, index) in item.socketedItems" :key="index">
             <div v-if="code" class="planner-insert-tooltip-properties">
-              <p>{{ runes[index]?.name[lang] }}</p>
+              <p v-if="runes.length > 1">{{ runes[index]?.name[lang] }}</p>
               <ul>
                 <li
                   v-for="line in socketPropertyLines(

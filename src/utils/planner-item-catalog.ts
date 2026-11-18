@@ -6,7 +6,7 @@ import {
   propertyClasses,
   itemSkillClass,
 } from "./planner-properties";
-import { socketCategory } from "./planner-sockets";
+import { baseSupportsSockets, socketCategory } from "./planner-sockets";
 import type { RunewordTableItem } from "@/types";
 import { baseItemImage, isContainerBase } from "./planner-item-art";
 import { runewordTemplates } from "./planner-runewords";
@@ -217,10 +217,12 @@ export function createItemCatalog(
           : "ubercode" in item && item.ubercode === code
             ? "exceptional"
             : "normal",
-      maxSockets: Math.min(
-        item.gemsockets || 0,
-        ...[...types].map((type) => gd.itemTypes[type]?.maxsock40 || 6)
-      ),
+      maxSockets: baseSupportsSockets(code)
+        ? Math.min(
+            item.gemsockets || 0,
+            ...[...types].map((type) => gd.itemTypes[type]?.maxsock40 || 6)
+          )
+        : 0,
       height: item.invheight,
       image: baseItemImage(code),
     });
@@ -340,9 +342,8 @@ export function socketPropertyLines(
   characterLevel = 99,
   values: PlannerItem["propertyValues"] = {}
 ) {
-  const jewel = native.gd.uniqueItems[code];
-  if (jewel && ["jew", "cjw"].includes(jewel.code))
-    return definitionPropertyLines(native, jewel, 1, characterLevel, values);
+  const jewel = native.socketJewelDefinition(code);
+  if (jewel) return definitionPropertyLines(native, jewel, 1, characterLevel, values);
   const gem = native.gd.gems[code] as unknown as Record<string, unknown> | undefined;
   if (!gem) return [];
   const definition: Record<string, unknown> = {};

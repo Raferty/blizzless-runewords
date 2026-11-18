@@ -91,9 +91,11 @@ export interface PlannerItem {
   catalogId?: string;
   craftId?: string;
   itemLevel?: number;
+  iconIndex?: number;
   sockets?: number;
   socketedItems?: (string | null)[];
   socketPropertyValues?: Record<string, Record<string, number>>;
+  socketIconIndices?: Record<string, number>;
   affixes?: PlannerAffix[];
   ethereal?: boolean;
   propertyRoll?: 0 | 1;

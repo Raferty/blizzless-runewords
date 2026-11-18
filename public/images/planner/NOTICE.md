@@ -24,6 +24,13 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   fallback rather than a substitute weapon picture.
   Inventory dimensions cover all game bases, including miscellaneous items without
   artwork; stash placement does not depend on image coverage.
+- `items/misc/amulet/highlords_wrath.png`: original Blizzless Highlord's Wrath
+  inventory sprite, downloaded 2026-11-18 from
+  https://blizzless.info/api/launcher-mods/manifest.
+  Native path: `data/hd/global/ui/items/misc/amulet/highlords_wrath.sprite`;
+  blob SHA-256 `6f79a8f6fa91c472dbc4c30eba6b40e456dc8852a4328195a906238991bdc9fe`.
+  The original 98×98 RGBA pixels are losslessly encoded as PNG. The sync script
+  resolves the unique item by name instead of its generic `invamu2` filename.
 - `items/misc/key/mephisto_key.png`, `mephisto_key2.png`, `mephisto_key3.png`:
   original Blizzless Key of Destruction, Hate and Terror inventory sprites,
   downloaded 2026-10-30 from https://blizzless.info/api/launcher-mods/manifest.
@@ -49,9 +56,8 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   `armor/helmet/unique_warlock_helm.webp` and `armor/grimoires/measured_wrath.webp`
   from the same LootCube image source. Stable unique names take precedence over
   shared legacy inventory filenames for these and Dreadfang, Wraithstep,
-  Gheed's Wager, Sling, Opalvein and Entropy Locket. Jewelry variants correspond to
-  the inventory graphics shown at https://d2emu.com/db/unique/sling,
-  https://d2emu.com/db/unique/opalvein and https://d2emu.com/db/unique/entropy-locket.
+  Gheed's Wager. Sling, Opalvein and Entropy Locket now use the native Blizzless
+  mappings documented below (2026-11-18).
 - `items/classic/invhaxu.gif` and `items/classic/invuhms.gif`: original inventory
   graphics for the two unavailable HD resources, from Blizzard's Arreat Summit:
   https://classic.battle.net/images/battle/diablo2exp/images/items/uniques/thegnasher.gif
@@ -99,11 +105,12 @@ Socket insert artwork (added 2026-10-27):
   `https://lootcube.net/images/items/misc/{hd}.webp` using the `misc[code].hd`
   mapping in the bundled Blizzless game tables. No screenshot crops are used.
 - Rune and pure-rune images reuse the existing local `../{rune}.webp` assets.
-- `sockets/colossal_jewel_{talic,korlic,madawc}.webp`: original Colossal Jewel
+- `sockets/colossal_jewel_{talic,korlic,madawc}.webp`: retained legacy Colossal Jewel
   bust artwork from `https://lootcube.net/images/items/misc/gem/` (2026-10-28).
   Defender's Bile/Fire use Talic; Protector's Frost/Stone use Korlic;
   Guardian's Thunder/Light use Madawc. The named mapping follows LootCube's
   `spriteOverride` item definitions and image manifest, not positional unique IDs.
+  Current rendering uses the native fragment mappings documented below.
 - `scripts/sync-planner-sockets.mjs` regenerates artwork and
   `src/shared/planner-sockets.json` from the bundled game data, with its SHA-256.
 
@@ -143,5 +150,31 @@ https://maxroll.gg/d2/d2planner
   values are recorded in `src/shared/planner-item-art.json` and the sync script.
   These are loose Blacksmith Ingot, Horadric Sphere, Resplendent Spark and
   Disenchanted Jewel, separate from their stack containers.
-- Rainbow Facet reuses the original Jewel graphic already bundled by the Cube
-  and socket catalogs (`images/cube/c42fa7a7a08d52a172.png`).
+- Rainbow Facet now uses the four native elemental sprites documented below.
+
+# Native unique jewelry and jewels — 2026-11-18
+
+- `src/shared/planner-native-art.json` pins the official Blizzless launcher
+  manifest version `1794765706633` and `data/hd/items/uniques.json` SHA-256
+  `4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072`.
+  Source: https://blizzless.info/api/launcher-mods/manifest.
+  Stable internal names map all 34 selectable unique rings/amulets and all
+  14 unique jewels, including Chronicle variants, eight Rainbow Facets and
+  six Colossal Jewels. The Eye of Etlich explicitly retains the shared
+  `misc/amulet/amulet` sprite, as specified by the native mapping.
+- `items/misc/{ring,amulet}/*.png` and
+  `items/misc/gem/{light,cold,fire,pois}_facet.png`: 29 original 98×98 RGBA
+  sprites from the official manifest/blob API, encoded losslessly as PNG.
+  Individual source hashes are pinned in `planner-native-art.json` and the
+  generated artwork manifest. Both death/level-up Facets use their elemental art.
+- `items/misc/body_part/fragment_{poison,lightning,cold,fire,physical,magic}.webp`:
+  original inventory images from https://lootcube.net/images/items/misc/body_part/,
+  following the six Colossal Jewel paths in the official `uniques.json`.
+  Original files are preserved; each download is pinned by SHA-256.
+- `items/misc/gem/perfect_diamond1.webp` through `perfect_diamond6.webp`:
+  the six ordinary Jewel inventory graphics from
+  https://lootcube.net/images/items/misc/gem/, using the native `jew` asset
+  and `jewl.varinvgfx` count. Their native picture indices 0–5 are preserved
+  in planner JSON and game-save import/export.
+- Item cards, stash icons, tooltips and socket overlays share the same artwork
+  mappings. `sync-planner-items.mjs` and `sync-planner-sockets.mjs` preserve them.

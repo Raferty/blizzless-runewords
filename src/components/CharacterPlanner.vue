@@ -48,7 +48,7 @@
           ><input
             ref="importInput"
             type="file"
-            accept=".json,application/json"
+            accept=".json,.d2s,application/json,application/octet-stream"
             hidden
             @change="importBuild"
           />
@@ -593,6 +593,7 @@ import {
   skillBudget,
   spentSkills,
 } from "@/utils/planner";
+import { loadGameSaveExporter } from "@/utils/planner-game-save";
 import type {
   Difficulty,
   EquipmentSlot,
@@ -856,7 +857,10 @@ async function importBuild(event: Event) {
   if (!file) return;
   try {
     if (file.size > 1000000) throw new Error("size");
-    store.loadBuild(JSON.parse(await file.text()));
+    if (file.name.toLowerCase().endsWith(".d2s")) {
+      const native = await loadGameSaveExporter();
+      store.loadBuild(native.importCharacter(new Uint8Array(await file.arrayBuffer())));
+    } else store.loadBuild(JSON.parse(await file.text()));
   } catch {
     store.message = "invalid";
   }

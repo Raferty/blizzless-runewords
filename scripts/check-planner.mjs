@@ -17,7 +17,7 @@ try {
   const { plannerClasses, plannerSkills, difficulties, quests } =
     await server.ssrLoadModule("/src/shared/planner.ts");
   const {
-    createBuild,
+    createBuild: createStarterBuild,
     createDefaultBuild,
     parsePlannerItem,
     parseBuild,
@@ -35,7 +35,10 @@ try {
     attributeBudget,
     mercenaryLevelCap,
     goldCapacity,
+    inventoryCells,
   } = await server.ssrLoadModule("/src/utils/planner.ts");
+  // Formula and placement fixtures below supply their own inventory.
+  const createBuild = (classId) => ({ ...createStarterBuild(classId), charms: [] });
   const { usePlannerStore } = await server.ssrLoadModule("/src/store/planner.ts");
   const { wowheadTreeArtwork, wowheadSkillSprite } = await server.ssrLoadModule(
     "/src/utils/planner-skill-art.ts"
@@ -106,6 +109,15 @@ try {
       for (const { key } of quests) build.quests[value][key] = completed;
   };
   for (const character of plannerClasses) {
+    const starter = createStarterBuild(character.id);
+    assert.deepEqual(parseBuild(starter), starter, "Starter items fit without overlaps");
+    assert.deepEqual(
+      starter.charms.map((item) => item.baseCode),
+      ["box", "tbk", "cm1", "cm2"]
+    );
+    assert.equal(starter.charms.find((item) => item.baseCode === "tbk").quantity, 20);
+    assert.equal(new Set(starter.charms.flatMap(inventoryCells)).size, 9);
+    assert.equal(buildStats(starter).skillBonus, 4);
     const skills = plannerSkills.filter((s) => s.classId === character.id);
     assert.equal(skills.length, 30);
     for (let tree = 0; tree < 3; tree++)
@@ -676,12 +688,21 @@ try {
   setActivePinia(createPinia());
   const migrated = usePlannerStore();
   assert.deepEqual(
-    JSON.parse(JSON.stringify(migrated.build)),
-    {
-      ...normalizedMercenary,
-      charms: createDefaultBuild(legacyMercenary.classId).charms,
-    },
+    { ...JSON.parse(JSON.stringify(migrated.build)), charms: [] },
+    normalizedMercenary,
+    "Inventory migration preserves the rest of the draft"
+  );
+  assert.deepEqual(
+    migrated.build.charms.map((item) => ({ ...item, position: undefined })),
+    createDefaultBuild(legacyMercenary.classId).charms.map((item) => ({
+      ...item,
+      position: undefined,
+    })),
     "Unversioned drafts receive the starter inventory during migration"
+  );
+  assert.deepEqual(
+    parseBuild(migrated.build),
+    JSON.parse(JSON.stringify(migrated.build))
   );
   assert.deepEqual(
     JSON.parse(JSON.stringify(migrated.saved[0].build)),

@@ -156,6 +156,62 @@ try {
   build.charms = [{ ...skiller, id: "test", height: 3, position: 0 }];
   assert.equal(p.buildStats(build).treeBonuses[2], 1);
   assert.equal(p.buildStats(build).treeBonuses[0], 0);
+  const grandCharms = [
+    [
+      { id: "mp252", values: [76, 10] },
+      { id: "ms338", values: [45] },
+    ],
+    [
+      { id: "mp252", values: [58, 8] },
+      { id: "ms338", values: [42] },
+    ],
+    [
+      { id: "mp252", values: [65, 10] },
+      { id: "ms677", values: [3] },
+    ],
+    [a.newAffix(skillAffix), { id: "ms338", values: [45] }],
+  ];
+  const charmBuild = p.createBuild("barbarian");
+  charmBuild.charms = grandCharms.map((affixes, position) => ({
+    ...skiller,
+    affixes,
+    position,
+    height: 3,
+    id: `gc-${position}`,
+  }));
+  const charmChoices = Object.fromEntries(
+    charmBuild.charms.map(({ id, baseCode }) => [`charm.${id}`, baseCode])
+  );
+  const exported = await native.exportCharacter(charmBuild, {
+    name: "CharmTest",
+    choices: charmChoices,
+    rolls: {},
+  });
+  const imported = native.importCharacter(exported).charms;
+  assert.equal(imported.length, grandCharms.length);
+  imported.forEach((charm, index) => {
+    const original = charmBuild.charms[index];
+    assert.deepEqual(
+      charm.affixes.map(({ id }) => id),
+      original.affixes.map(({ id }) => id)
+    );
+    assert.deepEqual(a.affixStats(charm), a.affixStats(original));
+    assert.deepEqual(charm.bonuses, {}, "Affix bonuses must only be counted once");
+    assert.equal(itemRequiredLevel(charm), index === 2 ? 63 : 83);
+  });
+  assert.deepEqual(imported[0].affixes, grandCharms[0]);
+  assert.deepEqual(imported[1].affixes, grandCharms[1]);
+  assert.deepEqual(
+    imported[0].affixes.flatMap(({ id, values }) =>
+      definitionPropertyLines(
+        native,
+        a.affixDefinition(a.affixById.get(id), values),
+        1,
+        99
+      )
+    ),
+    ["+76 to Attack Rating", "+10 to Maximum Damage", "+45 to Life"]
+  );
   const sockets = a.itemAffixes.find(
     (f) => a.affixFits(f, base) && f.mods.some((m) => m.code === "sock" && m.max === 3)
   );
@@ -166,7 +222,7 @@ try {
     3
   );
   console.log(
-    `Affixes: ${a.itemAffixes.length} definitions, ${cases} property rolls; quality/type/group/count, level, sockets, JSON, summary and skill-tree bonuses passed.`
+    `Affixes: ${a.itemAffixes.length} definitions, ${cases} property rolls; quality/type/group/count, level, sockets, JSON, summary, skill-tree bonuses and Grand Charm import passed.`
   );
 } finally {
   await server.close();

@@ -134,7 +134,12 @@ import { equipmentSlots } from "@/shared/planner";
 import { paperdollCapacity, paperdollStyle } from "@/shared/planner-art";
 import type { EquipmentSlot } from "@/types/planner";
 import { itemRequiredLevel } from "@/utils/planner-sockets";
-import { goldCapacity, inventoryWidth, inventoryCells } from "@/utils/planner";
+import {
+  defaultInventory,
+  goldCapacity,
+  inventoryWidth,
+  inventoryCells,
+} from "@/utils/planner";
 import { usePlannerItemDrag } from "@/composables/usePlannerItemDrag";
 defineEmits<{
   equip: [slot: EquipmentSlot];
@@ -148,7 +153,7 @@ const hasItems = computed(
 );
 function resetInventory() {
   store.build.equipment = {};
-  store.build.charms = [];
+  store.build.charms = defaultInventory(store.build.classId);
 }
 const maxGold = computed(() => goldCapacity(store.build.level));
 function setGold(event: Event) {

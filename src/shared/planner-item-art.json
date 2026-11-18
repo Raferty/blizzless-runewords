@@ -3,6 +3,7 @@
   "source": "https://lootcube.net/images/items/",
   "keySpriteSource": "https://blizzless.info/api/launcher-mods/blobs/",
   "keySprites": {
+    "misc/amulet/highlords_wrath": "6f79a8f6fa91c472dbc4c30eba6b40e456dc8852a4328195a906238991bdc9fe",
     "misc/quest/jewel_dis": "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
     "misc/quest/parts_1": "1aa22d0d5cb9a02f0af89c44f34e6446d68bb9cccff0fff038ce7eec50e6e97e",
     "misc/quest/parts_2": "fa991baba93ef9cdce010f5029f5b24bd1cad35ccfc617ebfda49bf058f27f3c",
@@ -18,7 +19,35 @@
     "misc/shard/cont_ua2": "53895807e7a5c41dc6c1637ddd24ecdbd6b568112b2739108a2a0a37a78a805d",
     "misc/shard/cont_ua3": "985fd7f3fc5818e7fab2077f72a493d6ce06163b6cb8b4e01513ad00d344a5ba",
     "misc/shard/cont_ua4": "f5f7cb88b5fd59ba0e269d1f91d27d2c478f968cb1d680b5755d7911108ec3bf",
-    "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85"
+    "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85",
+    "misc/amulet/atmas_scarab": "dcfe2a67f0eb9a7078b81beed3446ea791257ab185d68eef59b222406e3b65c9",
+    "misc/amulet/amulet": "be01f5109096b7f5bfcd9ecc65382372b88b5e5d07d7c0e406dfeedcadbba71d",
+    "misc/amulet/crescent_moon": "91d979955d64cc62a51c726504ecc444797c96c2094e60afd47488ae6e01da5f",
+    "misc/amulet/entropy_locket": "7c433479652569811d88f4de0057c932984d6d9aa0e8733b7c5333f65ae3489a",
+    "misc/amulet/maras_kaleidoscope": "24d0c4f432469d6c6a9068719ffc58266bc6e384ed33bf5a0082fe273926811d",
+    "misc/amulet/metalgrid": "f737f416761b44769f6a5e8c289e3efc6ff3fc20a21c0442f5c893bbd2c18e22",
+    "misc/amulet/nokozan_relic": "35582757b0134001488bad1edda3cf12bc596189dea3f0aa4758955a871aece5",
+    "misc/amulet/seraphs_hymn": "d990c1afd9910877ec10378904a4ab3e43b4a489ad8929adf3fe8951599af9ad",
+    "misc/amulet/saracens_chance": "0e0d3a37a81a038b1751215871e4ab95417365f23b09dc603efbf7266e547e8f",
+    "misc/amulet/the_cats_eye": "f14324583b2015045d95b21726d46ec830486d88b37d19102a4afaa9d1074b9b",
+    "misc/amulet/the_mahim-oak_curio": "ffb58002310afde07a570f70a43648b9c726cf6093e4948dadba1096a72be03e",
+    "misc/amulet/the_rising_sun": "9c3ea35540820867a73af3f788d6c328d12219ac7129e1c02a4988312887be36",
+    "misc/gem/cold_facet": "13c392fa13186d03b9b62b52636b2d6bd4ec319dbc99a5aa209086757b7f67d8",
+    "misc/gem/fire_facet": "244556eced1592bbd39c0aec312ac05dcc9af9302ceee14481301ec83d21356d",
+    "misc/gem/light_facet": "d974e226e14e055b99ed76c2f74856cb1ecf277bc1757096ae54d42b268aef9d",
+    "misc/gem/pois_facet": "9d119327636b5c2ac70264d60393a29f0e668b034401f6bcef4bad32ac652c86",
+    "misc/ring/carrion_wind": "d0a0a13e92887d5d74186305c871770f61134fa523c2f8760b0b5c2c4c258632",
+    "misc/ring/manald_heal": "0cf87aa4418a95cf516a26d8e891f09c359256cd295aaada68912603b95ed90d",
+    "misc/ring/bul-kathos_wedding_band": "98ccd73edec4dedda8b9fdba07e4193d9ede7c347f8283bf57ca2be1c14286cf",
+    "misc/ring/nagelring": "7bce5107db31504f80262288e34566b3bf01bef5671d531f0393a7875392ec10",
+    "misc/ring/natures_peace": "8a9dde09c883757f5fd8f2f69674786e2b11e76746977a57492d5ecea2f22b5f",
+    "misc/ring/dwarf_star": "d87ceb9bc00b620110da154d07f9ec3591aa71db3ff78dae6951ec7d96f7e242",
+    "misc/ring/raven_frost": "696e1217979a865c84449a939e0865fb760ed44ac925d7667220a2038a4b8de6",
+    "misc/ring/pawned_soul": "cfd830f6799403f4db85fe40f9f153d4879972a35e10c7742ab39a3b7a8c32ca",
+    "misc/ring/opalvein": "c1802e3cec71858ceb5598095257a632ccd6058ca6c220758da223fd8dc60e9e",
+    "misc/ring/sling": "51a33741ed34f4f424afd085ff426c8b410348393edb1aebcd8bd8fb976929f7",
+    "misc/ring/stone_of_jordan": "a7c75a4a152bbcf4e1fdcbae5d514019020cb53e6d359181db6a69065a9a781b",
+    "misc/ring/wisp_projector": "a0dace831e0cb20b9958a761225b974340c5cede6ac2f04528d605159207b110"
   },
   "gameDataSha256": "633fa72e0255f3fe0abae551dab84e8e8eb7c1c76827ba6f328fb98711588f49",
   "bases": {
@@ -666,7 +695,7 @@
     "r31": "images/planner/items/misc/rune/jah_rune.webp",
     "r32": "images/planner/items/misc/rune/cham_rune.webp",
     "r33": "images/planner/items/misc/rune/zod_rune.webp",
-    "jew": "images/planner/items/misc/gem/perfect_diamond.webp",
+    "jew": "images/planner/items/misc/gem/perfect_diamond1.webp",
     "pk1": "images/planner/items/misc/key/mephisto_key3.png",
     "pk2": "images/planner/items/misc/key/mephisto_key2.png",
     "pk3": "images/planner/items/misc/key/mephisto_key.png",
@@ -4217,34 +4246,34 @@
       "images/planner/items/armor/belt/girdle_h.webp"
     ],
     "unique117": [
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp"
+      "images/planner/items/misc/amulet/nokozan_relic.png",
+      "images/planner/items/misc/amulet/nokozan_relic.png",
+      "images/planner/items/misc/amulet/nokozan_relic.png"
     ],
     "unique118": [
-      "images/planner/items/misc/amulet/amulet.webp",
-      "images/planner/items/misc/amulet/amulet.webp",
-      "images/planner/items/misc/amulet/amulet.webp"
+      "images/planner/items/misc/amulet/amulet.png",
+      "images/planner/items/misc/amulet/amulet.png",
+      "images/planner/items/misc/amulet/amulet.png"
     ],
     "unique119": [
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp"
+      "images/planner/items/misc/amulet/the_mahim-oak_curio.png",
+      "images/planner/items/misc/amulet/the_mahim-oak_curio.png",
+      "images/planner/items/misc/amulet/the_mahim-oak_curio.png"
     ],
     "unique120": [
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp"
+      "images/planner/items/misc/ring/nagelring.png",
+      "images/planner/items/misc/ring/nagelring.png",
+      "images/planner/items/misc/ring/nagelring.png"
     ],
     "unique121": [
-      "images/planner/items/misc/ring/ring2.webp",
-      "images/planner/items/misc/ring/ring2.webp",
-      "images/planner/items/misc/ring/ring2.webp"
+      "images/planner/items/misc/ring/manald_heal.png",
+      "images/planner/items/misc/ring/manald_heal.png",
+      "images/planner/items/misc/ring/manald_heal.png"
     ],
     "unique122": [
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp"
+      "images/planner/items/misc/ring/stone_of_jordan.png",
+      "images/planner/items/misc/ring/stone_of_jordan.png",
+      "images/planner/items/misc/ring/stone_of_jordan.png"
     ],
     "unique123": [
       "images/planner/items/misc/amulet/viper_amulet.webp",
@@ -4862,9 +4891,9 @@
       "images/planner/items/armor/belt/girdle_h.webp"
     ],
     "unique248": [
-      "images/planner/items/armor/helmet/war_bonnet.webp",
-      "images/planner/items/armor/helmet/cap_hat.webp",
-      "images/planner/items/armor/helmet/cap_hat.webp"
+      "images/planner/items/armor/helmet/harlequin_crest.png",
+      "images/planner/items/armor/helmet/harlequin_crest.png",
+      "images/planner/items/armor/helmet/harlequin_crest.png"
     ],
     "unique249": [
       "images/planner/items/armor/helmet/great_helm.webp",
@@ -4952,54 +4981,54 @@
       "images/planner/items/weapon/bow/long_war_bow.webp"
     ],
     "unique268": [
-      "images/planner/items/misc/ring/ring4.webp",
-      "images/planner/items/misc/ring/ring4.webp",
-      "images/planner/items/misc/ring/ring4.webp"
+      "images/planner/items/misc/ring/bul-kathos_wedding_band.png",
+      "images/planner/items/misc/ring/bul-kathos_wedding_band.png",
+      "images/planner/items/misc/ring/bul-kathos_wedding_band.png"
     ],
     "unique269": [
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp"
+      "images/planner/items/misc/amulet/the_cats_eye.png",
+      "images/planner/items/misc/amulet/the_cats_eye.png",
+      "images/planner/items/misc/amulet/the_cats_eye.png"
     ],
     "unique270": [
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp"
+      "images/planner/items/misc/amulet/the_rising_sun.png",
+      "images/planner/items/misc/amulet/the_rising_sun.png",
+      "images/planner/items/misc/amulet/the_rising_sun.png"
     ],
     "unique271": [
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp"
+      "images/planner/items/misc/amulet/crescent_moon.png",
+      "images/planner/items/misc/amulet/crescent_moon.png",
+      "images/planner/items/misc/amulet/crescent_moon.png"
     ],
     "unique272": [
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp"
+      "images/planner/items/misc/amulet/maras_kaleidoscope.png",
+      "images/planner/items/misc/amulet/maras_kaleidoscope.png",
+      "images/planner/items/misc/amulet/maras_kaleidoscope.png"
     ],
     "unique273": [
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp"
+      "images/planner/items/misc/amulet/atmas_scarab.png",
+      "images/planner/items/misc/amulet/atmas_scarab.png",
+      "images/planner/items/misc/amulet/atmas_scarab.png"
     ],
     "unique274": [
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp"
+      "images/planner/items/misc/ring/dwarf_star.png",
+      "images/planner/items/misc/ring/dwarf_star.png",
+      "images/planner/items/misc/ring/dwarf_star.png"
     ],
     "unique275": [
-      "images/planner/items/misc/ring/ring2.webp",
-      "images/planner/items/misc/ring/ring2.webp",
-      "images/planner/items/misc/ring/ring2.webp"
+      "images/planner/items/misc/ring/raven_frost.png",
+      "images/planner/items/misc/ring/raven_frost.png",
+      "images/planner/items/misc/ring/raven_frost.png"
     ],
     "unique276": [
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp"
+      "images/planner/items/misc/amulet/highlords_wrath.png",
+      "images/planner/items/misc/amulet/highlords_wrath.png",
+      "images/planner/items/misc/amulet/highlords_wrath.png"
     ],
     "unique277": [
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp"
+      "images/planner/items/misc/amulet/saracens_chance.png",
+      "images/planner/items/misc/amulet/saracens_chance.png",
+      "images/planner/items/misc/amulet/saracens_chance.png"
     ],
     "unique279": [
       "images/planner/items/armor/helmet/avenger_guard.webp",
@@ -5102,9 +5131,9 @@
       "images/planner/items/weapon/wand/grim_wand.webp"
     ],
     "unique300": [
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp"
+      "images/planner/items/misc/ring/natures_peace.png",
+      "images/planner/items/misc/ring/natures_peace.png",
+      "images/planner/items/misc/ring/natures_peace.png"
     ],
     "unique301": [
       "images/planner/items/weapon/sword/crystal_sword.webp",
@@ -5112,9 +5141,9 @@
       "images/planner/items/weapon/sword/crystal_sword.webp"
     ],
     "unique302": [
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp"
+      "images/planner/items/misc/amulet/seraphs_hymn.png",
+      "images/planner/items/misc/amulet/seraphs_hymn.png",
+      "images/planner/items/misc/amulet/seraphs_hymn.png"
     ],
     "unique304": [
       "images/planner/items/weapon/knife/the_jade_tan_do.webp",
@@ -5182,9 +5211,9 @@
       "images/planner/items/armor/armor/field_plate.webp"
     ],
     "unique319": [
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp"
+      "images/planner/items/misc/ring/wisp_projector.png",
+      "images/planner/items/misc/ring/wisp_projector.png",
+      "images/planner/items/misc/ring/wisp_projector.png"
     ],
     "unique320": [
       "images/planner/items/weapon/javelin/throwing_spear.webp",
@@ -5427,9 +5456,9 @@
       "images/planner/items/weapon/scepter/scepter.webp"
     ],
     "unique373": [
-      "images/planner/items/armor/belt/sash_l.webp",
-      "images/planner/items/armor/belt/sash_l.webp",
-      "images/planner/items/armor/belt/sash_l.webp"
+      "images/cube/5dcfd7cabdd40e86af.png",
+      "images/cube/5dcfd7cabdd40e86af.png",
+      "images/cube/5dcfd7cabdd40e86af.png"
     ],
     "unique374": [
       "images/planner/items/armor/belt/light_belt.webp",
@@ -5437,9 +5466,9 @@
       "images/planner/items/armor/belt/light_belt.webp"
     ],
     "unique375": [
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp"
+      "images/planner/items/misc/amulet/metalgrid.png",
+      "images/planner/items/misc/amulet/metalgrid.png",
+      "images/planner/items/misc/amulet/metalgrid.png"
     ],
     "unique376": [
       "images/planner/items/armor/belt/belt_m.webp",
@@ -5447,9 +5476,9 @@
       "images/planner/items/armor/belt/belt_m.webp"
     ],
     "unique378": [
-      "images/planner/items/misc/ring/ring5.webp",
-      "images/planner/items/misc/ring/ring5.webp",
-      "images/planner/items/misc/ring/ring5.webp"
+      "images/planner/items/misc/ring/carrion_wind.png",
+      "images/planner/items/misc/ring/carrion_wind.png",
+      "images/planner/items/misc/ring/carrion_wind.png"
     ],
     "unique379": [
       "images/planner/items/armor/helmet/bone_helm.webp",
@@ -5517,44 +5546,44 @@
       "images/planner/items/armor/glove/gaunlets_h.webp"
     ],
     "unique392": [
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png"
+      "images/planner/items/misc/gem/light_facet.png",
+      "images/planner/items/misc/gem/light_facet.png",
+      "images/planner/items/misc/gem/light_facet.png"
     ],
     "unique393": [
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png"
+      "images/planner/items/misc/gem/cold_facet.png",
+      "images/planner/items/misc/gem/cold_facet.png",
+      "images/planner/items/misc/gem/cold_facet.png"
     ],
     "unique394": [
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png"
+      "images/planner/items/misc/gem/fire_facet.png",
+      "images/planner/items/misc/gem/fire_facet.png",
+      "images/planner/items/misc/gem/fire_facet.png"
     ],
     "unique395": [
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png"
+      "images/planner/items/misc/gem/pois_facet.png",
+      "images/planner/items/misc/gem/pois_facet.png",
+      "images/planner/items/misc/gem/pois_facet.png"
     ],
     "unique396": [
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png"
+      "images/planner/items/misc/gem/light_facet.png",
+      "images/planner/items/misc/gem/light_facet.png",
+      "images/planner/items/misc/gem/light_facet.png"
     ],
     "unique397": [
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png"
+      "images/planner/items/misc/gem/cold_facet.png",
+      "images/planner/items/misc/gem/cold_facet.png",
+      "images/planner/items/misc/gem/cold_facet.png"
     ],
     "unique398": [
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png"
+      "images/planner/items/misc/gem/fire_facet.png",
+      "images/planner/items/misc/gem/fire_facet.png",
+      "images/planner/items/misc/gem/fire_facet.png"
     ],
     "unique399": [
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png",
-      "images/cube/c42fa7a7a08d52a172.png"
+      "images/planner/items/misc/gem/pois_facet.png",
+      "images/planner/items/misc/gem/pois_facet.png",
+      "images/planner/items/misc/gem/pois_facet.png"
     ],
     "unique400": [
       "images/planner/items/misc/torch/torch.webp",
@@ -5661,39 +5690,39 @@
     "unique458": [null, null, null],
     "unique459": [null, null, null],
     "unique462": [
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp"
+      "images/planner/items/misc/amulet/seraphs_hymn.png",
+      "images/planner/items/misc/amulet/seraphs_hymn.png",
+      "images/planner/items/misc/amulet/seraphs_hymn.png"
     ],
     "unique463": [
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp"
+      "images/planner/items/misc/ring/bul-kathos_wedding_band.png",
+      "images/planner/items/misc/ring/bul-kathos_wedding_band.png",
+      "images/planner/items/misc/ring/bul-kathos_wedding_band.png"
     ],
     "unique464": [
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp"
+      "images/planner/items/misc/amulet/highlords_wrath.png",
+      "images/planner/items/misc/amulet/highlords_wrath.png",
+      "images/planner/items/misc/amulet/highlords_wrath.png"
     ],
     "unique465": [
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp"
+      "images/planner/items/misc/amulet/maras_kaleidoscope.png",
+      "images/planner/items/misc/amulet/maras_kaleidoscope.png",
+      "images/planner/items/misc/amulet/maras_kaleidoscope.png"
     ],
     "unique466": [
-      "images/planner/items/misc/ring/ring2.webp",
-      "images/planner/items/misc/ring/ring2.webp",
-      "images/planner/items/misc/ring/ring2.webp"
+      "images/planner/items/misc/ring/stone_of_jordan.png",
+      "images/planner/items/misc/ring/stone_of_jordan.png",
+      "images/planner/items/misc/ring/stone_of_jordan.png"
     ],
     "unique467": [
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp"
+      "images/planner/items/misc/ring/raven_frost.png",
+      "images/planner/items/misc/ring/raven_frost.png",
+      "images/planner/items/misc/ring/raven_frost.png"
     ],
     "unique468": [
-      "images/planner/items/misc/ring/ring4.webp",
-      "images/planner/items/misc/ring/ring4.webp",
-      "images/planner/items/misc/ring/ring4.webp"
+      "images/planner/items/misc/ring/wisp_projector.png",
+      "images/planner/items/misc/ring/wisp_projector.png",
+      "images/planner/items/misc/ring/wisp_projector.png"
     ],
     "unique469": [null, null, null],
     "unique470": [null, null, null],
@@ -5775,19 +5804,19 @@
       "images/planner/items/weapon/knife/dirk.webp"
     ],
     "unique488": [
-      "images/planner/items/misc/ring/ring2.webp",
-      "images/planner/items/misc/ring/ring2.webp",
-      "images/planner/items/misc/ring/ring2.webp"
+      "images/planner/items/misc/ring/sling.png",
+      "images/planner/items/misc/ring/sling.png",
+      "images/planner/items/misc/ring/sling.png"
     ],
     "unique489": [
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp",
-      "images/planner/items/misc/ring/ring3.webp"
+      "images/planner/items/misc/ring/opalvein.png",
+      "images/planner/items/misc/ring/opalvein.png",
+      "images/planner/items/misc/ring/opalvein.png"
     ],
     "unique490": [
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp",
-      "images/planner/items/misc/amulet/amulet1.webp"
+      "images/planner/items/misc/amulet/entropy_locket.png",
+      "images/planner/items/misc/amulet/entropy_locket.png",
+      "images/planner/items/misc/amulet/entropy_locket.png"
     ],
     "unique491": [
       "images/planner/items/armor/belt/heavy_belt.webp",
@@ -5800,34 +5829,34 @@
       "images/planner/items/armor/helmet/unique_warlock_helm.webp"
     ],
     "unique493": [
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp"
+      "images/planner/items/misc/body_part/fragment_poison.webp",
+      "images/planner/items/misc/body_part/fragment_poison.webp",
+      "images/planner/items/misc/body_part/fragment_poison.webp"
     ],
     "unique494": [
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp"
+      "images/planner/items/misc/body_part/fragment_lightning.webp",
+      "images/planner/items/misc/body_part/fragment_lightning.webp",
+      "images/planner/items/misc/body_part/fragment_lightning.webp"
     ],
     "unique495": [
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp"
+      "images/planner/items/misc/body_part/fragment_cold.webp",
+      "images/planner/items/misc/body_part/fragment_cold.webp",
+      "images/planner/items/misc/body_part/fragment_cold.webp"
     ],
     "unique496": [
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp"
+      "images/planner/items/misc/body_part/fragment_fire.webp",
+      "images/planner/items/misc/body_part/fragment_fire.webp",
+      "images/planner/items/misc/body_part/fragment_fire.webp"
     ],
     "unique497": [
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp"
+      "images/planner/items/misc/body_part/fragment_physical.webp",
+      "images/planner/items/misc/body_part/fragment_physical.webp",
+      "images/planner/items/misc/body_part/fragment_physical.webp"
     ],
     "unique498": [
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp",
-      "images/planner/items/misc/gem/perfect_diamond.webp"
+      "images/planner/items/misc/body_part/fragment_magic.webp",
+      "images/planner/items/misc/body_part/fragment_magic.webp",
+      "images/planner/items/misc/body_part/fragment_magic.webp"
     ],
     "unique499": [
       "images/planner/items/misc/charm/charm_large.webp",
@@ -5866,14 +5895,14 @@
     "unique509": [null, null, null],
     "unique510": [null, null, null],
     "unique696": [
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp",
-      "images/planner/items/misc/amulet/amulet2.webp"
+      "images/planner/items/misc/amulet/the_rising_sun.png",
+      "images/planner/items/misc/amulet/the_rising_sun.png",
+      "images/planner/items/misc/amulet/the_rising_sun.png"
     ],
     "unique697": [
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp",
-      "images/planner/items/misc/amulet/amulet3.webp"
+      "images/planner/items/misc/amulet/atmas_scarab.png",
+      "images/planner/items/misc/amulet/atmas_scarab.png",
+      "images/planner/items/misc/amulet/atmas_scarab.png"
     ],
     "unique698": [
       "images/planner/items/weapon/hammer/bonesob.webp",
@@ -5941,9 +5970,9 @@
       "images/planner/items/weapon/staff/long_staff.webp"
     ],
     "unique711": [
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp",
-      "images/planner/items/misc/ring/ring1.webp"
+      "images/planner/items/misc/ring/pawned_soul.png",
+      "images/planner/items/misc/ring/pawned_soul.png",
+      "images/planner/items/misc/ring/pawned_soul.png"
     ],
     "unique716": [null, null, null],
     "unique717": [null, null, null],
@@ -6694,5 +6723,22 @@
       "images/planner/items/armor/grimoires/oldbook.webp"
     ]
   },
-  "missing": []
+  "missing": [],
+  "nativeArtSource": {
+    "checkedAt": "2026-11-18",
+    "manifest": "https://blizzless.info/api/launcher-mods/manifest",
+    "version": 1794765706633,
+    "uniqueMappingPath": "data/hd/items/uniques.json",
+    "uniqueMappingSha256": "4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072"
+  },
+  "variants": {
+    "jew": [
+      "images/planner/items/misc/gem/perfect_diamond1.webp",
+      "images/planner/items/misc/gem/perfect_diamond2.webp",
+      "images/planner/items/misc/gem/perfect_diamond3.webp",
+      "images/planner/items/misc/gem/perfect_diamond4.webp",
+      "images/planner/items/misc/gem/perfect_diamond5.webp",
+      "images/planner/items/misc/gem/perfect_diamond6.webp"
+    ]
+  }
 }

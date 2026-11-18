@@ -1,9 +1,11 @@
 import { affixRequiredLevel } from "./planner-affixes";
 import data from "@/shared/planner-sockets.json";
-import { plannerItemIdentity } from "./planner-item-art";
+import { plannerItemIdentity, plannerItemImage } from "./planner-item-art";
 import type { Bonuses, ClassId, PlannerItem } from "@/types/planner";
 
 export type SocketCategory = "weapon" | "helm" | "shield";
+// Jewelry cannot be socketed, even when misc.txt reserves socket bits for it.
+export const baseSupportsSockets = (code?: string) => code !== "rin" && code !== "amu";
 export interface SocketBonuses {
   bonuses: Bonuses;
   classBonuses: Partial<Record<ClassId, number>>;
@@ -20,8 +22,77 @@ export interface SocketInsert {
   requiredLevel: number;
   effects: Record<SocketCategory, SocketBonuses>;
 }
+export const magicSocketJewels: Record<
+  string,
+  {
+    name: SocketInsert["name"];
+    requiredLevel: number;
+    definition: Record<string, string | number>;
+  }
+> = {
+  j15fr: {
+    name: { en: "Ruby Jewel of Fervor", ru: "Рубиновый самоцвет стремительности" },
+    requiredLevel: 31,
+    definition: {
+      prop1: "swing2",
+      min1: 15,
+      max1: 15,
+      prop2: "res-fire",
+      min2: 30,
+      max2: 30,
+    },
+  },
+  j15ar: {
+    name: {
+      en: "Jewel of Fervor and Accuracy",
+      ru: "Самоцвет стремительности и меткости",
+    },
+    requiredLevel: 31,
+    definition: {
+      prop1: "swing2",
+      min1: 15,
+      max1: 15,
+      prop2: "att",
+      min2: 100,
+      max2: 100,
+    },
+  },
+};
 export const socketInserts = data.items as SocketInsert[];
 export const socketInsertByCode = new Map(socketInserts.map((item) => [item.code, item]));
+export function socketInsertVisual(code: string, iconIndex?: number) {
+  const insert = socketInsertByCode.get(code);
+  return insert &&
+    iconIndex !== undefined &&
+    insert.group === "jewel" &&
+    insert.baseCode === "jew"
+    ? {
+        ...insert,
+        image_url: `/${plannerItemImage({ baseCode: "jew", quality: "magic", iconIndex })}`,
+      }
+    : insert;
+}
+export function parseSocketIconIndices(value: unknown, codes: (string | null)[] = []) {
+  if (!value || typeof value !== "object" || Array.isArray(value))
+    throw new Error("socket icons");
+  const result: NonNullable<PlannerItem["socketIconIndices"]> = {};
+  for (const [index, iconIndex] of Object.entries(value)) {
+    const insert = /^[0-5]$/.test(index)
+      ? socketInsertByCode.get(codes[Number(index)] ?? "")
+      : undefined;
+    if (
+      insert?.group !== "jewel" ||
+      insert.baseCode !== "jew" ||
+      typeof iconIndex !== "number" ||
+      !Number.isInteger(iconIndex) ||
+      iconIndex < 0 ||
+      iconIndex > 5
+    )
+      throw new Error("socket icon range");
+    result[index] = iconIndex;
+  }
+  return result;
+}
 const bases = data.bases as Record<string, SocketCategory>;
 export function socketCategory(item: PlannerItem): SocketCategory {
   const { baseCode } = plannerItemIdentity(item);
@@ -70,7 +141,7 @@ export function socketInsertItem(
   values?: Record<string, number>
 ): PlannerItem | undefined {
   const insert = socketInsertByCode.get(code);
-  if (!insert?.baseCode) return;
+  if (!insert?.baseCode || magicSocketJewels[code]) return;
   return {
     name: insert.name.en,
     quality: "unique",

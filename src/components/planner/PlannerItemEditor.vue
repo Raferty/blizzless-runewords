@@ -330,6 +330,7 @@
             :character-level="store.build.level"
             @update:model-value="item.socketedItems = $event"
             @values="item.socketPropertyValues = $event"
+            @icons="item.socketIconIndices = $event"
           />
           <p
             v-if="itemRequiredLevel(item) > item.requiredLevel"
@@ -391,7 +392,7 @@ import {
   affixById,
 } from "@/utils/planner-affixes";
 import PlannerSocketEditor from "./PlannerSocketEditor.vue";
-import { itemRequiredLevel } from "@/utils/planner-sockets";
+import { baseSupportsSockets, itemRequiredLevel } from "@/utils/planner-sockets";
 import { usePlannerStore } from "@/store/planner";
 import {
   createItemCatalog,
@@ -708,26 +709,39 @@ watch(
   },
   { immediate: true }
 );
+function clearUnsupportedSockets() {
+  if (baseSupportsSockets(item.value.baseCode)) return;
+  item.value.sockets = 0;
+  delete item.value.socketedItems;
+  delete item.value.socketPropertyValues;
+  delete item.value.socketIconIndices;
+}
+watch(() => [item.value, selectedBase.value?.code], clearUnsupportedSockets, {
+  immediate: true,
+});
 const selectedImage = computed(() =>
   plannerItemImage(item.value, selectedBase.value?.tier)
 );
 const maxSockets = computed(() =>
-  Math.min(
-    6,
-    Math.max(
-      item.value.quality === "crafted"
-        ? Math.min(
-            selectedBase.value?.maxSockets ?? 0,
-            Math.max(1, affixSockets(item.value))
-          )
-        : (selectedBase.value?.maxSockets ?? 0),
-      native.value &&
-        item.value.catalogId &&
-        (item.value.quality === "unique" || item.value.quality === "set")
-        ? native.value.catalogBonuses(item.value.catalogId, item.value.quality, 1).sockets
-        : 0
-    )
-  )
+  !baseSupportsSockets(selectedBase.value?.code)
+    ? 0
+    : Math.min(
+        6,
+        Math.max(
+          item.value.quality === "crafted"
+            ? Math.min(
+                selectedBase.value?.maxSockets ?? 0,
+                Math.max(1, affixSockets(item.value))
+              )
+            : (selectedBase.value?.maxSockets ?? 0),
+          native.value &&
+            item.value.catalogId &&
+            (item.value.quality === "unique" || item.value.quality === "set")
+            ? native.value.catalogBonuses(item.value.catalogId, item.value.quality, 1)
+                .sockets
+            : 0
+        )
+      )
 );
 const baseOptions = computed(() =>
   [...(catalog.value?.bases.values() ?? [])]
@@ -763,6 +777,12 @@ const socketCount = computed(() =>
 watch(
   () => item.value.sockets,
   (count) => {
+    if (Number.isInteger(count) && count! >= 0 && item.value.socketIconIndices)
+      item.value.socketIconIndices = Object.fromEntries(
+        Object.entries(item.value.socketIconIndices).filter(
+          ([index]) => Number(index) < count!
+        )
+      );
     if (Number.isInteger(count) && count! >= 0 && item.value.socketedItems)
       item.value.socketedItems = item.value.socketedItems.slice(0, count);
     if (Number.isInteger(count) && count! >= 0 && item.value.socketPropertyValues)
@@ -969,6 +989,7 @@ onMounted(loadCatalog);
 function save() {
   if (!item.value.name.trim() || !inventoryFits.value || !craftAffixesComplete.value)
     return;
+  clearUnsupportedSockets();
   emit(
     "save",
     parsePlannerItem({ ...item.value, name: item.value.name.trim() }),
