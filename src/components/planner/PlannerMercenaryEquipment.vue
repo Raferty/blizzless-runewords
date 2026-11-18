@@ -17,7 +17,7 @@
       <image :href="texture" width="1036" height="790" />
     </svg>
     <PlannerItemSlot
-      v-for="slot in slots"
+      v-for="slot in visibleSlots"
       :key="slot.key"
       class="planner-gear-slot"
       :class="{
@@ -47,10 +47,11 @@ import { computed } from "vue";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import { paperdollCapacity, slotBackgroundInset } from "@/shared/planner-art";
+import { mercenaryUsesOffHand } from "@/shared/planner";
 import PlannerItemSlot from "./PlannerItemSlot.vue";
 import UiIcon from "@/components/ui/UiIcon.vue";
 withDefaults(defineProps<{ showReset?: boolean }>(), { showReset: true });
-defineEmits<{ equip: [slot: "head" | "mainHand" | "armor"] }>();
+defineEmits<{ equip: [slot: "head" | "mainHand" | "offHand" | "armor"] }>();
 const store = usePlannerStore();
 const t = useText();
 const hasEquipment = computed(() =>
@@ -88,5 +89,23 @@ const slots = [
     height: 333,
     insets: [20, 18, 19, 17],
   },
+  {
+    key: "offHand",
+    ru: "Левая рука",
+    en: "Off-hand",
+    x: 776,
+    y: 174,
+    width: 230,
+    height: 430,
+    insets: [24, 20, 22, 18],
+  },
 ] as const;
+const visibleSlots = computed(() =>
+  slots.filter(
+    (slot) =>
+      slot.key !== "offHand" ||
+      mercenaryUsesOffHand(store.build.mercenary.type) ||
+      store.build.mercenary.equipment.offHand
+  )
+);
 </script>

@@ -357,9 +357,69 @@ try {
   for (const merc of mercenaries.filter((m) => m.value !== "none")) {
     const build = planner.createBuild();
     build.mercenary.type = merc.value;
-    const { raw } = await verify(build);
+    const { raw, bytes } = await verify(build);
     assert.equal(raw.profile.mercLevel, 90, merc.value);
     assert(raw.profile.merc, merc.value);
+    assert.equal(codec.importCharacter(bytes).mercenary.type, merc.value);
+  }
+  for (const [type, base, other, nativeClass] of [
+    ["barbarian-frenzy", "7cr", "7wa", 560],
+    ["barbarian-frenzy-axes", "7wa", "7cr", 953],
+  ]) {
+    const build = planner.createBuild("druid");
+    build.mercenary.type = type;
+    const weapon = {
+      name: "Mercenary weapon",
+      quality: "normal",
+      baseCode: base,
+      requiredLevel: 1,
+      notes: "",
+      bonuses: {},
+    };
+    build.mercenary.equipment = {
+      head: {
+        name: "Arreat's Face",
+        quality: "unique",
+        baseCode: "baa",
+        catalogId: "unique279",
+        requiredLevel: 42,
+        notes: "",
+        bonuses: {},
+      },
+      mainHand: weapon,
+      offHand: { ...weapon },
+    };
+    const choices = Object.fromEntries(
+      native
+        .gameSaveEntries(build)
+        .map((entry) => [entry.key, codec.defaultChoice(entry, build)])
+    );
+    assert(
+      Object.values(choices).every(Boolean),
+      "Barbarian helm and both weapons are selectable"
+    );
+    const entry = {
+      key: "mercenary.offHand",
+      owner: "mercenary",
+      slot: "offHand",
+      item: { ...weapon, baseCode: undefined },
+    };
+    const bases = codec.choices(entry, build).map((choice) => choice.base);
+    assert(bases.includes(base), `${type}: matching one-handed weapon`);
+    assert(!bases.includes(other), `${type}: rejects the other weapon family`);
+    assert(!bases.includes("7bt"), `${type}: rejects two-handed axes`);
+    const { raw, read, bytes } = await verify(build, { ...opts, choices });
+    assert.equal(Number(data.hireling[raw.profile.merc][0].class), nativeClass);
+    assert.equal(read.merc_items.length, 3);
+    assert.equal(read.merc_items.filter((item) => item.type === base).length, 2);
+    const imported = codec.importCharacter(bytes);
+    assert.equal(imported.mercenary.type, type);
+    assert.equal(imported.mercenary.equipment.mainHand.baseCode, base);
+    assert.equal(imported.mercenary.equipment.offHand.baseCode, base);
+    assert.equal(
+      planner.parseBuild(JSON.parse(JSON.stringify(build))).mercenary.type,
+      type
+    );
   }
   const modules = await Promise.all(
     ["runewords", "reworked-runewords", "custom-runewords", "rotw-runewords"].map(
@@ -421,6 +481,11 @@ try {
         throw error;
       }
       const { raw } = result;
+      assert.equal(
+        codec.importCharacter(result.bytes).stash[0].runewordId,
+        word.id,
+        `${word.name.en}: preserve the native runeword variant`
+      );
       const item = raw.items[raw.profile.stash.find((id) => id !== undefined)];
       assert.equal(item.quality, 9, word.name.en);
       assert.equal(item.socketedItems.length, word.runes.length, word.name.en);

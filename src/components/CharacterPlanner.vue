@@ -174,8 +174,8 @@
             <p class="planner-help">
               {{
                 t(
-                  "Экипировка хранится отдельно от героя. Ауры, урон и характеристики наёмника пока не рассчитываются. При смене типа его снаряжение переносится в сундук.",
-                  "Equipment is stored separately from your hero. Mercenary auras, damage and stats are not calculated. Changing type moves their gear to the stash."
+                  "Ауры от экипировки наёмника учитываются в расчётах героя. Собственный урон и характеристики наёмника пока не рассчитываются. При смене типа его снаряжение переносится в сундук.",
+                  "Mercenary equipment auras contribute to your hero's calculations. The mercenary's own damage and stats are not calculated. Changing type moves their gear to the stash."
                 )
               }}
             </p>
@@ -686,12 +686,19 @@ const editorTypes = computed(() => {
       : [18];
   if (current.slot === "armor") return [17];
   if (current.slot === "mainHand" || current.slot === "swapMain") {
-    if (current.kind === "mercenary")
+    if (current.kind === "mercenary") {
+      if (mercenary.value.value === "barbarian-frenzy-axes") return [1];
       return mercenary.value.act === 1 ? [6] : mercenary.value.act === 2 ? [9, 13] : [3];
+    }
     return [12];
   }
   if (current.slot === "offHand" || current.slot === "swapOff") {
-    if (current.kind === "mercenary") return mercenary.value.act === 3 ? [16] : [3];
+    if (current.kind === "mercenary")
+      return mercenary.value.value === "barbarian-frenzy-axes"
+        ? [1]
+        : mercenary.value.act === 3
+          ? [16]
+          : [3];
     return [
       16,
       ...(store.build.classId === "paladin"

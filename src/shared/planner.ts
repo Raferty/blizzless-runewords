@@ -181,8 +181,18 @@ export const mercenaries = [
   {
     value: "barbarian-frenzy",
     skillId: 147,
-    ru: "Акт V · Варвар · Бешенство",
-    en: "Act V · Barbarian · Frenzy",
+    ru: "Акт V · Варвар · Бешенство · Мечи",
+    en: "Act V · Barbarian · Frenzy · Swords",
+    act: 5,
+  },
+  {
+    value: "barbarian-frenzy-axes",
+    skillId: 147,
+    ru: "Акт V · Варвар · Бешенство · Топоры",
+    en: "Act V · Barbarian · Frenzy · Axes",
     act: 5,
   },
 ];
+
+export const mercenaryUsesOffHand = (type: string) =>
+  type.startsWith("wolf-") || type.startsWith("barbarian-frenzy");

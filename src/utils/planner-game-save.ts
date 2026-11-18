@@ -1,7 +1,12 @@
 import { D2RSaver, type BinaryParsedItem, type D2SCharacterProfile } from "d2r-saver";
 import { writeItem, type types as SaveTypes } from "@d2runewizard/d2s";
 import { constants as originalConstants } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
-import { difficulties, plannerClasses, plannerSkills } from "@/shared/planner";
+import {
+  difficulties,
+  mercenaries,
+  plannerClasses,
+  plannerSkills,
+} from "@/shared/planner";
 import { waypoints } from "@/shared/planner-waypoints";
 import { RUNEWORDS } from "@/shared/runewords";
 import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
@@ -157,6 +162,22 @@ export function saveChecksum(bytes: Uint8Array) {
 export function createGameSaveExporter(data: RawData, locale: Locale) {
   const saver = D2RSaver.fromData(structuredClone(data), locale);
   const gd = saver.gd;
+  function matchesMercenary(type: string, row: Definition) {
+    const mercenary = mercenaries.find((entry) => entry.value === type);
+    if (!mercenary?.skillId || Number(row.act) !== mercenary.act) return false;
+    const skill = gd.skills[String(mercenary.skillId)]?.skill;
+    if (
+      !skill ||
+      !Object.entries(row).some(
+        ([key, value]) => /^skill\d+$/.test(key) && value === skill
+      )
+    )
+      return false;
+    // Blizzless has distinct native hirelings for dual swords and dual axes.
+    if (type.startsWith("barbarian-frenzy"))
+      return Number(row.class) === (type === "barbarian-frenzy-axes" ? 953 : 560);
+    return true;
+  }
   const saveId = (kind: "uniqueItems" | "setItems", id?: string) => {
     if (!id) return 0;
     const value = (gd[kind][id] as unknown as Definition | undefined)?.saveId;
@@ -305,6 +326,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       const nativeRuneword =
         itemQuality === "runeword" ? gd.runes[native.unique ?? ""] : undefined;
       const runewordName = nativeRuneword?.name;
+      const baseTypes = types(native.base);
+      const baseKind = baseTypes.has("weap")
+        ? "weapon"
+        : baseTypes.has("shld")
+          ? "shield"
+          : "armor";
       const runewordId =
         typeof runewordName === "string"
           ? [
@@ -312,9 +339,24 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
               ...REWORKED_RUNEWORDS,
               ...CUSTOM_RUNEWORDS,
               ...ROTW_RUNEWORDS,
-            ].find((word) => normalize(word.name.en) === normalize(runewordName))?.id
+            ].find(
+              (candidate) =>
+                normalize(candidate.name.en) === normalize(runewordName) &&
+                word({
+                  key: "import",
+                  owner: "stash",
+                  item: {
+                    name: runewordName,
+                    quality: "runeword",
+                    runewordId: candidate.id,
+                    baseKind,
+                    requiredLevel: 1,
+                    notes: "",
+                    bonuses: {},
+                  },
+                })?.[0] === native.unique
+            )?.id
           : undefined;
-      const baseTypes = types(native.base);
       const item: PlannerItem = {
         name: catalogId
           ? gd.locale.strings[
@@ -332,11 +374,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         ...(Number.isInteger(runewordId) && runewordId! > 0 ? { runewordId } : {}),
         ...(itemQuality === "runeword"
           ? {
-              baseKind: baseTypes.has("weap")
-                ? "weapon"
-                : baseTypes.has("shld")
-                  ? "shield"
-                  : "armor",
+              baseKind,
             }
           : {}),
         baseCode: native.base,
@@ -403,10 +441,16 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       if (native && slot) build.equipment[slot] = makeItem(native);
     }
     if (profile.merc) {
+      const rows = gd.hireling[profile.merc] ?? [];
       build.mercenary = {
-        // Current v105 save profiles do not retain the UI aura key. Desert Might
-        // is the default Act II export option and preserves its equipment.
-        type: "desert-might",
+        type:
+          mercenaries.find(
+            (entry) =>
+              Array.isArray(rows) &&
+              rows.some((row) =>
+                matchesMercenary(entry.value, row as unknown as Definition)
+              )
+          )?.value ?? "desert-might",
         level: Math.max(1, Math.min(98, profile.mercLevel ?? build.level)),
         equipment: {},
       };
@@ -486,13 +530,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       ([, def]) => normalize(def.name) === normalize(name)
     );
     if (matches.length < 2) return matches[0];
-    const kind =
-      entry.item.baseKind ??
-      (name.includes("Weapons")
-        ? "weapon"
-        : name.includes("Armor")
-          ? "armor"
-          : undefined);
+    const kind = name.includes("Weapons")
+      ? "weapon"
+      : name.includes("Armor")
+        ? "armor"
+        : entry.item.baseKind;
     if (!kind) return matches[0];
     const wanted = { weapon: "weap", armor: "armo", shield: "shld" }[kind];
     const includes = (type: string): boolean =>
@@ -543,15 +585,19 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     if (entry.item.baseKind === "shield" && !t.has("shld")) return false;
     if (entry.item.baseKind === "armor" && (!t.has("armo") || t.has("shld")))
       return false;
-    const nativeClass = nativeClasses[classes.indexOf(build.classId)];
+    const mercenary = mercenaries.find((entry) => entry.value === build.mercenary.type);
+    const nativeClass =
+      entry.owner === "mercenary"
+        ? mercenary?.act === 5
+          ? "bar"
+          : mercenary?.act === 1
+            ? "ama"
+            : undefined
+        : nativeClasses[classes.indexOf(build.classId)];
     const classRestriction = [...t]
       .map((type) => gd.itemTypes[type]?.class)
       .find(Boolean);
-    if (
-      classRestriction &&
-      entry.owner !== "stash" &&
-      (entry.owner === "mercenary" || classRestriction !== nativeClass)
-    )
+    if (classRestriction && entry.owner !== "stash" && classRestriction !== nativeClass)
       return false;
     if (entry.owner === "charm") {
       if (entry.item.quality === "unique")
@@ -562,6 +608,16 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     }
     if (entry.slot) {
       const slot = slots[entry.slot].replace(/2$/, "");
+      if (
+        entry.owner === "mercenary" &&
+        build.mercenary.type.startsWith("barbarian-frenzy") &&
+        ["rarm", "larm"].includes(slot)
+      ) {
+        const weaponType =
+          build.mercenary.type === "barbarian-frenzy-axes" ? "axe" : "swor";
+        if (!t.has(weaponType) || Number((base as unknown as Definition)["2handed"]))
+          return false;
+      }
       if (slot === "rarm" && !t.has("weap")) return false;
       if (
         slot === "larm" &&
@@ -1092,27 +1148,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       if (!bits || !Number.isInteger(value) || value < 0 || value >= 2 ** bits)
         throw new GameSaveError("statRange", key);
     }
-    const mercSkill: Record<string, string> = {
-      "rogue-fire": "Fire Arrow",
-      "rogue-cold": "Cold Arrow",
-      "desert-prayer": "Prayer",
-      "desert-defiance": "Defiance",
-      "desert-blessed-aim": "Blessed Aim",
-      "desert-thorns": "Thorns",
-      "desert-holy-freeze": "Holy Freeze",
-      "desert-might": "Might",
-      "wolf-fire": "Fire Ball",
-      "wolf-cold": "Frozen Orb",
-      "wolf-lightning": "Lightning",
-      "barbarian-bash": "Concentrate",
-      "barbarian-frenzy": "Frenzy",
-    };
     let mercXP = 0;
     if (build.mercenary.type !== "none") {
-      const skill = mercSkill[build.mercenary.type];
       const match = Object.entries(gd.hireling).find(
         ([, rows]) =>
-          Array.isArray(rows) && rows.some((row) => Object.values(row).includes(skill))
+          Array.isArray(rows) &&
+          rows.some((row) =>
+            matchesMercenary(build.mercenary.type, row as unknown as Definition)
+          )
       );
       const row = match?.[1]?.[0] as unknown as
         { level: number; explvl: number } | undefined;
