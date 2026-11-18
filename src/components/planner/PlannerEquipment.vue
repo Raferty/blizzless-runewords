@@ -42,10 +42,10 @@
           class="planner-gear-slot"
           :class="{
             'planner-gear-slot--equipped': itemAt(slot.key),
-            'planner-gear-slot--warning': requiredLevelAt(slot.key) > store.build.level,
           }"
           :style="paperdollStyle(slot.key)"
           :item="itemAt(slot.key)"
+          :requirements="requirements(itemAt(slot.key))"
           :capacity="paperdollCapacity[slot.key]"
           :equipment-slot="slot.key"
           :aria-label="`${t(slot.ru, slot.en)}: ${itemAt(slot.key)?.name || t('пусто, выбрать предмет', 'empty, choose an item')}`"
@@ -80,6 +80,7 @@
               gridRow: `${Math.floor(charm.position / 10) + 1} / span ${charm.height}`,
             }"
             :item="charm"
+            :requirements="requirements(charm)"
             :capacity="[inventoryWidth(charm), charm.height]"
             :fallback-base="`cm${charm.height}`"
             compact
@@ -133,7 +134,7 @@ import { useText } from "@/composables/useText";
 import { equipmentSlots } from "@/shared/planner";
 import { paperdollCapacity, paperdollStyle } from "@/shared/planner-art";
 import type { EquipmentSlot } from "@/types/planner";
-import { itemRequiredLevel } from "@/utils/planner-sockets";
+import { useItemRequirements } from "@/composables/useItemRequirements";
 import {
   defaultInventory,
   goldCapacity,
@@ -147,6 +148,7 @@ defineEmits<{
 }>();
 const store = usePlannerStore();
 const t = useText();
+const requirements = useItemRequirements();
 const hasItems = computed(
   () =>
     store.build.charms.length > 0 || Object.values(store.build.equipment).some(Boolean)
@@ -173,10 +175,6 @@ const activeSlot = (key: EquipmentSlot): EquipmentSlot =>
       ? "swapOff"
       : key;
 const itemAt = (key: EquipmentSlot) => store.build.equipment[activeSlot(key)];
-const requiredLevelAt = (key: EquipmentSlot) => {
-  const item = itemAt(key);
-  return item ? itemRequiredLevel(item) : 0;
-};
 function removeEquipment(key: EquipmentSlot) {
   delete store.build.equipment[activeSlot(key)];
 }

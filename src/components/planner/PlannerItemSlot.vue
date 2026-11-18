@@ -1,6 +1,7 @@
 <template>
   <button
     ref="trigger"
+    :class="{ 'planner-item-slot--unusable': requirements?.unmet }"
     :aria-describedby="open && item ? uid : undefined"
     :aria-haspopup="item ? 'menu' : undefined"
     :aria-expanded="item ? menuOpen : undefined"
@@ -37,6 +38,7 @@
       :id="uid"
       :item="item"
       :anchor="anchor"
+      :requirements="requirements"
       @pointerenter="keep"
       @pointerleave="leave"
     />
@@ -49,6 +51,7 @@ import PlannerItemVisual from "./PlannerItemVisual.vue";
 import PlannerItemTooltip from "./PlannerItemTooltip.vue";
 import PlannerItemContextMenu from "./PlannerItemContextMenu.vue";
 import { plannerItemDragging } from "@/composables/usePlannerItemDrag";
+import type { ItemRequirementStatus } from "@/utils/planner-item-requirements";
 
 const props = defineProps<{
   item?: PlannerItem;
@@ -56,6 +59,7 @@ const props = defineProps<{
   equipmentSlot?: EquipmentSlot;
   fallbackBase?: string;
   compact?: boolean;
+  requirements?: ItemRequirementStatus;
 }>();
 const emit = defineEmits<{ click: [event: MouseEvent]; remove: [] }>();
 const uid = useId();

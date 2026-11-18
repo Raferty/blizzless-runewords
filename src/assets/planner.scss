@@ -406,6 +406,23 @@
   outline: 1px solid #f08d76;
   outline-offset: -2px;
 }
+.planner-equipment-art .planner-gear-slot.planner-item-slot--unusable,
+.planner-charm-grid .planner-charm-item.planner-item-slot--unusable,
+.planner-stash-grid .planner-stash-slot.planner-item-slot--unusable {
+  background: rgb(107 25 20 / 72%);
+  box-shadow: inset 0 0 0 1px rgb(203 75 60 / 45%);
+}
+.planner-equipment-art .planner-gear-slot.planner-item-slot--unusable:hover,
+.planner-equipment-art .planner-gear-slot.planner-item-slot--unusable:focus-visible,
+.planner-charm-grid .planner-charm-item.planner-item-slot--unusable:hover,
+.planner-charm-grid .planner-charm-item.planner-item-slot--unusable:focus-visible,
+.planner-stash-grid .planner-stash-slot.planner-item-slot--unusable:hover,
+.planner-stash-grid .planner-stash-slot.planner-item-slot--unusable:focus-visible {
+  background: rgb(133 33 26 / 78%);
+}
+.planner-item-tooltip .planner-requirement--unmet {
+  color: #f27569;
+}
 .planner-item-name {
   font-size: 11px;
   line-height: 1.4;

@@ -17,7 +17,26 @@
       <p v-if="word" class="planner-item-tooltip-rune-order">
         ‘{{ runes.map((rune) => rune?.name[lang]).join(" · ") }}’
       </p>
-      <p>{{ t("Требуемый уровень", "Required level") }}: {{ itemRequiredLevel(item) }}</p>
+      <p
+        :class="{ 'planner-requirement--unmet': requirements && !requirements.level.met }"
+      >
+        {{ t("Требуемый уровень", "Required level") }}:
+        {{ requirements?.level.required ?? itemRequiredLevel(item) }}
+      </p>
+      <p
+        v-for="requirement in requirements?.attributes"
+        :key="requirement.key"
+        :class="{ 'planner-requirement--unmet': !requirement.met }"
+      >
+        {{
+          requirement.key === "strength"
+            ? t("Требуется сила", "Required Strength")
+            : t("Требуется ловкость", "Required Dexterity")
+        }}: {{ requirement.required }}
+        <template v-if="!requirement.met">
+          ({{ t("сейчас", "current") }}: {{ requirement.current }})</template
+        >
+      </p>
       <p v-if="item.ethereal">{{ t("Эфирный", "Ethereal") }}</p>
       <p v-if="isTome(item.baseCode)">
         {{ t("Свитков внутри", "Scrolls inside") }}: {{ item.quantity ?? 20 }} / 20
@@ -97,11 +116,13 @@ import { itemRequiredLevel, socketCategory } from "@/utils/planner-sockets";
 import type { GameSaveExporter } from "@/utils/planner-game-save";
 import type { PlannerItem } from "@/types/planner";
 import { itemSkillClass } from "@/utils/planner-properties";
+import type { ItemRequirementStatus } from "@/utils/planner-item-requirements";
 
 const props = defineProps<{
   id: string;
   item: PlannerItem;
   anchor: { left: number; right: number; top: number; bottom: number };
+  requirements?: ItemRequirementStatus;
 }>();
 defineEmits<{ pointerenter: []; pointerleave: [] }>();
 const info = useInfoStore();

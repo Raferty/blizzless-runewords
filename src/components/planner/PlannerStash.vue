@@ -58,6 +58,7 @@
             gridRow: `${entry.y + 1} / span ${entry.size[1]}`,
           }"
           :item="entry.item"
+          :requirements="requirements(entry.item)"
           :capacity="entry.size"
           :aria-label="entry.item.name"
           @click="$emit('edit', entry.index)"
@@ -194,11 +195,13 @@ import { stashKits, createStashSupply } from "@/utils/planner-supplies";
 import type { GameSaveExporter } from "@/utils/planner-game-save";
 import { inventoryItemSize, stashItemLayout } from "@/utils/planner-item-movement";
 import { usePlannerItemDrag } from "@/composables/usePlannerItemDrag";
+import { useItemRequirements } from "@/composables/useItemRequirements";
 import type { PlannerItem } from "@/types/planner";
 
 defineEmits<{ edit: [index: number]; manage: [] }>();
 const store = usePlannerStore();
 const t = useText();
+const requirements = useItemRequirements();
 const native = shallowRef<GameSaveExporter>();
 const supplyMessage = ref("");
 onMounted(async () => {
