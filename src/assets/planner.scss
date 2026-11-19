@@ -460,7 +460,8 @@
   object-fit: contain;
 }
 .planner-ethereal-image {
-  opacity: 0.65;
+  opacity: 0.5;
+  filter: grayscale(0.65) brightness(1.15);
 }
 .planner-paperdoll-sockets {
   position: absolute;
