@@ -1,30 +1,14 @@
 {
-  "checkedAt": "2026-10-30",
+  "checkedAt": "2026-11-19",
   "source": "https://lootcube.net/images/items/",
   "keySpriteSource": "https://blizzless.info/api/launcher-mods/blobs/",
   "keySprites": {
-    "misc/amulet/highlords_wrath": "6f79a8f6fa91c472dbc4c30eba6b40e456dc8852a4328195a906238991bdc9fe",
-    "misc/quest/jewel_dis": "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
-    "misc/quest/parts_1": "1aa22d0d5cb9a02f0af89c44f34e6446d68bb9cccff0fff038ce7eec50e6e97e",
-    "misc/quest/parts_2": "fa991baba93ef9cdce010f5029f5b24bd1cad35ccfc617ebfda49bf058f27f3c",
-    "misc/quest/parts_3": "c8f59b04d4b47cfa1d297399291b3d4421696caf033684c49a397c27322e9af9",
-    "misc/quest/cont_rvl": "f8059926648c49c6913b2920ae40a1854082498a577a19df1738a770283e51c7",
-    "misc/key/mephisto_key": "904288fe2a8ef731e175462581565f8752780de3e6104f63901f86001b92af1e",
-    "misc/key/mephisto_key2": "d797b93a1d337236419c8e8021bdd18d58b8e5a9240ed8f15276304b8a144177",
-    "misc/key/mephisto_key3": "e0448767fa53aeb0af1ee5626da09451c907ecf5e1563d09360d923e07c0accf",
-    "misc/key/mephisto_sta": "4f2ab490fd1f5088e93a753c3bbb2d85934d4341a7a2dfcc8c61f62db3c9449b",
-    "misc/key/mephisto_stb": "35cbf85f2269327c9e5a9e8e8afc9181968740cf1138d59e8dba60ac5bc40f6e",
-    "misc/key/mephisto_stc": "229fdc3701750f60080481554745da169ca94627c19063808fa9f813d00244bc",
-    "misc/shard/cont_ua1": "568d18fd85b1518503eba4cc333e0e0ae653e275b695ae9357b89d57ef0682f6",
-    "misc/shard/cont_ua2": "53895807e7a5c41dc6c1637ddd24ecdbd6b568112b2739108a2a0a37a78a805d",
-    "misc/shard/cont_ua3": "985fd7f3fc5818e7fab2077f72a493d6ce06163b6cb8b4e01513ad00d344a5ba",
-    "misc/shard/cont_ua4": "f5f7cb88b5fd59ba0e269d1f91d27d2c478f968cb1d680b5755d7911108ec3bf",
-    "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85",
     "misc/amulet/atmas_scarab": "dcfe2a67f0eb9a7078b81beed3446ea791257ab185d68eef59b222406e3b65c9",
     "misc/amulet/amulet": "be01f5109096b7f5bfcd9ecc65382372b88b5e5d07d7c0e406dfeedcadbba71d",
     "misc/amulet/crescent_moon": "91d979955d64cc62a51c726504ecc444797c96c2094e60afd47488ae6e01da5f",
     "misc/amulet/entropy_locket": "7c433479652569811d88f4de0057c932984d6d9aa0e8733b7c5333f65ae3489a",
     "misc/amulet/maras_kaleidoscope": "24d0c4f432469d6c6a9068719ffc58266bc6e384ed33bf5a0082fe273926811d",
+    "misc/amulet/highlords_wrath": "6f79a8f6fa91c472dbc4c30eba6b40e456dc8852a4328195a906238991bdc9fe",
     "misc/amulet/metalgrid": "f737f416761b44769f6a5e8c289e3efc6ff3fc20a21c0442f5c893bbd2c18e22",
     "misc/amulet/nokozan_relic": "35582757b0134001488bad1edda3cf12bc596189dea3f0aa4758955a871aece5",
     "misc/amulet/seraphs_hymn": "d990c1afd9910877ec10378904a4ab3e43b4a489ad8929adf3fe8951599af9ad",
@@ -47,7 +31,55 @@
     "misc/ring/opalvein": "c1802e3cec71858ceb5598095257a632ccd6058ca6c220758da223fd8dc60e9e",
     "misc/ring/sling": "51a33741ed34f4f424afd085ff426c8b410348393edb1aebcd8bd8fb976929f7",
     "misc/ring/stone_of_jordan": "a7c75a4a152bbcf4e1fdcbae5d514019020cb53e6d359181db6a69065a9a781b",
-    "misc/ring/wisp_projector": "a0dace831e0cb20b9958a761225b974340c5cede6ac2f04528d605159207b110"
+    "misc/ring/wisp_projector": "a0dace831e0cb20b9958a761225b974340c5cede6ac2f04528d605159207b110",
+    "misc/charm/talisman": "09cd7b864b01c0d3f7768c4d0b2c02061a3c522d8e34e879ea7aee84e16bf3cc",
+    "misc/charm/talisman1": "f8d046fbd589dc834e640d6c40c1484ea695bb9c95cc0e9be64e93ba74295f51",
+    "misc/charm/talisman2": "3c62e2fe344697a7c2aefef479092d8f345fe4661d8137a5c4b9a4320712f51f",
+    "misc/charm/talisman3": "13c326d2b2ac8b2380ea6278f1b9b8ca9361ca4b87e96358e9e1eb19704a36e5",
+    "misc/quest/jewel_dis": "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
+    "misc/quest/parts_1": "1aa22d0d5cb9a02f0af89c44f34e6446d68bb9cccff0fff038ce7eec50e6e97e",
+    "misc/quest/parts_2": "fa991baba93ef9cdce010f5029f5b24bd1cad35ccfc617ebfda49bf058f27f3c",
+    "misc/quest/parts_3": "c8f59b04d4b47cfa1d297399291b3d4421696caf033684c49a397c27322e9af9",
+    "misc/quest/cont_rvl": "f8059926648c49c6913b2920ae40a1854082498a577a19df1738a770283e51c7",
+    "misc/key/mephisto_key": "904288fe2a8ef731e175462581565f8752780de3e6104f63901f86001b92af1e",
+    "misc/key/mephisto_key2": "d797b93a1d337236419c8e8021bdd18d58b8e5a9240ed8f15276304b8a144177",
+    "misc/key/mephisto_key3": "e0448767fa53aeb0af1ee5626da09451c907ecf5e1563d09360d923e07c0accf",
+    "misc/key/mephisto_sta": "4f2ab490fd1f5088e93a753c3bbb2d85934d4341a7a2dfcc8c61f62db3c9449b",
+    "misc/key/mephisto_stb": "35cbf85f2269327c9e5a9e8e8afc9181968740cf1138d59e8dba60ac5bc40f6e",
+    "misc/key/mephisto_stc": "229fdc3701750f60080481554745da169ca94627c19063808fa9f813d00244bc",
+    "misc/shard/cont_ua1": "568d18fd85b1518503eba4cc333e0e0ae653e275b695ae9357b89d57ef0682f6",
+    "misc/shard/cont_ua2": "53895807e7a5c41dc6c1637ddd24ecdbd6b568112b2739108a2a0a37a78a805d",
+    "misc/shard/cont_ua3": "985fd7f3fc5818e7fab2077f72a493d6ce06163b6cb8b4e01513ad00d344a5ba",
+    "misc/shard/cont_ua4": "f5f7cb88b5fd59ba0e269d1f91d27d2c478f968cb1d680b5755d7911108ec3bf",
+    "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85"
+  },
+  "nativeArtSource": {
+    "checkedAt": "2026-11-19",
+    "manifest": "https://blizzless.info/api/launcher-mods/manifest",
+    "version": 1795062639216,
+    "uniqueMappingPath": "data/hd/items/uniques.json",
+    "uniqueMappingSha256": "4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072",
+    "baseMappingPath": "data/hd/items/items.json",
+    "baseMappingSha256": "13b8aef22df1e42fbb6f5ced10ce1d738150242de0ee237040c9b6e8d7685092",
+    "miscTablePath": "data/global/excel/misc.txt",
+    "miscTableSha256": "0464b39f088fedaf9fdec3a8276cc7178e720d9fea3b02c94f31343cd635af60",
+    "itemTypesTablePath": "data/global/excel/itemtypes.txt",
+    "itemTypesTableSha256": "01702061af7d78c30ce96b072969e5f363af7804ad3694bec2e4c16c5b9d99d8"
+  },
+  "variants": {
+    "jew": [
+      "images/planner/items/misc/gem/perfect_diamond1.webp",
+      "images/planner/items/misc/gem/perfect_diamond2.webp",
+      "images/planner/items/misc/gem/perfect_diamond3.webp",
+      "images/planner/items/misc/gem/perfect_diamond4.webp",
+      "images/planner/items/misc/gem/perfect_diamond5.webp",
+      "images/planner/items/misc/gem/perfect_diamond6.webp"
+    ],
+    "cs2": [
+      "images/planner/items/misc/charm/talisman1.png",
+      "images/planner/items/misc/charm/talisman2.png",
+      "images/planner/items/misc/charm/talisman3.png"
+    ]
   },
   "gameDataSha256": "633fa72e0255f3fe0abae551dab84e8e8eb7c1c76827ba6f328fb98711588f49",
   "bases": {
@@ -713,7 +745,7 @@
     "ua4": "images/planner/items/misc/shard/cont_ua4.png",
     "ua5": "images/planner/items/misc/shard/cont_ua5.png",
     "cjw": "images/planner/items/misc/gem/perfect_diamond.webp",
-    "cs2": null,
+    "cs2": "images/planner/items/misc/charm/talisman.png",
     "cm4": "images/planner/items/misc/charm/charm_large.webp",
     "04r": "images/planner/items/misc/rune/nef_rune.webp",
     "14r": "images/planner/items/misc/rune/dol_rune.webp",
@@ -3661,9 +3693,7 @@
       "horazon's secrets": "set139"
     }
   },
-  "unresolvedBaseFiles": {
-    "cs2": "invp10"
-  },
+  "unresolvedBaseFiles": {},
   "unique": {
     "unique000": [
       "images/planner/items/classic/invhaxu.gif",
@@ -5863,7 +5893,11 @@
       "images/planner/items/misc/charm/charm_large.webp",
       "images/planner/items/misc/charm/charm_large.webp"
     ],
-    "unique500": [null, null, null],
+    "unique500": [
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png"
+    ],
     "unique501": [
       "images/planner/items/misc/charm/charm_large.webp",
       "images/planner/items/misc/charm/charm_large.webp",
@@ -5889,11 +5923,31 @@
       "images/planner/items/misc/charm/charm_large.webp",
       "images/planner/items/misc/charm/charm_large.webp"
     ],
-    "unique506": [null, null, null],
-    "unique507": [null, null, null],
-    "unique508": [null, null, null],
-    "unique509": [null, null, null],
-    "unique510": [null, null, null],
+    "unique506": [
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png"
+    ],
+    "unique507": [
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png"
+    ],
+    "unique508": [
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png"
+    ],
+    "unique509": [
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png"
+    ],
+    "unique510": [
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png",
+      "images/planner/items/misc/charm/talisman.png"
+    ],
     "unique696": [
       "images/planner/items/misc/amulet/the_rising_sun.png",
       "images/planner/items/misc/amulet/the_rising_sun.png",
@@ -6723,22 +6777,5 @@
       "images/planner/items/armor/grimoires/oldbook.webp"
     ]
   },
-  "missing": [],
-  "nativeArtSource": {
-    "checkedAt": "2026-11-18",
-    "manifest": "https://blizzless.info/api/launcher-mods/manifest",
-    "version": 1794765706633,
-    "uniqueMappingPath": "data/hd/items/uniques.json",
-    "uniqueMappingSha256": "4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072"
-  },
-  "variants": {
-    "jew": [
-      "images/planner/items/misc/gem/perfect_diamond1.webp",
-      "images/planner/items/misc/gem/perfect_diamond2.webp",
-      "images/planner/items/misc/gem/perfect_diamond3.webp",
-      "images/planner/items/misc/gem/perfect_diamond4.webp",
-      "images/planner/items/misc/gem/perfect_diamond5.webp",
-      "images/planner/items/misc/gem/perfect_diamond6.webp"
-    ]
-  }
+  "missing": []
 }

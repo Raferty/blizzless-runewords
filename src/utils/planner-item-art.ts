@@ -45,14 +45,19 @@ export function plannerItemImage(
   tier?: BaseTier
 ): string | undefined {
   const { definitions, catalogId, baseCode } = appearanceReference(item);
-  if (catalogId && definitions)
-    return (
+  if (catalogId && definitions) {
+    const image =
       definitions[catalogId][
         tier
           ? ["normal", "exceptional", "elite"].indexOf(tier)
           : (tiers[baseCode || ""] ?? 0)
-      ] || undefined
-    );
+      ] || undefined;
+    // Uniques without a fixed inventory graphic retain the native base's
+    // picture ID. Fixed unique artwork (jewelry, facets, etc.) takes priority.
+    return item.iconIndex !== undefined && image === bases[baseCode || ""]
+      ? variants[baseCode || ""]?.[item.iconIndex] || image
+      : image;
+  }
   return variants[baseCode || ""]?.[item.iconIndex ?? 0] || baseItemImage(baseCode || "");
 }
 

@@ -1,10 +1,16 @@
 {
   "source": {
-    "checkedAt": "2026-11-18",
+    "checkedAt": "2026-11-19",
     "manifest": "https://blizzless.info/api/launcher-mods/manifest",
-    "version": 1794765706633,
+    "version": 1795062639216,
     "uniqueMappingPath": "data/hd/items/uniques.json",
-    "uniqueMappingSha256": "4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072"
+    "uniqueMappingSha256": "4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072",
+    "baseMappingPath": "data/hd/items/items.json",
+    "baseMappingSha256": "13b8aef22df1e42fbb6f5ced10ce1d738150242de0ee237040c9b6e8d7685092",
+    "miscTablePath": "data/global/excel/misc.txt",
+    "miscTableSha256": "0464b39f088fedaf9fdec3a8276cc7178e720d9fea3b02c94f31343cd635af60",
+    "itemTypesTablePath": "data/global/excel/itemtypes.txt",
+    "itemTypesTableSha256": "01702061af7d78c30ce96b072969e5f363af7804ad3694bec2e4c16c5b9d99d8"
   },
   "unique": {
     "Bul Katho's Wedding Band": "misc/ring/bul-kathos_wedding_band",
@@ -64,7 +70,8 @@
       "misc/gem/perfect_diamond4",
       "misc/gem/perfect_diamond5",
       "misc/gem/perfect_diamond6"
-    ]
+    ],
+    "cs2": ["misc/charm/talisman1", "misc/charm/talisman2", "misc/charm/talisman3"]
   },
   "sprites": {
     "misc/amulet/atmas_scarab": "dcfe2a67f0eb9a7078b81beed3446ea791257ab185d68eef59b222406e3b65c9",
@@ -95,7 +102,11 @@
     "misc/ring/opalvein": "c1802e3cec71858ceb5598095257a632ccd6058ca6c220758da223fd8dc60e9e",
     "misc/ring/sling": "51a33741ed34f4f424afd085ff426c8b410348393edb1aebcd8bd8fb976929f7",
     "misc/ring/stone_of_jordan": "a7c75a4a152bbcf4e1fdcbae5d514019020cb53e6d359181db6a69065a9a781b",
-    "misc/ring/wisp_projector": "a0dace831e0cb20b9958a761225b974340c5cede6ac2f04528d605159207b110"
+    "misc/ring/wisp_projector": "a0dace831e0cb20b9958a761225b974340c5cede6ac2f04528d605159207b110",
+    "misc/charm/talisman": "09cd7b864b01c0d3f7768c4d0b2c02061a3c522d8e34e879ea7aee84e16bf3cc",
+    "misc/charm/talisman1": "f8d046fbd589dc834e640d6c40c1484ea695bb9c95cc0e9be64e93ba74295f51",
+    "misc/charm/talisman2": "3c62e2fe344697a7c2aefef479092d8f345fe4661d8137a5c4b9a4320712f51f",
+    "misc/charm/talisman3": "13c326d2b2ac8b2380ea6278f1b9b8ca9361ca4b87e96358e9e1eb19704a36e5"
   },
   "externalImages": {
     "misc/body_part/fragment_cold": {
@@ -146,5 +157,12 @@
       "url": "https://lootcube.net/images/items/misc/gem/perfect_diamond2.webp",
       "sha256": "74ea5524f71eb5b47c3b2aef6b77961a83960831bedf538444fd12fb40d1c338"
     }
+  },
+  "bases": {
+    "cs2": "misc/charm/talisman"
+  },
+  "imageOverrides": {
+    "Harlequin Crest": "images/planner/items/armor/helmet/harlequin_crest.png",
+    "Arachnid Mesh": "images/cube/5dcfd7cabdd40e86af.png"
   }
 }

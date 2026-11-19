@@ -112,6 +112,7 @@ for (const [quality, definitions] of [
 const baseKeys = {};
 for (const [code, { row, group }] of Object.entries(bases))
   baseKeys[code] =
+    nativeArt.bases?.[code] ||
     nativeArt.variants[code]?.[0] ||
     (/^ua[1-5]$/.test(code)
       ? `misc/shard/cont_${code}`
@@ -161,6 +162,12 @@ for (const [quality, definitions] of [
       const uniqueImage =
         quality === "unique" && uniqueArtwork[definition.index.replace(/ Player$/, "")];
       if (uniqueImage) return uniqueImage;
+      if (
+        nativeArt.bases?.[code] &&
+        !definition.invfile &&
+        !base.row[quality + "invfile"]
+      )
+        return nativeArt.bases[code];
       if (supplies[code]?.catalogId === id) return `${base.group}/${base.row.hd}`;
       if (!bases[code]) return null;
       const upgradedCode = base.row[["normcode", "ubercode", "ultracode"][index]] || code;
@@ -420,7 +427,10 @@ const manifest = {
       .map(([code, { row }]) => [code, defaultInventoryFile(row)])
   ),
   unique: Object.fromEntries(
-    Object.entries(qualityKeys.unique).map(([id, keys]) => [id, keys.map(image)])
+    Object.entries(qualityKeys.unique).map(([id, keys]) => {
+      const override = nativeArt.imageOverrides?.[data.uniqueItems[id].index];
+      return [id, override ? Array(3).fill(override) : keys.map(image)];
+    })
   ),
   set: Object.fromEntries(
     Object.entries(qualityKeys.set).map(([id, keys]) => [id, keys.map(image)])

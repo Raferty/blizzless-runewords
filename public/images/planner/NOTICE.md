@@ -184,3 +184,17 @@ https://maxroll.gg/d2/d2planner
   in planner JSON and game-save import/export.
 - Item cards, stash icons, tooltips and socket overlays share the same artwork
   mappings. `sync-planner-items.mjs` and `sync-planner-sockets.mjs` preserve them.
+
+# Native Renewed Sunder talismans — 2026-11-19
+
+- `items/misc/charm/talisman.png` and `talisman1.png` through `talisman3.png`:
+  original 294×98 RGBA sprites from the official Blizzless launcher manifest
+  `1795062639216`, encoded losslessly as PNG. Source:
+  https://blizzless.info/api/launcher-mods/manifest and its SHA-256 blob API.
+  Individual hashes are pinned in `src/shared/planner-native-art.json`.
+- `data/hd/items/items.json` maps `cs2` to `charm/talisman`; `itemtypes.txt`
+  specifies three inventory graphics (`invp10`, `invp11`, `invp12`). All six
+  Renewed uniques inherit this base art; their `uniqueItems.txt` records do not
+  define separate elemental images. Explicit saved picture IDs select variants.
+- The verified `misc.txt` defines a 3×1 inventory footprint for `cs2`, matching
+  the original sprite aspect ratio. Planner dimensions retain that native size.

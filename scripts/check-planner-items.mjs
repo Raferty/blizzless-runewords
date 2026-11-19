@@ -372,6 +372,16 @@ try {
       expected
     );
     assert.deepEqual(art.unique[item.catalogId], Array(3).fill(expected));
+    assert.equal(
+      plannerItemImage({
+        baseCode: item.bases[0],
+        quality: "unique",
+        catalogId: item.catalogId,
+        iconIndex: 2,
+      }),
+      expected,
+      "Fixed unique artwork takes priority over the native picture index"
+    );
   }
   assert.equal(new Set(art.variants.jew).size, 6);
   for (let iconIndex = 0; iconIndex < 6; iconIndex++) {
@@ -420,10 +430,33 @@ try {
     assert(image, `Selectable normal base ${code} has artwork`);
     await access(new URL("../public/" + image, import.meta.url));
   }
+  assert.equal(baseItemImage("cs2"), "images/planner/items/misc/charm/talisman.png");
+  const renewed = stash.items.filter(
+    (item) => item.quality === "unique" && item.bases.includes("cs2")
+  );
+  assert.equal(renewed.length, 6);
+  for (const definition of renewed) {
+    const item = { baseCode: "cs2", quality: "unique", catalogId: definition.catalogId };
+    assert.equal(plannerItemImage(item), baseItemImage("cs2"));
+    assert.deepEqual(plannerItemDimensions(item), [3, 1]);
+    for (let iconIndex = 0; iconIndex < 3; iconIndex++)
+      assert.equal(
+        plannerItemImage({ ...item, iconIndex }),
+        `images/planner/items/misc/charm/talisman${iconIndex + 1}.png`,
+        "Renewed sunders preserve all three native inventory graphics"
+      );
+  }
   assert.equal(
-    baseItemImage("cs2"),
-    undefined,
-    "Disabled crafted sunder placeholder must not display a staff"
+    plannerItemImage({
+      quality: "unique",
+      catalogId: "unique507",
+      iconIndex: 2,
+    }),
+    "images/planner/items/misc/charm/talisman3.png"
+  );
+  assert.equal(
+    plannerItemImage({ name: "Renewed Crack of the Heavens", quality: "unique" }),
+    baseItemImage("cs2")
   );
   const charms = createItemCatalog(
     native,
