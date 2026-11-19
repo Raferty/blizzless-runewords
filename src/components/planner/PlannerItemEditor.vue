@@ -186,6 +186,19 @@
               </div>
             </div>
           </div>
+          <fieldset v-if="charmSkins.length" class="planner-charm-skins">
+            <legend>{{ t("Скин талисмана", "Charm skin") }}</legend>
+            <button
+              v-for="(image, index) in charmSkins"
+              :key="image"
+              type="button"
+              :aria-label="t('Скин талисмана', 'Charm skin') + ' ' + (index + 1)"
+              :aria-pressed="(item.iconIndex ?? 0) === index"
+              @click="item.iconIndex = index"
+            >
+              <img :src="baseUrl + image" alt="" />
+            </button>
+          </fieldset>
           <div
             v-if="templates.length || selectedCatalog?.catalogId || selectedCraft"
             class="planner-template-controls"
@@ -410,7 +423,12 @@ import { bonusFields } from "@/shared/planner";
 import { RUNES } from "@/shared/constants";
 import { matchesItemType } from "@/utils/runeword";
 import { parsePlannerItem, charmFits, inventoryWidth } from "@/utils/planner";
-import { isContainerBase, plannerItemImage, isTome } from "@/utils/planner-item-art";
+import {
+  isContainerBase,
+  plannerItemImage,
+  isTome,
+  charmSkinImages,
+} from "@/utils/planner-item-art";
 import { itemRuneword } from "@/utils/planner-item-presentation";
 import type { ClassId, EquipmentSlot, PlannerItem, PlannerAffix } from "@/types/planner";
 import { runewordBonuses, runewordTemplates } from "@/utils/planner-runewords";
@@ -677,6 +695,7 @@ watch(
 );
 const selectedBase = computed(() => catalog.value?.bases.get(item.value.baseCode ?? ""));
 const isCharm = computed(() => selectedBase.value?.category === "char");
+const charmSkins = computed(() => charmSkinImages(item.value));
 watch(
   () => item.value.baseCode,
   (code) => {

@@ -40,6 +40,11 @@ export function plannerItemIdentity(item: AppearanceItem) {
   const { baseCode, catalogId } = appearanceReference(item);
   return { baseCode, catalogId };
 }
+export function charmSkinImages(item: AppearanceItem): string[] {
+  return item.quality === "magic" && ["cm1", "cm2", "cm3"].includes(item.baseCode || "")
+    ? variants[item.baseCode!] || []
+    : [];
+}
 export function plannerItemImage(
   item: AppearanceItem,
   tier?: BaseTier

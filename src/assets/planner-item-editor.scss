@@ -233,6 +233,36 @@
   gap: 20px;
   align-items: flex-start;
 }
+.planner-charm-skins {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  margin: 18px 0;
+  border: 1px solid #454545;
+}
+.planner-charm-skins legend {
+  padding: 0 6px;
+  color: #b1c1cc;
+}
+.planner-charm-skins button {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 106px;
+  padding: 8px;
+  background: #0d101b;
+  border: 2px solid #454545;
+  border-radius: 4px;
+}
+.planner-charm-skins button[aria-pressed="true"] {
+  background: #252c36;
+  border-color: #c6b577;
+}
+.planner-charm-skins img {
+  max-width: 100%;
+  max-height: 86px;
+  object-fit: contain;
+}
 .planner-item-portrait {
   display: grid;
   flex-shrink: 0;

@@ -73,7 +73,22 @@
       "misc/gem/perfect_diamond5",
       "misc/gem/perfect_diamond6"
     ],
-    "cs2": ["misc/charm/talisman1", "misc/charm/talisman2", "misc/charm/talisman3"]
+    "cs2": ["misc/charm/talisman1", "misc/charm/talisman2", "misc/charm/talisman3"],
+    "cm1": [
+      "misc/charm/charm_small",
+      "misc/charm/charm_small2",
+      "misc/charm/charm_small3"
+    ],
+    "cm2": [
+      "misc/charm/charm_medium",
+      "misc/charm/charm_medium2",
+      "misc/charm/charm_medium3"
+    ],
+    "cm3": [
+      "misc/charm/charm_large",
+      "misc/charm/charm_large2",
+      "misc/charm/charm_large3"
+    ]
   },
   "sprites": {
     "misc/amulet/atmas_scarab": "dcfe2a67f0eb9a7078b81beed3446ea791257ab185d68eef59b222406e3b65c9",
@@ -158,6 +173,30 @@
     "misc/gem/perfect_diamond2": {
       "url": "https://lootcube.net/images/items/misc/gem/perfect_diamond2.webp",
       "sha256": "74ea5524f71eb5b47c3b2aef6b77961a83960831bedf538444fd12fb40d1c338"
+    },
+    "misc/charm/charm_small2": {
+      "url": "https://lootcube.net/images/items/misc/charm/charm_small2.webp",
+      "sha256": "e1224c23bb849a4a4b9e87c7935ccdca212cf0d3258c27f1761eb39b0c8c53a3"
+    },
+    "misc/charm/charm_small3": {
+      "url": "https://lootcube.net/images/items/misc/charm/charm_small3.webp",
+      "sha256": "036e8747afd65aa7b1ee14c483643d8e869da3f512c27d8851f894c0ffb837f1"
+    },
+    "misc/charm/charm_medium2": {
+      "url": "https://lootcube.net/images/items/misc/charm/charm_medium2.webp",
+      "sha256": "490daeaa4d8f9704ac5a580d68417a1b70e1d8773d71320b983f5ea227c88492"
+    },
+    "misc/charm/charm_medium3": {
+      "url": "https://lootcube.net/images/items/misc/charm/charm_medium3.webp",
+      "sha256": "8043b09a817000ab75b9590c4f427cf885025bb1b0d3c08aec414ae8a0eac86c"
+    },
+    "misc/charm/charm_large2": {
+      "url": "https://lootcube.net/images/items/misc/charm/charm_large2.webp",
+      "sha256": "2ffeecf54900bf68db0c36f3c4b1332abf42e8dfe6a111593a3ff88e3ef6002d"
+    },
+    "misc/charm/charm_large3": {
+      "url": "https://lootcube.net/images/items/misc/charm/charm_large3.webp",
+      "sha256": "27339c17b3f5d02681129f5a846eca33a4044385b949bf30cf00106674552ba0"
     }
   },
   "bases": {

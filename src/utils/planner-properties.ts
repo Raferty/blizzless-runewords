@@ -97,6 +97,13 @@ export function propertyRange(
   index: number
 ) {
   const p = property as Record<string, unknown>;
+  // Allow a manually configured +2 Hiram while keeping the catalogue's +3 default.
+  if (
+    definition.index === "Hiram's Treason" &&
+    definition[`prop${index}`] === "oskill" &&
+    Number(definition[`par${index}`]) === 388
+  )
+    return { min: 2, max: 3 };
   const min = Number(definition[`min${index}`] ?? 0);
   const max = Number(definition[`max${index}`] ?? min);
   // These columns encode separate values (damage endpoints, skill IDs, charges,

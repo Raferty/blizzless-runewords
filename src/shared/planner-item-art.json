@@ -81,6 +81,21 @@
       "images/planner/items/misc/charm/talisman1.png",
       "images/planner/items/misc/charm/talisman2.png",
       "images/planner/items/misc/charm/talisman3.png"
+    ],
+    "cm1": [
+      "images/planner/items/misc/charm/charm_small.webp",
+      "images/planner/items/misc/charm/charm_small2.webp",
+      "images/planner/items/misc/charm/charm_small3.webp"
+    ],
+    "cm2": [
+      "images/planner/items/misc/charm/charm_medium.webp",
+      "images/planner/items/misc/charm/charm_medium2.webp",
+      "images/planner/items/misc/charm/charm_medium3.webp"
+    ],
+    "cm3": [
+      "images/planner/items/misc/charm/charm_large.webp",
+      "images/planner/items/misc/charm/charm_large2.webp",
+      "images/planner/items/misc/charm/charm_large3.webp"
     ]
   },
   "gameDataSha256": "633fa72e0255f3fe0abae551dab84e8e8eb7c1c76827ba6f328fb98711588f49",

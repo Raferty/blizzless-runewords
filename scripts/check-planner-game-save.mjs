@@ -84,6 +84,35 @@ try {
     return { bytes, read, raw: codec.readCharacter(bytes) };
   }
   {
+    const build = planner.createBuild("paladin");
+    for (const [index, baseCode] of ["cm1", "cm2", "cm3"].entries())
+      for (let iconIndex = 0; iconIndex < 3; iconIndex++)
+        build.charms.push({
+          id: `skin-${baseCode}-${iconIndex}`,
+          name: "Charm",
+          quality: "magic",
+          baseCode,
+          iconIndex,
+          position: index * 3 + iconIndex,
+          height: index + 1,
+          requiredLevel: 1,
+          notes: "",
+          bonuses: { mana: 5 },
+        });
+    const { bytes } = await verify(build, {
+      ...opts,
+      choices: Object.fromEntries(
+        native.gameSaveEntries(build).map((entry) => [entry.key, entry.item.baseCode])
+      ),
+    });
+    const restored = codec.importCharacter(bytes);
+    for (const [index, charm] of build.charms.entries()) {
+      assert.equal(restored.charms[index].iconIndex, charm.iconIndex);
+      assert.equal(restored.charms[index].baseCode, charm.baseCode);
+      assert.equal(restored.charms[index].bonuses.mana, 5);
+    }
+  }
+  {
     const { createItemCatalog } = await server.ssrLoadModule(
       "/src/utils/planner-item-catalog.ts"
     );

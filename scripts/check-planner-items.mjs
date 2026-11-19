@@ -18,7 +18,7 @@ try {
     socketPropertyLines,
     itemPropertyLines,
   } = await server.ssrLoadModule("/src/utils/planner-item-catalog.ts");
-  const { baseItemImage, plannerItemImage, plannerItemDimensions } =
+  const { baseItemImage, plannerItemImage, plannerItemDimensions, charmSkinImages } =
     await server.ssrLoadModule("/src/utils/planner-item-art.ts");
   const { itemRuneword, itemSockets, itemRunewordLines, itemBonusLines } =
     await server.ssrLoadModule("/src/utils/planner-item-presentation.ts");
@@ -416,12 +416,22 @@ try {
     ["cm1", "small"],
     ["cm2", "medium"],
     ["cm3", "large"],
-  ])
+  ]) {
     assert.equal(
       baseItemImage(code),
       `images/planner/items/misc/charm/charm_${size}.webp`,
       "Charm appearance comes from item-type variants, not placeholder weapons"
     );
+    const item = { baseCode: code, quality: "magic" };
+    const skins = charmSkinImages(item);
+    assert.equal(new Set(skins).size, 3);
+    assert.equal(skins[0], baseItemImage(code), "Default charm appearance is preserved");
+    for (const [iconIndex, image] of skins.entries()) {
+      assert.equal(plannerItemImage({ ...item, iconIndex }), image);
+      await access(new URL("../public/" + image, import.meta.url));
+    }
+    assert.deepEqual(charmSkinImages({ ...item, quality: "unique" }), []);
+  }
   // Hidden quest records are not selectable. Unique containers use their own
   // artwork (verified above), rather than a normal-base image.
   for (const code of new Set(
@@ -466,6 +476,21 @@ try {
   );
   assert(echoLines.includes("+2 Additional Echoes"));
   assert(echoLines.includes("+3 to Echoing Strike"));
+  const skillLines = itemPropertyLines(
+    native,
+    {
+      name: "Hiram's Treason",
+      quality: "unique",
+      catalogId: "unique703",
+      baseCode: "7pi",
+      propertyRoll: 1,
+      propertyValues: { 2: 2 },
+    },
+    99,
+    "paladin"
+  );
+  assert(skillLines.includes("+2 to Echoing Strike"));
+  assert(skillLines.includes("+3 Additional Echoes"));
   const renewed = stash.items.filter(
     (item) => item.quality === "unique" && item.bases.includes("cs2")
   );

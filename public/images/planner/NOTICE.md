@@ -216,3 +216,12 @@ https://maxroll.gg/d2/d2planner
   Alpha and native inventory footprint are preserved. The luminance/tint SVG
   filter approximates the client's HD colour shader; it is not a separate
   extracted elemental sprite. No colour is applied to ordinary magic charms.
+
+# Magic charm skins — 2026-11-20
+
+- Small, Large and Grand Charms (`cm1`, `cm2`, `cm3`) each have three native
+  inventory picture IDs, confirmed by Blizzless `itemtypes.txt` (`scha`, `mcha`,
+  `lcha`). The existing default graphic is retained for picture ID 0.
+- Alternate pictures use LootCube `misc/charm/charm_{small,medium,large}{2,3}.webp`.
+  Source URLs and SHA-256 hashes are pinned in `src/shared/planner-native-art.json`.
+  Fixed unique charm artwork is unaffected by the magic charm selector.
