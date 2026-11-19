@@ -16,6 +16,7 @@ try {
     catalogPropertyLines,
     catalogSetBonuses,
     socketPropertyLines,
+    itemPropertyLines,
   } = await server.ssrLoadModule("/src/utils/planner-item-catalog.ts");
   const { baseItemImage, plannerItemImage, plannerItemDimensions } =
     await server.ssrLoadModule("/src/utils/planner-item-art.ts");
@@ -450,6 +451,21 @@ try {
     plannerItemImage({ name: "Cold Rupture", quality: "unique" }),
     "images/planner/items/misc/charm/sunder_lblu.svg"
   );
+  const echoLines = itemPropertyLines(
+    native,
+    {
+      name: "Hiram's Treason",
+      quality: "unique",
+      catalogId: "unique703",
+      baseCode: "7pi",
+      propertyRoll: 1,
+      propertyValues: { 8: 2 },
+    },
+    99,
+    "paladin"
+  );
+  assert(echoLines.includes("+2 Additional Echoes"));
+  assert(echoLines.includes("+3 to Echoing Strike"));
   const renewed = stash.items.filter(
     (item) => item.quality === "unique" && item.bases.includes("cs2")
   );

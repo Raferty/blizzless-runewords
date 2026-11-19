@@ -400,6 +400,11 @@ export function definitionPropertyLines(
     const min = Number(definition[`min${i}`] ?? 0),
       max = Number(definition[`max${i}`] ?? min);
     const par = String(definition[`par${i}`] ?? "");
+    if (code === "plusecho") {
+      const count = roll ? max : min;
+      lines.push(`+${count} Additional Echo${count === 1 ? "" : "es"}`);
+      continue;
+    }
     if (code === "Add_one") {
       const quantity = Number(par || (roll ? max : min));
       lines.push(
