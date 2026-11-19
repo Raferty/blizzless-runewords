@@ -485,7 +485,8 @@
       ><div class="planner-editor">
         <div class="planner-modal-heading">
           <h2>
-            {{ t("Сундук", "Stash") }} <small>{{ store.build.stash.length }} / 100</small>
+            {{ t("Сундук", "Stash") }}
+            <small>{{ store.build.stash.length }} / {{ stashItemLimit }}</small>
           </h2>
           <button
             class="planner-close"
@@ -541,7 +542,10 @@
         <p v-if="!store.build.stash.length" class="planner-empty">
           {{ t("Сундук пуст", "Your stash is empty") }}
         </p>
-        <button :disabled="store.build.stash.length >= 100" @click="editStash(-1)">
+        <button
+          :disabled="store.build.stash.length >= stashItemLimit"
+          @click="editStash(-1)"
+        >
           <UiIcon name="plus" /> {{ t("Добавить предмет", "Add item") }}
         </button>
       </div></UiModal
@@ -577,6 +581,7 @@ import { useInfoStore } from "@/store";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import {
+  stashItemLimit,
   difficulties,
   equipmentSlots,
   mercenaries,
@@ -775,7 +780,7 @@ function saveItem(item: PlannerItem, height: number) {
 }
 function stashEditorItem() {
   if (!editorItem.value || editor.value?.kind === "stash") return;
-  if (store.build.stash.length >= 100) {
+  if (store.build.stash.length >= stashItemLimit) {
     store.message = "stashFull";
     return;
   }
@@ -811,7 +816,7 @@ function setMercLevel(event: Event) {
 function setMercenary(value: string) {
   if (value === store.build.mercenary.type) return;
   const currentItems = Object.values(store.build.mercenary.equipment);
-  if (store.build.stash.length + currentItems.length > 100) {
+  if (store.build.stash.length + currentItems.length > stashItemLimit) {
     store.message = "stashFull";
     return;
   }

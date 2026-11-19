@@ -1,4 +1,5 @@
 import {
+  stashItemLimit,
   attributes,
   bonusFields,
   difficulties,
@@ -610,7 +611,8 @@ export function parseBuild(value: unknown): PlannerBuild {
   for (const key of [...equipmentSlots.map((s) => s.key), "swapMain", "swapOff"] as const)
     if (equipment[key] !== undefined)
       build.equipment[key] = parsePlannerItem(equipment[key]);
-  if (!Array.isArray(raw.stash) || raw.stash.length > 100) throw new Error("stash");
+  if (!Array.isArray(raw.stash) || raw.stash.length > stashItemLimit)
+    throw new Error("stash");
   build.stash = raw.stash.map(parsePlannerItem);
   if (
     !Array.isArray(raw.primarySkills) ||

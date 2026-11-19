@@ -7,6 +7,9 @@ import type {
   PlannerSkill,
 } from "@/types/planner";
 
+// At most one item per cell in the native 16 × 13 personal stash.
+export const stashItemLimit = 16 * 13;
+
 export const plannerClasses = catalog.classes as PlannerClass[];
 export const plannerSkills = catalog.skills as PlannerSkill[];
 export const plannerSource = catalog.source;

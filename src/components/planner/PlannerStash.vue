@@ -1,7 +1,9 @@
 <template>
   <PlannerPanel class="planner-stash-panel" :title="t('Сундук', 'Stash')">
     <template #actions>
-      <span class="planner-muted">{{ store.build.stash.length }} / 100</span>
+      <span class="planner-muted"
+        >{{ store.build.stash.length }} / {{ stashItemLimit }}</span
+      >
       <button
         :aria-label="t('Управление сундуком', 'Manage stash')"
         @click="$emit('manage')"
@@ -40,10 +42,10 @@
             gridColumn: (cell % stashSize.columns) + 1,
             gridRow: Math.floor(cell / stashSize.columns) + 1,
           }"
-          :aria-disabled="store.build.stash.length >= 100"
+          :aria-disabled="store.build.stash.length >= stashItemLimit"
           :aria-label="t('Добавить предмет в сундук', 'Add item to stash')"
           tabindex="-1"
-          @click="store.build.stash.length < 100 && $emit('edit', -1)"
+          @click="store.build.stash.length < stashItemLimit && $emit('edit', -1)"
         />
         <PlannerItemSlot
           v-for="entry in layout.placed"
@@ -177,6 +179,7 @@
   </PlannerPanel>
 </template>
 <script setup lang="ts">
+import { stashItemLimit } from "@/shared/planner";
 import { computed, onMounted, shallowRef, ref } from "vue";
 import PlannerPanel from "./PlannerPanel.vue";
 import PlannerItemSlot from "./PlannerItemSlot.vue";
@@ -253,7 +256,7 @@ const layout = computed(() => {
   return { placed, unplaced, emptyCells };
 });
 const keySetItems = computed(() => {
-  if (store.build.stash.length + 9 > 100) return;
+  if (store.build.stash.length + 9 > stashItemLimit) return;
   const { occupied } = stashItemLayout(store.build);
   return createUberKeySet(occupied);
 });
@@ -261,7 +264,7 @@ function addKeySet() {
   if (keySetItems.value) store.build.stash.push(...keySetItems.value);
 }
 const ancientsSetItems = computed(() => {
-  if (store.build.stash.length + 5 > 100) return;
+  if (store.build.stash.length + 5 > stashItemLimit) return;
   const { occupied } = stashItemLayout(store.build);
   const items: PlannerItem[] = [];
   // The Colossal Summit recipe consumes ua1–ua5, not their stack containers.
@@ -291,7 +294,7 @@ function addAncientsSet() {
   if (ancientsSetItems.value) store.build.stash.push(...ancientsSetItems.value);
 }
 const rejuvenationContainer = computed(() => {
-  if (store.build.stash.length >= 100) return;
+  if (store.build.stash.length >= stashItemLimit) return;
   const { occupied } = stashItemLayout(store.build);
   return createFullRejuvenationContainer(occupied);
 });

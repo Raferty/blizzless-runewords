@@ -1,3 +1,4 @@
+import { stashItemLimit } from "@/shared/planner";
 import type { PlannerItem, PlannerBuild } from "@/types/planner";
 import { plannerItemDimensions } from "./planner-item-art";
 
@@ -6,7 +7,7 @@ export const stashSize = { columns: 16, rows: 13 };
 
 // Stage a whole kit before changing the build. Never add half a recipe on overflow.
 export function stageStashItems(build: PlannerBuild, items: PlannerItem[]) {
-  if (!items.length || build.stash.length + items.length > 100) return;
+  if (!items.length || build.stash.length + items.length > stashItemLimit) return;
   const { occupied, positions } = layoutStashItems(
     build.stash.map((item) => ({
       size: plannerItemDimensions(item),

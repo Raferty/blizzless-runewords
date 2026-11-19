@@ -482,6 +482,21 @@ try {
   invalid((b) => (b.version = 2));
   invalid((b) => (b.classId = "unknown"));
   invalid((b) => (b.level = 100));
+  const fullStash = createBuild("paladin");
+  fullStash.stash = Array.from({ length: 208 }, (_, stashPosition) => ({
+    name: "El",
+    quality: "normal",
+    baseCode: "r01",
+    requiredLevel: 1,
+    bonuses: {},
+    notes: "",
+    stashPosition,
+  }));
+  assert.equal(parseBuild(fullStash).stash.length, 208);
+  assert.equal(decodeBuild(encodeBuild(fullStash)).stash.length, 208);
+  assert.throws(() =>
+    parseBuild({ ...fullStash, stash: [...fullStash.stash, fullStash.stash[0]] })
+  );
   invalid((b) => (b.level = 6.5));
   invalid((b) => (b.attributes.vitality = 999));
   invalid((b) => (b.skills[47] = 21));

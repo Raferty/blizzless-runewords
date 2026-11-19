@@ -253,7 +253,7 @@ try {
     Array(12).fill("cr1")
   );
   const occupiedBuild = structuredClone(build);
-  occupiedBuild.stash = Array.from({ length: 99 }, () =>
+  occupiedBuild.stash = Array.from({ length: 207 }, () =>
     supplies.createStashSupply(native, "r01")
   );
   const before = JSON.stringify(occupiedBuild);

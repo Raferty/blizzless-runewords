@@ -1,3 +1,4 @@
+import { stashItemLimit } from "@/shared/planner";
 import type { PlannerBuild, PlannerItem } from "@/types/planner";
 import { charmFits, inventoryWidth, parsePlannerItem } from "./planner";
 import { plannerItemDimensions, plannerItemIdentity, isTome } from "./planner-item-art";
@@ -54,7 +55,7 @@ export function canMoveItem(
       )
     );
   }
-  if (source.owner !== "stash" && build.stash.length >= 100) return false;
+  if (source.owner !== "stash" && build.stash.length >= stashItemLimit) return false;
   const size = plannerItemDimensions(item) ?? inventoryItemSize(item);
   const cells = size && gridItemCells(target.position, size[0], size[1]);
   if (!cells) return false;
