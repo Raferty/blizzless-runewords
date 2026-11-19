@@ -10,7 +10,9 @@
     "miscTablePath": "data/global/excel/misc.txt",
     "miscTableSha256": "0464b39f088fedaf9fdec3a8276cc7178e720d9fea3b02c94f31343cd635af60",
     "itemTypesTablePath": "data/global/excel/itemtypes.txt",
-    "itemTypesTableSha256": "01702061af7d78c30ce96b072969e5f363af7804ad3694bec2e4c16c5b9d99d8"
+    "itemTypesTableSha256": "01702061af7d78c30ce96b072969e5f363af7804ad3694bec2e4c16c5b9d99d8",
+    "itemTransformsPath": "data/hd/global/palette/itemtransforms.json",
+    "itemTransformsSha256": "df4b76b3b284dd9e2e0eb8c38c5575a5dddd04b126d7d29bc9f337c9ed439a5b"
   },
   "unique": {
     "Bul Katho's Wedding Band": "misc/ring/bul-kathos_wedding_band",
@@ -164,5 +166,13 @@
   "imageOverrides": {
     "Harlequin Crest": "images/planner/items/armor/helmet/harlequin_crest.png",
     "Arachnid Mesh": "images/cube/5dcfd7cabdd40e86af.png"
+  },
+  "sunderColors": {
+    "lblu": [0.4745098, 0.7137255, 0.9254902],
+    "lred": [0.6431373, 0.1215686, 0.09411765],
+    "lyel": [1, 0.7450981, 0.2705882],
+    "lgrn": [0.1529412, 0.5529412, 0],
+    "whit": [1, 1, 1],
+    "lgry": [0.2666667, 0.2666667, 0.2666667]
   }
 }

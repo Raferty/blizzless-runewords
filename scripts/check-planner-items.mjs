@@ -431,6 +431,25 @@ try {
     await access(new URL("../public/" + image, import.meta.url));
   }
   assert.equal(baseItemImage("cs2"), "images/planner/items/misc/charm/talisman.png");
+  for (const [catalogId, color] of [
+    ["unique401", "lblu"],
+    ["unique402", "lred"],
+    ["unique403", "lyel"],
+    ["unique404", "lgrn"],
+    ["unique405", "whit"],
+    ["unique406", "lgry"],
+  ]) {
+    const item = { baseCode: "cm4", quality: "unique", catalogId };
+    const image = `images/planner/items/misc/charm/sunder_${color}.svg`;
+    assert.equal(plannerItemImage(item), image);
+    assert.equal(plannerItemImage({ ...item, iconIndex: 2 }), image);
+    assert.deepEqual(plannerItemDimensions(item), [1, 3]);
+    assert.notEqual(image, baseItemImage("cm3"));
+  }
+  assert.equal(
+    plannerItemImage({ name: "Cold Rupture", quality: "unique" }),
+    "images/planner/items/misc/charm/sunder_lblu.svg"
+  );
   const renewed = stash.items.filter(
     (item) => item.quality === "unique" && item.bases.includes("cs2")
   );

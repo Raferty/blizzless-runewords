@@ -198,3 +198,21 @@ https://maxroll.gg/d2/d2planner
   define separate elemental images. Explicit saved picture IDs select variants.
 - The verified `misc.txt` defines a 3×1 inventory footprint for `cs2`, matching
   the original sprite aspect ratio. Planner dimensions retain that native size.
+- These Latent/Renewed records are disabled in the current Blizzless launcher;
+  they were previously enabled explicitly for offline planner experiments.
+  They are not part of the six currently available Blizzless Sunder charms.
+
+# Available Sunder charm colours — 2026-11-19
+
+- The six `cm4` uniques (`unique401`–`unique406`) are vertical 1×3 Grand Charms.
+  Their native `invtransform` values are `lblu`, `lred`, `lyel`, `lgrn`, `whit`
+  and `lgry`. The official HD mapping and glossary use the shared Grand Charm
+  graphic, rather than six distinct elemental shapes.
+- `items/misc/charm/sunder_*.svg` embeds the unchanged Grand Charm WebP and
+  applies its respective RGB tint from `ClassInvGreyBrownTable` (native
+  `cm4.InvTrans = 8`) in `data/hd/global/palette/itemtransforms.json`.
+  Official source blob SHA-256:
+  `df4b76b3b284dd9e2e0eb8c38c5575a5dddd04b126d7d29bc9f337c9ed439a5b`.
+  Alpha and native inventory footprint are preserved. The luminance/tint SVG
+  filter approximates the client's HD colour shader; it is not a separate
+  extracted elemental sprite. No colour is applied to ordinary magic charms.

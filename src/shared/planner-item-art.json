@@ -64,7 +64,9 @@
     "miscTablePath": "data/global/excel/misc.txt",
     "miscTableSha256": "0464b39f088fedaf9fdec3a8276cc7178e720d9fea3b02c94f31343cd635af60",
     "itemTypesTablePath": "data/global/excel/itemtypes.txt",
-    "itemTypesTableSha256": "01702061af7d78c30ce96b072969e5f363af7804ad3694bec2e4c16c5b9d99d8"
+    "itemTypesTableSha256": "01702061af7d78c30ce96b072969e5f363af7804ad3694bec2e4c16c5b9d99d8",
+    "itemTransformsPath": "data/hd/global/palette/itemtransforms.json",
+    "itemTransformsSha256": "df4b76b3b284dd9e2e0eb8c38c5575a5dddd04b126d7d29bc9f337c9ed439a5b"
   },
   "variants": {
     "jew": [
@@ -5621,34 +5623,34 @@
       "images/planner/items/misc/torch/torch.webp"
     ],
     "unique401": [
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp"
+      "images/planner/items/misc/charm/sunder_lblu.svg",
+      "images/planner/items/misc/charm/sunder_lblu.svg",
+      "images/planner/items/misc/charm/sunder_lblu.svg"
     ],
     "unique402": [
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp"
+      "images/planner/items/misc/charm/sunder_lred.svg",
+      "images/planner/items/misc/charm/sunder_lred.svg",
+      "images/planner/items/misc/charm/sunder_lred.svg"
     ],
     "unique403": [
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp"
+      "images/planner/items/misc/charm/sunder_lyel.svg",
+      "images/planner/items/misc/charm/sunder_lyel.svg",
+      "images/planner/items/misc/charm/sunder_lyel.svg"
     ],
     "unique404": [
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp"
+      "images/planner/items/misc/charm/sunder_lgrn.svg",
+      "images/planner/items/misc/charm/sunder_lgrn.svg",
+      "images/planner/items/misc/charm/sunder_lgrn.svg"
     ],
     "unique405": [
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp"
+      "images/planner/items/misc/charm/sunder_whit.svg",
+      "images/planner/items/misc/charm/sunder_whit.svg",
+      "images/planner/items/misc/charm/sunder_whit.svg"
     ],
     "unique406": [
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp",
-      "images/planner/items/misc/charm/charm_large.webp"
+      "images/planner/items/misc/charm/sunder_lgry.svg",
+      "images/planner/items/misc/charm/sunder_lgry.svg",
+      "images/planner/items/misc/charm/sunder_lgry.svg"
     ],
     "unique407": [null, null, null],
     "unique408": [null, null, null],

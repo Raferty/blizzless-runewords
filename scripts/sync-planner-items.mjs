@@ -397,6 +397,28 @@ await Promise.all(
   })
 );
 const image = (key) => images.get(key) || null;
+const coloredSunders = {};
+for (const [id, definition] of Object.entries(data.uniqueItems)) {
+  if (definition.code !== "cm4") continue;
+  const tint = nativeArt.sunderColors?.[definition.invtransform];
+  const sourceImage = image(qualityKeys.unique[id]?.[0]);
+  if (!tint || !sourceImage) continue;
+  const bytes = await readFile(new URL("public/" + sourceImage, root));
+  // Preserve the inventory graphic and its alpha; use the native palette's
+  // RGB tint on its luminance. This approximates the client's HD colour shader.
+  const matrix = tint.flatMap((channel) => [
+    0.2126 * channel,
+    0.7152 * channel,
+    0.0722 * channel,
+    0,
+    0,
+  ]);
+  matrix.push(0, 0, 0, 1, 0);
+  const filename = `misc/charm/sunder_${definition.invtransform}.svg`;
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="100" height="300" viewBox="0 0 100 300"><defs><filter id="tint" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="${matrix.map((v) => Number(v.toFixed(7))).join(" ")}"/></filter></defs><image width="100" height="300" href="data:image/webp;base64,${bytes.toString("base64")}" filter="url(#tint)"/></svg>\n`;
+  await writeFile(new URL(filename, destination), svg);
+  coloredSunders[id] = "images/planner/items/" + filename;
+}
 const manifest = {
   checkedAt: new Date().toISOString().slice(0, 10),
   source: origin,
@@ -428,7 +450,8 @@ const manifest = {
   ),
   unique: Object.fromEntries(
     Object.entries(qualityKeys.unique).map(([id, keys]) => {
-      const override = nativeArt.imageOverrides?.[data.uniqueItems[id].index];
+      const override =
+        coloredSunders[id] || nativeArt.imageOverrides?.[data.uniqueItems[id].index];
       return [id, override ? Array(3).fill(override) : keys.map(image)];
     })
   ),
