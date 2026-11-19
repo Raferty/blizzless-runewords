@@ -588,14 +588,9 @@ import {
   plannerClasses,
   quests,
 } from "@/shared/planner";
-import {
-  attributeBudget,
-  charmFits,
-  encodeBuild,
-  skillBudget,
-  spentSkills,
-} from "@/utils/planner";
+import { attributeBudget, charmFits, skillBudget, spentSkills } from "@/utils/planner";
 import { loadGameSaveExporter } from "@/utils/planner-game-save";
+import { encodeSharedBuild } from "@/utils/planner-share";
 import type {
   Difficulty,
   EquipmentSlot,
@@ -876,7 +871,7 @@ async function importBuild(event: Event) {
   input.value = "";
 }
 async function shareBuild() {
-  const encoded = encodeBuild(store.build);
+  const encoded = await encodeSharedBuild(store.build);
   if (encoded.length > 30000) {
     store.message = "shareSize";
     return;

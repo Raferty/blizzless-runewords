@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { Buffer } from "node:buffer";
 import { access } from "node:fs/promises";
 import { createPinia, setActivePinia } from "pinia";
 import { nextTick } from "vue";
@@ -16,6 +17,9 @@ const server = await createServer({
 try {
   const { plannerClasses, plannerSkills, difficulties, quests } =
     await server.ssrLoadModule("/src/shared/planner.ts");
+  const { encodeSharedBuild, decodeSharedBuild } = await server.ssrLoadModule(
+    "/src/utils/planner-share.ts"
+  );
   const {
     createBuild: createStarterBuild,
     createDefaultBuild,
@@ -474,6 +478,20 @@ try {
   build.name = "Ледяная сфера 🧊 / <script>";
   build.notes = "Первая строка\nSecond line";
   assert.deepEqual(decodeBuild(encodeBuild(build)), build, "Unicode sharing round trip");
+  const compressed = await encodeSharedBuild(build);
+  assert(compressed.startsWith("gz1."));
+  assert(compressed.length < encodeBuild(build).length);
+  assert.deepEqual(await decodeSharedBuild(compressed), build);
+  assert.deepEqual(await decodeSharedBuild(encodeBuild(build)), build);
+  await assert.rejects(decodeSharedBuild("gz1.broken"));
+  await assert.rejects(decodeSharedBuild(compressed.slice(0, -8)));
+  const bomb = await new Response(
+    new Blob(["x".repeat(90001)]).stream().pipeThrough(new CompressionStream("gzip"))
+  ).arrayBuffer();
+  await assert.rejects(
+    decodeSharedBuild("gz1." + Buffer.from(bomb).toString("base64url")),
+    /size/
+  );
   const invalid = (change) => {
     const copy = structuredClone(build);
     change(copy);
@@ -494,6 +512,11 @@ try {
   }));
   assert.equal(parseBuild(fullStash).stash.length, 208);
   assert.equal(decodeBuild(encodeBuild(fullStash)).stash.length, 208);
+  assert.deepEqual(
+    await decodeSharedBuild(await encodeSharedBuild(fullStash)),
+    fullStash,
+    "Compressed links preserve the full native stash"
+  );
   assert.throws(() =>
     parseBuild({ ...fullStash, stash: [...fullStash.stash, fullStash.stash[0]] })
   );
@@ -692,6 +715,10 @@ try {
     "/blizzless-runewords/#/planner",
     "Shared snapshot becomes a local draft URL"
   );
+  const compressedBuild = { ...build, name: "Compressed shared character" };
+  window.location.hash = `#/planner?build=${await encodeSharedBuild(compressedBuild)}`;
+  await restored.loadSharedHash();
+  assert.equal(restored.build.name, compressedBuild.name);
   memory.set(
     "blizzless-planner-v1",
     JSON.stringify({

@@ -2,6 +2,7 @@ import { computed, ref, watch } from "vue";
 import { defineStore } from "pinia";
 import { plannerClasses, plannerSkills } from "@/shared/planner";
 import { stageStashItems } from "@/utils/planner-stash";
+import { decodeSharedBuild } from "@/utils/planner-share";
 import {
   attributeBudget,
   addDefaultInventory,
@@ -182,13 +183,17 @@ export const usePlannerStore = defineStore("planner", () => {
     }
   }
   let lastSharedHash = "";
-  function loadSharedHash() {
+  async function loadSharedHash() {
     const hash = window.location.hash;
     const encoded = new URLSearchParams(hash.split("?")[1] ?? "").get("build");
     if (!encoded || hash === lastSharedHash) return;
     lastSharedHash = hash;
     try {
-      if (loadBuild(decodeBuild(encoded))) {
+      const shared = encoded.startsWith("gz1.")
+        ? await decodeSharedBuild(encoded)
+        : decodeBuild(encoded);
+      if (window.location.hash !== hash) return;
+      if (loadBuild(shared)) {
         // Once imported, the draft should survive edits and a page reload.
         window.history.replaceState(
           null,
