@@ -32,6 +32,7 @@
           required
           :aria-label="row.label"
           :title="`${row.range.min} … ${row.range.max}`"
+          @input="input(row.index, $event, row.range)"
           @change="change(row.index, $event, row.range)"
         />
         <span>{{ row.after }}</span>
@@ -162,6 +163,12 @@ const socketLines = computed(() =>
       )
     )
 );
+function input(index: number, event: Event, range: { min: number; max: number }) {
+  const text = (event.target as HTMLInputElement).value;
+  const value = Number(text);
+  if (text && Number.isInteger(value) && value >= range.min && value <= range.max)
+    emit("values", { ...props.item.propertyValues, [index]: value });
+}
 function change(index: number, event: Event, range: { min: number; max: number }) {
   const input = event.target as HTMLInputElement;
   const value = Math.max(

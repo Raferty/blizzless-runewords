@@ -22,9 +22,8 @@ try {
   const { createGameSaveExporter, gameSaveEntries } = await server.ssrLoadModule(
     "/src/utils/planner-game-save.ts"
   );
-  const { createItemCatalog, itemPropertyLines } = await server.ssrLoadModule(
-    "/src/utils/planner-item-catalog.ts"
-  );
+  const { createItemCatalog, itemPropertyLines, applyItemRoll, itemRollState } =
+    await server.ssrLoadModule("/src/utils/planner-item-catalog.ts");
   const { createBuild, parsePlannerItem, encodeBuild, decodeBuild, buildStats } =
     await server.ssrLoadModule("/src/utils/planner.ts");
   const { itemRequiredLevel } = await server.ssrLoadModule(
@@ -60,10 +59,12 @@ try {
   };
   const amulet = createCraftedItem(native, "caster_amulet", "amu", 90, "sorceress");
   assert.equal(amulet.itemLevel, 94);
-  assert.equal(amulet.bonuses.fcr, 5);
-  assert.equal(amulet.bonuses.mana, 10);
-  const max = { ...amulet, propertyRoll: 1 };
-  assert.equal(native.itemBonuses(max, "sorceress").bonuses.fcr, 10);
+  assert.equal(amulet.propertyRoll, 1);
+  assert.equal(amulet.bonuses.fcr, 10);
+  assert.equal(amulet.bonuses.mana, 20);
+  assert.deepEqual(itemRollState(native, amulet), { min: false, max: true });
+  const min = { ...amulet, propertyRoll: 0 };
+  assert.equal(native.itemBonuses(min, "sorceress").bonuses.fcr, 5);
   const exact = { ...amulet, propertyValues: { 3: 7 } };
   assert.equal(native.itemBonuses(exact, "sorceress").bonuses.fcr, 7);
   assert(
@@ -86,6 +87,25 @@ try {
   ])
     assert.throws(() => parsePlannerItem({ ...amulet, ...patch }));
   const ready = complete(amulet);
+  const rerolled = structuredClone(ready);
+  const selectedAffixes = rerolled.affixes.map((row) => row.id);
+  for (const roll of [0, 1]) {
+    applyItemRoll(native, rerolled, roll, "sorceress");
+    assert.deepEqual(itemRollState(native, rerolled), {
+      min: roll === 0,
+      max: roll === 1,
+    });
+    assert.deepEqual(
+      rerolled.affixes.map((row) => row.id),
+      selectedAffixes
+    );
+    for (const row of rerolled.affixes) {
+      const definition = itemAffixes.find((affix) => affix.id === row.id);
+      definition.mods.forEach((mod, index) => {
+        if (mod.variable) assert.equal(row.values[index], roll ? mod.max : mod.min);
+      });
+    }
+  }
   assert.equal(ready.affixes.length, 4);
   assert(
     !itemAffixes.some((affix) => canAddAffix(affix, ready)),

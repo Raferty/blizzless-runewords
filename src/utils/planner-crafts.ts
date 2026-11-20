@@ -79,7 +79,7 @@ export function createCraftedItem(
     bonuses: {},
     notes: "",
     sockets: 0,
-    propertyRoll: 0,
+    propertyRoll: 1,
     affixes: [],
   };
   for (const id of variant.preferredAffixes) {

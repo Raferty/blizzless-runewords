@@ -11,6 +11,9 @@ const server = await createServer({
 try {
   const p = await server.ssrLoadModule("/src/utils/planner.ts");
   const n = await server.ssrLoadModule("/src/utils/planner-game-save.ts");
+  const { applyItemRoll } = await server.ssrLoadModule(
+    "/src/utils/planner-item-catalog.ts"
+  );
   const { inheritRunewordBase } = await server.ssrLoadModule(
     "/src/utils/planner-base-skills.ts"
   );
@@ -113,6 +116,15 @@ try {
       "Unrelated bases are not carried to runewords"
     );
     Object.assign(item, codec.itemBonuses(item, classId));
+    const inherent = structuredClone({ skills: item.baseSkills, tab: item.baseSkillTab });
+    for (const preset of [0, 1]) {
+      applyItemRoll(codec, item, preset, classId);
+      assert.deepEqual(
+        { skills: item.baseSkills, tab: item.baseSkillTab },
+        inherent,
+        "Roll presets keep base skills and automods"
+      );
+    }
     item = p.parsePlannerItem(item);
     build.stash = [item];
     assert.deepEqual(p.decodeBuild(p.encodeBuild(build)), build);

@@ -1524,6 +1524,11 @@
     color: var(--color-muted);
   }
 }
+.planner-editor .planner-template-controls button[aria-pressed="true"] {
+  color: #d3c294;
+  background: rgb(199 179 119 / 12%);
+  border-color: rgb(199 179 119 / 42%);
+}
 .planner-modal-actions {
   display: flex;
   flex-wrap: wrap;

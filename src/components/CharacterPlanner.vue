@@ -188,7 +188,7 @@
             </p>
           </section>
         </template>
-        <PlannerWaypoints v-if="section === 'waypoints'" />
+        <PlannerWaypoints v-if="section === 'waypoints'" initial-open />
         <section v-if="section === 'quests'" class="planner-panel">
           <div class="planner-panel-heading">
             <div>

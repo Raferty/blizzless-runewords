@@ -7,6 +7,7 @@ import {
   itemSkillClass,
   isClassCharm,
   normalizeClassCharm,
+  propertyRange,
 } from "./planner-properties";
 import { baseSupportsSockets, socketCategory } from "./planner-sockets";
 import type { RunewordTableItem } from "@/types";
@@ -15,7 +16,47 @@ import { runewordTemplates } from "./planner-runewords";
 import { plannerClasses } from "@/shared/planner";
 import { plannerCrafts } from "./planner-crafts";
 import { stashSupplies } from "./planner-supplies";
-import { canBeRare, affixFits, itemAffixes } from "./planner-affixes";
+import { canBeRare, affixFits, itemAffixes, affixById } from "./planner-affixes";
+
+function itemRollFields(native: GameSaveExporter, item: PlannerItem) {
+  const definition = resolvePropertyGroups(
+    native.itemDefinition(item) ?? {},
+    native.gd.propertyGroups,
+    item.propertyChoices
+  );
+  return Array.from({ length: 12 }, (_, n) => {
+    const index = n + 1;
+    const property = native.gd.properties[String(definition[`prop${index}`] ?? "")];
+    const range = property && propertyRange(definition, property, index);
+    return range
+      ? [
+          {
+            index,
+            range,
+            value:
+              item.propertyValues?.[index] ??
+              Number(definition[`${item.propertyRoll ? "max" : "min"}${index}`] ?? 0),
+          },
+        ]
+      : [];
+  }).flat();
+}
+
+export function itemRollState(native: GameSaveExporter, item: PlannerItem) {
+  const fields = itemRollFields(native, item);
+  const values = fields.map((row) => ({ ...row.range, value: row.value }));
+  for (const selected of item.affixes ?? [])
+    affixById.get(selected.id)?.mods.forEach((mod, index) => {
+      if (mod.variable)
+        values.push({ min: mod.min, max: mod.max, value: selected.values[index] });
+    });
+  return values.length
+    ? {
+        min: values.every((row) => row.value === row.min),
+        max: values.every((row) => row.value === row.max),
+      }
+    : { min: item.propertyRoll === 0, max: item.propertyRoll === 1 };
+}
 
 // A roll preset changes inherent stats, not the socketing or base configuration.
 export function applyItemRoll(
@@ -25,7 +66,20 @@ export function applyItemRoll(
   characterClass: ClassId
 ) {
   item.propertyRoll = roll;
-  delete item.propertyValues;
+  const fields = itemRollFields(native, item);
+  if (fields.length)
+    item.propertyValues = Object.fromEntries(
+      fields.map((row) => [row.index, roll ? row.range.max : row.range.min])
+    );
+  else delete item.propertyValues;
+  if (item.affixes)
+    item.affixes = item.affixes.map((selected) => ({
+      ...selected,
+      values: selected.values.map((value, index) => {
+        const mod = affixById.get(selected.id)?.mods[index];
+        return mod?.variable ? (roll ? mod.max : mod.min) : value;
+      }),
+    }));
   if (isClassCharm(item)) normalizeClassCharm(item, characterClass);
   const summary =
     item.catalogId && (item.quality === "unique" || item.quality === "set")
@@ -33,7 +87,7 @@ export function applyItemRoll(
           item.catalogId,
           item.quality,
           roll,
-          {},
+          item.propertyValues,
           item.skillClass ?? characterClass,
           item.propertyChoices
         )

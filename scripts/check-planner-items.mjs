@@ -18,6 +18,7 @@ try {
     socketPropertyLines,
     itemPropertyLines,
     applyItemRoll,
+    itemRollState,
   } = await server.ssrLoadModule("/src/utils/planner-item-catalog.ts");
   const { baseItemImage, plannerItemImage, plannerItemDimensions, charmSkinImages } =
     await server.ssrLoadModule("/src/utils/planner-item-art.ts");
@@ -308,6 +309,7 @@ try {
     const expected = structuredClone(config(item));
     for (const roll of [1, 0, 1, 0]) {
       applyItemRoll(native, item, roll, "paladin");
+      assert.deepEqual(itemRollState(native, item), { min: roll === 0, max: roll === 1 });
       assert.deepEqual(
         config(item),
         expected,
@@ -333,6 +335,50 @@ try {
       }
     }
   }
+  const reaper = stash.items.find((row) => row.name === "The Reaper's Toll");
+  const customRoll = {
+    name: reaper.name,
+    quality: reaper.quality,
+    catalogId: reaper.catalogId,
+    baseCode: reaper.bases[0],
+    bonuses: {},
+    notes: "",
+    requiredLevel: reaper.level,
+  };
+  applyItemRoll(native, customRoll, 1, "paladin");
+  customRoll.propertyValues[1] = 215;
+  assert.deepEqual(
+    itemRollState(native, customRoll),
+    { min: false, max: false },
+    "A manual intermediate roll clears both buttons"
+  );
+  customRoll.propertyValues[1] = 190;
+  assert.deepEqual(
+    itemRollState(native, customRoll),
+    { min: false, max: false },
+    "Mixed min/max properties select neither preset"
+  );
+  applyItemRoll(native, customRoll, 0, "paladin");
+  customRoll.propertyRoll = 1;
+  assert.deepEqual(
+    itemRollState(native, customRoll),
+    { min: true, max: false },
+    "Actual values take priority over the previous preset flag"
+  );
+  const hiramEntry = stash.items.find((row) => row.name === "Hiram's Treason");
+  const hiramRoll = {
+    ...customRoll,
+    name: hiramEntry.name,
+    catalogId: hiramEntry.catalogId,
+    baseCode: hiramEntry.bases[0],
+  };
+  applyItemRoll(native, hiramRoll, 0, "paladin");
+  assert(
+    itemPropertyLines(native, hiramRoll, 99, "paladin").some((line) =>
+      line.includes("+2 to Echoing Strike")
+    )
+  );
+  assert.deepEqual(itemRollState(native, hiramRoll), { min: true, max: false });
   let checked = 0;
   for (const item of stash.items.filter((i) => i.catalogId)) {
     for (const roll of [0, 1]) {

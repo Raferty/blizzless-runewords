@@ -55,6 +55,7 @@
           :max="mod.max"
           step="1"
           required
+          @input="inputValue(index, modIndex, $event)"
           @change="changeValue(index, modIndex, $event)"
         />
         <small v-if="mod.variable">{{ mod.min }}–{{ mod.max }}</small>
@@ -225,6 +226,14 @@ function remove(index: number) {
     "update:affixes",
     (props.item.affixes ?? []).filter((_, i) => i !== index)
   );
+}
+function inputValue(index: number, modIndex: number, event: Event) {
+  const text = (event.target as HTMLInputElement).value;
+  const value = Number(text);
+  const selected = props.item.affixes?.[index];
+  const mod = selected && affixById.get(selected.id)?.mods[modIndex];
+  if (mod && text && Number.isInteger(value) && value >= mod.min && value <= mod.max)
+    changeValue(index, modIndex, event);
 }
 function changeValue(index: number, modIndex: number, event: Event) {
   const input = event.target as HTMLInputElement;

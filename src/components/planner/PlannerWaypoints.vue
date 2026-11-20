@@ -54,9 +54,10 @@ import { difficulties } from "@/shared/planner";
 import { waypointActs, waypoints } from "@/shared/planner-waypoints";
 import type { Difficulty } from "@/types/planner";
 
+const props = defineProps<{ initialOpen?: boolean }>();
 const t = useText();
 const store = usePlannerStore();
-const open = ref(false);
+const open = ref(props.initialOpen ?? false);
 const count = (difficulty: Difficulty) =>
   waypoints.filter(({ key }) => store.build.waypoints[difficulty][key]).length;
 const total = computed(() =>

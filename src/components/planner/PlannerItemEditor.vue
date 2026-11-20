@@ -200,12 +200,17 @@
             </button>
           </fieldset>
           <div
-            v-if="templates.length || selectedCatalog?.catalogId || selectedCraft"
+            v-if="
+              templates.length ||
+              selectedCatalog?.catalogId ||
+              selectedCraft ||
+              item.affixes?.length
+            "
             class="planner-template-controls"
           >
-            <button type="button" @click="setRoll(0)">
+            <button type="button" :aria-pressed="rollState.min" @click="setRoll(0)">
               {{ t("Мин. ролл", "Min roll") }}</button
-            ><button type="button" @click="setRoll(1)">
+            ><button type="button" :aria-pressed="rollState.max" @click="setRoll(1)">
               {{ t("Макс. ролл", "Max roll") }}
             </button>
           </div>
@@ -417,6 +422,7 @@ import { usePlannerStore } from "@/store/planner";
 import {
   createItemCatalog,
   applyItemRoll,
+  itemRollState,
   catalogPropertyLines,
   catalogSetBonuses,
   type CatalogItem,
@@ -489,7 +495,12 @@ const tab = ref(props.initial ? "edit" : "select");
 const native = shallowRef<GameSaveExporter>();
 const catalog = shallowRef<ReturnType<typeof createItemCatalog>>();
 const loadError = ref("");
-const roll = ref<0 | 1>(props.initial?.propertyRoll ?? 0);
+const roll = ref<0 | 1>(props.initial ? (props.initial.propertyRoll ?? 0) : 1);
+const rollState = computed(() =>
+  native.value
+    ? itemRollState(native.value, item.value)
+    : { min: roll.value === 0, max: roll.value === 1 }
+);
 const height = ref(props.initialHeight);
 const item = ref<PlannerItem>(
   props.initial
@@ -659,7 +670,7 @@ function chooseWord(word: RunewordTableItem) {
       runewordTemplates(word.name.en).find((entry) => entry.kind === props.preferredKind)
         ?.kind ?? runewordTemplates(word.name.en)[0]?.kind,
   };
-  applyTemplate(0);
+  applyTemplate(1);
   item.value.itemLevel = 99;
   item.value.sockets = word.runes.length;
 }
@@ -953,9 +964,8 @@ function setRoll(value: 0 | 1) {
   roll.value = value;
   item.value.propertyRoll = value;
   delete item.value.propertyValues;
-  if (selectedWord.value) applyTemplate(value);
-  else if (native.value)
-    applyItemRoll(native.value, item.value, value, store.build.classId);
+  if (native.value) applyItemRoll(native.value, item.value, value, store.build.classId);
+  else if (selectedWord.value) applyTemplate(value);
 }
 function chooseCatalogItem(entry: CatalogItem) {
   affixNotice.value = "";
@@ -997,7 +1007,7 @@ function chooseCatalogItem(entry: CatalogItem) {
     )
       Object.assign(
         item.value,
-        native.value.catalogBonuses(entry.catalogId, entry.quality, 0)
+        native.value.catalogBonuses(entry.catalogId, entry.quality, 1)
       );
     const orderedBases = [...entry.bases].sort(
       (a, b) =>
@@ -1011,7 +1021,7 @@ function chooseCatalogItem(entry: CatalogItem) {
             (code) => catalog.value?.bases.get(code)?.kind === props.preferredKind
           ) ?? orderedBases[0]);
     changeBase(base);
-    setRoll(0);
+    setRoll(1);
   }
   item.value.itemLevel ??= 99;
   if (props.charmMode && selectedBase.value) height.value = selectedBase.value.height;
