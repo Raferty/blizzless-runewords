@@ -17,6 +17,7 @@ try {
     catalogSetBonuses,
     socketPropertyLines,
     itemPropertyLines,
+    applyItemRoll,
   } = await server.ssrLoadModule("/src/utils/planner-item-catalog.ts");
   const { baseItemImage, plannerItemImage, plannerItemDimensions, charmSkinImages } =
     await server.ssrLoadModule("/src/utils/planner-item-art.ts");
@@ -265,6 +266,73 @@ try {
     { key: "test", owner: "stash" },
     words
   );
+  const facet = socketInserts.find((insert) => insert.group === "facet");
+  for (const [name, inserts] of [
+    ["The Reaper's Toll", ["j15ar"]],
+    ["Andariel's Visage", ["j15fr"]],
+    ["Griffon's Eye", [facet.code]],
+    ["Tomb Reaver", ["r24", "j15ar", "gpv"]],
+    ["Aldur's Rhythm", ["r13", "r13"]],
+  ]) {
+    const entry = stash.items.find((row) => row.name === name);
+    assert(entry, name);
+    const item = {
+      name,
+      quality: entry.quality,
+      catalogId: entry.catalogId,
+      requiredLevel: entry.level,
+      baseCode: entry.bases[0],
+      itemLevel: 99,
+      bonuses: {},
+      notes: "",
+      sockets: inserts.length,
+      socketedItems: inserts,
+      socketPropertyValues:
+        name === "Griffon's Eye"
+          ? {
+              0: Object.fromEntries(
+                Object.entries(facet.ranges || {}).map(([key, range]) => [key, range.min])
+              ),
+            }
+          : {},
+      socketIconIndices: name === "The Reaper's Toll" ? { 0: 5 } : {},
+      ethereal: entry.quality === "unique",
+    };
+    const config = (value) => ({
+      sockets: value.sockets,
+      socketedItems: value.socketedItems,
+      socketPropertyValues: value.socketPropertyValues,
+      socketIconIndices: value.socketIconIndices,
+      ethereal: value.ethereal,
+    });
+    const expected = structuredClone(config(item));
+    for (const roll of [1, 0, 1, 0]) {
+      applyItemRoll(native, item, roll, "paladin");
+      assert.deepEqual(
+        config(item),
+        expected,
+        `${name}: roll keeps sockets, inserts and base configuration`
+      );
+      const build = { ...createBuild("paladin"), charms: [], stash: [item] };
+      const bytes = await native.exportCharacter(build, {
+        name: "SocketRoll",
+        choices: { "stash.0": entry.catalogId },
+        rolls: {},
+      });
+      const restored = native.importCharacter(bytes).stash[0];
+      assert.equal(restored.sockets, inserts.length, `${name}: exported socket count`);
+      assert.deepEqual(restored.socketedItems, inserts, `${name}: exported inserts`);
+      assert.equal(!!restored.ethereal, item.ethereal, `${name}: exported ethereal flag`);
+      if (name === "The Reaper's Toll") {
+        assert(
+          itemPropertyLines(native, restored, 99, "paladin").some((line) =>
+            line.includes(`${roll ? 240 : 190}% Enhanced Damage`)
+          )
+        );
+        assert.equal(restored.socketIconIndices[0], 5);
+      }
+    }
+  }
   let checked = 0;
   for (const item of stash.items.filter((i) => i.catalogId)) {
     for (const roll of [0, 1]) {

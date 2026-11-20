@@ -386,7 +386,8 @@
 </template>
 <script setup lang="ts">
 import PlannerBaseSkillEditor from "./PlannerBaseSkillEditor.vue";
-import { retainBaseSkills } from "@/utils/planner-base-skills";
+import { retainBaseSkills, inheritRunewordBase } from "@/utils/planner-base-skills";
+import { normalizeClassCharm } from "@/utils/planner-properties";
 import { computed, onMounted, ref, shallowRef, useId, watch } from "vue";
 import PlannerItemBrowser from "./PlannerItemBrowser.vue";
 import PlannerIcon from "./PlannerIcon.vue";
@@ -394,7 +395,6 @@ import UiIcon from "@/components/ui/UiIcon.vue";
 import PlannerSetBonuses from "./PlannerSetBonuses.vue";
 import PlannerAffixEditor from "./PlannerAffixEditor.vue";
 import PlannerPropertyEditor from "./PlannerPropertyEditor.vue";
-import { isClassCharm, normalizeClassCharm } from "@/utils/planner-properties";
 import {
   craftById,
   craftVariant,
@@ -416,6 +416,7 @@ import { baseSupportsSockets, itemRequiredLevel } from "@/utils/planner-sockets"
 import { usePlannerStore } from "@/store/planner";
 import {
   createItemCatalog,
+  applyItemRoll,
   catalogPropertyLines,
   catalogSetBonuses,
   type CatalogItem,
@@ -953,34 +954,19 @@ function setRoll(value: 0 | 1) {
   item.value.propertyRoll = value;
   delete item.value.propertyValues;
   if (selectedWord.value) applyTemplate(value);
-  else if (selectedCraft.value && native.value)
-    Object.assign(item.value, native.value.itemBonuses(item.value, store.build.classId));
-  else if (
-    native.value &&
-    item.value.catalogId &&
-    (item.value.quality === "unique" || item.value.quality === "set")
-  ) {
-    if (isClassCharm(item.value)) normalizeClassCharm(item.value, store.build.classId);
-    Object.assign(
-      item.value,
-      native.value.catalogBonuses(
-        item.value.catalogId,
-        item.value.quality,
-        value,
-        {},
-        item.value.skillClass ?? store.build.classId,
-        item.value.propertyChoices
-      )
-    );
-  }
+  else if (native.value)
+    applyItemRoll(native.value, item.value, value, store.build.classId);
 }
 function chooseCatalogItem(entry: CatalogItem) {
   affixNotice.value = "";
+  const previous = item.value;
   if (entry.existing) {
     item.value = JSON.parse(JSON.stringify(entry.existing));
     roll.value = item.value.propertyRoll ?? 0;
-  } else if (entry.word) chooseWord(entry.word);
-  else if (entry.craftId && native.value)
+  } else if (entry.word) {
+    chooseWord(entry.word);
+    inheritRunewordBase(item.value, previous, entry.bases);
+  } else if (entry.craftId && native.value)
     item.value = createCraftedItem(
       native.value,
       entry.craftId,
@@ -1004,15 +990,26 @@ function chooseCatalogItem(entry: CatalogItem) {
       sockets: 0,
     };
   if (!entry.existing) {
+    if (
+      entry.catalogId &&
+      native.value &&
+      (entry.quality === "unique" || entry.quality === "set")
+    )
+      Object.assign(
+        item.value,
+        native.value.catalogBonuses(entry.catalogId, entry.quality, 0)
+      );
     const orderedBases = [...entry.bases].sort(
       (a, b) =>
         (catalog.value?.bases.get(a)?.level ?? 0) -
         (catalog.value?.bases.get(b)?.level ?? 0)
     );
     const base =
-      orderedBases.find(
-        (code) => catalog.value?.bases.get(code)?.kind === props.preferredKind
-      ) ?? orderedBases[0];
+      entry.word && item.value.baseCode
+        ? item.value.baseCode
+        : (orderedBases.find(
+            (code) => catalog.value?.bases.get(code)?.kind === props.preferredKind
+          ) ?? orderedBases[0]);
     changeBase(base);
     setRoll(0);
   }

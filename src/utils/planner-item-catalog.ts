@@ -5,6 +5,8 @@ import {
   resolvePropertyGroups,
   propertyClasses,
   itemSkillClass,
+  isClassCharm,
+  normalizeClassCharm,
 } from "./planner-properties";
 import { baseSupportsSockets, socketCategory } from "./planner-sockets";
 import type { RunewordTableItem } from "@/types";
@@ -14,6 +16,31 @@ import { plannerClasses } from "@/shared/planner";
 import { plannerCrafts } from "./planner-crafts";
 import { stashSupplies } from "./planner-supplies";
 import { canBeRare, affixFits, itemAffixes } from "./planner-affixes";
+
+// A roll preset changes inherent stats, not the socketing or base configuration.
+export function applyItemRoll(
+  native: GameSaveExporter,
+  item: PlannerItem,
+  roll: 0 | 1,
+  characterClass: ClassId
+) {
+  item.propertyRoll = roll;
+  delete item.propertyValues;
+  if (isClassCharm(item)) normalizeClassCharm(item, characterClass);
+  const summary =
+    item.catalogId && (item.quality === "unique" || item.quality === "set")
+      ? native.catalogBonuses(
+          item.catalogId,
+          item.quality,
+          roll,
+          {},
+          item.skillClass ?? characterClass,
+          item.propertyChoices
+        )
+      : native.itemBonuses(item, characterClass);
+  item.bonuses = summary.bonuses;
+  item.classBonuses = summary.classBonuses;
+}
 
 export const itemCategories = [
   {

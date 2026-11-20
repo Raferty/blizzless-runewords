@@ -11,6 +11,9 @@ const server = await createServer({
 try {
   const p = await server.ssrLoadModule("/src/utils/planner.ts");
   const n = await server.ssrLoadModule("/src/utils/planner-game-save.ts");
+  const { inheritRunewordBase } = await server.ssrLoadModule(
+    "/src/utils/planner-base-skills.ts"
+  );
   const { plannerSkills } = await server.ssrLoadModule("/src/shared/planner.ts");
   const { useRunewordsStore } = await server.ssrLoadModule("/src/store/runewords.ts");
   setActivePinia(createPinia());
@@ -77,6 +80,38 @@ try {
         })
       );
     if (tab !== undefined) item.baseSkillTab = { tab, value: 3 };
+    const blank = { ...item, quality: "normal", ethereal: true };
+    delete blank.runewordId;
+    const replacement = { ...item };
+    delete replacement.baseCode;
+    delete replacement.baseSkills;
+    delete replacement.baseSkillTab;
+    inheritRunewordBase(
+      replacement,
+      blank,
+      choices.map((row) => row.base)
+    );
+    assert.equal(
+      replacement.baseCode,
+      blank.baseCode,
+      `${classId}: keeps chosen runeword base`
+    );
+    assert.equal(replacement.ethereal, true);
+    assert.deepEqual(replacement.baseSkills, blank.baseSkills);
+    assert.deepEqual(replacement.baseSkillTab, blank.baseSkillTab);
+    if (blank.baseSkills) assert.notEqual(replacement.baseSkills, blank.baseSkills);
+    if (blank.baseSkillTab) assert.notEqual(replacement.baseSkillTab, blank.baseSkillTab);
+    const incompatible = { ...replacement };
+    inheritRunewordBase(
+      incompatible,
+      { ...blank, baseCode: "hax" },
+      choices.map((row) => row.base).filter((code) => code !== "hax")
+    );
+    assert.deepEqual(
+      incompatible,
+      replacement,
+      "Unrelated bases are not carried to runewords"
+    );
     Object.assign(item, codec.itemBonuses(item, classId));
     item = p.parsePlannerItem(item);
     build.stash = [item];

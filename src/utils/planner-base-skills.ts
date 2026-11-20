@@ -122,6 +122,25 @@ export function retainBaseSkills(item: PlannerItem) {
       delete item.baseSkillTab;
     }
 }
+export function inheritRunewordBase(
+  item: PlannerItem,
+  previous: PlannerItem,
+  allowedBases: string[]
+) {
+  if (
+    item.quality !== "runeword" ||
+    !previous.baseCode ||
+    !allowedBases.includes(previous.baseCode)
+  )
+    return;
+  item.baseCode = previous.baseCode;
+  item.baseKind = previous.baseKind;
+  item.itemLevel = previous.itemLevel ?? 99;
+  item.ethereal = previous.ethereal;
+  if (previous.baseSkills) item.baseSkills = { ...previous.baseSkills };
+  if (previous.baseSkillTab) item.baseSkillTab = { ...previous.baseSkillTab };
+  retainBaseSkills(item);
+}
 export function baseSkillDefinition(item: PlannerItem) {
   const definition: Record<string, string | number> = {};
   const rows = [
