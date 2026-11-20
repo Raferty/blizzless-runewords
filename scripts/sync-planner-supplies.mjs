@@ -49,7 +49,9 @@ for (const code of Object.keys(data.misc)) {
       ? "gem"
       : /^(?:cr[123]|jwd)$/.test(code)
         ? "material"
-        : /^(?:toa|tes|ceh|bet|fed|dhn|bey|mbr|qey|qhr|qbr|ua[1-5]|pk[1-3])$/.test(code)
+        : /^(?:toa|tes|ceh|bet|fed|dhn|bey|mbr|qey|qhr|qbr|ua[1-5]|pk[1-3]|p14|p20|p21)$/.test(
+              code
+            )
           ? "ques"
           : /^rv[sl]$/.test(code)
             ? "rpot"

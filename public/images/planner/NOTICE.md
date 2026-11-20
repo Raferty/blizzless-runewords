@@ -225,3 +225,14 @@ https://maxroll.gg/d2/d2planner
 - Alternate pictures use LootCube `misc/charm/charm_{small,medium,large}{2,3}.webp`.
   Source URLs and SHA-256 hashes are pinned in `src/shared/planner-native-art.json`.
   Fixed unique charm artwork is unaffected by the magic charm selector.
+
+# Bartuc portal ingredients — 2026-11-20
+
+- `p14` (Tattered Scroll), `p20` (Bloodstone), and `p21` (Demon Paw) are the
+  three inputs for the Demon’s Refuge portal, verified in official `cubemain.txt`
+  SHA-256 `9c433e140eb6f93aab839502bc0da847542686cb492c2ca7bb49a79e145e1fc6`.
+  They occupy 2×2, 1×1, and 1×1 cells respectively in `misc.txt`.
+- Original Blizzless `items.json` maps them to `quest/tattered_scroll`,
+  `gem/bloodstone`, and `quest/ceremonial_claws`. The corresponding original
+  RGBA sprites are decoded to PNG without changing pixels. Source hashes are
+  pinned in `src/shared/planner-native-art.json` (manifest 1795131992295).

@@ -18,13 +18,16 @@ const countAfter =
   "            socketedItemsCount = reader.bits(questItem ? 1 : 3);\n            const types = itemGetTypes(gd, baseId);";
 const registerBefore =
   "        else if ((gd.items[item.base] && itemTypeTreeFilter(gd.items[item.base].type)) ||";
-const registerAfter =
+const legacyRegisterAfter =
   "        else if ((gd.items[item.base] && (itemTypeTreeFilter(gd.items[item.base].type) || questItem)) ||";
+const registerAfter =
+  "        else if ((gd.items[item.base] && (itemTypeTreeFilter(gd.items[item.base].type) || isSubType(gd, gd.items[item.base].type, 'ques'))) ||";
 const source = await readFile(file, "utf8");
 const unpatched = source
   .replace(after, before)
   .replace(countAfter, countBefore)
-  .replace(registerAfter, registerBefore);
+  .replace(registerAfter, registerBefore)
+  .replace(legacyRegisterAfter, registerBefore);
 if (createHash("sha256").update(unpatched).digest("hex") !== original)
   throw Error("d2r-saver item parser changed; review the quest-difficulty patch");
 const patched = unpatched

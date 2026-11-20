@@ -178,6 +178,20 @@ try {
     return item;
   });
   for (let i = 0; i < loose.length; i += 50) await verify(build, loose.slice(i, i + 50));
+  const bartucCodes = ["p14", "p20", "p21"];
+  assert.deepEqual(
+    supplies.stashKits.find((kit) => kit.id === "bartuc").codes,
+    bartucCodes
+  );
+  const bartucItems = bartucCodes.map((code) => supplies.createStashSupply(native, code));
+  assert.deepEqual(bartucItems.map(plannerItemDimensions), [
+    [2, 2],
+    [1, 1],
+    [1, 1],
+  ]);
+  const bartucSave = await verify(build, bartucItems);
+  assert(bartucSave.items.every((item) => !item.simple_item));
+  assert(bartucCodes.every((code) => !data.misc[code].questdiffcheck));
   assert.equal(loose.filter((item) => /^r\d\d$/.test(item.baseCode)).length, 33);
   assert.equal(
     loose.filter((item) => supplies.stashSupplies[item.baseCode].category === "gem")
@@ -288,7 +302,7 @@ try {
   );
   assert.equal(JSON.stringify(occupiedBuild), full);
   console.log(
-    `Planner supplies: ${loose.length} loose bases, 4 sets, ${Object.keys(supplies.recipeInputs).length} recipes / ${variants} variants, ${saves} independent native saves`
+    `Planner supplies: ${loose.length} loose bases, ${supplies.stashKits.length} sets, ${Object.keys(supplies.recipeInputs).length} recipes / ${variants} variants, ${saves} independent native saves`
   );
 } finally {
   await server.close();

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-19",
+  "checkedAt": "2026-11-20",
   "source": "https://lootcube.net/images/items/",
   "keySpriteSource": "https://blizzless.info/api/launcher-mods/blobs/",
   "keySprites": {
@@ -36,6 +36,9 @@
     "misc/charm/talisman1": "f8d046fbd589dc834e640d6c40c1484ea695bb9c95cc0e9be64e93ba74295f51",
     "misc/charm/talisman2": "3c62e2fe344697a7c2aefef479092d8f345fe4661d8137a5c4b9a4320712f51f",
     "misc/charm/talisman3": "13c326d2b2ac8b2380ea6278f1b9b8ca9361ca4b87e96358e9e1eb19704a36e5",
+    "misc/quest/tattered_scroll": "1096e7fcde8369265df5bdd57f75274aa03d5a4dfc80e78d5e7cbe9eec248f40",
+    "misc/gem/bloodstone": "a402f9f872eac3664cc7cddbb0473556efda0d4169d5e574b4aa520d4f28b4ea",
+    "misc/quest/ceremonial_claws": "495c2565867f3c319153aa705359ddb4b090509099f3b4cd26d713bea739906f",
     "misc/quest/jewel_dis": "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
     "misc/quest/parts_1": "1aa22d0d5cb9a02f0af89c44f34e6446d68bb9cccff0fff038ce7eec50e6e97e",
     "misc/quest/parts_2": "fa991baba93ef9cdce010f5029f5b24bd1cad35ccfc617ebfda49bf058f27f3c",
@@ -66,7 +69,12 @@
     "itemTypesTablePath": "data/global/excel/itemtypes.txt",
     "itemTypesTableSha256": "01702061af7d78c30ce96b072969e5f363af7804ad3694bec2e4c16c5b9d99d8",
     "itemTransformsPath": "data/hd/global/palette/itemtransforms.json",
-    "itemTransformsSha256": "df4b76b3b284dd9e2e0eb8c38c5575a5dddd04b126d7d29bc9f337c9ed439a5b"
+    "itemTransformsSha256": "df4b76b3b284dd9e2e0eb8c38c5575a5dddd04b126d7d29bc9f337c9ed439a5b",
+    "bartucEntry": {
+      "checkedAt": "2026-11-20",
+      "manifestVersion": 1795131992295,
+      "cubeSha256": "9c433e140eb6f93aab839502bc0da847542686cb492c2ca7bb49a79e145e1fc6"
+    }
   },
   "variants": {
     "jew": [
@@ -775,7 +783,10 @@
     "cr3": "images/planner/items/misc/quest/parts_3.png",
     "fmu": "images/planner/items/misc/amulet/amulet1.webp",
     "jwd": "images/planner/items/misc/quest/jewel_dis.png",
-    "p15": "images/planner/items/misc/amulet/amulet1.webp"
+    "p14": "images/planner/items/misc/quest/tattered_scroll.png",
+    "p15": "images/planner/items/misc/amulet/amulet1.webp",
+    "p20": "images/planner/items/misc/gem/bloodstone.png",
+    "p21": "images/planner/items/misc/quest/ceremonial_claws.png"
   },
   "tiers": {
     "hax": 0,
@@ -1453,7 +1464,10 @@
     "cr3": 0,
     "fmu": 0,
     "jwd": 0,
-    "p15": 0
+    "p14": 0,
+    "p15": 0,
+    "p20": 0,
+    "p21": 0
   },
   "dimensions": {
     "hax": [1, 3],
@@ -2131,7 +2145,10 @@
     "cr3": [1, 1],
     "fmu": [1, 1],
     "jwd": [1, 1],
+    "p14": [2, 2],
     "p15": [1, 1],
+    "p20": [1, 1],
+    "p21": [1, 1],
     "elx": [1, 1],
     "hpo": [1, 1],
     "mpo": [1, 1],
@@ -2184,12 +2201,9 @@
     "bg1": [1, 1],
     "bg2": [1, 2],
     "sth": [1, 1],
-    "p14": [2, 2],
     "p17": [1, 1],
     "p18": [1, 1],
     "p19": [1, 1],
-    "p20": [1, 1],
-    "p21": [1, 1],
     "p22": [1, 1]
   },
   "catalogBases": {

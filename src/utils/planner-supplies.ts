@@ -25,6 +25,12 @@ export const recipeInputs: Record<string, RecipeInputVariant[]> = data.recipes a
 >;
 export const stashKits = [
   {
+    id: "bartuc",
+    ru: "Вход к Бартуку",
+    en: "Bartuc portal ingredients",
+    codes: ["p14", "p20", "p21"],
+  },
+  {
     id: "respec",
     ru: "Набор для сброса",
     en: "Respec set",

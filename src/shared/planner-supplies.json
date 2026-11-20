@@ -461,6 +461,18 @@
       "name": "Disenchanted Jewel",
       "category": "material"
     },
+    "p14": {
+      "name": "Tattered Scroll",
+      "category": "ques"
+    },
+    "p20": {
+      "name": "Bloodstone",
+      "category": "ques"
+    },
+    "p21": {
+      "name": "Demon Paw",
+      "category": "ques"
+    },
     "msf": {
       "name": "Shaft of the Horadric Staff",
       "category": "ques",
