@@ -1,11 +1,6 @@
 <template>
   <aside class="planner-character">
     <PlannerPanel class="planner-stats-panel" :title="t('Характеристики', 'Stats')">
-      <template #actions>
-        <button @click="$emit('quests')">
-          <UiIcon name="quests" /> {{ t("Задания", "Quests") }}
-        </button>
-      </template>
       <div class="planner-stats-difficulty">
         <button
           v-for="difficulty in difficulties"
@@ -166,7 +161,6 @@ const store = usePlannerStore();
 const info = useInfoStore();
 const lang = computed(() => info.currentLang);
 const t = useText();
-defineEmits<{ quests: [] }>();
 const base = import.meta.env.BASE_URL;
 const query = ref("");
 const matches = (ru: string, en: string) =>

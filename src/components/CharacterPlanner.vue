@@ -25,15 +25,6 @@
               :placeholder="t('Название сборки', 'Build name')"
               :aria-label="t('Название сборки', 'Build name')"
           /></label>
-          <div
-            class="planner-set-controls"
-            role="group"
-            :aria-label="t('Наборы сборки', 'Build sets')"
-          >
-            <button @click="store.saveBuild">
-              <UiIcon name="plus" /> {{ t("Сохранить набор", "Save set") }}
-            </button>
-          </div>
         </div>
         <div class="planner-build-buttons">
           <button class="planner-primary" @click="store.saveBuild">
@@ -372,7 +363,7 @@
           @configure="section = 'mercenary'"
           @type="setMercenary"
         />
-        <PlannerCharacter @quests="section = 'quests'" />
+        <PlannerCharacter />
       </div>
     </div>
     <div class="planner-data-note">
