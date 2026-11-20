@@ -41,8 +41,9 @@
           ><button @click="libraryOpen = true">
             {{ t("Мои сборки", "My builds") }}
             <small>{{ store.saved.length }}</small></button
-          ><button @click="shareBuild">
-            {{ t("Ссылка", "Share") }} <UiIcon name="arrow-up-right" /></button
+          ><button @click="resetOpen = true">
+            <UiIcon name="reset" />
+            {{ t("Сбросить персонажа", "Reset character") }}</button
           ><button @click="exportOpen = true">{{ t("Экспорт", "Export") }}</button
           ><button @click="importInput?.click()">{{ t("Импорт", "Import") }}</button
           ><input
@@ -122,6 +123,12 @@
         />
       </PlannerEquipment>
       <div v-if="section !== 'equipment'" class="planner-main-column">
+        <PlannerStash
+          v-if="section === 'stash'"
+          class="planner-stash-page"
+          @edit="editStash"
+          @manage="stashOpen = true"
+        />
         <PlannerSkillPanel v-if="section === 'overview' || section === 'skills'" />
         <template v-if="section === 'mercenary'">
           <section class="planner-panel">
@@ -378,6 +385,45 @@
       ><span>{{ t("Автосохранение в этом браузере", "Autosaved in this browser") }}</span>
     </div>
     <TheFooter />
+    <UiModal
+      :model-value="resetOpen"
+      closable
+      :label="t('Сбросить персонажа?', 'Reset character?')"
+      @close="resetOpen = false"
+    >
+      <div class="planner-editor">
+        <div class="planner-modal-heading">
+          <h2>{{ t("Сбросить персонажа?", "Reset character?") }}</h2>
+          <button :aria-label="t('Закрыть', 'Close')" @click="resetOpen = false">
+            <UiIcon name="close" />
+          </button>
+        </div>
+        <p class="planner-help">
+          {{
+            t(
+              "Будут очищены навыки, характеристики, экипировка, инвентарь, сундук и наёмник. Уровень станет 90, задания и вейпоинты будут сброшены.",
+              "Skills, attributes, equipment, inventory, stash and mercenary will be cleared. Level returns to 90, and quests and waypoints are reset."
+            )
+          }}
+        </p>
+        <p class="planner-help">
+          {{
+            t(
+              "Класс и режим игры сохранятся. Сохранённые сборки останутся в «Мои сборки».",
+              "Class and game mode are kept. Saved builds remain in My builds."
+            )
+          }}
+        </p>
+        <div class="planner-reset-actions">
+          <button autofocus @click="resetOpen = false">
+            {{ t("Отмена", "Cancel") }}
+          </button>
+          <button class="planner-danger" @click="resetCharacter">
+            {{ t("Сбросить", "Reset") }}
+          </button>
+        </div>
+      </div>
+    </UiModal>
     <PlannerGameExport
       v-if="exportOpen"
       @close="exportOpen = false"
@@ -590,7 +636,6 @@ import {
 } from "@/shared/planner";
 import { attributeBudget, charmFits, skillBudget, spentSkills } from "@/utils/planner";
 import { loadGameSaveExporter } from "@/utils/planner-game-save";
-import { encodeSharedBuild } from "@/utils/planner-share";
 import type {
   Difficulty,
   EquipmentSlot,
@@ -612,6 +657,7 @@ const tabs = [
   { key: "equipment", ru: "Экипировка", en: "Equipment" },
   { key: "skills", ru: "Навыки", en: "Skills" },
   { key: "mercenary", ru: "Наёмник", en: "Mercenary" },
+  { key: "stash", ru: "Сундук", en: "Stash" },
   { key: "waypoints", ru: "Вейпоинты", en: "Waypoints" },
   { key: "quests", ru: "Задания", en: "Quests" },
   { key: "notes", ru: "Заметки", en: "Notes" },
@@ -622,6 +668,7 @@ watch(section, (value) => {
   if (value === "notes") notesOpen.value = true;
 });
 const libraryOpen = ref(false);
+const resetOpen = ref(false);
 const stashOpen = ref(false);
 const stashTarget = ref<EquipmentSlot>("mainHand");
 const importInput = ref<HTMLInputElement | null>(null);
@@ -870,20 +917,12 @@ async function importBuild(event: Event) {
   }
   input.value = "";
 }
-async function shareBuild() {
-  const encoded = await encodeSharedBuild(store.build);
-  if (encoded.length > 30000) {
-    store.message = "shareSize";
-    return;
-  }
-  const url = new URL(window.location.href);
-  url.hash = `/planner?build=${encoded}`;
-  try {
-    await navigator.clipboard.writeText(url.href);
-    store.message = "copied";
-  } catch {
-    store.message = "clipboard";
-  }
+function resetCharacter() {
+  store.resetCharacter();
+  resetOpen.value = false;
+  stashOpen.value = false;
+  editor.value = null;
+  section.value = "overview";
 }
 const formatDate = (value: string) => {
   const date = new Date(value);
@@ -898,7 +937,7 @@ const messageText = computed(() => {
       "Build snapshot saved in this browser.",
     ],
     loaded: ["Сборка загружена.", "Build loaded."],
-    copied: ["Ссылка на сборку скопирована.", "Build link copied."],
+    reset: ["Персонаж сброшен.", "Character reset."],
     invalid: [
       "Не удалось загрузить сборку: неверный формат или недопустимые значения.",
       "Cannot load build: invalid format or values.",
@@ -918,14 +957,6 @@ const messageText = computed(() => {
     limit: [
       "Достигнут лимит 50 сборок. Удалите ненужный снимок или экспортируйте JSON.",
       "50-build limit reached. Delete a snapshot or export JSON.",
-    ],
-    clipboard: [
-      "Браузер не разрешил копирование. Сохраните сборку через экспорт JSON.",
-      "Clipboard access is unavailable. Export JSON to share your build.",
-    ],
-    shareSize: [
-      "Сборка слишком велика для ссылки. Используйте экспорт JSON.",
-      "This build is too large for a link. Use JSON export.",
     ],
     stashFull: [
       "В сундуке недостаточно места для экипировки наёмника.",

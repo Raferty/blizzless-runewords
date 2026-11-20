@@ -225,6 +225,17 @@
 .planner-build-presets {
   flex: 1 1 400px;
 }
+.planner-reset-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+.planner-stash-page {
+  justify-self: center;
+  width: 100%;
+  max-width: 960px;
+}
 .planner-panel {
   min-width: 0;
   padding: 0;
@@ -460,8 +471,7 @@
   object-fit: contain;
 }
 .planner-ethereal-image {
-  opacity: 0.5;
-  filter: grayscale(0.65) brightness(1.15);
+  opacity: 0.7;
 }
 .planner-paperdoll-sockets {
   position: absolute;

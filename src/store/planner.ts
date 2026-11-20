@@ -101,6 +101,24 @@ export const usePlannerStore = defineStore("planner", () => {
     drafts.value[build.value.classId] = cloneBuild(build.value);
     build.value = cloneBuild(drafts.value[classId] ?? createDefaultBuild(classId));
   }
+  function resetCharacter() {
+    const next = createDefaultBuild(build.value.classId);
+    next.level = 90;
+    next.difficulty = "normal";
+    next.hardcore = build.value.hardcore;
+    if (build.value.gameSave) next.gameSave = { ...build.value.gameSave };
+    next.charms = [];
+    next.mercenary.level = 90;
+    for (const rewards of Object.values(next.quests))
+      for (const key of Object.keys(rewards) as (keyof typeof rewards)[])
+        rewards[key] = false;
+    for (const waypoints of Object.values(next.waypoints))
+      for (const key of Object.keys(waypoints) as (keyof typeof waypoints)[])
+        waypoints[key] = false;
+    build.value = next;
+    message.value = "reset";
+    persist();
+  }
   function updateConfiguration(change: (next: PlannerBuild) => void) {
     const next = cloneBuild(build.value);
     change(next);
@@ -214,6 +232,7 @@ export const usePlannerStore = defineStore("planner", () => {
     message,
     storageAvailable,
     selectClass,
+    resetCharacter,
     updateConfiguration,
     setLevel,
     setMercenaryLevel,

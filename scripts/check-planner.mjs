@@ -789,6 +789,98 @@ try {
     "sorceress",
     "Draft must match its class key"
   );
+  // A full reset clears only the active draft, including starter inventory and
+  // progress, while preserving snapshots, other classes and the native format.
+  await nextTick();
+  const resetFixture = createDefaultBuild("paladin");
+  resetFixture.name = "Reset fixture";
+  resetFixture.level = 99;
+  resetFixture.hardcore = true;
+  resetFixture.gameSave = { mode: "rotw", legacyExpansion: false };
+  resetFixture.attributes.vitality = 30;
+  resetFixture.skills = { 96: 1 };
+  resetFixture.primarySkills = [96];
+  resetFixture.gold = 990000;
+  resetFixture.equipment.head = structuredClone(socketItem);
+  resetFixture.stash = [structuredClone(socketItem)];
+  resetFixture.mercenary = {
+    type: "desert-might",
+    level: 98,
+    equipment: { head: structuredClone(socketItem) },
+  };
+  for (const key of [
+    "notes",
+    "author",
+    "description",
+    "strengths",
+    "weaknesses",
+    "lootFilter",
+  ])
+    resetFixture[key] = "Clear this text";
+  const otherDraft = { ...createDefaultBuild("sorceress"), name: "Other draft" };
+  const snapshots = [
+    { id: "reset-snapshot", savedAt: "2026-11-20T12:00:00Z", build: resetFixture },
+  ];
+  memory.set(
+    "blizzless-planner-v1",
+    JSON.stringify({
+      active: "paladin",
+      defaultInventoryVersion: 1,
+      drafts: { paladin: resetFixture, sorceress: otherDraft },
+      saved: snapshots,
+    })
+  );
+  setActivePinia(createPinia());
+  const resetStore = usePlannerStore();
+  resetStore.resetCharacter();
+  assert.equal(resetStore.build.classId, "paladin");
+  assert.equal(resetStore.build.level, 90);
+  assert.equal(resetStore.build.difficulty, "normal");
+  assert.equal(resetStore.build.hardcore, true);
+  assert.deepEqual(resetStore.build.gameSave, resetFixture.gameSave);
+  assert.equal(spentAttributes(resetStore.build), 0);
+  assert.equal(spentSkills(resetStore.build), 0);
+  assert.deepEqual(resetStore.build.equipment, {});
+  assert.deepEqual(resetStore.build.charms, []);
+  assert.deepEqual(resetStore.build.stash, []);
+  assert.deepEqual(resetStore.build.primarySkills, []);
+  assert.equal(resetStore.build.gold, 0);
+  assert.deepEqual(resetStore.build.mercenary, {
+    type: "none",
+    level: 90,
+    equipment: {},
+  });
+  for (const key of [
+    "name",
+    "notes",
+    "author",
+    "description",
+    "strengths",
+    "weaknesses",
+    "lootFilter",
+  ])
+    assert.equal(resetStore.build[key], "");
+  for (const progress of [
+    ...Object.values(resetStore.build.quests),
+    ...Object.values(resetStore.build.waypoints),
+  ])
+    assert(Object.values(progress).every((value) => value === false));
+  assert.deepEqual(JSON.parse(JSON.stringify(resetStore.saved)), snapshots);
+  assert.deepEqual(JSON.parse(JSON.stringify(resetStore.drafts.sorceress)), otherDraft);
+  const blank = JSON.parse(JSON.stringify(resetStore.build));
+  assert.deepEqual(parseBuild(blank), blank);
+  resetStore.selectClass("sorceress");
+  assert.equal(resetStore.build.name, "Other draft");
+  resetStore.selectClass("paladin");
+  assert.deepEqual(JSON.parse(JSON.stringify(resetStore.build)), blank);
+  await nextTick();
+  setActivePinia(createPinia());
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(usePlannerStore().build)),
+    blank,
+    "Reset persists across reloads without restoring starter charms"
+  );
+  assert.deepEqual(JSON.parse(JSON.stringify(usePlannerStore().saved)), snapshots);
   console.log(
     "Planner checks passed: Blizzless 1.3.2, 8 classes, 240 skills, 240 icons, server dependencies and attributes, 105 runeword templates, budgets, swap, charms, validated imports and persistence."
   );
