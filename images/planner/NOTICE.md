@@ -241,3 +241,12 @@ https://maxroll.gg/d2/d2planner
   `gem/bloodstone`, and `quest/ceremonial_claws`. The corresponding original
   RGBA sprites are decoded to PNG without changing pixels. Source hashes are
   pinned in `src/shared/planner-native-art.json` (manifest 1795131992295).
+
+- Container artwork audited 2026-11-20: all 68 enabled `bg1`/`bg2` unique
+  containers use their own mapping from `data/hd/items/uniques.json` in launcher
+  manifest `1795131992295` (mapping SHA-256
+  `4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072`).
+  Rune/gem stacks, quest/material containers, Worldstone Shards and Ancients
+  containers are lossless PNG conversions of the corresponding original
+  `data/hd/global/ui/items/misc/**/*.sprite` resources. Exact names and blob
+  checksums are pinned in `src/shared/planner-native-art.json`.
