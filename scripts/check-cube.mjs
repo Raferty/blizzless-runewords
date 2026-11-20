@@ -13,13 +13,13 @@ try {
   const { useRecipesStore } = await server.ssrLoadModule("/src/store/recipes.ts");
   const { parseCatalogHash } = await server.ssrLoadModule("/src/utils/navigation.ts");
   const { RUNES } = await server.ssrLoadModule("/src/shared/constants.ts");
-  assert.equal(cubeCatalog.recipes.length, 98);
+  assert.equal(cubeCatalog.recipes.length, 109);
   assert.equal(cubeCatalog.sourceVersionCount, 129);
-  assert.equal(new Set(cubeCatalog.recipes.map((recipe) => recipe.key)).size, 98);
-  assert.equal(cubeCatalog.ingredients.length, 153);
+  assert.equal(new Set(cubeCatalog.recipes.map((recipe) => recipe.key)).size, 109);
+  assert.equal(cubeCatalog.ingredients.length, 173);
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "added").length,
-    57
+    59
   );
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "changed").length,
@@ -27,7 +27,7 @@ try {
   );
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "unchanged").length,
-    12
+    21
   );
   assert.equal(cubeCatalog.recipes.filter((recipe) => recipe.original).length, 31);
   for (const item of cubeCatalog.ingredients.filter((item) =>
@@ -100,11 +100,11 @@ try {
 
   setActivePinia(createPinia());
   const store = useRecipesStore();
-  assert.equal(store.filteredRecipes.length, 98);
+  assert.equal(store.filteredRecipes.length, 109);
   store.toggleStatus("added");
-  assert.equal(store.filteredRecipes.length, 57);
+  assert.equal(store.filteredRecipes.length, 59);
   store.toggleStatus("changed");
-  assert.equal(store.filteredRecipes.length, 86, "Statuses combine with OR");
+  assert.equal(store.filteredRecipes.length, 88, "Statuses combine with OR");
   store.resetFilters();
   for (const [material, count, resultRecipe] of [
     ["Horadric Sphere", 27, "hora_sphere"],
@@ -124,7 +124,7 @@ try {
       "Every result must require the selected material"
     );
     store.toggleMaterial(material);
-    assert.equal(store.filteredRecipes.length, 98, "Toggle material off");
+    assert.equal(store.filteredRecipes.length, 109, "Toggle material off");
   }
   store.toggleMaterial("Horadric Sphere");
   store.toggleMaterial("Resplendent Spark");
@@ -150,7 +150,7 @@ try {
   );
   store.resetFilters();
   assert.equal(store.materials.length, 0);
-  assert.equal(store.filteredRecipes.length, 98);
+  assert.equal(store.filteredRecipes.length, 109);
   store.search = "caster helm";
   assert(store.filteredRecipes.some((recipe) => recipe.key === "caster_helm"));
   store.search = "шлем колдуна";
@@ -178,20 +178,34 @@ try {
   store.addTag("recipe", "armor");
   assert.equal(store.filteredRecipes.length, 0, "Recipe tags combine with AND");
   store.resetFilters();
-  assert.equal(store.filteredRecipes.length, 98);
+  assert.equal(store.filteredRecipes.length, 109);
 
+  store.addTag("recipe", "armor");
+  assert.equal(store.filteredRecipes.length, 14);
+  assert(!store.filteredRecipes.some((recipe) => recipe.key === "Amulet of the Sensei"));
+  store.resetFilters();
+  store.addTag("recipe", "amulet");
+  assert.equal(store.filteredRecipes.length, 15);
+  assert(store.filteredRecipes.some((recipe) => recipe.key === "Amulet of the Sensei"));
+  store.resetFilters();
+  assert.deepEqual(find("Amulet of the Sensei").tags, ["amulet"]);
   store.addTag("recipe", "reroll");
-  assert.deepEqual(
-    store.filteredRecipes.map((r) => r.key),
-    ["reroll_unique"]
-  );
+  assert.equal(store.filteredRecipes.length, 10);
+  assert(store.filteredRecipes.some((recipe) => recipe.key === "Mechanic's Weapon"));
+  assert(store.filteredRecipes.some((recipe) => recipe.key === "reroll_unique"));
   store.resetFilters();
   store.addTag("recipe", "sockets");
-  assert.equal(store.filteredRecipes.length, 6);
+  assert.equal(store.filteredRecipes.length, 10);
+  assert(store.filteredRecipes.every((recipe) => recipe.tags.includes("sockets")));
   store.addTag("recipe", "weapon");
   assert.deepEqual(
-    store.filteredRecipes.map((r) => r.key),
-    ["Mechanic's Weapon"]
+    store.filteredRecipes.map((recipe) => recipe.key),
+    [
+      "socket_add_weapon",
+      "socket_reroll_chipped",
+      "socket_reroll_flawless",
+      "socket_reroll_standard",
+    ]
   );
   store.resetFilters();
   store.addTag("recipe", "crafted");
@@ -213,6 +227,62 @@ try {
   );
   store.resetFilters();
 
+  const formula = (key) => find(key).ingredients.map((item) => [item.key, item.count]);
+  assert.deepEqual(formula("socket_add_weapon"), [
+    ["socket_normal_weapon", 1],
+    ["rune_ral", 1],
+    ["rune_amn", 1],
+    ["gem_perfect_amethyst", 1],
+  ]);
+  assert.deepEqual(formula("socket_add_armor"), [
+    ["socket_normal_armor", 1],
+    ["rune_tal", 1],
+    ["rune_thul", 1],
+    ["gem_perfect_topaz", 1],
+  ]);
+  assert.deepEqual(formula("socket_add_helm"), [
+    ["socket_normal_helm", 1],
+    ["rune_ral", 1],
+    ["rune_thul", 1],
+    ["gem_perfect_sapphire", 1],
+  ]);
+  assert.deepEqual(formula("socket_add_shield"), [
+    ["socket_normal_shield", 1],
+    ["rune_tal", 1],
+    ["rune_amn", 1],
+    ["gem_perfect_ruby", 1],
+  ]);
+  assert.deepEqual(formula("socket_add_rare"), [
+    ["socket_rare_item", 1],
+    ["gems", 3],
+    ["stone_of_jordan", 1],
+  ]);
+  assert.deepEqual(formula("socket_clear_hel"), [
+    ["socket_any_item", 1],
+    ["rune_hel", 1],
+    ["misc_town_portal_scroll", 1],
+  ]);
+  assert.deepEqual(formula("socket_recover_um"), [
+    ["socket_non_runeword", 1],
+    ["rune_um", 1],
+    ["misc_town_portal_scroll", 1],
+  ]);
+  assert(find("socket_clear_hel").notes.en.includes("destroyed"));
+  assert(find("socket_recover_um").notes.en.includes("Runewords are excluded"));
+  assert.equal(find("socket_recover_um").result.length, 2);
+  assert.deepEqual(formula("portal_bartuc"), [
+    ["bartuc_scroll", 1],
+    ["bartuc_bloodstone", 1],
+    ["bartuc_demon_paw", 1],
+  ]);
+  assert(find("portal_bartuc").notes.en.includes("Harrogath on Hell"));
+  assert(cubeIngredients.get("armor_to_recharge").image);
+  assert.equal(cubeIngredients.get("any_standard_gem").name.en, "Any Standard Gem");
+  store.addTag("recipe", "event");
+  assert.equal(store.filteredRecipes.length, 4);
+  assert(store.filteredRecipes.some((recipe) => recipe.key === "portal_bartuc"));
+  store.resetFilters();
+
   assert.deepEqual(parseCatalogHash("#/recipes"), { section: "recipes" });
   assert.deepEqual(parseCatalogHash("#/ricepes/stacks"), {
     section: "recipes",
@@ -222,7 +292,7 @@ try {
   });
   assert.deepEqual(parseCatalogHash(""), { section: "runewords" });
   console.log(
-    "Cube checks passed: 98 current recipes, 31 originals, assets, filters, translations and navigation."
+    "Cube checks passed: 109 current recipes, 31 originals, assets, filters, translations and navigation."
   );
 } finally {
   await server.close();

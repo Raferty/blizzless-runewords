@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { augmentNativeCubeRecipes } from "./cube-native-recipes.mjs";
 import { access, mkdir, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -46,7 +47,8 @@ const normalizeRecipe = (item) => ({
   name: localized(item, "name"),
   notes: localized(item, "notes"),
   status: item.status || "unchanged",
-  tags: item.tags || [],
+  // The published API mislabels this crafted amulet as body armor.
+  tags: item.key === "Amulet of the Sensei" ? ["amulet"] : item.tags || [],
   officialVersion: item.officialVersion,
   blizzlessVersion: item.blizzlessVersion,
   ingredients: item.ingredients.map(normalizeItem),
@@ -183,6 +185,7 @@ const catalog = {
   ingredientTags: ingredientTags.map(tag),
   missingImages,
 };
+await augmentNativeCubeRecipes(catalog);
 await writeFile(
   path.join(root, "src/shared/cube-catalog.json"),
   JSON.stringify(catalog, null, 2) + "\n"
@@ -196,5 +199,5 @@ for (let i = 0; i < endpoints.length; i++)
     JSON.stringify(raw[i], null, 2) + "\n"
   );
 console.log(
-  `Cube synced: ${recipes.length} recipes, ${ingredients.length} ingredients, ${imageRequests.size - missingImages.length} images, ${missingImages.length} unavailable source images.`
+  `Cube synced: ${recipes.length} recipes, ${catalog.ingredients.length} ingredients, ${imageRequests.size - missingImages.length} images, ${missingImages.length} unavailable source images.`
 );

@@ -1,56 +1,5 @@
 <template>
   <main class="recipes-page" :aria-label="t('Рецепты Куба', 'Cube recipes')">
-    <div class="recipes-filters">
-      <div
-        class="recipes-filters__status"
-        :aria-label="t('Версия рецепта', 'Recipe version')"
-      >
-        <button :aria-pressed="!recipes.statuses.length" @click="recipes.statuses = []">
-          {{ t("Все", "All") }}</button
-        ><button
-          v-for="status in statuses"
-          :key="status.key"
-          :aria-pressed="recipes.statuses.includes(status.key)"
-          @click="recipes.toggleStatus(status.key)"
-        >
-          {{ status.label }}
-        </button>
-      </div>
-      <div class="recipes-filters__materials">
-        <span>{{ t("Материалы", "Materials") }}</span>
-        <div
-          class="recipes-filters__material-options"
-          role="group"
-          :aria-label="t('Материалы', 'Materials')"
-        >
-          <button
-            v-for="material in cubeMaterials"
-            :key="material.key"
-            :aria-pressed="recipes.materials.includes(material.key)"
-            :title="text(cubeIngredients.get(material.key)?.name ?? material.name)"
-            @click="recipes.toggleMaterial(material.key)"
-          >
-            <img
-              :src="`${base}${cubeIngredients.get(material.key)?.image}`"
-              alt=""
-              width="22"
-              height="26"
-            />
-            {{ text(material.name) }}
-          </button>
-        </div>
-      </div>
-      <UiSelect
-        v-model="ingredientTagToAdd"
-        class="recipes-filters__select"
-        :options="ingredientTagOptions"
-        :aria-label="t('Тип ингредиента', 'Ingredient type')"
-        @change="addTag('ingredient', $event)"
-      />
-      <button class="recipes-reset" @click="reset">
-        {{ t("Сбросить всё", "Reset all") }}
-      </button>
-    </div>
     <section
       class="recipe-categories"
       :aria-label="t('Категории рецептов', 'Recipe categories')"
@@ -63,6 +12,9 @@
             "Combine filters. Click again to deselect."
           )
         }}</span>
+        <button class="recipes-reset" @click="reset">
+          <UiIcon name="reset" />{{ t("Сбросить всё", "Reset all") }}
+        </button>
       </div>
       <div
         v-for="group in categoryGroups"
@@ -102,17 +54,45 @@
           </button>
         </div>
       </div>
-    </section>
-    <div v-if="activeTags.length" class="recipes-active">
-      <button
-        v-for="tag in activeTags"
-        :key="`${tag.kind}-${tag.key}`"
-        :aria-label="`${t('Убрать фильтр', 'Remove filter')}: ${tag.label}`"
-        @click="recipes.removeTag(tag.kind, tag.key)"
+      <div
+        class="recipe-category-group"
+        role="group"
+        :aria-label="t('Материалы', 'Materials')"
       >
-        {{ tag.label }} <UiIcon name="close" :size="12" />
-      </button>
-    </div>
+        <span class="recipe-category-group__label">{{
+          t("Материалы", "Materials")
+        }}</span>
+        <div class="recipe-category-group__options">
+          <button
+            :aria-pressed="!recipes.materials.length"
+            @click="recipes.materials = []"
+          >
+            {{ t("Все", "All") }}
+          </button>
+          <button
+            v-for="material in cubeMaterials"
+            :key="material.key"
+            :aria-pressed="recipes.materials.includes(material.key)"
+            :title="`${text(cubeIngredients.get(material.key)?.name ?? material.name)} · ${t('Рецептов в каталоге', 'Recipes in catalog')}: ${materialCounts[material.key]}`"
+            @click="recipes.toggleMaterial(material.key)"
+          >
+            <img
+              :src="`${base}${cubeIngredients.get(material.key)?.image}`"
+              alt=""
+              width="24"
+              height="28"
+            />
+            <span>{{ text(material.name) }}</span
+            ><b>{{ materialCounts[material.key] }}</b>
+            <UiIcon
+              v-if="recipes.materials.includes(material.key)"
+              name="check"
+              :size="14"
+            />
+          </button>
+        </div>
+      </div>
+    </section>
     <p class="recipes-count" role="status">
       {{ t("Найдено", "Found") }} <b>{{ visibleRecipes.length }}</b> /
       {{ cubeCatalog.recipes.length }}
@@ -167,12 +147,10 @@ import {
   cubeText,
   matchesRecipeTag,
 } from "@/utils/cube";
-import type { CubeRecipe, CubeStatus, CubeTag } from "@/types/cube";
+import type { CubeRecipe } from "@/types/cube";
 import type { LocalizedName } from "@/types/runeword";
-import type { SelectOption } from "@/types/select";
 import CubeRecipeCard from "@/components/CubeRecipeCard.vue";
 import TheFooter from "@/components/TheFooter.vue";
-import UiSelect from "@/components/ui/UiSelect.vue";
 import UiModal from "@/components/ui/UiModal.vue";
 const props = defineProps<{ search: string }>();
 const emit = defineEmits<{ (event: "update:search", value: string): void }>();
@@ -181,11 +159,6 @@ const recipes = useRecipesStore();
 const t = useText();
 const selected = ref<CubeRecipe | null>(null);
 const text = (value: LocalizedName) => cubeText(value, info.currentLang);
-const statuses = computed<{ key: CubeStatus; label: string }[]>(() => [
-  { key: "added", label: t("Новые", "Added") },
-  { key: "changed", label: t("Переработанные", "Reworked") },
-  { key: "unchanged", label: t("Без изменений", "Unchanged") },
-]);
 watch(
   () => props.search,
   (value) => {
@@ -299,43 +272,14 @@ function toggleCategory(key: string) {
 function clearGroup(keys: string[]) {
   recipes.recipeTags = recipes.recipeTags.filter((key) => !keys.includes(key));
 }
-const ingredientTagToAdd = ref<string | null>(null);
-const tagOptions = (
-  tags: CubeTag[],
-  selectedTags: string[],
-  placeholder: string
-): SelectOption<string | null>[] => [
-  { value: null, label: placeholder },
-  ...tags
-    .filter((tag) => !selectedTags.includes(tag.key))
-    .map((tag) => ({
-      value: tag.key,
-      label: cubeText(tag.name, info.currentLang, t("Прочее", "Other")),
-    }))
-    .sort((a, b) => a.label.localeCompare(b.label, info.currentLang)),
-];
-const ingredientTagOptions = computed(() =>
-  tagOptions(
-    cubeCatalog.ingredientTags,
-    recipes.ingredientTags,
-    t("Тип ингредиента", "Ingredient type")
-  )
+const materialCounts = Object.fromEntries(
+  cubeMaterials.map((material) => [
+    material.key,
+    cubeCatalog.recipes.filter((recipe) =>
+      recipe.ingredients.some((item) => item.key === material.key)
+    ).length,
+  ])
 );
-const activeTags = computed(() => [
-  ...recipes.ingredientTags.map((key) => ({
-    key,
-    kind: "ingredient" as const,
-    label: cubeText(
-      cubeCatalog.ingredientTags.find((tag) => tag.key === key)!.name,
-      info.currentLang,
-      t("Прочее", "Other")
-    ),
-  })),
-]);
-function addTag(kind: "recipe" | "ingredient", key: string | null) {
-  recipes.addTag(kind, key);
-  ingredientTagToAdd.value = null;
-}
 function reset() {
   recipes.resetFilters();
   emit("update:search", "");
@@ -348,49 +292,17 @@ function reset() {
   padding: 0 18px;
   margin: 0 auto;
 }
-.recipes-filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  padding: 14px 0;
-  border-bottom: 1px var(--border-style) var(--color-border);
-}
-.recipes-filters button {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  min-height: 34px;
-  padding: 5px 9px;
-  font-size: 11px;
-}
-.recipes-filters__status,
-.recipes-filters__material-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-.recipes-filters__materials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  font-size: 11px;
-  color: var(--color-muted);
-}
-.recipes-filters__select {
-  width: 180px;
-}
-.recipes-filters .recipes-reset {
-  margin-left: auto;
-  color: var(--color-muted);
-  background: transparent;
-  border: 0;
-}
-.recipes-filters img,
 .recipe-category-group img {
   flex-shrink: 0;
   object-fit: contain;
+}
+.recipes-reset {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 6px 10px;
+  margin-left: auto;
+  font-size: 12px;
 }
 .recipe-categories {
   padding: 16px 0;
@@ -452,18 +364,6 @@ function reset() {
   text-align: center;
   background: rgb(0 0 0 / 25%);
   border-radius: 3px;
-}
-.recipes-active {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 10px;
-}
-.recipes-active button {
-  padding: 3px 7px;
-  font-size: 11px;
-  color: #ffe866;
-  border-color: #756b1f;
 }
 .recipes-count {
   padding: 12px 0;
@@ -537,10 +437,6 @@ function reset() {
   }
   .recipe-category-group__label {
     flex-basis: auto;
-  }
-  .recipes-filters__select {
-    width: calc(50% - 4px);
-    min-width: 135px;
   }
 }
 </style>

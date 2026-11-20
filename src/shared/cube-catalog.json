@@ -894,7 +894,7 @@
         "en": ""
       },
       "status": "added",
-      "tags": ["armor"],
+      "tags": ["amulet"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
@@ -1535,7 +1535,7 @@
         "en": ""
       },
       "status": "added",
-      "tags": ["helm"],
+      "tags": ["helm", "reroll"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
@@ -1586,7 +1586,7 @@
         "en": ""
       },
       "status": "added",
-      "tags": ["shields"],
+      "tags": ["shields", "reroll"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
@@ -1637,7 +1637,7 @@
         "en": ""
       },
       "status": "added",
-      "tags": ["armor"],
+      "tags": ["armor", "reroll"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
@@ -1857,7 +1857,7 @@
         "en": ""
       },
       "status": "added",
-      "tags": ["weapon"],
+      "tags": ["weapon", "reroll"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
@@ -1908,7 +1908,7 @@
         "en": ""
       },
       "status": "added",
-      "tags": ["armor"],
+      "tags": ["armor", "reroll"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
@@ -1959,7 +1959,7 @@
         "en": ""
       },
       "status": "added",
-      "tags": ["helm"],
+      "tags": ["helm", "reroll"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
@@ -7181,6 +7181,583 @@
           }
         }
       ]
+    },
+    {
+      "key": "socket_add_weapon",
+      "name": {
+        "ru": "Пробивка сокетов: оружие",
+        "en": "Add Sockets to Normal Weapon"
+      },
+      "notes": {
+        "ru": "Основа должна поддерживать сокеты. Только обычное качество без сокетов: не превосходное и не низкокачественное. Эфирные основы подходят. Бросок 1–6 ограничивается максимумом основы и ilvl; свойства сохраняются.",
+        "en": "The base must support sockets. Normal quality without sockets only: not superior or low quality. Ethereal bases are allowed. A 1–6 roll is capped by the base and item level; existing properties are preserved."
+      },
+      "status": "unchanged",
+      "tags": ["weapon", "base", "sockets"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socket_normal_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ral",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_amn",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_amethyst",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_weapon_result",
+          "count": 1,
+          "notes": {
+            "ru": "1–6 сокетов, в пределах лимита основы",
+            "en": "1–6 sockets, limited by the base"
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_add_armor",
+      "name": {
+        "ru": "Пробивка сокетов: доспех",
+        "en": "Add Sockets to Normal Body Armor"
+      },
+      "notes": {
+        "ru": "Основа должна поддерживать сокеты. Только обычное качество без сокетов: не превосходное и не низкокачественное. Эфирные основы подходят. Бросок 1–6 ограничивается максимумом основы и ilvl; свойства сохраняются.",
+        "en": "The base must support sockets. Normal quality without sockets only: not superior or low quality. Ethereal bases are allowed. A 1–6 roll is capped by the base and item level; existing properties are preserved."
+      },
+      "status": "unchanged",
+      "tags": ["armor", "base", "sockets"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socket_normal_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_tal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_thul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_topaz",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_armor_result",
+          "count": 1,
+          "notes": {
+            "ru": "1–4 сокетов, в пределах лимита основы",
+            "en": "1–4 sockets, limited by the base"
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_add_helm",
+      "name": {
+        "ru": "Пробивка сокетов: шлем",
+        "en": "Add Sockets to Normal Helm"
+      },
+      "notes": {
+        "ru": "Основа должна поддерживать сокеты. Только обычное качество без сокетов: не превосходное и не низкокачественное. Эфирные основы подходят. Бросок 1–6 ограничивается максимумом основы и ilvl; свойства сохраняются.",
+        "en": "The base must support sockets. Normal quality without sockets only: not superior or low quality. Ethereal bases are allowed. A 1–6 roll is capped by the base and item level; existing properties are preserved."
+      },
+      "status": "unchanged",
+      "tags": ["helm", "base", "sockets"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socket_normal_helm",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ral",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_thul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_sapphire",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_helm_result",
+          "count": 1,
+          "notes": {
+            "ru": "1–3 сокетов, в пределах лимита основы",
+            "en": "1–3 sockets, limited by the base"
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_add_shield",
+      "name": {
+        "ru": "Пробивка сокетов: щит",
+        "en": "Add Sockets to Normal Shield"
+      },
+      "notes": {
+        "ru": "Основа должна поддерживать сокеты. Только обычное качество без сокетов: не превосходное и не низкокачественное. Эфирные основы подходят. Бросок 1–6 ограничивается максимумом основы и ilvl; свойства сохраняются.",
+        "en": "The base must support sockets. Normal quality without sockets only: not superior or low quality. Ethereal bases are allowed. A 1–6 roll is capped by the base and item level; existing properties are preserved."
+      },
+      "status": "unchanged",
+      "tags": ["shields", "base", "sockets"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socket_normal_shield",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_tal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_amn",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_ruby",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_shield_result",
+          "count": 1,
+          "notes": {
+            "ru": "1–4 сокетов, в пределах лимита основы",
+            "en": "1–4 sockets, limited by the base"
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_add_rare",
+      "name": {
+        "ru": "Добавить один сокет в редкий предмет",
+        "en": "Add One Socket to a Rare Item"
+      },
+      "notes": {
+        "ru": "Нужен редкий предмет без сокетов, в котором вообще допустимы сокеты. Кольца и амулеты не подходят. Свойства сохраняются, эфирность сохраняется.",
+        "en": "Requires an unsocketed rare item that can have sockets. Rings and amulets are excluded. Existing properties and ethereal status are preserved."
+      },
+      "status": "unchanged",
+      "tags": ["sockets"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socket_rare_item",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gems",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "stone_of_jordan",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_rare_result",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_reroll_chipped",
+      "name": {
+        "ru": "Перекрафт оружия: треснувшие самоцветы",
+        "en": "Socketed Weapon Reroll: Chipped Gems"
+      },
+      "notes": {
+        "ru": "Создаёт новое магическое оружие той же основы. Старые аффиксы и содержимое сокетов теряются. Эфирность сохраняется. Если основа не поддерживает сокеты, они не появятся.",
+        "en": "Creates a new magic weapon of the same base. Old affixes and socket contents are lost. Ethereal status is preserved. Bases that cannot have sockets receive none."
+      },
+      "status": "unchanged",
+      "tags": ["weapon", "sockets", "reroll"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socket_magic_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "any_chipped_gem",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_magic_result",
+          "count": 1,
+          "notes": {
+            "ru": "1–2 сокета; ilvl 25",
+            "en": "1–2 sockets; ilvl 25"
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_reroll_flawless",
+      "name": {
+        "ru": "Перекрафт оружия: безупречные самоцветы",
+        "en": "Socketed Weapon Reroll: Flawless Gems"
+      },
+      "notes": {
+        "ru": "Создаёт новое магическое оружие той же основы. Старые аффиксы и содержимое сокетов теряются. Эфирность сохраняется. Если основа не поддерживает сокеты, они не появятся.",
+        "en": "Creates a new magic weapon of the same base. Old affixes and socket contents are lost. Ethereal status is preserved. Bases that cannot have sockets receive none."
+      },
+      "status": "unchanged",
+      "tags": ["weapon", "sockets", "reroll"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socket_magic_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "any_flawless_gem",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_magic_result",
+          "count": 1,
+          "notes": {
+            "ru": "1–2 сокета; ilvl 30",
+            "en": "1–2 sockets; ilvl 30"
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_reroll_standard",
+      "name": {
+        "ru": "Перекрафт оружия: обычные самоцветы",
+        "en": "Socketed Weapon Reroll: Standard Gems"
+      },
+      "notes": {
+        "ru": "Создаёт новое магическое оружие той же основы. Старые аффиксы и содержимое сокетов теряются. Эфирность сохраняется. Если основа не поддерживает сокеты, они не появятся.",
+        "en": "Creates a new magic weapon of the same base. Old affixes and socket contents are lost. Ethereal status is preserved. Bases that cannot have sockets receive none."
+      },
+      "status": "unchanged",
+      "tags": ["weapon", "sockets", "reroll"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socketed_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "any_standard_gem",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_magic_result",
+          "count": 1,
+          "notes": {
+            "ru": "1–2 сокета; ilvl 30",
+            "en": "1–2 sockets; ilvl 30"
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_clear_hel",
+      "name": {
+        "ru": "Очистить сокеты через Hel",
+        "en": "Clear Sockets with Hel"
+      },
+      "notes": {
+        "ru": "Предмет и число сокетов сохраняются. Вставленные руны, камни и джевелы уничтожаются. Работает и с рунными словами.",
+        "en": "The item and socket count are preserved. Inserted runes, gems and jewels are destroyed. Runewords are also accepted."
+      },
+      "status": "unchanged",
+      "tags": ["sockets"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "socket_any_item",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_hel",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "misc_town_portal_scroll",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_empty_item",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "socket_recover_um",
+      "name": {
+        "ru": "Извлечь вставки через Um",
+        "en": "Recover Socket Inserts with Um"
+      },
+      "notes": {
+        "ru": "Рецепт Blizzless: предмет сохраняется, руны, камни и джевелы возвращаются. Рунные слова не подходят.",
+        "en": "Blizzless recipe: preserves the item and returns its runes, gems and jewels. Runewords are excluded."
+      },
+      "status": "added",
+      "tags": ["sockets"],
+      "officialVersion": null,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "socket_non_runeword",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_um",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "misc_town_portal_scroll",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "socket_empty_item",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "socket_recovered_inserts",
+          "count": 1,
+          "notes": {
+            "ru": "Все вставки из предмета",
+            "en": "All inserts from the item"
+          }
+        }
+      ]
+    },
+    {
+      "key": "portal_bartuc",
+      "name": {
+        "ru": "Портал к Бартуку",
+        "en": "Portal to Bartuc"
+      },
+      "notes": {
+        "ru": "Сложите три отдельных предмета в кубе в Харрогате на сложности Ад. Открывает вход к Бартуку.",
+        "en": "Transmute the three loose items in Harrogath on Hell difficulty. Opens the entrance to Bartuc."
+      },
+      "status": "added",
+      "tags": ["event"],
+      "officialVersion": null,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "bartuc_scroll",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "bartuc_bloodstone",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "bartuc_demon_paw",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "portal",
+          "count": 1,
+          "notes": {
+            "ru": "Вход к Бартуку",
+            "en": "Entrance to Bartuc"
+          }
+        }
+      ]
     }
   ],
   "ingredients": [
@@ -7218,7 +7795,7 @@
         "en": "Armor to Recharge and Repair"
       },
       "tags": ["armor", "base"],
-      "image": null
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
     },
     {
       "key": "gem_perfect_ruby",
@@ -7646,10 +8223,10 @@
     {
       "key": "any_standard_gem",
       "name": {
-        "ru": "Любой Колотый Камень",
-        "en": "Any Chipped Gem"
+        "ru": "Любой обычный самоцвет",
+        "en": "Any Standard Gem"
       },
-      "tags": ["gem", "6949829eb8b9c05d999f852a"],
+      "tags": ["gem"],
       "image": "images/cube/cfa61f8754cc8fba53.webp"
     },
     {
@@ -8560,6 +9137,186 @@
       },
       "tags": ["armor"],
       "image": "images/cube/346ed36feab7fa08d4.png"
+    },
+    {
+      "key": "socket_normal_weapon",
+      "name": {
+        "ru": "Обычное оружие без сокетов",
+        "en": "Normal Unsocketed Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "socket_normal_armor",
+      "name": {
+        "ru": "Обычный доспех без сокетов",
+        "en": "Normal Unsocketed Body Armor"
+      },
+      "tags": ["armor"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "socket_normal_helm",
+      "name": {
+        "ru": "Обычный шлем без сокетов",
+        "en": "Normal Unsocketed Helm"
+      },
+      "tags": ["helm"],
+      "image": "images/cube/13bb5e457251618cd9.png"
+    },
+    {
+      "key": "socket_normal_shield",
+      "name": {
+        "ru": "Обычный щит без сокетов",
+        "en": "Normal Unsocketed Shield"
+      },
+      "tags": ["shield"],
+      "image": "images/cube/911402a41e2bf3fb51.png"
+    },
+    {
+      "key": "socket_weapon_result",
+      "name": {
+        "ru": "Оружие с сокетами",
+        "en": "Socketed Normal Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "socket_armor_result",
+      "name": {
+        "ru": "Доспех с сокетами",
+        "en": "Socketed Normal Body Armor"
+      },
+      "tags": ["armor"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "socket_helm_result",
+      "name": {
+        "ru": "Шлем с сокетами",
+        "en": "Socketed Normal Helm"
+      },
+      "tags": ["helm"],
+      "image": "images/cube/13bb5e457251618cd9.png"
+    },
+    {
+      "key": "socket_shield_result",
+      "name": {
+        "ru": "Щит с сокетами",
+        "en": "Socketed Normal Shield"
+      },
+      "tags": ["shield"],
+      "image": "images/cube/911402a41e2bf3fb51.png"
+    },
+    {
+      "key": "socket_magic_weapon",
+      "name": {
+        "ru": "Магическое оружие",
+        "en": "Magic Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "socket_magic_result",
+      "name": {
+        "ru": "Магическое оружие с сокетами",
+        "en": "Socketed Magic Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "socket_rare_item",
+      "name": {
+        "ru": "Редкий предмет без сокетов",
+        "en": "Rare Unsocketed Item"
+      },
+      "tags": ["base"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "socket_rare_result",
+      "name": {
+        "ru": "Редкий предмет с одним сокетом",
+        "en": "Rare Item with One Socket"
+      },
+      "tags": ["sockets"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "socket_any_item",
+      "name": {
+        "ru": "Предмет с заполненными сокетами",
+        "en": "Item with Filled Sockets"
+      },
+      "tags": ["sockets"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "socket_non_runeword",
+      "name": {
+        "ru": "Предмет с заполненными сокетами без рунного слова",
+        "en": "Socketed Item without a Runeword"
+      },
+      "tags": ["sockets"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "socket_empty_item",
+      "name": {
+        "ru": "Предмет с пустыми сокетами",
+        "en": "Item with Empty Sockets"
+      },
+      "tags": ["sockets"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "stone_of_jordan",
+      "name": {
+        "ru": "Камень Иордана",
+        "en": "The Stone of Jordan"
+      },
+      "tags": ["ring"],
+      "image": "images/planner/items/misc/ring/stone_of_jordan.png"
+    },
+    {
+      "key": "socket_recovered_inserts",
+      "name": {
+        "ru": "Извлечённые руны, камни и джевелы",
+        "en": "Recovered Runes, Gems and Jewels"
+      },
+      "tags": ["sockets"],
+      "image": "images/planner/items/misc/gem/perfect_diamond1.webp"
+    },
+    {
+      "key": "bartuc_scroll",
+      "name": {
+        "ru": "Потрёпанный свиток",
+        "en": "Tattered Scroll"
+      },
+      "tags": ["regular"],
+      "image": "images/planner/items/misc/quest/tattered_scroll.png"
+    },
+    {
+      "key": "bartuc_bloodstone",
+      "name": {
+        "ru": "Кровавик",
+        "en": "Bloodstone"
+      },
+      "tags": ["regular"],
+      "image": "images/planner/items/misc/gem/bloodstone.png"
+    },
+    {
+      "key": "bartuc_demon_paw",
+      "name": {
+        "ru": "Кисть демона",
+        "en": "Demon Paw"
+      },
+      "tags": ["regular"],
+      "image": "images/planner/items/misc/quest/ceremonial_claws.png"
     }
   ],
   "recipeTags": [
@@ -8723,6 +9480,20 @@
         "ru": "Очищенные Руны",
         "en": "Pure Runes"
       }
+    },
+    {
+      "key": "sockets",
+      "name": {
+        "ru": "Сокеты",
+        "en": "Sockets"
+      }
+    },
+    {
+      "key": "reroll",
+      "name": {
+        "ru": "Перекрафт",
+        "en": "Reroll"
+      }
     }
   ],
   "ingredientTags": [
@@ -8846,5 +9617,24 @@
       }
     }
   ],
-  "missingImages": []
+  "missingImages": [],
+  "nativeRecipeSource": {
+    "url": "https://blizzless.info/api/launcher-mods/blobs/9c433e140eb6f93aab839502bc0da847542686cb492c2ca7bb49a79e145e1fc6",
+    "sha256": "9c433e140eb6f93aab839502bc0da847542686cb492c2ca7bb49a79e145e1fc6",
+    "manifestVersion": 1795131992295,
+    "checkedAt": "2026-11-20",
+    "rows": {
+      "socket_add_weapon": [164],
+      "socket_add_armor": [163],
+      "socket_add_helm": [165],
+      "socket_add_shield": [166],
+      "socket_add_rare": [63, 2330],
+      "socket_reroll_chipped": [185, 2331],
+      "socket_reroll_flawless": [16, 2324],
+      "socket_reroll_standard": [15, 2323],
+      "socket_clear_hel": [179],
+      "socket_recover_um": [2244],
+      "portal_bartuc": [2334]
+    }
+  }
 }

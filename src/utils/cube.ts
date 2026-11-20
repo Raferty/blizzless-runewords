@@ -29,6 +29,7 @@ const uniqueResultKeys = new Set([
   "lich_tal",
   "bonelord_tal",
   "any_unique_item",
+  "stone_of_jordan",
 ]);
 /** Quality is independent of the current interface language. */
 export function cubeResultQuality(
@@ -58,9 +59,9 @@ export function isCubeCraftingResult(
 export function matchesRecipeTag(recipe: CubeRecipe, tag: string): boolean {
   if (tag === "crafted")
     return recipe.result.some((item) => cubeResultQuality(item.key) === "crafted");
-  if (tag === "reroll") return recipe.key === "reroll_unique";
-  if (tag === "sockets")
-    return recipe.result.some((item) => /\bsockets?\b/i.test(item.notes.en));
+  if (tag === "reroll")
+    return recipe.key === "reroll_unique" || recipe.tags.includes("reroll");
+  if (tag === "sockets") return recipe.tags.includes("sockets");
   return recipe.tags.includes(tag);
 }
 export const normalizeCubeSearch = (text: string) =>
