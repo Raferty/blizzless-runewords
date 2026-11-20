@@ -185,11 +185,12 @@ try {
   );
   const bartucItems = bartucCodes.map((code) => supplies.createStashSupply(native, code));
   assert.deepEqual(bartucItems.map(plannerItemDimensions), [
-    [2, 2],
+    [1, 1],
     [1, 1],
     [1, 1],
   ]);
   const bartucSave = await verify(build, bartucItems);
+  assert.equal(data.misc.p14.invfile, "invcscr");
   assert(bartucSave.items.every((item) => !item.simple_item));
   assert(bartucCodes.every((code) => !data.misc[code].questdiffcheck));
   assert.equal(loose.filter((item) => /^r\d\d$/.test(item.baseCode)).length, 33);

@@ -231,7 +231,7 @@ https://maxroll.gg/d2/d2planner
 - `p14` (Tattered Scroll), `p20` (Bloodstone), and `p21` (Demon Paw) are the
   three inputs for the Demon’s Refuge portal, verified in official `cubemain.txt`
   SHA-256 `9c433e140eb6f93aab839502bc0da847542686cb492c2ca7bb49a79e145e1fc6`.
-  They occupy 2×2, 1×1, and 1×1 cells respectively in `misc.txt`.
+  All three occupy 1×1 cells in the current `misc.txt`; the scroll uses `invcscr`.
 - Original Blizzless `items.json` maps them to `quest/tattered_scroll`,
   `gem/bloodstone`, and `quest/ceremonial_claws`. The corresponding original
   RGBA sprites are decoded to PNG without changing pixels. Source hashes are
