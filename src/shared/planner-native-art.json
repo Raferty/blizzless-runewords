@@ -22,6 +22,11 @@
       "checkedAt": "2026-11-20",
       "manifestVersion": 1795131992295,
       "uniqueMappingSha256": "4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072"
+    },
+    "worldstoneShards": {
+      "checkedAt": "2026-11-20",
+      "manifestVersion": 1795131992295,
+      "miscTableSha256": "0464b39f088fedaf9fdec3a8276cc7178e720d9fea3b02c94f31343cd635af60"
     }
   },
   "unique": {
@@ -140,7 +145,12 @@
     "misc/gem/bloodstone": "a402f9f872eac3664cc7cddbb0473556efda0d4169d5e574b4aa520d4f28b4ea",
     "misc/quest/ceremonial_claws": "495c2565867f3c319153aa705359ddb4b090509099f3b4cd26d713bea739906f",
     "armor/helmet/bloodforged_helm": "4a00de438ada69ec59faafe3cbd61afd96088257113cfc0582ebc03c39adb235",
-    "armor/armor/bloodforged_armor": "dde2dc0d86f982c7f93c64cd8251a5aa6241dea987c460b56d43c7c35ca90739"
+    "armor/armor/bloodforged_armor": "dde2dc0d86f982c7f93c64cd8251a5aa6241dea987c460b56d43c7c35ca90739",
+    "misc/shard/cont_xa1": "0221892f3b60f16a775fcf6177456057528c051ed382361676eac03e2bf0757e",
+    "misc/shard/cont_xa2": "25514e443a74d336c6d1af0618cee1fef51b26489d457ddf31347e2e7faa6e66",
+    "misc/shard/cont_xa3": "b68f30b43cc35f2aef3c8beded0ca0962d1810c2cf788c7a4f35fa2c73554a95",
+    "misc/shard/cont_xa4": "7d486325c971f52832ace5724c8238ef98942c76a2581035ce4b2fe207148048",
+    "misc/shard/cont_xa5": "c553732849df49eb02f6388cc728edb76b870da0b582bebbc552a1ceab45fe99"
   },
   "externalImages": {
     "misc/body_part/fragment_cold": {
@@ -220,7 +230,12 @@
     "cs2": "misc/charm/talisman",
     "p14": "misc/quest/tattered_scroll",
     "p20": "misc/gem/bloodstone",
-    "p21": "misc/quest/ceremonial_claws"
+    "p21": "misc/quest/ceremonial_claws",
+    "xa1": "misc/shard/cont_xa1",
+    "xa2": "misc/shard/cont_xa2",
+    "xa3": "misc/shard/cont_xa3",
+    "xa4": "misc/shard/cont_xa4",
+    "xa5": "misc/shard/cont_xa5"
   },
   "imageOverrides": {
     "Harlequin Crest": "images/planner/items/armor/helmet/harlequin_crest.png",

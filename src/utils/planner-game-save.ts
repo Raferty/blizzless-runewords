@@ -25,7 +25,7 @@ import type { ClassId, EquipmentSlot, PlannerBuild, PlannerItem } from "@/types/
 
 import { affixStats, parseAffixes, restoreMagicAffixes } from "./planner-affixes";
 import { layoutStashItems } from "./planner-stash";
-import { isContainerBase, isTome } from "./planner-item-art";
+import { isContainerBase, isTome, isWorldstoneShard } from "./planner-item-art";
 import {
   baseSupportsSockets,
   magicSocketJewels,
@@ -663,7 +663,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const supply = stashSupplies[code];
     if (supply)
       return (
-        entry.owner === "stash" &&
+        (entry.owner === "stash" ||
+          (entry.owner === "charm" && isWorldstoneShard(code) && entry.height === 1)) &&
         entry.item.quality === (supply.catalogId ? "unique" : "normal") &&
         (!supply.catalogId ||
           !entry.item.catalogId ||

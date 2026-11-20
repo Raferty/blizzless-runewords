@@ -31,7 +31,7 @@ import {
   itemSkillClass,
 } from "./planner-properties";
 import { craftDefinition } from "./planner-crafts";
-import { isTome } from "./planner-item-art";
+import { isTome, isWorldstoneShard } from "./planner-item-art";
 
 export function createBuild(classId: ClassId = "sorceress"): PlannerBuild {
   return {
@@ -666,6 +666,8 @@ export function parseBuild(value: unknown): PlannerBuild {
       build.charms.some((c) => c.id === charm.id) ||
       (charm.baseCode === "box" && charm.height !== 2) ||
       (isTome(charm.baseCode) && charm.height !== 2) ||
+      (isWorldstoneShard(charm.baseCode) &&
+        (charm.height !== 1 || charm.quality !== "normal")) ||
       (charm.baseCode === "cs2" && charm.height !== 1) ||
       (charm.baseCode === "cm4" && charm.height !== 3) ||
       !charmFits(

@@ -1,7 +1,12 @@
 import { stashItemLimit } from "@/shared/planner";
 import type { PlannerBuild, PlannerItem } from "@/types/planner";
 import { charmFits, inventoryWidth, parsePlannerItem } from "./planner";
-import { plannerItemDimensions, plannerItemIdentity, isTome } from "./planner-item-art";
+import {
+  plannerItemDimensions,
+  plannerItemIdentity,
+  isTome,
+  isWorldstoneShard,
+} from "./planner-item-art";
 import { gridItemCells, layoutStashItems, stashSize } from "./planner-stash";
 
 export type ItemSource =
@@ -18,6 +23,7 @@ export function inventoryItemSize(item: PlannerItem): [number, number] | undefin
   const code = plannerItemIdentity(item).baseCode;
   if (code === "box") return [2, 2];
   if (isTome(code)) return [1, 2];
+  if (isWorldstoneShard(code)) return [1, 1];
   if (code === "cm4") return [1, 3];
   if (code === "cs2") return [3, 1];
   if (code && /^cm[123]$/.test(code)) return [1, Number(code[2])];

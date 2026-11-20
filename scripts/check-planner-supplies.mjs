@@ -18,9 +18,12 @@ try {
   const { createItemCatalog } = await server.ssrLoadModule(
     "/src/utils/planner-item-catalog.ts"
   );
-  const { plannerItemImage, plannerItemDimensions } = await server.ssrLoadModule(
-    "/src/utils/planner-item-art.ts"
-  );
+  const {
+    plannerItemImage,
+    plannerItemDimensions,
+    worldstoneShardCodes,
+    isWorldstoneShard,
+  } = await server.ssrLoadModule("/src/utils/planner-item-art.ts");
   const { createGameSaveExporter, gameSaveEntries, saveChecksum } =
     await server.ssrLoadModule("/src/utils/planner-game-save.ts");
   const bytes = await readFile("public/data/planner-save/data.json");
@@ -161,7 +164,7 @@ try {
     assert(plannerItemDimensions(item), `${code} has dimensions`);
     for (const owner of ["hero", "mercenary", "charm"])
       assert(
-        !native
+        native
           .choices(
             {
               key: "blocked",
@@ -172,12 +175,115 @@ try {
             },
             build
           )
-          .some((row) => row.base === code),
-        `${code} is stash only`
+          .some((row) => row.base === code) ===
+          (owner === "charm" && isWorldstoneShard(code)),
+        `${code}: only shards may also be carried in inventory`
       );
     return item;
   });
   for (let i = 0; i < loose.length; i += 50) await verify(build, loose.slice(i, i + 50));
+  const { inventoryItemSize, moveItem } = await server.ssrLoadModule(
+    "/src/utils/planner-item-movement.ts"
+  );
+  const shards = worldstoneShardCodes.map((code) =>
+    supplies.createStashSupply(native, code)
+  );
+  assert.equal(
+    new Set(shards.map(plannerItemImage)).size,
+    5,
+    "Five distinct native shard sprites"
+  );
+  const inventoryBuild = planner.parseBuild({
+    ...build,
+    charms: shards.map((item, i) => ({
+      ...item,
+      id: `shard-${i}`,
+      position: i,
+      height: 1,
+    })),
+  });
+  assert.deepEqual(
+    planner.decodeBuild(planner.encodeBuild(inventoryBuild)),
+    inventoryBuild
+  );
+  for (const height of [1, 2, 3]) {
+    const inventoryCatalog = createItemCatalog(
+      native,
+      build,
+      { key: "inventory", owner: "charm", height },
+      []
+    );
+    for (const item of shards) {
+      assert(
+        inventoryCatalog.items.some((row) => row.bases.includes(item.baseCode)),
+        "Shard is discoverable in inventory picker"
+      );
+      assert.deepEqual(inventoryItemSize(item), [1, 1]);
+      assert.deepEqual(plannerItemDimensions(item), [1, 1]);
+      assert.equal(
+        native
+          .choices({ key: "inventory", owner: "charm", height, item }, build)
+          .some((row) => row.base === item.baseCode),
+        height === 1
+      );
+    }
+  }
+  const inventoryChoices = Object.fromEntries(
+    gameSaveEntries(inventoryBuild).map((entry) => [
+      entry.key,
+      native.defaultChoice(entry, inventoryBuild),
+    ])
+  );
+  const shardOutput = await native.exportCharacter(inventoryBuild, {
+    name: "ShardTest",
+    choices: inventoryChoices,
+    rolls: {},
+  });
+  const shardParsed = await read(shardOutput, constants, {
+    disableItemEnhancements: true,
+    extendedStash: true,
+  });
+  assert.deepEqual(
+    shardParsed.items.map((item) => [
+      item.type,
+      item.alt_position_id,
+      item.position_x,
+      item.position_y,
+    ]),
+    worldstoneShardCodes.map((code, i) => [code, 1, i, 0])
+  );
+  const shardImported = native.importCharacter(shardOutput);
+  assert.deepEqual(
+    shardImported.charms.map((item) => [item.baseCode, item.height, item.position]),
+    worldstoneShardCodes.map((code, i) => [code, 1, i])
+  );
+  for (const height of [2, 3])
+    assert.throws(() =>
+      planner.parseBuild({
+        ...inventoryBuild,
+        charms: [{ ...inventoryBuild.charms[0], height }],
+      })
+    );
+  assert.throws(() =>
+    planner.parseBuild({
+      ...inventoryBuild,
+      charms: [{ ...inventoryBuild.charms[0], quality: "magic" }],
+    })
+  );
+  const moved = structuredClone(inventoryBuild);
+  assert(
+    moveItem(
+      moved,
+      { owner: "inventory", id: "shard-0" },
+      { owner: "stash", position: 0 }
+    )
+  );
+  assert(
+    moveItem(moved, { owner: "stash", index: 0 }, { owner: "inventory", position: 9 })
+  );
+  assert.equal(moved.stash.length, 0);
+  assert.equal(moved.charms.find((item) => item.baseCode === "xa1").position, 9);
+  saves++;
   const bartucCodes = ["p14", "p20", "p21"];
   assert.deepEqual(
     supplies.stashKits.find((kit) => kit.id === "bartuc").codes,

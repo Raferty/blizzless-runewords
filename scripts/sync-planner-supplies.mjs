@@ -43,25 +43,27 @@ const name = (code) => strings.get(all[code].namestr) || all[code].name;
 const supplies = {};
 for (const code of Object.keys(data.misc)) {
   const t = types(code);
-  const category = t.has("rune")
-    ? "rune"
-    : t.has("gem")
-      ? "gem"
-      : /^(?:cr[123]|jwd)$/.test(code)
-        ? "material"
-        : /^(?:toa|tes|ceh|bet|fed|dhn|bey|mbr|qey|qhr|qbr|ua[1-5]|pk[1-3]|p14|p20|p21)$/.test(
-              code
-            )
-          ? "ques"
-          : /^rv[sl]$/.test(code)
-            ? "rpot"
-            : t.has("poti") && data.misc[code].spawnable
-              ? "poti"
-              : ["tsc", "isc"].includes(code)
-                ? "scro"
-                : ["aqv", "cqv"].includes(code)
-                  ? "ammo"
-                  : undefined;
+  const category = /^xa[1-5]$/.test(code)
+    ? "terrt"
+    : t.has("rune")
+      ? "rune"
+      : t.has("gem")
+        ? "gem"
+        : /^(?:cr[123]|jwd)$/.test(code)
+          ? "material"
+          : /^(?:toa|tes|ceh|bet|fed|dhn|bey|mbr|qey|qhr|qbr|ua[1-5]|pk[1-3]|p14|p20|p21)$/.test(
+                code
+              )
+            ? "ques"
+            : /^rv[sl]$/.test(code)
+              ? "rpot"
+              : t.has("poti") && data.misc[code].spawnable
+                ? "poti"
+                : ["tsc", "isc"].includes(code)
+                  ? "scro"
+                  : ["aqv", "cqv"].includes(code)
+                    ? "ammo"
+                    : undefined;
   if (category) supplies[code] = { name: name(code), category };
 }
 // Quest equipment really uses UniqueItems rows, including the completed weapons.

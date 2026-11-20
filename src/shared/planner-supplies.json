@@ -409,6 +409,26 @@
       "name": "Festering Essence of Destruction",
       "category": "ques"
     },
+    "xa1": {
+      "name": "Western Worldstone Shard",
+      "category": "terrt"
+    },
+    "xa2": {
+      "name": "Eastern Worldstone Shard",
+      "category": "terrt"
+    },
+    "xa3": {
+      "name": "Southern Worldstone Shard",
+      "category": "terrt"
+    },
+    "xa4": {
+      "name": "Deep Worldstone Shard",
+      "category": "terrt"
+    },
+    "xa5": {
+      "name": "Northern Worldstone Shard",
+      "category": "terrt"
+    },
     "ua1": {
       "name": "Talic's Anguish",
       "category": "ques"

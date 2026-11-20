@@ -58,6 +58,11 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   (2026-10-28). Original 99×196 RGBA pixels are losslessly encoded as PNG.
   SHA-256 values and the explicit `ua1`–`ua5` base mapping are maintained by
   `scripts/sync-planner-items.mjs`.
+- `items/misc/shard/cont_xa1.png` through `cont_xa5.png`: the five Worldstone
+  Shards for acts I–V, checked 2026-11-20 against launcher manifest
+  `1795131992295`. Native paths: `data/hd/global/ui/items/misc/shard/cont_xaN.sprite`.
+  Original 98×98 RGBA pixels are losslessly encoded as PNG. Base codes `xa1`–`xa5`
+  and SHA-256 values are pinned in `src/shared/planner-native-art.json`.
 - RotW artwork corrected 2026-10-28: Hellwarden's Will and Measured Wrath use
   `armor/helmet/unique_warlock_helm.webp` and `armor/grimoires/measured_wrath.webp`
   from the same LootCube image source. Stable unique names take precedence over

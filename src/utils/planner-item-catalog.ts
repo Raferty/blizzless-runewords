@@ -152,6 +152,7 @@ export const itemCategories = [
   { code: "poti", group: "other", ru: "Зелья", en: "Potions" },
   { code: "scro", group: "other", ru: "Свитки", en: "Scrolls" },
   { code: "ammo", group: "other", ru: "Боеприпасы", en: "Ammunition" },
+  { code: "terrt", group: "other", ru: "Осколки Камня Мира", en: "Worldstone Shards" },
   { code: "ques", group: "other", ru: "Квестовые предметы", en: "Quest Items" },
 ] as const;
 

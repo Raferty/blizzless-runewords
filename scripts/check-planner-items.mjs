@@ -693,6 +693,11 @@ try {
     "cm3",
     "ibk",
     "tbk",
+    "xa1",
+    "xa2",
+    "xa3",
+    "xa4",
+    "xa5",
   ]);
   const crafted = {
     name: "Custom craft",
