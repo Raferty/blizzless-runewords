@@ -74,6 +74,12 @@ export const stashKits = [
     en: "Quest set · Act III",
     codes: ["qey", "qhr", "qbr", "qf1", "qf2"],
   },
+  {
+    id: "worldstone-shards",
+    ru: "Шарды актов I–V",
+    en: "Act I–V Worldstone Shards",
+    codes: ["xa1", "xa2", "xa3", "xa4", "xa5"],
+  },
 ] as const;
 
 /** A physical loose item, never a similarly named stack container. */

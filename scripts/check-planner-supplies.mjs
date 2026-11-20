@@ -326,6 +326,10 @@ try {
     "bey",
     "mbr",
   ]);
+  assert.deepEqual(
+    supplies.stashKits.find((kit) => kit.id === "worldstone-shards").codes,
+    ["xa1", "xa2", "xa3", "xa4", "xa5"]
+  );
   assert(
     !supplies.recipeInputs["Envenomed Dagger"],
     "disabled recipes cannot add ingredients"
