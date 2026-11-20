@@ -15,6 +15,15 @@
         <UiIcon name="edit" /> {{ t("Редактировать", "Edit") }}
       </button>
       <button
+        v-if="cloneable"
+        type="button"
+        role="menuitem"
+        tabindex="-1"
+        @click="$emit('clone')"
+      >
+        <UiIcon name="copy" /> {{ t("Клонировать", "Clone") }}
+      </button>
+      <button
         type="button"
         role="menuitem"
         tabindex="-1"
@@ -38,10 +47,17 @@ import {
 } from "vue";
 import { useText } from "@/composables/useText";
 
-const props = defineProps<{ id: string; name: string; x: number; y: number }>();
+const props = defineProps<{
+  id: string;
+  name: string;
+  x: number;
+  y: number;
+  cloneable?: boolean;
+}>();
 const emit = defineEmits<{
   edit: [event: MouseEvent];
   remove: [];
+  clone: [];
   close: [restoreFocus: boolean];
 }>();
 const t = useText();

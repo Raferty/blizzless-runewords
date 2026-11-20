@@ -85,8 +85,10 @@
             :fallback-base="`cm${charm.height}`"
             compact
             :aria-label="charm.name"
+            cloneable
             @click="$emit('charm', charm.position, charm.id)"
             @remove="removeCharm(charm.id)"
+            @clone="store.duplicateItem({ owner: 'inventory', id: charm.id })"
             @dragstart="start($event, { owner: 'inventory', id: charm.id })"
             @dragend="end"
           />

@@ -87,7 +87,7 @@
       </div>
       <div class="planner-item-results" :aria-label="t('Список предметов', 'Item list')">
         <button
-          v-for="entry in filtered"
+          v-for="entry in visibleItems"
           :key="entry.id"
           type="button"
           class="planner-item-result"
@@ -114,13 +114,20 @@
       </div>
       <div class="planner-item-browser-footer">
         <span>{{ t("Найдено", "Found") }}: {{ filtered.length }}</span>
+        <button
+          v-if="visibleItems.length < filtered.length"
+          type="button"
+          @click="visibleCount += 200"
+        >
+          {{ t("Показать ещё", "Show more") }}
+        </button>
       </div>
     </section>
   </div>
 </template>
 <script setup lang="ts">
 import UiIcon from "@/components/ui/UiIcon.vue";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useText } from "@/composables/useText";
 import { useInfoStore } from "@/store";
 import { craftById } from "@/utils/planner-crafts";
@@ -175,6 +182,8 @@ const filters = computed(() => [
   { key: "runeword", ru: "Рунные слова", en: "Runewords" },
   { key: "unique", ru: "Уникальные", en: "Unique Items" },
   { key: "normal", ru: "Основы", en: "Base Items" },
+  { key: "magic", ru: "Магические", en: "Magic Items" },
+  { key: "rare", ru: "Редкие", en: "Rare Items" },
   { key: "crafted", ru: "Крафтовые", en: "Crafted Items" },
   { key: "set", ru: "Комплекты", en: "Set Items" },
   ...(hasUberItems.value ? [{ key: "uber", ru: "Убер-квесты", en: "Uber Quests" }] : []),
@@ -239,5 +248,10 @@ const filtered = computed(() => {
           .includes(term)
       )
   );
+});
+const visibleCount = ref(200);
+const visibleItems = computed(() => filtered.value.slice(0, visibleCount.value));
+watch(filtered, () => {
+  visibleCount.value = 200;
 });
 </script>

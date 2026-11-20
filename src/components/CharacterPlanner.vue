@@ -946,6 +946,14 @@ const messageText = computed(() => {
     ],
     loaded: ["Сборка загружена.", "Build loaded."],
     reset: ["Персонаж сброшен.", "Character reset."],
+    cloned: [
+      "Копия предмета добавлена рядом.",
+      "A copy was added in the nearest empty space.",
+    ],
+    cloneFull: [
+      "Недостаточно свободного места для копии предмета.",
+      "Not enough free space to duplicate this item.",
+    ],
     invalid: [
       "Не удалось загрузить сборку: неверный формат или недопустимые значения.",
       "Cannot load build: invalid format or values.",

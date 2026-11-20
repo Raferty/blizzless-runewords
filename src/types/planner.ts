@@ -97,6 +97,8 @@ export interface PlannerItem {
   socketPropertyValues?: Record<string, Record<string, number>>;
   socketIconIndices?: Record<string, number>;
   affixes?: PlannerAffix[];
+  baseSkills?: Record<string, number>;
+  baseSkillTab?: { tab: number; value: number };
   ethereal?: boolean;
   propertyRoll?: 0 | 1;
   propertyValues?: Record<string, number>;

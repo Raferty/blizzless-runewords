@@ -1,3 +1,4 @@
+import { baseSkillStats } from "./planner-base-skills";
 import combat from "@/shared/planner-combat.json";
 import { equipmentSlots, plannerSkills } from "@/shared/planner";
 import type { ClassId, PlannerBuild, PlannerItem, PlannerSkill } from "@/types/planner";
@@ -143,6 +144,7 @@ export function combatItemStats(
       if (code) addInsert(code, index);
     });
   merge(result, affixStats(item));
+  merge(result, baseSkillStats(item));
   return result;
 }
 

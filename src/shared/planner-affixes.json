@@ -27921,7 +27921,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "scl": {
       "level": 13,
@@ -27929,7 +27930,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "chn": {
       "level": 15,
@@ -27937,7 +27939,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "brs": {
       "level": 18,
@@ -27953,7 +27956,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "plt": {
       "level": 24,
@@ -27961,7 +27965,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "fld": {
       "level": 28,
@@ -27969,7 +27974,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "gth": {
       "level": 32,
@@ -27977,7 +27983,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "ful": {
       "level": 37,
@@ -27985,7 +27992,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "aar": {
       "level": 40,
@@ -27993,7 +28001,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "ltp": {
       "level": 35,
@@ -28289,7 +28298,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "xcl": {
       "level": 43,
@@ -28297,7 +28307,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "xhn": {
       "level": 45,
@@ -28305,7 +28316,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "xrs": {
       "level": 47,
@@ -28321,7 +28333,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "xlt": {
       "level": 52,
@@ -28329,7 +28342,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "xld": {
       "level": 55,
@@ -28337,7 +28351,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "xth": {
       "level": 58,
@@ -28345,7 +28360,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "xul": {
       "level": 61,
@@ -28353,7 +28369,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "xar": {
       "level": 64,
@@ -28361,7 +28378,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "xtp": {
       "level": 60,
@@ -28409,7 +28427,8 @@
       "types": ["shie", "shld", "armo", "seco"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "xts": {
       "level": 56,
@@ -28417,7 +28436,8 @@
       "types": ["shie", "shld", "armo", "seco"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "xlg": {
       "level": 33,
@@ -28569,7 +28589,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dr2": {
       "level": 8,
@@ -28577,7 +28598,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dr3": {
       "level": 16,
@@ -28585,7 +28607,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dr4": {
       "level": 20,
@@ -28593,7 +28616,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dr5": {
       "level": 24,
@@ -28601,7 +28625,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "ba1": {
       "level": 4,
@@ -28609,7 +28634,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "ba2": {
       "level": 8,
@@ -28617,7 +28643,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "ba3": {
       "level": 16,
@@ -28625,7 +28652,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "ba4": {
       "level": 20,
@@ -28633,7 +28661,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "ba5": {
       "level": 24,
@@ -28641,7 +28670,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "pa1": {
       "level": 4,
@@ -28649,7 +28679,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pa2": {
       "level": 8,
@@ -28657,7 +28688,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pa3": {
       "level": 16,
@@ -28665,7 +28697,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pa4": {
       "level": 20,
@@ -28673,7 +28706,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pa5": {
       "level": 24,
@@ -28681,7 +28715,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "ne1": {
       "level": 4,
@@ -28689,7 +28724,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ne2": {
       "level": 8,
@@ -28697,7 +28734,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ne3": {
       "level": 16,
@@ -28705,7 +28744,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ne4": {
       "level": 20,
@@ -28713,7 +28754,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ne5": {
       "level": 24,
@@ -28721,7 +28764,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ci0": {
       "level": 24,
@@ -28849,7 +28894,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "ucl": {
       "level": 73,
@@ -28857,7 +28903,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "uhn": {
       "level": 62,
@@ -28865,7 +28912,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "urs": {
       "level": 75,
@@ -28881,7 +28929,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "ult": {
       "level": 78,
@@ -28889,7 +28938,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "uld": {
       "level": 81,
@@ -28897,7 +28947,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "uth": {
       "level": 82,
@@ -28905,7 +28956,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "uul": {
       "level": 83,
@@ -28913,7 +28965,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "uar": {
       "level": 85,
@@ -28921,7 +28974,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "utp": {
       "level": 84,
@@ -28953,7 +29007,8 @@
       "types": ["shie", "shld", "armo", "seco"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "uit": {
       "level": 72,
@@ -28969,7 +29024,8 @@
       "types": ["shie", "shld", "armo", "seco"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "uts": {
       "level": 84,
@@ -28977,7 +29033,8 @@
       "types": ["shie", "shld", "armo", "seco"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "ulg": {
       "level": 57,
@@ -29129,7 +29186,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dr7": {
       "level": 40,
@@ -29137,7 +29195,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dr8": {
       "level": 46,
@@ -29145,7 +29204,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dr9": {
       "level": 50,
@@ -29153,7 +29213,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dra": {
       "level": 55,
@@ -29161,7 +29222,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "ba6": {
       "level": 33,
@@ -29169,7 +29231,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "ba7": {
       "level": 38,
@@ -29177,7 +29240,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "ba8": {
       "level": 44,
@@ -29185,7 +29249,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "ba9": {
       "level": 49,
@@ -29193,7 +29258,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "baa": {
       "level": 54,
@@ -29201,7 +29267,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "pa6": {
       "level": 35,
@@ -29209,7 +29276,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pa7": {
       "level": 40,
@@ -29217,7 +29285,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pa8": {
       "level": 46,
@@ -29225,7 +29294,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pa9": {
       "level": 51,
@@ -29233,7 +29303,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "paa": {
       "level": 55,
@@ -29241,7 +29312,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "ne6": {
       "level": 33,
@@ -29249,7 +29321,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ne7": {
       "level": 39,
@@ -29257,7 +29331,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ne8": {
       "level": 45,
@@ -29265,7 +29341,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ne9": {
       "level": 49,
@@ -29273,7 +29351,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "nea": {
       "level": 54,
@@ -29281,7 +29361,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "drb": {
       "level": 62,
@@ -29289,7 +29371,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "drc": {
       "level": 69,
@@ -29297,7 +29380,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "drd": {
       "level": 76,
@@ -29305,7 +29389,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "dre": {
       "level": 83,
@@ -29313,7 +29398,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "drf": {
       "level": 85,
@@ -29321,7 +29407,8 @@
       "types": ["pelt", "helm", "armo", "drui", "clas"],
       "classSpecific": "dru",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "dru"
     },
     "bab": {
       "level": 60,
@@ -29329,7 +29416,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "bac": {
       "level": 66,
@@ -29337,7 +29425,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "bad": {
       "level": 73,
@@ -29345,7 +29434,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "bae": {
       "level": 80,
@@ -29353,7 +29443,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "baf": {
       "level": 85,
@@ -29361,7 +29452,8 @@
       "types": ["phlm", "helm", "armo", "barb", "clas"],
       "classSpecific": "bar",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "bar"
     },
     "pab": {
       "level": 63,
@@ -29369,7 +29461,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pac": {
       "level": 70,
@@ -29377,7 +29470,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pad": {
       "level": 74,
@@ -29385,7 +29479,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "pae": {
       "level": 82,
@@ -29393,7 +29488,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "paf": {
       "level": 85,
@@ -29401,7 +29497,8 @@
       "types": ["ashd", "shld", "armo", "seco", "pala", "clas"],
       "classSpecific": "pal",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "neb": {
       "level": 59,
@@ -29409,7 +29506,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "neg": {
       "level": 67,
@@ -29417,7 +29516,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "ned": {
       "level": 66,
@@ -29425,7 +29526,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "nee": {
       "level": 81,
@@ -29433,7 +29536,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "nef": {
       "level": 85,
@@ -29441,7 +29546,9 @@
       "types": ["head", "shld", "armo", "seco", "necr", "clas"],
       "classSpecific": "nec",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec",
+      "skillTabs": []
     },
     "wa1": {
       "level": 4,
@@ -29449,7 +29556,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wa2": {
       "level": 8,
@@ -29457,7 +29566,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wa3": {
       "level": 16,
@@ -29465,7 +29576,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wa4": {
       "level": 20,
@@ -29473,7 +29586,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wa5": {
       "level": 24,
@@ -29481,7 +29596,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wa6": {
       "level": 33,
@@ -29489,7 +29606,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wa7": {
       "level": 39,
@@ -29497,7 +29616,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wa8": {
       "level": 45,
@@ -29505,7 +29626,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wa9": {
       "level": 49,
@@ -29513,7 +29636,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "waa": {
       "level": 54,
@@ -29521,7 +29646,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wab": {
       "level": 59,
@@ -29529,7 +29656,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wac": {
       "level": 67,
@@ -29537,7 +29666,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wad": {
       "level": 66,
@@ -29545,7 +29676,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "wae": {
       "level": 81,
@@ -29553,7 +29686,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "waf": {
       "level": 85,
@@ -29561,7 +29696,9 @@
       "types": ["grim", "shld", "armo", "seco", "warl", "clas"],
       "classSpecific": "war",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war",
+      "skillTabs": []
     },
     "p01": {
       "level": 72,
@@ -29577,7 +29714,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "p03": {
       "level": 58,
@@ -29609,7 +29747,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "p08": {
       "level": 70,
@@ -29625,7 +29764,8 @@
       "types": ["helm", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "p12": {
       "level": 60,
@@ -29633,7 +29773,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "skillTabs": []
     },
     "p13": {
       "level": 48,
@@ -29641,7 +29782,8 @@
       "types": ["shie", "shld", "armo", "seco"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "p23": {
       "level": 22,
@@ -29649,7 +29791,8 @@
       "types": ["helm", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "p24": {
       "level": 37,
@@ -29657,7 +29800,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "p25": {
       "level": 22,
@@ -29665,7 +29809,8 @@
       "types": ["helm", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "skillTabs": []
     },
     "p26": {
       "level": 85,
@@ -29673,7 +29818,8 @@
       "types": ["tors", "armo"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "skillTabs": []
     },
     "p27": {
       "level": 72,
@@ -31305,7 +31451,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 1
+      "maxSockets": 1,
+      "staffClass": "nec"
     },
     "ywn": {
       "level": 12,
@@ -31313,7 +31460,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 1
+      "maxSockets": 1,
+      "staffClass": "nec"
     },
     "bwn": {
       "level": 18,
@@ -31321,7 +31469,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "gwn": {
       "level": 26,
@@ -31329,7 +31478,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "clb": {
       "level": 1,
@@ -31345,7 +31495,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "pal"
     },
     "gsc": {
       "level": 15,
@@ -31353,7 +31504,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "pal"
     },
     "wsp": {
       "level": 21,
@@ -31361,7 +31513,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "staffClass": "pal"
     },
     "spc": {
       "level": 4,
@@ -31537,7 +31690,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 1
+      "maxSockets": 1,
+      "staffClass": "war"
     },
     "dir": {
       "level": 9,
@@ -31545,7 +31699,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 1
+      "maxSockets": 1,
+      "staffClass": "war"
     },
     "kri": {
       "level": 17,
@@ -31553,7 +31708,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "war"
     },
     "bld": {
       "level": 23,
@@ -31561,7 +31717,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "war"
     },
     "tkf": {
       "level": 2,
@@ -31729,7 +31886,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "sor"
     },
     "lst": {
       "level": 8,
@@ -31737,7 +31895,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "sor"
     },
     "cst": {
       "level": 12,
@@ -31745,7 +31904,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor"
     },
     "bst": {
       "level": 17,
@@ -31753,7 +31913,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor"
     },
     "wst": {
       "level": 24,
@@ -31761,7 +31922,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "staffClass": "sor"
     },
     "sbw": {
       "level": 1,
@@ -31913,7 +32075,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 0
+      "maxSockets": 0,
+      "staffClass": "war"
     },
     "g33": {
       "level": 1,
@@ -31921,7 +32084,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 0
+      "maxSockets": 0,
+      "staffClass": "war"
     },
     "leg": {
       "level": 1,
@@ -31953,7 +32117,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 0
+      "maxSockets": 0,
+      "staffClass": "sor"
     },
     "msf": {
       "level": 1,
@@ -31961,7 +32126,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 0
+      "maxSockets": 0,
+      "staffClass": "sor"
     },
     "9ha": {
       "level": 31,
@@ -32049,7 +32215,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 1
+      "maxSockets": 1,
+      "staffClass": "nec"
     },
     "9yw": {
       "level": 38,
@@ -32057,7 +32224,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "9bw": {
       "level": 43,
@@ -32065,7 +32233,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "9gw": {
       "level": 49,
@@ -32073,7 +32242,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "9cl": {
       "level": 30,
@@ -32089,7 +32259,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "pal"
     },
     "9qs": {
       "level": 40,
@@ -32097,7 +32268,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "pal"
     },
     "9ws": {
       "level": 45,
@@ -32105,7 +32277,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "staffClass": "pal"
     },
     "9sp": {
       "level": 32,
@@ -32281,7 +32454,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war"
     },
     "9di": {
       "level": 36,
@@ -32289,7 +32463,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war"
     },
     "9kr": {
       "level": 42,
@@ -32297,7 +32472,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "war"
     },
     "9bl": {
       "level": 46,
@@ -32305,7 +32481,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "war"
     },
     "9tk": {
       "level": 31,
@@ -32473,7 +32650,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "sor"
     },
     "8ls": {
       "level": 35,
@@ -32481,7 +32659,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "sor"
     },
     "8cs": {
       "level": 38,
@@ -32489,7 +32668,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor"
     },
     "8bs": {
       "level": 42,
@@ -32497,7 +32677,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor"
     },
     "8ws": {
       "level": 47,
@@ -32505,7 +32686,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "staffClass": "sor"
     },
     "8sb": {
       "level": 30,
@@ -32705,7 +32887,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "ass"
     },
     "9lw": {
       "level": 45,
@@ -32713,7 +32896,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "ass"
     },
     "9tw": {
       "level": 50,
@@ -32721,7 +32905,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "ass"
     },
     "9qr": {
       "level": 54,
@@ -32729,7 +32914,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "ass"
     },
     "7ar": {
       "level": 59,
@@ -32737,7 +32923,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "ass"
     },
     "7wb": {
       "level": 62,
@@ -32745,7 +32932,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "ass"
     },
     "7xf": {
       "level": 68,
@@ -32753,7 +32941,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "ass"
     },
     "7cs": {
       "level": 73,
@@ -32761,7 +32950,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "ass"
     },
     "7lw": {
       "level": 78,
@@ -32769,7 +32959,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "ass"
     },
     "7tw": {
       "level": 81,
@@ -32777,7 +32968,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "ass"
     },
     "7qr": {
       "level": 85,
@@ -32785,7 +32977,8 @@
       "types": ["h2h2", "h2h", "mele", "weap", "assn", "clas"],
       "classSpecific": "ass",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "ass"
     },
     "7ha": {
       "level": 54,
@@ -32873,7 +33066,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "7yw": {
       "level": 65,
@@ -32881,7 +33075,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "7bw": {
       "level": 75,
@@ -32889,7 +33084,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "7gw": {
       "level": 86,
@@ -32897,7 +33093,8 @@
       "types": ["wand", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "nec"
     },
     "7cl": {
       "level": 52,
@@ -32913,7 +33110,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "pal"
     },
     "7qs": {
       "level": 76,
@@ -32921,7 +33119,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "pal"
     },
     "7ws": {
       "level": 85,
@@ -32929,7 +33128,8 @@
       "types": ["scep", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "staffClass": "pal"
     },
     "7sp": {
       "level": 57,
@@ -33105,7 +33305,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war"
     },
     "7di": {
       "level": 70,
@@ -33113,7 +33314,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "war"
     },
     "7kr": {
       "level": 83,
@@ -33121,7 +33323,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "war"
     },
     "7bl": {
       "level": 85,
@@ -33129,7 +33332,8 @@
       "types": ["knif", "blde", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "war"
     },
     "7tk": {
       "level": 64,
@@ -33297,7 +33501,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 2
+      "maxSockets": 2,
+      "staffClass": "sor"
     },
     "6ls": {
       "level": 66,
@@ -33305,7 +33510,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 3
+      "maxSockets": 3,
+      "staffClass": "sor"
     },
     "6cs": {
       "level": 74,
@@ -33313,7 +33519,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor"
     },
     "6bs": {
       "level": 83,
@@ -33321,7 +33528,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor"
     },
     "6ws": {
       "level": 85,
@@ -33329,7 +33537,8 @@
       "types": ["staf", "rod", "blun", "mele", "weap"],
       "classSpecific": "",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "staffClass": "sor"
     },
     "6sb": {
       "level": 55,
@@ -33433,7 +33642,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "ob2": {
       "level": 8,
@@ -33441,7 +33652,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "ob3": {
       "level": 12,
@@ -33449,7 +33662,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "ob4": {
       "level": 17,
@@ -33457,7 +33672,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "ob5": {
       "level": 24,
@@ -33465,7 +33682,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "am1": {
       "level": 18,
@@ -33473,7 +33692,30 @@
       "types": ["abow", "bow", "miss", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "skillTabs": [
+        {
+          "tab": 0,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 0,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 0,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "am2": {
       "level": 27,
@@ -33481,7 +33723,30 @@
       "types": ["abow", "bow", "miss", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "skillTabs": [
+        {
+          "tab": 0,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 0,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 0,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "am3": {
       "level": 18,
@@ -33489,7 +33754,30 @@
       "types": ["aspe", "spea", "sppl", "mele", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "am4": {
       "level": 27,
@@ -33497,7 +33785,30 @@
       "types": ["aspe", "spea", "sppl", "mele", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "am5": {
       "level": 23,
@@ -33516,7 +33827,30 @@
       ],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 0
+      "maxSockets": 0,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "ob6": {
       "level": 32,
@@ -33524,7 +33858,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "ob7": {
       "level": 37,
@@ -33532,7 +33868,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "ob8": {
       "level": 41,
@@ -33540,7 +33878,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "ob9": {
       "level": 46,
@@ -33548,7 +33888,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "oba": {
       "level": 50,
@@ -33556,7 +33898,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "am6": {
       "level": 39,
@@ -33564,7 +33908,30 @@
       "types": ["abow", "bow", "miss", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "skillTabs": [
+        {
+          "tab": 0,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 0,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 0,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "am7": {
       "level": 47,
@@ -33572,7 +33939,30 @@
       "types": ["abow", "bow", "miss", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "skillTabs": [
+        {
+          "tab": 0,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 0,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 0,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "am8": {
       "level": 43,
@@ -33580,7 +33970,30 @@
       "types": ["aspe", "spea", "sppl", "mele", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "am9": {
       "level": 51,
@@ -33588,7 +34001,30 @@
       "types": ["aspe", "spea", "sppl", "mele", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "ama": {
       "level": 35,
@@ -33607,7 +34043,30 @@
       ],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 0
+      "maxSockets": 0,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "obb": {
       "level": 59,
@@ -33615,7 +34074,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "obc": {
       "level": 67,
@@ -33623,7 +34084,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "obd": {
       "level": 75,
@@ -33631,7 +34094,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "obe": {
       "level": 84,
@@ -33639,7 +34104,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "obf": {
       "level": 85,
@@ -33647,7 +34114,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     },
     "amb": {
       "level": 53,
@@ -33655,7 +34124,30 @@
       "types": ["abow", "bow", "miss", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "skillTabs": [
+        {
+          "tab": 0,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 0,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 0,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "amc": {
       "level": 78,
@@ -33663,7 +34155,30 @@
       "types": ["abow", "bow", "miss", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 5
+      "maxSockets": 5,
+      "skillTabs": [
+        {
+          "tab": 0,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 0,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 0,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "amd": {
       "level": 61,
@@ -33671,7 +34186,30 @@
       "types": ["aspe", "spea", "sppl", "mele", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "ame": {
       "level": 81,
@@ -33679,7 +34217,30 @@
       "types": ["aspe", "spea", "sppl", "mele", "weap", "amaz", "clas"],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 6
+      "maxSockets": 6,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "amf": {
       "level": 65,
@@ -33698,7 +34259,30 @@
       ],
       "classSpecific": "ama",
       "rare": true,
-      "maxSockets": 0
+      "maxSockets": 0,
+      "skillTabs": [
+        {
+          "tab": 2,
+          "min": 1,
+          "max": 1,
+          "level": 1,
+          "requiredLevel": 15
+        },
+        {
+          "tab": 2,
+          "min": 2,
+          "max": 2,
+          "level": 40,
+          "requiredLevel": 30
+        },
+        {
+          "tab": 2,
+          "min": 3,
+          "max": 3,
+          "level": 60,
+          "requiredLevel": 45
+        }
+      ]
     },
     "p04": {
       "level": 82,
@@ -33738,7 +34322,9 @@
       "types": ["orb", "weap", "sorc", "clas"],
       "classSpecific": "sor",
       "rare": true,
-      "maxSockets": 4
+      "maxSockets": 4,
+      "staffClass": "sor",
+      "skillTabs": []
     }
   }
 }

@@ -46,22 +46,76 @@
     "misc/shard/cont_xa3": "b68f30b43cc35f2aef3c8beded0ca0962d1810c2cf788c7a4f35fa2c73554a95",
     "misc/shard/cont_xa4": "7d486325c971f52832ace5724c8238ef98942c76a2581035ce4b2fe207148048",
     "misc/shard/cont_xa5": "c553732849df49eb02f6388cc728edb76b870da0b582bebbc552a1ceab45fe99",
-    "misc/quest/jewel_dis": "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
-    "misc/quest/parts_1": "1aa22d0d5cb9a02f0af89c44f34e6446d68bb9cccff0fff038ce7eec50e6e97e",
-    "misc/quest/parts_2": "fa991baba93ef9cdce010f5029f5b24bd1cad35ccfc617ebfda49bf058f27f3c",
-    "misc/quest/parts_3": "c8f59b04d4b47cfa1d297399291b3d4421696caf033684c49a397c27322e9af9",
-    "misc/quest/cont_rvl": "f8059926648c49c6913b2920ae40a1854082498a577a19df1738a770283e51c7",
-    "misc/key/mephisto_key": "904288fe2a8ef731e175462581565f8752780de3e6104f63901f86001b92af1e",
-    "misc/key/mephisto_key2": "d797b93a1d337236419c8e8021bdd18d58b8e5a9240ed8f15276304b8a144177",
-    "misc/key/mephisto_key3": "e0448767fa53aeb0af1ee5626da09451c907ecf5e1563d09360d923e07c0accf",
+    "misc/rune/amn_rune_stack": "1f51d695cb886e9490efd3dbbe1a2b492dd468d0cb5a3dc344d69910ff94b011",
+    "misc/rune/ber_rune_stack": "c50669de2d21918f8dfb78c0a1ee68ba009f468a3288034c95d11e5394ebbc1d",
+    "misc/rune/cham_rune_stack": "779209e84747441de0ca2ce09ea0a216ccc3117a2a8f5244197532ccb82cca0b",
+    "misc/rune/dol_rune_stack": "7c4467b519b0f12c47c21244afd87470ad08cf2cbf2beb12e59c96857ae8739e",
+    "misc/rune/eld_rune_stack": "d1b417c6c1522790397efe290f3592b3d0e2be2a9b6bdbc62c889c311d476ae2",
+    "misc/rune/el_rune_stack": "864f09321b72e8401e453439d44518a95845ad42ca031abfc979b24abf110eb0",
+    "misc/rune/eth_rune_stack": "582032d78df5dbc16d507cf77d457fc9b6cb442633869d24dce7d17ce7a31249",
+    "misc/rune/fal_rune_stack": "d76c79f1f4e421dd9f31b45f19565d415e6f5ba284b531a158f0d3daf796d9f2",
+    "misc/rune/gul_rune_stack": "2cf898e8be26f0cf815b522f794351c5ecada882162caafa78fc54e259de7dbe",
+    "misc/rune/hel_rune_stack": "edda0fd5779f44768244c995d9d7c1d8abecda42a900cc05e458dd153891fc17",
+    "misc/rune/io_rune_stack": "cdd1369e964f8a70cc2cfaf6434004af0a9e73affd7be8d9f78cea9fc1749ac9",
+    "misc/rune/ist_rune_stack": "4033ec29869fecf248c3644254f7b1455f0d411c66bd01343866fde2bec142ba",
+    "misc/rune/ith_rune_stack": "8e1b99bcd5370381f61b6ea7d37f05a670cc925c1cffbf0b8dc37d3675afcbec",
+    "misc/rune/jah_rune_stack": "008b902e09a3aac80176e80c0f386c6ebdbfae12712ba988d7b0210bc6b656e9",
+    "misc/rune/ko_rune_stack": "825040b65af15019d0cba44dbd51127a4a8adcd26b74ff61af3473173c070366",
+    "misc/rune/lem_rune_stack": "67746cb89dd80e403c7e417f7a18f0f08e1b67d23dfad30b7c5ed685e3d0c268",
+    "misc/rune/lo_rune_stack": "fec9830a19357d29c2024c41c1f3042f6b5b96eb6d02784a1c56d37bdb741a83",
+    "misc/rune/lum_rune_stack": "d4c2118b6abbd022992f33e7126f994ea7babf2759a47f03bc5d90b8cb654018",
+    "misc/rune/mal_rune_stack": "b085b367531b6dcb695a6a295dc9f88a1d05944fa95b34020b13fc96439e21cb",
+    "misc/rune/nef_rune_stack": "895bdef0c48c9d9b3854e9dff1487e362eb96118a4cc6b04635eaa35c42c059f",
+    "misc/rune/ohm_rune_stack": "8d7074caa9120e8364267ef8b183addabcf6c7ed379757f39dcd8f5273859d5b",
+    "misc/rune/ort_rune_stack": "13a57e7083af9018311d1e7e4852cea6761b4257f42f87be324545ebecafc9bc",
+    "misc/rune/pul_rune_stack": "76766516afc443e6edc21e914fdb2f2efef4b62c0e1ce72e59b15a5f7b282466",
+    "misc/rune/ral_rune_stack": "ca77b145c4627f4d18bb44c6e9df474cf3d31b33e17354fef697232481883c2a",
+    "misc/rune/shael_rune_stack": "9fe6bc08ce561a1c2bec8be2589582e1a82f318e62b4599f7068ffb96d07a04a",
+    "misc/rune/sol_rune_stack": "4a17ef6fefd12acc15bd2c03b525d22bae9281f5fa5a55acbcbd7824bf6db0ee",
+    "misc/rune/sur_rune_stack": "cb49cab8e418f68d5f6df587fba032d5b2497937281ec3663fdcf1c7dbf93e53",
+    "misc/rune/tal_rune_stack": "b2375f9d26c1037da482ba6bf7e5016afb310d833d8d923bd50f028dc183b965",
+    "misc/rune/thul_rune_stack": "7674f348a3d37660c96acdd25ec27d1f653cc7c1b53c3185f66ef25e52332b9a",
+    "misc/rune/tir_rune_stack": "d6ba54a6963cc4cdbc5f638b956a6da6a0bee1645604ea109fe225ebdb951353",
+    "misc/rune/um_rune_stack": "2d919072d3c80d41d56d573779b0fafc5acf7c5f0e9803d2ac1e22d74611a2b8",
+    "misc/rune/vex_rune_stack": "e326116ba030204c8191293a8813316ccd4b079994140c9ed5b237966f5384c1",
+    "misc/rune/zod_rune_stack": "ab09d8aee37a2138d273084f40335b34413e482eabfc22b9fbc5a966d1f5c7a8",
+    "misc/gem/perfect_saphire_stack": "e980d1d2e0dca2b681b6ae2fc429d5bf05ba52f58f8f4897065b4bfe02608004",
+    "misc/gem/perfect_emerald_stack": "9c797dea4b59f01d7708e12ccbdd8e05d7ee4cedca1883377047b7353a2ece57",
+    "misc/gem/perfect_ruby_stack": "2273792cf73ac81d5514e5e922efbf82a8e5cf8893a0907cfc02d80da6884e6e",
+    "misc/gem/perfect_amethyst_stack": "2c72449bab7df205073dd77a757900fbee3b45b265933b3dfdc2a5180a6a4cd7",
+    "misc/gem/perfect_diamond_stack": "d3d502cde71973534c1b964816f6dd230f45a1db0e023f87e49d268714d5632c",
+    "misc/gem/perfect_topaz_stack": "8266556c03ef65d451ff3ad0cc9db78eb65d2505425ca6bd06b82ee10d401aa7",
+    "misc/gem/perfect_skull_stack": "8f058fea07c5c100758a972ac25516257fc5389f1a3448a0e2ddb5b8b1c35405",
     "misc/key/mephisto_sta": "4f2ab490fd1f5088e93a753c3bbb2d85934d4341a7a2dfcc8c61f62db3c9449b",
     "misc/key/mephisto_stb": "35cbf85f2269327c9e5a9e8e8afc9181968740cf1138d59e8dba60ac5bc40f6e",
     "misc/key/mephisto_stc": "229fdc3701750f60080481554745da169ca94627c19063808fa9f813d00244bc",
+    "misc/quest/cont_beot": "79b503b0dd97cd513f4ac11a11f604a68c63c9d681833a6f9a7d505800eff203",
+    "misc/quest/cont_bra": "3ebb9d016cdf190a9e4bd7e15f7082c3f1a82710edbe0f40c221880d383d7c5a",
+    "misc/quest/cont_ceoh": "2ab9db1b247176162c185e23684d2602b8811037b88e36aa7113183a2a7229df",
+    "misc/quest/cont_eye": "9e80c8674b3deea3b931c5d35eb11f49a7ab003663b93ebc0c420f6fc9a6c349",
+    "misc/quest/cont_fang": "06516988e9396eb22431c91fd2e768d4ca0810228779e426f76e769ffe027915",
+    "misc/quest/cont_feod": "ebb8a7e8431c6d94ae052bc09167b12e6d746fa48e92b0d8332753e048d412da",
+    "misc/quest/cont_rvl": "f8059926648c49c6913b2920ae40a1854082498a577a19df1738a770283e51c7",
+    "misc/quest/cont_teos": "930af6fe4ebf6142a6bc5d16d1ae84aa54054a725bf678e794e5b06003b671f1",
+    "misc/quest/cont_toa": "157282b823ae8f9ecb51ad28b7b22b11756bfb86420c24f53a4a108a1a9f17b0",
+    "misc/quest/cont_std": "35bb3637b21dac9c83a352a24146919897b73f38d94b2b32f711c1e9f7408999",
+    "misc/quest/cont_cra": "85e4341f05066423db739ba79c340960214154347956e25ca588e8737b61f51a",
+    "misc/quest/cont_crb": "cec60e1e7bdb702c8e442f1986d7c176048375f5d4ecddfc0a39f575f9115e89",
+    "misc/quest/cont_crc": "4e1d45c0ea1c821eff39af98a888899bbc978b3f7ca4e581463d7d853168ffb0",
+    "misc/quest/cont_jwd": "72c550b62d54b674b5f5e0e3de75878f5fb0ccadd1a5ab244ee3b8027a764a97",
+    "misc/quest/cont_sth": "6effa095990b00159870e961722c9169b6d3d39107b0809dfbd1cdc553f174d2",
     "misc/shard/cont_ua1": "568d18fd85b1518503eba4cc333e0e0ae653e275b695ae9357b89d57ef0682f6",
     "misc/shard/cont_ua2": "53895807e7a5c41dc6c1637ddd24ecdbd6b568112b2739108a2a0a37a78a805d",
     "misc/shard/cont_ua3": "985fd7f3fc5818e7fab2077f72a493d6ce06163b6cb8b4e01513ad00d344a5ba",
     "misc/shard/cont_ua4": "f5f7cb88b5fd59ba0e269d1f91d27d2c478f968cb1d680b5755d7911108ec3bf",
-    "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85"
+    "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85",
+    "misc/quest/jewel_dis": "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
+    "misc/quest/parts_1": "1aa22d0d5cb9a02f0af89c44f34e6446d68bb9cccff0fff038ce7eec50e6e97e",
+    "misc/quest/parts_2": "fa991baba93ef9cdce010f5029f5b24bd1cad35ccfc617ebfda49bf058f27f3c",
+    "misc/quest/parts_3": "c8f59b04d4b47cfa1d297399291b3d4421696caf033684c49a397c27322e9af9",
+    "misc/key/mephisto_key": "904288fe2a8ef731e175462581565f8752780de3e6104f63901f86001b92af1e",
+    "misc/key/mephisto_key2": "d797b93a1d337236419c8e8021bdd18d58b8e5a9240ed8f15276304b8a144177",
+    "misc/key/mephisto_key3": "e0448767fa53aeb0af1ee5626da09451c907ecf5e1563d09360d923e07c0accf"
   },
   "nativeArtSource": {
     "checkedAt": "2026-11-19",
@@ -91,6 +145,11 @@
       "checkedAt": "2026-11-20",
       "manifestVersion": 1795131992295,
       "miscTableSha256": "0464b39f088fedaf9fdec3a8276cc7178e720d9fea3b02c94f31343cd635af60"
+    },
+    "containers": {
+      "checkedAt": "2026-11-20",
+      "manifestVersion": 1795131992295,
+      "uniqueMappingSha256": "4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072"
     }
   },
   "variants": {
@@ -5714,46 +5773,206 @@
       "images/planner/items/misc/charm/sunder_lgry.svg",
       "images/planner/items/misc/charm/sunder_lgry.svg"
     ],
-    "unique407": [null, null, null],
-    "unique408": [null, null, null],
-    "unique409": [null, null, null],
-    "unique410": [null, null, null],
-    "unique411": [null, null, null],
-    "unique412": [null, null, null],
-    "unique413": [null, null, null],
-    "unique414": [null, null, null],
-    "unique415": [null, null, null],
-    "unique416": [null, null, null],
-    "unique417": [null, null, null],
-    "unique418": [null, null, null],
-    "unique419": [null, null, null],
-    "unique420": [null, null, null],
-    "unique421": [null, null, null],
-    "unique422": [null, null, null],
-    "unique423": [null, null, null],
-    "unique424": [null, null, null],
-    "unique425": [null, null, null],
-    "unique426": [null, null, null],
-    "unique427": [null, null, null],
-    "unique428": [null, null, null],
-    "unique429": [null, null, null],
-    "unique430": [null, null, null],
-    "unique431": [null, null, null],
-    "unique432": [null, null, null],
-    "unique433": [null, null, null],
-    "unique434": [null, null, null],
-    "unique435": [null, null, null],
-    "unique436": [null, null, null],
-    "unique437": [null, null, null],
-    "unique438": [null, null, null],
-    "unique439": [null, null, null],
-    "unique440": [null, null, null],
-    "unique441": [null, null, null],
-    "unique442": [null, null, null],
-    "unique443": [null, null, null],
-    "unique444": [null, null, null],
-    "unique445": [null, null, null],
-    "unique446": [null, null, null],
+    "unique407": [
+      "images/planner/items/misc/rune/amn_rune_stack.png",
+      "images/planner/items/misc/rune/amn_rune_stack.png",
+      "images/planner/items/misc/rune/amn_rune_stack.png"
+    ],
+    "unique408": [
+      "images/planner/items/misc/rune/ber_rune_stack.png",
+      "images/planner/items/misc/rune/ber_rune_stack.png",
+      "images/planner/items/misc/rune/ber_rune_stack.png"
+    ],
+    "unique409": [
+      "images/planner/items/misc/rune/cham_rune_stack.png",
+      "images/planner/items/misc/rune/cham_rune_stack.png",
+      "images/planner/items/misc/rune/cham_rune_stack.png"
+    ],
+    "unique410": [
+      "images/planner/items/misc/rune/dol_rune_stack.png",
+      "images/planner/items/misc/rune/dol_rune_stack.png",
+      "images/planner/items/misc/rune/dol_rune_stack.png"
+    ],
+    "unique411": [
+      "images/planner/items/misc/rune/eld_rune_stack.png",
+      "images/planner/items/misc/rune/eld_rune_stack.png",
+      "images/planner/items/misc/rune/eld_rune_stack.png"
+    ],
+    "unique412": [
+      "images/planner/items/misc/rune/el_rune_stack.png",
+      "images/planner/items/misc/rune/el_rune_stack.png",
+      "images/planner/items/misc/rune/el_rune_stack.png"
+    ],
+    "unique413": [
+      "images/planner/items/misc/rune/eth_rune_stack.png",
+      "images/planner/items/misc/rune/eth_rune_stack.png",
+      "images/planner/items/misc/rune/eth_rune_stack.png"
+    ],
+    "unique414": [
+      "images/planner/items/misc/rune/fal_rune_stack.png",
+      "images/planner/items/misc/rune/fal_rune_stack.png",
+      "images/planner/items/misc/rune/fal_rune_stack.png"
+    ],
+    "unique415": [
+      "images/planner/items/misc/rune/gul_rune_stack.png",
+      "images/planner/items/misc/rune/gul_rune_stack.png",
+      "images/planner/items/misc/rune/gul_rune_stack.png"
+    ],
+    "unique416": [
+      "images/planner/items/misc/rune/hel_rune_stack.png",
+      "images/planner/items/misc/rune/hel_rune_stack.png",
+      "images/planner/items/misc/rune/hel_rune_stack.png"
+    ],
+    "unique417": [
+      "images/planner/items/misc/rune/io_rune_stack.png",
+      "images/planner/items/misc/rune/io_rune_stack.png",
+      "images/planner/items/misc/rune/io_rune_stack.png"
+    ],
+    "unique418": [
+      "images/planner/items/misc/rune/ist_rune_stack.png",
+      "images/planner/items/misc/rune/ist_rune_stack.png",
+      "images/planner/items/misc/rune/ist_rune_stack.png"
+    ],
+    "unique419": [
+      "images/planner/items/misc/rune/ith_rune_stack.png",
+      "images/planner/items/misc/rune/ith_rune_stack.png",
+      "images/planner/items/misc/rune/ith_rune_stack.png"
+    ],
+    "unique420": [
+      "images/planner/items/misc/rune/jah_rune_stack.png",
+      "images/planner/items/misc/rune/jah_rune_stack.png",
+      "images/planner/items/misc/rune/jah_rune_stack.png"
+    ],
+    "unique421": [
+      "images/planner/items/misc/rune/ko_rune_stack.png",
+      "images/planner/items/misc/rune/ko_rune_stack.png",
+      "images/planner/items/misc/rune/ko_rune_stack.png"
+    ],
+    "unique422": [
+      "images/planner/items/misc/rune/lem_rune_stack.png",
+      "images/planner/items/misc/rune/lem_rune_stack.png",
+      "images/planner/items/misc/rune/lem_rune_stack.png"
+    ],
+    "unique423": [
+      "images/planner/items/misc/rune/lo_rune_stack.png",
+      "images/planner/items/misc/rune/lo_rune_stack.png",
+      "images/planner/items/misc/rune/lo_rune_stack.png"
+    ],
+    "unique424": [
+      "images/planner/items/misc/rune/lum_rune_stack.png",
+      "images/planner/items/misc/rune/lum_rune_stack.png",
+      "images/planner/items/misc/rune/lum_rune_stack.png"
+    ],
+    "unique425": [
+      "images/planner/items/misc/rune/mal_rune_stack.png",
+      "images/planner/items/misc/rune/mal_rune_stack.png",
+      "images/planner/items/misc/rune/mal_rune_stack.png"
+    ],
+    "unique426": [
+      "images/planner/items/misc/rune/nef_rune_stack.png",
+      "images/planner/items/misc/rune/nef_rune_stack.png",
+      "images/planner/items/misc/rune/nef_rune_stack.png"
+    ],
+    "unique427": [
+      "images/planner/items/misc/rune/ohm_rune_stack.png",
+      "images/planner/items/misc/rune/ohm_rune_stack.png",
+      "images/planner/items/misc/rune/ohm_rune_stack.png"
+    ],
+    "unique428": [
+      "images/planner/items/misc/rune/ort_rune_stack.png",
+      "images/planner/items/misc/rune/ort_rune_stack.png",
+      "images/planner/items/misc/rune/ort_rune_stack.png"
+    ],
+    "unique429": [
+      "images/planner/items/misc/rune/pul_rune_stack.png",
+      "images/planner/items/misc/rune/pul_rune_stack.png",
+      "images/planner/items/misc/rune/pul_rune_stack.png"
+    ],
+    "unique430": [
+      "images/planner/items/misc/rune/ral_rune_stack.png",
+      "images/planner/items/misc/rune/ral_rune_stack.png",
+      "images/planner/items/misc/rune/ral_rune_stack.png"
+    ],
+    "unique431": [
+      "images/planner/items/misc/rune/shael_rune_stack.png",
+      "images/planner/items/misc/rune/shael_rune_stack.png",
+      "images/planner/items/misc/rune/shael_rune_stack.png"
+    ],
+    "unique432": [
+      "images/planner/items/misc/rune/sol_rune_stack.png",
+      "images/planner/items/misc/rune/sol_rune_stack.png",
+      "images/planner/items/misc/rune/sol_rune_stack.png"
+    ],
+    "unique433": [
+      "images/planner/items/misc/rune/sur_rune_stack.png",
+      "images/planner/items/misc/rune/sur_rune_stack.png",
+      "images/planner/items/misc/rune/sur_rune_stack.png"
+    ],
+    "unique434": [
+      "images/planner/items/misc/rune/tal_rune_stack.png",
+      "images/planner/items/misc/rune/tal_rune_stack.png",
+      "images/planner/items/misc/rune/tal_rune_stack.png"
+    ],
+    "unique435": [
+      "images/planner/items/misc/rune/thul_rune_stack.png",
+      "images/planner/items/misc/rune/thul_rune_stack.png",
+      "images/planner/items/misc/rune/thul_rune_stack.png"
+    ],
+    "unique436": [
+      "images/planner/items/misc/rune/tir_rune_stack.png",
+      "images/planner/items/misc/rune/tir_rune_stack.png",
+      "images/planner/items/misc/rune/tir_rune_stack.png"
+    ],
+    "unique437": [
+      "images/planner/items/misc/rune/um_rune_stack.png",
+      "images/planner/items/misc/rune/um_rune_stack.png",
+      "images/planner/items/misc/rune/um_rune_stack.png"
+    ],
+    "unique438": [
+      "images/planner/items/misc/rune/vex_rune_stack.png",
+      "images/planner/items/misc/rune/vex_rune_stack.png",
+      "images/planner/items/misc/rune/vex_rune_stack.png"
+    ],
+    "unique439": [
+      "images/planner/items/misc/rune/zod_rune_stack.png",
+      "images/planner/items/misc/rune/zod_rune_stack.png",
+      "images/planner/items/misc/rune/zod_rune_stack.png"
+    ],
+    "unique440": [
+      "images/planner/items/misc/gem/perfect_saphire_stack.png",
+      "images/planner/items/misc/gem/perfect_saphire_stack.png",
+      "images/planner/items/misc/gem/perfect_saphire_stack.png"
+    ],
+    "unique441": [
+      "images/planner/items/misc/gem/perfect_emerald_stack.png",
+      "images/planner/items/misc/gem/perfect_emerald_stack.png",
+      "images/planner/items/misc/gem/perfect_emerald_stack.png"
+    ],
+    "unique442": [
+      "images/planner/items/misc/gem/perfect_ruby_stack.png",
+      "images/planner/items/misc/gem/perfect_ruby_stack.png",
+      "images/planner/items/misc/gem/perfect_ruby_stack.png"
+    ],
+    "unique443": [
+      "images/planner/items/misc/gem/perfect_amethyst_stack.png",
+      "images/planner/items/misc/gem/perfect_amethyst_stack.png",
+      "images/planner/items/misc/gem/perfect_amethyst_stack.png"
+    ],
+    "unique444": [
+      "images/planner/items/misc/gem/perfect_diamond_stack.png",
+      "images/planner/items/misc/gem/perfect_diamond_stack.png",
+      "images/planner/items/misc/gem/perfect_diamond_stack.png"
+    ],
+    "unique445": [
+      "images/planner/items/misc/gem/perfect_topaz_stack.png",
+      "images/planner/items/misc/gem/perfect_topaz_stack.png",
+      "images/planner/items/misc/gem/perfect_topaz_stack.png"
+    ],
+    "unique446": [
+      "images/planner/items/misc/gem/perfect_skull_stack.png",
+      "images/planner/items/misc/gem/perfect_skull_stack.png",
+      "images/planner/items/misc/gem/perfect_skull_stack.png"
+    ],
     "unique447": [
       "images/planner/items/misc/key/mephisto_sta.png",
       "images/planner/items/misc/key/mephisto_sta.png",
@@ -5769,20 +5988,56 @@
       "images/planner/items/misc/key/mephisto_stc.png",
       "images/planner/items/misc/key/mephisto_stc.png"
     ],
-    "unique450": [null, null, null],
-    "unique451": [null, null, null],
-    "unique452": [null, null, null],
-    "unique453": [null, null, null],
-    "unique454": [null, null, null],
-    "unique455": [null, null, null],
+    "unique450": [
+      "images/planner/items/misc/quest/cont_beot.png",
+      "images/planner/items/misc/quest/cont_beot.png",
+      "images/planner/items/misc/quest/cont_beot.png"
+    ],
+    "unique451": [
+      "images/planner/items/misc/quest/cont_bra.png",
+      "images/planner/items/misc/quest/cont_bra.png",
+      "images/planner/items/misc/quest/cont_bra.png"
+    ],
+    "unique452": [
+      "images/planner/items/misc/quest/cont_ceoh.png",
+      "images/planner/items/misc/quest/cont_ceoh.png",
+      "images/planner/items/misc/quest/cont_ceoh.png"
+    ],
+    "unique453": [
+      "images/planner/items/misc/quest/cont_eye.png",
+      "images/planner/items/misc/quest/cont_eye.png",
+      "images/planner/items/misc/quest/cont_eye.png"
+    ],
+    "unique454": [
+      "images/planner/items/misc/quest/cont_fang.png",
+      "images/planner/items/misc/quest/cont_fang.png",
+      "images/planner/items/misc/quest/cont_fang.png"
+    ],
+    "unique455": [
+      "images/planner/items/misc/quest/cont_feod.png",
+      "images/planner/items/misc/quest/cont_feod.png",
+      "images/planner/items/misc/quest/cont_feod.png"
+    ],
     "unique456": [
       "images/planner/items/misc/quest/cont_rvl.png",
       "images/planner/items/misc/quest/cont_rvl.png",
       "images/planner/items/misc/quest/cont_rvl.png"
     ],
-    "unique457": [null, null, null],
-    "unique458": [null, null, null],
-    "unique459": [null, null, null],
+    "unique457": [
+      "images/planner/items/misc/quest/cont_teos.png",
+      "images/planner/items/misc/quest/cont_teos.png",
+      "images/planner/items/misc/quest/cont_teos.png"
+    ],
+    "unique458": [
+      "images/planner/items/misc/quest/cont_toa.png",
+      "images/planner/items/misc/quest/cont_toa.png",
+      "images/planner/items/misc/quest/cont_toa.png"
+    ],
+    "unique459": [
+      "images/planner/items/misc/quest/cont_std.png",
+      "images/planner/items/misc/quest/cont_std.png",
+      "images/planner/items/misc/quest/cont_std.png"
+    ],
     "unique462": [
       "images/planner/items/misc/amulet/seraphs_hymn.png",
       "images/planner/items/misc/amulet/seraphs_hymn.png",
@@ -5818,10 +6073,26 @@
       "images/planner/items/misc/ring/wisp_projector.png",
       "images/planner/items/misc/ring/wisp_projector.png"
     ],
-    "unique469": [null, null, null],
-    "unique470": [null, null, null],
-    "unique471": [null, null, null],
-    "unique472": [null, null, null],
+    "unique469": [
+      "images/planner/items/misc/quest/cont_cra.png",
+      "images/planner/items/misc/quest/cont_cra.png",
+      "images/planner/items/misc/quest/cont_cra.png"
+    ],
+    "unique470": [
+      "images/planner/items/misc/quest/cont_crb.png",
+      "images/planner/items/misc/quest/cont_crb.png",
+      "images/planner/items/misc/quest/cont_crb.png"
+    ],
+    "unique471": [
+      "images/planner/items/misc/quest/cont_crc.png",
+      "images/planner/items/misc/quest/cont_crc.png",
+      "images/planner/items/misc/quest/cont_crc.png"
+    ],
+    "unique472": [
+      "images/planner/items/misc/quest/cont_jwd.png",
+      "images/planner/items/misc/quest/cont_jwd.png",
+      "images/planner/items/misc/quest/cont_jwd.png"
+    ],
     "unique473": [
       "images/planner/items/armor/helmet/cap_hat.webp",
       "images/planner/items/armor/helmet/cap_hat.webp",
@@ -6092,17 +6363,61 @@
       "images/planner/items/misc/ring/pawned_soul.png",
       "images/planner/items/misc/ring/pawned_soul.png"
     ],
-    "unique716": [null, null, null],
-    "unique717": [null, null, null],
-    "unique718": [null, null, null],
-    "unique719": [null, null, null],
-    "unique720": [null, null, null],
-    "unique721": [null, null, null],
-    "unique722": [null, null, null],
-    "unique723": [null, null, null],
-    "unique724": [null, null, null],
-    "unique725": [null, null, null],
-    "unique726": [null, null, null],
+    "unique716": [
+      "images/planner/items/misc/quest/cont_sth.png",
+      "images/planner/items/misc/quest/cont_sth.png",
+      "images/planner/items/misc/quest/cont_sth.png"
+    ],
+    "unique717": [
+      "images/planner/items/misc/shard/cont_xa1.png",
+      "images/planner/items/misc/shard/cont_xa1.png",
+      "images/planner/items/misc/shard/cont_xa1.png"
+    ],
+    "unique718": [
+      "images/planner/items/misc/shard/cont_xa2.png",
+      "images/planner/items/misc/shard/cont_xa2.png",
+      "images/planner/items/misc/shard/cont_xa2.png"
+    ],
+    "unique719": [
+      "images/planner/items/misc/shard/cont_xa3.png",
+      "images/planner/items/misc/shard/cont_xa3.png",
+      "images/planner/items/misc/shard/cont_xa3.png"
+    ],
+    "unique720": [
+      "images/planner/items/misc/shard/cont_xa4.png",
+      "images/planner/items/misc/shard/cont_xa4.png",
+      "images/planner/items/misc/shard/cont_xa4.png"
+    ],
+    "unique721": [
+      "images/planner/items/misc/shard/cont_xa5.png",
+      "images/planner/items/misc/shard/cont_xa5.png",
+      "images/planner/items/misc/shard/cont_xa5.png"
+    ],
+    "unique722": [
+      "images/planner/items/misc/shard/cont_ua1.png",
+      "images/planner/items/misc/shard/cont_ua1.png",
+      "images/planner/items/misc/shard/cont_ua1.png"
+    ],
+    "unique723": [
+      "images/planner/items/misc/shard/cont_ua2.png",
+      "images/planner/items/misc/shard/cont_ua2.png",
+      "images/planner/items/misc/shard/cont_ua2.png"
+    ],
+    "unique724": [
+      "images/planner/items/misc/shard/cont_ua3.png",
+      "images/planner/items/misc/shard/cont_ua3.png",
+      "images/planner/items/misc/shard/cont_ua3.png"
+    ],
+    "unique725": [
+      "images/planner/items/misc/shard/cont_ua4.png",
+      "images/planner/items/misc/shard/cont_ua4.png",
+      "images/planner/items/misc/shard/cont_ua4.png"
+    ],
+    "unique726": [
+      "images/planner/items/misc/shard/cont_ua5.png",
+      "images/planner/items/misc/shard/cont_ua5.png",
+      "images/planner/items/misc/shard/cont_ua5.png"
+    ],
     "unique727": [
       "images/planner/items/weapon/sword/the_patriarch.webp",
       "images/planner/items/weapon/sword/the_patriarch.webp",

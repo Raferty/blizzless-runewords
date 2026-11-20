@@ -699,6 +699,96 @@ try {
     "xa4",
     "xa5",
   ]);
+  const stashCatalog = createItemCatalog(
+    native,
+    build,
+    { key: "stash", owner: "stash" },
+    []
+  );
+  for (const quality of ["magic", "rare"]) {
+    const variants = stashCatalog.items.filter((item) => item.quality === quality);
+    for (const code of ["rin", "amu", "utp", "7cr", "pab", "amc"])
+      assert(
+        variants.some((item) => item.bases.includes(code)),
+        `${quality} ${code} is directly selectable`
+      );
+    for (const code of ["r01", "gpr", "tbk", "box", "xa1", "p14", "rvl"])
+      assert(
+        !variants.some((item) => item.bases.includes(code)),
+        `${code} cannot have ${quality} quality`
+      );
+    assert.equal(new Set(variants.map((item) => item.id)).size, variants.length);
+    assert(variants.every((item) => !item.catalogId && !item.craftId && !item.word));
+  }
+  assert(!charms.items.some((item) => item.quality === "rare"));
+  assert(
+    charms.items.some((item) => item.quality === "magic" && item.bases.includes("cm3"))
+  );
+  const containers = Object.entries(native.gd.uniqueItems).filter(
+    ([, row]) =>
+      ["bg1", "bg2"].includes(row.code) && row.enabled !== 0 && row.spawnable !== 0
+  );
+  assert.equal(containers.length, 68);
+  for (const [id, row] of containers) {
+    const graphic = plannerItemImage({
+      quality: "unique",
+      catalogId: id,
+      baseCode: row.code,
+      name: row.index,
+    });
+    assert(graphic?.endsWith(".png"), `${row.index} has its original container sprite`);
+    const bytes = await readFile(`public/${graphic}`);
+    assert.deepEqual([...bytes.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
+    assert(nativeArt.unique[row.index]);
+  }
+  const { duplicateItem } = await server.ssrLoadModule(
+    "/src/utils/planner-item-movement.ts"
+  );
+  const duplicateBuild = {
+    ...createBuild("paladin"),
+    charms: [],
+    stash: [{ ...enigmaItem, stashPosition: 0, propertyValues: { 1: 123 } }],
+  };
+  assert(duplicateItem(duplicateBuild, { owner: "stash", index: 0 }));
+  assert.equal(duplicateBuild.stash[1].stashPosition, 2);
+  assert.deepEqual(
+    { ...duplicateBuild.stash[1], stashPosition: 0 },
+    duplicateBuild.stash[0]
+  );
+  duplicateBuild.stash[1].propertyValues[1] = 100;
+  assert.equal(
+    duplicateBuild.stash[0].propertyValues[1],
+    123,
+    "Nested rolls are independent"
+  );
+  duplicateBuild.charms = [
+    {
+      name: "Small Charm",
+      quality: "magic",
+      baseCode: "cm1",
+      requiredLevel: 1,
+      notes: "",
+      bonuses: { life: 5 },
+      id: "source",
+      height: 1,
+      position: 0,
+    },
+  ];
+  assert(duplicateItem(duplicateBuild, { owner: "inventory", id: "source" }));
+  assert.equal(duplicateBuild.charms[1].position, 1);
+  assert.notEqual(duplicateBuild.charms[1].id, "source");
+  duplicateBuild.charms = Array.from({ length: 40 }, (_, i) => ({
+    ...duplicateBuild.charms[0],
+    id: String(i),
+    position: i,
+  }));
+  const fullBefore = JSON.stringify(duplicateBuild);
+  assert(!duplicateItem(duplicateBuild, { owner: "inventory", id: "0" }));
+  assert.equal(
+    JSON.stringify(duplicateBuild),
+    fullBefore,
+    "Failed cloning does not mutate the build"
+  );
   const crafted = {
     name: "Custom craft",
     quality: "crafted",

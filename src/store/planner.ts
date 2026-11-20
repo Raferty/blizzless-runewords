@@ -1,6 +1,10 @@
 import { computed, ref, watch } from "vue";
 import { defineStore } from "pinia";
 import { plannerClasses, plannerSkills } from "@/shared/planner";
+import {
+  duplicateItem as duplicateGridItem,
+  type ItemSource,
+} from "@/utils/planner-item-movement";
 import { stageStashItems } from "@/utils/planner-stash";
 import { decodeSharedBuild } from "@/utils/planner-share";
 import {
@@ -111,6 +115,11 @@ export const usePlannerStore = defineStore("planner", () => {
     build.value = next;
     message.value = "reset";
     persist();
+  }
+  function duplicateItem(source: ItemSource) {
+    const copied = duplicateGridItem(build.value, source);
+    message.value = copied ? "cloned" : "cloneFull";
+    return copied;
   }
   function updateConfiguration(change: (next: PlannerBuild) => void) {
     const next = cloneBuild(build.value);
@@ -226,6 +235,7 @@ export const usePlannerStore = defineStore("planner", () => {
     storageAvailable,
     selectClass,
     resetCharacter,
+    duplicateItem,
     updateConfiguration,
     setLevel,
     setMercenaryLevel,

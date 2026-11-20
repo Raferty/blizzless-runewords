@@ -30,6 +30,11 @@ import {
   isClassCharm,
   itemSkillClass,
 } from "./planner-properties";
+import {
+  parseBaseSkills,
+  parseBaseSkillTab,
+  baseSkillStats,
+} from "./planner-base-skills";
 import { craftDefinition } from "./planner-crafts";
 import { isTome, isWorldstoneShard } from "./planner-item-art";
 
@@ -364,15 +369,36 @@ export function buildStats(build: PlannerBuild) {
     attributes: stats,
     bonuses,
     classSkills,
-    treeBonuses: [0, 1, 2].map((tree) =>
-      mods.reduce((sum, mod) => sum + mod.treeBonuses[build.classId][tree], 0)
+    treeBonuses: [0, 1, 2].map(
+      (tree) =>
+        mods.reduce((sum, mod) => sum + mod.treeBonuses[build.classId][tree], 0) +
+        items.reduce(
+          (sum, item) =>
+            sum +
+            (baseSkillStats(item)[
+              `item_addskill_tab#${plannerClasses.findIndex((c) => c.id === build.classId) * 3 + tree}`
+            ] || 0),
+          0
+        )
     ),
     skillBonus: bonuses.allSkills + classSkills,
-    socketSkillBonuses: insertBonuses.reduce<Record<string, number>>((result, insert) => {
-      for (const [id, value] of Object.entries(insert.skillBonuses ?? {}))
-        result[id] = (result[id] ?? 0) + value;
-      return result;
-    }, {}),
+    socketSkillBonuses: insertBonuses.reduce<Record<string, number>>(
+      (result, insert) => {
+        for (const [id, value] of Object.entries(insert.skillBonuses ?? {}))
+          result[id] = (result[id] ?? 0) + value;
+        return result;
+      },
+      Object.fromEntries(
+        items
+          .flatMap((item) => Object.entries(item.baseSkills || {}))
+          .reduce<[string, number][]>((result, [id, value]) => {
+            const old = result.find((row) => row[0] === id);
+            if (old) old[1] += value;
+            else result.push([id, value]);
+            return result;
+          }, [])
+      )
+    ),
     life: Math.floor(
       character.life +
         (build.level - 1) * character.lifePerLevel +
@@ -508,6 +534,10 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       ? {}
       : { runewordId: integer(item.runewordId, 1, 100000) }),
   };
+  if (item.baseSkills !== undefined)
+    result.baseSkills = parseBaseSkills(item.baseSkills, result);
+  if (item.baseSkillTab !== undefined)
+    result.baseSkillTab = parseBaseSkillTab(item.baseSkillTab, result);
   if (item.affixes !== undefined) {
     result.affixes = parseAffixes(item.affixes, result);
     if ((result.sockets ?? 0) < affixSockets(result)) throw new Error("affix sockets");

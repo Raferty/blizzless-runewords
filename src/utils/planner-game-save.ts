@@ -24,6 +24,11 @@ import {
 import type { ClassId, EquipmentSlot, PlannerBuild, PlannerItem } from "@/types/planner";
 
 import { affixStats, parseAffixes, restoreMagicAffixes } from "./planner-affixes";
+import {
+  baseSkillProfile,
+  baseSkillOptions,
+  baseSkillStats,
+} from "./planner-base-skills";
 import { layoutStashItems } from "./planner-stash";
 import { isContainerBase, isTome, isWorldstoneShard } from "./planner-item-art";
 import {
@@ -112,8 +117,7 @@ export interface GameSaveOptions {
   gameMode?: GameSaveMode;
 }
 export type GameSaveMode = "expansion" | "rotw";
-export const defaultGameSaveMode = (classId: ClassId): GameSaveMode =>
-  classId === "warlock" ? "rotw" : "expansion";
+export const defaultGameSaveMode: (classId?: ClassId) => GameSaveMode = () => "rotw";
 export type GameSaveRoll = 0 | 1 | "planned";
 export class GameSaveError extends Error {
   constructor(
@@ -498,6 +502,47 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           }
         }
       }
+      // Separate native base skill mods from the word/craft and random affixes.
+      const profile = baseSkillProfile(item);
+      if (profile) {
+        const reference = itemDefinition(item);
+        const values: Record<string, number> = {};
+        if (reference)
+          for (let index = 1; index <= 12; index++) {
+            const property = gd.properties[String(reference[`prop${index}`])];
+            const range = property && propertyRange(reference, property, index);
+            const value = native.uniqueValues?.[index - 1];
+            if (range && value !== undefined && value >= range.min && value <= range.max)
+              values[index] = value;
+          }
+        const fixed = reference
+          ? definitionStats(
+              reference,
+              native.base,
+              0,
+              values,
+              itemSkillClass(item, build.classId),
+              item.propertyChoices
+            )
+          : {};
+        for (const [key, value] of Object.entries(affixStats(item)))
+          fixed[key] = (fixed[key] || 0) + value;
+        const staff: Record<string, number> = {};
+        for (const skill of baseSkillOptions(item)) {
+          const key = `item_singleskill#${skill.id}`,
+            value = (native.stats[key] || 0) - (fixed[key] || 0);
+          if (Number.isInteger(value) && value >= 1 && value <= 3)
+            staff[skill.id] = value;
+        }
+        if (Object.keys(staff).length <= 3 && Object.keys(staff).length)
+          item.baseSkills = staff;
+        for (const tab of profile.skillTabs) {
+          const key = `item_addskill_tab#${tab.tab}`,
+            value = (native.stats[key] || 0) - (fixed[key] || 0);
+          if (Number.isInteger(value) && value >= tab.min && value <= tab.max)
+            item.baseSkillTab = { tab: tab.tab, value };
+        }
+      }
       const extra = Object.fromEntries(
         Object.entries(native.stats).flatMap(([stat, value]) => {
           if (isProjectedStat(stat)) return [];
@@ -515,6 +560,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           ];
         })
       );
+      for (const [key, value] of Object.entries(baseSkillStats(item)))
+        extra[key] = (extra[key] || 0) - value;
       // d2r-saver adds the implicit blunt-weapon modifier while reading.
       if (baseTypes.has("blun"))
         extra.item_undeaddamage_percent = (extra.item_undeaddamage_percent ?? 0) - 50;
@@ -1539,6 +1586,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         restoreNativeStats(item.stats);
         validateStats(item.stats);
       }
+      for (const [key, value] of Object.entries(
+        baseSkillStats({ ...entry.item, baseCode: choice.base })
+      ))
+        item.stats[key] = (item.stats[key] || 0) + value;
+      validateStats(item.stats);
       items[item.itemId] = item;
       if (item.ethereal && item.defense !== undefined)
         item.defense = Math.floor(item.defense * 1.5);

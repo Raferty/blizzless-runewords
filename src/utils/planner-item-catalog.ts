@@ -13,6 +13,7 @@ import { runewordTemplates } from "./planner-runewords";
 import { plannerClasses } from "@/shared/planner";
 import { plannerCrafts } from "./planner-crafts";
 import { stashSupplies } from "./planner-supplies";
+import { canBeRare, affixFits, itemAffixes } from "./planner-affixes";
 
 export const itemCategories = [
   {
@@ -247,6 +248,22 @@ export function createItemCatalog(
     level: bases.get(base)!.level,
     bases: [base],
   }));
+  for (const quality of ["magic", "rare"] as const) {
+    const seen = new Set<string>();
+    for (const { base } of choices({ ...empty, quality })) {
+      if (seen.has(base) || (quality === "rare" && !canBeRare(base))) continue;
+      const candidate = { ...empty, quality, baseCode: base, itemLevel: 99 };
+      if (!itemAffixes.some((affix) => affixFits(affix, candidate))) continue;
+      seen.add(base);
+      items.push({
+        id: `${quality}:${base}`,
+        name: bases.get(base)!.name,
+        quality,
+        level: bases.get(base)!.level,
+        bases: [base],
+      });
+    }
+  }
   const available = new Set(availableBases.map((row) => row.base));
   for (const craft of plannerCrafts) {
     const codes = [...new Set(craft.variants.flatMap((row) => row.bases))].filter(

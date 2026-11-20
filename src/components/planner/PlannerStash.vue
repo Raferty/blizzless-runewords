@@ -63,8 +63,10 @@
           :requirements="requirements(entry.item)"
           :capacity="entry.size"
           :aria-label="entry.item.name"
+          cloneable
           @click="$emit('edit', entry.index)"
           @remove="remove(entry.index)"
+          @clone="store.duplicateItem({ owner: 'stash', index: entry.index })"
           @dragstart="start($event, { owner: 'stash', index: entry.index })"
           @dragend="end"
         />

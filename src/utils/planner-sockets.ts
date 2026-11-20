@@ -1,3 +1,4 @@
+import { baseSkillRequiredLevel } from "./planner-base-skills";
 import { affixRequiredLevel } from "./planner-affixes";
 import data from "@/shared/planner-sockets.json";
 import { plannerItemIdentity, plannerItemImage } from "./planner-item-art";
@@ -189,6 +190,7 @@ export function itemRequiredLevel(item: PlannerItem): number {
   return Math.max(
     item.requiredLevel,
     affixRequiredLevel(item),
+    baseSkillRequiredLevel(item),
     ...(item.socketedItems ?? []).map((code) =>
       code ? (socketInsertByCode.get(code)?.requiredLevel ?? 1) : 1
     )

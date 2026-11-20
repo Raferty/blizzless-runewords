@@ -256,6 +256,11 @@
               {{ preferredCraftAffixes.join(", ") }}
             </p>
           </section>
+          <PlannerBaseSkillEditor
+            :item="item"
+            @skills="setBaseSkills"
+            @tab="setBaseSkillTab"
+          />
           <PlannerAffixEditor
             v-if="native && editableQuality(item.quality)"
             :item="item"
@@ -380,6 +385,8 @@
   </UiModal>
 </template>
 <script setup lang="ts">
+import PlannerBaseSkillEditor from "./PlannerBaseSkillEditor.vue";
+import { retainBaseSkills } from "@/utils/planner-base-skills";
 import { computed, onMounted, ref, shallowRef, useId, watch } from "vue";
 import PlannerItemBrowser from "./PlannerItemBrowser.vue";
 import PlannerIcon from "./PlannerIcon.vue";
@@ -541,11 +548,20 @@ const editableQualities = computed(() =>
   )
 );
 const affixNotice = ref("");
+function setBaseSkills(value: Record<string, number>) {
+  if (Object.keys(value).length) item.value.baseSkills = value;
+  else delete item.value.baseSkills;
+}
+function setBaseSkillTab(value: PlannerItem["baseSkillTab"]) {
+  if (value) item.value.baseSkillTab = value;
+  else delete item.value.baseSkillTab;
+}
 function updateAffixes(value: PlannerAffix[]) {
   item.value.affixes = value;
   item.value.sockets = Math.max(item.value.sockets ?? 0, affixSockets(item.value));
 }
 function reconcileAffixes() {
+  retainBaseSkills(item.value);
   const previous = item.value.affixes ?? [];
   const next = retainCompatibleAffixes(item.value);
   if (next.length !== previous.length) {

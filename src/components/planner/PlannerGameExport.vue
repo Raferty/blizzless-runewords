@@ -2,6 +2,7 @@
   <UiModal
     :model-value="true"
     closable
+    :close-on-backdrop="false"
     :label="t('Экспорт персонажа', 'Export character')"
     @close="$emit('close')"
   >
@@ -181,10 +182,10 @@ const gameMode = ref(
   store.build.gameSave?.mode ?? defaultGameSaveMode(store.build.classId)
 );
 const gameModes = computed<{ value: GameSaveMode; label: string }[]>(() => [
+  { value: "rotw", label: "Reign of the Warlock" },
   ...(store.build.classId === "warlock"
     ? []
     : [{ value: "expansion" as const, label: "Expansion (Lord of Destruction)" }]),
-  { value: "rotw", label: "Reign of the Warlock" },
 ]);
 const name = ref(
   validCharacterName(store.build.name)

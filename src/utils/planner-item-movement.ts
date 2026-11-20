@@ -117,3 +117,50 @@ export function moveItem(
   else build.stash.splice(source.index, 1);
   return true;
 }
+
+/** Copy into the nearest free rectangle without moving or sharing the source. */
+export function duplicateItem(build: PlannerBuild, source: ItemSource): boolean {
+  const original = sourceItem(build, source);
+  if (!original) return false;
+  const inventory = source.owner === "inventory";
+  if (!inventory && build.stash.length >= stashItemLimit) return false;
+  const size = inventory ? inventoryItemSize(original) : plannerItemDimensions(original);
+  if (!size) return false;
+  const columns = inventory ? 10 : stashSize.columns;
+  const rows = inventory ? 4 : stashSize.rows;
+  const layout = stashItemLayout(build);
+  const current = inventory
+    ? (original as PlannerItem & { position: number }).position
+    : (layout.positions[source.index]?.y ?? 0) * columns +
+      (layout.positions[source.index]?.x ?? 0);
+  const occupied = inventory ? undefined : layout.occupied;
+  const distance = (position: number) =>
+    Math.abs((position % columns) - (current % columns)) +
+    Math.abs(Math.floor(position / columns) - Math.floor(current / columns));
+  const candidates = Array.from({ length: columns * rows }, (_, i) => i).sort(
+    (a, b) =>
+      distance(a) - distance(b) ||
+      Math.abs(Math.floor(a / columns) - Math.floor(current / columns)) -
+        Math.abs(Math.floor(b / columns) - Math.floor(current / columns)) ||
+      Number(a < current) - Number(b < current) ||
+      a - b
+  );
+  const position = candidates.find((position) =>
+    inventory
+      ? charmFits(build.charms, position, size[1], undefined, size[0])
+      : gridItemCells(position, ...size)?.every((cell) => !occupied!.has(cell))
+  );
+  if (position === undefined) return false;
+  const copy = parsePlannerItem(JSON.parse(JSON.stringify(original)));
+  delete copy.stashPosition;
+  if (inventory)
+    build.charms.push({ ...copy, id: crypto.randomUUID(), height: size[1], position });
+  else {
+    build.stash.forEach((item, index) => {
+      const cell = layout.positions[index];
+      if (cell) item.stashPosition = cell.y * columns + cell.x;
+    });
+    build.stash.push({ ...copy, stashPosition: position });
+  }
+  return true;
+}

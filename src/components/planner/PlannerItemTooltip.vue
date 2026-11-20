@@ -47,6 +47,9 @@
       <ul v-else class="planner-item-tooltip-properties">
         <li v-for="(line, index) in properties" :key="index">{{ line }}</li>
       </ul>
+      <ul v-if="baseSkillLines.length" class="planner-item-tooltip-properties">
+        <li v-for="line in baseSkillLines" :key="line">{{ line }}</li>
+      </ul>
       <PlannerSetBonuses :bonuses="setBonuses" />
       <div v-if="runes.length" class="planner-item-tooltip-sockets">
         <p>{{ t("Сокеты", "Socketed") }} ({{ runes.length }})</p>
@@ -84,6 +87,7 @@
   </Teleport>
 </template>
 <script setup lang="ts">
+import { baseSkillDefinition } from "@/utils/planner-base-skills";
 import {
   computed,
   onBeforeUnmount,
@@ -151,6 +155,16 @@ const wordLines = computed(() =>
           store.build.level
         )
       : []
+);
+const baseSkillLines = computed(() =>
+  native.value
+    ? definitionPropertyLines(
+        native.value,
+        baseSkillDefinition(props.item),
+        1,
+        store.build.level
+      )
+    : []
 );
 const properties = computed(() => {
   const { catalogId } = identity.value;

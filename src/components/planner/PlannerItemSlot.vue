@@ -27,10 +27,12 @@
       v-if="menuOpen && item"
       :id="`${uid}-menu`"
       :name="item.name"
+      :cloneable="cloneable"
       :x="menuPoint.x"
       :y="menuPoint.y"
       @edit="editFromMenu"
       @remove="removeFromMenu"
+      @clone="cloneFromMenu"
       @close="closeMenu"
     />
     <PlannerItemTooltip
@@ -59,9 +61,10 @@ const props = defineProps<{
   equipmentSlot?: EquipmentSlot;
   fallbackBase?: string;
   compact?: boolean;
+  cloneable?: boolean;
   requirements?: ItemRequirementStatus;
 }>();
-const emit = defineEmits<{ click: [event: MouseEvent]; remove: [] }>();
+const emit = defineEmits<{ click: [event: MouseEvent]; remove: []; clone: [] }>();
 const uid = useId();
 const trigger = ref<HTMLButtonElement>();
 const menuOpen = ref(false);
@@ -142,6 +145,11 @@ function editFromMenu(event: MouseEvent) {
   closeMenu(true);
   close();
   emit("click", event);
+}
+function cloneFromMenu() {
+  closeMenu(true);
+  close();
+  emit("clone");
 }
 function removeFromMenu() {
   closeMenu(true);

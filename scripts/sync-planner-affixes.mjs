@@ -89,6 +89,27 @@ try {
       classSpecific: gd.itemTypes[row.type]?.class || "",
       rare: !!gd.itemTypes[row.type]?.rare,
       maxSockets: row.gemsockets || 0,
+      ...(gd.itemTypes[row.type]?.staffmods
+        ? { staffClass: gd.itemTypes[row.type].staffmods }
+        : {}),
+      ...(row.autoprefix
+        ? {
+            skillTabs: Object.values(gd.autoMagic)
+              .filter(
+                (mod) =>
+                  mod.group === row.autoprefix &&
+                  mod.spawnable &&
+                  mod.mod1code === "skilltab"
+              )
+              .map((mod) => ({
+                tab: Number(mod.mod1param),
+                min: Number(mod.mod1min),
+                max: Number(mod.mod1max),
+                level: Number(mod.level || 1),
+                requiredLevel: Number(mod.levelreq || 1),
+              })),
+          }
+        : {}),
     };
   }
   await writeFile(

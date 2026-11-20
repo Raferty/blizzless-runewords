@@ -5,6 +5,7 @@
     :aria-label="label"
     @cancel="onCancel"
     @close="emit('close')"
+    @pointerdown="onBackdropPointerDown"
     @click="onBackdropClick"
   >
     <div v-if="modelValue" class="ui-modal__content"><slot /></div>
@@ -12,7 +13,12 @@
 </template>
 <script setup lang="ts">
 import { nextTick, onBeforeUnmount, ref, watch } from "vue";
-const props = defineProps<{ modelValue: boolean; closable?: boolean; label?: string }>();
+const props = defineProps<{
+  modelValue: boolean;
+  closable?: boolean;
+  closeOnBackdrop?: boolean;
+  label?: string;
+}>();
 const emit = defineEmits<{ (e: "close"): void }>();
 const dialog = ref<HTMLDialogElement | null>(null);
 let previousOverflow = "";
@@ -44,14 +50,28 @@ watch(
 function onCancel(event: Event) {
   if (!props.closable) event.preventDefault();
 }
-function onBackdropClick(event: MouseEvent) {
-  if (!dialog.value || event.target !== dialog.value || !props.closable) return;
+let backdropPointerDown = false;
+function outsideDialog(event: MouseEvent) {
+  if (!dialog.value || event.target !== dialog.value) return false;
   const rect = dialog.value.getBoundingClientRect();
-  if (
+  return (
     event.clientX < rect.left ||
     event.clientX > rect.right ||
     event.clientY < rect.top ||
     event.clientY > rect.bottom
+  );
+}
+function onBackdropPointerDown(event: PointerEvent) {
+  backdropPointerDown = outsideDialog(event);
+}
+function onBackdropClick(event: MouseEvent) {
+  const startedOutside = backdropPointerDown;
+  backdropPointerDown = false;
+  if (
+    props.closable &&
+    props.closeOnBackdrop !== false &&
+    startedOutside &&
+    outsideDialog(event)
   )
     emit("close");
 }
