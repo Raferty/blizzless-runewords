@@ -17,9 +17,12 @@ const server = await createServer({
 try {
   const { plannerClasses, plannerSkills, difficulties, quests } =
     await server.ssrLoadModule("/src/shared/planner.ts");
-  const { encodeSharedBuild, decodeSharedBuild } = await server.ssrLoadModule(
-    "/src/utils/planner-share.ts"
-  );
+  const {
+    encodeSharedBuild,
+    decodeSharedBuild,
+    createBuildShareUrl,
+    maxSharedBuildBytes,
+  } = await server.ssrLoadModule("/src/utils/planner-share.ts");
   const {
     createBuild: createStarterBuild,
     createDefaultBuild,
@@ -486,7 +489,9 @@ try {
   await assert.rejects(decodeSharedBuild("gz1.broken"));
   await assert.rejects(decodeSharedBuild(compressed.slice(0, -8)));
   const bomb = await new Response(
-    new Blob(["x".repeat(90001)]).stream().pipeThrough(new CompressionStream("gzip"))
+    new Blob(["x".repeat(maxSharedBuildBytes + 1)])
+      .stream()
+      .pipeThrough(new CompressionStream("gzip"))
   ).arrayBuffer();
   await assert.rejects(
     decodeSharedBuild("gz1." + Buffer.from(bomb).toString("base64url")),
@@ -516,6 +521,64 @@ try {
     await decodeSharedBuild(await encodeSharedBuild(fullStash)),
     fullStash,
     "Compressed links preserve the full native stash"
+  );
+  const shareSnapshot = {
+    ...structuredClone(socketBuild),
+    name: "Полный билд 🛡️",
+    gameSave: { mode: "rotw", legacyExpansion: false },
+    author: "Тестовый автор",
+    description: "Экипировка, запасное оружие, наёмник и полный сундук",
+    strengths: "Сопротивления",
+    weaknesses: "Неизвестны",
+    lootFilter: "Показывать руны и уникальные вещи",
+    notes: "Первая строка\nSecond line",
+    stash: fullStash.stash.map((item) => ({
+      ...item,
+      notes: "Проверка полного сундука. ".repeat(40),
+    })),
+  };
+  const waypointKey = Object.keys(shareSnapshot.waypoints.hell)[0];
+  shareSnapshot.waypoints.hell[waypointKey] = false;
+  const expectedShare = parseBuild(shareSnapshot);
+  assert(new TextEncoder().encode(JSON.stringify(expectedShare)).length > 90000);
+  const generating = createBuildShareUrl(expectedShare);
+  const beforeEdit = structuredClone(expectedShare);
+  expectedShare.name = "Edited while link is generating";
+  const shareUrl = new URL(await generating);
+  assert.equal(shareUrl.origin, "https://raferty.github.io");
+  assert.equal(shareUrl.pathname, "/blizzless-runewords/");
+  assert.equal(shareUrl.search, "");
+  const sharedToken = new URLSearchParams(shareUrl.hash.split("?")[1]).get("build");
+  assert(sharedToken.startsWith("gz1."));
+  assert.deepEqual(
+    await decodeSharedBuild(sharedToken),
+    beforeEdit,
+    "Share stores the entire snapshot before async generation, including native metadata and all 208 stash items"
+  );
+  assert.notEqual(
+    await createBuildShareUrl(expectedShare),
+    shareUrl.href,
+    "Changed builds receive a different link"
+  );
+  const originalCompression = globalThis.CompressionStream;
+  try {
+    globalThis.CompressionStream = undefined;
+    assert.deepEqual(
+      await decodeSharedBuild(await encodeSharedBuild(build)),
+      build,
+      "Small snapshots fall back to legacy links without compression"
+    );
+    await assert.rejects(
+      encodeSharedBuild(expectedShare),
+      /size/,
+      "Oversized uncompressed links are rejected, never truncated"
+    );
+  } finally {
+    globalThis.CompressionStream = originalCompression;
+  }
+  await assert.rejects(
+    encodeSharedBuild({ ...build, notes: "x".repeat(maxSharedBuildBytes + 1) }),
+    /size/
   );
   assert.throws(() =>
     parseBuild({ ...fullStash, stash: [...fullStash.stash, fullStash.stash[0]] })
@@ -719,6 +782,13 @@ try {
   window.location.hash = `#/planner?build=${await encodeSharedBuild(compressedBuild)}`;
   await restored.loadSharedHash();
   assert.equal(restored.build.name, compressedBuild.name);
+  restored.build.name = "Edited after opening shared link";
+  await restored.loadSharedHash();
+  assert.equal(
+    restored.build.name,
+    compressedBuild.name,
+    "The same shared link can be opened again to restore its snapshot"
+  );
   memory.set(
     "blizzless-planner-v1",
     JSON.stringify({

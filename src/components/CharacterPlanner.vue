@@ -32,6 +32,8 @@
           ><button @click="libraryOpen = true">
             {{ t("Мои сборки", "My builds") }}
             <small>{{ store.saved.length }}</small></button
+          ><button @click="shareOpen = true">
+            {{ t("Поделиться", "Share") }} <UiIcon name="arrow-up-right" /></button
           ><button @click="resetOpen = true">
             <UiIcon name="reset" />
             {{ t("Сбросить персонажа", "Reset character") }}</button
@@ -376,6 +378,7 @@
       ><span>{{ t("Автосохранение в этом браузере", "Autosaved in this browser") }}</span>
     </div>
     <TheFooter />
+    <PlannerBuildShare v-if="shareOpen" :build="store.build" @close="shareOpen = false" />
     <UiModal
       :model-value="resetOpen"
       closable
@@ -647,6 +650,10 @@ const store = usePlannerStore();
 const PlannerGameExport = defineAsyncComponent(
   () => import("./planner/PlannerGameExport.vue")
 );
+const PlannerBuildShare = defineAsyncComponent(
+  () => import("./planner/PlannerBuildShare.vue")
+);
+const shareOpen = ref(false);
 const exportOpen = ref(false);
 const info = useInfoStore();
 const t = useText();

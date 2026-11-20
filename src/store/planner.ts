@@ -202,12 +202,12 @@ export const usePlannerStore = defineStore("planner", () => {
       return false;
     }
   }
-  let lastSharedHash = "";
+  let loadingSharedHash = "";
   async function loadSharedHash() {
     const hash = window.location.hash;
     const encoded = new URLSearchParams(hash.split("?")[1] ?? "").get("build");
-    if (!encoded || hash === lastSharedHash) return;
-    lastSharedHash = hash;
+    if (!encoded || hash === loadingSharedHash) return;
+    loadingSharedHash = hash;
     try {
       const shared = encoded.startsWith("gz1.")
         ? await decodeSharedBuild(encoded)
@@ -223,6 +223,8 @@ export const usePlannerStore = defineStore("planner", () => {
       }
     } catch {
       message.value = "invalid";
+    } finally {
+      if (loadingSharedHash === hash) loadingSharedHash = "";
     }
   }
   return {
