@@ -8,7 +8,7 @@ const server = await createServer({
   optimizeDeps: { noDiscovery: true, include: [] },
 });
 try {
-  const { createGameSaveExporter } = await server.ssrLoadModule(
+  const { createGameSaveExporter, gameSaveEntries } = await server.ssrLoadModule(
     "/src/utils/planner-game-save.ts"
   );
   const {
@@ -461,6 +461,116 @@ try {
     plannerItemImage({ name: "Cold Rupture", quality: "unique" }),
     "images/planner/items/misc/charm/sunder_lblu.svg"
   );
+  // Current Blizzless launcher uniqueitems.txt, verified 2026-11-20:
+  // c2509c81fd0655ba0e015adfea9934db28aa85b272d7391b4db3f530372733eb.
+  // These deliberately differ from the original six Blizzard charms.
+  const sunderStats = [
+    {
+      passive_cold_mastery: [10, 15],
+      item_poisonlengthresist: [-90, -70],
+      item_maxmana_percent: [-10, -10],
+      item_pierce_cold_immunity: [300, 300],
+    },
+    { item_pierce_fire_immunity: [300, 300], maxfireresist: [-25, -20] },
+    { passive_ltng_pierce: [20, 25], item_magicbonus: [-50, -40] },
+    { item_pois_dur_skill: [-50, -30], damageresist: [-10, -10] },
+    {
+      item_fractionaltargetac: [50, 75],
+      item_damagetargetac: [-120, -100],
+      fireresist: [-20, -20],
+      coldresist: [-20, -20],
+      lightresist: [-20, -20],
+      poisonresist: [-20, -20],
+    },
+    {
+      item_fasterattackrate: [-60, -60],
+      item_fastercastrate: [-30, -25],
+      "item_aura#113": [16, 20],
+      "item_reanimate#189": [10, 10],
+    },
+  ];
+  const activeSunders = stash.items.filter(
+    (item) => item.quality === "unique" && item.bases.includes("cm4")
+  );
+  assert.deepEqual(activeSunders.map((item) => item.catalogId).sort(), [
+    "unique401",
+    "unique402",
+    "unique403",
+    "unique404",
+    "unique405",
+    "unique406",
+  ]);
+  const sunderBuild = createBuild("paladin");
+  sunderBuild.level = 99;
+  sunderBuild.charms = [];
+  sunderBuild.equipment = {};
+  sunderBuild.mercenary.equipment = {};
+  sunderBuild.stash = sunderStats.flatMap((_, index) =>
+    [0, 1].map((propertyRoll) => {
+      const catalogId = `unique${401 + index}`;
+      const item = {
+        name: native.gd.uniqueItems[catalogId].index,
+        quality: "unique",
+        catalogId,
+        baseCode: "cm4",
+        requiredLevel: 75,
+        itemLevel: 99,
+        notes: "",
+        bonuses: {},
+        propertyRoll,
+        stashPosition: index * 2 + propertyRoll,
+      };
+      Object.assign(item, native.itemBonuses(item, "paladin"));
+      return item;
+    })
+  );
+  const sunderChoices = Object.fromEntries(
+    gameSaveEntries(sunderBuild).map((entry) => [
+      entry.key,
+      native.defaultChoice(entry, sunderBuild),
+    ])
+  );
+  const sunderBytes = await native.exportCharacter(sunderBuild, {
+    name: "SunderTest",
+    choices: sunderChoices,
+    rolls: {},
+  });
+  const sunderRaw = native.readCharacter(sunderBytes);
+  assert.deepEqual(sunderRaw.warnings, []);
+  for (const [index, item] of sunderBuild.stash.entries()) {
+    const saved = sunderRaw.items[sunderRaw.profile.stash[item.stashPosition]];
+    assert.equal(saved.base, "cm4");
+    assert.equal(saved.unique, `unique${401 + Math.floor(index / 2)}`);
+    for (const [stat, values] of Object.entries(sunderStats[Math.floor(index / 2)]))
+      assert.equal(saved.stats[stat], values[item.propertyRoll], `${item.name}: ${stat}`);
+    if (index >= 4)
+      assert(
+        !Object.entries(saved.stats).some(
+          ([key, value]) => key.includes("immunity") && value
+        ),
+        "No removed vanilla immunity properties are reintroduced"
+      );
+  }
+  assert(
+    itemPropertyLines(native, sunderBuild.stash[1], 99, "paladin").includes(
+      "Poison Length Increased by 70%"
+    )
+  );
+  assert(
+    itemPropertyLines(native, sunderBuild.stash[1], 99, "paladin").includes(
+      "Reduce Maximum Mana 10%"
+    )
+  );
+  assert(
+    itemPropertyLines(native, sunderBuild.stash[7], 99, "paladin").includes(
+      "Physical Damage Received Increased By 10%"
+    )
+  );
+  assert(
+    itemPropertyLines(native, sunderBuild.stash[11], 99, "paladin").includes(
+      "10% Reanimate As: Urdar"
+    )
+  );
   const echoLines = itemPropertyLines(
     native,
     {
@@ -494,9 +604,23 @@ try {
   const renewed = stash.items.filter(
     (item) => item.quality === "unique" && item.bases.includes("cs2")
   );
-  assert.equal(renewed.length, 6);
-  for (const definition of renewed) {
-    const item = { baseCode: "cs2", quality: "unique", catalogId: definition.catalogId };
+  assert.equal(
+    renewed.length,
+    0,
+    "Disabled Renewed sunders are not offered as server items"
+  );
+  assert(
+    stash.items.every((item) => {
+      const row = native.gd.uniqueItems[item.catalogId];
+      return !row?.disablechronicle || !["cm3", "cs2"].includes(row.code);
+    }),
+    "Disabled Sunder definitions stay outside the item picker"
+  );
+  // Old experimental builds retain their saved art and properties.
+  for (const [catalogId] of Object.entries(native.gd.uniqueItems).filter(
+    ([, row]) => row.code === "cs2" && row.disablechronicle === 1
+  )) {
+    const item = { baseCode: "cs2", quality: "unique", catalogId };
     assert.equal(plannerItemImage(item), baseItemImage("cs2"));
     assert.deepEqual(plannerItemDimensions(item), [3, 1]);
     for (let iconIndex = 0; iconIndex < 3; iconIndex++)

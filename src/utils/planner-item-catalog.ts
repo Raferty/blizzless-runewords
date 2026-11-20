@@ -265,7 +265,9 @@ export function createItemCatalog(
     const definitions = quality === "unique" ? gd.uniqueItems : gd.setItems;
     for (const choice of choices({ ...empty, quality })) {
       const def = definitions[choice.value];
-      if (def.enabled === 0 || def.spawnable === 0) continue;
+      const disabledSunder =
+        def.disablechronicle === 1 && ["cm3", "cs2"].includes(String(def.code));
+      if (def.enabled === 0 || def.spawnable === 0 || disabledSunder) continue;
       items.push({
         id: `${quality}:${choice.value}`,
         name: isContainerBase(choice.base)
@@ -400,6 +402,27 @@ export function definitionPropertyLines(
     const min = Number(definition[`min${i}`] ?? 0),
       max = Number(definition[`max${i}`] ?? min);
     const par = String(definition[`par${i}`] ?? "");
+    if (code === "reanimate") {
+      const monster = Object.values(native.gd.monsters).find(
+        (row) => row.hcidx === Number(par)
+      );
+      const nameKey = String(monster?.namestr ?? "");
+      const name = native.gd.locale.strings[nameKey] || nameKey;
+      lines.push(`${roll ? max : min}% Reanimate As: ${name || par}`);
+      continue;
+    }
+    if (code === "res-pois-len" && (roll ? max : min) < 0) {
+      lines.push(`Poison Length Increased by ${-(roll ? max : min)}%`);
+      continue;
+    }
+    if (code === "mana%" && (roll ? max : min) < 0) {
+      lines.push(`Reduce Maximum Mana ${-(roll ? max : min)}%`);
+      continue;
+    }
+    if (code === "red-dmg%" && (roll ? max : min) < 0) {
+      lines.push(`Physical Damage Received Increased By ${-(roll ? max : min)}%`);
+      continue;
+    }
     if (code === "plusecho") {
       const count = roll ? max : min;
       lines.push(`+${count} Additional Echo${count === 1 ? "" : "es"}`);
