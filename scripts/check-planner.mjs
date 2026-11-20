@@ -789,8 +789,8 @@ try {
     "sorceress",
     "Draft must match its class key"
   );
-  // A full reset clears only the active draft, including starter inventory and
-  // progress, while preserving snapshots, other classes and the native format.
+  // A full reset restores the active class's utility items and full progress,
+  // while preserving snapshots, other classes and the native format.
   await nextTick();
   const resetFixture = createDefaultBuild("paladin");
   resetFixture.name = "Reset fixture";
@@ -800,6 +800,22 @@ try {
   resetFixture.attributes.vitality = 30;
   resetFixture.skills = { 96: 1 };
   resetFixture.primarySkills = [96];
+  completeQuests(resetFixture, false);
+  for (const points of Object.values(resetFixture.waypoints))
+    for (const key of Object.keys(points)) points[key] = false;
+  resetFixture.charms.find((item) => item.baseCode === "tbk").quantity = 4;
+  resetFixture.charms.push({
+    id: "reset-extra-charm",
+    name: "Small Charm",
+    baseCode: "cm1",
+    quality: "magic",
+    requiredLevel: 1,
+    itemLevel: 1,
+    bonuses: { life: 5 },
+    notes: "",
+    position: 39,
+    height: 1,
+  });
   resetFixture.gold = 990000;
   resetFixture.equipment.head = structuredClone(socketItem);
   resetFixture.stash = [structuredClone(socketItem)];
@@ -841,7 +857,10 @@ try {
   assert.equal(spentAttributes(resetStore.build), 0);
   assert.equal(spentSkills(resetStore.build), 0);
   assert.deepEqual(resetStore.build.equipment, {});
-  assert.deepEqual(resetStore.build.charms, []);
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(resetStore.build.charms)),
+    createDefaultBuild("paladin").charms
+  );
   assert.deepEqual(resetStore.build.stash, []);
   assert.deepEqual(resetStore.build.primarySkills, []);
   assert.equal(resetStore.build.gold, 0);
@@ -864,7 +883,7 @@ try {
     ...Object.values(resetStore.build.quests),
     ...Object.values(resetStore.build.waypoints),
   ])
-    assert(Object.values(progress).every((value) => value === false));
+    assert(Object.values(progress).every((value) => value === true));
   assert.deepEqual(JSON.parse(JSON.stringify(resetStore.saved)), snapshots);
   assert.deepEqual(JSON.parse(JSON.stringify(resetStore.drafts.sorceress)), otherDraft);
   const blank = JSON.parse(JSON.stringify(resetStore.build));
@@ -878,9 +897,30 @@ try {
   assert.deepEqual(
     JSON.parse(JSON.stringify(usePlannerStore().build)),
     blank,
-    "Reset persists across reloads without restoring starter charms"
+    "Reset utility items and completed progress persist across reloads"
   );
   assert.deepEqual(JSON.parse(JSON.stringify(usePlannerStore().saved)), snapshots);
+  for (const character of plannerClasses) {
+    resetStore.selectClass(character.id);
+    resetStore.build.charms = [];
+    completeQuests(resetStore.build, false);
+    resetStore.resetCharacter();
+    const reset = JSON.parse(JSON.stringify(resetStore.build));
+    assert.deepEqual(reset.charms, createDefaultBuild(character.id).charms);
+    const torch = reset.charms.find((item) => item.catalogId === "unique400");
+    assert.deepEqual(torch.classBonuses, { [character.id]: 3 });
+    assert.equal(torch.skillClass, character.id);
+    assert.equal(reset.charms.find((item) => item.baseCode === "tbk").quantity, 20);
+    assert.equal(skillBudget(reset), 101);
+    assert.equal(attributeBudget(reset), 460);
+    for (const progress of [
+      ...Object.values(reset.quests),
+      ...Object.values(reset.waypoints),
+    ])
+      assert(Object.values(progress).every(Boolean));
+    assert.deepEqual(parseBuild(reset), reset);
+  }
+  await nextTick();
   console.log(
     "Planner checks passed: Blizzless 1.3.2, 8 classes, 240 skills, 240 icons, server dependencies and attributes, 105 runeword templates, budgets, swap, charms, validated imports and persistence."
   );

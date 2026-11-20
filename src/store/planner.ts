@@ -107,14 +107,7 @@ export const usePlannerStore = defineStore("planner", () => {
     next.difficulty = "normal";
     next.hardcore = build.value.hardcore;
     if (build.value.gameSave) next.gameSave = { ...build.value.gameSave };
-    next.charms = [];
     next.mercenary.level = 90;
-    for (const rewards of Object.values(next.quests))
-      for (const key of Object.keys(rewards) as (keyof typeof rewards)[])
-        rewards[key] = false;
-    for (const waypoints of Object.values(next.waypoints))
-      for (const key of Object.keys(waypoints) as (keyof typeof waypoints)[])
-        waypoints[key] = false;
     build.value = next;
     message.value = "reset";
     persist();

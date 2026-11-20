@@ -401,8 +401,16 @@
         <p class="planner-help">
           {{
             t(
-              "Будут очищены навыки, характеристики, экипировка, инвентарь, сундук и наёмник. Уровень станет 90, задания и вейпоинты будут сброшены.",
-              "Skills, attributes, equipment, inventory, stash and mercenary will be cleared. Level returns to 90, and quests and waypoints are reset."
+              "Будут очищены навыки, характеристики, экипировка, сундук и наёмник. Уровень станет 90. Все задания будут выполнены, все вейпоинты открыты на каждой сложности.",
+              "Skills, attributes, equipment, stash and mercenary will be cleared. Level returns to 90. All quests will be completed and all waypoints unlocked on every difficulty."
+            )
+          }}
+        </p>
+        <p class="planner-help">
+          {{
+            t(
+              "В инвентаре останутся только куб, торч выбранного класса, Annihilus и том городских порталов с 20 зарядами.",
+              "Inventory will contain only the Horadric Cube, a Hellfire Torch for the selected class, Annihilus and a Tome of Town Portal with 20 charges."
             )
           }}
         </p>
