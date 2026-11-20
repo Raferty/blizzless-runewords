@@ -109,6 +109,20 @@
       "unique500": [
         "Gelid-Affix5"
       ]
+    },
+    "verifiedMiscCorrections": {
+      "p14": {
+        "checkedAt": "2026-11-20",
+        "manifestVersion": 1795131992295,
+        "tableSha256": "0464b39f088fedaf9fdec3a8276cc7178e720d9fea3b02c94f31343cd635af60",
+        "fields": [
+          "invwidth",
+          "invheight",
+          "invfile",
+          "spelldescstr",
+          "advancedstashstackable"
+        ]
+      }
     }
   }
 }
