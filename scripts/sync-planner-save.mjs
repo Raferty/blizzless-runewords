@@ -292,3 +292,4 @@ await writeFile(
   `Item codec: @d2runewizard/d2s 2.0.134 (ISC; author: prowner). Source: https://github.com/prowner/d2s/tree/ee9c192f2c45646b895a4c93006ef995c15249a7\n\nNative save data for ${catalog.source.version}.\n\nGame tables: https://blizzless.info/api/launcher-mods/manifest\nCharacter codec and supplemental tables: https://github.com/TrayHard/d2r-saver/tree/${revision}\n\n${await (await request(`${source}LICENSE`)).text()}`
 );
 console.log(`Native save tables: ${fileURLToPath(target)}`);
+await import("./sync-planner-bartuc.mjs");

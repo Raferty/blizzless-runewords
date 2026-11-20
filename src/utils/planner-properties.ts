@@ -13,6 +13,22 @@ export const propertyClasses: ClassId[] = [
 
 type PropertyGroups = Record<string, { [key: string]: unknown }>;
 
+// Imported native properties remain authoritative until their item template changes.
+// Plain attribute/class-bonus edits can still be applied independently.
+export function nativeStatsSignature(item: PlannerItem) {
+  return JSON.stringify([
+    item.baseCode ?? null,
+    item.quality,
+    item.catalogId ?? null,
+    item.runewordId ?? null,
+    item.craftId ?? null,
+    item.propertyRoll ?? 0,
+    item.propertyValues ?? null,
+    item.propertyChoices ?? null,
+    item.affixes ?? null,
+  ]);
+}
+
 export function propertyGroupOptions(group: PropertyGroups[string] | undefined) {
   if (!group || group.pickmode !== 2) return [];
   return Object.keys(group)

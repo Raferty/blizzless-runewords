@@ -546,6 +546,20 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       throw new Error("tome quantity");
     result.quantity = integer(item.quantity, 0, 20);
   }
+  if (item.importedStats !== undefined) {
+    const imported = record(item.importedStats);
+    const values = record(imported.values);
+    if (Object.keys(values).length > 128) throw new Error("native stats");
+    const stats: Record<string, number> = {};
+    for (const [key, value] of Object.entries(values)) {
+      if (!/^[a-z][a-z0-9_]*(?:#\d+){0,2}$/i.test(key)) throw new Error("native stat");
+      stats[key] = integer(value, -2147483648, 2147483647);
+    }
+    result.importedStats = {
+      signature: string(imported.signature, 10000),
+      values: stats,
+    };
+  }
   return result;
 }
 export function parseBuild(value: unknown): PlannerBuild {
@@ -562,6 +576,19 @@ export function parseBuild(value: unknown): PlannerBuild {
   build.difficulty = raw.difficulty as PlannerBuild["difficulty"];
   if (typeof raw.hardcore !== "boolean") throw new Error("hardcore");
   build.hardcore = raw.hardcore;
+  if (raw.gameSave !== undefined) {
+    const gameSave = record(raw.gameSave);
+    if (
+      !["expansion", "rotw"].includes(String(gameSave.mode)) ||
+      typeof gameSave.legacyExpansion !== "boolean" ||
+      (build.classId === "warlock" && gameSave.mode !== "rotw")
+    )
+      throw new Error("game save mode");
+    build.gameSave = {
+      mode: gameSave.mode as "expansion" | "rotw",
+      legacyExpansion: gameSave.legacyExpansion,
+    };
+  }
   build.weaponSet = integer(raw.weaponSet, 0, 1) as 0 | 1;
   // Older builds exported every waypoint as unlocked.
   if (raw.waypoints !== undefined) {

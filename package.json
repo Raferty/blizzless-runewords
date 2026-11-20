@@ -17,7 +17,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,tsx,vue,js,json,scss,css}\"",
     "stylelint": "stylelint \"src/**/*.{vue,scss,css}\"",
     "stylelint:fix": "stylelint \"src/**/*.{vue,scss,css}\" --fix",
-    "test": "node scripts/check-catalog.mjs && node scripts/check-cube.mjs && node scripts/check-planner.mjs && node scripts/check-planner-damage.mjs && node scripts/check-planner-crafts.mjs && node scripts/check-planner-supplies.mjs && node scripts/check-planner-items.mjs && node scripts/check-planner-affixes.mjs && node scripts/check-planner-game-save-mode.mjs && node scripts/check-planner-game-save.mjs && node scripts/check-planner-sockets.mjs && node scripts/check-planner-waypoints.mjs && node scripts/check-planner-requirements.mjs",
+    "test": "node scripts/check-catalog.mjs && node scripts/check-cube.mjs && node scripts/check-planner.mjs && node scripts/check-planner-damage.mjs && node scripts/check-planner-crafts.mjs && node scripts/check-planner-supplies.mjs && node scripts/check-planner-items.mjs && node scripts/check-planner-affixes.mjs && node scripts/check-planner-game-save-mode.mjs && node scripts/check-planner-import-chain.mjs && node scripts/check-planner-game-save.mjs && node scripts/check-planner-sockets.mjs && node scripts/check-planner-waypoints.mjs && node scripts/check-planner-requirements.mjs",
     "sync:planner": "node scripts/sync-planner.mjs && prettier --write src/shared/planner-catalog.json src/shared/planner-runewords.json",
     "test:planner-damage": "node scripts/check-planner-damage.mjs",
     "test:planner-crafts": "node scripts/check-planner-crafts.mjs",
@@ -29,7 +29,8 @@
     "sync:planner-sockets": "node scripts/sync-planner-sockets.mjs && prettier --write src/shared/planner-sockets.json",
     "sync:planner-items": "node scripts/sync-planner-items.mjs && prettier --write src/shared/planner-item-art.json",
     "sync:cube": "node scripts/sync-cube.mjs && prettier --write src/shared/cube-catalog.json",
-    "sync:planner-affixes": "node scripts/sync-planner-affixes.mjs && prettier --write src/shared/planner-affixes.json"
+    "sync:planner-affixes": "node scripts/sync-planner-affixes.mjs && prettier --write src/shared/planner-affixes.json",
+    "sync:planner-bartuc": "node scripts/sync-planner-bartuc.mjs"
   },
   "dependencies": {
     "@d2runewizard/d2s": "2.0.134",

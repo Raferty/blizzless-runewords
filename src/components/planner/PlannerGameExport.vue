@@ -177,7 +177,9 @@ import {
 defineEmits<{ close: []; backup: [] }>();
 const store = usePlannerStore();
 const t = useText();
-const gameMode = ref(defaultGameSaveMode(store.build.classId));
+const gameMode = ref(
+  store.build.gameSave?.mode ?? defaultGameSaveMode(store.build.classId)
+);
 const gameModes = computed<{ value: GameSaveMode; label: string }[]>(() => [
   ...(store.build.classId === "warlock"
     ? []

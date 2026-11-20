@@ -37,6 +37,8 @@ import {
   resolvePropertyGroups,
   itemSkillClass,
   isClassCharm,
+  nativeStatsSignature,
+  propertyRange,
 } from "./planner-properties";
 
 type RawData = Parameters<typeof D2RSaver.fromData>[0];
@@ -85,6 +87,9 @@ const bonusStats = {
   frw: "item_fastermovevelocity",
   magicFind: "item_magicbonus",
 } as const;
+const projectedStats = new Set<string>(Object.values(bonusStats));
+const isProjectedStat = (stat: string) =>
+  projectedStats.has(stat) || /^item_addclassskills#\d+$/.test(stat);
 export interface GameSaveEntry {
   key: string;
   item: PlannerItem;
@@ -225,6 +230,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     // A native save owns its inventory; do not retain the new-character defaults.
     build.charms = [];
     build.name = profile.name;
+    build.hardcore = !!(bytes[20] & 4);
+    if (bytes[248] === 2 || bytes[248] === 3)
+      build.gameSave = {
+        mode: bytes[248] === 3 ? "rotw" : "expansion",
+        legacyExpansion: !!(bytes[20] & 0x20),
+      };
     build.level = Math.max(1, Math.min(99, profile.level));
     build.weaponSet = profile.weaponSet === 1 ? 1 : 0;
     build.gold = Math.max(0, Math.min(build.level * 10000, profile.gold ?? 0));
@@ -372,6 +383,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         requiredLevel: Math.max(1, base?.levelreq || 1),
         notes: "",
         bonuses,
+        classBonuses: Object.fromEntries(
+          classes.flatMap((id, index) => {
+            const value = native.stats[`item_addclassskills#${index}`];
+            return value ? [[id, value]] : [];
+          })
+        ),
         ...(catalogId ? { catalogId } : {}),
         ...(Number.isInteger(runewordId) && runewordId! > 0 ? { runewordId } : {}),
         ...(itemQuality === "runeword"
@@ -407,6 +424,48 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           ? { quantity: native.quantity }
           : {}),
       };
+      // Native runeword stats exclude the inserted runes. The planner's flat
+      // bonuses include them; the exporter removes them again from the parent.
+      if (itemQuality === "runeword") {
+        const category =
+          baseKind === "weapon" ? "weapon" : baseKind === "shield" ? "shield" : "helm";
+        for (const value of native.socketedItems) {
+          const code = typeof value === "string" ? value : parsedItems[value]?.base;
+          if (!code) throw new GameSaveError("property", String(value));
+          const socket = socketBonuses(code, category);
+          for (const [key, value] of Object.entries(socket.bonuses)) {
+            const bonus = key as keyof PlannerItem["bonuses"];
+            bonuses[bonus] = (bonuses[bonus] ?? 0) + value!;
+          }
+          for (const [id, value] of Object.entries(socket.classBonuses)) {
+            const classId = id as ClassId;
+            item.classBonuses![classId] = (item.classBonuses![classId] ?? 0) + value!;
+          }
+        }
+      }
+      if (catalogId) {
+        const definition = (itemQuality === "set" ? gd.setItems : gd.uniqueItems)[
+          catalogId
+        ] as unknown as Definition;
+        const values: Record<number, number> = {};
+        for (let index = 1; index <= 12; index++) {
+          const property = gd.properties[String(definition[`prop${index}`])];
+          const range = property && propertyRange(definition, property, index);
+          const value =
+            definition[`prop${index}`] === "oskill"
+              ? native.stats[`item_nonclassskill#${definition[`par${index}`]}`]
+              : native.uniqueValues?.[index - 1];
+          if (
+            range &&
+            value !== undefined &&
+            Number.isInteger(value) &&
+            value >= range.min &&
+            value <= range.max
+          )
+            values[index] = value;
+        }
+        if (Object.keys(values).length) item.propertyValues = values;
+      }
       const socketIcons = Object.fromEntries(
         native.socketedItems.flatMap((value, index) => {
           const child = typeof value === "number" ? parsedItems[value] : undefined;
@@ -429,9 +488,37 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           for (const stat of Object.keys(affixStats(item))) {
             const key = statBonuses[stat];
             if (key) delete bonuses[key];
+            const classIndex = /^item_addclassskills#(\d+)$/.exec(stat)?.[1];
+            if (classIndex) delete item.classBonuses?.[classes[Number(classIndex)]];
           }
         }
       }
+      const extra = Object.fromEntries(
+        Object.entries(native.stats).flatMap(([stat, value]) => {
+          if (isProjectedStat(stat)) return [];
+          // The native reader exposes event procs as skill/chance -> level;
+          // the property compiler and binary writer use skill/level -> chance.
+          const proc =
+            /^(item_skillon(?:attack|kill|death|hit|levelup|gethit))#(\d+)#(\d+)$/.exec(
+              stat
+            );
+          return [
+            [
+              proc ? `${proc[1]}#${proc[2]}#${value}` : stat,
+              proc ? Number(proc[3]) : value,
+            ],
+          ];
+        })
+      );
+      // d2r-saver adds the implicit blunt-weapon modifier while reading.
+      if (baseTypes.has("blun"))
+        extra.item_undeaddamage_percent = (extra.item_undeaddamage_percent ?? 0) - 50;
+      delete extra.item_numsockets;
+      delete extra.item_ethereal;
+      item.importedStats = {
+        signature: nativeStatsSignature(item),
+        values: Object.fromEntries(Object.entries(extra).filter(([, value]) => value)),
+      };
       return item;
     };
     const slotByGame: Record<string, EquipmentSlot> = Object.fromEntries(
@@ -1074,7 +1161,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   ): Promise<Uint8Array> {
     const build = parseBuild(input);
     if (!validCharacterName(options.name)) throw new GameSaveError("name");
-    const gameMode = options.gameMode ?? defaultGameSaveMode(build.classId);
+    const gameMode =
+      options.gameMode ?? build.gameSave?.mode ?? defaultGameSaveMode(build.classId);
     if (
       !["expansion", "rotw"].includes(gameMode) ||
       (build.classId === "warlock" && gameMode !== "rotw")
@@ -1253,6 +1341,24 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       );
       if (isTome(choice.base)) itemQuantities.set(item.itemId, entry.item.quantity ?? 20);
       const mode = options.rolls[entry.key] ?? "planned";
+      const preserveNative =
+        mode === "planned" &&
+        entry.item.importedStats?.signature === nativeStatsSignature(entry.item);
+      const restoreNativeStats = (stats: Record<string, number>) => {
+        if (!preserveNative) return;
+        for (const stat of Object.keys(stats))
+          if (
+            !isProjectedStat(stat) &&
+            !["item_numsockets", "item_ethereal"].includes(stat)
+          )
+            delete stats[stat];
+        for (const [stat, value] of Object.entries(entry.item.importedStats!.values))
+          if (
+            !isProjectedStat(stat) &&
+            !["item_numsockets", "item_ethereal"].includes(stat)
+          )
+            stats[stat] = value;
+      };
       const roll = mode === "planned" ? (entry.item.propertyRoll ?? 1) : mode;
       let maxSockets = base.gemsockets || 0;
       if (choice.unique || entry.item.craftId) {
@@ -1315,7 +1421,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           roll,
           mode === "planned" ? entry.item.propertyValues : undefined
         );
-        if (mode === "planned" && !entry.item.propertyValues) {
+        if (mode === "planned" && (!entry.item.propertyValues || preserveNative)) {
           const socketStats: Record<string, number> = {};
           const category = types(choice.base).has("weap")
             ? "weapon"
@@ -1350,19 +1456,20 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           item.ethereal = true;
           delete stats.item_ethereal;
         }
+        restoreNativeStats(stats);
         validateStats(stats);
         runewordProperties.set(item.itemId, stats);
       } else {
         for (const [key, value] of Object.entries(entry.item.bonuses))
           if (
-            (mode === "planned" && !entry.item.propertyValues) ||
+            (mode === "planned" && (!entry.item.propertyValues || preserveNative)) ||
             (!choice.unique && !entry.item.craftId)
           )
             item.stats[bonusStats[key as keyof typeof bonusStats]] = value!;
         for (const [id, value] of Object.entries(entry.item.classBonuses ?? {}))
           if (
             !isClassCharm(entry.item) &&
-            ((mode === "planned" && !entry.item.propertyValues) ||
+            ((mode === "planned" && (!entry.item.propertyValues || preserveNative)) ||
               (!choice.unique && !entry.item.craftId))
           )
             item.stats[`item_addclassskills#${classes.indexOf(id as ClassId)}`] = value;
@@ -1414,6 +1521,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           )
         )
           throw new GameSaveError("base", entry.item.name);
+        restoreNativeStats(item.stats);
         validateStats(item.stats);
       }
       items[item.itemId] = item;
@@ -1691,9 +1799,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     });
     // d2r-saver 0.2.0 hardcodes RotW (3) for every class. In v105 the
     // actual game mode is PreviewData.GameVersion at 0xF8, independently
-    // of the legacy Expansion status bit at 0x14. Keep both consistent.
+    // of the legacy Expansion status bit at 0x14. Preserve imported flags.
     // https://github.com/ResurrectedTrader/D2SSharp/blob/main/src/D2SSharp/Model/PreviewData.cs
-    bytes[20] = 0x20 | (build.hardcore ? 4 : 0);
+    const legacyExpansion =
+      build.gameSave?.mode === gameMode ? build.gameSave.legacyExpansion : true;
+    bytes[20] = (legacyExpansion ? 0x20 : 0) | (build.hardcore ? 4 : 0);
     bytes[248] = gameMode === "rotw" ? 3 : 2;
     bytes.fill(0, 152, 155);
     bytes[152 + ["normal", "nightmare", "hell"].indexOf(build.difficulty)] = 0x80;

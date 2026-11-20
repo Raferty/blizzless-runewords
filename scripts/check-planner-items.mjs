@@ -145,6 +145,44 @@ try {
       .digest("hex")
   );
   assert.equal(socketInserts.length, 88);
+  const bartucCatalog = createItemCatalog(
+    native,
+    createBuild("paladin"),
+    { key: "test", owner: "stash" },
+    []
+  );
+  for (const [catalogId, baseCode, name, graphic, size] of [
+    [
+      "unique694",
+      "uh9",
+      "Bartuc's Crimson Visage",
+      "armor/helmet/bloodforged_helm",
+      [2, 2],
+    ],
+    [
+      "unique695",
+      "uul",
+      "Bartuc's Crimson Vessel",
+      "armor/armor/bloodforged_armor",
+      [2, 3],
+    ],
+  ]) {
+    assert(bartucCatalog.items.some((i) => i.catalogId === catalogId && i.name === name));
+    const item = { name, quality: "unique", catalogId, baseCode, propertyRoll: 1 };
+    assert.equal(plannerItemImage(item), `images/planner/items/${graphic}.png`);
+    assert.deepEqual(plannerItemDimensions(item), size);
+    assert(nativeArt.sprites[graphic], "Bartuc art is a verified native sprite");
+    const lines = itemPropertyLines(native, item, 99, "paladin");
+    assert(lines.every((line) => !/NaN|undefined|#|%d/.test(line)));
+    assert(lines.some((line) => line.includes("Max Demons")));
+    if (catalogId === "unique694") {
+      assert(lines.some((line) => line.includes("+10 to Max Chains")));
+      assert(lines.includes("1% Reanimate As: Blood Maiden"));
+    } else {
+      assert(lines.includes("Abyss Modifier: No Cooldown"));
+      assert(lines.includes("Apocalypse Modifier: deals damage over 4 seconds"));
+    }
+  }
   assert.equal(socketInserts.filter((insert) => insert.group === "facet").length, 8);
   assert.equal(socketInserts.filter((insert) => insert.baseCode === "cjw").length, 6);
   assert.equal(socketInserts.filter((insert) => insert.group === "gem").length, 35);

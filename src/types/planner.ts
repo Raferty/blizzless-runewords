@@ -105,6 +105,10 @@ export interface PlannerItem {
   stashPosition?: number;
   containerQuantity?: number;
   quantity?: number;
+  importedStats?: {
+    signature: string;
+    values: Record<string, number>;
+  };
 }
 export interface PlannerCharm extends PlannerItem {
   id: string;
@@ -119,6 +123,10 @@ export interface PlannerBuild {
   difficulty: Difficulty;
   gold: number;
   hardcore: boolean;
+  gameSave?: {
+    mode: "expansion" | "rotw";
+    legacyExpansion: boolean;
+  };
   weaponSet: 0 | 1;
   waypoints: Record<Difficulty, Record<WaypointId, boolean>>;
   quests: Record<

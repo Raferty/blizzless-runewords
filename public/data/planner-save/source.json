@@ -123,6 +123,21 @@
           "advancedstashstackable"
         ]
       }
+    },
+    "bartucRewards": {
+      "checkedAt": "2026-11-20",
+      "manifestVersion": 1795131992295,
+      "source": "https://blizzless.info/ru/changelogs/patch-2026-11",
+      "catalogIds": [
+        "unique694",
+        "unique695"
+      ],
+      "files": {
+        "uniqueItems": "c2509c81fd0655ba0e015adfea9934db28aa85b272d7391b4db3f530372733eb",
+        "properties": "84cbc6ed62186da1c7720fb3bdab7b1689fd08f549a59579bb660b55d959f3aa",
+        "itemStatCost": "6975bb81a533025fcbcd836216c4960ca759d5dec5c7a9273b6e145ed490c1e4",
+        "monstats": "cbd17fe08e35f5fe5ad6261748ed791b4753780a18e7b1638f6ba8a3a0a21c1f"
+      }
     }
   }
 }

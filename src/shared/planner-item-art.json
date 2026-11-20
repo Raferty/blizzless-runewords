@@ -39,6 +39,8 @@
     "misc/quest/tattered_scroll": "1096e7fcde8369265df5bdd57f75274aa03d5a4dfc80e78d5e7cbe9eec248f40",
     "misc/gem/bloodstone": "a402f9f872eac3664cc7cddbb0473556efda0d4169d5e574b4aa520d4f28b4ea",
     "misc/quest/ceremonial_claws": "495c2565867f3c319153aa705359ddb4b090509099f3b4cd26d713bea739906f",
+    "armor/helmet/bloodforged_helm": "4a00de438ada69ec59faafe3cbd61afd96088257113cfc0582ebc03c39adb235",
+    "armor/armor/bloodforged_armor": "dde2dc0d86f982c7f93c64cd8251a5aa6241dea987c460b56d43c7c35ca90739",
     "misc/quest/jewel_dis": "a926c84b8e77c4ad1116475c6caacdf0dda0eb03155bd4f5f30c37a6924d3322",
     "misc/quest/parts_1": "1aa22d0d5cb9a02f0af89c44f34e6446d68bb9cccff0fff038ce7eec50e6e97e",
     "misc/quest/parts_2": "fa991baba93ef9cdce010f5029f5b24bd1cad35ccfc617ebfda49bf058f27f3c",
@@ -74,6 +76,11 @@
       "checkedAt": "2026-11-20",
       "manifestVersion": 1795131992295,
       "cubeSha256": "9c433e140eb6f93aab839502bc0da847542686cb492c2ca7bb49a79e145e1fc6"
+    },
+    "bartucRewards": {
+      "checkedAt": "2026-11-20",
+      "manifestVersion": 1795131992295,
+      "uniqueMappingSha256": "4c4dcac0732a34d6264437a5e7a392ce93f36dc10ef2de37bbf17bf202bde072"
     }
   },
   "variants": {
@@ -106,7 +113,7 @@
       "images/planner/items/misc/charm/charm_large3.webp"
     ]
   },
-  "gameDataSha256": "a5d66b7ed708e025d907fa9fee7b5cc2803b3931d0b7d6e59e887b953322b440",
+  "gameDataSha256": "6a462923f162a0a649b28950ef1b47288f84cf9c2b62ffe0d27f12551035e1a8",
   "bases": {
     "hax": "images/planner/items/weapon/axe/hand_axe.webp",
     "axe": "images/planner/items/weapon/axe/axe.webp",
@@ -2734,6 +2741,8 @@
     "unique731": "p26",
     "unique732": "p27",
     "unique733": "p28",
+    "unique694": "uh9",
+    "unique695": "uul",
     "set000": "lrg",
     "set001": "amu",
     "set002": "gsc",
@@ -3565,7 +3574,11 @@
       "unique warlock helm player": "unique730",
       "tyrael's might player": "unique731",
       "monarch player": "unique732",
-      "skullcollector player": "unique733"
+      "skullcollector player": "unique733",
+      "bloodforgedhelm": "unique694",
+      "bartuc's crimson visage": "unique694",
+      "bloodforgedarmor": "unique695",
+      "bartuc's crimson vessel": "unique695"
     },
     "set": {
       "civerb's ward": "set000",
@@ -6104,6 +6117,16 @@
       "images/planner/items/weapon/staff/skullcollector.webp",
       "images/planner/items/weapon/staff/skullcollector.webp",
       "images/planner/items/weapon/staff/skullcollector.webp"
+    ],
+    "unique694": [
+      "images/planner/items/armor/helmet/bloodforged_helm.png",
+      "images/planner/items/armor/helmet/bloodforged_helm.png",
+      "images/planner/items/armor/helmet/bloodforged_helm.png"
+    ],
+    "unique695": [
+      "images/planner/items/armor/armor/bloodforged_armor.png",
+      "images/planner/items/armor/armor/bloodforged_armor.png",
+      "images/planner/items/armor/armor/bloodforged_armor.png"
     ]
   },
   "set": {

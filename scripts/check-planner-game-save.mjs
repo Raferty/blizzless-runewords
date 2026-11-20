@@ -83,6 +83,43 @@ try {
     assertions++;
     return { bytes, read, raw: codec.readCharacter(bytes) };
   }
+  for (const roll of [0, 1]) {
+    const build = planner.createBuild("paladin");
+    build.level = 99;
+    build.stash = ["unique694", "unique695"].map((catalogId) => ({
+      name: codec.gd.locale.strings[data.uniqueItems[catalogId].index],
+      quality: "unique",
+      catalogId,
+      baseCode: data.uniqueItems[catalogId].code,
+      requiredLevel: 80,
+      itemLevel: 99,
+      propertyRoll: roll,
+      bonuses: {},
+      notes: "",
+    }));
+    const { read, bytes } = await verify(build, {
+      ...opts,
+      choices: Object.fromEntries(
+        native.gameSaveEntries(build).map((e) => [e.key, codec.defaultChoice(e, build)])
+      ),
+    });
+    const helm = read.items.find((i) => i.unique_id === 695);
+    const armor = read.items.find((i) => i.unique_id === 696);
+    assert(helm && armor, "Bartuc boss rewards retain their actual binary record IDs");
+    const stat = (item, id) => item.magic_attributes.find((p) => p.id === id)?.values;
+    assert.deepEqual(stat(helm, 476), [10]);
+    assert.deepEqual(stat(helm, 477), [1]);
+    assert.deepEqual(stat(helm, 107), [387, 20]);
+    assert.deepEqual(stat(armor, 474), [1]);
+    assert.deepEqual(stat(armor, 475), [1]);
+    assert.deepEqual(stat(armor, 477), [1]);
+    assert.deepEqual(stat(armor, 39), [roll ? 30 : 15]);
+    const imported = codec.importCharacter(bytes);
+    assert.deepEqual(imported.stash.map((i) => i.catalogId).sort(), [
+      "unique694",
+      "unique695",
+    ]);
+  }
   {
     const build = planner.createBuild("paladin");
     for (const [index, baseCode] of ["cm1", "cm2", "cm3"].entries())
