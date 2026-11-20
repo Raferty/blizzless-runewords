@@ -11,6 +11,7 @@ import { waypoints } from "@/shared/planner-waypoints";
 import { RUNEWORDS } from "@/shared/runewords";
 import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
 import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
+import { runewordNames } from "./runeword";
 import { REWORKED_RUNEWORDS } from "@/shared/reworked-runewords";
 import {
   attributeBudget,
@@ -345,7 +346,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         : baseTypes.has("shld")
           ? "shield"
           : "armor";
-      const runewordId =
+      const runeword =
         typeof runewordName === "string"
           ? [
               ...RUNEWORDS,
@@ -354,7 +355,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
               ...ROTW_RUNEWORDS,
             ].find(
               (candidate) =>
-                normalize(candidate.name.en) === normalize(runewordName) &&
+                runewordNames(candidate).some(
+                  (name) => normalize(name) === normalize(runewordName)
+                ) &&
                 word({
                   key: "import",
                   owner: "stash",
@@ -368,14 +371,16 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
                     bonuses: {},
                   },
                 })?.[0] === native.unique
-            )?.id
+            )
           : undefined;
+      const runewordId = runeword?.id;
       const item: PlannerItem = {
         name: catalogId
           ? gd.locale.strings[
               (itemQuality === "set" ? gd.setItems : gd.uniqueItems)[catalogId].index
             ] || (itemQuality === "set" ? gd.setItems : gd.uniqueItems)[catalogId].index
-          : runewordName ||
+          : runeword?.name.en ||
+            runewordName ||
             (itemQuality === "magic" && (prefix || suffix)
               ? `${prefix ? `${prefix} ` : ""}${gd.locale.strings[base?.namestr ?? ""] || base?.name || native.base}${suffix ? ` ${suffix}` : ""}`
               : gd.locale.strings[base?.namestr ?? ""] || base?.name || native.base),
@@ -611,17 +616,26 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     return result;
   }
   function word(entry: GameSaveEntry) {
-    const name =
-      [...RUNEWORDS, ...REWORKED_RUNEWORDS, ...CUSTOM_RUNEWORDS, ...ROTW_RUNEWORDS].find(
-        (w) => w.id === entry.item.runewordId
-      )?.name.en ?? entry.item.name;
-    const matches = Object.entries(gd.runes).filter(
-      ([, def]) => normalize(def.name) === normalize(name)
+    const known = [
+      ...RUNEWORDS,
+      ...REWORKED_RUNEWORDS,
+      ...CUSTOM_RUNEWORDS,
+      ...ROTW_RUNEWORDS,
+    ].find((w) =>
+      entry.item.runewordId === undefined
+        ? runewordNames(w).some(
+            (name) => name.toLowerCase() === entry.item.name.trim().toLowerCase()
+          )
+        : w.id === entry.item.runewordId
+    );
+    const names = known ? runewordNames(known) : [entry.item.name];
+    const matches = Object.entries(gd.runes).filter(([, def]) =>
+      names.some((name) => normalize(def.name) === normalize(name))
     );
     if (matches.length < 2) return matches[0];
-    const kind = name.includes("Weapons")
+    const kind = names.some((name) => /\(weapons?\)/i.test(name))
       ? "weapon"
-      : name.includes("Armor")
+      : names.some((name) => /\(armor\)/i.test(name))
         ? "armor"
         : entry.item.baseKind;
     if (!kind) return matches[0];

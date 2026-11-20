@@ -1,4 +1,9 @@
 import { ITEM_TYPE_ID as T } from "@/shared/constants";
+import type { RunewordItem } from "@/types";
+
+export function runewordNames(word: Pick<RunewordItem, "name" | "aliases">) {
+  return [...Object.values(word.name), ...(word.aliases ?? [])];
+}
 
 /** Selected runes represent available rune kinds, rather than quantities. */
 export function isComplete(where: number[], what: number[]): boolean {

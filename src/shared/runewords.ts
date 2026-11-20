@@ -523,9 +523,10 @@ export const RUNEWORDS = [
   {
     id: 16,
     name: {
-      ru: "История",
+      ru: "Знание",
       en: "Lore",
     },
+    aliases: ["История"],
     runes: [9, 12],
     types: [ItemTypes.ITEM_TYPE_HELMS],
     excluded: "",
@@ -1045,15 +1046,15 @@ export const RUNEWORDS = [
   },
 
   /**
-   * Hustle (id 33) — блок оружия сверен со скрином вики/UI (март 2026).
-   * ED 200–240; порядок: аура Fanaticism → Burst → IAS → ED → Dex → урон/AR по нежити. Броня — отдельный набор.
+   * Hysteria (formerly Hustle Armor); current names follow item-runes.json.
    */
   {
     id: 33,
     name: {
-      ru: "Переполох (броня)",
-      en: "Hustle (Armor)",
+      ru: "Истерия",
+      en: "Hysteria",
     },
+    aliases: ["Hustle (Armor)", "Переполох (броня)"],
     runes: [13, 18, 2],
     types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
@@ -1937,9 +1938,10 @@ export const RUNEWORDS = [
   {
     id: 76,
     name: {
-      ru: "Неистовство",
+      ru: "Ярость",
       en: "Fury",
     },
+    aliases: ["Неистовство"],
     runes: [31, 25, 5],
     types: [ItemTypes.ITEM_TYPE_MELEE_WEAPONS],
     excluded: "",
@@ -2019,9 +2021,10 @@ export const RUNEWORDS = [
   {
     id: 81,
     name: {
-      ru: "Мечта",
+      ru: "Видение",
       en: "Dream",
     },
+    aliases: ["Мечта"],
     runes: [16, 31, 21],
     types: [ItemTypes.ITEM_TYPE_SHIELDS, ItemTypes.ITEM_TYPE_HELMS],
     excluded: "",

@@ -6,7 +6,7 @@ import { REWORKED_RUNEWORDS } from "@/shared/reworked-runewords";
 import { RUNEWORDS } from "@/shared/runewords";
 import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
 import { useInfoStore } from "@/store";
-import { isComplete, matchesItemType } from "@/utils/runeword";
+import { isComplete, matchesItemType, runewordNames } from "@/utils/runeword";
 
 const ALL_RUNEWORDS = [
   ...RUNEWORDS,
@@ -74,8 +74,7 @@ export const useRunewordsStore = defineStore({
       const q = this.searchDebounced.toLowerCase().trim();
       return this.sortedRunewords.filter((word) => {
         const searchText = [
-          word.name.ru,
-          word.name.en,
+          ...runewordNames(word),
           ...(word.types ?? []).flatMap((id) => [
             getItemTypeDisplayName(id, "ru"),
             getItemTypeDisplayName(id, "en"),

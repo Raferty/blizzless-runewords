@@ -170,7 +170,7 @@ export const CUSTOM_RUNEWORDS = [
     // The unpublished API entry differs: the announcement specifies on striking.
     id: 106,
     name: {
-      ru: "Wonder",
+      ru: "Чудо",
       en: "Wonder",
     },
     runes: [27, 20, 24],

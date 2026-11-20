@@ -29,6 +29,35 @@ try {
   assert.equal(words.sortedRunewords.filter((word) => word.reworked).length, 51);
   assert.equal(words.sortedRunewords.filter((word) => word.marked).length, 6);
   assert.equal(words.sortedRunewords.filter((word) => word.patch === "rotw").length, 6);
+  for (const [id, ru, en] of [
+    [33, "Истерия", "Hysteria"],
+    [99, "Мания", "Mania"],
+    [16, "Знание", "Lore"],
+    [76, "Ярость", "Fury"],
+    [81, "Видение", "Dream"],
+    [53, "Ливень", "Rain"],
+    [79, "Тавро", "Brand"],
+    [104, "Бездна", "Void"],
+    [106, "Чудо", "Wonder"],
+  ]) {
+    const word = words.sortedRunewords.find((w) => w.id === id);
+    assert.deepEqual(word.name, { ru, en }, "Names follow the Blizzless client strings");
+    for (const name of [ru, en, ...(word.aliases ?? [])]) {
+      words.searchDebounced = name;
+      assert(
+        words.filteredRunewords.some((w) => w.id === id),
+        `Find ${en} using ${name}`
+      );
+    }
+  }
+  for (const search of ["hustle", "переполох"]) {
+    words.searchDebounced = search;
+    assert.deepEqual(
+      words.filteredRunewords.map((w) => w.id).sort((a, b) => a - b),
+      [33, 99]
+    );
+  }
+  words.resetFilters();
 
   const wonder = words.sortedRunewords.find((word) => word.name.en === "Wonder");
   assert(

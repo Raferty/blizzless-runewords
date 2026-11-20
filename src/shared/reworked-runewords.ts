@@ -1313,9 +1313,10 @@ export const REWORKED_RUNEWORDS = [
   {
     id: 53,
     name: {
-      ru: "Дождь",
+      ru: "Ливень",
       en: "Rain",
     },
+    aliases: ["Дождь"],
     runes: [9, 23, 6],
     types: [ItemTypes.ITEM_TYPE_BODY_ARMORS],
     excluded: "",
@@ -2217,9 +2218,10 @@ export const REWORKED_RUNEWORDS = [
   {
     id: 79,
     name: {
-      ru: "Клеймо",
+      ru: "Тавро",
       en: "Brand",
     },
+    aliases: ["Клеймо"],
     runes: [31, 28, 23, 25],
     types: [ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
     excluded: "",
@@ -3087,9 +3089,10 @@ export const REWORKED_RUNEWORDS = [
   {
     id: 99,
     name: {
-      ru: "Переполох (оружие)",
-      en: "Hustle (Weapons)",
+      ru: "Мания",
+      en: "Mania",
     },
+    aliases: ["Hustle (Weapons)", "Hustle (Weapon)", "Переполох (оружие)"],
     runes: [13, 18, 2],
     types: [ItemTypes.ITEM_TYPE_WEAPONS],
     excluded: "",

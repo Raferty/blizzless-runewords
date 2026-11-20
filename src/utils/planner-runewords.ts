@@ -15,8 +15,19 @@ const normalize = (value: string) =>
     .replace(/[’‘']/g, "")
     .replace(/\s*\([^)]*\)\s*/g, "")
     .trim();
-export const runewordTemplates = (name: string) =>
-  plannerRunewords.filter((word) => normalize(word.name) === normalize(name));
+export const runewordTemplates = (name: string) => {
+  // Runes.txt retains the old Hustle comments; the client names the two recipes
+  // separately. Keep old saved names usable and each renamed recipe in its base.
+  const renamed = {
+    hysteria: { name: "Hustle", kind: "armor" },
+    mania: { name: "Hustle", kind: "weapon" },
+  }[normalize(name)];
+  return plannerRunewords.filter(
+    (word) =>
+      normalize(word.name) === normalize(renamed?.name ?? name) &&
+      (!renamed || word.kind === renamed.kind)
+  );
+};
 export function runewordBonuses(template: RunewordTemplate, roll: 0 | 1) {
   return {
     bonuses: Object.fromEntries(

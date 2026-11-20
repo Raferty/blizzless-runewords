@@ -3,7 +3,7 @@ import { bonusFields, plannerClasses } from "@/shared/planner";
 import type { PlannerItem } from "@/types/planner";
 import type { RunewordTableItem } from "@/types";
 import type { Lang } from "@/types/lang";
-import { splitStatSections } from "./runeword";
+import { splitStatSections, runewordNames } from "./runeword";
 import { socketInsertVisual } from "./planner-sockets";
 
 export function itemRuneword(item: PlannerItem, words: RunewordTableItem[]) {
@@ -11,7 +11,7 @@ export function itemRuneword(item: PlannerItem, words: RunewordTableItem[]) {
   return words.find((word) =>
     item.runewordId !== undefined
       ? word.id === item.runewordId
-      : Object.values(word.name).some(
+      : runewordNames(word).some(
           (name) => name.toLowerCase() === item.name.trim().toLowerCase()
         )
   );

@@ -8,6 +8,7 @@ export interface LocalizedName {
 export interface RunewordItem {
   id: number;
   name: LocalizedName;
+  aliases?: string[];
   runes: number[];
   types?: number[];
   level: number;

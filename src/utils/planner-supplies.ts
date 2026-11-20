@@ -19,6 +19,26 @@ export interface RecipeInputVariant {
   sourceRows: number[];
 }
 export const stashSupplies: Record<string, Supply> = data.supplies;
+export const uberQuestIngredients = [
+  {
+    id: "ancients",
+    ru: "Убер-древние",
+    en: "Uber Ancients",
+    codes: ["ua1", "ua2", "ua3", "ua4", "ua5"],
+  },
+  {
+    id: "tristram",
+    ru: "Убер-Тристрам",
+    en: "Uber Tristram",
+    codes: ["pk1", "pk2", "pk3", "dhn", "bey", "mbr"],
+  },
+  {
+    id: "bartuc",
+    ru: "Бартук",
+    en: "Bartuc",
+    codes: ["p14", "p20", "p21"],
+  },
+] as const;
 export const recipeInputs: Record<string, RecipeInputVariant[]> = data.recipes as Record<
   string,
   RecipeInputVariant[]

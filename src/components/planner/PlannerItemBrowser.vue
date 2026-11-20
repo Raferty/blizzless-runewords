@@ -54,7 +54,7 @@
       </div>
       <div
         class="planner-item-quality-tabs"
-        :aria-label="t('Качество предметов', 'Item qualities')"
+        :aria-label="t('Фильтры предметов', 'Item filters')"
       >
         <button
           v-for="filter in filters"
@@ -62,9 +62,27 @@
           type="button"
           :data-quality="filter.key"
           :aria-pressed="quality === filter.key"
-          @click="quality = filter.key"
+          @click="selectFilter(filter.key)"
         >
           {{ t(filter.ru, filter.en) }}
+        </button>
+      </div>
+      <div
+        v-if="quality === 'uber'"
+        class="planner-item-quality-tabs"
+        :aria-label="t('Убер-квесты', 'Uber quests')"
+      >
+        <button type="button" :aria-pressed="!uberQuest" @click="uberQuest = ''">
+          {{ t("Все квесты", "All quests") }}
+        </button>
+        <button
+          v-for="quest in uberQuestIngredients"
+          :key="quest.id"
+          type="button"
+          :aria-pressed="uberQuest === quest.id"
+          @click="uberQuest = quest.id"
+        >
+          {{ t(quest.ru, quest.en) }}
         </button>
       </div>
       <div class="planner-item-results" :aria-label="t('Список предметов', 'Item list')">
@@ -106,6 +124,7 @@ import { computed, ref } from "vue";
 import { useText } from "@/composables/useText";
 import { useInfoStore } from "@/store";
 import { craftById } from "@/utils/planner-crafts";
+import { uberQuestIngredients } from "@/utils/planner-supplies";
 import {
   itemCategories,
   type CatalogItem,
@@ -125,17 +144,49 @@ const query = ref(""),
   category = ref(""),
   quality = ref("all"),
   tier = ref("");
+const uberQuest = ref("");
+const allUberCodes = new Set<string>(
+  uberQuestIngredients.flatMap((quest) => [...quest.codes])
+);
+const uberCodes = computed(
+  () =>
+    new Set<string>(
+      uberQuestIngredients
+        .filter((quest) => !uberQuest.value || quest.id === uberQuest.value)
+        .flatMap((quest) => [...quest.codes])
+    )
+);
+const hasUberItems = computed(() =>
+  props.items.some(
+    (item) =>
+      item.quality === "normal" && item.bases.some((code) => allUberCodes.has(code))
+  )
+);
+const uberItems = computed(() =>
+  props.items.filter(
+    (item) =>
+      item.quality === "normal" && item.bases.some((code) => uberCodes.value.has(code))
+  )
+);
 const byLevel = ref(false),
   filtersOpen = ref(false);
-const filters = [
+const filters = computed(() => [
   { key: "all", ru: "Все предметы", en: "All Items" },
   { key: "runeword", ru: "Рунные слова", en: "Runewords" },
   { key: "unique", ru: "Уникальные", en: "Unique Items" },
   { key: "normal", ru: "Основы", en: "Base Items" },
   { key: "crafted", ru: "Крафтовые", en: "Crafted Items" },
   { key: "set", ru: "Комплекты", en: "Set Items" },
+  ...(hasUberItems.value ? [{ key: "uber", ru: "Убер-квесты", en: "Uber Quests" }] : []),
   { key: "existing", ru: "Мои предметы", en: "Existing Items" },
-];
+]);
+function selectFilter(key: string) {
+  quality.value = key;
+  if (key === "uber") {
+    category.value = "";
+    tier.value = "";
+  }
+}
 const groups = computed(() =>
   [
     { key: "shields", ru: "Щиты", en: "Shields" },
@@ -148,7 +199,7 @@ const groups = computed(() =>
       categories: itemCategories.filter(
         (c) =>
           c.group === group.key &&
-          props.items.some((item) =>
+          (quality.value === "uber" ? uberItems.value : props.items).some((item) =>
             item.bases.some((code) => props.bases.get(code)?.category === c.code)
           )
       ),
@@ -157,10 +208,17 @@ const groups = computed(() =>
 );
 const filtered = computed(() => {
   const search = query.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
-  return (quality.value === "existing" ? props.existing : props.items).filter(
+  return (
+    quality.value === "existing"
+      ? props.existing
+      : quality.value === "uber"
+        ? uberItems.value
+        : props.items
+  ).filter(
     (item) =>
       (quality.value === "all" ||
         quality.value === "existing" ||
+        quality.value === "uber" ||
         quality.value === item.quality) &&
       (!byLevel.value || item.level <= props.level) &&
       item.bases.some(
@@ -172,6 +230,7 @@ const filtered = computed(() => {
         [
           item.name,
           item.word?.name.ru,
+          ...(item.word?.aliases ?? []),
           item.craftId ? craftById.get(item.craftId)?.name.ru : "",
           ...item.bases.map((code) => props.bases.get(code)?.name),
         ]

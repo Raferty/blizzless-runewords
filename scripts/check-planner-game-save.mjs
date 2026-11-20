@@ -496,6 +496,56 @@ try {
   const { runewordTemplates, runewordBonuses } = await server.ssrLoadModule(
     "/src/utils/planner-runewords.ts"
   );
+  const { itemRuneword } = await server.ssrLoadModule(
+    "/src/utils/planner-item-presentation.ts"
+  );
+  for (const [id, name, base, nativeId, aliases, kind] of [
+    [
+      33,
+      "Hysteria",
+      "utp",
+      "runeword196",
+      ["Hustle (Armor)", "Переполох (броня)"],
+      "armor",
+    ],
+    [
+      99,
+      "Mania",
+      "crs",
+      "runeword197",
+      ["Hustle (Weapons)", "Hustle (Weapon)", "Переполох (оружие)"],
+      "weapon",
+    ],
+  ]) {
+    assert.deepEqual(
+      runewordTemplates(name).map((r) => r.kind),
+      [kind]
+    );
+    for (const label of [name, ...aliases]) {
+      const build = planner.createBuild("paladin");
+      // Legacy JSON can have a name without a planner ID or an explicit base kind.
+      build.stash = [
+        {
+          name: label,
+          quality: "runeword",
+          requiredLevel: 39,
+          notes: "",
+          bonuses: {},
+          baseCode: base,
+        },
+      ];
+      assert.equal(itemRuneword(build.stash[0], words).id, id);
+      const { raw, bytes } = await verify(build, {
+        ...opts,
+        choices: { "stash.0": base },
+      });
+      const item = raw.items[raw.profile.stash.find((i) => i !== undefined)];
+      assert.equal(item.unique, nativeId, `${label}: preserve armor/weapon identity`);
+      const restored = codec.importCharacter(bytes).stash[0];
+      assert.equal(restored.runewordId, id);
+      assert.equal(restored.name, name);
+    }
+  }
   for (const word of words) {
     let build, entry, choices;
     for (const c of plannerClasses) {

@@ -167,9 +167,10 @@ export const ROTW_RUNEWORDS = [
   {
     id: 104,
     name: {
-      ru: "Пустота",
+      ru: "Бездна",
       en: "Void",
     },
+    aliases: ["Пустота"],
     runes: [10, 33, 24],
     types: [ItemTypes.ITEM_TYPE_DAGGERS],
     excluded: "",
