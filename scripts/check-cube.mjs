@@ -180,6 +180,39 @@ try {
   store.resetFilters();
   assert.equal(store.filteredRecipes.length, 98);
 
+  store.addTag("recipe", "reroll");
+  assert.deepEqual(
+    store.filteredRecipes.map((r) => r.key),
+    ["reroll_unique"]
+  );
+  store.resetFilters();
+  store.addTag("recipe", "sockets");
+  assert.equal(store.filteredRecipes.length, 6);
+  store.addTag("recipe", "weapon");
+  assert.deepEqual(
+    store.filteredRecipes.map((r) => r.key),
+    ["Mechanic's Weapon"]
+  );
+  store.resetFilters();
+  store.addTag("recipe", "crafted");
+  assert.equal(
+    store.filteredRecipes.length,
+    60,
+    "All crafted results, including upgrades, are discoverable"
+  );
+  store.addTag("recipe", "caster");
+  store.addTag("recipe", "boots");
+  assert.deepEqual(
+    store.filteredRecipes.map((r) => r.key),
+    ["caster_boots"]
+  );
+  store.removeTag("recipe", "crafted");
+  assert.deepEqual(
+    store.filteredRecipes.map((r) => r.key),
+    ["caster_boots"]
+  );
+  store.resetFilters();
+
   assert.deepEqual(parseCatalogHash("#/recipes"), { section: "recipes" });
   assert.deepEqual(parseCatalogHash("#/ricepes/stacks"), {
     section: "recipes",

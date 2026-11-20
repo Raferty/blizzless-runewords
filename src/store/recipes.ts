@@ -3,6 +3,7 @@ import {
   cubeCatalog,
   cubeIngredients,
   matchesCubeSearch,
+  matchesRecipeTag,
   recipeSearchText,
   type CubeMaterialKey,
 } from "@/utils/cube";
@@ -31,7 +32,7 @@ export const useRecipesStore = defineStore("recipes", {
             recipe.ingredients.some((item) =>
               state.materials.some((key) => item.key === key)
             )) &&
-          state.recipeTags.every((tag) => recipe.tags.includes(tag)) &&
+          state.recipeTags.every((tag) => matchesRecipeTag(recipe, tag)) &&
           state.ingredientTags.every((tag) => tags.has(tag)) &&
           matchesCubeSearch(searchable.get(recipe.key) ?? "", state.search)
         );

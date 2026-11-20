@@ -54,6 +54,15 @@ export function isCubeCraftingResult(
     !ingredients.some((item) => cubeResultQuality(item.key) === "crafted")
   );
 }
+/** Upstream craft tags are incomplete; classify by the actual result quality. */
+export function matchesRecipeTag(recipe: CubeRecipe, tag: string): boolean {
+  if (tag === "crafted")
+    return recipe.result.some((item) => cubeResultQuality(item.key) === "crafted");
+  if (tag === "reroll") return recipe.key === "reroll_unique";
+  if (tag === "sockets")
+    return recipe.result.some((item) => /\bsockets?\b/i.test(item.notes.en));
+  return recipe.tags.includes(tag);
+}
 export const normalizeCubeSearch = (text: string) =>
   text.toLowerCase().replace(/ё/g, "е").replace(/\s+/g, " ").trim();
 export function recipeSearchText(recipe: CubeRecipe): string {
