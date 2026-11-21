@@ -265,3 +265,9 @@ https://maxroll.gg/d2/d2planner
   containers are lossless PNG conversions of the corresponding original
   `data/hd/global/ui/items/misc/**/*.sprite` resources. Exact names and blob
   checksums are pinned in `src/shared/planner-native-art.json`.
+
+- Set inventory images in `items/sets/` come from the [Blizzless set catalogue](https://blizzless.info/ru/sets).
+  The catalogue maps each native set-item name to an AVIF with its inventory
+  tint. The normal, exceptional and elite models match in the launcher’s
+  `data/hd/items/sets.json` (SHA-256
+  `63f6b2ffb0c1df6d26414b1a55261c22a04fc095b04c37e600e7650ca5444308`).
