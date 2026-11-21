@@ -10,14 +10,21 @@
       @pointerenter="$emit('pointerenter')"
       @pointerleave="$emit('pointerleave')"
     >
-      <h3 :data-quality="item.quality">{{ word?.name[lang] || item.name }}</h3>
-      <p v-if="baseName && baseName !== item.name" class="planner-item-tooltip-base">
+      <h3 :data-quality="item.quality">
+        {{ shard?.name || word?.name[lang] || item.name }}
+      </h3>
+      <p
+        v-if="!shard && baseName && baseName !== item.name"
+        class="planner-item-tooltip-base"
+      >
         {{ baseName }}
       </p>
       <p v-if="word" class="planner-item-tooltip-rune-order">
         ‘{{ runes.map((rune) => rune?.name[lang]).join(" · ") }}’
       </p>
+      <p v-for="line in shard?.lines" :key="line">{{ line }}</p>
       <p
+        v-if="!shard"
         :class="{ 'planner-requirement--unmet': requirements && !requirements.level.met }"
       >
         {{ t("Требуемый уровень", "Required level") }}:
@@ -106,6 +113,7 @@ import {
   itemBonusLines,
   itemRuneword,
   itemRunewordLines,
+  worldstoneShardTooltip,
   itemSockets,
 } from "@/utils/planner-item-presentation";
 import {
@@ -136,6 +144,7 @@ const t = useText();
 const lang = computed(() => info.currentLang);
 const native = shallowRef<GameSaveExporter>();
 const identity = computed(() => plannerItemIdentity(props.item));
+const shard = computed(() => worldstoneShardTooltip(identity.value.baseCode, lang.value));
 const baseName = computed(() => {
   if (isContainerBase(identity.value.baseCode)) return "";
   const base = native.value?.gd.items[identity.value.baseCode || ""];

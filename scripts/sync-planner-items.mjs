@@ -302,11 +302,12 @@ await Promise.all(
   Array.from({ length: 6 }, async () => {
     while (cursor < keys.length) {
       const key = keys[cursor++];
-      if (/^sets\/[a-z0-9_-]+\/[a-z0-9_.-]+\.avif$/i.test(key)) {
+      if (/^(?:sets|misc)\/[a-z0-9_-]+\/[a-z0-9_.-]+\.avif$/i.test(key)) {
         const file = new URL(key, destination);
         let bytes = await readFile(file).catch(() => null);
         if (!bytes || !bytes.subarray(0, 32).includes("avif")) {
-          const url = "https://blizzless.info/imgs/game-items/" + key.slice(5);
+          const url =
+            "https://blizzless.info/imgs/game-items/" + key.slice(key.indexOf("/") + 1);
           const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
           if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
           bytes = Buffer.from(await response.arrayBuffer());

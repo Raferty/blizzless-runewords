@@ -367,11 +367,11 @@
     "p14": "misc/quest/tattered_scroll",
     "p20": "misc/gem/bloodstone",
     "p21": "misc/quest/ceremonial_claws",
-    "xa1": "misc/shard/cont_xa1",
-    "xa2": "misc/shard/cont_xa2",
-    "xa3": "misc/shard/cont_xa3",
-    "xa4": "misc/shard/cont_xa4",
-    "xa5": "misc/shard/cont_xa5"
+    "xa1": "misc/shard/mote_of_anguish.avif",
+    "xa2": "misc/shard/mote_of_pain.avif",
+    "xa3": "misc/shard/mote_of_hatred.avif",
+    "xa4": "misc/shard/mote_of_terror.avif",
+    "xa5": "misc/shard/mote_of_destruction.avif"
   },
   "imageOverrides": {
     "Harlequin Crest": "images/planner/items/armor/helmet/harlequin_crest.png",

@@ -193,6 +193,22 @@ try {
     5,
     "Five distinct native shard sprites"
   );
+  const { worldstoneShardTooltip } = await server.ssrLoadModule(
+    "/src/utils/planner-item-presentation.ts"
+  );
+  for (const item of shards) {
+    const code = item.baseCode;
+    const base = data.misc[code];
+    const act = code.slice(2);
+    const expected = "images/planner/items/misc/" + base.hd + ".avif";
+    assert.equal(plannerItemImage(item), expected);
+    assert((await readFile("public/" + expected)).subarray(0, 32).includes("avif"));
+    assert.equal(worldstoneShardTooltip(code, "en").name, base.name);
+    assert(worldstoneShardTooltip(code, "en").lines[0].includes("Act " + act));
+    assert(worldstoneShardTooltip(code, "ru").lines[0].includes("акт " + act));
+    assert(worldstoneShardTooltip(code, "ru").lines.join(" ").includes("кубе"));
+  }
+  assert.equal(worldstoneShardTooltip("bg1", "en"), undefined);
   const inventoryBuild = planner.parseBuild({
     ...build,
     charms: shards.map((item, i) => ({

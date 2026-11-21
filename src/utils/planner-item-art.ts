@@ -16,7 +16,9 @@ type AppearanceItem = Pick<PlannerItem, "baseCode" | "quality" | "catalogId"> &
 // Blizzless uses these internal bases for keys and other stackable quest items.
 export const isContainerBase = (code?: string) => code === "bg1" || code === "bg2";
 export const worldstoneShardCodes = ["xa1", "xa2", "xa3", "xa4", "xa5"] as const;
-export const isWorldstoneShard = (code?: string) => /^xa[1-5]$/.test(code || "");
+export const isWorldstoneShard = (
+  code?: string
+): code is (typeof worldstoneShardCodes)[number] => /^xa[1-5]$/.test(code || "");
 export const isTome = (code?: string) => code === "tbk" || code === "ibk";
 
 function appearanceReference(item: AppearanceItem) {

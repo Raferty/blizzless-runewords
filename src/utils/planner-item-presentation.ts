@@ -6,6 +6,36 @@ import type { Lang } from "@/types/lang";
 import { splitStatSections, runewordNames } from "./runeword";
 import { socketInsertVisual } from "./planner-sockets";
 
+import { isWorldstoneShard, type worldstoneShardCodes } from "./planner-item-art";
+
+const shardNames: Record<(typeof worldstoneShardCodes)[number], Record<Lang, string>> = {
+  xa1: { en: "Western Worldstone Shard", ru: "Западный осколок камня мироздания" },
+  xa2: { en: "Eastern Worldstone Shard", ru: "Восточный осколок камня мироздания" },
+  xa3: { en: "Southern Worldstone Shard", ru: "Южный осколок камня мироздания" },
+  xa4: { en: "Deep Worldstone Shard", ru: "Глубинный осколок камня мироздания" },
+  xa5: { en: "Northern Worldstone Shard", ru: "Северный осколок камня мироздания" },
+};
+
+export function worldstoneShardTooltip(code: string | undefined, lang: Lang) {
+  if (!isWorldstoneShard(code)) return;
+  const act = code.slice(2);
+  return {
+    name: shardNames[code][lang],
+    lines:
+      lang === "ru"
+        ? [
+            `Щёлкните правой кнопкой мыши, чтобы повергнуть акт ${act} в ужас.`,
+            "Требуется сложность «Ад» и включённые зоны ужаса.",
+            "Преобразуйте осколок отдельно в Хорадрическом кубе, чтобы поместить его в новый контейнер.",
+          ]
+        : [
+            `Right-click to terrorize Act ${act}.`,
+            "Requires Hell difficulty with Terror Zones enabled.",
+            "Transmute this shard alone in the Horadric Cube to create a container holding it.",
+          ],
+  };
+}
+
 export function itemRuneword(item: PlannerItem, words: RunewordTableItem[]) {
   if (item.quality !== "runeword") return;
   return words.find((word) =>
