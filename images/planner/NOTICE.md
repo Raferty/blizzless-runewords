@@ -68,11 +68,9 @@ The character inventory uses its PNG cropped to the equipment slots and 10×4 gr
   `items/misc/scroll/deciphered_bark_scroll.webp`: ordinary Key (`key`) and
   Key to the Cairn Stones (`bkd`) artwork downloaded 2026-10-30 from
   `https://lootcube.net/images/items/misc/`, following the game tables' `hd` field.
-- `items/misc/shard/cont_ua1.png` through `cont_ua5.png`: the five Ancients
-  summon statues from the same Blizzless launcher manifest and blob endpoint
-  (2026-10-28). Original 99×196 RGBA pixels are losslessly encoded as PNG.
-  SHA-256 values and the explicit `ua1`–`ua5` base mapping are maintained by
-  `scripts/sync-planner-items.mjs`.
+- The five loose Ancients statues (`ua1`–`ua5`) use the Blizzless catalogue AVIF
+  matching each base's HD model at `https://blizzless.info/imgs/game-items/shard/`.
+  Their stack containers use the original launcher sprites `cont_ua1.png` through `cont_ua5.png`.
 - Loose Worldstone Shards (`xa1`–`xa5`) use `items/misc/shard/mote_of_*.avif`
   from the Blizzless catalogue at `https://blizzless.info/imgs/game-items/shard/`,
   matched by base code and the native HD model. The corresponding stack
