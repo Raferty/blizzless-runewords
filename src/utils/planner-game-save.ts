@@ -178,6 +178,18 @@ export function saveChecksum(bytes: Uint8Array) {
 export function createGameSaveExporter(data: RawData, locale: Locale) {
   const saver = D2RSaver.fromData(structuredClone(data), locale);
   const gd = saver.gd;
+  function rareNameIds(name = "") {
+    const [prefix, suffix] = name.split(" ");
+    const lookup = (table: typeof gd.rarePrefix, part: string) =>
+      Object.entries(table).find(
+        ([, row]) => (gd.locale.strings[row.name] || row.name) === part
+      )?.[0];
+    const first = lookup(gd.rarePrefix, prefix);
+    const second = lookup(gd.rareSuffix, suffix);
+    if (first !== undefined && second !== undefined && name === `${prefix} ${suffix}`)
+      return { rare_name_id: Number(first) + 156, rare_name_id2: Number(second) + 1 };
+    return { rare_name_id: 156, rare_name_id2: 1 };
+  }
   function matchesMercenary(type: string, row: Definition) {
     const mercenary = mercenaries.find((entry) => entry.value === type);
     if (!mercenary?.skillId || Number(row.act) !== mercenary.act) return false;
@@ -431,6 +443,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             ] || (itemQuality === "set" ? gd.setItems : gd.uniqueItems)[catalogId].index
           : runeword?.name.en ||
             runewordName ||
+            ((itemQuality === "rare" || itemQuality === "crafted") && native.name) ||
             (itemQuality === "magic" && (prefix || suffix)
               ? `${prefix ? `${prefix} ` : ""}${gd.locale.strings[base?.namestr ?? ""] || base?.name || native.base}${suffix ? ` ${suffix}` : ""}`
               : gd.locale.strings[base?.namestr ?? ""] || base?.name || native.base),
@@ -1894,8 +1907,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             ?.find((id) => id.startsWith("ms"))
             ?.slice(2) ?? 0
         ),
-        rare_name_id: 156,
-        rare_name_id2: 1,
+        ...((item.quality === 6 || item.quality === 8) && rareNameIds(item.name)),
         magical_name_ids: Array.from({ length: 6 }, (_, i) =>
           Number(
             itemAffixIds

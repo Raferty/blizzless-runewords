@@ -84,6 +84,36 @@ try {
     assertions++;
     return { bytes, read, raw: codec.readCharacter(bytes) };
   }
+  {
+    const build = planner.createBuild("paladin");
+    const names = ["Raven Turn", "Entropy Clasp"];
+    build.stash = names.map((name, index) => ({
+      name,
+      baseCode: index ? "amu" : "rin",
+      quality: index ? "crafted" : "rare",
+      requiredLevel: 1,
+      itemLevel: 99,
+      notes: "",
+      bonuses: {},
+    }));
+    const { bytes, read } = await verify(build, {
+      ...opts,
+      choices: Object.fromEntries(
+        native.gameSaveEntries(build).map((e) => [e.key, codec.defaultChoice(e, build)])
+      ),
+    });
+    assert.deepEqual(
+      read.items.map((i) => [i.rare_name_id, i.rare_name_id2]),
+      [
+        [158, 125],
+        [195, 111],
+      ]
+    );
+    assert.deepEqual(
+      codec.importCharacter(bytes).stash.map((i) => i.name),
+      names
+    );
+  }
   for (const roll of [0, 1]) {
     const build = planner.createBuild("paladin");
     build.level = 99;
