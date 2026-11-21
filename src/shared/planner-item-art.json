@@ -1555,7 +1555,54 @@
     "p20": 0,
     "p21": 0
   },
-  "stackableBases": ["7b8", "7bk", "7gl", "7ja", "7pi", "7s7", "7ta", "7tk", "7ts", "9b8", "9bk", "9gl", "9ja", "9pi", "9s9", "9ta", "9tk", "9ts", "am5", "ama", "amf", "aqv", "bal", "bkf", "bpl", "bps", "cqv", "gld", "glv", "gpl", "gpm", "gps", "ibk", "jav", "key", "opl", "opm", "ops", "pil", "rpl", "rps", "ssp", "tax", "tbk", "tkf", "tsp"],
+  "stackableBases": [
+    "7b8",
+    "7bk",
+    "7gl",
+    "7ja",
+    "7pi",
+    "7s7",
+    "7ta",
+    "7tk",
+    "7ts",
+    "9b8",
+    "9bk",
+    "9gl",
+    "9ja",
+    "9pi",
+    "9s9",
+    "9ta",
+    "9tk",
+    "9ts",
+    "am5",
+    "ama",
+    "amf",
+    "aqv",
+    "bal",
+    "bkf",
+    "bpl",
+    "bps",
+    "cqv",
+    "gld",
+    "glv",
+    "gpl",
+    "gpm",
+    "gps",
+    "ibk",
+    "jav",
+    "key",
+    "opl",
+    "opm",
+    "ops",
+    "pil",
+    "rpl",
+    "rps",
+    "ssp",
+    "tax",
+    "tbk",
+    "tkf",
+    "tsp"
+  ],
   "dimensions": {
     "hax": [1, 3],
     "axe": [2, 3],
@@ -3820,9 +3867,9 @@
   "unresolvedBaseFiles": {},
   "unique": {
     "unique000": [
-      "images/planner/items/classic/invhaxu.gif",
-      "images/planner/items/classic/invhaxu.gif",
-      "images/planner/items/classic/invhaxu.gif"
+      "images/planner/items/uniques/axe/the_gnasher.avif",
+      "images/planner/items/uniques/axe/the_gnasher.avif",
+      "images/planner/items/uniques/axe/the_gnasher.avif"
     ],
     "unique001": [
       "images/planner/items/weapon/axe/deathspade.webp",
@@ -3830,9 +3877,9 @@
       "images/planner/items/weapon/axe/deathspade.webp"
     ],
     "unique002": [
-      "images/planner/items/weapon/axe/double_axe.webp",
-      "images/planner/items/weapon/axe/double_axe.webp",
-      "images/planner/items/weapon/axe/double_axe.webp"
+      "images/planner/items/uniques/axe/double_axe.t43.avif",
+      "images/planner/items/uniques/axe/double_axe.t43.avif",
+      "images/planner/items/uniques/axe/double_axe.t43.avif"
     ],
     "unique003": [
       "images/planner/items/weapon/axe/mindrend.webp",
@@ -3840,19 +3887,19 @@
       "images/planner/items/weapon/axe/mindrend.webp"
     ],
     "unique004": [
-      "images/planner/items/weapon/axe/war_axe.webp",
-      "images/planner/items/weapon/axe/war_axe.webp",
-      "images/planner/items/weapon/axe/war_axe.webp"
+      "images/planner/items/uniques/axe/war_axe.t44.avif",
+      "images/planner/items/uniques/axe/war_axe.t44.avif",
+      "images/planner/items/uniques/axe/war_axe.t44.avif"
     ],
     "unique005": [
-      "images/planner/items/weapon/axe/large_axe.webp",
-      "images/planner/items/weapon/axe/large_axe.webp",
-      "images/planner/items/weapon/axe/large_axe.webp"
+      "images/planner/items/uniques/axe/large_axe.t59.avif",
+      "images/planner/items/uniques/axe/large_axe.t59.avif",
+      "images/planner/items/uniques/axe/large_axe.t59.avif"
     ],
     "unique006": [
-      "images/planner/items/weapon/axe/broad_axe.webp",
-      "images/planner/items/weapon/axe/broad_axe.webp",
-      "images/planner/items/weapon/axe/broad_axe.webp"
+      "images/planner/items/uniques/axe/broad_axe.t60.avif",
+      "images/planner/items/uniques/axe/broad_axe.t60.avif",
+      "images/planner/items/uniques/axe/broad_axe.t60.avif"
     ],
     "unique007": [
       "images/planner/items/weapon/axe/the_chieftan.webp",
@@ -3865,9 +3912,9 @@
       "images/planner/items/weapon/axe/brainhew.webp"
     ],
     "unique009": [
-      "images/planner/items/weapon/axe/giant_axe.webp",
-      "images/planner/items/weapon/axe/the_minataur.webp",
-      "images/planner/items/weapon/axe/giant_axe.webp"
+      "images/planner/items/uniques/axe/giant_axe.t45.avif",
+      "images/planner/items/uniques/axe/giant_axe.t45.avif",
+      "images/planner/items/uniques/axe/giant_axe.t45.avif"
     ],
     "unique010": [
       "images/planner/items/weapon/wand/iros_torch.webp",
@@ -3875,9 +3922,9 @@
       "images/planner/items/weapon/wand/iros_torch.webp"
     ],
     "unique011": [
-      "images/planner/items/weapon/wand/yew_wand.webp",
-      "images/planner/items/weapon/wand/yew_wand.webp",
-      "images/planner/items/weapon/wand/yew_wand.webp"
+      "images/planner/items/uniques/wand/yew_wand.t173.avif",
+      "images/planner/items/uniques/wand/yew_wand.t173.avif",
+      "images/planner/items/uniques/wand/yew_wand.t173.avif"
     ],
     "unique012": [
       "images/planner/items/weapon/wand/gravenspine.webp",
@@ -3885,9 +3932,9 @@
       "images/planner/items/weapon/wand/gravenspine.webp"
     ],
     "unique013": [
-      "images/planner/items/weapon/wand/grim_wand.webp",
-      "images/planner/items/weapon/wand/blackhand_key.webp",
-      "images/planner/items/weapon/wand/grim_wand.webp"
+      "images/planner/items/uniques/wand/grim_wand.t46.avif",
+      "images/planner/items/uniques/wand/grim_wand.t46.avif",
+      "images/planner/items/uniques/wand/grim_wand.t46.avif"
     ],
     "unique014": [
       "images/planner/items/weapon/club/felloak.webp",
@@ -3895,19 +3942,19 @@
       "images/planner/items/weapon/club/felloak.webp"
     ],
     "unique015": [
-      "images/planner/items/weapon/scepter/scepter.webp",
-      "images/planner/items/weapon/scepter/scepter.webp",
-      "images/planner/items/weapon/scepter/scepter.webp"
+      "images/planner/items/uniques/scepter/scepter.t50.avif",
+      "images/planner/items/uniques/scepter/scepter.t50.avif",
+      "images/planner/items/uniques/scepter/scepter.t50.avif"
     ],
     "unique016": [
-      "images/planner/items/weapon/scepter/grand_scepter.webp",
-      "images/planner/items/weapon/scepter/grand_scepter.webp",
-      "images/planner/items/weapon/scepter/grand_scepter.webp"
+      "images/planner/items/uniques/scepter/grand_scepter.t57.avif",
+      "images/planner/items/uniques/scepter/grand_scepter.t57.avif",
+      "images/planner/items/uniques/scepter/grand_scepter.t57.avif"
     ],
     "unique017": [
-      "images/planner/items/weapon/scepter/war_scepter.webp",
-      "images/planner/items/weapon/scepter/war_scepter.webp",
-      "images/planner/items/weapon/scepter/war_scepter.webp"
+      "images/planner/items/uniques/scepter/war_scepter.t51.avif",
+      "images/planner/items/uniques/scepter/war_scepter.t51.avif",
+      "images/planner/items/uniques/scepter/war_scepter.t51.avif"
     ],
     "unique018": [
       "images/planner/items/weapon/club/stoutnail.webp",
@@ -3915,9 +3962,9 @@
       "images/planner/items/weapon/club/stoutnail.webp"
     ],
     "unique019": [
-      "images/planner/items/weapon/mace/mace.webp",
-      "images/planner/items/weapon/mace/mace.webp",
-      "images/planner/items/weapon/mace/mace.webp"
+      "images/planner/items/uniques/mace/mace.t45.avif",
+      "images/planner/items/uniques/mace/mace.t45.avif",
+      "images/planner/items/uniques/mace/mace.t45.avif"
     ],
     "unique020": [
       "images/planner/items/weapon/mace/bloodrise.webp",
@@ -3925,14 +3972,14 @@
       "images/planner/items/weapon/mace/bloodrise.webp"
     ],
     "unique021": [
-      "images/planner/items/weapon/mace/flail.webp",
-      "images/planner/items/weapon/mace/flail.webp",
-      "images/planner/items/weapon/mace/flail.webp"
+      "images/planner/items/uniques/mace/flail.t47.avif",
+      "images/planner/items/uniques/mace/flail.t47.avif",
+      "images/planner/items/uniques/mace/flail.t47.avif"
     ],
     "unique022": [
-      "images/planner/items/weapon/hammer/war_hammer.webp",
-      "images/planner/items/weapon/hammer/war_hammer.webp",
-      "images/planner/items/weapon/hammer/war_hammer.webp"
+      "images/planner/items/uniques/hammer/war_hammer.t48.avif",
+      "images/planner/items/uniques/hammer/war_hammer.t48.avif",
+      "images/planner/items/uniques/hammer/war_hammer.t48.avif"
     ],
     "unique023": [
       "images/planner/items/weapon/hammer/bonesob.webp",
@@ -3940,14 +3987,14 @@
       "images/planner/items/weapon/hammer/bonesob.webp"
     ],
     "unique024": [
-      "images/planner/items/weapon/hammer/great_maul.webp",
-      "images/planner/items/weapon/hammer/great_maul.webp",
-      "images/planner/items/weapon/hammer/great_maul.webp"
+      "images/planner/items/uniques/hammer/great_maul.t54.avif",
+      "images/planner/items/uniques/hammer/great_maul.t54.avif",
+      "images/planner/items/uniques/hammer/great_maul.t54.avif"
     ],
     "unique025": [
-      "images/planner/items/weapon/sword/short_sword.webp",
-      "images/planner/items/weapon/sword/short_sword.webp",
-      "images/planner/items/weapon/sword/short_sword.webp"
+      "images/planner/items/uniques/sword/short_sword.t45.avif",
+      "images/planner/items/uniques/sword/short_sword.t45.avif",
+      "images/planner/items/uniques/sword/short_sword.t45.avif"
     ],
     "unique026": [
       "images/planner/items/weapon/sword/blood_crescent.webp",
@@ -3975,9 +4022,9 @@
       "images/planner/items/weapon/sword/hellplague.webp"
     ],
     "unique032": [
-      "images/planner/items/weapon/sword/war_sword.webp",
-      "images/planner/items/weapon/sword/war_sword.webp",
-      "images/planner/items/weapon/sword/war_sword.webp"
+      "images/planner/items/uniques/sword/war_sword.t42.avif",
+      "images/planner/items/uniques/sword/war_sword.t42.avif",
+      "images/planner/items/uniques/sword/war_sword.t42.avif"
     ],
     "unique033": [
       "images/planner/items/weapon/sword/shadowfang.webp",
@@ -3985,9 +4032,9 @@
       "images/planner/items/weapon/sword/shadowfang.webp"
     ],
     "unique034": [
-      "images/planner/items/weapon/sword/claymore.webp",
-      "images/planner/items/weapon/sword/claymore.webp",
-      "images/planner/items/weapon/sword/claymore.webp"
+      "images/planner/items/uniques/sword/claymore.t53.avif",
+      "images/planner/items/uniques/sword/claymore.t53.avif",
+      "images/planner/items/uniques/sword/claymore.t53.avif"
     ],
     "unique035": [
       "images/planner/items/weapon/sword/kinemils_awl.webp",
@@ -4000,9 +4047,9 @@
       "images/planner/items/weapon/sword/blacktongue.webp"
     ],
     "unique037": [
-      "images/planner/items/weapon/sword/flamberge.webp",
-      "images/planner/items/weapon/sword/todesfaelle_flamme.webp",
-      "images/planner/items/weapon/sword/flamberge.webp"
+      "images/planner/items/uniques/sword/flamberge.t48.avif",
+      "images/planner/items/uniques/sword/flamberge.t48.avif",
+      "images/planner/items/uniques/sword/flamberge.t48.avif"
     ],
     "unique038": [
       "images/planner/items/weapon/sword/the_patriarch.webp",
@@ -4010,14 +4057,14 @@
       "images/planner/items/weapon/sword/the_patriarch.webp"
     ],
     "unique039": [
-      "images/planner/items/weapon/knife/dagger.webp",
-      "images/planner/items/weapon/knife/dagger.webp",
-      "images/planner/items/weapon/knife/dagger.webp"
+      "images/planner/items/uniques/knife/dagger.t43.avif",
+      "images/planner/items/uniques/knife/dagger.t43.avif",
+      "images/planner/items/uniques/knife/dagger.t43.avif"
     ],
     "unique040": [
-      "images/planner/items/weapon/knife/dirk.webp",
-      "images/planner/items/weapon/knife/dirk.webp",
-      "images/planner/items/weapon/knife/dirk.webp"
+      "images/planner/items/uniques/knife/dirk.t44.avif",
+      "images/planner/items/uniques/knife/dirk.t44.avif",
+      "images/planner/items/uniques/knife/dirk.t44.avif"
     ],
     "unique041": [
       "images/planner/items/weapon/knife/the_jade_tan_do.webp",
@@ -4025,14 +4072,14 @@
       "images/planner/items/weapon/knife/the_jade_tan_do.webp"
     ],
     "unique042": [
-      "images/planner/items/weapon/knife/blade.webp",
-      "images/planner/items/weapon/knife/stormspike.webp",
-      "images/planner/items/weapon/knife/blade.webp"
+      "images/planner/items/uniques/knife/blade.t47.avif",
+      "images/planner/items/uniques/knife/blade.t47.avif",
+      "images/planner/items/uniques/knife/blade.t47.avif"
     ],
     "unique043": [
-      "images/planner/items/weapon/spear/spear.webp",
-      "images/planner/items/weapon/spear/spear.webp",
-      "images/planner/items/weapon/spear/spear.webp"
+      "images/planner/items/uniques/spear/spear.t186.avif",
+      "images/planner/items/uniques/spear/spear.t186.avif",
+      "images/planner/items/uniques/spear/spear.t186.avif"
     ],
     "unique044": [
       "images/planner/items/weapon/spear/razortine.webp",
@@ -4040,29 +4087,29 @@
       "images/planner/items/weapon/spear/razortine.webp"
     ],
     "unique045": [
-      "images/planner/items/weapon/spear/brandistock.webp",
-      "images/planner/items/weapon/spear/soulfeast_tine.webp",
-      "images/planner/items/weapon/spear/brandistock.webp"
+      "images/planner/items/uniques/spear/brandistock.t168.avif",
+      "images/planner/items/uniques/spear/brandistock.t168.avif",
+      "images/planner/items/uniques/spear/brandistock.t168.avif"
     ],
     "unique046": [
-      "images/planner/items/weapon/spear/spetum.webp",
-      "images/planner/items/weapon/spear/spetum.webp",
-      "images/planner/items/weapon/spear/spetum.webp"
+      "images/planner/items/uniques/spear/spetum.t175.avif",
+      "images/planner/items/uniques/spear/spetum.t175.avif",
+      "images/planner/items/uniques/spear/spetum.t175.avif"
     ],
     "unique047": [
-      "images/planner/items/weapon/spear/pike.webp",
-      "images/planner/items/weapon/spear/pike.webp",
-      "images/planner/items/weapon/spear/pike.webp"
+      "images/planner/items/uniques/spear/pike.t169.avif",
+      "images/planner/items/uniques/spear/pike.t169.avif",
+      "images/planner/items/uniques/spear/pike.t169.avif"
     ],
     "unique048": [
-      "images/planner/items/weapon/polearm/bardiche.webp",
-      "images/planner/items/weapon/polearm/bardiche.webp",
-      "images/planner/items/weapon/polearm/bardiche.webp"
+      "images/planner/items/uniques/polearm/bardiche.t45.avif",
+      "images/planner/items/uniques/polearm/bardiche.t45.avif",
+      "images/planner/items/uniques/polearm/bardiche.t45.avif"
     ],
     "unique049": [
-      "images/planner/items/weapon/polearm/voulge.webp",
-      "images/planner/items/weapon/polearm/voulge.webp",
-      "images/planner/items/weapon/polearm/voulge.webp"
+      "images/planner/items/uniques/polearm/voulge.t54.avif",
+      "images/planner/items/uniques/polearm/voulge.t54.avif",
+      "images/planner/items/uniques/polearm/voulge.t54.avif"
     ],
     "unique050": [
       "images/planner/items/weapon/polearm/soul_harvest.webp",
@@ -4070,29 +4117,29 @@
       "images/planner/items/weapon/polearm/soul_harvest.webp"
     ],
     "unique051": [
-      "images/planner/items/weapon/polearm/poleaxe.webp",
-      "images/planner/items/weapon/polearm/poleaxe.webp",
-      "images/planner/items/weapon/polearm/poleaxe.webp"
+      "images/planner/items/uniques/polearm/poleaxe.t46.avif",
+      "images/planner/items/uniques/polearm/poleaxe.t46.avif",
+      "images/planner/items/uniques/polearm/poleaxe.t46.avif"
     ],
     "unique052": [
-      "images/planner/items/weapon/polearm/halberd.webp",
-      "images/planner/items/weapon/polearm/halberd.webp",
-      "images/planner/items/weapon/polearm/halberd.webp"
+      "images/planner/items/uniques/polearm/halberd.t47.avif",
+      "images/planner/items/uniques/polearm/halberd.t47.avif",
+      "images/planner/items/uniques/polearm/halberd.t47.avif"
     ],
     "unique053": [
-      "images/planner/items/weapon/polearm/war_scythe.webp",
-      "images/planner/items/weapon/polearm/war_scythe.webp",
-      "images/planner/items/weapon/polearm/war_scythe.webp"
+      "images/planner/items/uniques/polearm/war_scythe.t59.avif",
+      "images/planner/items/uniques/polearm/war_scythe.t59.avif",
+      "images/planner/items/uniques/polearm/war_scythe.t59.avif"
     ],
     "unique054": [
-      "images/planner/items/weapon/staff/short_staff.webp",
-      "images/planner/items/weapon/staff/short_staff.webp",
-      "images/planner/items/weapon/staff/short_staff.webp"
+      "images/planner/items/uniques/staff/short_staff.t178.avif",
+      "images/planner/items/uniques/staff/short_staff.t178.avif",
+      "images/planner/items/uniques/staff/short_staff.t178.avif"
     ],
     "unique055": [
-      "images/planner/items/weapon/staff/long_staff.webp",
-      "images/planner/items/weapon/staff/long_staff.webp",
-      "images/planner/items/weapon/staff/long_staff.webp"
+      "images/planner/items/uniques/staff/long_staff.t180.avif",
+      "images/planner/items/uniques/staff/long_staff.t180.avif",
+      "images/planner/items/uniques/staff/long_staff.t180.avif"
     ],
     "unique056": [
       "images/planner/items/weapon/staff/lazarus_spire.webp",
@@ -4100,29 +4147,29 @@
       "images/planner/items/weapon/staff/lazarus_spire.webp"
     ],
     "unique057": [
-      "images/planner/items/weapon/staff/battle_staff.webp",
-      "images/planner/items/weapon/staff/battle_staff.webp",
-      "images/planner/items/weapon/staff/battle_staff.webp"
+      "images/planner/items/uniques/staff/battle_staff.t176.avif",
+      "images/planner/items/uniques/staff/battle_staff.t176.avif",
+      "images/planner/items/uniques/staff/battle_staff.t176.avif"
     ],
     "unique058": [
-      "images/planner/items/weapon/staff/war_staff.webp",
-      "images/planner/items/weapon/staff/skullcollector.webp",
-      "images/planner/items/weapon/staff/war_staff.webp"
+      "images/planner/items/uniques/staff/war_staff.t182.avif",
+      "images/planner/items/uniques/staff/war_staff.t182.avif",
+      "images/planner/items/uniques/staff/war_staff.t182.avif"
     ],
     "unique059": [
-      "images/planner/items/weapon/bow/short_bow.webp",
-      "images/planner/items/weapon/bow/short_bow.webp",
-      "images/planner/items/weapon/bow/short_bow.webp"
+      "images/planner/items/uniques/bow/short_bow.t174.avif",
+      "images/planner/items/uniques/bow/short_bow.t174.avif",
+      "images/planner/items/uniques/bow/short_bow.t174.avif"
     ],
     "unique060": [
-      "images/planner/items/weapon/bow/hunters_bow.webp",
-      "images/planner/items/weapon/bow/hunters_bow.webp",
-      "images/planner/items/weapon/bow/hunters_bow.webp"
+      "images/planner/items/uniques/bow/hunters_bow.t175.avif",
+      "images/planner/items/uniques/bow/hunters_bow.t175.avif",
+      "images/planner/items/uniques/bow/hunters_bow.t175.avif"
     ],
     "unique061": [
-      "images/planner/items/weapon/bow/long_bow.webp",
-      "images/planner/items/weapon/bow/kuko_shakaku.webp",
-      "images/planner/items/weapon/bow/long_bow.webp"
+      "images/planner/items/uniques/bow/long_bow.t176.avif",
+      "images/planner/items/uniques/bow/long_bow.t176.avif",
+      "images/planner/items/uniques/bow/long_bow.t176.avif"
     ],
     "unique062": [
       "images/planner/items/weapon/bow/piercerib.webp",
@@ -4135,9 +4182,9 @@
       "images/planner/items/weapon/bow/pullspite.webp"
     ],
     "unique064": [
-      "images/planner/items/weapon/bow/long_battle_bow.webp",
-      "images/planner/items/weapon/bow/long_battle_bow.webp",
-      "images/planner/items/weapon/bow/long_battle_bow.webp"
+      "images/planner/items/uniques/bow/long_battle_bow.t179.avif",
+      "images/planner/items/uniques/bow/long_battle_bow.t179.avif",
+      "images/planner/items/uniques/bow/long_battle_bow.t179.avif"
     ],
     "unique065": [
       "images/planner/items/weapon/bow/hellclap.webp",
@@ -4145,9 +4192,9 @@
       "images/planner/items/weapon/bow/hellclap.webp"
     ],
     "unique066": [
-      "images/planner/items/weapon/bow/long_war_bow.webp",
-      "images/planner/items/weapon/bow/long_war_bow.webp",
-      "images/planner/items/weapon/bow/long_war_bow.webp"
+      "images/planner/items/uniques/bow/long_war_bow.t181.avif",
+      "images/planner/items/uniques/bow/long_war_bow.t181.avif",
+      "images/planner/items/uniques/bow/long_war_bow.t181.avif"
     ],
     "unique067": [
       "images/planner/items/weapon/bow/leadcrow.webp",
@@ -4175,9 +4222,9 @@
       "images/planner/items/armor/helmet/war_bonnet.webp"
     ],
     "unique072": [
-      "images/planner/items/armor/helmet/skull_cap.webp",
-      "images/planner/items/armor/helmet/rockstopper.webp",
-      "images/planner/items/armor/helmet/skull_cap.webp"
+      "images/planner/items/uniques/helmet/skull_cap.t187.avif",
+      "images/planner/items/uniques/helmet/skull_cap.t187.avif",
+      "images/planner/items/uniques/helmet/skull_cap.t187.avif"
     ],
     "unique073": [
       "images/planner/items/armor/helmet/coif_of_glory.webp",
@@ -4195,79 +4242,79 @@
       "images/planner/items/armor/helmet/wormskull.webp"
     ],
     "unique076": [
-      "images/planner/items/armor/helmet/great_helm.webp",
-      "images/planner/items/armor/helmet/great_helm.webp",
-      "images/planner/items/armor/helmet/great_helm.webp"
+      "images/planner/items/uniques/helmet/great_helm.t170.avif",
+      "images/planner/items/uniques/helmet/great_helm.t170.avif",
+      "images/planner/items/uniques/helmet/great_helm.t170.avif"
     ],
     "unique077": [
-      "images/planner/items/armor/helmet/crown.webp",
-      "images/planner/items/armor/helmet/crown_of_thieves.webp",
-      "images/planner/items/armor/helmet/crown.webp"
+      "images/planner/items/uniques/helmet/crown.t171.avif",
+      "images/planner/items/uniques/helmet/crown.t171.avif",
+      "images/planner/items/uniques/helmet/crown.t171.avif"
     ],
     "unique078": [
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp"
+      "images/planner/items/uniques/helmet/mask.t46.avif",
+      "images/planner/items/uniques/helmet/mask.t46.avif",
+      "images/planner/items/uniques/helmet/mask.t46.avif"
     ],
     "unique079": [
-      "images/planner/items/armor/armor/quilted_armor.webp",
-      "images/planner/items/armor/armor/quilted_armor.webp",
-      "images/planner/items/armor/armor/quilted_armor.webp"
+      "images/planner/items/uniques/armor/quilted_armor.t169.avif",
+      "images/planner/items/uniques/armor/quilted_armor.t169.avif",
+      "images/planner/items/uniques/armor/quilted_armor.t169.avif"
     ],
     "unique080": [
-      "images/planner/items/armor/armor/leather_armor.webp",
-      "images/planner/items/armor/armor/leather_armor.webp",
-      "images/planner/items/armor/armor/leather_armor.webp"
+      "images/planner/items/uniques/armor/leather_armor.t176.avif",
+      "images/planner/items/uniques/armor/leather_armor.t176.avif",
+      "images/planner/items/uniques/armor/leather_armor.t176.avif"
     ],
     "unique081": [
-      "images/planner/items/armor/armor/hard_leather_armor.webp",
-      "images/planner/items/armor/armor/hard_leather_armor.webp",
-      "images/planner/items/armor/armor/hard_leather_armor.webp"
+      "images/planner/items/uniques/armor/hard_leather_armor.t177.avif",
+      "images/planner/items/uniques/armor/hard_leather_armor.t177.avif",
+      "images/planner/items/uniques/armor/hard_leather_armor.t177.avif"
     ],
     "unique082": [
-      "images/planner/items/armor/armor/studded_leather.webp",
-      "images/planner/items/armor/armor/ironpelt.webp",
-      "images/planner/items/armor/armor/studded_leather.webp"
+      "images/planner/items/uniques/armor/studded_leather.t178.avif",
+      "images/planner/items/uniques/armor/studded_leather.t178.avif",
+      "images/planner/items/uniques/armor/studded_leather.t178.avif"
     ],
     "unique083": [
-      "images/planner/items/armor/armor/ring_mail.webp",
-      "images/planner/items/armor/armor/ring_mail.webp",
-      "images/planner/items/armor/armor/ring_mail.webp"
+      "images/planner/items/uniques/armor/ring_mail.t179.avif",
+      "images/planner/items/uniques/armor/ring_mail.t179.avif",
+      "images/planner/items/uniques/armor/ring_mail.t179.avif"
     ],
     "unique084": [
-      "images/planner/items/armor/armor/scale_mail.webp",
-      "images/planner/items/armor/armor/scale_mail.webp",
-      "images/planner/items/armor/armor/scale_mail.webp"
+      "images/planner/items/uniques/armor/scale_mail.t180.avif",
+      "images/planner/items/uniques/armor/scale_mail.t180.avif",
+      "images/planner/items/uniques/armor/scale_mail.t180.avif"
     ],
     "unique085": [
-      "images/planner/items/armor/armor/chain_mail.webp",
-      "images/planner/items/armor/armor/chain_mail.webp",
-      "images/planner/items/armor/armor/chain_mail.webp"
+      "images/planner/items/uniques/armor/chain_mail.t181.avif",
+      "images/planner/items/uniques/armor/chain_mail.t181.avif",
+      "images/planner/items/uniques/armor/chain_mail.t181.avif"
     ],
     "unique086": [
-      "images/planner/items/armor/armor/breast_plate.webp",
-      "images/planner/items/armor/armor/breast_plate.webp",
-      "images/planner/items/armor/armor/breast_plate.webp"
+      "images/planner/items/uniques/armor/breast_plate.t182.avif",
+      "images/planner/items/uniques/armor/breast_plate.t182.avif",
+      "images/planner/items/uniques/armor/breast_plate.t182.avif"
     ],
     "unique087": [
-      "images/planner/items/armor/armor/splint_mail.webp",
-      "images/planner/items/armor/armor/splint_mail.webp",
-      "images/planner/items/armor/armor/splint_mail.webp"
+      "images/planner/items/uniques/armor/splint_mail.t183.avif",
+      "images/planner/items/uniques/armor/splint_mail.t183.avif",
+      "images/planner/items/uniques/armor/splint_mail.t183.avif"
     ],
     "unique088": [
-      "images/planner/items/armor/armor/plate_mail.webp",
-      "images/planner/items/armor/armor/plate_mail.webp",
-      "images/planner/items/armor/armor/plate_mail.webp"
+      "images/planner/items/uniques/armor/plate_mail.t184.avif",
+      "images/planner/items/uniques/armor/plate_mail.t184.avif",
+      "images/planner/items/uniques/armor/plate_mail.t184.avif"
     ],
     "unique089": [
-      "images/planner/items/armor/armor/field_plate.webp",
-      "images/planner/items/armor/armor/field_plate.webp",
-      "images/planner/items/armor/armor/field_plate.webp"
+      "images/planner/items/uniques/armor/field_plate.t170.avif",
+      "images/planner/items/uniques/armor/field_plate.t170.avif",
+      "images/planner/items/uniques/armor/field_plate.t170.avif"
     ],
     "unique090": [
-      "images/planner/items/armor/armor/gothic_plate.webp",
-      "images/planner/items/armor/armor/gothic_plate.webp",
-      "images/planner/items/armor/armor/gothic_plate.webp"
+      "images/planner/items/uniques/armor/gothic_plate.t186.avif",
+      "images/planner/items/uniques/armor/gothic_plate.t186.avif",
+      "images/planner/items/uniques/armor/gothic_plate.t186.avif"
     ],
     "unique091": [
       "images/planner/items/armor/armor/goldskin.webp",
@@ -4280,9 +4327,9 @@
       "images/planner/items/armor/armor/victors_silk.webp"
     ],
     "unique093": [
-      "images/planner/items/armor/armor/light_plate.webp",
-      "images/planner/items/armor/armor/light_plate.webp",
-      "images/planner/items/armor/armor/light_plate.webp"
+      "images/planner/items/uniques/armor/light_plate.t174.avif",
+      "images/planner/items/uniques/armor/light_plate.t174.avif",
+      "images/planner/items/uniques/armor/light_plate.t174.avif"
     ],
     "unique094": [
       "images/planner/items/armor/shield/pelta_lunata.webp",
@@ -4325,79 +4372,79 @@
       "images/planner/items/armor/shield/the_ward.webp"
     ],
     "unique102": [
-      "images/planner/items/armor/glove/gloves_l.webp",
-      "images/planner/items/armor/glove/gloves_l.webp",
-      "images/planner/items/armor/glove/gloves_l.webp"
+      "images/planner/items/uniques/glove/gloves_l.t174.avif",
+      "images/planner/items/uniques/glove/gloves_l.t174.avif",
+      "images/planner/items/uniques/glove/gloves_l.t174.avif"
     ],
     "unique103": [
-      "images/planner/items/armor/glove/heavy_gloves.webp",
-      "images/planner/items/armor/glove/heavy_gloves.webp",
-      "images/planner/items/armor/glove/heavy_gloves.webp"
+      "images/planner/items/uniques/glove/heavy_gloves.t187.avif",
+      "images/planner/items/uniques/glove/heavy_gloves.t187.avif",
+      "images/planner/items/uniques/glove/heavy_gloves.t187.avif"
     ],
     "unique104": [
-      "images/planner/items/armor/glove/bracers_m.webp",
-      "images/planner/items/armor/glove/bracers_m.webp",
-      "images/planner/items/armor/glove/bracers_m.webp"
+      "images/planner/items/uniques/glove/bracers_m.t175.avif",
+      "images/planner/items/uniques/glove/bracers_m.t175.avif",
+      "images/planner/items/uniques/glove/bracers_m.t175.avif"
     ],
     "unique105": [
-      "images/planner/items/armor/glove/light_gauntlets.webp",
-      "images/planner/items/armor/glove/light_gauntlets.webp",
-      "images/planner/items/armor/glove/light_gauntlets.webp"
+      "images/planner/items/uniques/glove/light_gauntlets.t169.avif",
+      "images/planner/items/uniques/glove/light_gauntlets.t169.avif",
+      "images/planner/items/uniques/glove/light_gauntlets.t169.avif"
     ],
     "unique106": [
-      "images/planner/items/armor/glove/gaunlets_h.webp",
-      "images/planner/items/armor/glove/gaunlets_h.webp",
-      "images/planner/items/armor/glove/gaunlets_h.webp"
+      "images/planner/items/uniques/glove/gaunlets_h.t176.avif",
+      "images/planner/items/uniques/glove/gaunlets_h.t176.avif",
+      "images/planner/items/uniques/glove/gaunlets_h.t176.avif"
     ],
     "unique107": [
-      "images/planner/items/armor/boot/leather_boots.webp",
-      "images/planner/items/armor/boot/leather_boots.webp",
-      "images/planner/items/armor/boot/leather_boots.webp"
+      "images/planner/items/uniques/boot/leather_boots.t177.avif",
+      "images/planner/items/uniques/boot/leather_boots.t177.avif",
+      "images/planner/items/uniques/boot/leather_boots.t177.avif"
     ],
     "unique108": [
-      "images/planner/items/armor/boot/heavy_boots.webp",
-      "images/planner/items/armor/boot/heavy_boots.webp",
-      "images/planner/items/armor/boot/heavy_boots.webp"
+      "images/planner/items/uniques/boot/heavy_boots.t173.avif",
+      "images/planner/items/uniques/boot/heavy_boots.t173.avif",
+      "images/planner/items/uniques/boot/heavy_boots.t173.avif"
     ],
     "unique109": [
-      "images/planner/items/armor/boot/chain_boots.webp",
-      "images/planner/items/armor/boot/chain_boots.webp",
-      "images/planner/items/armor/boot/chain_boots.webp"
+      "images/planner/items/uniques/boot/chain_boots.t178.avif",
+      "images/planner/items/uniques/boot/chain_boots.t178.avif",
+      "images/planner/items/uniques/boot/chain_boots.t178.avif"
     ],
     "unique110": [
-      "images/planner/items/armor/boot/light_plate_boots.webp",
-      "images/planner/items/armor/boot/light_plate_boots.webp",
-      "images/planner/items/armor/boot/light_plate_boots.webp"
+      "images/planner/items/uniques/boot/light_plate_boots.t170.avif",
+      "images/planner/items/uniques/boot/light_plate_boots.t170.avif",
+      "images/planner/items/uniques/boot/light_plate_boots.t170.avif"
     ],
     "unique111": [
-      "images/planner/items/armor/boot/plate_boots.webp",
-      "images/planner/items/armor/boot/plate_boots.webp",
-      "images/planner/items/armor/boot/plate_boots.webp"
+      "images/planner/items/uniques/boot/plate_boots.t179.avif",
+      "images/planner/items/uniques/boot/plate_boots.t179.avif",
+      "images/planner/items/uniques/boot/plate_boots.t179.avif"
     ],
     "unique112": [
-      "images/planner/items/armor/belt/sash_l.webp",
-      "images/planner/items/armor/belt/sash_l.webp",
-      "images/planner/items/armor/belt/sash_l.webp"
+      "images/planner/items/uniques/belt/sash_l.t180.avif",
+      "images/planner/items/uniques/belt/sash_l.t180.avif",
+      "images/planner/items/uniques/belt/sash_l.t180.avif"
     ],
     "unique113": [
-      "images/planner/items/armor/belt/light_belt.webp",
-      "images/planner/items/armor/belt/light_belt.webp",
-      "images/planner/items/armor/belt/light_belt.webp"
+      "images/planner/items/uniques/belt/light_belt.t171.avif",
+      "images/planner/items/uniques/belt/light_belt.t171.avif",
+      "images/planner/items/uniques/belt/light_belt.t171.avif"
     ],
     "unique114": [
-      "images/planner/items/armor/belt/belt_m.webp",
-      "images/planner/items/armor/belt/belt_m.webp",
-      "images/planner/items/armor/belt/belt_m.webp"
+      "images/planner/items/uniques/belt/belt_m.t181.avif",
+      "images/planner/items/uniques/belt/belt_m.t181.avif",
+      "images/planner/items/uniques/belt/belt_m.t181.avif"
     ],
     "unique115": [
-      "images/planner/items/armor/belt/heavy_belt.webp",
-      "images/planner/items/armor/belt/heavy_belt.webp",
-      "images/planner/items/armor/belt/heavy_belt.webp"
+      "images/planner/items/uniques/belt/heavy_belt.t172.avif",
+      "images/planner/items/uniques/belt/heavy_belt.t172.avif",
+      "images/planner/items/uniques/belt/heavy_belt.t172.avif"
     ],
     "unique116": [
-      "images/planner/items/armor/belt/girdle_h.webp",
-      "images/planner/items/armor/belt/girdle_h.webp",
-      "images/planner/items/armor/belt/girdle_h.webp"
+      "images/planner/items/uniques/belt/girdle_h.t182.avif",
+      "images/planner/items/uniques/belt/girdle_h.t182.avif",
+      "images/planner/items/uniques/belt/girdle_h.t182.avif"
     ],
     "unique117": [
       "images/planner/items/misc/amulet/nokozan_relic.png",
@@ -4405,9 +4452,9 @@
       "images/planner/items/misc/amulet/nokozan_relic.png"
     ],
     "unique118": [
-      "images/planner/items/misc/amulet/amulet.png",
-      "images/planner/items/misc/amulet/amulet.png",
-      "images/planner/items/misc/amulet/amulet.png"
+      "images/planner/items/uniques/amulet/amulet1.avif",
+      "images/planner/items/uniques/amulet/amulet1.avif",
+      "images/planner/items/uniques/amulet/amulet1.avif"
     ],
     "unique119": [
       "images/planner/items/misc/amulet/the_mahim-oak_curio.png",
@@ -4430,9 +4477,9 @@
       "images/planner/items/misc/ring/stone_of_jordan.png"
     ],
     "unique123": [
-      "images/planner/items/misc/amulet/viper_amulet.webp",
-      "images/planner/items/misc/amulet/viper_amulet.webp",
-      "images/planner/items/misc/amulet/viper_amulet.webp"
+      "images/planner/items/uniques/amulet/viper_amulet1.avif",
+      "images/planner/items/uniques/amulet/viper_amulet1.avif",
+      "images/planner/items/uniques/amulet/viper_amulet1.avif"
     ],
     "unique124": [
       "images/planner/items/weapon/staff/staff_of_the_kings.webp",
@@ -4460,14 +4507,14 @@
       "images/planner/items/weapon/mace/super_khalim_flail.webp"
     ],
     "unique129": [
-      "images/planner/items/classic/invhaxu.gif",
-      "images/planner/items/classic/invhaxu.gif",
-      "images/planner/items/classic/invhaxu.gif"
+      "images/planner/items/uniques/axe/the_gnasher.t48.avif",
+      "images/planner/items/uniques/axe/the_gnasher.t48.avif",
+      "images/planner/items/uniques/axe/the_gnasher.t48.avif"
     ],
     "unique130": [
-      "images/planner/items/weapon/axe/deathspade.webp",
-      "images/planner/items/weapon/axe/deathspade.webp",
-      "images/planner/items/weapon/axe/deathspade.webp"
+      "images/planner/items/uniques/axe/deathspade.t48.avif",
+      "images/planner/items/uniques/axe/deathspade.t48.avif",
+      "images/planner/items/uniques/axe/deathspade.t48.avif"
     ],
     "unique131": [
       "images/planner/items/weapon/axe/double_axe.webp",
@@ -4475,9 +4522,9 @@
       "images/planner/items/weapon/axe/double_axe.webp"
     ],
     "unique132": [
-      "images/planner/items/weapon/axe/mindrend.webp",
-      "images/planner/items/weapon/axe/mindrend.webp",
-      "images/planner/items/weapon/axe/mindrend.webp"
+      "images/planner/items/uniques/axe/mindrend.t51.avif",
+      "images/planner/items/uniques/axe/mindrend.t51.avif",
+      "images/planner/items/uniques/axe/mindrend.t51.avif"
     ],
     "unique133": [
       "images/planner/items/weapon/axe/war_axe.webp",
@@ -4485,19 +4532,19 @@
       "images/planner/items/weapon/axe/war_axe.webp"
     ],
     "unique134": [
-      "images/planner/items/weapon/axe/large_axe.webp",
-      "images/planner/items/weapon/axe/large_axe.webp",
-      "images/planner/items/weapon/axe/large_axe.webp"
+      "images/planner/items/uniques/axe/large_axe.t42.avif",
+      "images/planner/items/uniques/axe/large_axe.t42.avif",
+      "images/planner/items/uniques/axe/large_axe.t42.avif"
     ],
     "unique135": [
-      "images/planner/items/weapon/axe/broad_axe.webp",
-      "images/planner/items/weapon/axe/broad_axe.webp",
-      "images/planner/items/weapon/axe/broad_axe.webp"
+      "images/planner/items/uniques/axe/broad_axe.t42.avif",
+      "images/planner/items/uniques/axe/broad_axe.t42.avif",
+      "images/planner/items/uniques/axe/broad_axe.t42.avif"
     ],
     "unique136": [
-      "images/planner/items/weapon/axe/the_chieftan.webp",
-      "images/planner/items/weapon/axe/the_chieftan.webp",
-      "images/planner/items/weapon/axe/the_chieftan.webp"
+      "images/planner/items/uniques/axe/stormrider.t49.avif",
+      "images/planner/items/uniques/axe/stormrider.t49.avif",
+      "images/planner/items/uniques/axe/stormrider.t49.avif"
     ],
     "unique137": [
       "images/planner/items/weapon/axe/brainhew.webp",
@@ -4510,14 +4557,14 @@
       "images/planner/items/weapon/axe/the_minataur.webp"
     ],
     "unique139": [
-      "images/planner/items/weapon/wand/iros_torch.webp",
-      "images/planner/items/weapon/wand/wand.webp",
-      "images/planner/items/weapon/wand/wand.webp"
+      "images/planner/items/uniques/wand/wand.avif",
+      "images/planner/items/uniques/wand/wand.avif",
+      "images/planner/items/uniques/wand/wand.avif"
     ],
     "unique140": [
-      "images/planner/items/weapon/wand/yew_wand.webp",
-      "images/planner/items/weapon/wand/yew_wand.webp",
-      "images/planner/items/weapon/wand/yew_wand.webp"
+      "images/planner/items/uniques/wand/yew_wand.t174.avif",
+      "images/planner/items/uniques/wand/yew_wand.t174.avif",
+      "images/planner/items/uniques/wand/yew_wand.t174.avif"
     ],
     "unique141": [
       "images/planner/items/weapon/wand/gravenspine.webp",
@@ -4525,19 +4572,19 @@
       "images/planner/items/weapon/wand/gravenspine.webp"
     ],
     "unique142": [
-      "images/planner/items/weapon/wand/blackhand_key.webp",
-      "images/planner/items/weapon/wand/blackhand_key.webp",
-      "images/planner/items/weapon/wand/blackhand_key.webp"
+      "images/planner/items/uniques/wand/blackhand_key.t45.avif",
+      "images/planner/items/uniques/wand/blackhand_key.t45.avif",
+      "images/planner/items/uniques/wand/blackhand_key.t45.avif"
     ],
     "unique143": [
-      "images/planner/items/weapon/club/felloak.webp",
-      "images/planner/items/weapon/club/felloak.webp",
-      "images/planner/items/weapon/club/felloak.webp"
+      "images/planner/items/uniques/club/felloak.t58.avif",
+      "images/planner/items/uniques/club/felloak.t58.avif",
+      "images/planner/items/uniques/club/felloak.t58.avif"
     ],
     "unique144": [
-      "images/planner/items/weapon/scepter/scepter.webp",
-      "images/planner/items/weapon/scepter/scepter.webp",
-      "images/planner/items/weapon/scepter/scepter.webp"
+      "images/planner/items/uniques/scepter/scepter.t59.avif",
+      "images/planner/items/uniques/scepter/scepter.t59.avif",
+      "images/planner/items/uniques/scepter/scepter.t59.avif"
     ],
     "unique145": [
       "images/planner/items/weapon/scepter/grand_scepter.webp",
@@ -4565,9 +4612,9 @@
       "images/planner/items/weapon/mace/bloodrise.webp"
     ],
     "unique150": [
-      "images/planner/items/weapon/mace/flail.webp",
-      "images/planner/items/weapon/mace/flail.webp",
-      "images/planner/items/weapon/mace/flail.webp"
+      "images/planner/items/uniques/mace/flail.t47.avif",
+      "images/planner/items/uniques/mace/flail.t47.avif",
+      "images/planner/items/uniques/mace/flail.t47.avif"
     ],
     "unique151": [
       "images/planner/items/weapon/hammer/war_hammer.webp",
@@ -4575,19 +4622,19 @@
       "images/planner/items/weapon/hammer/war_hammer.webp"
     ],
     "unique152": [
-      "images/planner/items/weapon/hammer/bonesob.webp",
-      "images/planner/items/weapon/hammer/maul.webp",
-      "images/planner/items/weapon/hammer/maul.webp"
+      "images/planner/items/uniques/hammer/maul.avif",
+      "images/planner/items/uniques/hammer/maul.avif",
+      "images/planner/items/uniques/hammer/maul.avif"
     ],
     "unique153": [
-      "images/planner/items/weapon/hammer/great_maul.webp",
-      "images/planner/items/weapon/hammer/great_maul.webp",
-      "images/planner/items/weapon/hammer/great_maul.webp"
+      "images/planner/items/uniques/hammer/the_gavel_of_pain.avif",
+      "images/planner/items/uniques/hammer/the_gavel_of_pain.avif",
+      "images/planner/items/uniques/hammer/the_gavel_of_pain.avif"
     ],
     "unique154": [
-      "images/planner/items/weapon/sword/short_sword.webp",
-      "images/planner/items/weapon/sword/short_sword.webp",
-      "images/planner/items/weapon/sword/short_sword.webp"
+      "images/planner/items/uniques/sword/short_sword.t51.avif",
+      "images/planner/items/uniques/sword/short_sword.t51.avif",
+      "images/planner/items/uniques/sword/short_sword.t51.avif"
     ],
     "unique155": [
       "images/planner/items/weapon/sword/blood_crescent.webp",
@@ -4595,14 +4642,14 @@
       "images/planner/items/weapon/sword/blood_crescent.webp"
     ],
     "unique156": [
-      "images/planner/items/weapon/sword/krintizs_skewer.webp",
-      "images/planner/items/weapon/sword/krintizs_skewer.webp",
-      "images/planner/items/weapon/sword/krintizs_skewer.webp"
+      "images/planner/items/uniques/sword/hexfire.avif",
+      "images/planner/items/uniques/sword/hexfire.avif",
+      "images/planner/items/uniques/sword/hexfire.avif"
     ],
     "unique157": [
-      "images/planner/items/weapon/sword/gleamscythe.webp",
-      "images/planner/items/weapon/sword/falchion.webp",
-      "images/planner/items/weapon/sword/falchion.webp"
+      "images/planner/items/uniques/sword/falchion.t51.avif",
+      "images/planner/items/uniques/sword/falchion.t51.avif",
+      "images/planner/items/uniques/sword/falchion.t51.avif"
     ],
     "unique158": [
       "images/planner/items/weapon/sword/ginthers_rift.webp",
@@ -4610,19 +4657,19 @@
       "images/planner/items/weapon/sword/ginthers_rift.webp"
     ],
     "unique159": [
-      "images/planner/items/weapon/sword/griswolds_edge.webp",
-      "images/planner/items/weapon/sword/broad_sword.webp",
-      "images/planner/items/weapon/sword/broad_sword.webp"
+      "images/planner/items/uniques/sword/broad_sword.t62.avif",
+      "images/planner/items/uniques/sword/broad_sword.t62.avif",
+      "images/planner/items/uniques/sword/broad_sword.t62.avif"
     ],
     "unique160": [
-      "images/planner/items/weapon/sword/hellplague.webp",
-      "images/planner/items/weapon/sword/hellplague.webp",
-      "images/planner/items/weapon/sword/hellplague.webp"
+      "images/planner/items/uniques/sword/plague_bearer.avif",
+      "images/planner/items/uniques/sword/plague_bearer.avif",
+      "images/planner/items/uniques/sword/plague_bearer.avif"
     ],
     "unique161": [
-      "images/planner/items/weapon/sword/war_sword.webp",
-      "images/planner/items/weapon/sword/war_sword.webp",
-      "images/planner/items/weapon/sword/war_sword.webp"
+      "images/planner/items/uniques/sword/war_sword.t46.avif",
+      "images/planner/items/uniques/sword/war_sword.t46.avif",
+      "images/planner/items/uniques/sword/war_sword.t46.avif"
     ],
     "unique162": [
       "images/planner/items/weapon/sword/shadowfang.webp",
@@ -4635,9 +4682,9 @@
       "images/planner/items/weapon/sword/claymore.webp"
     ],
     "unique164": [
-      "images/planner/items/weapon/sword/kinemils_awl.webp",
-      "images/planner/items/weapon/sword/kinemils_awl.webp",
-      "images/planner/items/weapon/sword/kinemils_awl.webp"
+      "images/planner/items/uniques/sword/kinemils_awl.t44.avif",
+      "images/planner/items/uniques/sword/kinemils_awl.t44.avif",
+      "images/planner/items/uniques/sword/kinemils_awl.t44.avif"
     ],
     "unique165": [
       "images/planner/items/weapon/sword/blacktongue.webp",
@@ -4650,9 +4697,9 @@
       "images/planner/items/weapon/sword/todesfaelle_flamme.webp"
     ],
     "unique167": [
-      "images/planner/items/weapon/sword/the_patriarch.webp",
-      "images/planner/items/weapon/sword/the_patriarch.webp",
-      "images/planner/items/weapon/sword/the_patriarch.webp"
+      "images/planner/items/uniques/sword/the_patriarch.t62.avif",
+      "images/planner/items/uniques/sword/the_patriarch.t62.avif",
+      "images/planner/items/uniques/sword/the_patriarch.t62.avif"
     ],
     "unique168": [
       "images/planner/items/weapon/knife/dagger.webp",
@@ -4670,14 +4717,14 @@
       "images/planner/items/weapon/knife/the_jade_tan_do.webp"
     ],
     "unique171": [
-      "images/planner/items/weapon/knife/stormspike.webp",
-      "images/planner/items/weapon/knife/stormspike.webp",
-      "images/planner/items/weapon/knife/stormspike.webp"
+      "images/planner/items/uniques/knife/stormspike.t48.avif",
+      "images/planner/items/uniques/knife/stormspike.t48.avif",
+      "images/planner/items/uniques/knife/stormspike.t48.avif"
     ],
     "unique172": [
-      "images/planner/items/weapon/spear/spear.webp",
-      "images/planner/items/weapon/spear/spear.webp",
-      "images/planner/items/weapon/spear/spear.webp"
+      "images/planner/items/uniques/spear/spear.t175.avif",
+      "images/planner/items/uniques/spear/spear.t175.avif",
+      "images/planner/items/uniques/spear/spear.t175.avif"
     ],
     "unique173": [
       "images/planner/items/weapon/spear/razortine.webp",
@@ -4685,9 +4732,9 @@
       "images/planner/items/weapon/spear/razortine.webp"
     ],
     "unique174": [
-      "images/planner/items/weapon/spear/soulfeast_tine.webp",
-      "images/planner/items/weapon/spear/soulfeast_tine.webp",
-      "images/planner/items/weapon/spear/soulfeast_tine.webp"
+      "images/planner/items/uniques/spear/soulfeast_tine.t181.avif",
+      "images/planner/items/uniques/spear/soulfeast_tine.t181.avif",
+      "images/planner/items/uniques/spear/soulfeast_tine.t181.avif"
     ],
     "unique175": [
       "images/planner/items/weapon/spear/spetum.webp",
@@ -4695,29 +4742,29 @@
       "images/planner/items/weapon/spear/spetum.webp"
     ],
     "unique176": [
-      "images/planner/items/weapon/spear/pike.webp",
-      "images/planner/items/weapon/spear/pike.webp",
-      "images/planner/items/weapon/spear/pike.webp"
+      "images/planner/items/uniques/spear/pike.t169.avif",
+      "images/planner/items/uniques/spear/pike.t169.avif",
+      "images/planner/items/uniques/spear/pike.t169.avif"
     ],
     "unique177": [
-      "images/planner/items/weapon/polearm/bardiche.webp",
-      "images/planner/items/weapon/polearm/bardiche.webp",
-      "images/planner/items/weapon/polearm/bardiche.webp"
+      "images/planner/items/uniques/polearm/bardiche.t50.avif",
+      "images/planner/items/uniques/polearm/bardiche.t50.avif",
+      "images/planner/items/uniques/polearm/bardiche.t50.avif"
     ],
     "unique178": [
-      "images/planner/items/weapon/polearm/voulge.webp",
-      "images/planner/items/weapon/polearm/voulge.webp",
-      "images/planner/items/weapon/polearm/voulge.webp"
+      "images/planner/items/uniques/polearm/voulge.t45.avif",
+      "images/planner/items/uniques/polearm/voulge.t45.avif",
+      "images/planner/items/uniques/polearm/voulge.t45.avif"
     ],
     "unique179": [
-      "images/planner/items/weapon/polearm/soul_harvest.webp",
-      "images/planner/items/weapon/polearm/soul_harvest.webp",
-      "images/planner/items/weapon/polearm/soul_harvest.webp"
+      "images/planner/items/uniques/polearm/athenas_wrath.avif",
+      "images/planner/items/uniques/polearm/athenas_wrath.avif",
+      "images/planner/items/uniques/polearm/athenas_wrath.avif"
     ],
     "unique180": [
-      "images/planner/items/weapon/polearm/poleaxe.webp",
-      "images/planner/items/weapon/polearm/poleaxe.webp",
-      "images/planner/items/weapon/polearm/poleaxe.webp"
+      "images/planner/items/uniques/polearm/poleaxe.t57.avif",
+      "images/planner/items/uniques/polearm/poleaxe.t57.avif",
+      "images/planner/items/uniques/polearm/poleaxe.t57.avif"
     ],
     "unique181": [
       "images/planner/items/weapon/polearm/halberd.webp",
@@ -4725,9 +4772,9 @@
       "images/planner/items/weapon/polearm/halberd.webp"
     ],
     "unique182": [
-      "images/planner/items/weapon/polearm/war_scythe.webp",
-      "images/planner/items/weapon/polearm/war_scythe.webp",
-      "images/planner/items/weapon/polearm/war_scythe.webp"
+      "images/planner/items/uniques/polearm/war_scythe.t51.avif",
+      "images/planner/items/uniques/polearm/war_scythe.t51.avif",
+      "images/planner/items/uniques/polearm/war_scythe.t51.avif"
     ],
     "unique183": [
       "images/planner/items/weapon/staff/short_staff.webp",
@@ -4735,9 +4782,9 @@
       "images/planner/items/weapon/staff/short_staff.webp"
     ],
     "unique184": [
-      "images/planner/items/weapon/staff/long_staff.webp",
-      "images/planner/items/weapon/staff/long_staff.webp",
-      "images/planner/items/weapon/staff/long_staff.webp"
+      "images/planner/items/uniques/staff/long_staff.t172.avif",
+      "images/planner/items/uniques/staff/long_staff.t172.avif",
+      "images/planner/items/uniques/staff/long_staff.t172.avif"
     ],
     "unique185": [
       "images/planner/items/weapon/staff/lazarus_spire.webp",
@@ -4745,14 +4792,14 @@
       "images/planner/items/weapon/staff/lazarus_spire.webp"
     ],
     "unique186": [
-      "images/planner/items/weapon/staff/battle_staff.webp",
-      "images/planner/items/weapon/staff/battle_staff.webp",
-      "images/planner/items/weapon/staff/battle_staff.webp"
+      "images/planner/items/uniques/staff/battle_staff.t174.avif",
+      "images/planner/items/uniques/staff/battle_staff.t174.avif",
+      "images/planner/items/uniques/staff/battle_staff.t174.avif"
     ],
     "unique187": [
-      "images/planner/items/weapon/staff/skullcollector.webp",
-      "images/planner/items/weapon/staff/skullcollector.webp",
-      "images/planner/items/weapon/staff/skullcollector.webp"
+      "images/planner/items/uniques/staff/skullcollector.t171.avif",
+      "images/planner/items/uniques/staff/skullcollector.t171.avif",
+      "images/planner/items/uniques/staff/skullcollector.t171.avif"
     ],
     "unique188": [
       "images/planner/items/weapon/bow/short_bow.webp",
@@ -4760,14 +4807,14 @@
       "images/planner/items/weapon/bow/short_bow.webp"
     ],
     "unique189": [
-      "images/planner/items/weapon/bow/hunters_bow.webp",
-      "images/planner/items/weapon/bow/hunters_bow.webp",
-      "images/planner/items/weapon/bow/hunters_bow.webp"
+      "images/planner/items/uniques/bow/hunters_bow.t177.avif",
+      "images/planner/items/uniques/bow/hunters_bow.t177.avif",
+      "images/planner/items/uniques/bow/hunters_bow.t177.avif"
     ],
     "unique190": [
-      "images/planner/items/weapon/bow/kuko_shakaku.webp",
-      "images/planner/items/weapon/bow/kuko_shakaku.webp",
-      "images/planner/items/weapon/bow/kuko_shakaku.webp"
+      "images/planner/items/uniques/bow/kuko_shakaku.t185.avif",
+      "images/planner/items/uniques/bow/kuko_shakaku.t185.avif",
+      "images/planner/items/uniques/bow/kuko_shakaku.t185.avif"
     ],
     "unique191": [
       "images/planner/items/weapon/bow/piercerib.webp",
@@ -4775,9 +4822,9 @@
       "images/planner/items/weapon/bow/piercerib.webp"
     ],
     "unique192": [
-      "images/planner/items/weapon/bow/pullspite.webp",
-      "images/planner/items/weapon/bow/pullspite.webp",
-      "images/planner/items/weapon/bow/pullspite.webp"
+      "images/planner/items/uniques/bow/whichwild_string.t172.avif",
+      "images/planner/items/uniques/bow/whichwild_string.t172.avif",
+      "images/planner/items/uniques/bow/whichwild_string.t172.avif"
     ],
     "unique193": [
       "images/planner/items/weapon/bow/long_battle_bow.webp",
@@ -4790,19 +4837,19 @@
       "images/planner/items/weapon/bow/hellclap.webp"
     ],
     "unique195": [
-      "images/planner/items/weapon/bow/long_war_bow.webp",
-      "images/planner/items/weapon/bow/long_war_bow.webp",
-      "images/planner/items/weapon/bow/long_war_bow.webp"
+      "images/planner/items/uniques/bow/long_war_bow.t169.avif",
+      "images/planner/items/uniques/bow/long_war_bow.t169.avif",
+      "images/planner/items/uniques/bow/long_war_bow.t169.avif"
     ],
     "unique196": [
-      "images/planner/items/weapon/bow/leadcrow.webp",
-      "images/planner/items/weapon/bow/leadcrow.webp",
-      "images/planner/items/weapon/bow/leadcrow.webp"
+      "images/planner/items/uniques/bow/langer_briser.avif",
+      "images/planner/items/uniques/bow/langer_briser.avif",
+      "images/planner/items/uniques/bow/langer_briser.avif"
     ],
     "unique197": [
-      "images/planner/items/weapon/bow/ichorsting.webp",
-      "images/planner/items/weapon/bow/ichorsting.webp",
-      "images/planner/items/weapon/bow/ichorsting.webp"
+      "images/planner/items/uniques/bow/pus_spiter.t180.avif",
+      "images/planner/items/uniques/bow/pus_spiter.t180.avif",
+      "images/planner/items/uniques/bow/pus_spiter.t180.avif"
     ],
     "unique198": [
       "images/planner/items/weapon/bow/hellcast.webp",
@@ -4810,14 +4857,14 @@
       "images/planner/items/weapon/bow/hellcast.webp"
     ],
     "unique199": [
-      "images/planner/items/weapon/bow/doomspittle.webp",
-      "images/planner/items/weapon/bow/doomspittle.webp",
-      "images/planner/items/weapon/bow/doomspittle.webp"
+      "images/planner/items/uniques/bow/doomspittle.t171.avif",
+      "images/planner/items/uniques/bow/doomspittle.t171.avif",
+      "images/planner/items/uniques/bow/doomspittle.t171.avif"
     ],
     "unique201": [
-      "images/planner/items/armor/helmet/war_bonnet.webp",
-      "images/planner/items/armor/helmet/cap_hat.webp",
-      "images/planner/items/armor/helmet/cap_hat.webp"
+      "images/planner/items/uniques/helmet/cap_hat.avif",
+      "images/planner/items/uniques/helmet/cap_hat.avif",
+      "images/planner/items/uniques/helmet/cap_hat.avif"
     ],
     "unique202": [
       "images/planner/items/armor/helmet/rockstopper.webp",
@@ -4830,9 +4877,9 @@
       "images/planner/items/armor/helmet/coif_of_glory.webp"
     ],
     "unique204": [
-      "images/planner/items/armor/helmet/duskdeep.webp",
-      "images/planner/items/armor/helmet/duskdeep.webp",
-      "images/planner/items/armor/helmet/duskdeep.webp"
+      "images/planner/items/uniques/helmet/duskdeep.t171.avif",
+      "images/planner/items/uniques/helmet/duskdeep.t171.avif",
+      "images/planner/items/uniques/helmet/duskdeep.t171.avif"
     ],
     "unique205": [
       "images/planner/items/armor/helmet/great_helm.webp",
@@ -4840,19 +4887,19 @@
       "images/planner/items/armor/helmet/great_helm.webp"
     ],
     "unique206": [
-      "images/planner/items/armor/helmet/crown_of_thieves.webp",
-      "images/planner/items/armor/helmet/crown_of_thieves.webp",
-      "images/planner/items/armor/helmet/crown_of_thieves.webp"
+      "images/planner/items/uniques/helmet/crown_of_thieves.t184.avif",
+      "images/planner/items/uniques/helmet/crown_of_thieves.t184.avif",
+      "images/planner/items/uniques/helmet/crown_of_thieves.t184.avif"
     ],
     "unique207": [
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp"
+      "images/planner/items/uniques/helmet/mask.t45.avif",
+      "images/planner/items/uniques/helmet/mask.t45.avif",
+      "images/planner/items/uniques/helmet/mask.t45.avif"
     ],
     "unique208": [
-      "images/planner/items/armor/helmet/wormskull.webp",
-      "images/planner/items/armor/helmet/wormskull.webp",
-      "images/planner/items/armor/helmet/wormskull.webp"
+      "images/planner/items/uniques/helmet/wormskull.t180.avif",
+      "images/planner/items/uniques/helmet/wormskull.t180.avif",
+      "images/planner/items/uniques/helmet/wormskull.t180.avif"
     ],
     "unique209": [
       "images/planner/items/armor/armor/quilted_armor.webp",
@@ -4860,19 +4907,19 @@
       "images/planner/items/armor/armor/quilted_armor.webp"
     ],
     "unique210": [
-      "images/planner/items/armor/armor/leather_armor.webp",
-      "images/planner/items/armor/armor/leather_armor.webp",
-      "images/planner/items/armor/armor/leather_armor.webp"
+      "images/planner/items/uniques/armor/leather_armor.t173.avif",
+      "images/planner/items/uniques/armor/leather_armor.t173.avif",
+      "images/planner/items/uniques/armor/leather_armor.t173.avif"
     ],
     "unique211": [
-      "images/planner/items/armor/armor/hard_leather_armor.webp",
-      "images/planner/items/armor/armor/hard_leather_armor.webp",
-      "images/planner/items/armor/armor/hard_leather_armor.webp"
+      "images/planner/items/uniques/armor/hard_leather_armor.t175.avif",
+      "images/planner/items/uniques/armor/hard_leather_armor.t175.avif",
+      "images/planner/items/uniques/armor/hard_leather_armor.t175.avif"
     ],
     "unique212": [
-      "images/planner/items/armor/armor/ironpelt.webp",
-      "images/planner/items/armor/armor/ironpelt.webp",
-      "images/planner/items/armor/armor/ironpelt.webp"
+      "images/planner/items/uniques/armor/ironpelt.t170.avif",
+      "images/planner/items/uniques/armor/ironpelt.t170.avif",
+      "images/planner/items/uniques/armor/ironpelt.t170.avif"
     ],
     "unique213": [
       "images/planner/items/armor/armor/ring_mail.webp",
@@ -4890,9 +4937,9 @@
       "images/planner/items/armor/armor/chain_mail.webp"
     ],
     "unique216": [
-      "images/planner/items/armor/armor/breast_plate.webp",
-      "images/planner/items/armor/armor/breast_plate.webp",
-      "images/planner/items/armor/armor/breast_plate.webp"
+      "images/planner/items/uniques/armor/breast_plate.t187.avif",
+      "images/planner/items/uniques/armor/breast_plate.t187.avif",
+      "images/planner/items/uniques/armor/breast_plate.t187.avif"
     ],
     "unique217": [
       "images/planner/items/armor/armor/splint_mail.webp",
@@ -4900,14 +4947,14 @@
       "images/planner/items/armor/armor/splint_mail.webp"
     ],
     "unique218": [
-      "images/planner/items/armor/armor/plate_mail.webp",
-      "images/planner/items/armor/armor/plate_mail.webp",
-      "images/planner/items/armor/armor/plate_mail.webp"
+      "images/planner/items/uniques/armor/plate_mail.t169.avif",
+      "images/planner/items/uniques/armor/plate_mail.t169.avif",
+      "images/planner/items/uniques/armor/plate_mail.t169.avif"
     ],
     "unique219": [
-      "images/planner/items/armor/armor/field_plate.webp",
-      "images/planner/items/armor/armor/field_plate.webp",
-      "images/planner/items/armor/armor/field_plate.webp"
+      "images/planner/items/uniques/armor/field_plate.t168.avif",
+      "images/planner/items/uniques/armor/field_plate.t168.avif",
+      "images/planner/items/uniques/armor/field_plate.t168.avif"
     ],
     "unique220": [
       "images/planner/items/armor/armor/gothic_plate.webp",
@@ -4915,14 +4962,14 @@
       "images/planner/items/armor/armor/gothic_plate.webp"
     ],
     "unique221": [
-      "images/planner/items/armor/armor/goldskin.webp",
-      "images/planner/items/armor/armor/full_plate_mail.webp",
-      "images/planner/items/armor/armor/full_plate_mail.webp"
+      "images/planner/items/uniques/armor/full_plate_mail.avif",
+      "images/planner/items/uniques/armor/full_plate_mail.avif",
+      "images/planner/items/uniques/armor/full_plate_mail.avif"
     ],
     "unique222": [
-      "images/planner/items/armor/armor/victors_silk.webp",
-      "images/planner/items/armor/armor/victors_silk.webp",
-      "images/planner/items/armor/armor/victors_silk.webp"
+      "images/planner/items/uniques/armor/corpsemourn.t171.avif",
+      "images/planner/items/uniques/armor/corpsemourn.t171.avif",
+      "images/planner/items/uniques/armor/corpsemourn.t171.avif"
     ],
     "unique223": [
       "images/planner/items/armor/armor/light_plate.webp",
@@ -4935,24 +4982,24 @@
       "images/planner/items/armor/shield/pelta_lunata.webp"
     ],
     "unique225": [
-      "images/planner/items/armor/shield/umbral_disk.webp",
-      "images/planner/items/armor/shield/umbral_disk.webp",
-      "images/planner/items/armor/shield/umbral_disk.webp"
+      "images/planner/items/uniques/shield/mosers_blessed_circle.avif",
+      "images/planner/items/uniques/shield/mosers_blessed_circle.avif",
+      "images/planner/items/uniques/shield/mosers_blessed_circle.avif"
     ],
     "unique226": [
-      "images/planner/items/armor/shield/stormguild.webp",
-      "images/planner/items/armor/shield/stormguild.webp",
-      "images/planner/items/armor/shield/stormguild.webp"
+      "images/planner/items/uniques/shield/stormchaser.t48.avif",
+      "images/planner/items/uniques/shield/stormchaser.t48.avif",
+      "images/planner/items/uniques/shield/stormchaser.t48.avif"
     ],
     "unique227": [
-      "images/planner/items/armor/shield/steelclash.webp",
-      "images/planner/items/armor/shield/steelclash.webp",
-      "images/planner/items/armor/shield/steelclash.webp"
+      "images/planner/items/uniques/shield/steelclash.t43.avif",
+      "images/planner/items/uniques/shield/steelclash.t43.avif",
+      "images/planner/items/uniques/shield/steelclash.t43.avif"
     ],
     "unique228": [
-      "images/planner/items/armor/shield/bverrit_keep.webp",
-      "images/planner/items/armor/shield/bverrit_keep.webp",
-      "images/planner/items/armor/shield/bverrit_keep.webp"
+      "images/planner/items/uniques/shield/bverrit_keep.t52.avif",
+      "images/planner/items/uniques/shield/bverrit_keep.t52.avif",
+      "images/planner/items/uniques/shield/bverrit_keep.t52.avif"
     ],
     "unique229": [
       "images/planner/items/armor/shield/the_ward.webp",
@@ -4960,14 +5007,14 @@
       "images/planner/items/armor/shield/the_ward.webp"
     ],
     "unique230": [
-      "images/planner/items/armor/shield/wall_of_the_eyeless.webp",
-      "images/planner/items/armor/shield/wall_of_the_eyeless.webp",
-      "images/planner/items/armor/shield/wall_of_the_eyeless.webp"
+      "images/planner/items/uniques/shield/lidless_wall.t184.avif",
+      "images/planner/items/uniques/shield/lidless_wall.t184.avif",
+      "images/planner/items/uniques/shield/lidless_wall.t184.avif"
     ],
     "unique231": [
-      "images/planner/items/armor/shield/swordback_hold.webp",
-      "images/planner/items/armor/shield/swordback_hold.webp",
-      "images/planner/items/armor/shield/swordback_hold.webp"
+      "images/planner/items/uniques/shield/lance_guard.avif",
+      "images/planner/items/uniques/shield/lance_guard.avif",
+      "images/planner/items/uniques/shield/lance_guard.avif"
     ],
     "unique232": [
       "images/planner/items/armor/glove/gloves_l.webp",
@@ -5050,19 +5097,19 @@
       "images/planner/items/armor/helmet/harlequin_crest.png"
     ],
     "unique249": [
-      "images/planner/items/armor/helmet/great_helm.webp",
-      "images/planner/items/armor/helmet/great_helm.webp",
-      "images/planner/items/armor/helmet/great_helm.webp"
+      "images/planner/items/uniques/helmet/great_helm.t169.avif",
+      "images/planner/items/uniques/helmet/great_helm.t169.avif",
+      "images/planner/items/uniques/helmet/great_helm.t169.avif"
     ],
     "unique250": [
-      "images/planner/items/armor/armor/studded_leather.webp",
-      "images/planner/items/armor/armor/ironpelt.webp",
-      "images/planner/items/armor/armor/studded_leather.webp"
+      "images/planner/items/uniques/armor/studded_leather.t169.avif",
+      "images/planner/items/uniques/armor/studded_leather.t169.avif",
+      "images/planner/items/uniques/armor/studded_leather.t169.avif"
     ],
     "unique251": [
-      "images/planner/items/armor/armor/splint_mail.webp",
-      "images/planner/items/armor/armor/splint_mail.webp",
-      "images/planner/items/armor/armor/splint_mail.webp"
+      "images/planner/items/uniques/armor/splint_mail.t175.avif",
+      "images/planner/items/uniques/armor/splint_mail.t175.avif",
+      "images/planner/items/uniques/armor/splint_mail.t175.avif"
     ],
     "unique252": [
       "images/planner/items/armor/shield/umbral_disk.webp",
@@ -5075,64 +5122,64 @@
       "images/planner/items/armor/shield/steelclash.webp"
     ],
     "unique254": [
-      "images/planner/items/weapon/axe/the_chieftan.webp",
-      "images/planner/items/weapon/axe/the_chieftan.webp",
-      "images/planner/items/weapon/axe/the_chieftan.webp"
+      "images/planner/items/uniques/axe/the_chieftan.t50.avif",
+      "images/planner/items/uniques/axe/the_chieftan.t50.avif",
+      "images/planner/items/uniques/axe/the_chieftan.t50.avif"
     ],
     "unique255": [
-      "images/planner/items/weapon/axe/brainhew.webp",
-      "images/planner/items/weapon/axe/brainhew.webp",
-      "images/planner/items/weapon/axe/brainhew.webp"
+      "images/planner/items/uniques/axe/brainhew.t45.avif",
+      "images/planner/items/uniques/axe/brainhew.t45.avif",
+      "images/planner/items/uniques/axe/brainhew.t45.avif"
     ],
     "unique256": [
-      "images/planner/items/weapon/mace/bloodrise.webp",
-      "images/planner/items/weapon/mace/bloodrise.webp",
-      "images/planner/items/weapon/mace/bloodrise.webp"
+      "images/planner/items/uniques/mace/bloodrise.t49.avif",
+      "images/planner/items/uniques/mace/bloodrise.t49.avif",
+      "images/planner/items/uniques/mace/bloodrise.t49.avif"
     ],
     "unique257": [
-      "images/planner/items/weapon/hammer/war_hammer.webp",
-      "images/planner/items/weapon/hammer/war_hammer.webp",
-      "images/planner/items/weapon/hammer/war_hammer.webp"
+      "images/planner/items/uniques/hammer/war_hammer.t46.avif",
+      "images/planner/items/uniques/hammer/war_hammer.t46.avif",
+      "images/planner/items/uniques/hammer/war_hammer.t46.avif"
     ],
     "unique258": [
-      "images/planner/items/weapon/hammer/great_maul.webp",
-      "images/planner/items/weapon/hammer/great_maul.webp",
-      "images/planner/items/weapon/hammer/great_maul.webp"
+      "images/planner/items/uniques/hammer/great_maul.t45.avif",
+      "images/planner/items/uniques/hammer/great_maul.t45.avif",
+      "images/planner/items/uniques/hammer/great_maul.t45.avif"
     ],
     "unique259": [
-      "images/planner/items/weapon/sword/ginthers_rift.webp",
-      "images/planner/items/weapon/sword/ginthers_rift.webp",
-      "images/planner/items/weapon/sword/ginthers_rift.webp"
+      "images/planner/items/uniques/sword/lightsabre.avif",
+      "images/planner/items/uniques/sword/lightsabre.avif",
+      "images/planner/items/uniques/sword/lightsabre.avif"
     ],
     "unique260": [
-      "images/planner/items/weapon/sword/blacktongue.webp",
-      "images/planner/items/weapon/sword/blacktongue.webp",
-      "images/planner/items/weapon/sword/blacktongue.webp"
+      "images/planner/items/uniques/sword/blacktongue.t50.avif",
+      "images/planner/items/uniques/sword/blacktongue.t50.avif",
+      "images/planner/items/uniques/sword/blacktongue.t50.avif"
     ],
     "unique261": [
-      "images/planner/items/weapon/sword/the_patriarch.webp",
-      "images/planner/items/weapon/sword/the_patriarch.webp",
-      "images/planner/items/weapon/sword/the_patriarch.webp"
+      "images/planner/items/uniques/sword/the_patriarch.t55.avif",
+      "images/planner/items/uniques/sword/the_patriarch.t55.avif",
+      "images/planner/items/uniques/sword/the_patriarch.t55.avif"
     ],
     "unique262": [
-      "images/planner/items/weapon/knife/dagger.webp",
-      "images/planner/items/weapon/knife/dagger.webp",
-      "images/planner/items/weapon/knife/dagger.webp"
+      "images/planner/items/uniques/knife/dagger.t43.avif",
+      "images/planner/items/uniques/knife/dagger.t43.avif",
+      "images/planner/items/uniques/knife/dagger.t43.avif"
     ],
     "unique264": [
-      "images/planner/items/weapon/polearm/war_scythe.webp",
-      "images/planner/items/weapon/polearm/war_scythe.webp",
-      "images/planner/items/weapon/polearm/war_scythe.webp"
+      "images/planner/items/uniques/polearm/war_scythe.t47.avif",
+      "images/planner/items/uniques/polearm/war_scythe.t47.avif",
+      "images/planner/items/uniques/polearm/war_scythe.t47.avif"
     ],
     "unique265": [
-      "images/planner/items/weapon/bow/long_battle_bow.webp",
-      "images/planner/items/weapon/bow/long_battle_bow.webp",
-      "images/planner/items/weapon/bow/long_battle_bow.webp"
+      "images/planner/items/uniques/bow/long_battle_bow.t184.avif",
+      "images/planner/items/uniques/bow/long_battle_bow.t184.avif",
+      "images/planner/items/uniques/bow/long_battle_bow.t184.avif"
     ],
     "unique266": [
-      "images/planner/items/weapon/bow/long_war_bow.webp",
-      "images/planner/items/weapon/bow/long_war_bow.webp",
-      "images/planner/items/weapon/bow/long_war_bow.webp"
+      "images/planner/items/uniques/bow/long_war_bow.t182.avif",
+      "images/planner/items/uniques/bow/long_war_bow.t182.avif",
+      "images/planner/items/uniques/bow/long_war_bow.t182.avif"
     ],
     "unique268": [
       "images/planner/items/misc/ring/bul-kathos_wedding_band.png",
@@ -5235,14 +5282,14 @@
       "images/planner/items/weapon/axe/throwing_axe.webp"
     ],
     "unique289": [
-      "images/planner/items/weapon/sword/krintizs_skewer.webp",
-      "images/planner/items/weapon/sword/krintizs_skewer.webp",
-      "images/planner/items/weapon/sword/krintizs_skewer.webp"
+      "images/planner/items/uniques/sword/hexfire.t51.avif",
+      "images/planner/items/uniques/sword/hexfire.t51.avif",
+      "images/planner/items/uniques/sword/hexfire.t51.avif"
     ],
     "unique290": [
-      "images/planner/items/weapon/sword/blood_crescent.webp",
-      "images/planner/items/weapon/sword/blood_crescent.webp",
-      "images/planner/items/weapon/sword/blood_crescent.webp"
+      "images/planner/items/uniques/sword/blood_crescent.t60.avif",
+      "images/planner/items/uniques/sword/blood_crescent.t60.avif",
+      "images/planner/items/uniques/sword/blood_crescent.t60.avif"
     ],
     "unique291": [
       "images/planner/items/weapon/knife/throwing_knife.webp",
@@ -5250,39 +5297,39 @@
       "images/planner/items/weapon/knife/throwing_knife.webp"
     ],
     "unique292": [
-      "images/planner/items/weapon/knife/warshrike.webp",
-      "images/planner/items/weapon/knife/warshrike.webp",
-      "images/planner/items/weapon/knife/warshrike.webp"
+      "images/planner/items/uniques/knife/warshrike.t62.avif",
+      "images/planner/items/uniques/knife/warshrike.t62.avif",
+      "images/planner/items/uniques/knife/warshrike.t62.avif"
     ],
     "unique293": [
-      "images/planner/items/weapon/bow/doomspittle.webp",
-      "images/planner/items/weapon/bow/doomspittle.webp",
-      "images/planner/items/weapon/bow/doomspittle.webp"
+      "images/planner/items/uniques/bow/doomspittle.t178.avif",
+      "images/planner/items/uniques/bow/doomspittle.t178.avif",
+      "images/planner/items/uniques/bow/doomspittle.t178.avif"
     ],
     "unique294": [
-      "images/planner/items/classic/invhaxu.gif",
-      "images/planner/items/classic/invhaxu.gif",
-      "images/planner/items/classic/invhaxu.gif"
+      "images/planner/items/uniques/axe/the_gnasher.avif",
+      "images/planner/items/uniques/axe/the_gnasher.avif",
+      "images/planner/items/uniques/axe/the_gnasher.avif"
     ],
     "unique296": [
-      "images/planner/items/weapon/club/stoutnail.webp",
-      "images/planner/items/weapon/club/stoutnail.webp",
-      "images/planner/items/weapon/club/stoutnail.webp"
+      "images/planner/items/uniques/club/stoutnail.t53.avif",
+      "images/planner/items/uniques/club/stoutnail.t53.avif",
+      "images/planner/items/uniques/club/stoutnail.t53.avif"
     ],
     "unique297": [
-      "images/planner/items/armor/helmet/coif_of_glory.webp",
-      "images/planner/items/armor/helmet/coif_of_glory.webp",
-      "images/planner/items/armor/helmet/coif_of_glory.webp"
+      "images/planner/items/uniques/helmet/coif_of_glory.t171.avif",
+      "images/planner/items/uniques/helmet/coif_of_glory.t171.avif",
+      "images/planner/items/uniques/helmet/coif_of_glory.t171.avif"
     ],
     "unique298": [
-      "images/planner/items/weapon/polearm/poleaxe.webp",
-      "images/planner/items/weapon/polearm/poleaxe.webp",
-      "images/planner/items/weapon/polearm/poleaxe.webp"
+      "images/planner/items/uniques/polearm/poleaxe.t55.avif",
+      "images/planner/items/uniques/polearm/poleaxe.t55.avif",
+      "images/planner/items/uniques/polearm/poleaxe.t55.avif"
     ],
     "unique299": [
-      "images/planner/items/weapon/wand/grim_wand.webp",
-      "images/planner/items/weapon/wand/blackhand_key.webp",
-      "images/planner/items/weapon/wand/grim_wand.webp"
+      "images/planner/items/uniques/wand/grim_wand.t62.avif",
+      "images/planner/items/uniques/wand/grim_wand.t62.avif",
+      "images/planner/items/uniques/wand/grim_wand.t62.avif"
     ],
     "unique300": [
       "images/planner/items/misc/ring/natures_peace.png",
@@ -5300,14 +5347,14 @@
       "images/planner/items/misc/amulet/seraphs_hymn.png"
     ],
     "unique304": [
-      "images/planner/items/weapon/knife/the_jade_tan_do.webp",
-      "images/planner/items/weapon/knife/the_jade_tan_do.webp",
-      "images/planner/items/weapon/knife/the_jade_tan_do.webp"
+      "images/planner/items/uniques/knife/the_jade_tan_do.t50.avif",
+      "images/planner/items/uniques/knife/the_jade_tan_do.t50.avif",
+      "images/planner/items/uniques/knife/the_jade_tan_do.t50.avif"
     ],
     "unique306": [
-      "images/planner/items/weapon/mace/flail.webp",
-      "images/planner/items/weapon/mace/flail.webp",
-      "images/planner/items/weapon/mace/flail.webp"
+      "images/planner/items/uniques/mace/flail.t60.avif",
+      "images/planner/items/uniques/mace/flail.t60.avif",
+      "images/planner/items/uniques/mace/flail.t60.avif"
     ],
     "unique307": [
       "images/planner/items/weapon/hammer/war_hammer.webp",
@@ -5315,34 +5362,34 @@
       "images/planner/items/weapon/hammer/war_hammer.webp"
     ],
     "unique308": [
-      "images/planner/items/weapon/h2h/katar.webp",
-      "images/planner/items/weapon/h2h/katar.webp",
-      "images/planner/items/weapon/h2h/katar.webp"
+      "images/planner/items/uniques/h2h/katar.t54.avif",
+      "images/planner/items/uniques/h2h/katar.t54.avif",
+      "images/planner/items/uniques/h2h/katar.t54.avif"
     ],
     "unique309": [
-      "images/planner/items/armor/boot/plate_boots.webp",
-      "images/planner/items/armor/boot/plate_boots.webp",
-      "images/planner/items/armor/boot/plate_boots.webp"
+      "images/planner/items/uniques/boot/plate_boots.t171.avif",
+      "images/planner/items/uniques/boot/plate_boots.t171.avif",
+      "images/planner/items/uniques/boot/plate_boots.t171.avif"
     ],
     "unique310": [
-      "images/planner/items/armor/pelt/wolf_head.webp",
-      "images/planner/items/armor/pelt/wolf_head.webp",
-      "images/planner/items/armor/pelt/wolf_head.webp"
+      "images/planner/items/uniques/pelt/wolf_head.t188.avif",
+      "images/planner/items/uniques/pelt/wolf_head.t188.avif",
+      "images/planner/items/uniques/pelt/wolf_head.t188.avif"
     ],
     "unique311": [
-      "images/planner/items/armor/armor/victors_silk.webp",
-      "images/planner/items/armor/armor/victors_silk.webp",
-      "images/planner/items/armor/armor/victors_silk.webp"
+      "images/planner/items/uniques/armor/victors_silk.t173.avif",
+      "images/planner/items/uniques/armor/victors_silk.t173.avif",
+      "images/planner/items/uniques/armor/victors_silk.t173.avif"
     ],
     "unique312": [
-      "images/planner/items/armor/glove/bracers_m.webp",
-      "images/planner/items/armor/glove/bracers_m.webp",
-      "images/planner/items/armor/glove/bracers_m.webp"
+      "images/planner/items/uniques/glove/bracers_m.t176.avif",
+      "images/planner/items/uniques/glove/bracers_m.t176.avif",
+      "images/planner/items/uniques/glove/bracers_m.t176.avif"
     ],
     "unique313": [
-      "images/planner/items/weapon/axe/double_axe.webp",
-      "images/planner/items/weapon/axe/double_axe.webp",
-      "images/planner/items/weapon/axe/double_axe.webp"
+      "images/planner/items/uniques/axe/double_axe.t46.avif",
+      "images/planner/items/uniques/axe/double_axe.t46.avif",
+      "images/planner/items/uniques/axe/double_axe.t46.avif"
     ],
     "unique314": [
       "images/planner/items/weapon/axe/war_axe.webp",
@@ -5350,9 +5397,9 @@
       "images/planner/items/weapon/axe/war_axe.webp"
     ],
     "unique315": [
-      "images/planner/items/weapon/axe/giant_axe.webp",
-      "images/planner/items/weapon/axe/the_minataur.webp",
-      "images/planner/items/weapon/axe/giant_axe.webp"
+      "images/planner/items/uniques/axe/giant_axe.t45.avif",
+      "images/planner/items/uniques/axe/giant_axe.t45.avif",
+      "images/planner/items/uniques/axe/giant_axe.t45.avif"
     ],
     "unique316": [
       "images/planner/items/weapon/spear/maiden_spear.webp",
@@ -5360,9 +5407,9 @@
       "images/planner/items/weapon/spear/maiden_spear.webp"
     ],
     "unique317": [
-      "images/planner/items/armor/armor/field_plate.webp",
-      "images/planner/items/armor/armor/field_plate.webp",
-      "images/planner/items/armor/armor/field_plate.webp"
+      "images/planner/items/uniques/armor/field_plate.t180.avif",
+      "images/planner/items/uniques/armor/field_plate.t180.avif",
+      "images/planner/items/uniques/armor/field_plate.t180.avif"
     ],
     "unique319": [
       "images/planner/items/misc/ring/wisp_projector.png",
@@ -5370,29 +5417,29 @@
       "images/planner/items/misc/ring/wisp_projector.png"
     ],
     "unique320": [
-      "images/planner/items/weapon/javelin/throwing_spear.webp",
-      "images/planner/items/weapon/javelin/throwing_spear.webp",
-      "images/planner/items/weapon/javelin/throwing_spear.webp"
+      "images/planner/items/uniques/javelin/throwing_spear.t54.avif",
+      "images/planner/items/uniques/javelin/throwing_spear.t54.avif",
+      "images/planner/items/uniques/javelin/throwing_spear.t54.avif"
     ],
     "unique321": [
-      "images/planner/items/weapon/axe/balanced_axe.webp",
-      "images/planner/items/weapon/axe/balanced_axe.webp",
-      "images/planner/items/weapon/axe/balanced_axe.webp"
+      "images/planner/items/uniques/axe/balanced_axe.t45.avif",
+      "images/planner/items/uniques/axe/balanced_axe.t45.avif",
+      "images/planner/items/uniques/axe/balanced_axe.t45.avif"
     ],
     "unique322": [
-      "images/planner/items/weapon/staff/skullcollector.webp",
-      "images/planner/items/weapon/staff/skullcollector.webp",
-      "images/planner/items/weapon/staff/skullcollector.webp"
+      "images/planner/items/uniques/staff/skullcollector.t184.avif",
+      "images/planner/items/uniques/staff/skullcollector.t184.avif",
+      "images/planner/items/uniques/staff/skullcollector.t184.avif"
     ],
     "unique323": [
-      "images/planner/items/weapon/spear/brandistock.webp",
-      "images/planner/items/weapon/spear/soulfeast_tine.webp",
-      "images/planner/items/weapon/spear/brandistock.webp"
+      "images/planner/items/uniques/spear/brandistock.t179.avif",
+      "images/planner/items/uniques/spear/brandistock.t179.avif",
+      "images/planner/items/uniques/spear/brandistock.t179.avif"
     ],
     "unique324": [
-      "images/planner/items/weapon/axe/broad_axe.webp",
-      "images/planner/items/weapon/axe/broad_axe.webp",
-      "images/planner/items/weapon/axe/broad_axe.webp"
+      "images/planner/items/uniques/axe/broad_axe.t42.avif",
+      "images/planner/items/uniques/axe/broad_axe.t42.avif",
+      "images/planner/items/uniques/axe/broad_axe.t42.avif"
     ],
     "unique325": [
       "images/planner/items/armor/helmet/horned_helm.webp",
@@ -5425,19 +5472,19 @@
       "images/planner/items/armor/voodoo_head/demon_head.webp"
     ],
     "unique331": [
-      "images/planner/items/weapon/bow/hellclap.webp",
-      "images/planner/items/weapon/bow/hellclap.webp",
-      "images/planner/items/weapon/bow/hellclap.webp"
+      "images/planner/items/uniques/bow/hellclap.t176.avif",
+      "images/planner/items/uniques/bow/hellclap.t176.avif",
+      "images/planner/items/uniques/bow/hellclap.t176.avif"
     ],
     "unique332": [
-      "images/planner/items/weapon/bow/hellclap.webp",
-      "images/planner/items/weapon/bow/hellclap.webp",
-      "images/planner/items/weapon/bow/hellclap.webp"
+      "images/planner/items/uniques/bow/bloodraven.t184.avif",
+      "images/planner/items/uniques/bow/bloodraven.t184.avif",
+      "images/planner/items/uniques/bow/bloodraven.t184.avif"
     ],
     "unique333": [
-      "images/planner/items/weapon/knife/blade.webp",
-      "images/planner/items/weapon/knife/stormspike.webp",
-      "images/planner/items/weapon/knife/blade.webp"
+      "images/planner/items/uniques/knife/blade.t48.avif",
+      "images/planner/items/uniques/knife/blade.t48.avif",
+      "images/planner/items/uniques/knife/blade.t48.avif"
     ],
     "unique334": [
       "images/planner/items/weapon/h2h/shadowkiller.webp",
@@ -5450,24 +5497,24 @@
       "images/planner/items/weapon/axe/throwing_axe.webp"
     ],
     "unique336": [
-      "images/planner/items/armor/circlet/coronet.webp",
-      "images/planner/items/armor/circlet/tiara.webp",
-      "images/planner/items/armor/circlet/diadem.webp"
+      "images/planner/items/uniques/circlet/diadem.avif",
+      "images/planner/items/uniques/circlet/diadem.avif",
+      "images/planner/items/uniques/circlet/diadem.avif"
     ],
     "unique337": [
-      "images/planner/items/weapon/hammer/maul.webp",
-      "images/planner/items/weapon/hammer/maul.webp",
-      "images/planner/items/weapon/hammer/maul.webp"
+      "images/planner/items/uniques/hammer/maul.t48.avif",
+      "images/planner/items/uniques/hammer/maul.t48.avif",
+      "images/planner/items/uniques/hammer/maul.t48.avif"
     ],
     "unique338": [
-      "images/planner/items/weapon/javelin/maiden_javelin.webp",
-      "images/planner/items/weapon/javelin/maiden_javelin.webp",
-      "images/planner/items/weapon/javelin/maiden_javelin.webp"
+      "images/planner/items/uniques/javelin/maiden_javelin.t47.avif",
+      "images/planner/items/uniques/javelin/maiden_javelin.t47.avif",
+      "images/planner/items/uniques/javelin/maiden_javelin.t47.avif"
     ],
     "unique340": [
-      "images/planner/items/weapon/javelin/short_spear.webp",
-      "images/planner/items/weapon/javelin/short_spear.webp",
-      "images/planner/items/weapon/javelin/short_spear.webp"
+      "images/planner/items/uniques/javelin/short_spear.t177.avif",
+      "images/planner/items/uniques/javelin/short_spear.t177.avif",
+      "images/planner/items/uniques/javelin/short_spear.t177.avif"
     ],
     "unique341": [
       "images/planner/items/armor/voodoo_head/gargoyle_head.webp",
@@ -5480,19 +5527,19 @@
       "images/planner/items/weapon/spear/pike.webp"
     ],
     "unique343": [
-      "images/planner/items/armor/helmet/great_helm.webp",
-      "images/planner/items/armor/helmet/great_helm.webp",
-      "images/planner/items/armor/helmet/great_helm.webp"
+      "images/planner/items/uniques/helmet/great_helm.t174.avif",
+      "images/planner/items/uniques/helmet/great_helm.t174.avif",
+      "images/planner/items/uniques/helmet/great_helm.t174.avif"
     ],
     "unique344": [
-      "images/planner/items/armor/helmet/crown.webp",
-      "images/planner/items/armor/helmet/crown_of_thieves.webp",
-      "images/planner/items/armor/helmet/crown.webp"
+      "images/planner/items/uniques/helmet/crown.t184.avif",
+      "images/planner/items/uniques/helmet/crown.t184.avif",
+      "images/planner/items/uniques/helmet/crown.t184.avif"
     ],
     "unique345": [
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp",
-      "images/planner/items/armor/helmet/mask.webp"
+      "images/planner/items/uniques/helmet/mask.t50.avif",
+      "images/planner/items/uniques/helmet/mask.t50.avif",
+      "images/planner/items/uniques/helmet/mask.t50.avif"
     ],
     "unique347": [
       "images/planner/items/armor/shield/aerin_shield.webp",
@@ -5500,29 +5547,29 @@
       "images/planner/items/armor/shield/aerin_shield.webp"
     ],
     "unique348": [
-      "images/planner/items/armor/armor/goldskin.webp",
-      "images/planner/items/armor/armor/full_plate_mail.webp",
-      "images/planner/items/armor/armor/full_plate_mail.webp"
+      "images/planner/items/uniques/armor/full_plate_mail.t170.avif",
+      "images/planner/items/uniques/armor/full_plate_mail.t170.avif",
+      "images/planner/items/uniques/armor/full_plate_mail.t170.avif"
     ],
     "unique349": [
-      "images/planner/items/armor/shield/bverrit_keep.webp",
-      "images/planner/items/armor/shield/bverrit_keep.webp",
-      "images/planner/items/armor/shield/bverrit_keep.webp"
+      "images/planner/items/uniques/shield/bverrit_keep.t49.avif",
+      "images/planner/items/uniques/shield/bverrit_keep.t49.avif",
+      "images/planner/items/uniques/shield/bverrit_keep.t49.avif"
     ],
     "unique350": [
-      "images/planner/items/armor/pelt/falcon_mask.webp",
-      "images/planner/items/armor/pelt/falcon_mask.webp",
-      "images/planner/items/armor/pelt/falcon_mask.webp"
+      "images/planner/items/uniques/pelt/falcon_mask.t184.avif",
+      "images/planner/items/uniques/pelt/falcon_mask.t184.avif",
+      "images/planner/items/uniques/pelt/falcon_mask.t184.avif"
     ],
     "unique351": [
-      "images/planner/items/weapon/wand/gravenspine.webp",
-      "images/planner/items/weapon/wand/gravenspine.webp",
-      "images/planner/items/weapon/wand/gravenspine.webp"
+      "images/planner/items/uniques/wand/gravenspine.t44.avif",
+      "images/planner/items/uniques/wand/gravenspine.t44.avif",
+      "images/planner/items/uniques/wand/gravenspine.t44.avif"
     ],
     "unique353": [
-      "images/planner/items/weapon/sword/kinemils_awl.webp",
-      "images/planner/items/weapon/sword/kinemils_awl.webp",
-      "images/planner/items/weapon/sword/kinemils_awl.webp"
+      "images/planner/items/uniques/sword/kinemils_awl.t51.avif",
+      "images/planner/items/uniques/sword/kinemils_awl.t51.avif",
+      "images/planner/items/uniques/sword/kinemils_awl.t51.avif"
     ],
     "unique354": [
       "images/planner/items/weapon/orb/dragon_stone.webp",
@@ -5535,19 +5582,19 @@
       "images/planner/items/armor/helmet/fanged_helm.webp"
     ],
     "unique356": [
-      "images/planner/items/armor/shield/the_ward.webp",
-      "images/planner/items/armor/shield/the_ward.webp",
-      "images/planner/items/armor/shield/the_ward.webp"
+      "images/planner/items/uniques/shield/the_ward.t47.avif",
+      "images/planner/items/uniques/shield/the_ward.t47.avif",
+      "images/planner/items/uniques/shield/the_ward.t47.avif"
     ],
     "unique357": [
-      "images/planner/items/armor/circlet/coronet.webp",
-      "images/planner/items/armor/circlet/tiara.webp",
-      "images/planner/items/armor/circlet/diadem.webp"
+      "images/planner/items/uniques/circlet/tiara.t45.avif",
+      "images/planner/items/uniques/circlet/tiara.t45.avif",
+      "images/planner/items/uniques/circlet/tiara.t45.avif"
     ],
     "unique358": [
-      "images/planner/items/armor/armor/quilted_armor.webp",
-      "images/planner/items/armor/armor/quilted_armor.webp",
-      "images/planner/items/armor/armor/quilted_armor.webp"
+      "images/planner/items/uniques/armor/quilted_armor.t171.avif",
+      "images/planner/items/uniques/armor/quilted_armor.t171.avif",
+      "images/planner/items/uniques/armor/quilted_armor.t171.avif"
     ],
     "unique359": [
       "images/planner/items/misc/charm/charm_large.webp",
@@ -5555,9 +5602,9 @@
       "images/planner/items/misc/charm/charm_large.webp"
     ],
     "unique360": [
-      "images/planner/items/weapon/mace/flail.webp",
-      "images/planner/items/weapon/mace/flail.webp",
-      "images/planner/items/weapon/mace/flail.webp"
+      "images/planner/items/uniques/mace/flail.t44.avif",
+      "images/planner/items/uniques/mace/flail.t44.avif",
+      "images/planner/items/uniques/mace/flail.t44.avif"
     ],
     "unique361": [
       "images/planner/items/armor/helmet/assault_helmet.webp",
@@ -5565,24 +5612,24 @@
       "images/planner/items/armor/helmet/assault_helmet.webp"
     ],
     "unique363": [
-      "images/planner/items/armor/shield/swordback_hold.webp",
-      "images/planner/items/armor/shield/swordback_hold.webp",
-      "images/planner/items/armor/shield/swordback_hold.webp"
+      "images/planner/items/uniques/shield/swordback_hold.t182.avif",
+      "images/planner/items/uniques/shield/swordback_hold.t182.avif",
+      "images/planner/items/uniques/shield/swordback_hold.t182.avif"
     ],
     "unique364": [
-      "images/planner/items/armor/glove/heavy_gloves.webp",
-      "images/planner/items/armor/glove/heavy_gloves.webp",
-      "images/planner/items/armor/glove/heavy_gloves.webp"
+      "images/planner/items/uniques/glove/heavy_gloves.t176.avif",
+      "images/planner/items/uniques/glove/heavy_gloves.t176.avif",
+      "images/planner/items/uniques/glove/heavy_gloves.t176.avif"
     ],
     "unique365": [
-      "images/planner/items/weapon/sword/hellplague.webp",
-      "images/planner/items/weapon/sword/hellplague.webp",
-      "images/planner/items/weapon/sword/hellplague.webp"
+      "images/planner/items/uniques/sword/hellplague.t48.avif",
+      "images/planner/items/uniques/sword/hellplague.t48.avif",
+      "images/planner/items/uniques/sword/hellplague.t48.avif"
     ],
     "unique366": [
-      "images/planner/items/armor/armor/victors_silk.webp",
-      "images/planner/items/armor/armor/victors_silk.webp",
-      "images/planner/items/armor/armor/victors_silk.webp"
+      "images/planner/items/uniques/armor/victors_silk.t180.avif",
+      "images/planner/items/uniques/armor/victors_silk.t180.avif",
+      "images/planner/items/uniques/armor/victors_silk.t180.avif"
     ],
     "unique367": [
       "images/planner/items/weapon/orb/sacred_globe.webp",
@@ -5605,9 +5652,9 @@
       "images/planner/items/armor/boot/chain_boots.webp"
     ],
     "unique371": [
-      "images/planner/items/weapon/scepter/scepter.webp",
-      "images/planner/items/weapon/scepter/scepter.webp",
-      "images/planner/items/weapon/scepter/scepter.webp"
+      "images/planner/items/uniques/scepter/scepter.t48.avif",
+      "images/planner/items/uniques/scepter/scepter.t48.avif",
+      "images/planner/items/uniques/scepter/scepter.t48.avif"
     ],
     "unique373": [
       "images/cube/5dcfd7cabdd40e86af.png",
@@ -5625,9 +5672,9 @@
       "images/planner/items/misc/amulet/metalgrid.png"
     ],
     "unique376": [
-      "images/planner/items/armor/belt/belt_m.webp",
-      "images/planner/items/armor/belt/belt_m.webp",
-      "images/planner/items/armor/belt/belt_m.webp"
+      "images/planner/items/uniques/belt/belt_m.t171.avif",
+      "images/planner/items/uniques/belt/belt_m.t171.avif",
+      "images/planner/items/uniques/belt/belt_m.t171.avif"
     ],
     "unique378": [
       "images/planner/items/misc/ring/carrion_wind.png",
@@ -5635,14 +5682,14 @@
       "images/planner/items/misc/ring/carrion_wind.png"
     ],
     "unique379": [
-      "images/planner/items/armor/helmet/bone_helm.webp",
-      "images/planner/items/armor/helmet/bone_helm.webp",
-      "images/planner/items/armor/helmet/bone_helm.webp"
+      "images/planner/items/uniques/helmet/bone_helm.t169.avif",
+      "images/planner/items/uniques/helmet/bone_helm.t169.avif",
+      "images/planner/items/uniques/helmet/bone_helm.t169.avif"
     ],
     "unique380": [
-      "images/planner/items/weapon/scepter/war_scepter.webp",
-      "images/planner/items/weapon/scepter/war_scepter.webp",
-      "images/planner/items/weapon/scepter/war_scepter.webp"
+      "images/planner/items/uniques/scepter/war_scepter.t45.avif",
+      "images/planner/items/uniques/scepter/war_scepter.t45.avif",
+      "images/planner/items/uniques/scepter/war_scepter.t45.avif"
     ],
     "unique381": [
       "images/planner/items/misc/quest/mephisto_soul_stone.webp",
@@ -5670,14 +5717,14 @@
       "images/planner/items/weapon/hammer/great_maul.webp"
     ],
     "unique386": [
-      "images/planner/items/weapon/javelin/glaive.webp",
-      "images/planner/items/weapon/javelin/glaive.webp",
-      "images/planner/items/weapon/javelin/glaive.webp"
+      "images/planner/items/uniques/javelin/glaive.t47.avif",
+      "images/planner/items/uniques/javelin/glaive.t47.avif",
+      "images/planner/items/uniques/javelin/glaive.t47.avif"
     ],
     "unique387": [
-      "images/planner/items/weapon/polearm/bardiche.webp",
-      "images/planner/items/weapon/polearm/bardiche.webp",
-      "images/planner/items/weapon/polearm/bardiche.webp"
+      "images/planner/items/uniques/polearm/bardiche.t62.avif",
+      "images/planner/items/uniques/polearm/bardiche.t62.avif",
+      "images/planner/items/uniques/polearm/bardiche.t62.avif"
     ],
     "unique388": [
       "images/planner/items/weapon/staff/lazarus_spire.webp",
@@ -6095,14 +6142,14 @@
       "images/planner/items/misc/quest/cont_jwd.png"
     ],
     "unique473": [
-      "images/planner/items/armor/helmet/cap_hat.webp",
-      "images/planner/items/armor/helmet/cap_hat.webp",
-      "images/planner/items/armor/helmet/cap_hat.webp"
+      "images/planner/items/uniques/helmet/cap_hat.t180.avif",
+      "images/planner/items/uniques/helmet/cap_hat.t180.avif",
+      "images/planner/items/uniques/helmet/cap_hat.t180.avif"
     ],
     "unique474": [
-      "images/planner/items/armor/armor/plate_mail.webp",
-      "images/planner/items/armor/armor/plate_mail.webp",
-      "images/planner/items/armor/armor/plate_mail.webp"
+      "images/planner/items/uniques/armor/plate_mail.t169.avif",
+      "images/planner/items/uniques/armor/plate_mail.t169.avif",
+      "images/planner/items/uniques/armor/plate_mail.t169.avif"
     ],
     "unique475": [
       "images/planner/items/armor/shield/steelclash.webp",
@@ -6110,44 +6157,44 @@
       "images/planner/items/armor/shield/steelclash.webp"
     ],
     "unique476": [
-      "images/planner/items/weapon/hammer/war_hammer.webp",
-      "images/planner/items/weapon/hammer/war_hammer.webp",
-      "images/planner/items/weapon/hammer/war_hammer.webp"
+      "images/planner/items/uniques/hammer/war_hammer.t46.avif",
+      "images/planner/items/uniques/hammer/war_hammer.t46.avif",
+      "images/planner/items/uniques/hammer/war_hammer.t46.avif"
     ],
     "unique477": [
-      "images/planner/items/armor/armor/leather_armor.webp",
-      "images/planner/items/armor/armor/leather_armor.webp",
-      "images/planner/items/armor/armor/leather_armor.webp"
+      "images/planner/items/uniques/armor/leather_armor.t173.avif",
+      "images/planner/items/uniques/armor/leather_armor.t173.avif",
+      "images/planner/items/uniques/armor/leather_armor.t173.avif"
     ],
     "unique478": [
-      "images/planner/items/armor/circlet/coronet.webp",
-      "images/planner/items/armor/circlet/coronet.webp",
-      "images/planner/items/armor/circlet/coronet.webp"
+      "images/planner/items/uniques/circlet/coronet.t51.avif",
+      "images/planner/items/uniques/circlet/coronet.t51.avif",
+      "images/planner/items/uniques/circlet/coronet.t51.avif"
     ],
     "unique479": [
-      "images/planner/items/armor/armor/full_plate_mail.webp",
-      "images/planner/items/armor/armor/full_plate_mail.webp",
-      "images/planner/items/armor/armor/full_plate_mail.webp"
+      "images/planner/items/uniques/armor/full_plate_mail.t183.avif",
+      "images/planner/items/uniques/armor/full_plate_mail.t183.avif",
+      "images/planner/items/uniques/armor/full_plate_mail.t183.avif"
     ],
     "unique480": [
-      "images/planner/items/armor/circlet/tiara.webp",
-      "images/planner/items/armor/circlet/tiara.webp",
-      "images/planner/items/armor/circlet/tiara.webp"
+      "images/planner/items/uniques/circlet/tiara.t57.avif",
+      "images/planner/items/uniques/circlet/tiara.t57.avif",
+      "images/planner/items/uniques/circlet/tiara.t57.avif"
     ],
     "unique481": [
-      "images/planner/items/armor/grimoires/oldbook.webp",
-      "images/planner/items/armor/grimoires/oldbook.webp",
-      "images/planner/items/armor/grimoires/oldbook.webp"
+      "images/planner/items/uniques/grimoires/grimoire.t177.avif",
+      "images/planner/items/uniques/grimoires/grimoire.t177.avif",
+      "images/planner/items/uniques/grimoires/grimoire.t177.avif"
     ],
     "unique482": [
-      "images/planner/items/armor/grimoires/oldbook.webp",
-      "images/planner/items/armor/grimoires/oldbook.webp",
-      "images/planner/items/armor/grimoires/oldbook.webp"
+      "images/planner/items/uniques/grimoires/compendium.avif",
+      "images/planner/items/uniques/grimoires/compendium.avif",
+      "images/planner/items/uniques/grimoires/compendium.avif"
     ],
     "unique483": [
-      "images/planner/items/armor/grimoires/oldbook.webp",
-      "images/planner/items/armor/grimoires/oldbook.webp",
-      "images/planner/items/armor/grimoires/oldbook.webp"
+      "images/planner/items/uniques/grimoires/tome_book.t174.avif",
+      "images/planner/items/uniques/grimoires/tome_book.t174.avif",
+      "images/planner/items/uniques/grimoires/tome_book.t174.avif"
     ],
     "unique484": [
       "images/planner/items/armor/grimoires/measured_wrath.webp",
@@ -6155,19 +6202,19 @@
       "images/planner/items/armor/grimoires/measured_wrath.webp"
     ],
     "unique485": [
-      "images/planner/items/weapon/sword/two_handed_sword.webp",
-      "images/planner/items/weapon/sword/two_handed_sword.webp",
-      "images/planner/items/weapon/sword/two_handed_sword.webp"
+      "images/planner/items/uniques/sword/two_handed_sword.t45.avif",
+      "images/planner/items/uniques/sword/two_handed_sword.t45.avif",
+      "images/planner/items/uniques/sword/two_handed_sword.t45.avif"
     ],
     "unique486": [
-      "images/planner/items/armor/boot/light_plate_boots.webp",
-      "images/planner/items/armor/boot/light_plate_boots.webp",
-      "images/planner/items/armor/boot/light_plate_boots.webp"
+      "images/planner/items/uniques/boot/light_plate_boots.t169.avif",
+      "images/planner/items/uniques/boot/light_plate_boots.t169.avif",
+      "images/planner/items/uniques/boot/light_plate_boots.t169.avif"
     ],
     "unique487": [
-      "images/planner/items/weapon/knife/dirk.webp",
-      "images/planner/items/weapon/knife/dirk.webp",
-      "images/planner/items/weapon/knife/dirk.webp"
+      "images/planner/items/uniques/knife/dirk.t50.avif",
+      "images/planner/items/uniques/knife/dirk.t50.avif",
+      "images/planner/items/uniques/knife/dirk.t50.avif"
     ],
     "unique488": [
       "images/planner/items/misc/ring/sling.png",
@@ -6185,9 +6232,9 @@
       "images/planner/items/misc/amulet/entropy_locket.png"
     ],
     "unique491": [
-      "images/planner/items/armor/belt/heavy_belt.webp",
-      "images/planner/items/armor/belt/heavy_belt.webp",
-      "images/planner/items/armor/belt/heavy_belt.webp"
+      "images/planner/items/uniques/belt/heavy_belt.t184.avif",
+      "images/planner/items/uniques/belt/heavy_belt.t184.avif",
+      "images/planner/items/uniques/belt/heavy_belt.t184.avif"
     ],
     "unique492": [
       "images/planner/items/armor/helmet/unique_warlock_helm.webp",
@@ -6200,9 +6247,9 @@
       "images/planner/items/misc/body_part/fragment_poison.webp"
     ],
     "unique494": [
-      "images/planner/items/misc/body_part/fragment_lightning.webp",
-      "images/planner/items/misc/body_part/fragment_lightning.webp",
-      "images/planner/items/misc/body_part/fragment_lightning.webp"
+      "images/planner/items/uniques/body_part/fragment_magic.avif",
+      "images/planner/items/uniques/body_part/fragment_magic.avif",
+      "images/planner/items/uniques/body_part/fragment_magic.avif"
     ],
     "unique495": [
       "images/planner/items/misc/body_part/fragment_cold.webp",
@@ -6220,9 +6267,9 @@
       "images/planner/items/misc/body_part/fragment_physical.webp"
     ],
     "unique498": [
-      "images/planner/items/misc/body_part/fragment_magic.webp",
-      "images/planner/items/misc/body_part/fragment_magic.webp",
-      "images/planner/items/misc/body_part/fragment_magic.webp"
+      "images/planner/items/uniques/body_part/fragment_lightning.avif",
+      "images/planner/items/uniques/body_part/fragment_lightning.avif",
+      "images/planner/items/uniques/body_part/fragment_lightning.avif"
     ],
     "unique499": [
       "images/planner/items/misc/charm/charm_large.webp",
@@ -6295,69 +6342,69 @@
       "images/planner/items/misc/amulet/atmas_scarab.png"
     ],
     "unique698": [
-      "images/planner/items/weapon/hammer/bonesob.webp",
-      "images/planner/items/weapon/hammer/bonesob.webp",
-      "images/planner/items/weapon/hammer/bonesob.webp"
+      "images/planner/items/uniques/hammer/maul.avif",
+      "images/planner/items/uniques/hammer/maul.avif",
+      "images/planner/items/uniques/hammer/maul.avif"
     ],
     "unique699": [
-      "images/planner/items/weapon/spear/spetum.webp",
-      "images/planner/items/weapon/spear/spetum.webp",
-      "images/planner/items/weapon/spear/spetum.webp"
+      "images/planner/items/uniques/spear/haunted.avif",
+      "images/planner/items/uniques/spear/haunted.avif",
+      "images/planner/items/uniques/spear/haunted.avif"
     ],
     "unique700": [
-      "images/planner/items/weapon/polearm/voulge.webp",
-      "images/planner/items/weapon/polearm/voulge.webp",
-      "images/planner/items/weapon/polearm/voulge.webp"
+      "images/planner/items/uniques/spear/horrible_thing.avif",
+      "images/planner/items/uniques/spear/horrible_thing.avif",
+      "images/planner/items/uniques/spear/horrible_thing.avif"
     ],
     "unique701": [
-      "images/planner/items/weapon/axe/large_axe.webp",
-      "images/planner/items/weapon/axe/large_axe.webp",
-      "images/planner/items/weapon/axe/large_axe.webp"
+      "images/planner/items/uniques/axe/triumph_of_rakkis.t58.avif",
+      "images/planner/items/uniques/axe/triumph_of_rakkis.t58.avif",
+      "images/planner/items/uniques/axe/triumph_of_rakkis.t58.avif"
     ],
     "unique702": [
-      "images/planner/items/weapon/axe/axe.webp",
-      "images/planner/items/weapon/axe/axe.webp",
-      "images/planner/items/weapon/axe/axe.webp"
+      "images/planner/items/uniques/axe/wicked_tool.avif",
+      "images/planner/items/uniques/axe/wicked_tool.avif",
+      "images/planner/items/uniques/axe/wicked_tool.avif"
     ],
     "unique703": [
-      "images/planner/items/weapon/javelin/pilum.webp",
-      "images/planner/items/weapon/javelin/pilum.webp",
-      "images/planner/items/weapon/javelin/pilum.webp"
+      "images/planner/items/uniques/javelin/hirams_treason.t186.avif",
+      "images/planner/items/uniques/javelin/hirams_treason.t186.avif",
+      "images/planner/items/uniques/javelin/hirams_treason.t186.avif"
     ],
     "unique704": [
-      "images/planner/items/weapon/javelin/javelin.webp",
-      "images/planner/items/weapon/javelin/javelin.webp",
-      "images/planner/items/weapon/javelin/javelin.webp"
+      "images/planner/items/uniques/javelin/javelin.t177.avif",
+      "images/planner/items/uniques/javelin/javelin.t177.avif",
+      "images/planner/items/uniques/javelin/javelin.t177.avif"
     ],
     "unique705": [
-      "images/planner/items/weapon/knife/dirk.webp",
-      "images/planner/items/weapon/knife/dirk.webp",
-      "images/planner/items/weapon/knife/dirk.webp"
+      "images/planner/items/uniques/knife/forbidden_ceremony.t51.avif",
+      "images/planner/items/uniques/knife/forbidden_ceremony.t51.avif",
+      "images/planner/items/uniques/knife/forbidden_ceremony.t51.avif"
     ],
     "unique706": [
-      "images/planner/items/weapon/bow/long_bow.webp",
-      "images/planner/items/weapon/bow/long_bow.webp",
-      "images/planner/items/weapon/bow/long_bow.webp"
+      "images/planner/items/uniques/bow/ruler_of_darkness.avif",
+      "images/planner/items/uniques/bow/ruler_of_darkness.avif",
+      "images/planner/items/uniques/bow/ruler_of_darkness.avif"
     ],
     "unique707": [
-      "images/planner/items/weapon/bow/hunters_bow.webp",
-      "images/planner/items/weapon/bow/hunters_bow.webp",
-      "images/planner/items/weapon/bow/hunters_bow.webp"
+      "images/planner/items/uniques/bow/doomglass.avif",
+      "images/planner/items/uniques/bow/doomglass.avif",
+      "images/planner/items/uniques/bow/doomglass.avif"
     ],
     "unique708": [
-      "images/planner/items/weapon/staff/short_staff.webp",
-      "images/planner/items/weapon/staff/short_staff.webp",
-      "images/planner/items/weapon/staff/short_staff.webp"
+      "images/planner/items/uniques/staff/short_staff.t171.avif",
+      "images/planner/items/uniques/staff/short_staff.t171.avif",
+      "images/planner/items/uniques/staff/short_staff.t171.avif"
     ],
     "unique709": [
-      "images/planner/items/weapon/staff/long_staff.webp",
-      "images/planner/items/weapon/staff/long_staff.webp",
-      "images/planner/items/weapon/staff/long_staff.webp"
+      "images/planner/items/uniques/staff/crisp.t177.avif",
+      "images/planner/items/uniques/staff/crisp.t177.avif",
+      "images/planner/items/uniques/staff/crisp.t177.avif"
     ],
     "unique710": [
-      "images/planner/items/weapon/staff/long_staff.webp",
-      "images/planner/items/weapon/staff/long_staff.webp",
-      "images/planner/items/weapon/staff/long_staff.webp"
+      "images/planner/items/uniques/staff/order_of_excesses.avif",
+      "images/planner/items/uniques/staff/order_of_excesses.avif",
+      "images/planner/items/uniques/staff/order_of_excesses.avif"
     ],
     "unique711": [
       "images/planner/items/misc/ring/pawned_soul.png",
@@ -6420,14 +6467,14 @@
       "images/planner/items/misc/shard/cont_ua5.png"
     ],
     "unique727": [
-      "images/planner/items/weapon/sword/the_patriarch.webp",
-      "images/planner/items/weapon/sword/the_patriarch.webp",
-      "images/planner/items/weapon/sword/the_patriarch.webp"
+      "images/planner/items/uniques/sword/the_patriarch.t55.avif",
+      "images/planner/items/uniques/sword/the_patriarch.t55.avif",
+      "images/planner/items/uniques/sword/the_patriarch.t55.avif"
     ],
     "unique728": [
-      "images/planner/items/classic/invuhms.gif",
-      "images/planner/items/classic/invuhms.gif",
-      "images/planner/items/classic/invuhms.gif"
+      "images/planner/items/uniques/helmet/leorics_crown.avif",
+      "images/planner/items/uniques/helmet/leorics_crown.avif",
+      "images/planner/items/uniques/helmet/leorics_crown.avif"
     ],
     "unique729": [
       "images/planner/items/armor/armor/full_plate_mail.webp",
@@ -6440,9 +6487,9 @@
       "images/planner/items/armor/helmet/unique_warlock_helm.webp"
     ],
     "unique731": [
-      "images/planner/items/armor/armor/victors_silk.webp",
-      "images/planner/items/armor/armor/victors_silk.webp",
-      "images/planner/items/armor/armor/victors_silk.webp"
+      "images/planner/items/uniques/armor/victors_silk.t173.avif",
+      "images/planner/items/uniques/armor/victors_silk.t173.avif",
+      "images/planner/items/uniques/armor/victors_silk.t173.avif"
     ],
     "unique732": [
       "images/planner/items/armor/armor/victors_silk.webp",
@@ -6450,9 +6497,9 @@
       "images/planner/items/armor/armor/victors_silk.webp"
     ],
     "unique733": [
-      "images/planner/items/weapon/staff/skullcollector.webp",
-      "images/planner/items/weapon/staff/skullcollector.webp",
-      "images/planner/items/weapon/staff/skullcollector.webp"
+      "images/planner/items/uniques/staff/skullcollector.t171.avif",
+      "images/planner/items/uniques/staff/skullcollector.t171.avif",
+      "images/planner/items/uniques/staff/skullcollector.t171.avif"
     ],
     "unique694": [
       "images/planner/items/armor/helmet/bloodforged_helm.png",

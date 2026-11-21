@@ -39,7 +39,11 @@
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
-import { plannerItemDimensions, plannerItemImage } from "@/utils/planner-item-art";
+import {
+  plannerItemDimensions,
+  plannerItemIdentity,
+  plannerItemImage,
+} from "@/utils/planner-item-art";
 import { itemSockets } from "@/utils/planner-item-presentation";
 import { socketCategory } from "@/utils/planner-sockets";
 import { useRunewordsStore } from "@/store";
@@ -66,14 +70,41 @@ const image = computed(
 const equipmentRuneword = computed(
   () => !!props.equipmentSlot && props.item.quality === "runeword"
 );
+const javelinBases = new Set([
+  "jav",
+  "pil",
+  "ssp",
+  "glv",
+  "tsp",
+  "9ja",
+  "9pi",
+  "9s9",
+  "9gl",
+  "9ts",
+  "7ja",
+  "7pi",
+  "7s7",
+  "7gl",
+  "7ts",
+  "am5",
+  "ama",
+  "amf",
+]);
+const fullWeaponArt = computed(() => {
+  if (!["mainHand", "offHand", "swapMain", "swapOff"].includes(props.equipmentSlot ?? ""))
+    return false;
+  const { baseCode, catalogId } = plannerItemIdentity(props.item);
+  return catalogId === "set078" || javelinBases.has(baseCode ?? props.fallbackBase ?? "");
+});
 const size = computed(() =>
-  equipmentRuneword.value
+  equipmentRuneword.value || fullWeaponArt.value
     ? props.capacity
     : plannerItemDimensions(props.item) ||
       plannerItemDimensions(fallback.value) ||
       props.capacity
 );
 const imageStyle = computed(() => {
+  if (fullWeaponArt.value) return { width: "80%", height: "80%" };
   return {
     width: `${Math.min(size.value[0] / props.capacity[0], 1) * 100}%`,
     height: `${Math.min(size.value[1] / props.capacity[1], 1) * 100}%`,
@@ -149,12 +180,7 @@ const socketLayout = computed(() => {
   }
   const helmetTriangle = props.equipmentSlot === "head" && count === 3;
   // Four sockets on tall weapons and shields follow a vertical line in every view.
-  const columns =
-    verticalItemSockets.value
-      ? 1
-      : count > 3 || helmetTriangle
-        ? 2
-        : 1;
+  const columns = verticalItemSockets.value ? 1 : count > 3 || helmetTriangle ? 2 : 1;
   const rows = Math.max(1, Math.ceil(count / columns));
   const columnWidth = (width * 0.88) / columns;
   const rowHeight = (height * 0.9) / rows;

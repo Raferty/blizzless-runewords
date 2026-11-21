@@ -142,7 +142,8 @@
     </div>
     <div class="planner-skill-toolbar">
       <p>
-        <kbd>CTRL</kbd> {{ t("+ клик — 5", "+ click — 5") }}<br /><kbd>SHIFT</kbd> {{ t("+ клик — максимум", "+ click — max") }}<br /><kbd>{{
+        <kbd>CTRL</kbd> {{ t("+ клик — 5", "+ click — 5") }}<br /><kbd>SHIFT</kbd>
+        {{ t("+ клик — максимум", "+ click — max") }}<br /><kbd>{{
           t("ПКМ", "RMB")
         }}</kbd>
         {{ t("−1 очко", "−1 point") }}<br /><kbd>CTRL</kbd>
@@ -303,7 +304,11 @@ function startGesture(event: PointerEvent) {
   primaryDown = event.button === 0;
   controlHandled = false;
 }
-function changeSkill(skill: PlannerSkill, event: MouseEvent | KeyboardEvent, add: boolean) {
+function changeSkill(
+  skill: PlannerSkill,
+  event: MouseEvent | KeyboardEvent,
+  add: boolean
+) {
   const steps = event.ctrlKey && !event.shiftKey ? 5 : 1;
   for (let i = 0; i < steps; i++) {
     if (add) store.addSkill(skill, event.shiftKey);

@@ -147,7 +147,12 @@ const lang = computed(() => info.currentLang);
 const native = shallowRef<GameSaveExporter>();
 const squareSockets = computed(() => {
   const size = plannerItemDimensions(props.item);
-  return runes.value.length === 4 && socketCategory(props.item) === "weapon" && size?.[0] === 2 && size[1] === 3;
+  return (
+    runes.value.length === 4 &&
+    socketCategory(props.item) === "weapon" &&
+    size?.[0] === 2 &&
+    size[1] === 3
+  );
 });
 const identity = computed(() => plannerItemIdentity(props.item));
 const shard = computed(() => worldstoneShardTooltip(identity.value.baseCode, lang.value));

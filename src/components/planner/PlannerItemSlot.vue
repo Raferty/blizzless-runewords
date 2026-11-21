@@ -89,7 +89,13 @@ function show(target: HTMLElement) {
   open.value = true;
 }
 function enter(event: PointerEvent) {
-  if (event.pointerType === "touch" || !props.item || menuOpen.value || plannerItemDragging.value) return;
+  if (
+    event.pointerType === "touch" ||
+    !props.item ||
+    menuOpen.value ||
+    plannerItemDragging.value
+  )
+    return;
   keep();
   open.value = true;
   move(event);

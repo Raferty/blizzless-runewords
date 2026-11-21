@@ -399,6 +399,7 @@
 .planner-equipment-art .planner-gear-slot {
   position: absolute;
   display: grid;
+  grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   place-items: center;
   min-height: 0;
   padding: 4px !important;
@@ -1268,18 +1269,18 @@
   font-size: 8px;
   color: #777;
 }
-.planner-attribute input {
-  width: 5ch;
-  padding-right: 3px;
-  font-size: 12px;
-  font-weight: 400;
-  color: inherit;
-  text-align: right;
-  background: transparent;
-  border: 1px solid #444;
-}
+.planner-attribute input,
 .planner-attribute button {
   @include controls.square;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.planner-attribute input {
+  font-variant-numeric: tabular-nums;
+  color: inherit;
+  text-align: center;
+}
+.planner-attribute button {
   color: #0788fa;
   background: #101010;
 }

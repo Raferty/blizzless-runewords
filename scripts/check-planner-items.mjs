@@ -472,6 +472,10 @@ try {
     stash.bases.get("9fc").image,
     "images/planner/items/weapon/sword/falchion.webp"
   );
+  assert.equal(
+    plannerItemImage({ quality: "unique", name: "Hiram’s Treason", baseCode: "7pi" }),
+    "images/planner/items/uniques/javelin/hirams_treason.t186.avif"
+  );
   const aliBaba = stash.items.find((item) => item.name === "Blade of Ali Baba");
   assert(aliBaba);
   assert(
@@ -484,7 +488,7 @@ try {
       { baseCode: "9fc", quality: "unique", catalogId: aliBaba.catalogId },
       "exceptional"
     ),
-    stash.bases.get("9fc").image
+    "images/planner/items/uniques/sword/falchion.t51.avif"
   );
   assert.equal(
     plannerItemImage({
@@ -492,7 +496,7 @@ try {
       quality: "unique",
       catalogId: aliBaba.catalogId,
     }),
-    stash.bases.get("9fc").image,
+    "images/planner/items/uniques/sword/falchion.t51.avif",
     "Existing items resolve their tier before the editor catalog loads"
   );
   assert.equal(
@@ -531,7 +535,9 @@ try {
   for (const item of jewelryAndJewels) {
     const key = nativeArt.unique[data.uniqueItems[item.catalogId].index];
     assert(key, item.name);
-    const expected = `images/planner/items/${key}.${nativeArt.sprites[key] ? "png" : "webp"}`;
+    const expected =
+      nativeArt.imageOverrides[data.uniqueItems[item.catalogId].index] ??
+      `images/planner/items/${key}.${nativeArt.sprites[key] ? "png" : "webp"}`;
     assert.equal(
       plannerItemImage({
         baseCode: item.bases[0],
