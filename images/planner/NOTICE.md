@@ -2,6 +2,22 @@
 
 Downloaded 2026-10-26. No user screenshots are included in the site.
 
+## Custom panel variants — 2026-11-21
+
+- `inventory-clear-v3.png` (1081×1455): generated character inventory panel variant
+  based on the inventory artwork linked below. Includes dark empty-slot category
+  silhouettes, neutral I/II weapon-set selectors and a 10×4 inventory grid.
+- `mercenary-clear-v1.png` (1605×980): generated companion mercenary panel in the
+  same visual style, with a helmet, body armor and two hand slots. Intended to
+  use corresponding slot proportions when displayed at the character panel's width.
+
+Both original PNG outputs are preserved without resizing or re-encoding. These
+are saved design assets; the planner currently uses the original WebP panels.
+Their generated layouts need slot-coordinate alignment before replacing the
+active panels. The active weapon-set indication remains an interactive UI state.
+
+## Original interface artwork
+
 - `inventory.webp`: original Diablo II: Resurrected inventory interface, served by LootCube:
   https://lootcube.net/images/ui/panel/inventory/background_cropped.webp
   Source page: https://lootcube.net/en/builds/abyss-warlock
