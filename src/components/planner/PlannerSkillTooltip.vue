@@ -28,6 +28,7 @@
       <div v-if="rank" class="planner-tooltip-section">
         <p>
           {{ t("Текущий уровень навыка", "Current Skill Level") }}: {{ rank + bonus }}
+          ({{ t("вложено", "base points:") }} {{ rank }})
         </p>
         <p v-for="(line, i) in current?.effects" :key="i">{{ line }}</p>
       </div>
