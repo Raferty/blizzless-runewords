@@ -11,10 +11,9 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   same visual style, with a helmet, body armor and two hand slots. Intended to
   use corresponding slot proportions when displayed at the character panel's width.
 
-Both original PNG outputs are preserved without resizing or re-encoding. These
-are saved design assets; the planner currently uses the original WebP panels.
-Their generated layouts need slot-coordinate alignment before replacing the
-active panels. The active weapon-set indication remains an interactive UI state.
+Both original PNG outputs are preserved without resizing or re-encoding. The
+mercenary equipment panel uses its PNG with interactive slots aligned to its frames.
+The character inventory uses its PNG cropped to the equipment slots and 10×4 grid. The active weapon-set indication remains an interactive UI state.
 
 ## Original interface artwork
 
@@ -24,7 +23,7 @@ active panels. The active weapon-set indication remains an interactive UI state.
 - `mercenary.webp`: original Diablo II: Resurrected hireling equipment panel, downloaded 2026-10-27:
   https://lootcube.net/images/ui/panel/hireling/hirelingpanel_cropped.webp
   Source page: https://lootcube.net/en/builds/lightning-javazon-amazon
-  The unmodified 1036×790 image is displayed through an SVG viewport without its header/footer.
+  Original 1036×790 panel.
 - `classes/*.png`: class portraits from Blizzless Glossary:
   https://blizzless.info/media/chars/hd/{classId}.png
 - `mercenaries/act{1,2,3,5}.png`: the four original hireling portraits from
