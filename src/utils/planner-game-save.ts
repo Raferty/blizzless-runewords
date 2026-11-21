@@ -6,6 +6,7 @@ import {
   mercenaries,
   plannerClasses,
   plannerSkills,
+  resistanceTypes,
 } from "@/shared/planner";
 import { waypoints } from "@/shared/planner-waypoints";
 import { RUNEWORDS } from "@/shared/runewords";
@@ -16,6 +17,8 @@ import { REWORKED_RUNEWORDS } from "@/shared/reworked-runewords";
 import {
   attributeBudget,
   createBuild,
+  isBackpackGear,
+  inventoryWidth,
   parseBuild,
   skillBudget,
   spentAttributes,
@@ -32,6 +35,7 @@ import {
 import { layoutStashItems } from "./planner-stash";
 import { isContainerBase, isTome, isWorldstoneShard } from "./planner-item-art";
 import {
+  socketCategory,
   baseSupportsSockets,
   magicSocketJewels,
   parseSocketIconIndices,
@@ -50,6 +54,7 @@ import {
 type RawData = Parameters<typeof D2RSaver.fromData>[0];
 type Locale = Parameters<typeof D2RSaver.fromData>[1];
 type Definition = Record<string, string | number | undefined>;
+const waypointBitsStart = (difficulty: number) => 711 + difficulty * 24;
 const classes = [
   "amazon",
   "sorceress",
@@ -100,7 +105,7 @@ export interface GameSaveEntry {
   key: string;
   item: PlannerItem;
   slot?: EquipmentSlot;
-  owner: "hero" | "mercenary" | "charm" | "stash";
+  owner: "hero" | "mercenary" | "charm" | "inventory" | "stash";
   position?: number;
   height?: number;
 }
@@ -151,7 +156,7 @@ export function gameSaveEntries(build: PlannerBuild): GameSaveEntry[] {
     ...build.charms.map((item) => ({
       key: `charm.${item.id}`,
       item,
-      owner: "charm" as const,
+      owner: isBackpackGear(item) ? ("inventory" as const) : ("charm" as const),
       position: item.position,
       height: item.height,
     })),
@@ -234,6 +239,24 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const build = createBuild(classId);
     // A native save owns its inventory; do not retain the new-character defaults.
     build.charms = [];
+    build.difficulty = "normal";
+    for (const [index, { value }] of difficulties.entries()) {
+      const flags = profile.quests[index];
+      build.quests[value] = {
+        den: flags.denofevil,
+        radament: flags.radamentslair,
+        izual: flags.thefallenangel,
+        lamEsen: flags.lamessenstome,
+        anya: flags.prisonofice,
+        goldenBird: flags.thegoldenbird,
+      };
+      for (const { key, bit } of waypoints)
+        build.waypoints[value][key] = !!(
+          bytes[waypointBitsStart(index) + (bit >> 3)] &
+          (1 << (bit & 7))
+        );
+      if (bytes[152 + index] & 0x80) build.difficulty = value;
+    }
     build.name = profile.name;
     build.hardcore = !!(bytes[20] & 4);
     if (bytes[248] === 2 || bytes[248] === 3)
@@ -456,6 +479,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         const definition = (itemQuality === "set" ? gd.setItems : gd.uniqueItems)[
           catalogId
         ] as unknown as Definition;
+        if (
+          itemQuality === "unique" &&
+          isContainerBase(native.base) &&
+          definition.prop1 === "Add_one"
+        )
+          item.containerQuantity = native.stats.Add_one ?? 0;
         const values: Record<number, number> = {};
         for (let index = 1; index <= 12; index++) {
           const property = gd.properties[String(definition[`prop${index}`])];
@@ -622,10 +651,10 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       const native = id === undefined ? undefined : parsedItems[id];
       if (!native) continue;
       const item = makeItem(native);
-      const height = Math.max(1, Math.min(3, gd.items[native.base]?.invheight || 1));
+      const height = Math.max(1, Math.min(4, gd.items[native.base]?.invheight || 1));
       build.charms.push({
         ...item,
-        id: `d2s-${native.guid ?? native.itemId}`,
+        id: `d2s-${native.guid ?? native.itemId}-${position}`,
         position,
         height,
       });
@@ -701,6 +730,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const base = gd.items[code];
     if (!base || !/^[a-z0-9]{3}$/.test(code)) return false;
     if (
+      entry.owner === "inventory" &&
+      entry.position !== undefined &&
+      (base.invheight !== entry.height || base.invwidth !== inventoryWidth(entry.item))
+    )
+      return false;
+    if (
       entry.item.craftId &&
       (entry.item.quality !== "crafted" ||
         !craftVariant({ ...entry.item, baseCode: code }))
@@ -710,7 +745,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const supply = stashSupplies[code];
     if (supply)
       return (
-        (entry.owner === "stash" ||
+        (["stash", "inventory"].includes(entry.owner) ||
           (entry.owner === "charm" && isWorldstoneShard(code) && entry.height === 1)) &&
         entry.item.quality === (supply.catalogId ? "unique" : "normal") &&
         (!supply.catalogId ||
@@ -748,7 +783,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const classRestriction = [...t]
       .map((type) => gd.itemTypes[type]?.class)
       .find(Boolean);
-    if (classRestriction && entry.owner !== "stash" && classRestriction !== nativeClass)
+    if (
+      classRestriction &&
+      !["stash", "inventory"].includes(entry.owner) &&
+      classRestriction !== nativeClass
+    )
       return false;
     if (entry.owner === "charm") {
       if (entry.item.quality === "unique")
@@ -843,6 +882,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           permitted(code, entry, build) &&
           (entry.slot ||
             entry.owner === "charm" ||
+            entry.owner === "inventory" ||
             types(code).has("weap") ||
             types(code).has("armo") ||
             types(code).has("ring") ||
@@ -1180,6 +1220,68 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         )
       ) as NonNullable<PlannerItem["classBonuses"]>,
     };
+  }
+  function itemResistanceCaps(item: PlannerItem, classId: ClassId) {
+    const caps: Record<string, number> = {};
+    const keys = resistanceTypes.map(({ maximum }) => maximum);
+    const add = (stats: Record<string, number>) => {
+      for (const key of keys) caps[key] = (caps[key] ?? 0) + (stats[key] ?? 0);
+    };
+    // Compile only resistance-cap properties, including rolled and grouped properties.
+    const addDefinition = (
+      row: Definition,
+      roll: 0 | 1,
+      values?: PlannerItem["propertyValues"],
+      choices?: PlannerItem["propertyChoices"]
+    ) => {
+      const definition = resolvePropertyGroups(
+        row,
+        gd.propertyGroups,
+        choices
+      ) as Definition;
+      const rolls: Record<string, number> = {};
+      for (let i = 1; i <= 12; i++) {
+        const prop = gd.properties[String(definition[`prop${i}`])] as
+          Definition | undefined;
+        if (prop && keys.some((key) => Object.values(prop).includes(key))) {
+          if (values?.[i] !== undefined) rolls[i] = values[i];
+        } else delete definition[`prop${i}`];
+      }
+      add(definitionStats(definition, "", roll, rolls, classId));
+    };
+    if (item.importedStats?.signature === nativeStatsSignature(item))
+      add(item.importedStats.values);
+    else {
+      const def = itemDefinition(item);
+      if (def)
+        addDefinition(
+          def,
+          item.propertyRoll ?? 1,
+          item.propertyValues,
+          item.propertyChoices
+        );
+      add(affixStats(item));
+    }
+    const inserts =
+      item.quality === "runeword" ? itemRunes(item) : (item.socketedItems ?? []);
+    for (const [index, code] of inserts.entries()) {
+      if (!code) continue;
+      const jewel = socketJewelDefinition(code);
+      if (jewel) addDefinition(jewel, 1, item.socketPropertyValues?.[index]);
+      else {
+        const gem = gd.gems[code] as Definition | undefined;
+        if (!gem) continue;
+        const prefix = socketCategory(item);
+        const props: Definition = {};
+        for (let i = 1; i <= 3; i++) {
+          props[`prop${i}`] = gem[`${prefix}mod${i}code`];
+          props[`min${i}`] = gem[`${prefix}mod${i}min`];
+          props[`max${i}`] = gem[`${prefix}mod${i}max`];
+        }
+        addDefinition(props, 1);
+      }
+    }
+    return caps;
   }
   function magicProperties(stats: Record<string, number>): SaveTypes.IMagicProperty[] {
     const result: SaveTypes.IMagicProperty[] = [];
@@ -1598,7 +1700,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       else if (entry.owner === "mercenary") {
         if (!profile.merc) throw new GameSaveError("mercenary");
         profile.mercItems[slots[entry.slot!]] = item.itemId;
-      } else if (entry.owner === "charm")
+      } else if (entry.owner === "charm" || entry.owner === "inventory")
         profile.inventory[entry.position!] = item.itemId;
       else {
         const position = stashPositions.get(entry.key);
@@ -1858,7 +1960,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     // three 24-byte blocks (2-byte prefix, 39 waypoint bits, padding).
     if (bytes[701] !== 0x57 || bytes[702] !== 0x53) throw new GameSaveError("validation");
     difficulties.forEach(({ value }, index) => {
-      const start = 711 + index * 24;
+      const start = waypointBitsStart(index);
       bytes.fill(0, start, start + 5);
       for (const { key, bit } of waypoints) {
         if (build.waypoints[value][key]) bytes[start + (bit >> 3)] |= 1 << (bit & 7);
@@ -1898,10 +2000,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   }
   return {
     choices,
+    permitted,
     defaultChoice,
     catalogBonuses,
     itemDefinition,
     itemBonuses,
+    itemResistanceCaps,
     itemRunes,
     socketBonuses,
     socketJewelDefinition,

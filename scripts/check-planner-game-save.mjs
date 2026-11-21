@@ -341,7 +341,7 @@ try {
     };
     assert.equal(choices[key], "unique456");
     for (const roll of ["planned", 0, 1]) {
-      const { read } = await verify(restored, {
+      const { read, bytes } = await verify(restored, {
         ...opts,
         choices,
         rolls: { [key]: roll },
@@ -358,6 +358,19 @@ try {
           .values,
         [100],
         "All export roll modes preserve the 100 potions inside"
+      );
+      const imported = codec.importCharacter(bytes);
+      assert.equal(imported.stash[0].containerQuantity, 100);
+      const roundTrip = await verify(imported, {
+        ...opts,
+        choices,
+        rolls: { [key]: roll },
+      });
+      assert.deepEqual(
+        roundTrip.read.items[0].magic_attributes.find(
+          (stat) => stat.id === data.itemStatCost.Add_one.id
+        )?.values,
+        [100]
       );
     }
     assert(
@@ -380,6 +393,106 @@ try {
         Math.floor(c.life + (level - 1) * c.lifePerLevel + 60)
       );
     }
+  {
+    const build = planner.createBuild("paladin");
+    const item = (name, baseCode, extra = {}) => ({
+      name,
+      baseCode,
+      quality: "normal",
+      requiredLevel: 1,
+      notes: "",
+      bonuses: {},
+      ...extra,
+    });
+    const ring = item("Raven Frost", "rin", {
+      quality: "unique",
+      catalogId: "unique275",
+      propertyRoll: 1,
+      bonuses: { dexterity: 20 },
+    });
+    const pike = item("Pike", "pik");
+    build.charms = [
+      { ...ring, id: "ring", height: 1, position: 39 },
+      { ...pike, id: "pike", height: 4, position: 0 },
+    ];
+    const planned = (b) => ({
+      ...opts,
+      choices: Object.fromEntries(
+        native.gameSaveEntries(b).map((e) => [e.key, codec.defaultChoice(e, b)])
+      ),
+    });
+    let restored = build;
+    for (let round = 0; round < 2; round++) {
+      const { bytes, read } = await verify(restored, planned(restored));
+      assert.deepEqual(
+        read.items
+          .map((i) => [i.type, i.alt_position_id, i.position_x, i.position_y])
+          .sort(),
+        [
+          ["pik", 1, 0, 0],
+          ["rin", 1, 9, 3],
+        ]
+      );
+      restored = codec.importCharacter(bytes);
+      assert.equal(planner.buildStats(restored).bonuses.dexterity, 0);
+      assert.equal(
+        restored.charms.find((i) => i.baseCode === "rin").bonuses.dexterity,
+        20
+      );
+      assert.equal(restored.charms.find((i) => i.baseCode === "pik").height, 4);
+    }
+    const { fitsStashCell } = await server.ssrLoadModule(
+      "/src/utils/planner-item-movement.ts"
+    );
+    assert(fitsStashCell(build, ring, 207));
+    build.stash = [{ ...ring, stashPosition: 207 }];
+    assert(!fitsStashCell(build, ring, 207));
+    assert(!fitsStashCell(build, pike, 206));
+    assert.equal(
+      codec.importCharacter((await verify(build, planned(build))).bytes).stash[0]
+        .stashPosition,
+      207
+    );
+    const slot = (item, slot) =>
+      codec.permitted(item.baseCode, { key: "test", owner: "hero", slot, item }, build);
+    assert(!slot(item("Shard", "xa1"), "head"));
+    assert(!slot(ring, "head"));
+    assert(slot(ring, "ringLeft"));
+
+    build.equipment.armor = item("Guardian Angel", "xlt", {
+      quality: "unique",
+      catalogId: "unique218",
+      bonuses: {
+        fireResist: 250,
+        lightningResist: 250,
+        coldResist: 250,
+        poisonResist: 250,
+      },
+    });
+    const caps = () =>
+      planner.buildStats(build, codec).resists.map((r) => [r.cap, r.value]);
+    assert.deepEqual(caps(), Array(4).fill([90, 90]));
+    build.skills[100] = 20;
+    assert.deepEqual(caps(), [
+      [95, 95],
+      [90, 90],
+      [90, 90],
+      [90, 90],
+    ]);
+    build.charms = [{ ...build.equipment.armor, id: "carried", position: 0, height: 3 }];
+    delete build.equipment.armor;
+    assert.deepEqual(
+      caps().map(([cap]) => cap),
+      [85, 75, 75, 75]
+    );
+    build.equipment.offHand = item("Shield with Vex", "buc", {
+      sockets: 1,
+      socketedItems: ["r26"],
+    });
+    assert.equal(caps()[0][0], 90);
+    build.weaponSet = 1;
+    assert.equal(caps()[0][0], 85);
+  }
   const rewards = planner.createBuild("paladin");
   for (const difficulty of Object.values(rewards.quests))
     for (const key of Object.keys(difficulty)) difficulty[key] = false;

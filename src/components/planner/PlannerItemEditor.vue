@@ -444,6 +444,7 @@ import {
   charmSkinImages,
 } from "@/utils/planner-item-art";
 import { itemRuneword } from "@/utils/planner-item-presentation";
+import { fitsStashCell } from "@/utils/planner-item-movement";
 import type { ClassId, EquipmentSlot, PlannerItem, PlannerAffix } from "@/types/planner";
 import { runewordBonuses, runewordTemplates } from "@/utils/planner-runewords";
 import type { RunewordTableItem } from "@/types";
@@ -451,7 +452,7 @@ const props = withDefaults(
   defineProps<{
     title: string;
     itemSlot?: EquipmentSlot;
-    owner?: "hero" | "mercenary" | "charm" | "stash";
+    owner?: "hero" | "mercenary" | "charm" | "inventory" | "stash";
     initial?: PlannerItem;
     allowedTypes?: number[];
     removable?: boolean;
@@ -460,6 +461,7 @@ const props = withDefaults(
     allowedHeights?: number[];
     preferredKind?: NonNullable<PlannerItem["baseKind"]>;
     characterClass?: ClassId;
+    stashPosition?: number;
     inventoryPosition?: number;
     inventoryId?: string;
   }>(),
@@ -474,6 +476,7 @@ const props = withDefaults(
     allowedHeights: () => [1, 2, 3],
     preferredKind: "weapon",
     characterClass: undefined,
+    stashPosition: undefined,
     inventoryPosition: undefined,
     inventoryId: undefined,
   }
@@ -515,18 +518,19 @@ const item = ref<PlannerItem>(
       }
 );
 item.value.itemLevel ??= 99;
-const inventoryFits = computed(
-  () =>
-    !props.charmMode ||
-    (props.inventoryPosition === undefined
-      ? props.allowedHeights.includes(height.value)
-      : charmFits(
-          store.build.charms,
-          props.inventoryPosition,
-          height.value,
-          props.inventoryId,
-          inventoryWidth(item.value)
-        ))
+const inventoryFits = computed(() =>
+  props.stashPosition !== undefined
+    ? fitsStashCell(store.build, item.value, props.stashPosition)
+    : !props.charmMode ||
+      (props.inventoryPosition === undefined
+        ? props.allowedHeights.includes(height.value)
+        : charmFits(
+            store.build.charms,
+            props.inventoryPosition,
+            height.value,
+            props.inventoryId,
+            inventoryWidth(item.value)
+          ))
 );
 item.value.propertyRoll ??= roll.value;
 normalizeClassCharm(item.value, store.build.classId);

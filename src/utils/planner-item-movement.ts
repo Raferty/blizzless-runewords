@@ -27,6 +27,8 @@ export function inventoryItemSize(item: PlannerItem): [number, number] | undefin
   if (code === "cm4") return [1, 3];
   if (code === "cs2") return [3, 1];
   if (code && /^cm[123]$/.test(code)) return [1, Number(code[2])];
+  const size = plannerItemDimensions(item);
+  if (size) return size;
   // Legacy planner charms may not have an explicit base yet.
   if ("height" in item && [1, 2, 3].includes(Number(item.height)))
     return [inventoryWidth(item), Number(item.height)];
@@ -39,6 +41,14 @@ export function stashItemLayout(build: PlannerBuild) {
       position: item.stashPosition,
     }))
   );
+}
+
+export function fitsStashCell(build: PlannerBuild, item: PlannerItem, position: number) {
+  const size = plannerItemDimensions(item) ?? inventoryItemSize(item);
+  const cells = size && gridItemCells(position, ...size);
+  if (!cells) return false;
+  const { occupied } = stashItemLayout(build);
+  return cells.every((cell) => !occupied.has(cell));
 }
 
 export function canMoveItem(

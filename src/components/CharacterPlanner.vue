@@ -348,16 +348,8 @@
                   'Keep your loot filter settings with this build'
                 )
               "
-            /></label
-          ><button v-if="section === 'overview'" @click="section = 'notes'">
-            {{
-              t(
-                "Автор, сильные стороны и лут-фильтр",
-                "Author, strengths and loot filter"
-              )
-            }}
-            <UiIcon name="arrow-up-right" />
-          </button>
+            />
+          </label>
         </PlannerPanel>
       </div>
       <div class="planner-side-column">
@@ -445,7 +437,9 @@
         editor.kind === 'equipment'
           ? 'hero'
           : editor.kind === 'charm'
-            ? 'charm'
+            ? editorCharm && isBackpackGear(editorCharm)
+              ? 'inventory'
+              : 'charm'
             : editor.kind === 'stash'
               ? 'stash'
               : 'mercenary'
@@ -459,6 +453,7 @@
       :initial-height="editorCharm?.height ?? 1"
       :allowed-heights="allowedCharmHeights"
       :inventory-position="editor.kind === 'charm' ? editor.position : undefined"
+      :stash-position="editor.kind === 'stash' ? editor.position : undefined"
       :inventory-id="editor.kind === 'charm' ? editor.id : undefined"
       @close="editor = null"
       @save="saveItem"
@@ -580,7 +575,8 @@
             @click="editStash(index)"
           >
             {{ item.name }}</button
-          ><button @click="equipFromStash(index)">{{ t("Надеть", "Equip") }}</button
+          ><button :disabled="!canEquipFromStash(item)" @click="equipFromStash(index)">
+            {{ t("Надеть", "Equip") }}</button
           ><button
             :aria-label="t('Удалить предмет из сундука', 'Remove stash item')"
             @click="store.build.stash.splice(index, 1)"
@@ -637,7 +633,17 @@ import {
   plannerClasses,
   quests,
 } from "@/shared/planner";
-import { attributeBudget, charmFits, skillBudget, spentSkills } from "@/utils/planner";
+import {
+  inventoryWidth,
+  isBackpackGear,
+  attributeBudget,
+  charmFits,
+  skillBudget,
+  spentSkills,
+} from "@/utils/planner";
+import { plannerItemIdentity } from "@/utils/planner-item-art";
+import { fitsStashCell } from "@/utils/planner-item-movement";
+import { usePlannerGameData } from "@/composables/usePlannerGameData";
 import { loadGameSaveExporter } from "@/utils/planner-game-save";
 import type {
   Difficulty,
@@ -677,6 +683,7 @@ watch(section, (value) => {
 const libraryOpen = ref(false);
 const resetOpen = ref(false);
 const stashOpen = ref(false);
+const nativeGame = usePlannerGameData();
 const stashTarget = ref<EquipmentSlot>("mainHand");
 const importInput = ref<HTMLInputElement | null>(null);
 type MercSlot = "head" | "armor" | "mainHand" | "offHand";
@@ -684,7 +691,7 @@ type Editor =
   | { kind: "equipment"; slot: EquipmentSlot; key: string }
   | { kind: "mercenary"; slot: MercSlot; key: string }
   | { kind: "charm"; position: number; id?: string; key: string }
-  | { kind: "stash"; index: number; key: string };
+  | { kind: "stash"; index: number; position?: number; key: string };
 const editor = ref<Editor | null>(null);
 const editorCharm = computed(() =>
   editor.value?.kind === "charm"
@@ -702,7 +709,7 @@ const editorItem = computed(() => {
 });
 const allowedCharmHeights = computed(() =>
   editor.value?.kind === "charm"
-    ? [1, 2, 3].filter((height) =>
+    ? [1, 2, 3, 4].filter((height) =>
         charmFits(
           store.build.charms,
           (editor.value as { position: number }).position,
@@ -789,8 +796,8 @@ function editMercenary(slot: MercSlot) {
 function editCharm(position: number, id?: string) {
   editor.value = { kind: "charm", position, id, key: crypto.randomUUID() };
 }
-function editStash(index: number) {
-  editor.value = { kind: "stash", index, key: crypto.randomUUID() };
+function editStash(index: number, position?: number) {
+  editor.value = { kind: "stash", index, position, key: crypto.randomUUID() };
 }
 function closeStash() {
   if (!editor.value) stashOpen.value = false;
@@ -802,8 +809,15 @@ function saveItem(item: PlannerItem, height: number) {
   else if (current.kind === "mercenary")
     store.build.mercenary.equipment[current.slot] = item;
   else if (current.kind === "stash") {
-    if (current.index < 0) store.build.stash.push(item);
-    else store.build.stash[current.index] = item;
+    if (current.index < 0) {
+      if (store.build.stash.length >= stashItemLimit) return;
+      if (
+        current.position !== undefined &&
+        !fitsStashCell(store.build, item, current.position)
+      )
+        return;
+      store.build.stash.push({ ...item, stashPosition: current.position });
+    } else store.build.stash[current.index] = item;
   } else {
     if (
       !charmFits(
@@ -811,7 +825,7 @@ function saveItem(item: PlannerItem, height: number) {
         current.position,
         height,
         current.id,
-        item.baseCode === "box" ? 2 : 1
+        inventoryWidth(item)
       )
     )
       return;
@@ -846,7 +860,17 @@ function removeItem() {
   else store.build.charms = store.build.charms.filter((c) => c.id !== current.id);
   editor.value = null;
 }
+function canEquipFromStash(item: PlannerItem) {
+  const base = plannerItemIdentity(item).baseCode;
+  const native = nativeGame.value;
+  if (!native) return false;
+  const entry = { key: "stash", item, owner: "hero" as const, slot: stashTarget.value };
+  return base
+    ? native.permitted(base, entry, store.build)
+    : !!native.defaultChoice(entry, store.build);
+}
 function equipFromStash(index: number) {
+  if (!canEquipFromStash(store.build.stash[index])) return;
   const old = store.build.equipment[stashTarget.value];
   store.build.equipment[stashTarget.value] = store.build.stash[index];
   if (old) store.build.stash[index] = old;

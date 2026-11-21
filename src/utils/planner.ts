@@ -7,6 +7,7 @@ import {
   mercenaries,
   plannerClasses,
   plannerSkills,
+  resistanceTypes,
 } from "@/shared/planner";
 import type {
   Bonuses,
@@ -17,6 +18,7 @@ import type {
   PlannerSkill,
 } from "@/types/planner";
 import { affixBonuses, parseAffixes, affixSockets } from "./planner-affixes";
+import type { GameSaveExporter } from "./planner-game-save";
 import { waypoints } from "@/shared/planner-waypoints";
 import {
   socketInsertByCode,
@@ -36,7 +38,12 @@ import {
   baseSkillStats,
 } from "./planner-base-skills";
 import { craftDefinition } from "./planner-crafts";
-import { isTome, isWorldstoneShard } from "./planner-item-art";
+import {
+  plannerItemDimensions,
+  plannerItemIdentity,
+  isTome,
+  isWorldstoneShard,
+} from "./planner-item-art";
 
 export function createBuild(classId: ClassId = "sorceress"): PlannerBuild {
   return {
@@ -209,7 +216,7 @@ export function charmFits(
     !Number.isInteger(position) ||
     position < 0 ||
     position >= 40 ||
-    ![1, 2, 3].includes(height) ||
+    ![1, 2, 3, 4].includes(height) ||
     Math.floor(position / 10) + height > 4 ||
     ![1, 2, 3].includes(width) ||
     (position % 10) + width > 10
@@ -223,7 +230,22 @@ export function charmFits(
     .every((cell) => !cells.has(cell));
 }
 export const inventoryWidth = (item: PlannerItem) =>
-  item.baseCode === "box" ? 2 : item.baseCode === "cs2" ? 3 : 1;
+  plannerItemDimensions(item)?.[0] ?? 1;
+
+// Older custom charms may have no base code.
+export function grantsInventoryBonuses(item: PlannerItem) {
+  const code = plannerItemIdentity(item).baseCode;
+  return !code || /^(?:cm[1-5]|cs2)$/.test(code);
+}
+export function isBackpackGear(item: PlannerItem) {
+  const code = plannerItemIdentity(item).baseCode;
+  return (
+    !grantsInventoryBonuses(item) &&
+    code !== "box" &&
+    !isTome(code) &&
+    !isWorldstoneShard(code)
+  );
+}
 export const inventoryCells = (item: PlannerCharm) =>
   Array.from({ length: item.height }, (_, y) =>
     Array.from({ length: inventoryWidth(item) }, (_, x) => item.position + y * 10 + x)
@@ -318,17 +340,23 @@ export function addDefaultInventory(build: PlannerBuild) {
     if (position !== undefined) build.charms.push({ ...item, position });
   }
 }
-export function buildStats(build: PlannerBuild) {
-  const character = plannerClasses.find((c) => c.id === build.classId)!;
+export function activeItems(build: PlannerBuild) {
   const activeSlots = equipmentSlots
     .map((s) => s.key)
     .filter((key) => key !== "mainHand" && key !== "offHand");
-  const items = [
+  return [
     ...activeSlots.map((key) => build.equipment[key]),
     build.equipment[build.weaponSet ? "swapMain" : "mainHand"],
     build.equipment[build.weaponSet ? "swapOff" : "offHand"],
-    ...build.charms,
+    ...build.charms.filter(grantsInventoryBonuses),
   ].filter((item): item is PlannerItem => !!item);
+}
+export function buildStats(build: PlannerBuild, native?: GameSaveExporter) {
+  const character = plannerClasses.find((c) => c.id === build.classId)!;
+  const items = activeItems(build);
+  const caps = native
+    ? items.map((item) => native.itemResistanceCaps(item, build.classId))
+    : [];
   const insertBonuses = items.map(socketedBonuses);
   const mods = items.map((item) => affixBonuses(item, build.level));
   const bonuses = Object.fromEntries(
@@ -417,13 +445,18 @@ export function buildStats(build: PlannerBuild) {
         (build.level - 1) * character.staminaPerLevel +
         (stats.vitality - character.base.vitality) * character.staminaPerVitality
     ),
-    resists: (
-      ["fireResist", "coldResist", "lightningResist", "poisonResist"] as const
-    ).map((key) => ({
-      key,
-      uncapped: bonuses[key] + questResist + penalty,
-      value: Math.max(-100, Math.min(75, bonuses[key] + questResist + penalty)),
-    })),
+    resists: resistanceTypes.map(({ key, maximum, passiveSkill }) => {
+      const passive =
+        build.classId === "paladin" && passiveSkill !== null
+          ? Math.floor((build.skills[passiveSkill] ?? 0) / 2)
+          : 0;
+      const cap = Math.min(
+        95,
+        75 + passive + caps.reduce((sum, item) => sum + (item[maximum] ?? 0), 0)
+      );
+      const uncapped = bonuses[key] + questResist + penalty;
+      return { key, cap, uncapped, value: Math.max(-100, Math.min(cap, uncapped)) };
+    }),
   };
 }
 
@@ -689,17 +722,23 @@ export function parseBuild(value: unknown): PlannerBuild {
       ...parsePlannerItem(entry),
       id: string(rawCharm.id, 100),
       position: integer(rawCharm.position, 0, 39),
-      height: integer(rawCharm.height, 1, 3),
+      height: integer(rawCharm.height, 1, 4),
     };
+    const nativeHeight = plannerItemDimensions(charm)?.[1];
+    // The old native importer clipped four-row weapons to three rows.
+    if (
+      nativeHeight === 4 &&
+      charm.height === 3 &&
+      /^d2s-[^-]+$/.test(charm.id) &&
+      isBackpackGear(charm)
+    )
+      charm.height = 4;
     if (
       !charm.id ||
+      (nativeHeight !== undefined ? charm.height !== nativeHeight : charm.height > 3) ||
       build.charms.some((c) => c.id === charm.id) ||
-      (charm.baseCode === "box" && charm.height !== 2) ||
-      (isTome(charm.baseCode) && charm.height !== 2) ||
       (isWorldstoneShard(charm.baseCode) &&
         (charm.height !== 1 || charm.quality !== "normal")) ||
-      (charm.baseCode === "cs2" && charm.height !== 1) ||
-      (charm.baseCode === "cm4" && charm.height !== 3) ||
       !charmFits(
         build.charms,
         charm.position,

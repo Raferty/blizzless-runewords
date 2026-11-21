@@ -19,6 +19,13 @@ export const attributes: { key: Attribute; ru: string; en: string }[] = [
   { key: "vitality", ru: "Живучесть", en: "Vitality" },
   { key: "energy", ru: "Энергия", en: "Energy" },
 ];
+export const resistanceTypes = [
+  { key: "fireResist", maximum: "maxfireresist", passiveSkill: 100 },
+  { key: "coldResist", maximum: "maxcoldresist", passiveSkill: 105 },
+  { key: "lightningResist", maximum: "maxlightresist", passiveSkill: 110 },
+  { key: "poisonResist", maximum: "maxpoisonresist", passiveSkill: null },
+] as const;
+
 export const bonusFields: { key: BonusKey; ru: string; en: string; percent?: boolean }[] =
   [
     ...attributes,

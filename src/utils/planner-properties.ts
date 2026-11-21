@@ -26,6 +26,7 @@ export function nativeStatsSignature(item: PlannerItem) {
     item.propertyValues ?? null,
     item.propertyChoices ?? null,
     item.affixes ?? null,
+    ...(item.containerQuantity === undefined ? [] : [item.containerQuantity]),
     ...(item.baseSkills || item.baseSkillTab
       ? [item.baseSkills ?? null, item.baseSkillTab ?? null]
       : []),

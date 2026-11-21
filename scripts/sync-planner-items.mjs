@@ -115,7 +115,7 @@ for (const [code, { row, group }] of Object.entries(bases))
     nativeArt.bases?.[code] ||
     nativeArt.variants[code]?.[0] ||
     (/^ua[1-5]$/.test(code)
-      ? `misc/shard/cont_${code}`
+      ? `misc/${row.hd}.avif`
       : supplies[code] ||
           row.type === "key" ||
           row.type === "book" ||

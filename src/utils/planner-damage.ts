@@ -1,9 +1,9 @@
 import { baseSkillStats } from "./planner-base-skills";
 import combat from "@/shared/planner-combat.json";
-import { equipmentSlots, plannerSkills } from "@/shared/planner";
+import { plannerSkills } from "@/shared/planner";
 import type { ClassId, PlannerBuild, PlannerItem, PlannerSkill } from "@/types/planner";
 import type { GameSaveExporter } from "./planner-game-save";
-import { buildStats } from "./planner";
+import { activeItems, buildStats } from "./planner";
 import { affixStats } from "./planner-affixes";
 import { plannerItemIdentity } from "./planner-item-art";
 import { socketCategory } from "./planner-sockets";
@@ -200,14 +200,7 @@ export function calculateBuildDamage(
   const metadata = new Map(plannerSkills.map((skill) => [skill.id, skill]));
   const main = build.equipment[build.weaponSet ? "swapMain" : "mainHand"];
   const off = build.equipment[build.weaponSet ? "swapOff" : "offHand"];
-  const items = [
-    ...equipmentSlots
-      .filter(({ key }) => key !== "mainHand" && key !== "offHand")
-      .map(({ key }) => build.equipment[key]),
-    main,
-    off,
-    ...build.charms,
-  ].filter((item): item is PlannerItem => !!item);
+  const items = activeItems(build);
   const stats: Stats = {};
   const itemStats = new Map<PlannerItem, Stats>();
   const warnings: string[] = [];

@@ -222,9 +222,11 @@ function location(entry: GameSaveEntry) {
       ? t("Наёмник", "Mercenary")
       : entry.owner === "stash"
         ? t("Сундук", "Stash")
-        : entry.owner === "charm"
-          ? t("Талисман", "Charm")
-          : "";
+        : entry.owner === "inventory"
+          ? t("Инвентарь", "Inventory")
+          : entry.owner === "charm"
+            ? t("Талисман", "Charm")
+            : "";
   const slot = equipmentSlots.find((s) => s.key === entry.slot);
   return [owner, slot ? t(slot.ru, slot.en) : ""].filter(Boolean).join(" · ");
 }

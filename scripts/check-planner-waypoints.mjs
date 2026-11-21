@@ -99,6 +99,11 @@ try {
       build.waypoints
     );
     assert.deepEqual(decodeBuild(encodeBuild(build)).waypoints, build.waypoints);
+    build.difficulty = { all: "hell", none: "normal", mixed: "nightmare" }[mode];
+    for (const [index, flags] of Object.values(build.quests).entries())
+      Object.keys(flags).forEach((key, i) => {
+        flags[key] = mode === "all" || (mode === "mixed" && (index + i) % 2 === 1);
+      });
     const before = JSON.stringify(build);
     const bytes = await exporter.exportCharacter(build, {
       name: "Waypoints",
@@ -106,6 +111,10 @@ try {
       rolls: {},
     });
     assert.equal(new DataView(bytes.buffer).getUint32(12, true), saveChecksum(bytes));
+    const imported = exporter.importCharacter(bytes);
+    assert.deepEqual(imported.waypoints, build.waypoints);
+    assert.deepEqual(imported.quests, build.quests);
+    assert.equal(imported.difficulty, build.difficulty);
     const saved = await read(bytes, constants, {
       disableItemEnhancements: true,
       extendedStash: true,

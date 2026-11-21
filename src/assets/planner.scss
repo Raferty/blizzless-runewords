@@ -388,12 +388,13 @@
 .planner-equipment-art {
   position: relative;
   width: 100%;
-  aspect-ratio: 1066 / 1160;
+  aspect-ratio: 1081 / 1200;
   overflow: hidden;
-  background-image: url("/images/planner/inventory.webp");
+  background-image: url("/images/planner/inventory-clear-v3.png");
   background-repeat: no-repeat;
-  background-position: center 40%;
-  background-size: 100% 123.7069%;
+  // Crop 100 source pixels above the gear and 155 below the grid.
+  background-position: center 39.2157%;
+  background-size: 100% 121.25%;
 }
 .planner-equipment-art .planner-gear-slot {
   position: absolute;
@@ -668,17 +669,17 @@
 }
 .planner-weapon-tabs {
   position: absolute;
-  top: 2.5%;
+  top: 3.33%;
   z-index: 2;
   display: flex;
-  width: 20.8%;
-  height: 4.3%;
+  width: 20.72%;
+  height: 4.17%;
 }
 .planner-weapon-tabs--left {
-  left: 4.5%;
+  left: 4.35%;
 }
 .planner-weapon-tabs--right {
-  left: 74.9%;
+  left: 74.93%;
 }
 .planner-weapon-tabs button {
   flex: 1;
@@ -686,26 +687,26 @@
   padding: 0;
   font-size: 11px;
   color: #b0a58f;
-  background: transparent;
+  background: #14130f;
   border: 0;
   border-radius: 0;
 }
 .planner-weapon-tabs button[aria-pressed="true"] {
   color: #e7dfc9;
   text-shadow: 0 0 5px #8ea9d4;
-  background: rgb(39 39 34 / 70%);
+  background: #302d23;
   border-bottom: 1px solid #9d8b56;
 }
 .planner-charm-grid {
   position: absolute;
-  top: 65%;
-  left: 4.13%;
+  top: 64.58%;
+  left: 4.16%;
   display: grid;
   grid-template-rows: repeat(4, minmax(0, 1fr));
   grid-template-columns: repeat(10, minmax(0, 1fr));
   gap: 0;
-  width: 91.55%;
-  height: 33.6%;
+  width: 91.44%;
+  height: 33.08%;
 }
 .planner-charm-grid .planner-charm-cell {
   min-width: 0;
@@ -1394,21 +1395,16 @@
   white-space: pre-wrap;
 }
 .planner-equipment-art.planner-mercenary-art {
-  max-width: clamp(300px, calc((100dvh - 350px) * 1036 / 626), 520px);
-  aspect-ratio: 1036 / 626;
+  max-width: 960px;
+  aspect-ratio: 1605 / 980;
   margin: 18px auto;
-  background-image: none;
+  background-image: url("/images/planner/mercenary-clear-v1.png");
+  background-position: center;
+  background-size: 100% 100%;
 }
 .planner-equipment-column .planner-mercenary-art {
   max-width: none;
   margin: 0;
-}
-.planner-mercenary-background {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
 }
 .planner-empty {
   padding: 35px 12px;

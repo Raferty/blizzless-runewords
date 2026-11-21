@@ -2,13 +2,28 @@
 
 Downloaded 2026-10-26. No user screenshots are included in the site.
 
+## Custom panel variants — 2026-11-21
+
+- `inventory-clear-v3.png` (1081×1455): generated character inventory panel variant
+  based on the inventory artwork linked below. Includes dark empty-slot category
+  silhouettes, neutral I/II weapon-set selectors and a 10×4 inventory grid.
+- `mercenary-clear-v1.png` (1605×980): generated companion mercenary panel in the
+  same visual style, with a helmet, body armor and two hand slots. Intended to
+  use corresponding slot proportions when displayed at the character panel's width.
+
+Both original PNG outputs are preserved without resizing or re-encoding. The
+mercenary equipment panel uses its PNG with interactive slots aligned to its frames.
+The character inventory uses its PNG cropped to the equipment slots and 10×4 grid. The active weapon-set indication remains an interactive UI state.
+
+## Original interface artwork
+
 - `inventory.webp`: original Diablo II: Resurrected inventory interface, served by LootCube:
   https://lootcube.net/images/ui/panel/inventory/background_cropped.webp
   Source page: https://lootcube.net/en/builds/abyss-warlock
 - `mercenary.webp`: original Diablo II: Resurrected hireling equipment panel, downloaded 2026-10-27:
   https://lootcube.net/images/ui/panel/hireling/hirelingpanel_cropped.webp
   Source page: https://lootcube.net/en/builds/lightning-javazon-amazon
-  The unmodified 1036×790 image is displayed through an SVG viewport without its header/footer.
+  Original 1036×790 panel.
 - `classes/*.png`: class portraits from Blizzless Glossary:
   https://blizzless.info/media/chars/hd/{classId}.png
 - `mercenaries/act{1,2,3,5}.png`: the four original hireling portraits from
@@ -53,11 +68,9 @@ Downloaded 2026-10-26. No user screenshots are included in the site.
   `items/misc/scroll/deciphered_bark_scroll.webp`: ordinary Key (`key`) and
   Key to the Cairn Stones (`bkd`) artwork downloaded 2026-10-30 from
   `https://lootcube.net/images/items/misc/`, following the game tables' `hd` field.
-- `items/misc/shard/cont_ua1.png` through `cont_ua5.png`: the five Ancients
-  summon statues from the same Blizzless launcher manifest and blob endpoint
-  (2026-10-28). Original 99×196 RGBA pixels are losslessly encoded as PNG.
-  SHA-256 values and the explicit `ua1`–`ua5` base mapping are maintained by
-  `scripts/sync-planner-items.mjs`.
+- The five loose Ancients statues (`ua1`–`ua5`) use the Blizzless catalogue AVIF
+  matching each base's HD model at `https://blizzless.info/imgs/game-items/shard/`.
+  Their stack containers use the original launcher sprites `cont_ua1.png` through `cont_ua5.png`.
 - Loose Worldstone Shards (`xa1`–`xa5`) use `items/misc/shard/mote_of_*.avif`
   from the Blizzless catalogue at `https://blizzless.info/imgs/game-items/shard/`,
   matched by base code and the native HD model. The corresponding stack

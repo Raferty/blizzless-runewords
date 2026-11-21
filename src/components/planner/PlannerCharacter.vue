@@ -64,6 +64,8 @@
         v-for="attribute in attributes.filter((a) => matches(a.ru, a.en))"
         :key="attribute.key"
         class="planner-attribute"
+        @pointerdown="handledControlClick = false"
+        @keydown="handledControlClick = false"
       >
         <div>
           <span>{{ t(attribute.ru, attribute.en) }}</span
@@ -79,14 +81,16 @@
         <button
           :aria-label="`${t('Уменьшить', 'Decrease')} ${t(attribute.ru, attribute.en)}`"
           :disabled="!store.build.attributes[attribute.key]"
-          @click="store.changeAttribute(attribute.key, $event.shiftKey ? -10 : -1)"
+          @click="adjustAttribute(attribute.key, -1, $event)"
+          @contextmenu.ctrl.prevent="adjustAttribute(attribute.key, -1, $event)"
         >
           <UiIcon name="minus" />
         </button>
         <button
           :aria-label="`${t('Увеличить', 'Increase')} ${t(attribute.ru, attribute.en)}`"
           :disabled="!remainingAttributes"
-          @click="store.changeAttribute(attribute.key, $event.shiftKey ? 10 : 1)"
+          @click="adjustAttribute(attribute.key, 1, $event)"
+          @contextmenu.ctrl.prevent="adjustAttribute(attribute.key, 1, $event)"
         >
           <UiIcon name="plus" />
         </button>
@@ -96,7 +100,12 @@
         ><strong>{{ remainingAttributes }}</strong>
       </div>
       <p class="planner-help">
-        {{ t("Shift + клик: 10 очков", "Shift + click: 10 points") }}
+        {{
+          t(
+            "Shift + клик — все очки · Ctrl + клик — 5 очков",
+            "Shift + click — all points · Ctrl + click — 5 points"
+          )
+        }}
       </p>
       <div class="planner-section-label">
         {{ t("Сопротивления", "Resistances")
@@ -114,16 +123,21 @@
         :class="`planner-resistance--${i}`"
       >
         <span>{{ t(resistLabels[i].ru, resistLabels[i].en) }}</span>
-        <div><span :style="{ width: `${(resist.value + 100) / 1.75}%` }" /></div>
-        <strong :title="`${t('Без ограничения', 'Uncapped')}: ${resist.uncapped}%`"
+        <div>
+          <span
+            :style="{ width: `${(100 * (resist.value + 100)) / (100 + resist.cap)}%` }"
+          />
+        </div>
+        <strong
+          :title="`${t('Без ограничения', 'Uncapped')}: ${resist.uncapped}% · ${t('Предел', 'Cap')}: ${resist.cap}%`"
           >{{ resist.value }}%</strong
         >
       </div>
       <p class="planner-help">
         {{
           t(
-            "Лимит: −100…75%. Аня учитывается по отмеченным заданиям.",
-            "Cap: −100…75%. Anya follows your quest selections."
+            "Базовый максимум 75%. Экипировка и навыки могут повысить его до 95%. Бонус Ани зависит от заданий.",
+            "The base cap is 75%. Gear and skills can raise it to 95%. Anya follows your quest selections."
           )
         }}
       </p>
@@ -148,6 +162,7 @@
   </aside>
 </template>
 <script setup lang="ts">
+import { usePlannerGameData } from "@/composables/usePlannerGameData";
 import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref } from "vue";
 import PlannerClassSelect from "./PlannerClassSelect.vue";
@@ -156,6 +171,7 @@ import { useInfoStore } from "@/store";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import { attributes, bonusFields, difficulties } from "@/shared/planner";
+import type { Attribute } from "@/types/planner";
 import { attributeBudget, buildStats, spentAttributes } from "@/utils/planner";
 const store = usePlannerStore();
 const info = useInfoStore();
@@ -165,10 +181,22 @@ const base = import.meta.env.BASE_URL;
 const query = ref("");
 const matches = (ru: string, en: string) =>
   `${ru} ${en}`.toLowerCase().includes(query.value.trim().toLowerCase());
-const stats = computed(() => buildStats(store.build));
+const native = usePlannerGameData();
+const stats = computed(() => buildStats(store.build, native.value));
 const remainingAttributes = computed(
   () => attributeBudget(store.build) - spentAttributes(store.build)
 );
+// macOS may deliver a contextmenu event for Ctrl + click. Count each gesture once.
+let handledControlClick = false;
+function adjustAttribute(key: Attribute, direction: -1 | 1, event: MouseEvent) {
+  if (event.ctrlKey) {
+    if (handledControlClick) return;
+    handledControlClick = true;
+  }
+  const limit = direction === 1 ? remainingAttributes.value : store.build.attributes[key];
+  const step = event.shiftKey ? limit : event.ctrlKey ? 5 : 1;
+  store.changeAttribute(key, direction * step);
+}
 const resistLabels = [
   { ru: "Огонь", en: "Fire" },
   { ru: "Холод", en: "Cold" },

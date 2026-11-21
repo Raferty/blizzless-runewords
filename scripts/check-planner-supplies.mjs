@@ -120,6 +120,12 @@ try {
     );
     const statues = staged.filter((item) => /^ua[1-5]$/.test(item.baseCode));
     if (statues.length) {
+      for (const item of statues) {
+        const image =
+          "images/planner/items/misc/" + data.misc[item.baseCode].hd + ".avif";
+        assert.equal(plannerItemImage(item), image);
+        assert((await readFile("public/" + image)).subarray(0, 32).includes("avif"));
+      }
       const imported = native.importCharacter(output);
       const restored = imported.stash.filter((item) => /^ua[1-5]$/.test(item.baseCode));
       assert.deepEqual(
@@ -268,6 +274,27 @@ try {
     ]),
     worldstoneShardCodes.map((code, i) => [code, 1, i, 0])
   );
+  const duplicates = structuredClone(inventoryBuild);
+  duplicates.charms.push({
+    ...duplicates.charms[0],
+    id: "second-loose-shard",
+    position: 9,
+  });
+  const duplicateBytes = await native.exportCharacter(duplicates, {
+    name: "TwinShards",
+    rolls: {},
+    choices: Object.fromEntries(
+      gameSaveEntries(duplicates).map((e) => [e.key, native.defaultChoice(e, duplicates)])
+    ),
+  });
+  const twins = native
+    .importCharacter(duplicateBytes)
+    .charms.filter((item) => item.baseCode === "xa1");
+  assert.deepEqual(
+    twins.map((item) => item.position),
+    [0, 9]
+  );
+  assert.notEqual(twins[0].id, twins[1].id);
   const shardImported = native.importCharacter(shardOutput);
   assert.deepEqual(
     shardImported.charms.map((item) => [item.baseCode, item.height, item.position]),

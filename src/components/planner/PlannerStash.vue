@@ -45,7 +45,7 @@
           :aria-disabled="store.build.stash.length >= stashItemLimit"
           :aria-label="t('Добавить предмет в сундук', 'Add item to stash')"
           tabindex="-1"
-          @click="store.build.stash.length < stashItemLimit && $emit('edit', -1)"
+          @click="store.build.stash.length < stashItemLimit && $emit('edit', -1, cell)"
         />
         <PlannerItemSlot
           v-for="entry in layout.placed"
@@ -203,7 +203,7 @@ import { usePlannerItemDrag } from "@/composables/usePlannerItemDrag";
 import { useItemRequirements } from "@/composables/useItemRequirements";
 import type { PlannerItem } from "@/types/planner";
 
-defineEmits<{ edit: [index: number]; manage: [] }>();
+defineEmits<{ edit: [index: number, position?: number]; manage: [] }>();
 const store = usePlannerStore();
 const t = useText();
 const requirements = useItemRequirements();
