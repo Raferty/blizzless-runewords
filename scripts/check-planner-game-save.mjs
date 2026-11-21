@@ -113,6 +113,54 @@ try {
       codec.importCharacter(bytes).stash.map((i) => i.name),
       names
     );
+    // Placeholder jewelry names must get a legal in-game suffix for their base.
+    for (const item of build.stash)
+      item.name = item.baseCode === "rin" ? "Ring" : "Amulet";
+    const rolled = await verify(build, {
+      ...opts,
+      choices: { "stash.0": "rin", "stash.1": "amu" },
+    });
+    for (const item of rolled.read.items) {
+      const suffix = data.rareSuffix[item.rare_name_id2 - 1];
+      const allowed = Object.entries(suffix)
+        .filter(([k]) => k.startsWith("itype"))
+        .map(([, type]) => type);
+      assert(
+        allowed.includes(codec.gd.items[item.type].type) || allowed.includes("misc")
+      );
+    }
+  }
+  {
+    const build = planner.createBuild("paladin");
+    const affixes = [
+      { id: "mp321", values: [5] },
+      { id: "ms290", values: [7] },
+    ];
+    build.stash = [
+      {
+        name: "Small Charm",
+        baseCode: "cm1",
+        quality: "magic",
+        requiredLevel: 1,
+        itemLevel: 99,
+        notes: "",
+        bonuses: {},
+        affixes,
+      },
+    ];
+    const options = { ...opts, choices: { "stash.0": "cm1" } };
+    let current = build;
+    for (let i = 0; i < 2; i++) {
+      const { bytes, read } = await verify(current, options);
+      const [charm] = read.items;
+      assert.equal(charm.magic_prefix, 322);
+      assert.equal(charm.magic_suffix, 291);
+      assert.equal(constants.magic_prefixes[charm.magic_prefix].n, "Shimmering");
+      assert.equal(constants.magic_suffixes[charm.magic_suffix].n, "of Good Luck");
+      current = codec.importCharacter(bytes);
+      assert.equal(current.stash[0].name, "Shimmering Small Charm of Good Luck");
+      assert.deepEqual(current.stash[0].affixes, affixes);
+    }
   }
   for (const roll of [0, 1]) {
     const build = planner.createBuild("paladin");
@@ -1177,10 +1225,10 @@ try {
       assert.equal(raw.stats[stat], value, stat);
     const prefixes = modItem.affixes
       .filter((a) => a.id.startsWith("mp"))
-      .map((a) => Number(a.id.slice(2)));
+      .map((a) => Number(a.id.slice(2)) + 1);
     const suffixes = modItem.affixes
       .filter((a) => a.id.startsWith("ms"))
-      .map((a) => Number(a.id.slice(2)));
+      .map((a) => Number(a.id.slice(2)) + 1);
     if (quality === "magic") {
       assert.equal(item.magic_prefix, prefixes[0]);
       assert.equal(item.magic_suffix, suffixes[0]);

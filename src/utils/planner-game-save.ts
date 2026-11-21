@@ -1,3 +1,4 @@
+import { loadDataFromFile } from "./planner-data-loader";
 import { D2RSaver, type BinaryParsedItem, type D2SCharacterProfile } from "d2r-saver";
 import { writeItem, type types as SaveTypes } from "@d2runewizard/d2s";
 import { constants as originalConstants } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
@@ -26,7 +27,12 @@ import {
 } from "./planner";
 import type { ClassId, EquipmentSlot, PlannerBuild, PlannerItem } from "@/types/planner";
 
-import { affixStats, parseAffixes, restoreMagicAffixes } from "./planner-affixes";
+import {
+  affixStats,
+  magicItemName,
+  parseAffixes,
+  restoreMagicAffixes,
+} from "./planner-affixes";
 import {
   baseSkillProfile,
   baseSkillOptions,
@@ -178,7 +184,28 @@ export function saveChecksum(bytes: Uint8Array) {
 export function createGameSaveExporter(data: RawData, locale: Locale) {
   const saver = D2RSaver.fromData(structuredClone(data), locale);
   const gd = saver.gd;
-  function rareNameIds(name = "") {
+  function rollRareName(base: string) {
+    const allowed = types(base);
+    const pick = (table: typeof gd.rarePrefix) => {
+      const candidates = Object.entries(table).filter(([, row]) => {
+        const matches = (kind: string) =>
+          Object.entries(row).some(
+            ([key, type]) =>
+              key.startsWith(kind) && typeof type === "string" && allowed.has(type)
+          );
+        return matches("itype") && !matches("etype");
+      });
+      if (!candidates.length) throw new GameSaveError("base", base);
+      return candidates[Math.floor(Math.random() * candidates.length)];
+    };
+    const [prefixId, prefix] = pick(gd.rarePrefix);
+    const [suffixId, suffix] = pick(gd.rareSuffix);
+    return {
+      name: `${gd.locale.strings[prefix.name] || prefix.name} ${gd.locale.strings[suffix.name] || suffix.name}`,
+      ids: { rare_name_id: Number(prefixId) + 156, rare_name_id2: Number(suffixId) + 1 },
+    };
+  }
+  function rareNameIds(name: string, base: string) {
     const [prefix, suffix] = name.split(" ");
     const lookup = (table: typeof gd.rarePrefix, part: string) =>
       Object.entries(table).find(
@@ -188,7 +215,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const second = lookup(gd.rareSuffix, suffix);
     if (first !== undefined && second !== undefined && name === `${prefix} ${suffix}`)
       return { rare_name_id: Number(first) + 156, rare_name_id2: Number(second) + 1 };
-    return { rare_name_id: 156, rare_name_id2: 1 };
+    return rollRareName(base).ids;
   }
   function matchesMercenary(type: string, row: Definition) {
     const mercenary = mercenaries.find((entry) => entry.value === type);
@@ -215,6 +242,10 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   };
   // UI/catalog IDs are stable across patches; the binary reader needs game row IDs.
   let reader: D2RSaver | undefined;
+  // Planner affixes are zero-based rows. The save reserves zero for an empty slot.
+  const saveAffixId = (id?: string) => (id ? Number(id.slice(2)) + 1 : 0);
+  const plannerAffixId = (id?: string) =>
+    id ? id.slice(0, 2) + String(Number(id.slice(2)) - 1).padStart(3, "0") : undefined;
   function readCharacter(bytes: Uint8Array) {
     if (!reader) {
       const readData = structuredClone(data);
@@ -223,6 +254,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         readData[kind] = Object.fromEntries(
           Object.entries(readData[kind]).map(([id, row]) => [
             `${prefix}${String(saveId(kind, id)).padStart(3, "0")}`,
+            row,
+          ])
+        );
+      }
+      for (const kind of ["magicPrefix", "magicSuffix"] as const) {
+        readData[kind] = Object.fromEntries(
+          Object.entries(data[kind]).map(([id, row]) => [
+            id.slice(0, 2) + String(saveAffixId(id)).padStart(3, "0"),
             row,
           ])
         );
@@ -375,13 +414,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const makeItem = (native: BinaryParsedItem): PlannerItem => {
       const base = gd.items[native.base];
       const itemQuality = quality[native.quality] ?? "normal";
-      const prefixKey = native.magicPrefixCode
-        ? (gd.magicPrefix[native.magicPrefixCode] as unknown as Definition | undefined)
-            ?.name
+      const prefixId = plannerAffixId(native.magicPrefixCode);
+      const suffixId = plannerAffixId(native.magicSuffixCode);
+      const prefixKey = prefixId
+        ? (gd.magicPrefix[prefixId] as unknown as Definition | undefined)?.name
         : undefined;
-      const suffixKey = native.magicSuffixCode
-        ? (gd.magicSuffix[native.magicSuffixCode] as unknown as Definition | undefined)
-            ?.name
+      const suffixKey = suffixId
+        ? (gd.magicSuffix[suffixId] as unknown as Definition | undefined)?.name
         : undefined;
       const prefix = prefixKey ? gd.locale.strings[prefixKey] || prefixKey : undefined;
       const suffix = suffixKey ? gd.locale.strings[suffixKey] || suffixKey : undefined;
@@ -567,12 +606,30 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         })
       );
       if (Object.keys(socketIcons).length) item.socketIconIndices = socketIcons;
-      if (native.base === "cm3" && itemQuality === "magic") {
-        const affixes = restoreMagicAffixes(
-          item,
-          [native.magicPrefixCode, native.magicSuffixCode],
-          native.stats
-        );
+      if (baseTypes.has("char") && itemQuality === "magic") {
+        const ids = [prefixId, suffixId];
+        let affixes = restoreMagicAffixes(item, ids, native.stats);
+        // Older planner saves wrote zero-based IDs. Recover them only when both
+        // the full affix list and every stat roll agree with the saved charm.
+        if (affixes.length < ids.filter(Boolean).length) {
+          const legacy = restoreMagicAffixes(
+            item,
+            [native.magicPrefixCode, native.magicSuffixCode],
+            native.stats
+          );
+          const stats = affixStats({ ...item, affixes: legacy });
+          if (
+            legacy.length === ids.filter(Boolean).length &&
+            Object.keys(stats).length === Object.keys(native.stats).length &&
+            Object.entries(stats).every(([key, value]) => value === native.stats[key])
+          ) {
+            affixes = legacy;
+            item.name = magicItemName(
+              { ...item, affixes },
+              gd.locale.strings[base.namestr] || base.name || native.base
+            );
+          }
+        }
         if (affixes.length) {
           item.affixes = affixes;
           for (const stat of Object.keys(affixStats(item))) {
@@ -1844,6 +1901,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       const questItem =
         t.has("ques") && "questdiffcheck" in base && !!base.questdiffcheck;
       const rw = runewordProperties.get(item.itemId);
+      const affixIds = itemAffixIds.get(item.itemId) ?? [];
       const canonicalRunewordId = rw ? Number(item.unique!.replace("runeword", "")) : 0;
       // Stored v105 aliases documented by the codecs; Nightfall=1396 is
       // confirmed from a Blizzless save (d2r-saver CUSTOM_RUNEWORD_IDS).
@@ -1895,25 +1953,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         defense_rating: item.defense ?? 0,
         max_durability: base.durability ?? 0,
         current_durability: base.durability ?? 0,
-        magic_prefix: Number(
-          itemAffixIds
-            .get(item.itemId)
-            ?.find((id) => id.startsWith("mp"))
-            ?.slice(2) ?? 0
-        ),
-        magic_suffix: Number(
-          itemAffixIds
-            .get(item.itemId)
-            ?.find((id) => id.startsWith("ms"))
-            ?.slice(2) ?? 0
-        ),
-        ...((item.quality === 6 || item.quality === 8) && rareNameIds(item.name)),
+        magic_prefix: saveAffixId(affixIds.find((id) => id.startsWith("mp"))),
+        magic_suffix: saveAffixId(affixIds.find((id) => id.startsWith("ms"))),
+        ...((item.quality === 6 || item.quality === 8) &&
+          rareNameIds(item.name ?? "", item.base)),
         magical_name_ids: Array.from({ length: 6 }, (_, i) =>
-          Number(
-            itemAffixIds
-              .get(item.itemId)
-              ?.filter((id) => id.startsWith(i % 2 ? "ms" : "mp"))
-              [Math.floor(i / 2)]?.slice(2) ?? 0
+          saveAffixId(
+            affixIds.filter((id) => id.startsWith(i % 2 ? "ms" : "mp"))[Math.floor(i / 2)]
           )
         ),
         multiple_pictures: item.iconIndex === undefined ? 0 : 1,
@@ -2123,6 +2169,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     return bytes;
   }
   return {
+    randomRareName: (base: string) => rollRareName(base).name,
     choices,
     permitted,
     defaultChoice,
@@ -2144,17 +2191,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
 export type GameSaveExporter = ReturnType<typeof createGameSaveExporter>;
 let exporter: Promise<GameSaveExporter> | undefined;
 export function loadGameSaveExporter() {
-  return (exporter ??= Promise.all(
-    ["data.json", "strings.json"].map(async (name) => {
-      const response = await fetch(
-        `${import.meta.env.BASE_URL}data/planner-save/${name}`,
-        { cache: "no-cache" }
-      );
-      if (!response.ok) throw new GameSaveError("load");
-      return response.json();
+  const root = `${import.meta.env.BASE_URL}data/planner-save/`;
+  return (exporter ??= loadDataFromFile(`${root}data.json`, `${root}strings.json`)
+    .catch(() => {
+      throw new GameSaveError("load");
     })
-  )
-    .then(([data, locale]) => createGameSaveExporter(data, locale))
+    .then(({ rawData, locale }) => createGameSaveExporter(rawData, locale))
     .catch((error) => {
       exporter = undefined;
       throw error;

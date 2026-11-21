@@ -25,7 +25,34 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: "/blizzless-runewords/",
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      {
+        name: "d2r-saver-browser-loader",
+        enforce: "pre",
+        resolveId(source, importer, options) {
+          if (
+            !options.ssr &&
+            source === "./loader.js" &&
+            importer?.endsWith("/d2r-saver/dist/game-data/game-data.js")
+          )
+            return fileURLToPath(
+              new URL("./src/utils/planner-data-loader.ts", import.meta.url)
+            );
+        },
+      },
+    ],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.endsWith("/src/shared/planner-affixes.json")) return "planner-affixes";
+            if (id.endsWith("/src/shared/planner-item-art.json"))
+              return "planner-item-art";
+          },
+        },
+      },
+    },
     define: {
       "import.meta.env.VITE_RELEASE_DATE": JSON.stringify(releaseDate),
     },

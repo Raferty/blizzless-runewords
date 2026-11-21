@@ -69,7 +69,7 @@ export function createCraftedItem(
   if (!craft || !variant) throw Error("Invalid crafting recipe or base");
   const base = native.gd.items[baseCode];
   const item: PlannerItem = {
-    name: craft.name.en,
+    name: native.randomRareName(baseCode),
     quality: "crafted",
     craftId,
     baseCode,

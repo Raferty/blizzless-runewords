@@ -411,6 +411,7 @@ import PlannerRecipeIngredients from "./PlannerRecipeIngredients.vue";
 import { stashSupplies } from "@/utils/planner-supplies";
 import {
   editableQuality,
+  magicItemName,
   canBeRare,
   retainCompatibleAffixes,
   affixSockets,
@@ -573,8 +574,13 @@ function setBaseSkillTab(value: PlannerItem["baseSkillTab"]) {
   if (value) item.value.baseSkillTab = value;
   else delete item.value.baseSkillTab;
 }
+function updateMagicName() {
+  if (item.value.quality !== "magic" || !selectedBase.value) return;
+  item.value.name = magicItemName(item.value, selectedBase.value.name);
+}
 function updateAffixes(value: PlannerAffix[]) {
   item.value.affixes = value;
+  updateMagicName();
   item.value.sockets = Math.max(item.value.sockets ?? 0, affixSockets(item.value));
 }
 function reconcileAffixes() {
@@ -608,7 +614,13 @@ function changeQuality(value: string) {
     return;
   }
   item.value.quality = value as PlannerItem["quality"];
+  if (selectedBase.value && native.value)
+    item.value.name =
+      value === "rare"
+        ? native.value.randomRareName(selectedBase.value.code)
+        : selectedBase.value.name;
   reconcileAffixes();
+  updateMagicName();
 }
 function chooseCharm(entry: CatalogItem) {
   const { itemLevel, notes } = item.value;
@@ -935,11 +947,16 @@ function changeBase(code: string) {
     delete item.value.propertyValues;
     delete item.value.propertyChoices;
   }
+  const previousCode = item.value.baseCode;
   item.value.baseCode = code;
   item.value.baseKind = base.kind;
   if (props.charmMode) height.value = base.height;
   if (item.value.quality === "normal" || editableQuality(item.value.quality)) {
-    item.value.name = selectedCraft.value?.name.en ?? base.name;
+    if (item.value.quality === "rare" || item.value.quality === "crafted") {
+      if (previousCode !== code && native.value)
+        item.value.name = native.value.randomRareName(code);
+    } else item.value.name = base.name;
+    updateMagicName();
     item.value.requiredLevel = base.level;
   }
   if (item.value.quality === "runeword") {

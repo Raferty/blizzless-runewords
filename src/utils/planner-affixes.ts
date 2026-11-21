@@ -38,6 +38,16 @@ const bases = data.bases as Record<string, AffixBase>;
 export const canBeRare = (code: string) => !!bases[code]?.rare;
 export const editableQuality = (quality: PlannerItem["quality"]) =>
   quality === "magic" || quality === "rare" || quality === "crafted";
+export function magicItemName(item: PlannerItem, baseName: string) {
+  const selected = (item.affixes ?? []).map((row) => affixById.get(row.id));
+  return [
+    selected.find((affix) => affix?.kind === "prefix")?.name,
+    baseName,
+    selected.find((affix) => affix?.kind === "suffix")?.name,
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
 export function affixLevel(item: PlannerItem) {
   const base = bases[item.baseCode ?? ""];
   if (!base) return 0;
