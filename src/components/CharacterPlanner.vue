@@ -119,6 +119,7 @@
         <PlannerStash
           v-if="section === 'stash'"
           class="planner-stash-page"
+          fixed-open
           @edit="editStash"
           @manage="stashOpen = true"
         />
@@ -181,7 +182,7 @@
             </p>
           </section>
         </template>
-        <PlannerWaypoints v-if="section === 'waypoints'" initial-open />
+        <PlannerWaypoints v-if="section === 'waypoints'" fixed-open />
         <section v-if="section === 'quests'" class="planner-panel">
           <div class="planner-panel-heading">
             <div>
