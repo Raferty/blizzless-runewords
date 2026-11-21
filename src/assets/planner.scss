@@ -1274,15 +1274,19 @@
   @include controls.square;
   box-sizing: border-box;
   flex-shrink: 0;
+  color: var(--color-accent);
+  background: #101010;
+  border: 1px solid #343434;
 }
 .planner-attribute input {
   font-variant-numeric: tabular-nums;
-  color: inherit;
   text-align: center;
+  appearance: none;
 }
-.planner-attribute button {
-  color: #0788fa;
-  background: #101010;
+.planner-attribute input:hover {
+  color: #fff;
+  background: #242424;
+  border-color: #5a5a5a;
 }
 .planner-point-budget {
   display: flex;
