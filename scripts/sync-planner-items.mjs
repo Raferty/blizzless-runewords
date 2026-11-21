@@ -158,6 +158,14 @@ for (const [quality, definitions] of [
     catalogBases[id] = code;
     for (const name of [definition.index, strings.get(definition.index)])
       if (name) names[quality][normalizedName(name)] = id;
+    if (quality === "set") {
+      // The Blizzless set-item gallery resolves HD art and inventory tint by name.
+      // The launcher uses the same graphic for normal, exceptional and elite bases.
+      const path = nativeArt.set[definition.index];
+      if (!path) throw new Error(`Missing set artwork: ${definition.index}`);
+      qualityKeys.set[id] = Array(3).fill("sets/" + path);
+      continue;
+    }
     qualityKeys[quality][id] = [0, 1, 2].map((index) => {
       const uniqueImage =
         quality === "unique" && uniqueArtwork[definition.index.replace(/ Player$/, "")];
@@ -294,6 +302,22 @@ await Promise.all(
   Array.from({ length: 6 }, async () => {
     while (cursor < keys.length) {
       const key = keys[cursor++];
+      if (/^sets\/[a-z0-9_-]+\/[a-z0-9_.-]+\.avif$/i.test(key)) {
+        const file = new URL(key, destination);
+        let bytes = await readFile(file).catch(() => null);
+        if (!bytes || !bytes.subarray(0, 32).includes("avif")) {
+          const url = "https://blizzless.info/imgs/game-items/" + key.slice(5);
+          const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
+          if (!response.ok) throw new Error(`${url}: HTTP ${response.status}`);
+          bytes = Buffer.from(await response.arrayBuffer());
+          if (!bytes.subarray(0, 32).includes("avif"))
+            throw new Error(`Invalid AVIF: ${url}`);
+          await mkdir(new URL(".", file), { recursive: true });
+          await writeFile(file, bytes);
+        }
+        images.set(key, "images/planner/items/" + key);
+        continue;
+      }
       if (!/^(weapon|armor|misc)\/[a-z0-9_/-]+$/.test(key))
         throw new Error(`Invalid item image key: ${key}`);
       if (keySprites[key]) {

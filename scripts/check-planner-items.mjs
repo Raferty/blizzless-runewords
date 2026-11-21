@@ -420,7 +420,19 @@ try {
   assert.equal(wardMin.item[0].lines[0], "+21 to Mana");
   assert.equal(wardMax.item[0].lines[0], "+22 to Mana");
   assert.equal(wardMax.item[1].requires, "Civerb's Cudgel");
-  for (const [id] of Object.entries(native.gd.setItems)) {
+  for (const [id, definition] of Object.entries(native.gd.setItems)) {
+    const asset = nativeArt.set[definition.index];
+    assert(asset, definition.index);
+    for (const tier of ["normal", "exceptional", "elite"]) {
+      assert.equal(
+        plannerItemImage(
+          { catalogId: id, quality: "set", baseCode: definition.item, iconIndex: 2 },
+          tier
+        ),
+        "images/planner/items/sets/" + asset,
+        definition.index + " (" + tier + ")"
+      );
+    }
     for (const roll of [0, 1]) {
       const bonuses = catalogSetBonuses(native, id, roll, 90);
       assert(bonuses?.size >= 1, id);
@@ -488,7 +500,7 @@ try {
       { baseCode: "9mt", quality: "set", catalogId: aldur.catalogId },
       "exceptional"
     ),
-    "images/planner/items/weapon/mace/bloodrise.webp"
+    "images/planner/items/sets/mace/bloodrise.t61.avif"
   );
   assert.equal(
     baseItemImage("9mt"),
@@ -502,8 +514,12 @@ try {
   assert.deepEqual(plannerItemDimensions({ baseCode: "9fc", quality: "normal" }), [1, 3]);
   assert.equal(
     plannerItemImage({ name: "Aldur’s Rhythm", quality: "set" }),
-    "images/planner/items/weapon/mace/bloodrise.webp",
+    "images/planner/items/sets/mace/bloodrise.t61.avif",
     "Legacy items resolve their artwork without changing saved data"
+  );
+  assert.equal(
+    plannerItemImage({ name: "Tal Rasha’s Fine-Spun Cloth", quality: "set" }),
+    "images/planner/items/sets/belt/belt_m.t186.avif"
   );
   assert(plannerItemImage({ name: "Arcanna's Head", quality: "set" }));
   const jewelryAndJewels = stash.items.filter(
