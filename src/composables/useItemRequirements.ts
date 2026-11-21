@@ -8,7 +8,7 @@ import type { PlannerItem } from "@/types/planner";
 export function useItemRequirements() {
   const store = usePlannerStore();
   const native = usePlannerGameData();
-  const attributes = computed(() => buildStats(store.build).attributes);
+  const attributes = computed(() => buildStats(store.build, native.value).attributes);
   return (item?: PlannerItem) =>
     item
       ? itemRequirements(

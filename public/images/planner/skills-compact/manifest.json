@@ -1,0 +1,4934 @@
+{
+  "version": 1,
+  "source": {
+    "version": "Blizzless 1.3.2",
+    "patch": "1.3.2",
+    "datasetId": "6ada53efa3680a208170ae3d",
+    "manifestVersion": 1792771561313,
+    "updatedAt": "2026-10-23T16:06:01.313Z",
+    "url": "https://blizzless.info/ru/skills",
+    "files": {
+      "global/excel/charstats.txt": {
+        "sha256": "0b4ab97796e2286cb11c3b810bb290b0dc27d862118d6e28d90fe02f5d4d3d13",
+        "size": 4127
+      },
+      "global/excel/difficultylevels.txt": {
+        "sha256": "c54b77d7fc12081913815bb8b58b0b8778a5a7a3a851d7cfa477abe86a36f3b6",
+        "size": 1073
+      },
+      "global/excel/base/skills.txt": {
+        "sha256": "ae6f0c6242df854aa9eacc1d861555e26c385b6f11293142a3bb0571a467aac4",
+        "size": 340435
+      },
+      "global/excel/gems.txt": {
+        "sha256": "caf1bda937f2207f58dc854b5c968d99e585c90c29794ffdc11ee37c6fc6fe75",
+        "size": 8016
+      },
+      "global/excel/runes.txt": {
+        "sha256": "ee99dbc8248010efbea6ef7ddf7dc65435a5fb512db4ea490f9d4f751928c228",
+        "size": 32679
+      },
+      "global/excel/base/skilldesc.txt": {
+        "sha256": "740c3ce63a8ee2c091939e7c0236c1642c7e9a1c6052d681f348251a89a50bb8",
+        "size": 83609
+      },
+      "global/excel/inventory.txt": {
+        "sha256": "c9b758fca47eabd74c5d1240c0c06ec768eb6025669942553f6a0cccfb7cf4fa",
+        "size": 8427
+      },
+      "global/excel/skills.txt": {
+        "sha256": "acd30f649df831f7ddde8b2eedeafa8957e2fc5c253a11c4840ebbe133c64608",
+        "size": 366339
+      },
+      "global/excel/skilldesc.txt": {
+        "sha256": "b8d3137e16bf8c72b34854ec659d92e77eb1459ad6b6db7ed9a3b976a6c9d6d9",
+        "size": 98287
+      },
+      "local/lng/strings/skills.json": {
+        "sha256": "cdc527bf323045660c282d43f048571b06dd2706b1b4a23c6f51594b1f4b1d43",
+        "size": 1073374
+      }
+    }
+  },
+  "size": {
+    "width": 360,
+    "height": 580
+  },
+  "pngSize": {
+    "width": 720,
+    "height": 1160
+  },
+  "layer": {
+    "x": 10,
+    "y": 70,
+    "width": 340,
+    "height": 480.5945945945946
+  },
+  "header": {
+    "x": 5,
+    "y": 5,
+    "width": 350,
+    "height": 52
+  },
+  "classes": [
+    {
+      "id": "amazon",
+      "name": {
+        "ru": "Амазонка",
+        "en": "Amazon"
+      },
+      "trees": [
+        {
+          "tree": 2,
+          "title": {
+            "ru": "Дротики и копья",
+            "en": "Javelin & spear"
+          },
+          "svg": "amazon-javelin-spear.svg",
+          "png": "amazon-javelin-spear.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/amazon1.webp"
+          },
+          "skills": [
+            {
+              "id": 10,
+              "name": {
+                "ru": "Выпад",
+                "en": "Jab"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/jab.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 14,
+              "name": {
+                "ru": "Мощный удар",
+                "en": "Power Strike"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                10
+              ],
+              "icon": "images/planner/wowhead/icons/power-strike.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 15,
+              "name": {
+                "ru": "Отравленный дротик",
+                "en": "Poison Javelin"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/poison-javelin.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 19,
+              "name": {
+                "ru": "Прокалывание",
+                "en": "Impale"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                10
+              ],
+              "icon": "images/planner/wowhead/icons/impale.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 20,
+              "name": {
+                "ru": "Разряд молнии",
+                "en": "Lightning Bolt"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                15
+              ],
+              "icon": "images/planner/wowhead/icons/lightning-bolt.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 24,
+              "name": {
+                "ru": "Заряженный удар",
+                "en": "Charged Strike"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                14,
+                20
+              ],
+              "icon": "images/planner/wowhead/icons/charged-strike.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 25,
+              "name": {
+                "ru": "Чумной дротик",
+                "en": "Plague Javelin"
+              },
+              "row": 4,
+              "column": 3,
+              "requires": [
+                20
+              ],
+              "icon": "images/planner/wowhead/icons/plague-javelin.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 30,
+              "name": {
+                "ru": "Лучшая защита",
+                "en": "Fend"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                19
+              ],
+              "icon": "images/planner/wowhead/icons/fend.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 34,
+              "name": {
+                "ru": "Удар молнии",
+                "en": "Lightning Strike"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                24
+              ],
+              "icon": "images/planner/wowhead/icons/lightning-strike.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 35,
+              "name": {
+                "ru": "Неистовство молний",
+                "en": "Lightning Fury"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                25
+              ],
+              "icon": "images/planner/wowhead/icons/lightning-fury.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 1,
+          "title": {
+            "ru": "Пассивные и магические",
+            "en": "Passive & magic"
+          },
+          "svg": "amazon-passive-magic.svg",
+          "png": "amazon-passive-magic.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/amazon2.webp"
+          },
+          "skills": [
+            {
+              "id": 8,
+              "name": {
+                "ru": "Внутреннее зрение",
+                "en": "Inner Sight"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/inner-sight.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 9,
+              "name": {
+                "ru": "Критический удар",
+                "en": "Critical Strike"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/critical-strike.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 13,
+              "name": {
+                "ru": "Уклонение",
+                "en": "Dodge"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/dodge.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 17,
+              "name": {
+                "ru": "Замедление снарядов",
+                "en": "Slow Missiles"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                8
+              ],
+              "icon": "images/planner/wowhead/icons/slow-missiles.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 18,
+              "name": {
+                "ru": "Ускользание",
+                "en": "Avoid"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                13
+              ],
+              "icon": "images/planner/wowhead/icons/avoid.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 23,
+              "name": {
+                "ru": "Пронзание",
+                "en": "Penetrate"
+              },
+              "row": 4,
+              "column": 3,
+              "requires": [
+                9
+              ],
+              "icon": "images/planner/wowhead/icons/penetrate.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 28,
+              "name": {
+                "ru": "Двойник",
+                "en": "Decoy"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                17
+              ],
+              "icon": "images/planner/wowhead/icons/dopplezon.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 29,
+              "name": {
+                "ru": "Избежание",
+                "en": "Evade"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                18
+              ],
+              "icon": "images/planner/wowhead/icons/evade.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 32,
+              "name": {
+                "ru": "Валькирия",
+                "en": "Valkyrie"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                28,
+                29
+              ],
+              "icon": "images/planner/wowhead/icons/valkyrie.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 33,
+              "name": {
+                "ru": "Пробивание",
+                "en": "Pierce"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                23
+              ],
+              "icon": "images/planner/wowhead/icons/pierce.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 0,
+          "title": {
+            "ru": "Лук и арбалет",
+            "en": "Bow & crossbow"
+          },
+          "svg": "amazon-bow-crossbow.svg",
+          "png": "amazon-bow-crossbow.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/amazon3.webp"
+          },
+          "skills": [
+            {
+              "id": 6,
+              "name": {
+                "ru": "Магическая стрела",
+                "en": "Magic Arrow"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/magic-arrow.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 7,
+              "name": {
+                "ru": "Огненная стрела",
+                "en": "Fire Arrow"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/fire-arrow.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 11,
+              "name": {
+                "ru": "Морозная стрела",
+                "en": "Cold Arrow"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/cold-arrow.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 12,
+              "name": {
+                "ru": "Залп",
+                "en": "Multiple Shot"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                6
+              ],
+              "icon": "images/planner/wowhead/icons/multiple-shot.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 16,
+              "name": {
+                "ru": "Взрывная стрела",
+                "en": "Exploding Arrow"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                7,
+                12
+              ],
+              "icon": "images/planner/wowhead/icons/exploding-arrow.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 21,
+              "name": {
+                "ru": "Ледяная стрела",
+                "en": "Ice Arrow"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                11
+              ],
+              "icon": "images/planner/wowhead/icons/ice-arrow.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 22,
+              "name": {
+                "ru": "Самонаводящаяся стрела",
+                "en": "Guided Arrow"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                11,
+                12
+              ],
+              "icon": "images/planner/wowhead/icons/guided-arrow.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 26,
+              "name": {
+                "ru": "Обстрел",
+                "en": "Strafe"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                22
+              ],
+              "icon": "images/planner/wowhead/icons/strafe.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 27,
+              "name": {
+                "ru": "Обжигающая стрела",
+                "en": "Immolation Arrow"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                16
+              ],
+              "icon": "images/planner/wowhead/icons/immolation-arrow.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 31,
+              "name": {
+                "ru": "Замораживающая стрела",
+                "en": "Freezing Arrow"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                21
+              ],
+              "icon": "images/planner/wowhead/icons/freezing-arrow.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sorceress",
+      "name": {
+        "ru": "Волшебница",
+        "en": "Sorceress"
+      },
+      "trees": [
+        {
+          "tree": 2,
+          "title": {
+            "ru": "Холод",
+            "en": "Cold"
+          },
+          "svg": "sorceress-cold.svg",
+          "png": "sorceress-cold.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/sorceress1.webp"
+          },
+          "skills": [
+            {
+              "id": 39,
+              "name": {
+                "ru": "Стрела льда",
+                "en": "Ice Bolt"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/ice-bolt.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 40,
+              "name": {
+                "ru": "Ледяной доспех",
+                "en": "Frozen Armor"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/frozen-armor.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 44,
+              "name": {
+                "ru": "Кольцо льда",
+                "en": "Frost Nova"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/frost-nova.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 45,
+              "name": {
+                "ru": "Ледяной удар",
+                "en": "Ice Blast"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                39
+              ],
+              "icon": "images/planner/wowhead/icons/ice-blast.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 50,
+              "name": {
+                "ru": "Морозный доспех",
+                "en": "Shiver Armor"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                45,
+                40
+              ],
+              "icon": "images/planner/wowhead/icons/shiver-armor.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 55,
+              "name": {
+                "ru": "Ледяной шип",
+                "en": "Glacial Spike"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                45
+              ],
+              "icon": "images/planner/wowhead/icons/glacial-spike.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 59,
+              "name": {
+                "ru": "Снежная буря",
+                "en": "Blizzard"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                44,
+                55
+              ],
+              "icon": "images/planner/wowhead/icons/blizzard.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 60,
+              "name": {
+                "ru": "Леденящий доспех",
+                "en": "Chilling Armor"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                50
+              ],
+              "icon": "images/planner/wowhead/icons/chilling-armor.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 64,
+              "name": {
+                "ru": "Морозная сфера",
+                "en": "Frozen Orb"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                59
+              ],
+              "icon": "images/planner/wowhead/icons/frozen-orb.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 65,
+              "name": {
+                "ru": "Мастер льда",
+                "en": "Cold Mastery"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/cold-mastery.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 1,
+          "title": {
+            "ru": "Молния",
+            "en": "Lightning"
+          },
+          "svg": "sorceress-lightning.svg",
+          "png": "sorceress-lightning.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/sorceress2.webp"
+          },
+          "skills": [
+            {
+              "id": 38,
+              "name": {
+                "ru": "Залп молний",
+                "en": "Charged Bolt"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/charged-bolt.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 42,
+              "name": {
+                "ru": "Статическое поле",
+                "en": "Static Field"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/static-field.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 43,
+              "name": {
+                "ru": "Телекинез",
+                "en": "Telekinesis"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/telekinesis.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 48,
+              "name": {
+                "ru": "Кольцо молний",
+                "en": "Nova"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                42
+              ],
+              "icon": "images/planner/wowhead/icons/nova.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 49,
+              "name": {
+                "ru": "Молния",
+                "en": "Lightning"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                38
+              ],
+              "icon": "images/planner/wowhead/icons/lightning.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 53,
+              "name": {
+                "ru": "Цепная молния",
+                "en": "Chain Lightning"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                49
+              ],
+              "icon": "images/planner/wowhead/icons/chain-lightning.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 54,
+              "name": {
+                "ru": "Телепортация",
+                "en": "Teleport"
+              },
+              "row": 4,
+              "column": 3,
+              "requires": [
+                43
+              ],
+              "icon": "images/planner/wowhead/icons/teleport.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 57,
+              "name": {
+                "ru": "Гроза",
+                "en": "Thunder Storm"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                48,
+                53
+              ],
+              "icon": "images/planner/wowhead/icons/thunder-storm.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 58,
+              "name": {
+                "ru": "Энергетический щит",
+                "en": "Energy Shield"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                54,
+                53
+              ],
+              "icon": "images/planner/wowhead/icons/energy-shield.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 63,
+              "name": {
+                "ru": "Мастер молнии",
+                "en": "Lightning Mastery"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/lightning-mastery.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 0,
+          "title": {
+            "ru": "Огонь",
+            "en": "Fire"
+          },
+          "svg": "sorceress-fire.svg",
+          "png": "sorceress-fire.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/sorceress3.webp"
+          },
+          "skills": [
+            {
+              "id": 36,
+              "name": {
+                "ru": "Стрела огня",
+                "en": "Fire Bolt"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/fire-bolt.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 37,
+              "name": {
+                "ru": "Тепло",
+                "en": "Warmth"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/warmth.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 41,
+              "name": {
+                "ru": "Инферно",
+                "en": "Inferno"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/inferno.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 46,
+              "name": {
+                "ru": "Огненный след",
+                "en": "Blaze"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                41
+              ],
+              "icon": "images/planner/wowhead/icons/blaze.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 47,
+              "name": {
+                "ru": "Огненный шар",
+                "en": "Fire Ball"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                36
+              ],
+              "icon": "images/planner/wowhead/icons/fire-ball.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 51,
+              "name": {
+                "ru": "Огненная стена",
+                "en": "Fire Wall"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                46
+              ],
+              "icon": "images/planner/wowhead/icons/fire-wall.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 52,
+              "name": {
+                "ru": "Чары",
+                "en": "Enchant"
+              },
+              "row": 4,
+              "column": 3,
+              "requires": [
+                37,
+                47
+              ],
+              "icon": "images/planner/wowhead/icons/enchant.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 56,
+              "name": {
+                "ru": "Метеорит",
+                "en": "Meteor"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                47,
+                51
+              ],
+              "icon": "images/planner/wowhead/icons/meteor.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 61,
+              "name": {
+                "ru": "Мастер огня",
+                "en": "Fire Mastery"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/fire-mastery.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 62,
+              "name": {
+                "ru": "Гидра",
+                "en": "Hydra"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                52
+              ],
+              "icon": "images/planner/wowhead/icons/hydra.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "necromancer",
+      "name": {
+        "ru": "Некромант",
+        "en": "Necromancer"
+      },
+      "trees": [
+        {
+          "tree": 2,
+          "title": {
+            "ru": "Призыв",
+            "en": "Summoning"
+          },
+          "svg": "necromancer-summoning.svg",
+          "png": "necromancer-summoning.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/necromancer1.webp"
+          },
+          "skills": [
+            {
+              "id": 69,
+              "name": {
+                "ru": "Мастер скелетов",
+                "en": "Skeleton Mastery"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [
+                70
+              ],
+              "icon": "images/planner/wowhead/icons/skeleton-mastery.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 70,
+              "name": {
+                "ru": "Скелет",
+                "en": "Raise Skeleton"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/raise-skeleton.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 75,
+              "name": {
+                "ru": "Глиняный голем",
+                "en": "Clay Golem"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/clay-golem.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 79,
+              "name": {
+                "ru": "Мастер големов",
+                "en": "Golem Mastery"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                75
+              ],
+              "icon": "images/planner/wowhead/icons/golem-mastery.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 80,
+              "name": {
+                "ru": "Скелет-маг",
+                "en": "Raise Skeletal Mage"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                70
+              ],
+              "icon": "images/planner/wowhead/icons/raise-skeletal-mage.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 85,
+              "name": {
+                "ru": "Кровяной голем",
+                "en": "Blood Golem"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                75
+              ],
+              "icon": "images/planner/wowhead/icons/bloodgolem.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 89,
+              "name": {
+                "ru": "Стойкие прислужники",
+                "en": "Summon Resist"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                79
+              ],
+              "icon": "images/planner/wowhead/icons/summon-resist.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 90,
+              "name": {
+                "ru": "Железный голем",
+                "en": "Iron Golem"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                85
+              ],
+              "icon": "images/planner/wowhead/icons/irongolem.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 94,
+              "name": {
+                "ru": "Огненный голем",
+                "en": "Fire Golem"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                90
+              ],
+              "icon": "images/planner/wowhead/icons/firegolem.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 95,
+              "name": {
+                "ru": "Оживление",
+                "en": "Revive"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                80,
+                90
+              ],
+              "icon": "images/planner/wowhead/icons/revive.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 1,
+          "title": {
+            "ru": "Яд и кости",
+            "en": "Poison & bone"
+          },
+          "svg": "necromancer-poison-bone.svg",
+          "png": "necromancer-poison-bone.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/necromancer2.webp"
+          },
+          "skills": [
+            {
+              "id": 67,
+              "name": {
+                "ru": "Клыки",
+                "en": "Teeth"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/teeth.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 68,
+              "name": {
+                "ru": "Костяной доспех",
+                "en": "Bone Armor"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/bone-armor.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 73,
+              "name": {
+                "ru": "Отравленный кинжал",
+                "en": "Poison Dagger"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/poison-dagger.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 74,
+              "name": {
+                "ru": "Взрыв трупа",
+                "en": "Corpse Explosion"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                67
+              ],
+              "icon": "images/planner/wowhead/icons/corpse-explosion.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 78,
+              "name": {
+                "ru": "Костяная стена",
+                "en": "Bone Wall"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                68
+              ],
+              "icon": "images/planner/wowhead/icons/bone-wall.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 83,
+              "name": {
+                "ru": "Ядовитый взрыв",
+                "en": "Poison Explosion"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                73,
+                74
+              ],
+              "icon": "images/planner/wowhead/icons/poison-explosion.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 84,
+              "name": {
+                "ru": "Костяное копье",
+                "en": "Bone Spear"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                74
+              ],
+              "icon": "images/planner/wowhead/icons/bone-spear.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 88,
+              "name": {
+                "ru": "Костяная клетка",
+                "en": "Bone Prison"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                78,
+                84
+              ],
+              "icon": "images/planner/wowhead/icons/bone-prison.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 92,
+              "name": {
+                "ru": "Кольцо яда",
+                "en": "Poison Nova"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                83
+              ],
+              "icon": "images/planner/wowhead/icons/poison-nova.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 93,
+              "name": {
+                "ru": "Костяной дух",
+                "en": "Bone Spirit"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                84
+              ],
+              "icon": "images/planner/wowhead/icons/bone-spirit.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 0,
+          "title": {
+            "ru": "Проклятия",
+            "en": "Curses"
+          },
+          "svg": "necromancer-curses.svg",
+          "png": "necromancer-curses.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/necromancer3.webp",
+            "adaptation": "necromancer-curses"
+          },
+          "skills": [
+            {
+              "id": 66,
+              "name": {
+                "ru": "Усиление урона",
+                "en": "Amplify Damage"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/amplify-damage.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 71,
+              "name": {
+                "ru": "Лишение зрения",
+                "en": "Dim Vision"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/dim-vision.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 72,
+              "name": {
+                "ru": "Немощность",
+                "en": "Weaken"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [
+                66
+              ],
+              "icon": "images/planner/wowhead/icons/weaken.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 76,
+              "name": {
+                "ru": "Железная дева",
+                "en": "Iron Maiden"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                66
+              ],
+              "icon": "images/planner/wowhead/icons/iron-maiden.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 77,
+              "name": {
+                "ru": "Устрашение",
+                "en": "Terror"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                72
+              ],
+              "icon": "images/planner/wowhead/icons/terror.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 81,
+              "name": {
+                "ru": "Замешательство",
+                "en": "Confuse"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                71
+              ],
+              "icon": "images/planner/wowhead/icons/confuse.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 82,
+              "name": {
+                "ru": "Похищение жизни",
+                "en": "Life Tap"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                76
+              ],
+              "icon": "images/planner/wowhead/icons/life-tap.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 86,
+              "name": {
+                "ru": "Фокусировка прислужников",
+                "en": "Focus Minions"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                81
+              ],
+              "icon": "images/skills/neskillicon_60.8652be331a52.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 87,
+              "name": {
+                "ru": "Одряхление",
+                "en": "Decrepify"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                77
+              ],
+              "icon": "images/planner/wowhead/icons/decrepify.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 91,
+              "name": {
+                "ru": "Снижение сопротивлений",
+                "en": "Lower Resist"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                82,
+                87
+              ],
+              "icon": "images/planner/wowhead/icons/lower-resist.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "paladin",
+      "name": {
+        "ru": "Паладин",
+        "en": "Paladin"
+      },
+      "trees": [
+        {
+          "tree": 2,
+          "title": {
+            "ru": "Защитные ауры",
+            "en": "Defensive auras"
+          },
+          "svg": "paladin-defensive-auras.svg",
+          "png": "paladin-defensive-auras.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/paladin1.webp"
+          },
+          "skills": [
+            {
+              "id": 99,
+              "name": {
+                "ru": "Молитва",
+                "en": "Prayer"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/prayer.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 100,
+              "name": {
+                "ru": "Сопротивление огню",
+                "en": "Resist Fire"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/resist-fire.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 104,
+              "name": {
+                "ru": "Непокорность",
+                "en": "Defiance"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/defiance.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 105,
+              "name": {
+                "ru": "Сопротивление льду",
+                "en": "Resist Cold"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/resist-cold.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 109,
+              "name": {
+                "ru": "Очищение",
+                "en": "Cleansing"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                99
+              ],
+              "icon": "images/planner/wowhead/icons/cleansing.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 110,
+              "name": {
+                "ru": "Сопротивление молнии",
+                "en": "Resist Lightning"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/resist-lightning.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 115,
+              "name": {
+                "ru": "Бодрость",
+                "en": "Vigor"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                109,
+                104
+              ],
+              "icon": "images/planner/wowhead/icons/vigor.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 120,
+              "name": {
+                "ru": "Медитация",
+                "en": "Meditation"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                109
+              ],
+              "icon": "images/planner/wowhead/icons/meditation.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 124,
+              "name": {
+                "ru": "Искупление",
+                "en": "Redemption"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                115
+              ],
+              "icon": "images/planner/wowhead/icons/redemption.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 125,
+              "name": {
+                "ru": "Спасение",
+                "en": "Salvation"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/salvation.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 1,
+          "title": {
+            "ru": "Боевые ауры",
+            "en": "Offensive auras"
+          },
+          "svg": "paladin-offensive-auras.svg",
+          "png": "paladin-offensive-auras.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/paladin2.webp"
+          },
+          "skills": [
+            {
+              "id": 98,
+              "name": {
+                "ru": "Мощь",
+                "en": "Might"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/might.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 102,
+              "name": {
+                "ru": "Священный огонь",
+                "en": "Holy Fire"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                98
+              ],
+              "icon": "images/planner/wowhead/icons/holy-fire.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 103,
+              "name": {
+                "ru": "Шипы",
+                "en": "Thorns"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/thorns.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 108,
+              "name": {
+                "ru": "Правое дело",
+                "en": "Blessed Aim"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                98
+              ],
+              "icon": "images/planner/wowhead/icons/blessed-aim.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 113,
+              "name": {
+                "ru": "Сосредоточенность",
+                "en": "Concentration"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                108
+              ],
+              "icon": "images/planner/wowhead/icons/concentration.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 114,
+              "name": {
+                "ru": "Священный холод",
+                "en": "Holy Freeze"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                102
+              ],
+              "icon": "images/planner/wowhead/icons/holy-freeze.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 118,
+              "name": {
+                "ru": "Священная молния",
+                "en": "Holy Shock"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                114
+              ],
+              "icon": "images/planner/wowhead/icons/holy-shock.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 119,
+              "name": {
+                "ru": "Убежище",
+                "en": "Sanctuary"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                103,
+                114
+              ],
+              "icon": "images/planner/wowhead/icons/sanctuary.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 122,
+              "name": {
+                "ru": "Фанатизм",
+                "en": "Fanaticism"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                113
+              ],
+              "icon": "images/planner/wowhead/icons/fanaticism.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 123,
+              "name": {
+                "ru": "Осуждение",
+                "en": "Conviction"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                119
+              ],
+              "icon": "images/planner/wowhead/icons/conviction.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 0,
+          "title": {
+            "ru": "Боевые навыки",
+            "en": "Combat skills"
+          },
+          "svg": "paladin-combat-skills.svg",
+          "png": "paladin-combat-skills.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/paladin3.webp"
+          },
+          "skills": [
+            {
+              "id": 96,
+              "name": {
+                "ru": "Жертва",
+                "en": "Sacrifice"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/sacrifice.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 97,
+              "name": {
+                "ru": "Кара",
+                "en": "Smite"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/smite.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 101,
+              "name": {
+                "ru": "Заряд Света",
+                "en": "Holy Bolt"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/holy-bolt.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 106,
+              "name": {
+                "ru": "Рвение",
+                "en": "Zeal"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                96
+              ],
+              "icon": "images/planner/wowhead/icons/zeal.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 107,
+              "name": {
+                "ru": "Рывок",
+                "en": "Charge"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                97
+              ],
+              "icon": "images/planner/wowhead/icons/charge.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 111,
+              "name": {
+                "ru": "Возмездие",
+                "en": "Vengeance"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                106
+              ],
+              "icon": "images/planner/wowhead/icons/vengeance.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 112,
+              "name": {
+                "ru": "Освященный молот",
+                "en": "Blessed Hammer"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                101
+              ],
+              "icon": "images/planner/wowhead/icons/blessed-hammer.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 116,
+              "name": {
+                "ru": "Обращение",
+                "en": "Conversion"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                111
+              ],
+              "icon": "images/planner/wowhead/icons/conversion.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 117,
+              "name": {
+                "ru": "Освященный щит",
+                "en": "Holy Shield"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                107,
+                112
+              ],
+              "icon": "images/planner/wowhead/icons/holy-shield.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 121,
+              "name": {
+                "ru": "Длань небес",
+                "en": "Fist of the Heavens"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                112,
+                116
+              ],
+              "icon": "images/planner/wowhead/icons/fist-of-the-heavens.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "barbarian",
+      "name": {
+        "ru": "Варвар",
+        "en": "Barbarian"
+      },
+      "trees": [
+        {
+          "tree": 2,
+          "title": {
+            "ru": "Боевые кличи",
+            "en": "Warcries"
+          },
+          "svg": "barbarian-warcries.svg",
+          "png": "barbarian-warcries.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/barbarian1.webp"
+          },
+          "skills": [
+            {
+              "id": 130,
+              "name": {
+                "ru": "Рев",
+                "en": "Howl"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/howl.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 131,
+              "name": {
+                "ru": "Поиск зелий",
+                "en": "Find Potion"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/find-potion.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 137,
+              "name": {
+                "ru": "Провокация",
+                "en": "Taunt"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [
+                130
+              ],
+              "icon": "images/planner/wowhead/icons/taunt.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 138,
+              "name": {
+                "ru": "Крик",
+                "en": "Shout"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                130
+              ],
+              "icon": "images/planner/wowhead/icons/shout.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 142,
+              "name": {
+                "ru": "Поиск предметов",
+                "en": "Find Item"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                131
+              ],
+              "icon": "images/planner/wowhead/icons/find-item.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 146,
+              "name": {
+                "ru": "Боевой клич",
+                "en": "Battle Cry"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                137
+              ],
+              "icon": "images/planner/wowhead/icons/battle-cry.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 149,
+              "name": {
+                "ru": "Боевые приказы",
+                "en": "Battle Orders"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                138
+              ],
+              "icon": "images/planner/wowhead/icons/battle-orders.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 150,
+              "name": {
+                "ru": "Зловещий тотем",
+                "en": "Grim Ward"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                142
+              ],
+              "icon": "images/planner/wowhead/icons/grim-ward.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 154,
+              "name": {
+                "ru": "Воинственный клич",
+                "en": "War Cry"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                146,
+                149
+              ],
+              "icon": "images/planner/wowhead/icons/war-cry.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 155,
+              "name": {
+                "ru": "Боевой призыв",
+                "en": "Battle Command"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                149
+              ],
+              "icon": "images/planner/wowhead/icons/battle-command.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 1,
+          "title": {
+            "ru": "Мастерство боя",
+            "en": "Combat masteries"
+          },
+          "svg": "barbarian-combat-masteries.svg",
+          "png": "barbarian-combat-masteries.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/barbarian2.webp"
+          },
+          "skills": [
+            {
+              "id": 127,
+              "name": {
+                "ru": "Мастер клинка",
+                "en": "Blade Mastery"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/skills/baskillicon_2.9b2a79213c59.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 128,
+              "name": {
+                "ru": "Мастер топора",
+                "en": "Axe Mastery"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/axe-mastery.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 129,
+              "name": {
+                "ru": "Мастер дробящего",
+                "en": "Blunt Mastery"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/mace-mastery.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 134,
+              "name": {
+                "ru": "Мастер древкового оружия",
+                "en": "Polearm Mastery"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/pole-arm-mastery.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 135,
+              "name": {
+                "ru": "Мастер метательного оружия",
+                "en": "Throwing Mastery"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/throwing-mastery.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 136,
+              "name": {
+                "ru": "Мастер стрелкового",
+                "en": "Archery Mastery"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/spear-mastery.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 141,
+              "name": {
+                "ru": "Повышенная выносливость",
+                "en": "Increased Stamina"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/increased-stamina.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 145,
+              "name": {
+                "ru": "Железная кожа",
+                "en": "Iron Skin"
+              },
+              "row": 4,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/iron-skin.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 148,
+              "name": {
+                "ru": "Повышенная скорость",
+                "en": "Increased Speed"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                141
+              ],
+              "icon": "images/planner/wowhead/icons/increased-speed.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 153,
+              "name": {
+                "ru": "Природная стойкость",
+                "en": "Natural Resistance"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                145
+              ],
+              "icon": "images/planner/wowhead/icons/natural-resistance.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 0,
+          "title": {
+            "ru": "Боевые навыки",
+            "en": "Combat skills"
+          },
+          "svg": "barbarian-combat-skills.svg",
+          "png": "barbarian-combat-skills.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/barbarian3.webp"
+          },
+          "skills": [
+            {
+              "id": 126,
+              "name": {
+                "ru": "Сокрушающий удар",
+                "en": "Bash"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/bash.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 132,
+              "name": {
+                "ru": "Прыжок",
+                "en": "Leap"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/leap.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 133,
+              "name": {
+                "ru": "Двойной удар",
+                "en": "Double Swing"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [
+                126
+              ],
+              "icon": "images/planner/wowhead/icons/double-swing.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 139,
+              "name": {
+                "ru": "Оглушение",
+                "en": "Stun"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                126
+              ],
+              "icon": "images/planner/wowhead/icons/stun.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 140,
+              "name": {
+                "ru": "Двойной бросок",
+                "en": "Double Throw"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                133
+              ],
+              "icon": "images/planner/wowhead/icons/double-throw.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 143,
+              "name": {
+                "ru": "Удар в прыжке",
+                "en": "Leap Attack"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                132
+              ],
+              "icon": "images/planner/wowhead/icons/leap-attack.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 144,
+              "name": {
+                "ru": "Концентрация",
+                "en": "Concentrate"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                139
+              ],
+              "icon": "images/planner/wowhead/icons/concentrate.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 147,
+              "name": {
+                "ru": "Ярость",
+                "en": "Frenzy"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                140
+              ],
+              "icon": "images/planner/wowhead/icons/frenzy.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 151,
+              "name": {
+                "ru": "Вихрь",
+                "en": "Whirlwind"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                143,
+                144
+              ],
+              "icon": "images/planner/wowhead/icons/whirlwind.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 152,
+              "name": {
+                "ru": "Берсерк",
+                "en": "Berserk"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                144
+              ],
+              "icon": "images/planner/wowhead/icons/berserk.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "druid",
+      "name": {
+        "ru": "Друид",
+        "en": "Druid"
+      },
+      "trees": [
+        {
+          "tree": 2,
+          "title": {
+            "ru": "Стихии",
+            "en": "Elemental"
+          },
+          "svg": "druid-elemental.svg",
+          "png": "druid-elemental.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/druid1.webp"
+          },
+          "skills": [
+            {
+              "id": 225,
+              "name": {
+                "ru": "Огненная буря",
+                "en": "Firestorm"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/firestorm.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 229,
+              "name": {
+                "ru": "Пылающий валун",
+                "en": "Molten Boulder"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [
+                225
+              ],
+              "icon": "images/planner/wowhead/icons/molten-boulder.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 230,
+              "name": {
+                "ru": "Арктический ветер",
+                "en": "Arctic Blast"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/arctic-blast.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 234,
+              "name": {
+                "ru": "Разлом",
+                "en": "Fissure"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                229
+              ],
+              "icon": "images/planner/wowhead/icons/eruption.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 235,
+              "name": {
+                "ru": "Ураганный доспех",
+                "en": "Cyclone Armor"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                230
+              ],
+              "icon": "images/planner/wowhead/icons/cyclone-armor.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 240,
+              "name": {
+                "ru": "Смерч",
+                "en": "Twister"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                235
+              ],
+              "icon": "images/planner/wowhead/icons/twister.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 244,
+              "name": {
+                "ru": "Вулкан",
+                "en": "Volcano"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                234
+              ],
+              "icon": "images/planner/wowhead/icons/volcano.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 245,
+              "name": {
+                "ru": "Торнадо",
+                "en": "Tornado"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                240
+              ],
+              "icon": "images/planner/wowhead/icons/tornado.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 249,
+              "name": {
+                "ru": "Армагеддон",
+                "en": "Armageddon"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                244
+              ],
+              "icon": "images/planner/wowhead/icons/armageddon.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 250,
+              "name": {
+                "ru": "Ураган",
+                "en": "Hurricane"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                245
+              ],
+              "icon": "images/planner/wowhead/icons/hurricane.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 1,
+          "title": {
+            "ru": "Превращения",
+            "en": "Shapeshifting"
+          },
+          "svg": "druid-shapeshifting.svg",
+          "png": "druid-shapeshifting.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/druid2.webp",
+            "adaptation": "druid-shapeshifting"
+          },
+          "skills": [
+            {
+              "id": 223,
+              "name": {
+                "ru": "Облик волка",
+                "en": "Werewolf"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/wearwolf.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 224,
+              "name": {
+                "ru": "Ликантропия",
+                "en": "Lycanthropy"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [
+                223
+              ],
+              "icon": "images/planner/wowhead/icons/shape-shifting.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 228,
+              "name": {
+                "ru": "Облик медведя",
+                "en": "Werebear"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/wearbear.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 232,
+              "name": {
+                "ru": "Дикая ярость",
+                "en": "Feral Rage"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                223
+              ],
+              "icon": "images/planner/wowhead/icons/feral-rage.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 233,
+              "name": {
+                "ru": "Потрошение",
+                "en": "Maul"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                228
+              ],
+              "icon": "images/planner/wowhead/icons/maul.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 238,
+              "name": {
+                "ru": "Бешенство",
+                "en": "Rabies"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                232
+              ],
+              "icon": "images/planner/wowhead/icons/rabies.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 239,
+              "name": {
+                "ru": "Огненные когти",
+                "en": "Fire Claws"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                232,
+                233
+              ],
+              "icon": "images/planner/wowhead/icons/fire-claws.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 241,
+              "name": {
+                "ru": "Зов природы",
+                "en": "Call of The Wild"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                243
+              ],
+              "icon": "images/skills/drskillicon_60.c7f867f3c9ff.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 242,
+              "name": {
+                "ru": "Голод",
+                "en": "Hunger"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                239
+              ],
+              "icon": "images/planner/wowhead/icons/hunger.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 243,
+              "name": {
+                "ru": "Ударная волна",
+                "en": "Shock Wave"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                233
+              ],
+              "icon": "images/planner/wowhead/icons/shock-wave.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 248,
+              "name": {
+                "ru": "Гнев",
+                "en": "Fury"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                238
+              ],
+              "icon": "images/planner/wowhead/icons/fury.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 0,
+          "title": {
+            "ru": "Призыв",
+            "en": "Summoning"
+          },
+          "svg": "druid-summoning.svg",
+          "png": "druid-summoning.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/druid3.webp",
+            "adaptation": "druid-summoning"
+          },
+          "skills": [
+            {
+              "id": 221,
+              "name": {
+                "ru": "Ворон",
+                "en": "Raven"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/raven.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 222,
+              "name": {
+                "ru": "Ядовитая лоза",
+                "en": "Poison Creeper"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/plague-poppy.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 226,
+              "name": {
+                "ru": "Древесный дух",
+                "en": "Oak Sage"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/oak-sage.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 227,
+              "name": {
+                "ru": "Призрачный волк",
+                "en": "Summon Spirit Wolf"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                221
+              ],
+              "icon": "images/planner/wowhead/icons/summon-spirit-wolf.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 231,
+              "name": {
+                "ru": "Солнечная лоза",
+                "en": "Solar Creeper"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                222
+              ],
+              "icon": "images/planner/wowhead/icons/cycle-of-life.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 236,
+              "name": {
+                "ru": "Сердце росомахи",
+                "en": "Heart of Wolverine"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                226
+              ],
+              "icon": "images/planner/wowhead/icons/heart-of-wolverine.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 237,
+              "name": {
+                "ru": "Лютый волк",
+                "en": "Summon Dire Wolf"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                226,
+                227
+              ],
+              "icon": "images/planner/wowhead/icons/summon-fenris.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 246,
+              "name": {
+                "ru": "Терновый дух",
+                "en": "Spirit of Barbs"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                236
+              ],
+              "icon": "images/planner/wowhead/icons/spirit-of-barbs.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 247,
+              "name": {
+                "ru": "Гризли",
+                "en": "Summon Grizzly"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                237
+              ],
+              "icon": "images/planner/wowhead/icons/summon-grizzly.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assassin",
+      "name": {
+        "ru": "Ассасин",
+        "en": "Assassin"
+      },
+      "trees": [
+        {
+          "tree": 2,
+          "title": {
+            "ru": "Боевые искусства",
+            "en": "Martial arts"
+          },
+          "svg": "assassin-martial-arts.svg",
+          "png": "assassin-martial-arts.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/assassin1.webp"
+          },
+          "skills": [
+            {
+              "id": 254,
+              "name": {
+                "ru": "Удар тигра",
+                "en": "Tiger Strike"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/tiger-strike.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 255,
+              "name": {
+                "ru": "Коготь дракона",
+                "en": "Dragon Talon"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/dragon-talon.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 259,
+              "name": {
+                "ru": "Огненные кулаки",
+                "en": "Fists of Fire"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/fists-of-fire.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 260,
+              "name": {
+                "ru": "Лапа дракона",
+                "en": "Dragon Claw"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [
+                255
+              ],
+              "icon": "images/planner/wowhead/icons/dragon-claw.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 265,
+              "name": {
+                "ru": "Удар кобры",
+                "en": "Cobra Strike"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                254
+              ],
+              "icon": "images/planner/wowhead/icons/cobra-strike.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 269,
+              "name": {
+                "ru": "Грозовые когти",
+                "en": "Claws of Thunder"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                259
+              ],
+              "icon": "images/planner/wowhead/icons/claws-of-thunder.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 270,
+              "name": {
+                "ru": "Хвост дракона",
+                "en": "Dragon Tail"
+              },
+              "row": 4,
+              "column": 3,
+              "requires": [
+                260
+              ],
+              "icon": "images/planner/wowhead/icons/dragon-tail.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 274,
+              "name": {
+                "ru": "Ледяные клинки",
+                "en": "Blades of Ice"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                269
+              ],
+              "icon": "images/planner/wowhead/icons/blades-of-ice.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 275,
+              "name": {
+                "ru": "Полет дракона",
+                "en": "Dragon Flight"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                270
+              ],
+              "icon": "images/planner/wowhead/icons/dragon-flight.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 280,
+              "name": {
+                "ru": "Удар феникса",
+                "en": "Phoenix Strike"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                265,
+                274
+              ],
+              "icon": "images/planner/wowhead/icons/royal-strike.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 1,
+          "title": {
+            "ru": "Теневые дисциплины",
+            "en": "Shadow disciplines"
+          },
+          "svg": "assassin-shadow-disciplines.svg",
+          "png": "assassin-shadow-disciplines.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/assassin2.webp"
+          },
+          "skills": [
+            {
+              "id": 252,
+              "name": {
+                "ru": "Мастер когтей",
+                "en": "Claw Mastery"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/claw-mastery.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 253,
+              "name": {
+                "ru": "Ментальный молот",
+                "en": "Psychic Hammer"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/psychic-hammer.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 258,
+              "name": {
+                "ru": "Ускорение",
+                "en": "Burst of Speed"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [
+                252
+              ],
+              "icon": "images/planner/wowhead/icons/quickness.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 263,
+              "name": {
+                "ru": "Блокирование",
+                "en": "Weapon Block"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                252
+              ],
+              "icon": "images/planner/wowhead/icons/weapon-block.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 264,
+              "name": {
+                "ru": "Покров теней",
+                "en": "Cloak of Shadows"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                253
+              ],
+              "icon": "images/planner/wowhead/icons/cloak-of-shadows.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 267,
+              "name": {
+                "ru": "Уход в тень",
+                "en": "Fade"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                258
+              ],
+              "icon": "images/planner/wowhead/icons/fade.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 268,
+              "name": {
+                "ru": "Тень воина",
+                "en": "Shadow Warrior"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                264,
+                263
+              ],
+              "icon": "images/planner/wowhead/icons/shadow-warrior.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 273,
+              "name": {
+                "ru": "Ментальный взрыв",
+                "en": "Mind Blast"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                264
+              ],
+              "icon": "images/planner/wowhead/icons/mind-blast.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 278,
+              "name": {
+                "ru": "Яд",
+                "en": "Venom"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                267
+              ],
+              "icon": "images/planner/wowhead/icons/venom.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 279,
+              "name": {
+                "ru": "Тень мастера",
+                "en": "Shadow Master"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                268
+              ],
+              "icon": "images/planner/wowhead/icons/shadow-master.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 0,
+          "title": {
+            "ru": "Ловушки",
+            "en": "Traps"
+          },
+          "svg": "assassin-traps.svg",
+          "png": "assassin-traps.png",
+          "art": {
+            "image": "images/planner/wowhead/trees/assassin3.webp"
+          },
+          "skills": [
+            {
+              "id": 251,
+              "name": {
+                "ru": "Огненный взрыв",
+                "en": "Fire Blast"
+              },
+              "row": 1,
+              "column": 2,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/fire-trauma.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 256,
+              "name": {
+                "ru": "Электрическая сеть",
+                "en": "Shock Web"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [
+                251
+              ],
+              "icon": "images/planner/wowhead/icons/shock-field.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 257,
+              "name": {
+                "ru": "Летающий клинок",
+                "en": "Blade Sentinel"
+              },
+              "row": 2,
+              "column": 3,
+              "requires": [],
+              "icon": "images/planner/wowhead/icons/blade-sentinel.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 261,
+              "name": {
+                "ru": "Грозовая турель",
+                "en": "Charged Bolt Sentry"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                256
+              ],
+              "icon": "images/planner/wowhead/icons/charged-bolt-sentry.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 262,
+              "name": {
+                "ru": "Огненная волна",
+                "en": "Wake of Fire"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                251
+              ],
+              "icon": "images/planner/wowhead/icons/wake-of-fire-sentry.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 266,
+              "name": {
+                "ru": "Неистовые клинки",
+                "en": "Blade Fury"
+              },
+              "row": 4,
+              "column": 3,
+              "requires": [
+                257,
+                262
+              ],
+              "icon": "images/planner/wowhead/icons/blade-fury.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 271,
+              "name": {
+                "ru": "Электрическая турель",
+                "en": "Lightning Sentry"
+              },
+              "row": 5,
+              "column": 1,
+              "requires": [
+                261
+              ],
+              "icon": "images/planner/wowhead/icons/lightning-sentry.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 272,
+              "name": {
+                "ru": "Инфернальная волна",
+                "en": "Wake of Inferno"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                262
+              ],
+              "icon": "images/planner/wowhead/icons/inferno-sentry.webp",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 276,
+              "name": {
+                "ru": "Смертоносная турель",
+                "en": "Death Sentry"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                271
+              ],
+              "icon": "images/planner/wowhead/icons/death-sentry.webp",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 277,
+              "name": {
+                "ru": "Щит из клинков",
+                "en": "Blade Shield"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                266
+              ],
+              "icon": "images/planner/wowhead/icons/blade-shield.webp",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "warlock",
+      "name": {
+        "ru": "Чернокнижник",
+        "en": "Warlock"
+      },
+      "trees": [
+        {
+          "tree": 0,
+          "title": {
+            "ru": "Демоны",
+            "en": "Demon"
+          },
+          "svg": "warlock-demon.svg",
+          "png": "warlock-demon.png",
+          "art": {
+            "composition": "native-parts"
+          },
+          "skills": [
+            {
+              "id": 373,
+              "name": {
+                "ru": "Призыв козлоногого",
+                "en": "Summon Goatman"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/skills/waskillicon_2.ac4ccca4f6e7.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 374,
+              "name": {
+                "ru": "Мастер демонологии",
+                "en": "Demonic Mastery"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [
+                373
+              ],
+              "icon": "images/skills/waskillicon_0.a8838d33d3c4.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 375,
+              "name": {
+                "ru": "Метка смерти",
+                "en": "Death Mark"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                373
+              ],
+              "icon": "images/skills/waskillicon_6.6fb1266ca395.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 376,
+              "name": {
+                "ru": "Призыв помутненного",
+                "en": "Summon Tainted"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                373
+              ],
+              "icon": "images/skills/waskillicon_8.9a2340fd6faa.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 377,
+              "name": {
+                "ru": "Призыв осквернителя",
+                "en": "Summon Defiler"
+              },
+              "row": 4,
+              "column": 3,
+              "requires": [
+                376
+              ],
+              "icon": "images/skills/waskillicon_10.565802c88059.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 378,
+              "name": {
+                "ru": "Кровавая клятва",
+                "en": "Blood Oath"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                381
+              ],
+              "icon": "images/skills/waskillicon_4.8ae6f3e3c82a.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 379,
+              "name": {
+                "ru": "Насыщение",
+                "en": "Engorge"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                380
+              ],
+              "icon": "images/skills/waskillicon_12.8152ac025839.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 380,
+              "name": {
+                "ru": "Кровавый нарыв",
+                "en": "Blood Boil"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                375
+              ],
+              "icon": "images/skills/waskillicon_14.6d9a79fca8b9.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 381,
+              "name": {
+                "ru": "Поглощение",
+                "en": "Consume"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [
+                374
+              ],
+              "icon": "images/skills/waskillicon_16.5fb66c29bbdf.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 382,
+              "name": {
+                "ru": "Сковать демона",
+                "en": "Bind Demon"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                379,
+                377
+              ],
+              "icon": "images/skills/waskillicon_18.3fa4def20a46.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 1,
+          "title": {
+            "ru": "Мистика",
+            "en": "Eldritch"
+          },
+          "svg": "warlock-eldritch.svg",
+          "png": "warlock-eldritch.png",
+          "art": {
+            "composition": "native-parts"
+          },
+          "skills": [
+            {
+              "id": 383,
+              "name": {
+                "ru": "Мастер левитации",
+                "en": "Levitation Mastery"
+              },
+              "row": 1,
+              "column": 1,
+              "requires": [],
+              "icon": "images/skills/waskillicon_20.bbdd8d062f74.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 384,
+              "name": {
+                "ru": "Потусторонний взрыв",
+                "en": "Eldritch Blast"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                387
+              ],
+              "icon": "images/skills/waskillicon_28.7fe4f8b983ba.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 385,
+              "name": {
+                "ru": "Порча: \"Погибель\"",
+                "en": "Hex: Bane"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/skills/waskillicon_24.aa4ff9819a44.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 386,
+              "name": {
+                "ru": "Порча: \"Вытягивание жизни\"",
+                "en": "Hex: Siphon"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                389
+              ],
+              "icon": "images/skills/waskillicon_26.686046761924.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 387,
+              "name": {
+                "ru": "Ментальный оберег",
+                "en": "Psychic Ward"
+              },
+              "row": 4,
+              "column": 2,
+              "requires": [
+                391
+              ],
+              "icon": "images/skills/waskillicon_22.e5fc03393aec.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 388,
+              "name": {
+                "ru": "Вторящий удар",
+                "en": "Echoing Strike"
+              },
+              "row": 3,
+              "column": 1,
+              "requires": [
+                383
+              ],
+              "icon": "images/skills/waskillicon_30.273496ad1eb7.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 389,
+              "name": {
+                "ru": "Порча: \"Очищение\"",
+                "en": "Hex: Purge"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                385
+              ],
+              "icon": "images/skills/waskillicon_32.a9d50fc4363c.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 390,
+              "name": {
+                "ru": "Искаженный клинок",
+                "en": "Blade Warp"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                388
+              ],
+              "icon": "images/skills/waskillicon_34.0798638c0288.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 391,
+              "name": {
+                "ru": "Рассекатель",
+                "en": "Cleave"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [
+                383
+              ],
+              "icon": "images/skills/waskillicon_36.f9b9a34b2cc5.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 392,
+              "name": {
+                "ru": "Зеркальные клинки",
+                "en": "Mirrored Blades"
+              },
+              "row": 6,
+              "column": 2,
+              "requires": [
+                390,
+                384
+              ],
+              "icon": "images/skills/waskillicon_38.82bb7b8a713c.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        },
+        {
+          "tree": 2,
+          "title": {
+            "ru": "Хаос",
+            "en": "Chaos"
+          },
+          "svg": "warlock-chaos.svg",
+          "png": "warlock-chaos.png",
+          "art": {
+            "composition": "native-parts"
+          },
+          "skills": [
+            {
+              "id": 393,
+              "name": {
+                "ru": "Печать: \"Летаргия\"",
+                "en": "Sigil: Lethargy"
+              },
+              "row": 2,
+              "column": 2,
+              "requires": [],
+              "icon": "images/skills/waskillicon_40.7143563875ca.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 394,
+              "name": {
+                "ru": "Кольцо огня",
+                "en": "Ring of Fire"
+              },
+              "row": 2,
+              "column": 1,
+              "requires": [],
+              "icon": "images/skills/waskillicon_42.a2945e439524.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 157.2972972972973,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 395,
+              "name": {
+                "ru": "Стрела миазм",
+                "en": "Miasma Bolt"
+              },
+              "row": 1,
+              "column": 3,
+              "requires": [],
+              "icon": "images/skills/waskillicon_46.87f01cd9c1e4.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 74.5945945945946,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 396,
+              "name": {
+                "ru": "Печать: \"Озлобленность\"",
+                "en": "Sigil: Rancor"
+              },
+              "row": 3,
+              "column": 2,
+              "requires": [
+                393
+              ],
+              "icon": "images/skills/waskillicon_44.a9d4a505890f.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 397,
+              "name": {
+                "ru": "Усиленная энтропия",
+                "en": "Enhanced Entropy"
+              },
+              "row": 5,
+              "column": 3,
+              "requires": [
+                399
+              ],
+              "icon": "images/skills/waskillicon_54.2404b3af1796.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 398,
+              "name": {
+                "ru": "Волна пламени",
+                "en": "Flame Wave"
+              },
+              "row": 4,
+              "column": 1,
+              "requires": [
+                394
+              ],
+              "icon": "images/skills/waskillicon_50.8e4a16ddceb3.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 322.7027027027027,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 399,
+              "name": {
+                "ru": "Цепь миазм",
+                "en": "Miasma Chain"
+              },
+              "row": 3,
+              "column": 3,
+              "requires": [
+                395
+              ],
+              "icon": "images/skills/waskillicon_52.da3288275c88.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 240,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 400,
+              "name": {
+                "ru": "Печать: \"Смерть\"",
+                "en": "Sigil: Death"
+              },
+              "row": 5,
+              "column": 2,
+              "requires": [
+                396
+              ],
+              "icon": "images/skills/waskillicon_48.b919c5e2250a.avif",
+              "bounds": {
+                "x": 134.05405405405406,
+                "y": 405.4054054054054,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 401,
+              "name": {
+                "ru": "Апокалипсис",
+                "en": "Apocalypse"
+              },
+              "row": 6,
+              "column": 1,
+              "requires": [
+                398,
+                400
+              ],
+              "icon": "images/skills/waskillicon_56.c4fba9dfecdd.avif",
+              "bounds": {
+                "x": 14.594594594594595,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            },
+            {
+              "id": 402,
+              "name": {
+                "ru": "Бездна",
+                "en": "Abyss"
+              },
+              "row": 6,
+              "column": 3,
+              "requires": [
+                397
+              ],
+              "icon": "images/skills/waskillicon_58.88f02423f626.avif",
+              "bounds": {
+                "x": 253.51351351351352,
+                "y": 488.1081081081081,
+                "width": 62.48648648648649,
+                "height": 62.48648648648649
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -116,11 +116,14 @@ const socketLayout = computed(() => {
     };
   }
   const compactShield =
+    socketCategory(props.item) === "shield" &&
     props.equipmentSlot === "offHand" &&
     !verticalItemSockets.value &&
     count >= 3 &&
     count <= 4;
-  if (compactShield) {
+  const compactWeapon =
+    count === 4 && socketCategory(props.item) === "weapon" && itemSize?.[1] === 3;
+  if (compactShield || compactWeapon) {
     // D2 keeps shield inserts clustered over the centre of the shield instead
     // of placing them against the corners of the paperdoll slot.
     const positions =
@@ -146,10 +149,8 @@ const socketLayout = computed(() => {
   }
   const helmetTriangle = props.equipmentSlot === "head" && count === 3;
   // Four sockets on tall weapons and shields follow a vertical line in every view.
-  const verticalWeaponSockets =
-    props.equipmentSlot === "mainHand" && count === 4 && height > width * 1.5;
   const columns =
-    verticalItemSockets.value || verticalWeaponSockets
+    verticalItemSockets.value
       ? 1
       : count > 3 || helmetTriangle
         ? 2
@@ -191,6 +192,7 @@ const socketImageSize = (socket: (typeof sockets.value)[number] | undefined) => 
   if (socket.group === "jewel") return socketLayout.value.filledSize * 0.75;
   const compactFacetShield =
     socket.group === "facet" &&
+    socketCategory(props.item) === "shield" &&
     props.equipmentSlot === "offHand" &&
     !verticalItemSockets.value &&
     sockets.value.length >= 3 &&

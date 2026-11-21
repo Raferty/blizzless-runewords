@@ -22,19 +22,33 @@ const legacyRegisterAfter =
   "        else if ((gd.items[item.base] && (itemTypeTreeFilter(gd.items[item.base].type) || questItem)) ||";
 const registerAfter =
   "        else if ((gd.items[item.base] && (itemTypeTreeFilter(gd.items[item.base].type) || isSubType(gd, gd.items[item.base].type, 'ques'))) ||";
+// Keep separate records for preset stacks with different quantities. Cube and
+// belt records must also include the complete bytes of any socketed children.
+const locationBefore = "        // ── Validate / store / emit";
+const locationAfter =
+  `        if (((location === 0 || location === 4) && storage === 4) || location === 2 ||
+            (location !== 6 && base.stackable && presetItemIds.has(item.base))) {
+            item.binaryOffset.end = reader.bitpos;
+            items[idIn] = item;
+            emitLocation(idIn, location, bodyloc, storage, invrow, invcol, item, handler);
+            return;
+        }
+` + locationBefore;
 const source = await readFile(file, "utf8");
 const unpatched = source
+  .replace(locationAfter, locationBefore)
   .replace(after, before)
   .replace(countAfter, countBefore)
   .replace(registerAfter, registerBefore)
   .replace(legacyRegisterAfter, registerBefore);
 if (createHash("sha256").update(unpatched).digest("hex") !== original)
-  throw Error("d2r-saver item parser changed; review the quest-difficulty patch");
+  throw Error("d2r-saver item parser changed; review the planner reader patches");
 const patched = unpatched
+  .replace(locationBefore, locationAfter)
   .replace(before, after)
   .replace(countBefore, countAfter)
   .replace(registerBefore, registerAfter);
 if (source !== patched) {
   await writeFile(file, patched);
-  console.log("Patched d2r-saver 0.2.0 quest-item reader");
+  console.log("Patched d2r-saver 0.2.0 item reader");
 }

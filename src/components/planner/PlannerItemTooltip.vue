@@ -60,7 +60,7 @@
       <PlannerSetBonuses :bonuses="setBonuses" />
       <div v-if="runes.length" class="planner-item-tooltip-sockets">
         <p>{{ t("Сокеты", "Socketed") }} ({{ runes.length }})</p>
-        <div>
+        <div :class="{ 'planner-socket-grid': squareSockets }">
           <span v-for="(rune, index) in runes" :key="index">
             <img v-if="rune" :src="baseUrl + rune.image_url.slice(1)" alt="" />
             <i v-else aria-hidden="true" />
@@ -94,6 +94,7 @@
   </Teleport>
 </template>
 <script setup lang="ts">
+import { watch } from "vue";
 import { baseSkillDefinition } from "@/utils/planner-base-skills";
 import {
   computed,
@@ -125,6 +126,7 @@ import {
 } from "@/utils/planner-item-catalog";
 import { affixById, affixDefinition } from "@/utils/planner-affixes";
 import { itemRequiredLevel, socketCategory } from "@/utils/planner-sockets";
+import { plannerItemDimensions } from "@/utils/planner-item-art";
 import type { GameSaveExporter } from "@/utils/planner-game-save";
 import type { PlannerItem } from "@/types/planner";
 import { itemSkillClass } from "@/utils/planner-properties";
@@ -143,6 +145,10 @@ const store = usePlannerStore();
 const t = useText();
 const lang = computed(() => info.currentLang);
 const native = shallowRef<GameSaveExporter>();
+const squareSockets = computed(() => {
+  const size = plannerItemDimensions(props.item);
+  return runes.value.length === 4 && socketCategory(props.item) === "weapon" && size?.[0] === 2 && size[1] === 3;
+});
 const identity = computed(() => plannerItemIdentity(props.item));
 const shard = computed(() => worldstoneShardTooltip(identity.value.baseCode, lang.value));
 const baseName = computed(() => {
@@ -272,6 +278,7 @@ function place() {
     visibility: "visible",
   };
 }
+watch(() => props.anchor, place, { flush: "post" });
 let observer: ResizeObserver;
 let disposed = false;
 onMounted(async () => {

@@ -213,7 +213,7 @@ export function calculateBuildDamage(
       warnings.push(item.name);
     }
   }
-  const summary = buildStats(build);
+  const summary = buildStats(build, native);
   Object.assign(stats, summary.attributes, { level: build.level });
   const classIndex = classIds.indexOf(build.classId);
   const rank = (id: number) => {

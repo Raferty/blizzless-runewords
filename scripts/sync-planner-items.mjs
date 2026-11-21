@@ -460,6 +460,10 @@ const manifest = {
   tiers: Object.fromEntries(
     Object.entries(bases).map(([code, { row }]) => [code, tier(row, code)])
   ),
+  stackableBases: Object.entries(allBases)
+    .filter(([, { row }]) => row.stackable)
+    .map(([code]) => code)
+    .sort(),
   dimensions: Object.fromEntries(
     Object.entries(allBases).map(([code, { row }]) => [
       code,

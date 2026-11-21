@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
+import { Buffer } from "node:buffer";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { createServer } from "vite";
-import { read as readIndependent } from "@d2runewizard/d2s";
+import { read as readIndependent, writeItem } from "@d2runewizard/d2s";
 import { constants as defaults } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
 
 const server = await createServer({
@@ -421,6 +422,133 @@ try {
         native.gameSaveEntries(b).map((e) => [e.key, codec.defaultChoice(e, b)])
       ),
     });
+    {
+      const hero = planner.createBuild("barbarian");
+      hero.equipment.amulet = item("The Mahim-Oak Curio", "amu", {
+        quality: "unique",
+        catalogId: "unique119",
+      });
+      hero.equipment.gloves = item("Venom Grip", "xlg", {
+        quality: "unique",
+        catalogId: "unique232",
+      });
+      hero.equipment.mainHand = item("Javelin", "jav", { quantity: 42 });
+      hero.stash = [
+        item("Tome", "tbk", { quantity: 0 }),
+        item("Tome", "tbk", { quantity: 17 }),
+      ];
+      const resists = (b) => planner.buildStats(b, codec).resists.map((s) => s.value);
+      const plain = resists(planner.createBuild("barbarian"));
+      const expected = plain.map((value, index) => value + (index === 3 ? 40 : 10));
+      assert.deepEqual(resists(hero), expected);
+      hero.equipment.amulet.bonuses.fireResist = 0;
+      assert.equal(resists(hero)[0], plain[0]);
+      delete hero.equipment.amulet.bonuses.fireResist;
+      const restored = codec.importCharacter((await verify(hero, planned(hero))).bytes);
+      assert.deepEqual(resists(restored), expected);
+      const { read } = await verify(restored, planned(restored));
+      assert.equal(read.items.find((i) => i.type === "jav").quantity, 42);
+      assert.deepEqual(
+        read.items.filter((i) => i.type === "tbk").map((i) => i.quantity),
+        [0, 17]
+      );
+      for (const [main, off] of [
+        ["mainHand", "offHand"],
+        ["swapMain", "swapOff"],
+      ]) {
+        const warrior = planner.createBuild("barbarian");
+        const pair = (a, b) => {
+          warrior.equipment[main] = item(a, a);
+          warrior.equipment[off] = item(b, b);
+        };
+        for (const [a, b] of [
+          ["pik", "pik"],
+          ["pik", "buc"],
+          ["sbw", "cqv"],
+        ]) {
+          pair(a, b);
+          await assert.rejects(
+            () => codec.exportCharacter(warrior, planned(warrior)),
+            (e) => e.code === "base"
+          );
+        }
+        for (const [a, b] of [
+          ["2hs", "2hs"],
+          ["sbw", "aqv"],
+        ]) {
+          pair(a, b);
+          const { read } = await verify(warrior, planned(warrior));
+          assert.deepEqual(read.items.map((i) => i.type).sort(), [a, b].sort());
+        }
+      }
+    }
+    {
+      const hero = planner.createBuild("paladin");
+      hero.charms = [
+        { ...item("Horadric Cube", "box"), id: "cube", height: 2, position: 0 },
+      ];
+      hero.stash = [
+        item("Helm", "uh9", { sockets: 1, socketedItems: ["r22"] }),
+        item("Rejuvenation", "rvl"),
+        item("Rejuvenation", "rvl"),
+      ];
+      const { bytes, read, raw } = await verify(hero, planned(hero));
+      const config = { disableItemEnhancements: true, extendedStash: true };
+      let offset = raw.items[raw.profile.inventory[0]].binaryOffset.start / 8;
+      const expected = [];
+      for (const [index, record] of read.items.entries()) {
+        const original = await writeItem(record, 105, constants, config);
+        assert.deepEqual(bytes.slice(offset, offset + original.length), original);
+        if (record.type !== "box") {
+          const cube = record.type === "uh9";
+          record.location_id = cube ? 0 : 2;
+          record.alt_position_id = cube ? 4 : 0;
+          record.position_x = cube ? 1 : index + 8;
+          record.position_y = cube ? 2 : 0;
+          const encoded = await writeItem(record, 105, constants, config);
+          bytes.set(encoded, offset);
+          expected.push([
+            cube ? "cube" : "belt",
+            cube ? 7 : record.position_x,
+            Buffer.from(encoded).toString("hex"),
+          ]);
+        }
+        offset += original.length;
+      }
+      new DataView(bytes.buffer, bytes.byteOffset).setUint32(
+        12,
+        native.saveChecksum(bytes),
+        true
+      );
+      const restored = planner.decodeBuild(
+        planner.encodeBuild(codec.importCharacter(bytes))
+      );
+      assert.deepEqual(
+        restored.storedItems.map((i) => [i.location, i.position, i.hex]),
+        expected
+      );
+      const saved = (await verify(restored, planned(restored))).read;
+      assert.deepEqual(
+        saved.items.map((i) => [
+          i.type,
+          i.location_id,
+          i.alt_position_id,
+          i.position_x,
+          i.position_y,
+        ]),
+        read.items.map((i) => [
+          i.type,
+          i.location_id,
+          i.alt_position_id,
+          i.position_x,
+          i.position_y,
+        ])
+      );
+      assert.equal(
+        saved.items.find((i) => i.type === "uh9").socketed_items[0].type,
+        "r22"
+      );
+    }
     let restored = build;
     for (let round = 0; round < 2; round++) {
       const { bytes, read } = await verify(restored, planned(restored));

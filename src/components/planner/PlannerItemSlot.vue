@@ -7,6 +7,7 @@
     :aria-expanded="item ? menuOpen : undefined"
     :aria-controls="menuOpen ? `${uid}-menu` : undefined"
     @pointerenter="enter"
+    @pointermove="move"
     @pointerleave="leave"
     @focus="focus"
     @blur="close"
@@ -88,7 +89,15 @@ function show(target: HTMLElement) {
   open.value = true;
 }
 function enter(event: PointerEvent) {
-  if (event.pointerType !== "touch") show(event.currentTarget as HTMLElement);
+  if (event.pointerType === "touch" || !props.item || menuOpen.value || plannerItemDragging.value) return;
+  keep();
+  open.value = true;
+  move(event);
+}
+function move(event: PointerEvent) {
+  if (!open.value || event.pointerType === "touch") return;
+  const { clientX: x, clientY: y } = event;
+  anchor.value = { left: x, right: x, top: y, bottom: y };
 }
 function focus(event: FocusEvent) {
   if (menuOpen.value || restoringFocus) return;

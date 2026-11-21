@@ -77,7 +77,15 @@
             ></small
           >
         </div>
-        <strong>{{ stats.attributes[attribute.key] }}</strong>
+        <input
+          type="text"
+          inputmode="numeric"
+          :aria-label="t(attribute.ru, attribute.en)"
+          :value="stats.attributes[attribute.key]"
+          @focus="($event.target as HTMLInputElement).select()"
+          @change="editAttribute(attribute.key, $event)"
+          @keydown.enter.prevent="($event.target as HTMLInputElement).blur()"
+        />
         <button
           :aria-label="`${t('Уменьшить', 'Decrease')} ${t(attribute.ru, attribute.en)}`"
           :disabled="!store.build.attributes[attribute.key]"
@@ -196,6 +204,13 @@ function adjustAttribute(key: Attribute, direction: -1 | 1, event: MouseEvent) {
   const limit = direction === 1 ? remainingAttributes.value : store.build.attributes[key];
   const step = event.shiftKey ? limit : event.ctrlKey ? 5 : 1;
   store.changeAttribute(key, direction * step);
+}
+function editAttribute(key: Attribute, event: Event) {
+  const input = event.target as HTMLInputElement;
+  const value = input.value.trim();
+  if (/^\d+$/.test(value))
+    store.changeAttribute(key, Number(value) - stats.value.attributes[key]);
+  input.value = String(stats.value.attributes[key]);
 }
 const resistLabels = [
   { ru: "Огонь", en: "Fire" },

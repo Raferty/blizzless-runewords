@@ -98,12 +98,12 @@
             :aria-describedby="selected?.id === skill.id ? `${uid}-tooltip` : undefined"
             @pointerenter="hoverSkill(skill, $event)"
             @pointerleave="leaveSkill"
-            @pointerdown="pointerType = $event.pointerType"
+            @pointerdown="startGesture($event)"
             @focus="focusSkill(skill, $event)"
             @blur="blurSkill"
             @click="learn(skill, $event)"
             @contextmenu.prevent="remove(skill, $event)"
-            @keydown.delete.prevent="store.removeSkill(skill.id, $event.shiftKey)"
+            @keydown.delete.prevent="changeSkill(skill, $event, false)"
           >
             <span
               v-if="skillSprites[skill.id]"
@@ -142,7 +142,7 @@
     </div>
     <div class="planner-skill-toolbar">
       <p>
-        <kbd>SHIFT</kbd> {{ t("+ клик — максимум", "+ click — max") }}<br /><kbd>{{
+        <kbd>CTRL</kbd> {{ t("+ клик — 5", "+ click — 5") }}<br /><kbd>SHIFT</kbd> {{ t("+ клик — максимум", "+ click — max") }}<br /><kbd>{{
           t("ПКМ", "RMB")
         }}</kbd>
         {{ t("−1 очко", "−1 point") }}<br /><kbd>CTRL</kbd>
@@ -192,6 +192,7 @@ import { nativeSkillTreeArtwork } from "@/utils/planner-native-skill-art";
 import PlannerSkillTooltip from "./PlannerSkillTooltip.vue";
 import { useInfoStore } from "@/store";
 import { usePlannerStore } from "@/store/planner";
+import { usePlannerGameData } from "@/composables/usePlannerGameData";
 import { useText } from "@/composables/useText";
 import { plannerSkills } from "@/shared/planner";
 import {
@@ -239,7 +240,8 @@ const skillSprites = computed(() =>
   )
 );
 const selected = computed(() => classSkills.value.find((s) => s.id === selectedId.value));
-const stats = computed(() => buildStats(store.build));
+const native = usePlannerGameData();
+const stats = computed(() => buildStats(store.build, native.value));
 const base = import.meta.env.BASE_URL;
 const treeBonus = (tree: number) =>
   stats.value.skillBonus + stats.value.treeBonuses[tree];
@@ -294,8 +296,24 @@ function blurSkill() {
 function closeTooltip() {
   selectedId.value = undefined;
 }
+let primaryDown = false;
+let controlHandled = false;
+function startGesture(event: PointerEvent) {
+  pointerType = event.pointerType;
+  primaryDown = event.button === 0;
+  controlHandled = false;
+}
+function changeSkill(skill: PlannerSkill, event: MouseEvent | KeyboardEvent, add: boolean) {
+  const steps = event.ctrlKey && !event.shiftKey ? 5 : 1;
+  for (let i = 0; i < steps; i++) {
+    if (add) store.addSkill(skill, event.shiftKey);
+    else store.removeSkill(skill.id, event.shiftKey);
+  }
+}
 function learn(skill: PlannerSkill, event: MouseEvent) {
-  store.addSkill(skill, event.shiftKey);
+  if (event.ctrlKey && event.detail && controlHandled) return;
+  if (event.ctrlKey && event.detail) controlHandled = true;
+  changeSkill(skill, event, true);
   inspectSkill(
     skill,
     event,
@@ -303,7 +321,9 @@ function learn(skill: PlannerSkill, event: MouseEvent) {
   );
 }
 function remove(skill: PlannerSkill, event: MouseEvent) {
-  store.removeSkill(skill.id, event.shiftKey);
+  if (event.ctrlKey && controlHandled) return;
+  if (event.ctrlKey) controlHandled = true;
+  changeSkill(skill, event, event.ctrlKey && primaryDown);
   inspectSkill(skill, event, "pointer");
 }
 function keyDown(event: KeyboardEvent) {

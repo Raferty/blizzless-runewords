@@ -129,6 +129,7 @@ export interface PlannerBuild {
     mode: "expansion" | "rotw";
     legacyExpansion: boolean;
   };
+  storedItems?: { location: "cube" | "belt"; position: number; hex: string }[];
   weaponSet: 0 | 1;
   waypoints: Record<Difficulty, Record<WaypointId, boolean>>;
   quests: Record<

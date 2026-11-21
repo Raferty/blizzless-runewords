@@ -441,6 +441,7 @@ import {
   isContainerBase,
   plannerItemImage,
   isTome,
+  isStackableBase,
   charmSkinImages,
 } from "@/utils/planner-item-art";
 import { itemRuneword } from "@/utils/planner-item-presentation";
@@ -732,7 +733,7 @@ watch(
   () => item.value.baseCode,
   (code) => {
     if (isTome(code)) item.value.quantity ??= 20;
-    else delete item.value.quantity;
+    else if (!isStackableBase(code)) delete item.value.quantity;
   },
   { immediate: true }
 );

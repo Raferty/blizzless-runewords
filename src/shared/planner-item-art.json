@@ -1555,6 +1555,7 @@
     "p20": 0,
     "p21": 0
   },
+  "stackableBases": ["7b8", "7bk", "7gl", "7ja", "7pi", "7s7", "7ta", "7tk", "7ts", "9b8", "9bk", "9gl", "9ja", "9pi", "9s9", "9ta", "9tk", "9ts", "am5", "ama", "amf", "aqv", "bal", "bkf", "bpl", "bps", "cqv", "gld", "glv", "gpl", "gpm", "gps", "ibk", "jav", "key", "opl", "opm", "ops", "pil", "rpl", "rps", "ssp", "tax", "tbk", "tkf", "tsp"],
   "dimensions": {
     "hax": [1, 3],
     "axe": [2, 3],

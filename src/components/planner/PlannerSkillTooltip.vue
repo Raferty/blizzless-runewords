@@ -69,8 +69,8 @@
       <p class="planner-tooltip-hint">
         {{
           t(
-            "ЛКМ: +1 · ПКМ: −1 · Shift: максимум",
-            "Left click: +1 · Right click: −1 · Shift: max"
+            "ЛКМ: +1 · ПКМ: −1 · Ctrl: ±5 · Shift: максимум",
+            "Left click: +1 · Right click: −1 · Ctrl: ±5 · Shift: max"
           )
         }}
       </p>

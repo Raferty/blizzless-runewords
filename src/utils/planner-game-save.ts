@@ -39,6 +39,7 @@ import {
   baseSupportsSockets,
   magicSocketJewels,
   parseSocketIconIndices,
+  socketInsertByCode,
 } from "./planner-sockets";
 import { craftDefinition, craftVariant, craftAffixMinimum } from "./planner-crafts";
 import { stashSupplies } from "./planner-supplies";
@@ -219,6 +220,26 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     return reader.readD2S(bytes);
   }
 
+  function storedItems(
+    bytes: Uint8Array,
+    profile: D2SCharacterProfile,
+    items: Record<number | string, BinaryParsedItem>
+  ) {
+    const result: NonNullable<PlannerBuild["storedItems"]> = [];
+    for (const location of ["cube", "belt"] as const) {
+      for (const [position, id] of profile[location].entries()) {
+        if (id === undefined) continue;
+        const { start, end } = items[id].binaryOffset;
+        if (start % 8 || end % 8 || end <= start || end > bytes.length * 8)
+          throw new GameSaveError("validation");
+        const hex = Array.from(bytes.subarray(start / 8, end / 8), (byte) =>
+          byte.toString(16).padStart(2, "0")
+        ).join("");
+        result.push({ location, position, hex });
+      }
+    }
+    return result;
+  }
   /**
    * Turn a native v105 character save into a planner draft.  This deliberately
    * favours keeping a usable character over rejecting saves with an item the
@@ -239,6 +260,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const build = createBuild(classId);
     // A native save owns its inventory; do not retain the new-character defaults.
     build.charms = [];
+    const stored = storedItems(bytes, profile, parsedItems);
+    if (stored.length) build.storedItems = stored;
     build.difficulty = "normal";
     for (const [index, { value }] of difficulties.entries()) {
       const flags = profile.quests[index];
@@ -449,10 +472,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             }
           : {}),
         ...(native.ethereal ? { ethereal: true } : {}),
-        // The planner only models quantities for Town Portal / Identify tomes.
-        // Other stack sizes (keys, scrolls, potions, etc.) are game-save details
-        // and would make the imported planner item fail validation.
-        ...(native.quantity && ["tbk", "ibk"].includes(native.base)
+        ...(base?.stackable && native.quantity !== undefined
           ? { quantity: native.quantity }
           : {}),
       };
@@ -503,6 +523,25 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             values[index] = value;
         }
         if (Object.keys(values).length) item.propertyValues = values;
+      }
+      if (item.socketedItems) {
+        const rolls: NonNullable<PlannerItem["socketPropertyValues"]> = {};
+        native.socketedItems.forEach((id, index) => {
+          const code = item.socketedItems?.[index];
+          const ranges = code && socketInsertByCode.get(code)?.ranges;
+          if (!code || !ranges || typeof id !== "number") return;
+          const child = parsedItems[id];
+          const definition = socketJewelDefinition(code);
+          if (!child || !definition) return;
+          for (const [key, range] of Object.entries(ranges)) {
+            const stat = gd.properties[String(definition[`prop${key}`])]?.stat1;
+            const value = stat && child.stats[stat];
+            if (typeof value !== "number" || value < range.min || value > range.max)
+              throw new GameSaveError("property", code);
+            (rolls[index] ??= {})[key] = value;
+          }
+        });
+        if (Object.keys(rolls).length) item.socketPropertyValues = rolls;
       }
       const socketIcons = Object.fromEntries(
         native.socketedItems.flatMap((value, index) => {
@@ -726,6 +765,21 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       )
     );
   }
+  function handsFit(heroClass: ClassId, main?: string, off?: string) {
+    if (!off) return true;
+    if (stashSupplies[off]?.category === "ammo") {
+      if (!main) return true;
+      const ammoType = [...types(main)]
+        .map((type) => gd.itemTypes[type]?.shoots)
+        .find(Boolean);
+      return !!ammoType && types(off).has(ammoType);
+    }
+    if (heroClass !== "barbarian") return true;
+    const requiresBothHands = (code: string) =>
+      !!(gd.weapons[code] as unknown as Definition | undefined)?.["2handed"] &&
+      !types(code).has("swor");
+    return !requiresBothHands(off) && (!main || !requiresBothHands(main));
+  }
   function permitted(code: string, entry: GameSaveEntry, build: PlannerBuild) {
     const base = gd.items[code];
     if (!base || !/^[a-z0-9]{3}$/.test(code)) return false;
@@ -741,9 +795,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         !craftVariant({ ...entry.item, baseCode: code }))
     )
       return false;
-    // Loose supplies are separate from bg1/bg2 containers and cannot be equipped.
+    // Ammunition is the only loose supply that can be equipped.
     const supply = stashSupplies[code];
-    if (supply)
+    const equippedAmmo =
+      supply?.category === "ammo" &&
+      entry.item.quality === "normal" &&
+      entry.owner === "hero" &&
+      (entry.slot === "offHand" || entry.slot === "swapOff");
+    if (supply && !equippedAmmo)
       return (
         (["stash", "inventory"].includes(entry.owner) ||
           (entry.owner === "charm" && isWorldstoneShard(code) && entry.height === 1)) &&
@@ -808,6 +867,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         if (!t.has(weaponType) || Number((base as unknown as Definition)["2handed"]))
           return false;
       }
+      if (entry.owner === "hero" && (slot === "rarm" || slot === "larm")) {
+        const main =
+          entry.slot === "swapMain" || entry.slot === "swapOff" ? "swapMain" : "mainHand";
+        const off = main === "swapMain" ? "swapOff" : "offHand";
+        const mainCode = slot === "rarm" ? code : build.equipment[main]?.baseCode;
+        const offCode = slot === "larm" ? code : build.equipment[off]?.baseCode;
+        if (!handsFit(build.classId, mainCode, offCode)) return false;
+      }
       if (slot === "rarm" && !t.has("weap")) return false;
       if (
         slot === "larm" &&
@@ -820,7 +887,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         gd.itemTypes[type]?.bodyloc1,
         gd.itemTypes[type]?.bodyloc2,
       ]);
-      if (!bodySlots.includes(slot)) return false;
+      const barbarianOffhand =
+        entry.owner === "hero" &&
+        build.classId === "barbarian" &&
+        slot === "larm" &&
+        t.has("weap") &&
+        (t.has("swor") || !Number((base as unknown as Definition)["2handed"]));
+      if (!bodySlots.includes(barbarianOffhand ? "rarm" : slot)) return false;
       if (entry.item.baseKind === "weapon" && !t.has("weap")) return false;
       if (entry.item.baseKind === "shield" && !t.has("shld")) return false;
       if (entry.item.baseKind === "armor" && t.has("weap")) return false;
@@ -1429,6 +1502,18 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       if (!choice) throw new GameSaveError("base", entry.item.name);
       return { entry, choice, base: gd.items[choice.base] };
     });
+    {
+      const gear = Object.fromEntries(
+        entries
+          .filter(({ entry }) => entry.owner === "hero")
+          .map(({ entry, choice }) => [entry.slot!, choice.base])
+      );
+      if (
+        !handsFit(build.classId, gear.mainHand, gear.offHand) ||
+        !handsFit(build.classId, gear.swapMain, gear.swapOff)
+      )
+        throw new GameSaveError("base", "Two-handed weapon");
+    }
     const stashEntries = entries.filter(({ entry }) => entry.owner === "stash");
     const stashLayout = layoutStashItems(
       stashEntries.map(({ entry, base }) => ({
@@ -1503,7 +1588,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         item.itemId,
         (entry.item.affixes ?? []).map((a) => a.id)
       );
-      if (isTome(choice.base)) itemQuantities.set(item.itemId, entry.item.quantity ?? 20);
+      if (entry.item.quantity !== undefined && !base.stackable)
+        throw new GameSaveError("base", entry.item.name);
+      if (base.stackable)
+        itemQuantities.set(
+          item.itemId,
+          entry.item.quantity ?? (isTome(choice.base) ? 20 : 1)
+        );
       const mode = options.rolls[entry.key] ?? "planned";
       const preserveNative =
         mode === "planned" &&
@@ -1923,11 +2014,18 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             });
         });
       }
+      const preserved = merc
+        ? []
+        : (build.storedItems ?? []).map(({ hex }) =>
+            Uint8Array.from(hex.match(/../g)!, (pair) => parseInt(pair, 16))
+          );
+      const count = entries.length + preserved.length;
       return [
-        new Uint8Array([74, 77, entries.length & 255, entries.length >> 8]),
+        new Uint8Array([74, 77, count & 255, count >> 8]),
         ...(await Promise.all(
           entries.map((entry) => encodeItem(items[entry.id], entry))
         )),
+        ...preserved,
       ];
     }
     const pieces = [
@@ -1983,6 +2081,20 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     }
     header.setUint32(12, saveChecksum(bytes), true);
     const check = readCharacter(bytes);
+    const preserved = storedItems(bytes, check.profile, check.items);
+    if (
+      preserved.length !== (build.storedItems?.length ?? 0) ||
+      preserved.some(
+        (value) =>
+          !build.storedItems?.some(
+            (input) =>
+              input.location === value.location &&
+              input.position === value.position &&
+              input.hex === value.hex
+          )
+      )
+    )
+      throw new GameSaveError("validation");
     if (
       check.warnings.length ||
       check.profile.class !== profile.class ||

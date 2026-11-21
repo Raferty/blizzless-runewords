@@ -141,6 +141,31 @@ try {
     assert.equal(child.simple_item, 0);
     assert(child.magic_attributes.length >= 4);
     assert.equal(rune.type, "r22");
+    const restored = codec.importCharacter(bytes);
+    assert.deepEqual(
+      restored.equipment.head.socketPropertyValues,
+      { 0: values },
+      insert.code
+    );
+    const reexported = await codec.exportCharacter(restored, {
+      ...options,
+      choices: Object.fromEntries(
+        gameSaveEntries(restored).map((entry) => [
+          entry.key,
+          codec.defaultChoice(entry, restored),
+        ])
+      ),
+    });
+    const roundTrip = await read(reexported, constants, {
+      disableItemEnhancements: true,
+      extendedStash: true,
+    });
+    const sockets = roundTrip.items.find((i) => i.type === "uh9").socketed_items;
+    assert.deepEqual(
+      sockets.map((i) => i.type),
+      [insert.baseCode, "r22"]
+    );
+    assert.deepEqual(sockets[0].magic_attributes, child.magic_attributes);
     if (insert.group === "jewel") {
       const mf = child.magic_attributes.find(
         (s) => s.id === data.itemStatCost.item_magicbonus.id

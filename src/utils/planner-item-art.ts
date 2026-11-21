@@ -1,6 +1,8 @@
 import artwork from "@/shared/planner-item-art.json";
 import type { PlannerItem } from "@/types/planner";
 
+const stackableBases = new Set(artwork.stackableBases);
+export const isStackableBase = (code?: string) => !!code && stackableBases.has(code);
 const bases: Record<string, string | null> = artwork.bases;
 const unique: Record<string, (string | null)[]> = artwork.unique;
 const sets: Record<string, (string | null)[]> = artwork.set;

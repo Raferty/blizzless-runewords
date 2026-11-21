@@ -624,6 +624,10 @@
   justify-content: center;
   margin-top: 6px;
 }
+.planner-item-tooltip-sockets > .planner-socket-grid {
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+}
 .planner-item-tooltip-sockets span {
   display: grid;
   gap: 2px;
@@ -1264,12 +1268,15 @@
   font-size: 8px;
   color: #777;
 }
-.planner-attribute strong {
-  min-width: 28px;
+.planner-attribute input {
+  width: 5ch;
   padding-right: 3px;
   font-size: 12px;
   font-weight: 400;
+  color: inherit;
   text-align: right;
+  background: transparent;
+  border: 1px solid #444;
 }
 .planner-attribute button {
   @include controls.square;

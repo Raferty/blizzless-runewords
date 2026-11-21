@@ -39,6 +39,7 @@ import {
 } from "./planner-base-skills";
 import { craftDefinition } from "./planner-crafts";
 import {
+  isStackableBase,
   plannerItemDimensions,
   plannerItemIdentity,
   isTome,
@@ -357,15 +358,37 @@ export function buildStats(build: PlannerBuild, native?: GameSaveExporter) {
   const caps = native
     ? items.map((item) => native.itemResistanceCaps(item, build.classId))
     : [];
+  const baseBonuses = items.map((item) => {
+    // Imported totals include the exact native rolls. Older JSON drafts can
+    // contain only overrides, including an explicit zero for a catalogue stat.
+    if (
+      !native ||
+      item.importedStats ||
+      !item.catalogId ||
+      (item.quality !== "unique" && item.quality !== "set") ||
+      !native.itemDefinition(item) ||
+      bonusFields.every(({ key }) => item.bonuses[key] !== undefined)
+    )
+      return item.bonuses;
+    const summary = native.catalogBonuses(
+      item.catalogId,
+      item.quality,
+      item.propertyRoll ?? 1,
+      item.propertyValues,
+      itemSkillClass(item, build.classId),
+      item.propertyChoices
+    );
+    return { ...summary.bonuses, ...item.bonuses };
+  });
   const insertBonuses = items.map(socketedBonuses);
   const mods = items.map((item) => affixBonuses(item, build.level));
   const bonuses = Object.fromEntries(
     bonusFields.map(({ key }) => [
       key,
       items.reduce(
-        (sum, item, index) =>
+        (sum, _, index) =>
           sum +
-          (item.bonuses[key] ?? 0) +
+          (baseBonuses[index][key] ?? 0) +
           (insertBonuses[index].bonuses[key] ?? 0) +
           (mods[index].bonuses[key] ?? 0),
         0
@@ -605,9 +628,12 @@ export function parsePlannerItem(value: unknown): PlannerItem {
     result.containerQuantity = integer(item.containerQuantity, 0, 2037);
   }
   if (item.quantity !== undefined) {
-    if (!isTome(result.baseCode) || result.quality !== "normal")
-      throw new Error("tome quantity");
-    result.quantity = integer(item.quantity, 0, 20);
+    if (
+      !isStackableBase(result.baseCode) ||
+      (isTome(result.baseCode) && result.quality !== "normal")
+    )
+      throw new Error("stack quantity");
+    result.quantity = integer(item.quantity, 0, isTome(result.baseCode) ? 20 : 511);
   }
   if (item.importedStats !== undefined) {
     const imported = record(item.importedStats);
@@ -651,6 +677,23 @@ export function parseBuild(value: unknown): PlannerBuild {
       mode: gameSave.mode as "expansion" | "rotw",
       legacyExpansion: gameSave.legacyExpansion,
     };
+  }
+  if (raw.storedItems !== undefined) {
+    if (!Array.isArray(raw.storedItems) || raw.storedItems.length > 28)
+      throw new Error("stored items");
+    const occupied = new Set<string>();
+    build.storedItems = raw.storedItems.map((value) => {
+      const entry = record(value);
+      const location = entry.location;
+      if (location !== "cube" && location !== "belt") throw new Error("stored location");
+      const position = integer(entry.position, 0, location === "cube" ? 11 : 15);
+      const key = location + position;
+      const hex = string(entry.hex, 32768);
+      if (occupied.has(key) || !/^(?:[a-f0-9]{2})+$/.test(hex))
+        throw new Error("stored item");
+      occupied.add(key);
+      return { location, position, hex };
+    });
   }
   build.weaponSet = integer(raw.weaponSet, 0, 1) as 0 | 1;
   // Older builds exported every waypoint as unlocked.
