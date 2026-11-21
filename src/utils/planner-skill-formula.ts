@@ -13,7 +13,7 @@ export function evaluateSkillFormula(
 ): number {
   if (value === undefined || value === "") return 0;
   if (typeof value === "number") return value;
-  const expression = String(value);
+  const expression = String(value).replace(/^"(.*)"$/, "$1");
   if (expression.length > 2048) throw new Error("Skill formula is too long");
   let root = cache.get(expression);
   if (!root) {

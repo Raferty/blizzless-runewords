@@ -20,64 +20,47 @@
       >
         <UiIcon name="close" />
       </button>
-      <p class="planner-tooltip-status">
-        {{
-          rank
-            ? `${t("Текущий уровень", "Current skill level")}: ${rank + bonus}`
-            : t("Навык ещё не изучен", "You have not learned this skill yet")
-        }}
-      </p>
       <h4>{{ skill.name[lang] }}</h4>
       <p class="planner-tooltip-description">{{ skill.description[lang] }}</p>
-      <p class="planner-tooltip-requirement">
-        {{ t("Требуемый уровень", "Required level") }}: {{ skill.requiredLevel }}
-      </p>
-      <div class="planner-tooltip-ranks">
+      <div v-if="fixed.length" class="planner-tooltip-section">
+        <p v-for="(line, i) in fixed" :key="i">{{ line }}</p>
+      </div>
+      <div v-if="rank" class="planner-tooltip-section">
         <p>
-          {{ t("Вложено очков", "Base skill level") }}: {{ rank }} / {{ skill.maxPoints }}
+          {{ t("Текущий уровень навыка", "Current Skill Level") }}: {{ rank + bonus }}
         </p>
-        <p v-if="rank && bonus" class="planner-tooltip-bonus">
-          {{ t("Бонус снаряжения", "Equipment bonus") }}: +{{ bonus }}
-        </p>
-        <p v-if="!canLearn" class="planner-tooltip-limit">
-          {{
-            t(
-              "Недостаточно очков или достигнут предел уровня.",
-              "Not enough points or the level limit has been reached."
-            )
-          }}
-        </p>
+        <p v-for="(line, i) in current?.effects" :key="i">{{ line }}</p>
       </div>
-      <div v-if="skill.requires.length" class="planner-tooltip-section">
-        <p>{{ t("Требуемые навыки", "Required skills") }}:</p>
-        <ul>
-          <li v-for="requiredId in skill.requires" :key="requiredId">
-            {{ skillName(requiredId) }}
-          </li>
-        </ul>
-      </div>
-      <div v-if="skill.synergies.length" class="planner-tooltip-section">
+      <div v-if="rank < skill.maxPoints" class="planner-tooltip-section">
         <p>
-          {{ skill.name[lang] }} {{ t("получает бонусы от", "receives bonuses from") }}:
+          {{ t("Следующий уровень", "Next Level")
+          }}<template v-if="!rank">: {{ 1 + bonus }}</template>
         </p>
-        <ul>
-          <li v-for="synergyId in skill.synergies" :key="synergyId">
-            {{ skillName(synergyId) }}
-          </li>
-        </ul>
+        <p v-for="(line, i) in nextLevel?.effects" :key="i">{{ line }}</p>
       </div>
-      <p class="planner-tooltip-hint">
-        {{
-          t(
-            "ЛКМ: +1 · ПКМ: −1 · Ctrl: ±5 · Shift: максимум",
-            "Left click: +1 · Right click: −1 · Ctrl: ±5 · Shift: max"
-          )
-        }}
-      </p>
+      <div v-if="synergies.length" class="planner-tooltip-section">
+        <p class="planner-tooltip-synergies">
+          {{ skill.name[lang] }} {{ t("получает бонусы от", "Receives Bonuses From") }}:
+        </p>
+        <p v-for="(line, i) in synergies" :key="i">{{ line }}</p>
+      </div>
+      <div
+        v-if="!rank && !canLearn"
+        class="planner-tooltip-section planner-tooltip-limit"
+      >
+        <p>{{ t("Требуемый уровень", "Required level") }}: {{ skill.requiredLevel }}</p>
+        <p v-if="skill.requires.length">
+          {{ t("Требуемые навыки", "Required skills") }}:
+          {{ skill.requires.map(skillName).join(", ") }}
+        </p>
+      </div>
     </div>
   </Teleport>
 </template>
 <script setup lang="ts">
+import { describeSkill } from "@/utils/planner-skill-description";
+import { usePlannerGameData } from "@/composables/usePlannerGameData";
+import { usePlannerStore } from "@/store/planner";
 import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import { useInfoStore } from "@/store";
@@ -104,6 +87,28 @@ const position = ref({ left: "12px", top: "12px" });
 const skillName = (id: number) =>
   plannerSkills.find((skill) => skill.id === id)!.name[lang.value];
 
+const store = usePlannerStore();
+const native = usePlannerGameData();
+const details = (next: boolean) =>
+  native.value &&
+  describeSkill(
+    native.value,
+    store.build,
+    props.skill,
+    props.rank + props.bonus + Number(next),
+    next,
+    lang.value
+  );
+const current = computed(() => (props.rank ? details(false) : undefined));
+const nextLevel = computed(() =>
+  props.rank < props.skill.maxPoints ? details(true) : undefined
+);
+const fixed = computed(() => (current.value ?? nextLevel.value)?.fixed ?? []);
+const synergies = computed(() => {
+  const lines = (current.value ?? nextLevel.value)?.synergies;
+  return lines?.length ? lines : props.skill.synergies.map(skillName);
+});
+
 function place() {
   if (!tooltip.value) return;
   const { width, height } = tooltip.value.getBoundingClientRect();
@@ -124,7 +129,19 @@ function place() {
   ready.value = true;
 }
 onMounted(place);
-watch(() => [props.anchor, props.skill, props.rank, props.bonus, lang.value], place, {
-  flush: "post",
-});
+watch(
+  () => [
+    props.anchor,
+    props.skill,
+    props.rank,
+    props.bonus,
+    current.value,
+    nextLevel.value,
+    lang.value,
+  ],
+  place,
+  {
+    flush: "post",
+  }
+);
 </script>

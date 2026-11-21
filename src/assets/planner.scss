@@ -1065,62 +1065,38 @@
 .planner-skill-tooltip {
   position: fixed;
   z-index: 1100;
-  width: min(420px, calc(100vw - 24px));
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(550px, calc(100vw - 24px));
   max-height: calc(100dvh - 24px);
-  padding: 14px 16px 12px;
+  padding: 12px 18px;
   overflow-y: auto;
-  font-size: clamp(12px, 0.85vw, 14px);
-  font-weight: 400;
+  font-size: clamp(14px, 1vw, 17px);
   line-height: 1.4;
-  color: #eeeae0;
+  color: #fff;
   text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
   pointer-events: none;
-  background: rgb(0 0 0 / 94%);
-  border: 1px solid #151515;
-  box-shadow: 0 5px 18px rgb(0 0 0 / 65%);
+  background: rgb(8 8 8 / 96%);
+  border: 1px solid #232323;
 }
-.planner-skill-tooltip h4 {
-  margin: 12px 0 6px;
-  font-size: clamp(17px, 1.1vw, 20px);
+.planner-skill-tooltip h4,
+.planner-tooltip-synergies {
+  margin: 0;
+  font-size: inherit;
   font-weight: 400;
   color: #00f000;
 }
-.planner-tooltip-status,
-.planner-tooltip-section > p {
-  color: #00f000;
+.planner-skill-tooltip p {
+  margin: 0;
 }
 .planner-tooltip-description {
   white-space: pre-line;
 }
-.planner-skill-tooltip--unlearned .planner-tooltip-description,
-.planner-skill-tooltip--unlearned .planner-tooltip-requirement,
-.planner-skill-tooltip--unlearned .planner-tooltip-section li {
-  color: #ff4b4b;
-}
-.planner-tooltip-ranks,
 .planner-tooltip-section {
-  margin-top: 12px;
-}
-.planner-tooltip-section ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.planner-tooltip-bonus {
-  color: #899cff;
+  margin-top: 1em;
 }
 .planner-tooltip-limit {
-  margin-top: 8px;
   color: #d0b074;
-}
-.planner-tooltip-hint {
-  padding-top: 10px;
-  font-size: 10px;
-  color: #aaa;
-  text-transform: none;
-  letter-spacing: 0;
 }
 .planner-skill-tooltip--interactive {
   padding-top: 34px;

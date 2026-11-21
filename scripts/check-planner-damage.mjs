@@ -27,6 +27,42 @@ try {
     JSON.parse(await readFile("public/data/planner-save/data.json")),
     JSON.parse(await readFile("public/data/planner-save/strings.json"))
   );
+  const { describeSkill } = await server.ssrLoadModule(
+    "/src/utils/planner-skill-description.ts"
+  );
+  const armor = plannerSkills.find((skill) => skill.id === 40);
+  const frozen = createBuild("sorceress");
+  frozen.skills[40] = 1;
+  const first = describeSkill(native, frozen, armor, 1, false, "en");
+  assert.deepEqual(first.fixed, ["Mana Cost: 7"]);
+  assert.deepEqual(first.effects, [
+    "Defense: +30%",
+    "Freezes for 1.2 seconds",
+    "Duration: 144 seconds",
+  ]);
+  assert.equal(first.synergies.length, 4);
+  assert.deepEqual(describeSkill(native, frozen, armor, 2, true, "ru").effects, [
+    "Защита: +35%",
+    "Замораживает на 1,3 сек.",
+    "Длительность: 156 сек.",
+  ]);
+  frozen.skills[50] = 2;
+  assert.deepEqual(describeSkill(native, frozen, armor, 7, false, "en").effects, [
+    "Defense: +60%",
+    "Freezes for 2.1 seconds",
+    "Duration: 236 seconds",
+  ]);
+  assert.equal(
+    describeSkill(native, frozen, armor, 8, true, "en").effects[0],
+    "Defense: +65%"
+  );
+  for (const skill of plannerSkills) {
+    const build = createBuild(skill.classId);
+    assert(
+      describeSkill(native, build, skill, 1, true, "en").effects.length,
+      skill.name.en
+    );
+  }
   const item = (baseCode, bonuses = {}) => ({
     name: baseCode,
     baseCode,

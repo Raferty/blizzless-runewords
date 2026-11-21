@@ -103,6 +103,23 @@ const localize = (key, fallback = {}) => {
     en: text?.enUS?.trim() || fallback.en || "",
   };
 };
+// Keep only the localized format strings referenced by skill descriptions.
+const tooltipKeys = new Set(
+  desc.flatMap((row) =>
+    Object.entries(row)
+      .filter(([field]) => /^(desc|dsc[23])text[ab]\d+$/i.test(field.replaceAll(" ", "")))
+      .map(([, value]) => value.toLowerCase())
+  )
+);
+const tooltipLabels = Object.fromEntries(
+  [...strings]
+    .filter(([key]) => tooltipKeys.has(key.toLowerCase()))
+    .map(([key, value]) => [key.toLowerCase(), { en: value.enUS, ru: value.ruRU }])
+);
+await writeFile(
+  new URL("src/shared/planner-skill-labels.json", root),
+  JSON.stringify(tooltipLabels, null, 2) + "\n"
+);
 const source = {
   version: `Blizzless ${dataset.patch}`,
   patch: dataset.patch,

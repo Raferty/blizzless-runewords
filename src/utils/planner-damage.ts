@@ -188,10 +188,18 @@ export function animationFrames(
   return Math.max(1, Math.ceil((animation.frames * 256) / rate) - 1);
 }
 
-export function calculateBuildDamage(
+function skillManaCost(row: Row, level: number) {
+  return Math.max(
+    Number(row.minmana ?? 0),
+    (Number(row.mana ?? 0) + (level - 1) * Number(row.lvlmana ?? 0)) *
+      2 ** (Number(row.manashift ?? 0) - 8)
+  );
+}
+
+export function skillCalculationContext(
   native: GameSaveExporter,
   build: PlannerBuild,
-  options: DamageOptions = {}
+  preview?: { id: number; level: number }
 ) {
   const skills = native.gd.skills as unknown as Record<string, Row>;
   const names = new Map(
@@ -217,6 +225,7 @@ export function calculateBuildDamage(
   Object.assign(stats, summary.attributes, { level: build.level });
   const classIndex = classIds.indexOf(build.classId);
   const rank = (id: number) => {
+    if (preview?.id === id) return preview.level;
     const hard = build.skills[id] ?? 0;
     const single = stats[`item_singleskill#${id}`] ?? 0;
     const ownClass = metadata.get(id)?.classId === build.classId;
@@ -258,6 +267,61 @@ export function calculateBuildDamage(
     try {
       return evaluateSkillFormula(value, {
         variable: (name) => {
+          const masteryStat = { math: "th", madm: "dmg", macr: "crit" }[name];
+          if (masteryStat) {
+            for (let slot = 1; slot <= 6; slot++) {
+              if (String(row[`passivestat${slot}`]).endsWith("_" + masteryStat))
+                return formula(id, row[`passivecalc${slot}`], level);
+            }
+          }
+          const missileDamage = /^m([1-3])e([nx])$/.exec(name);
+          if (missileDamage) {
+            const desc = native.skillDescriptions[String(row.skilldesc)];
+            const missile = native.gd.missileByName[
+              String(desc?.["descmissile" + missileDamage[1]])
+            ] as unknown as Row | undefined;
+            if (!missile) throw new Error("Unknown skill missile");
+            const side = missileDamage[2] === "n" ? "min" : "max";
+            return Math.trunc(
+              skillDamageByLevel(
+                numeric(missile, "e" + side),
+                [1, 2, 3, 4, 5].map((i) => numeric(missile, side + "elev" + i)),
+                level
+              ) *
+                2 ** (numeric(missile, "hitshift") - 8)
+            );
+          }
+          if (name === "usmc") return 256 * skillManaCost(row, level);
+          const field = /^(clc|ast|pst)([1-9])$/.exec(name);
+          if (field) {
+            const key =
+              { clc: "calc", ast: "aurastatcalc", pst: "passivecalc" }[field[1]] +
+              field[2];
+            if (row[key] === undefined) throw new Error("Missing skill calculation");
+            return formula(id, row[key], level);
+          }
+          if (name === "len" && row.auralencalc !== undefined)
+            return formula(id, row.auralencalc, level);
+          if (["enma", "exma", "pnma", "pxma"].includes(name)) {
+            const elemental = name.startsWith("e"),
+              maximum = name[1] === "x";
+            let value = band(id, elemental, maximum) * 2 ** numeric(row, "hitshift");
+            if (
+              maximum ||
+              value > 256 ||
+              numeric(row, elemental ? "eminlev1" : "minlevdam1")
+            )
+              value += Math.trunc(
+                (value *
+                  formula(id, elemental ? row.edmgsympercalc : row.dmgsympercalc)) /
+                  100
+              );
+            if (elemental)
+              value += Math.trunc(
+                (value * (stats[`passive_${row.etype}_mastery`] ?? 0)) / 100
+              );
+            return Math.trunc(value / 256);
+          }
           if (name === "lvl") return level;
           if (name === "blvl") return build.skills[id] ?? 0;
           if (name === "ulvl") return build.level;
@@ -333,6 +397,43 @@ export function calculateBuildDamage(
           }
       }
     }
+  return {
+    skills,
+    metadata,
+    main,
+    off,
+    stats,
+    itemStats,
+    warnings,
+    summary,
+    rank,
+    numeric,
+    band,
+    formula,
+    duration,
+  };
+}
+
+export function calculateBuildDamage(
+  native: GameSaveExporter,
+  build: PlannerBuild,
+  options: DamageOptions = {}
+) {
+  const {
+    skills,
+    metadata,
+    main,
+    off,
+    stats,
+    itemStats,
+    warnings,
+    summary,
+    rank,
+    numeric,
+    band,
+    formula,
+    duration,
+  } = skillCalculationContext(native, build);
   const auraCandidates = plannerSkills.filter(
     (skill) =>
       skill.classId === build.classId &&
@@ -608,11 +709,7 @@ export function calculateBuildDamage(
       continue;
     }
     try {
-      row.mana = Math.max(
-        numeric(raw, "minmana"),
-        (numeric(raw, "mana") + (level - 1) * numeric(raw, "lvlmana")) *
-          2 ** (numeric(raw, "manashift") - 8)
-      );
+      row.mana = skillManaCost(raw, level);
       if (skill.id === 74) {
         const life = Math.max(1, options.corpseLife ?? 10000);
         const low = (formula(skill.id, raw.calc1) * life) / 100,

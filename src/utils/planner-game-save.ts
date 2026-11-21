@@ -2169,6 +2169,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     return bytes;
   }
   return {
+    skillDescriptions: data.skillDesc as Record<string, Definition>,
     randomRareName: (base: string) => rollRareName(base).name,
     choices,
     permitted,

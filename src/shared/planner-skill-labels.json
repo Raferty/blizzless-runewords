@@ -1,0 +1,1790 @@
+{
+  "strskill0": {
+    "en": "",
+    "ru": ""
+  },
+  "strskill3": {
+    "en": "Mana Cost: %d",
+    "ru": "Затраты маны: %d"
+  },
+  "strskill4": {
+    "en": "Damage: %d-%d",
+    "ru": "Урон: %d–%d"
+  },
+  "strskill5": {
+    "en": "Fire Damage: %d-%d",
+    "ru": "Урон от огня: %d–%d"
+  },
+  "strskill6": {
+    "en": "Cold Damage: %d-%d",
+    "ru": "Урон от льда: %d–%d"
+  },
+  "strskill7": {
+    "en": "Lightning Damage: %d-%d",
+    "ru": "Урон от молнии: %d–%d"
+  },
+  "strskill8": {
+    "en": "Poison Damage: %d-%d",
+    "ru": "Урон от яда: %d–%d"
+  },
+  "strskill9": {
+    "en": "%d arrows",
+    "ru": "Стрел: %d"
+  },
+  "strskill11": {
+    "en": "%d hits",
+    "ru": "Максимум целей: %d"
+  },
+  "strskill13": {
+    "en": "Cold Length: %d seconds",
+    "ru": "Длительность замедления от льда: %d сек."
+  },
+  "strskill18": {
+    "en": "Radius: %d yards",
+    "ru": "Радиус: %d м"
+  },
+  "strskill20": {
+    "en": "Duration: %d seconds",
+    "ru": "Длительность: %d сек."
+  },
+  "strskill21": {
+    "en": "Defense: %+d%%",
+    "ru": "Защита: %+d%%"
+  },
+  "strskill22": {
+    "en": "Attack Rating: %+d%%",
+    "ru": "Рейтинг атаки: %+d%%"
+  },
+  "strskill24": {
+    "en": "%d%% chance",
+    "ru": "%d%% шанс"
+  },
+  "strskill25": {
+    "en": "Enemy Defense: %+d%%",
+    "ru": "Защита врагов: %+d%%"
+  },
+  "strskill27": {
+    "en": "%d bolts",
+    "ru": "Снарядов: %d"
+  },
+  "strskill28": {
+    "en": "%d teeth",
+    "ru": "Клыков: %d"
+  },
+  "strskill29": {
+    "en": "Freeze Length: %d seconds",
+    "ru": "Длительность заморозки: %d сек."
+  },
+  "strskill33": {
+    "en": "Weakens Enemies by %d%%",
+    "ru": "Ослабляет врагов на %d%%"
+  },
+  "strskill34": {
+    "en": "Mana Cost: %d per second",
+    "ru": "Затраты маны: %d/сек."
+  },
+  "strskill37": {
+    "en": "Damage Taken: %+d%%",
+    "ru": "Получаемый урон: %+d%%"
+  },
+  "strskill38": {
+    "en": "Enemy Damage: %+d%%",
+    "ru": "Урон врагов: %+d%%"
+  },
+  "strskill39": {
+    "en": "Magic Damage: %d-%d",
+    "ru": "Магический урон: %d–%d"
+  },
+  "strskill40": {
+    "en": "Absorbs %d damage",
+    "ru": "Поглощает %d урона"
+  },
+  "strskill42": {
+    "en": "Life: %d",
+    "ru": "Здоровье: %d"
+  },
+  "strskill43": {
+    "en": "Magi: Improved Missile Damage",
+    "ru": "Маги: бонус к урону от снарядов"
+  },
+  "strskill44": {
+    "en": "%d skeletons total",
+    "ru": "Всего скелетов: %d"
+  },
+  "strskill46": {
+    "en": "Damage: %d-%d%% of corpse Life",
+    "ru": "Урон: %d–%d%% здоровья трупа"
+  },
+  "strskill47": {
+    "en": "%d%% damage to Self",
+    "ru": "%d%% урона по себе"
+  },
+  "strskill48": {
+    "en": "Stun Length: %d seconds",
+    "ru": "Длительность оглушения: %d сек."
+  },
+  "strskill50": {
+    "en": "Heals: %d-%d",
+    "ru": "Исцеление: %d–%d"
+  },
+  "strskill51": {
+    "en": "Resist Fire: %+d%%",
+    "ru": "Сопротивление огню: %+d%%"
+  },
+  "strskill52": {
+    "en": "Resist Cold: %+d%%",
+    "ru": "Сопротивление льду: %+d%%"
+  },
+  "strskill53": {
+    "en": "Resist Lightning: %+d%%",
+    "ru": "Сопротивление молнии: %+d%%"
+  },
+  "strskill54": {
+    "en": "Resist All: %+d%%",
+    "ru": "Сопротивления: %+d%%"
+  },
+  "strskill55": {
+    "en": "%d%% damage returned",
+    "ru": "Отражает %d%% урона"
+  },
+  "strskill56": {
+    "en": "Range: %d yards",
+    "ru": "Дальность: %d м"
+  },
+  "strskill57": {
+    "en": "Target's Attack Rating: %+d%%",
+    "ru": "Рейтинг атаки цели: %+d%%"
+  },
+  "strskill58": {
+    "en": "Monster runs up to %d yards",
+    "ru": "Монстры убегают на расстояние до %d м"
+  },
+  "strskill62": {
+    "en": "Freezes for %d seconds",
+    "ru": "Замораживает на %d сек."
+  },
+  "strskill63": {
+    "en": "over %d seconds",
+    "ru": "в течение %d сек."
+  },
+  "strskill65": {
+    "en": "Chance of losing durability: %d%%",
+    "ru": "Шанс потери прочности: %d%%"
+  },
+  "strskill67": {
+    "en": "Ranged attacks slowed to %d%%",
+    "ru": "Замедляет атаки дальнего боя до %d%%"
+  },
+  "strskill69": {
+    "en": "Stamina Recovery Rate: %+d%%",
+    "ru": "Скорость восполнения выносливости: %+d%%"
+  },
+  "strskill72": {
+    "en": "Releases %d charged bolts",
+    "ru": "Залпов молний: %d"
+  },
+  "strskill74": {
+    "en": "Duration reduced by %d%%",
+    "ru": "Длительность сокращена на %d%%"
+  },
+  "strskill76": {
+    "en": "Chance uninterruptable: %d%%",
+    "ru": "Шанс невозможности прерывания: %d%%"
+  },
+  "strskill77": {
+    "en": "Enemies slowed %d%%",
+    "ru": "Замедляет врагов на %d%%"
+  },
+  "strskill79": {
+    "en": "Heals: %d%% of attack damage",
+    "ru": "Объем исцеления: %d%% урона от атак"
+  },
+  "strskill80": {
+    "en": "Converts %d%% damage to life",
+    "ru": "Восполняет здоровье в объеме %d%% урона"
+  },
+  "strskill82": {
+    "en": "Fire Duration: %d seconds",
+    "ru": "Длительность эффекта огня: %d сек."
+  },
+  "strskill83": {
+    "en": "Fire Explosion Damage: %d-%d",
+    "ru": "Урон от огня (взрыв): %d–%d"
+  },
+  "strskill85": {
+    "en": "Reduces curse duration by %d%%",
+    "ru": "Сокращает длительность проклятий на %d%%"
+  },
+  "strskill86": {
+    "en": "Attacks up to %d targets",
+    "ru": "Максимум целей: %d"
+  },
+  "strskill88": {
+    "en": "Mana Recovery Rate: %+d%%",
+    "ru": "Скорость восполнения маны: %+d%%"
+  },
+  "strskill89": {
+    "en": "Run/Walk Speed: %+d%%",
+    "ru": "Скорость ходьбы/бега: %+d%%"
+  },
+  "strskill91": {
+    "en": "Holy Bolt Damage: %d-%d",
+    "ru": "Урон от «Заряда Света»: %d–%d"
+  },
+  "strskill94": {
+    "en": "%d skeleton total",
+    "ru": "Всего скелетов: %d"
+  },
+  "strskill95": {
+    "en": "Skeletons: Life: %+d",
+    "ru": "Здоровье скелетов: %+d"
+  },
+  "strskill96": {
+    "en": "Magi: Life: %+d",
+    "ru": "Здоровье магов: %+d"
+  },
+  "strskill97": {
+    "en": "Monsters: Life: %+d%%",
+    "ru": "Здоровье монстров: %+d%%"
+  },
+  "strskill99": {
+    "en": "Chance to convert: %d%%",
+    "ru": "Шанс обращения: %d%%"
+  },
+  "strskill100": {
+    "en": "Max Life: %+d%%",
+    "ru": "Максимальный запас здоровья: %+d%%"
+  },
+  "strskill101": {
+    "en": "Max Mana: %+d%%",
+    "ru": "Максимальный запас маны: %+d%%"
+  },
+  "strskill102": {
+    "en": "Max Stamina: %+d%%",
+    "ru": "Максимальный запас выносливости: %+d%%"
+  },
+  "strskill103": {
+    "en": "Absorbs %d%% fire damage",
+    "ru": "Поглощает %d%% урона от огня"
+  },
+  "strskill106": {
+    "en": "Attack Speed: %+d%%",
+    "ru": "Скорость атаки: %+d%%"
+  },
+  "strskill107": {
+    "en": "Life/Mana Recovered: %d",
+    "ru": "Восполнение здоровья/маны: %d"
+  },
+  "strskill109": {
+    "en": "Chance to redeem soul: %d%%",
+    "ru": "Шанс спасения души: %d%%"
+  },
+  "strskill110": {
+    "en": "Successful Blocking: %+d%%",
+    "ru": "Шанс успешного блокирования: %+d%%"
+  },
+  "strskill112": {
+    "en": "Thorns damage",
+    "ru": "Урон от шипов"
+  },
+  "strskill113": {
+    "en": "Hydra Fire Damage: %d-%d",
+    "ru": "Урон от огня гидры: %d–%d"
+  },
+  "strskill115": {
+    "en": "Minimum Mana Required to Cast: %d",
+    "ru": "Минимум маны для применения: %d"
+  },
+  "skillname6": {
+    "en": "Magic Arrow",
+    "ru": "Магическая стрела"
+  },
+  "skillname7": {
+    "en": "Fire Arrow",
+    "ru": "Огненная стрела"
+  },
+  "skillname9": {
+    "en": "Critical Strike",
+    "ru": "Критический удар"
+  },
+  "skillname10": {
+    "en": "Jab",
+    "ru": "Выпад"
+  },
+  "skillname11": {
+    "en": "Cold Arrow",
+    "ru": "Морозная стрела"
+  },
+  "skillname12": {
+    "en": "Multiple Shot",
+    "ru": "Залп"
+  },
+  "skillname13": {
+    "en": "Dodge",
+    "ru": "Уклонение"
+  },
+  "skillname14": {
+    "en": "Power Strike",
+    "ru": "Мощный удар"
+  },
+  "skillname15": {
+    "en": "Poison Javelin",
+    "ru": "Отравленный дротик"
+  },
+  "skillname16": {
+    "en": "Exploding Arrow",
+    "ru": "Взрывная стрела"
+  },
+  "skillname18": {
+    "en": "Avoid",
+    "ru": "Ускользание"
+  },
+  "skillname20": {
+    "en": "Lightning Bolt",
+    "ru": "Разряд молнии"
+  },
+  "skillname21": {
+    "en": "Ice Arrow",
+    "ru": "Ледяная стрела"
+  },
+  "skillname22": {
+    "en": "Guided Arrow",
+    "ru": "Самонаводящаяся стрела"
+  },
+  "skillname23": {
+    "en": "Penetrate",
+    "ru": "Пронзание"
+  },
+  "skillname24": {
+    "en": "Charged Strike",
+    "ru": "Заряженный удар"
+  },
+  "skillname25": {
+    "en": "Plague Javelin",
+    "ru": "Чумной дротик"
+  },
+  "skillname26": {
+    "en": "Strafe",
+    "ru": "Обстрел"
+  },
+  "skillname27": {
+    "en": "Immolation Arrow",
+    "ru": "Обжигающая стрела"
+  },
+  "skillname28": {
+    "en": "Decoy",
+    "ru": "Двойник"
+  },
+  "skillname29": {
+    "en": "Evade",
+    "ru": "Избежание"
+  },
+  "skillname30": {
+    "en": "Fend",
+    "ru": "Лучшая защита"
+  },
+  "skillname31": {
+    "en": "Freezing Arrow",
+    "ru": "Замораживающая стрела"
+  },
+  "skillname32": {
+    "en": "Valkyrie",
+    "ru": "Валькирия"
+  },
+  "skillname34": {
+    "en": "Lightning Strike",
+    "ru": "Удар молнии"
+  },
+  "skillname35": {
+    "en": "Lightning Fury",
+    "ru": "Неистовство молний"
+  },
+  "skillname36": {
+    "en": "Fire Bolt",
+    "ru": "Стрела огня"
+  },
+  "skillname37": {
+    "en": "Warmth",
+    "ru": "Тепло"
+  },
+  "skillname38": {
+    "en": "Charged Bolt",
+    "ru": "Залп молний"
+  },
+  "skillname39": {
+    "en": "Ice Bolt",
+    "ru": "Стрела льда"
+  },
+  "skillname40": {
+    "en": "Frozen Armor",
+    "ru": "Ледяной доспех"
+  },
+  "skillname41": {
+    "en": "Inferno",
+    "ru": "Инферно"
+  },
+  "skillname42": {
+    "en": "Static Field",
+    "ru": "Статическое поле"
+  },
+  "skillname43": {
+    "en": "Telekinesis",
+    "ru": "Телекинез"
+  },
+  "skillname44": {
+    "en": "Frost Nova",
+    "ru": "Кольцо льда"
+  },
+  "skillname45": {
+    "en": "Ice Blast",
+    "ru": "Ледяной удар"
+  },
+  "skillname46": {
+    "en": "Blaze",
+    "ru": "Огненный след"
+  },
+  "skillname47": {
+    "en": "Fire Ball",
+    "ru": "Огненный шар"
+  },
+  "skillname48": {
+    "en": "Nova",
+    "ru": "Кольцо молний"
+  },
+  "skillname49": {
+    "en": "Lightning",
+    "ru": "Молния"
+  },
+  "skillname50": {
+    "en": "Shiver Armor",
+    "ru": "Морозный доспех"
+  },
+  "skillname51": {
+    "en": "Fire Wall",
+    "ru": "Огненная стена"
+  },
+  "skillname52": {
+    "en": "Enchant",
+    "ru": "Чары"
+  },
+  "skillname53": {
+    "en": "Chain Lightning",
+    "ru": "Цепная молния"
+  },
+  "skillname55": {
+    "en": "Glacial Spike",
+    "ru": "Ледяной шип"
+  },
+  "skillname56": {
+    "en": "Meteor",
+    "ru": "Метеорит"
+  },
+  "skillname57": {
+    "en": "Thunder Storm",
+    "ru": "Гроза"
+  },
+  "skillname58": {
+    "en": "Energy Shield",
+    "ru": "Энергетический щит"
+  },
+  "skillname59": {
+    "en": "Blizzard",
+    "ru": "Снежная буря"
+  },
+  "skillname60": {
+    "en": "Chilling Armor",
+    "ru": "Леденящий доспех"
+  },
+  "skillname62": {
+    "en": "Hydra",
+    "ru": "Гидра"
+  },
+  "skillname64": {
+    "en": "Frozen Orb",
+    "ru": "Морозная сфера"
+  },
+  "skillname67": {
+    "en": "Teeth",
+    "ru": "Клыки"
+  },
+  "skillname68": {
+    "en": "Bone Armor",
+    "ru": "Костяной доспех"
+  },
+  "skillname69": {
+    "en": "Skeleton Mastery",
+    "ru": "Мастер скелетов"
+  },
+  "skillname70": {
+    "en": "Raise Skeleton",
+    "ru": "Скелет"
+  },
+  "skillname73": {
+    "en": "Poison Dagger",
+    "ru": "Отравленный кинжал"
+  },
+  "skillname74": {
+    "en": "Corpse Explosion",
+    "ru": "Взрыв трупа"
+  },
+  "skillname75": {
+    "en": "Clay Golem",
+    "ru": "Глиняный голем"
+  },
+  "skillname78": {
+    "en": "Bone Wall",
+    "ru": "Костяная стена"
+  },
+  "skillname79": {
+    "en": "Golem Mastery",
+    "ru": "Мастер големов"
+  },
+  "skillname80": {
+    "en": "Raise Skeletal Mage",
+    "ru": "Скелет-маг"
+  },
+  "skillname83": {
+    "en": "Poison Explosion",
+    "ru": "Ядовитый взрыв"
+  },
+  "skillname84": {
+    "en": "Bone Spear",
+    "ru": "Костяное копье"
+  },
+  "skillname85": {
+    "en": "Blood Golem",
+    "ru": "Кровяной голем"
+  },
+  "skillname88": {
+    "en": "Bone Prison",
+    "ru": "Костяная клетка"
+  },
+  "skillname89": {
+    "en": "Summon Resist",
+    "ru": "Стойкие прислужники"
+  },
+  "skillname90": {
+    "en": "Iron Golem",
+    "ru": "Железный голем"
+  },
+  "skillname92": {
+    "en": "Poison Nova",
+    "ru": "Кольцо яда"
+  },
+  "skillname93": {
+    "en": "Bone Spirit",
+    "ru": "Костяной дух"
+  },
+  "skillname94": {
+    "en": "Fire Golem",
+    "ru": "Огненный голем"
+  },
+  "skillname95": {
+    "en": "Revive",
+    "ru": "Оживление"
+  },
+  "skillname96": {
+    "en": "Sacrifice",
+    "ru": "Жертва"
+  },
+  "skillname98": {
+    "en": "Might",
+    "ru": "Мощь"
+  },
+  "skillname99": {
+    "en": "Prayer",
+    "ru": "Молитва"
+  },
+  "skillname100": {
+    "en": "Resist Fire",
+    "ru": "Сопротивление огню"
+  },
+  "skillname101": {
+    "en": "Holy Bolt",
+    "ru": "Заряд Света"
+  },
+  "skillname102": {
+    "en": "Holy Fire",
+    "ru": "Священный огонь"
+  },
+  "skillname104": {
+    "en": "Defiance",
+    "ru": "Непокорность"
+  },
+  "skillname105": {
+    "en": "Resist Cold",
+    "ru": "Сопротивление льду"
+  },
+  "skillname106": {
+    "en": "Zeal",
+    "ru": "Рвение"
+  },
+  "skillname107": {
+    "en": "Charge",
+    "ru": "Рывок"
+  },
+  "skillname108": {
+    "en": "Blessed Aim",
+    "ru": "Правое дело"
+  },
+  "skillname109": {
+    "en": "Cleansing",
+    "ru": "Очищение"
+  },
+  "skillname110": {
+    "en": "Resist Lightning",
+    "ru": "Сопротивление молнии"
+  },
+  "skillname111": {
+    "en": "Vengeance",
+    "ru": "Возмездие"
+  },
+  "skillname112": {
+    "en": "Blessed Hammer",
+    "ru": "Освященный молот"
+  },
+  "skillname114": {
+    "en": "Holy Freeze",
+    "ru": "Священный холод"
+  },
+  "skillname115": {
+    "en": "Vigor",
+    "ru": "Бодрость"
+  },
+  "skillname117": {
+    "en": "Holy Shield",
+    "ru": "Освященный щит"
+  },
+  "skillname118": {
+    "en": "Holy Shock",
+    "ru": "Священная молния"
+  },
+  "skillname119": {
+    "en": "Sanctuary",
+    "ru": "Убежище"
+  },
+  "skillname120": {
+    "en": "Meditation",
+    "ru": "Медитация"
+  },
+  "skillname121": {
+    "en": "Fist of the Heavens",
+    "ru": "Длань небес"
+  },
+  "skillname122": {
+    "en": "Fanaticism",
+    "ru": "Фанатизм"
+  },
+  "skillname124": {
+    "en": "Redemption",
+    "ru": "Искупление"
+  },
+  "skillname125": {
+    "en": "Salvation",
+    "ru": "Спасение"
+  },
+  "skillname126": {
+    "en": "Bash",
+    "ru": "Сокрушающий удар"
+  },
+  "skillname130": {
+    "en": "Howl",
+    "ru": "Рев"
+  },
+  "skillname131": {
+    "en": "Find Potion",
+    "ru": "Поиск зелий"
+  },
+  "skillname132": {
+    "en": "Leap",
+    "ru": "Прыжок"
+  },
+  "skillname133": {
+    "en": "Double Swing",
+    "ru": "Двойной удар"
+  },
+  "skillname137": {
+    "en": "Taunt",
+    "ru": "Провокация"
+  },
+  "skillname138": {
+    "en": "Shout",
+    "ru": "Крик"
+  },
+  "skillname139": {
+    "en": "Stun",
+    "ru": "Оглушение"
+  },
+  "skillname140": {
+    "en": "Double Throw",
+    "ru": "Двойной бросок"
+  },
+  "skillname141": {
+    "en": "Increased Stamina",
+    "ru": "Повышенная выносливость"
+  },
+  "skillname142": {
+    "en": "Find Item",
+    "ru": "Поиск предметов"
+  },
+  "skillname143": {
+    "en": "Leap Attack",
+    "ru": "Удар в прыжке"
+  },
+  "skillname144": {
+    "en": "Concentrate",
+    "ru": "Концентрация"
+  },
+  "skillname146": {
+    "en": "Battle Cry",
+    "ru": "Боевой клич"
+  },
+  "skillname147": {
+    "en": "Frenzy",
+    "ru": "Ярость"
+  },
+  "skillname149": {
+    "en": "Battle Orders",
+    "ru": "Боевые приказы"
+  },
+  "skillname150": {
+    "en": "Grim Ward",
+    "ru": "Зловещий тотем"
+  },
+  "skillname152": {
+    "en": "Berserk",
+    "ru": "Берсерк"
+  },
+  "skillname154": {
+    "en": "War Cry",
+    "ru": "Воинственный клич"
+  },
+  "skillname155": {
+    "en": "Battle Command",
+    "ru": "Боевой призыв"
+  },
+  "strskill41": {
+    "en": "Absorbs %d%%",
+    "ru": "Поглощает %d%% урона"
+  },
+  "streskilllighttoattack": {
+    "en": "Lightning Damage: %d-%d to your attack",
+    "ru": "Урон от молнии: + %d–%d к атаке"
+  },
+  "sksyn": {
+    "en": "%s Receives Bonuses From:",
+    "ru": "Умение «%s» получает бонусы от:"
+  },
+  "damplev": {
+    "en": "%s: %+d%% Damage per Level",
+    "ru": "%s: %+d%% к урону за уровень"
+  },
+  "firedplev": {
+    "en": "%s: %+d%% Fire Damage per Level",
+    "ru": "%s: %+d%% к урону от огня за уровень"
+  },
+  "colddplev": {
+    "en": "%s: %+d%% Cold Damage per Level",
+    "ru": "%s: %+d%% к урону от льда за уровень"
+  },
+  "ltngdplev": {
+    "en": "%s: %+d%% Lightning Damage per Level",
+    "ru": "%s: %+d%% к урону от молнии за уровень"
+  },
+  "poisdplev": {
+    "en": "%s: %+d%% Poison Damage per Level",
+    "ru": "%s: %+d%% к урону от яда за уровень"
+  },
+  "magdplev": {
+    "en": "%s: %+d%% Magic Damage per Level",
+    "ru": "%s: %+d%% к магическому урону за уровень"
+  },
+  "rangplev": {
+    "en": "%s: %+d.%d Yards per Level",
+    "ru": "%s: %+d.%d м за уровень"
+  },
+  "attrateplev": {
+    "en": "%s: %+d%% Attack Rating per Level",
+    "ru": "%s: %+d%% к рейтингу атаки за уровень"
+  },
+  "defplev": {
+    "en": "%s: %+d%% Defense per Level",
+    "ru": "%s: %+d%% к защите за уровень"
+  },
+  "missplev3": {
+    "en": "%s: %+d Spike per %d Levels",
+    "ru": "%s: %+d шип за %d ур."
+  },
+  "boltplev3": {
+    "en": "%s: %+d Bolt per %d Levels",
+    "ru": "%s: %+d заряд за %d ур."
+  },
+  "shotplev3": {
+    "en": "%s: %+d Shot per %d Levels",
+    "ru": "%s: %+d выстрел за %d ур."
+  },
+  "hpplev": {
+    "en": "%s: %+d%% Life per Level",
+    "ru": "%s: %+d%% к здоровью за уровень"
+  },
+  "durateplev": {
+    "en": "%s: %+d%% Duration per Level",
+    "ru": "%s: %+d%% к длительности за уровень"
+  },
+  "frezlenplev": {
+    "en": "%s: %+d%% Freeze Length per Level",
+    "ru": "%s: %+d%% к длительности заморозки за уровень"
+  },
+  "convphy2magalt": {
+    "en": "Converts %d%% Physical Damage to Elemental Damage",
+    "ru": "Преобразует %d%% физического урона в урон от стихий"
+  },
+  "convphy2elemalt": {
+    "en": "Converts %d%% Physical Damage to Magic Damage",
+    "ru": "Преобразует %d%% физического урона в магический"
+  },
+  "secplev2": {
+    "en": "%s: %+d Seconds per Level",
+    "ru": "%s: %+d сек. за уровень"
+  },
+  "damabsplev": {
+    "en": "%s: %+d Damage Absorbed per Level",
+    "ru": "%s: %+d к поглощению урона за уровень"
+  },
+  "weapdamsk": {
+    "en": "%d%% Weapon Damage",
+    "ru": "%d%% урона от оружия"
+  },
+  "hbdplev": {
+    "en": "%s: %+d%% Holy Bolt Damage per Level",
+    "ru": "%s: %+d%% к урону от «Заряда Света» за уровень"
+  },
+  "healplev": {
+    "en": "%s: %+d%% Life Healed per Level",
+    "ru": "%s: %+d%% к восполнению здоровья за уровень"
+  },
+  "healplev2": {
+    "en": "%s: %+d Life Healed Every 2 Seconds",
+    "ru": "%s: %+d восполняемого здоровья раз в 2 сек."
+  },
+  "fanydam": {
+    "en": "Your Damage: %+d%%",
+    "ru": "Ваш урон: %+d%%"
+  },
+  "partdam": {
+    "en": "Party Damage: %+d%%",
+    "ru": "Урон группы: %+d%%"
+  },
+  "afdimm": {
+    "en": "%s: %+d%% Average Fire Damage per Second per Level",
+    "ru": "%s: %+d%% к среднему урону от огня в секунду за уровень"
+  },
+  "cgslow": {
+    "en": "Slows Enemies: %d%%",
+    "ru": "Замедление врагов: %d%%"
+  },
+  "corexpdam": {
+    "en": "Corpse Explosion Damage: %d-%d%% of corpse Life",
+    "ru": "Урон от взрыва трупа: %d–%d%% здоровья убитого монстра"
+  },
+  "skillname224": {
+    "en": "Werewolf",
+    "ru": "Облик волка"
+  },
+  "strskill43a": {
+    "en": "%d skeleton mage",
+    "ru": "Всего скелетов-магов: %d"
+  },
+  "strskill44a": {
+    "en": "%d skeleton magi",
+    "ru": "Всего скелетов-магов: %d"
+  },
+  "strskill61": {
+    "en": "Multiple Hits",
+    "ru": "Несколько ударов"
+  },
+  "eskillincasemasteryx": {
+    "en": "%d%% Chance of Critical Strike",
+    "ru": "Шанс критического удара: %d%%"
+  },
+  "eskillkicksing": {
+    "en": "%d Kick",
+    "ru": "%d удар ногой"
+  },
+  "eskillkickplur": {
+    "en": "%d Kicks",
+    "ru": "%d ударов ногой"
+  },
+  "eskillincaseraven": {
+    "en": "Mana Cost Per Raven: %d",
+    "ru": "Затраты маны за каждого ворона: %d"
+  },
+  "eskillkickdamage": {
+    "en": "Kick Damage: %+d%%",
+    "ru": "Урон от ударов ногой: %+d%%"
+  },
+  "eskillperblade": {
+    "en": "Mana Cost: %d per blade",
+    "ru": "Затраты маны: %d за клинок"
+  },
+  "skillname222": {
+    "en": "Raven",
+    "ru": "Ворон"
+  },
+  "skillname223": {
+    "en": "Poison Creeper",
+    "ru": "Ядовитая лоза"
+  },
+  "skillname225": {
+    "en": "Lycanthropy",
+    "ru": "Ликантропия"
+  },
+  "skillname226": {
+    "en": "Firestorm",
+    "ru": "Огненная буря"
+  },
+  "skillname228": {
+    "en": "Summon Spirit Wolf",
+    "ru": "Призрачный волк"
+  },
+  "skillname229": {
+    "en": "Werebear",
+    "ru": "Облик медведя"
+  },
+  "skillname230": {
+    "en": "Molten Boulder",
+    "ru": "Пылающий валун"
+  },
+  "skillname231": {
+    "en": "Arctic Blast",
+    "ru": "Арктический ветер"
+  },
+  "skillname233": {
+    "en": "Feral Rage",
+    "ru": "Дикая ярость"
+  },
+  "skillname234": {
+    "en": "Maul",
+    "ru": "Потрошение"
+  },
+  "skillname235": {
+    "en": "Fissure",
+    "ru": "Разлом"
+  },
+  "skillname236": {
+    "en": "Cyclone Armor",
+    "ru": "Ураганный доспех"
+  },
+  "skillname238": {
+    "en": "Summon Dire Wolf",
+    "ru": "Лютый волк"
+  },
+  "skillname239": {
+    "en": "Rabies",
+    "ru": "Бешенство"
+  },
+  "skillname240": {
+    "en": "Fire Claws",
+    "ru": "Огненные когти"
+  },
+  "skillname241": {
+    "en": "Twister",
+    "ru": "Смерч"
+  },
+  "skillname243": {
+    "en": "Hunger",
+    "ru": "Голод"
+  },
+  "skillname244": {
+    "en": "Shock Wave",
+    "ru": "Ударная волна"
+  },
+  "skillname245": {
+    "en": "Volcano",
+    "ru": "Вулкан"
+  },
+  "skillname246": {
+    "en": "Tornado",
+    "ru": "Торнадо"
+  },
+  "skillname248": {
+    "en": "Summon Grizzly",
+    "ru": "Гризли"
+  },
+  "skillname250": {
+    "en": "Armageddon",
+    "ru": "Армагеддон"
+  },
+  "skillname251": {
+    "en": "Hurricane",
+    "ru": "Ураган"
+  },
+  "skillname252": {
+    "en": "Fire Blast",
+    "ru": "Огненный взрыв"
+  },
+  "skillname253": {
+    "en": "Claw Mastery",
+    "ru": "Мастер когтей"
+  },
+  "skillname257": {
+    "en": "Shock Web",
+    "ru": "Электрическая сеть"
+  },
+  "skillname258": {
+    "en": "Blade Sentinel",
+    "ru": "Летающий клинок"
+  },
+  "skillname260": {
+    "en": "Fists of Fire",
+    "ru": "Огненные кулаки"
+  },
+  "skillname261": {
+    "en": "Dragon Claw",
+    "ru": "Лапа дракона"
+  },
+  "skillname262": {
+    "en": "Charged Bolt Sentry",
+    "ru": "Грозовая турель"
+  },
+  "skillname263": {
+    "en": "Wake of Fire",
+    "ru": "Огненная волна"
+  },
+  "skillname267": {
+    "en": "Blade Fury",
+    "ru": "Неистовые клинки"
+  },
+  "skillname270": {
+    "en": "Claws of Thunder",
+    "ru": "Грозовые когти"
+  },
+  "skillname272": {
+    "en": "Lightning Sentry",
+    "ru": "Электрическая турель"
+  },
+  "skillname273": {
+    "en": "Wake of Inferno",
+    "ru": "Инфернальная волна"
+  },
+  "skillname275": {
+    "en": "Blades of Ice",
+    "ru": "Ледяные клинки"
+  },
+  "skillname277": {
+    "en": "Death Sentry",
+    "ru": "Смертоносная турель"
+  },
+  "skillname278": {
+    "en": "Blade Shield",
+    "ru": "Щит из клинков"
+  },
+  "skillname281": {
+    "en": "Phoenix Strike",
+    "ru": "Удар феникса"
+  },
+  "eskillhawk": {
+    "en": "Max Ravens: %d",
+    "ru": "Макс. воронов: %d"
+  },
+  "eskillspikes": {
+    "en": "Spikes: %d",
+    "ru": "Шипов: %d"
+  },
+  "eskillwolves": {
+    "en": "Max Wolves: %d",
+    "ru": "Макс. волков: %d"
+  },
+  "eskillshoots": {
+    "en": "Shoots %d Times",
+    "ru": "Выстрелов: %d"
+  },
+  "eskilllifesteal": {
+    "en": "Life Steal: %+d%%",
+    "ru": "Похищение здоровья: %+d%%"
+  },
+  "eskillpudmana": {
+    "en": "Charge 2 - Life and Mana Steal: %+d%%",
+    "ru": "2 заряда – похищение здоровья и маны: %+d%%"
+  },
+  "eskillmanasteal": {
+    "en": "Mana Steal: %+d%%",
+    "ru": "Похищение маны: %+d%%"
+  },
+  "eskillphoenix1": {
+    "en": "Charge 1 - Meteor Damage: %d-%d",
+    "ru": "1 заряд – урон от «Метеорита»: %d–%d"
+  },
+  "eskillphoenix2": {
+    "en": "Charge 2 - Chain Lightning Damage: %d-%d",
+    "ru": "2 заряда – урон от «Хаотической молнии»: %d–%d"
+  },
+  "eskillphoenix3": {
+    "en": "Charge 3 - Chaos Ice Bolt Damage: %d-%d",
+    "ru": "3 заряда – урон от «Ледяной стрелы хаоса»: %d–%d"
+  },
+  "eskillthunder1": {
+    "en": "Charge 1 - Lightning Damage: %d-%d",
+    "ru": "1 заряд – урон от молнии: %d–%d"
+  },
+  "eskillthunder2": {
+    "en": "Charge 2 - Nova Damage: %d-%d",
+    "ru": "2 заряда – урон от кольца молний: %d–%d"
+  },
+  "eskillthunder3": {
+    "en": "Charge 3 - Charged Bolt Damage: %d-%d",
+    "ru": "3 заряда – урон от залпа молний: %d–%d"
+  },
+  "eskillfistsoffire1": {
+    "en": "Charge 1 - Fire Damage: %d-%d",
+    "ru": "1 заряд – урон от огня: %d–%d"
+  },
+  "eskillfistsoffire2": {
+    "en": "Charge 2 - Fire Damage Radius: %d yards",
+    "ru": "2 заряда – радиус поражения уроном от огня: %d м"
+  },
+  "eskillfistsoffire3": {
+    "en": "Charge 3 - Average Fire Damage: %d-%d per second",
+    "ru": "3 заряда – средний урон от огня: %d–%d/сек."
+  },
+  "eskillbladesofice1": {
+    "en": "Charge 1 - Cold Damage: %d-%d",
+    "ru": "1 заряд – урон от льда: %d–%d"
+  },
+  "eskillbladesofice2": {
+    "en": "Charge 2 - Cold Damage Radius: %d yards",
+    "ru": "2 заряда – радиус поражения уроном от льда: %d м"
+  },
+  "eskillbladesofice3": {
+    "en": "Charge 3 - Freezes for %d seconds",
+    "ru": "3 заряда – замораживает на %d сек."
+  },
+  "strskillalwayshits": {
+    "en": "Always Hits",
+    "ru": "Всегда поражает цель."
+  },
+  "strskillattackrating": {
+    "en": "Attack Rating: %d",
+    "ru": "Рейтинг атаки: %d"
+  },
+  "strskilldamagetoundead": {
+    "en": "Damage to Undead: %+d%%",
+    "ru": "Урон по нежити: %+d%%"
+  },
+  "strskilldefense": {
+    "en": "Defense: %d",
+    "ru": "Защита: %d"
+  },
+  "strskillrunwalkrange": {
+    "en": "Run/Walk Speed: %+d-%d%%",
+    "ru": "Скорость ходьбы/бега: %+d–%d%%"
+  },
+  "strskillattackspeedrange": {
+    "en": "Attack Speed: %+d-%d%%",
+    "ru": "Скорость атаки: %+d–%d%%"
+  },
+  "strskillreleasesbolts": {
+    "en": "Releases %d bolts",
+    "ru": "Зарядов: %d"
+  },
+  "strskilldamagepercent": {
+    "en": "Damage: %+d%%",
+    "ru": "Урон: %+d%%"
+  },
+  "strskillfiredamagepercent": {
+    "en": "Fire Damage: %+d%%",
+    "ru": "Урон от огня: %+d%%"
+  },
+  "strskillcolddamagepercent": {
+    "en": "Cold Damage: %+d%%",
+    "ru": "Урон от льда: %+d%%"
+  },
+  "strskilllightningdamagepercent": {
+    "en": "Lightning Damage: %+d%%",
+    "ru": "Урон от молнии: %+d%%"
+  },
+  "strskillmagicdamagepercent": {
+    "en": "Magic Damage: %+d%%",
+    "ru": "Магический урон: %+d%%"
+  },
+  "strskillassassincobrastrikecharge1": {
+    "en": "Charge 1 - Life Steal: %+d%%",
+    "ru": "1 заряд – похищение здоровья: %+d%%"
+  },
+  "strskilllifestealrange": {
+    "en": "Life Steal: %+d-%d%%",
+    "ru": "Похищение здоровья: %+d–%d%%"
+  },
+  "strskillhealpercent": {
+    "en": "Heals: %+d%%",
+    "ru": "Объем исцеления: %+d%%"
+  },
+  "strskillhealflat": {
+    "en": "Heals: %+d",
+    "ru": "Объем исцеления: %+d"
+  },
+  "strskillmanacostpersecond": {
+    "en": "Mana Cost: %d per second",
+    "ru": "Затраты маны: %d/сек."
+  },
+  "strskilldamageflat": {
+    "en": "Damage: %+d",
+    "ru": "Урон: %+d"
+  },
+  "strskilldamagepercentrange": {
+    "en": "Damage: %+d-%d%%",
+    "ru": "Урон: %+d–%d%%"
+  },
+  "strskilllifepercent": {
+    "en": "Life: %+d%%",
+    "ru": "Здоровье: %+d%%"
+  },
+  "strskillmonsterscount": {
+    "en": "Monsters: %d",
+    "ru": "Всего монстров: %d"
+  },
+  "strskillfiredamagetoyourattack": {
+    "en": "Fire Damage: %d-%d to your attack",
+    "ru": "Урон от огня: + %d–%d к атаке"
+  },
+  "strskillcolddamagetoyourattack": {
+    "en": "Cold Damage: %d-%d to your attack",
+    "ru": "Урон от льда: + %d–%d к атаке"
+  },
+  "strskillsmitedamage": {
+    "en": "Smite Damage: %+d-%d",
+    "ru": "Урон от «Кары»: %+d–%d"
+  },
+  "strskillfiredamageaveragepersecond": {
+    "en": "Average Fire Damage: %d-%d per second",
+    "ru": "Средний урон от огня: %d–%d/сек."
+  },
+  "strskillcolddamageaveragepersecond": {
+    "en": "Average Cold Damage: %d-%d per second",
+    "ru": "Средний урон от льда: %d–%d/сек."
+  },
+  "strskilllightningdamageaveragepersecond": {
+    "en": "Average Lightning Damage: %d-%d per second",
+    "ru": "Средний урон от молнии: %d–%d/сек."
+  },
+  "strskillattackratingperlevelflat": {
+    "en": "%s: %+d Attack Rating per Level",
+    "ru": "%s: %+d к рейтингу атаки за уровень"
+  },
+  "strskilldefenseperlevelflat": {
+    "en": "%s: %+d Defense per Level",
+    "ru": "%s: %+d к защите за уровень"
+  },
+  "strskillassassincobrastrikecharge3": {
+    "en": "Charge 3 - Life and Mana Steal: %+d%%",
+    "ru": "3 заряда – похищение здоровья и маны: %+d%%"
+  },
+  "strskillassassintigerstrikecharge1": {
+    "en": "Charge 1 - Damage: %+d%%",
+    "ru": "1 заряд – урон: %+d%%"
+  },
+  "strskillassassintigerstrikecharge2": {
+    "en": "Charge 2 - Damage: %+d%%",
+    "ru": "2 заряда – урон: %+d%%"
+  },
+  "strskillassassintigerstrikecharge3": {
+    "en": "Charge 3 - Damage: %+d%%",
+    "ru": "3 заряда – урон: %+d%%"
+  },
+  "strskillholyfiredamagerange": {
+    "en": "Holy Fire: %d-%d",
+    "ru": "Священный огонь: %d–%d"
+  },
+  "strskillsleketonmasteryskeletondamage": {
+    "en": "Skeletons: Damage: %+d",
+    "ru": "Урон скелетов: %+d"
+  },
+  "strskillsleketonmasterymonsterdamage": {
+    "en": "Monsters: Damage: %+d%%",
+    "ru": "Урон монстров: %+d%%"
+  },
+  "strskilldurationrange": {
+    "en": "Duration: %d-%d seconds",
+    "ru": "Длительность: %d–%d сек."
+  },
+  "strskillradiussingular": {
+    "en": "Radius: %d yard",
+    "ru": "Радиус: %d м"
+  },
+  "strskillrangesingular": {
+    "en": "Range: %d yard",
+    "ru": "Дальность: %d м"
+  },
+  "strskilldurationsingular": {
+    "en": "Duration: %d second",
+    "ru": "Длительность: %d сек."
+  },
+  "strskillfreezelengthsingular": {
+    "en": "Freezes for %d second",
+    "ru": "Замораживает на %d сек."
+  },
+  "strskillcoldlengthsingular": {
+    "en": "Cold Length: %d second",
+    "ru": "Длительность замедления от льда: %d сек."
+  },
+  "strskillpoisonlengthsingular": {
+    "en": "over %d second",
+    "ru": "за %d сек."
+  },
+  "strskillfiredurationsingular": {
+    "en": "Fire Duration: %d second",
+    "ru": "Длительность эффекта огня: %d сек."
+  },
+  "strskillstunlengthsingular": {
+    "en": "Stun Length: %d second",
+    "ru": "Длительность оглушения: %d сек."
+  },
+  "strskilldurationplus": {
+    "en": "Duration: %+d seconds",
+    "ru": "Длительность: %+d сек."
+  },
+  "strskilldefenseflatbonus": {
+    "en": "Defense: %+d",
+    "ru": "Защита: %+d"
+  },
+  "strskillattackratingflatbonus": {
+    "en": "Attack Rating: %+d",
+    "ru": "Рейтинг атаки: %+d"
+  },
+  "strskillenemydefenseflatbonus": {
+    "en": "Enemy Defense: %+d",
+    "ru": "Защита врагов: %+d"
+  },
+  "strskillpiercingchance": {
+    "en": "%d%% Chance to Pierce",
+    "ru": "Вероятность пробивания %d%%"
+  },
+  "strskillrangeradius": {
+    "en": "Range Radius: %d yards",
+    "ru": "Радиус: %d м"
+  },
+  "strskillknockbackradius": {
+    "en": "Knockback Radius: %d yards",
+    "ru": "Радиус отбрасывания: %d м"
+  },
+  "strskillmaxresistfireactive": {
+    "en": "Maximum Fire Resist: +%d%% (Active)",
+    "ru": "Макс. сопротивление огню: +%d%% (активация)"
+  },
+  "strskillmaxresistfirepassive": {
+    "en": "Maximum Fire Resist: +%d%% (Passive)",
+    "ru": "Макс. сопротивление огню: +%d%% (пассивный эффект)"
+  },
+  "strskillmaxresistcoldactive": {
+    "en": "Maximum Cold Resist: +%d%% (Active)",
+    "ru": "Макс. сопротивление льду: +%d%% (активация)"
+  },
+  "strskillmaxresistcoldpassive": {
+    "en": "Maximum Cold Resist: +%d%% (Passive)",
+    "ru": "Макс. сопротивление льду: +%d%% (пассивный эффект)"
+  },
+  "strskillmaxresistlightningactive": {
+    "en": "Maximum Lightning Resist: +%d%% (Active)",
+    "ru": "Макс. сопротивление молнии: +%d%% (активация)"
+  },
+  "strskillmaxresistlightningpassive": {
+    "en": "Maximum Lightning Resist: +%d%% (Passive)",
+    "ru": "Макс. сопротивление молнии: +%d%% (пассивный эффект)"
+  },
+  "strskillhydramax": {
+    "en": "Max Hydras: %d",
+    "ru": "Макс. гидр: %d"
+  },
+  "strskillcastingdelaysingular": {
+    "en": "Casting Delay: %d second",
+    "ru": "Задержка после применения: %d сек."
+  },
+  "strskillcastingdelayplural": {
+    "en": "Casting Delay: %d seconds",
+    "ru": "Задержка после применения: %d сек."
+  },
+  "strskillmanaconsumedratio": {
+    "en": "Mana Consumed Per Damage: %d%%",
+    "ru": "Расход маны при получении урона: %d%%"
+  },
+  "strskillmanaconsumedsynergy": {
+    "en": "%s: %d%% Mana consumed per Level",
+    "ru": "%s: расход маны за уровень: %d%%"
+  },
+  "strskillblazeduration": {
+    "en": "Blaze Duration: %d seconds",
+    "ru": "Время действия «Огненного следа»: %d сек."
+  },
+  "strskillattackratingactive": {
+    "en": "Attack Rating: +%d%% (Active)",
+    "ru": "Рейтинг атаки: +%d%% (активация)"
+  },
+  "strskillattackratingpassive": {
+    "en": "Attack Rating: +%d%% (Passive)",
+    "ru": "Рейтинг атаки: +%d%% (пассивный эффект)"
+  },
+  "strskilldamagetakenperlevel": {
+    "en": "%s: %+d%% Damage Taken per Level",
+    "ru": "%s: %+d%% к получаемому урону за уровень"
+  },
+  "strskilluninterruptable": {
+    "en": "Uninterruptable",
+    "ru": "Невозможно прервать"
+  },
+  "strskillproximitydamage": {
+    "en": "Area damage increases at closer range",
+    "ru": "Урон по области увеличивается на меньшей дистанции"
+  },
+  "strskillnoconsumechance": {
+    "en": "%d%% Chance to not consume Quantity",
+    "ru": "%d%% шанс не израсходовать количество"
+  },
+  "strskillreplenishoncrit": {
+    "en": "Replenish Quantity on Critical Strike",
+    "ru": "Критические удары восполняют снаряды"
+  },
+  "strskillskillchanceperlevel": {
+    "en": "%s: %+d%% Chance per level",
+    "ru": "%s: %+d%% к вероятности за уровень"
+  },
+  "skillitemmetamorphosisbear": {
+    "en": "\n%s\n%s\nMark of the Bear:\nWerebear strikes grant Mark for %s",
+    "ru": "\n%s\n%s\nЗнак медведя:\nатаки в облике медведя накладывают метку на %s"
+  },
+  "skillitemmetamorphosiswolf": {
+    "en": "\n%s\n%s\nMark of the Wolf:\nWerewolf strikes grant Mark for %s",
+    "ru": "\n%s\n%s\nЗнак волка:\nатаки в облике волка накладывают метку на %s"
+  },
+  "miasmaboltname": {
+    "en": "Miasma Bolt",
+    "ru": "Стрела миазм"
+  },
+  "ringoffirename": {
+    "en": "Ring of Fire",
+    "ru": "Кольцо огня"
+  },
+  "flamewavename": {
+    "en": "Flame Wave",
+    "ru": "Волна пламени"
+  },
+  "miasmachainname": {
+    "en": "Miasma Chain",
+    "ru": "Цепь миазм"
+  },
+  "deathsigilname": {
+    "en": "Sigil: Death",
+    "ru": "Печать: \"Смерть\""
+  },
+  "apocalypsename": {
+    "en": "Apocalypse",
+    "ru": "Апокалипсис"
+  },
+  "abyssname": {
+    "en": "Abyss",
+    "ru": "Бездна"
+  },
+  "psychicwardname": {
+    "en": "Psychic Ward",
+    "ru": "Ментальный оберег"
+  },
+  "banehexname": {
+    "en": "Hex: Bane",
+    "ru": "Порча: \"Погибель\""
+  },
+  "siphonhexname": {
+    "en": "Hex: Siphon",
+    "ru": "Порча: \"Вытягивание жизни\""
+  },
+  "eldritchblastname": {
+    "en": "Eldritch Blast",
+    "ru": "Потусторонний взрыв"
+  },
+  "echoingstrikename": {
+    "en": "Echoing Strike",
+    "ru": "Вторящий удар"
+  },
+  "purgehexname": {
+    "en": "Hex: Purge",
+    "ru": "Порча: \"Очищение\""
+  },
+  "bladewarpname": {
+    "en": "Blade Warp",
+    "ru": "Искаженный клинок"
+  },
+  "cleavename": {
+    "en": "Cleave",
+    "ru": "Рассекатель"
+  },
+  "mirroredbladesname": {
+    "en": "Mirrored Blades",
+    "ru": "Зеркальные клинки"
+  },
+  "summongoatmanname": {
+    "en": "Summon Goatman",
+    "ru": "Призыв козлоногого"
+  },
+  "deathmarkname": {
+    "en": "Death Mark",
+    "ru": "Метка смерти"
+  },
+  "summontaintedname": {
+    "en": "Summon Tainted",
+    "ru": "Призыв помутненного"
+  },
+  "bloodoathname": {
+    "en": "Blood Oath",
+    "ru": "Кровавая клятва"
+  },
+  "engorgename": {
+    "en": "Engorge",
+    "ru": "Насыщение"
+  },
+  "bloodboilname": {
+    "en": "Blood Boil",
+    "ru": "Кровавый нарыв"
+  },
+  "consumename": {
+    "en": "Consume",
+    "ru": "Поглощение"
+  },
+  "binddemonname": {
+    "en": "Bind Demon",
+    "ru": "Сковать демона"
+  },
+  "strskilldemonallresist": {
+    "en": "Resist All for your demon: %+d%%",
+    "ru": "Сопротивление всем стихиям вашего демона: %+d%%"
+  },
+  "strskillcrushing": {
+    "en": "+%d%% Chance of Crushing Blow",
+    "ru": "+%d%% к вероятности нанести сокрушительный удар"
+  },
+  "strskillmagicdamageaveragepersecond": {
+    "en": "Average Magic Damage: %d-%d per second",
+    "ru": "Средний магический урон: %d-%d в сек."
+  },
+  "strskilllifeafterkill": {
+    "en": "Life After Each Kill: %+d",
+    "ru": "Здоровье при убийстве: %+d"
+  },
+  "strskillbindsouls": {
+    "en": "Max Bound Souls: %d",
+    "ru": "Максимум скованных душ: %d"
+  },
+  "strskillslayenemies": {
+    "en": "Slays enemies with less than %d%% health",
+    "ru": "Убивает врагов с запасом здоровья ниже %d%%"
+  },
+  "strskilllifecostdemon": {
+    "en": "Demon's Life Cost: %d%%",
+    "ru": "Затраты здоровья демона: %d%%"
+  },
+  "strskillchancetosucceed": {
+    "en": "Chance to Bind: %d%%",
+    "ru": "Вероятность сковывания: %d%%"
+  },
+  "strskilldemonicmasterydemondamage": {
+    "en": "Damage: %+d%%",
+    "ru": "Урон: %+d%%"
+  },
+  "strskilldemonicmasterydemonlife": {
+    "en": "Life of your demon: %+d%%",
+    "ru": "Здоровье вашего демона: %+d%%"
+  },
+  "strskillmanaafterkill": {
+    "en": "Mana After Each Kill: %+d",
+    "ru": "Мана после каждого убийства: %+d"
+  },
+  "strskillcritchance": {
+    "en": "Critical Strike Chance: %+d%%",
+    "ru": "Вероятность критического удара: %+d%%"
+  },
+  "strskillphysicalreductiondemon": {
+    "en": "Physical Damage to your demon Reduced by %d%%",
+    "ru": "Физический урон, получаемый вашим демоном, уменьшен на %d%%"
+  },
+  "strskillhealpercentdemon": {
+    "en": "Heal Demon's Life: %+d%%",
+    "ru": "Исцеление демона: %+d%%"
+  },
+  "strskillconsumebonus": {
+    "en": "Summon or Bind a demon to learn its secrets",
+    "ru": "Чтобы узнать тайны демона, его необходимо призвать или сковать"
+  },
+  "strskilluniqueaffixstrong": {
+    "en": "Bound demons gain Extra Strong",
+    "ru": "Скованные демоны получают эффект \"Сверхсила\""
+  },
+  "strskillrequirements": {
+    "en": "Weapon Requirements %+d%%",
+    "ru": "Требования к оружию: %+d%%"
+  },
+  "strskillenemyattackrating": {
+    "en": "%+d%% to Enemy Attack Rating",
+    "ru": "%+d%% к рейтингу атаки противников"
+  },
+  "strskillenemydefense": {
+    "en": "%+d%% to Enemy Defense",
+    "ru": "%+d%% к защите противников"
+  },
+  "strskilleffectlengthsingular": {
+    "en": "[PH] Effect Length: %d second",
+    "ru": ""
+  },
+  "strskilleffectlength": {
+    "en": "[PH]Effect Length: %d seconds",
+    "ru": ""
+  },
+  "strskilleffectwidth": {
+    "en": "Width: %d yards",
+    "ru": "Ширина: %d м"
+  },
+  "strskillconfusechance": {
+    "en": "Chance to Enrage: %+d%%",
+    "ru": "Вероятность впадения в ярость: %+d%%"
+  },
+  "strskillexplodechance": {
+    "en": "Chance to Erupt: %+d%%",
+    "ru": "Вероятность взрыва: %+d%%"
+  },
+  "strskilldamagetodemon": {
+    "en": "%+d%% Damage Taken Goes To your demon",
+    "ru": "%+d%% получаемого урона направляется на вашего демона"
+  },
+  "hexpurgemagicexplosiondamage": {
+    "en": "Magic Explosion Damage: %d-%d",
+    "ru": "Урон магического взрыва: %d-%d"
+  },
+  "sigildeathexplosiondamage": {
+    "en": "Fire Explosion Damage: %d-%d%% of slain enemy's health",
+    "ru": "Урон огненного взрыва: %d-%d%% от здоровья убитого противника"
+  },
+  "shadowmasterymiasmadurationincrease": {
+    "en": "+%d Seconds to Miasma Duration",
+    "ru": "+%d сек. к длительности миазм"
+  },
+  "shadowmasterymiasmarangeincrease": {
+    "en": "Miasma Radius: %d Yards",
+    "ru": "Радиус миазм: %d м"
+  },
+  "shadowmasteryabyssrangeincrease": {
+    "en": "Bonus Abyss Radius: +%d Yards",
+    "ru": "Дополнительный радиус бездны: +%d м"
+  },
+  "amdimm": {
+    "en": "%s: %+d%% Average Magic Damage per Second per Level",
+    "ru": "%s: %+d%% к среднему магическому урону в сек. за уровень"
+  },
+  "synhealthregenperlvl": {
+    "en": "%s: +%d Replenish life per level",
+    "ru": "%s: +%d к восполнению здоровья за уровень"
+  },
+  "synenemyhexduration": {
+    "en": "%s: Hex Duration +%d seconds per level",
+    "ru": "%s: +%d к длительности порчи за уровень"
+  },
+  "hexenemyduration": {
+    "en": "Hex Duration: %d seconds",
+    "ru": "Длительность порчи: %d сек."
+  },
+  "synhexsiphonlifemanasteal": {
+    "en": "%s: +%d Life and Mana After Kill per level",
+    "ru": "%s: +%d к здоровью и мане при убийстве за уровень"
+  },
+  "synhexpurgechancetoerupt": {
+    "en": "%s: %+d%% Chance to Erupt per level",
+    "ru": "%s: %+d%% к вероятности взрыва за уровень"
+  },
+  "mirroredbladesdamagepercent": {
+    "en": "Mirrored Blade Damage: %d%%",
+    "ru": "Урон зеркальных клинков: %d%%"
+  },
+  "syngoatmancrushingblowperlevel": {
+    "en": "%s: %+d%% Chance of Crushing Blow per level",
+    "ru": "%s: %+d%% к вероятности нанести сокрушительный удар за уровень"
+  },
+  "strskilldemonicmasterydemonac": {
+    "en": "Defense: %+d",
+    "ru": "Защита: %+d"
+  },
+  "syndefenseflatperlevel": {
+    "en": "%s: %+d Defense per level",
+    "ru": "%s: %+d к защите за уровень"
+  },
+  "strskilluniqueaffixfast": {
+    "en": "Bound demons gain Extra Fast",
+    "ru": "Скованные демоны получают эффект \"Стремительность\""
+  },
+  "strskilluniqueaffixspectral": {
+    "en": "Bound demons gain Spectral Hit",
+    "ru": "Скованные демоны получают эффект \"Призрачный удар\""
+  },
+  "strskilluniqueaffixaura": {
+    "en": "Bound demons gain Aura Enchanted",
+    "ru": "Скованные демоны получают эффект \"Зачарованная аура\""
+  },
+  "synchancetobindperlevel": {
+    "en": "%s: +%d%% Chance to Bind Demon per level",
+    "ru": "%s: +%d%% к вероятности сковывания демона за уровень"
+  },
+  "strskillhealthlinkdamagesharepercent": {
+    "en": "Damage Shared Between Bound Targets: %d%%",
+    "ru": "Урон, разделяемый между связанными целями: %d%%"
+  },
+  "strskilldamageincreaseflat": {
+    "en": "Damage Increased by %d",
+    "ru": "Урон увеличен на %d"
+  },
+  "strskillmagicdamageincreaseflat": {
+    "en": "Magic Damage Increased by %d",
+    "ru": "Магический урон увеличен на %d"
+  },
+  "strskillconsumepetbonus": {
+    "en": "Bonus from %s:",
+    "ru": "%s – бонус:"
+  },
+  "strskillmirroredbladesduplicates": {
+    "en": "Mirrored Weapons Created: %d",
+    "ru": "Зеркальные копии оружия: %d"
+  },
+  "synechoingstrikeduplicates": {
+    "en": "%s: Additional echoes created every sixth level: %d",
+    "ru": "%s – дополнительные отголоски, создаваемые за каждый шестой уровень: %d"
+  },
+  "strskillechoingstriketotalduplicates": {
+    "en": "%d Echoes",
+    "ru": "Отголоски: %d"
+  },
+  "strskillcleavearcradius": {
+    "en": "Cleave Arc: %d Degrees",
+    "ru": "Рассекающая дуга: %d градусов"
+  },
+  "strskillhexpurgeexplosioncount": {
+    "en": "Hex Removed after %d Explosions",
+    "ru": "Порча спадает после %d взрывов"
+  },
+  "strskilldamagepercentage": {
+    "en": "Damage: +%d%%",
+    "ru": "Урон: +%d%%"
+  },
+  "strskillringoffiredamageperframebonus": {
+    "en": "+%d%% Fire Damage per yard",
+    "ru": "+%d%% к урону от огня за м"
+  },
+  "strskillechoingstriketotalduplicatesingular": {
+    "en": "%d Echo",
+    "ru": "Отголоски: %d"
+  },
+  "strskillhexpurgeexplosioncountsingular": {
+    "en": "Hex Removed after %d Explosion",
+    "ru": "Порча спадает после %d-го взрыва"
+  },
+  "strskilldemonmaxcount": {
+    "en": "Max Demons: %d",
+    "ru": "Максимум демонов: %d"
+  },
+  "strskillchainmaxcount": {
+    "en": "Max Chains: %d",
+    "ru": "Максимум цепей: %d"
+  }
+}
