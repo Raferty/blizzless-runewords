@@ -252,7 +252,8 @@
           v-model:open="overviewMaterialsOpen"
           :title="t('Материалы', 'Materials')"
         >
-          <PlannerMaterials />
+          <template #actions><PlannerMaterialActions /></template>
+          <PlannerMaterials header-actions />
         </PlannerPanel>
         <PlannerPanel
           v-if="section === 'overview' || section === 'notes'"
@@ -657,6 +658,7 @@ import {
   skillBudget,
   spentSkills,
 } from "@/utils/planner";
+import PlannerMaterialActions from "./planner/PlannerMaterialActions.vue";
 import PlannerMaterials from "./planner/PlannerMaterials.vue";
 import { plannerItemIdentity } from "@/utils/planner-item-art";
 import { fitsStashCell } from "@/utils/planner-item-movement";

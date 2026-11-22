@@ -29,17 +29,8 @@
       </button>
       <h3 id="planner-materials-heading">{{ t("Материалы", "Materials") }}</h3>
     </div>
-    <div class="planner-materials-actions">
-      <button type="button" :disabled="materialsEmpty" @click="setAllMaterials(0)">
-        {{ t("Очистить панель", "Clear panel") }}
-      </button>
-      <button
-        type="button"
-        :disabled="materialsFull"
-        @click="setAllMaterials(materialSlotLimit)"
-      >
-        {{ t("Заполнить панель", "Fill panel") }}
-      </button>
+    <div v-if="!headerActions" class="planner-materials-actions">
+      <PlannerMaterialActions />
     </div>
   </section>
   <UiModal
@@ -80,7 +71,7 @@
   </UiModal>
 </template>
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import UiIcon from "../ui/UiIcon.vue";
 import UiModal from "../ui/UiModal.vue";
 import { useText } from "@/composables/useText";
@@ -89,6 +80,8 @@ import { materialSlotLimit } from "@/shared/planner";
 import slotLayout from "@/shared/planner-material-slots.json";
 import { stashSupplies } from "@/utils/planner-supplies";
 import { baseItemImage } from "@/utils/planner-item-art";
+import PlannerMaterialActions from "./PlannerMaterialActions.vue";
+defineProps<{ headerActions?: boolean }>();
 const t = useText();
 const store = usePlannerStore();
 const assetRoot = import.meta.env.BASE_URL;
@@ -111,17 +104,6 @@ const materialSlots = slotLayout.map(({ code, x, y, width, height }) => ({
     height: `${(height / 1507) * 100}%`,
   },
 }));
-const materialsEmpty = computed(() =>
-  materialSlots.every(({ code }) => store.build.materials[code] === 0)
-);
-const materialsFull = computed(() =>
-  materialSlots.every(({ code }) => store.build.materials[code] === materialSlotLimit)
-);
-function setAllMaterials(count: number) {
-  store.build.materials = Object.fromEntries(
-    materialSlots.map(({ code }) => [code, count])
-  );
-}
 type MaterialSlot = (typeof materialSlots)[number];
 const activeMaterial = ref<MaterialSlot | null>(null);
 const materialQuantity = ref<number | string>(0);
