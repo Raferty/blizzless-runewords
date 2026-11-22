@@ -143,7 +143,7 @@ try {
         extendedStash: true,
       });
       const actual = raw.items[0];
-      assert.equal(bytes[248], current.classId === "warlock" ? 3 : 2);
+      assert.equal(bytes[248], 3);
       for (const [id, value] of Object.entries(item.baseSkills || {}))
         assert(
           actual.magic_attributes.some(

@@ -107,9 +107,15 @@ try {
       const { character, stash } = unpackMaterialArchive(archive);
       assert.deepEqual(character, Uint8Array.from(bytes));
       assert.deepEqual(await codec.readMaterials(stash, hero.hardcore), hero.materials);
+      const view = new DataView(stash.buffer, stash.byteOffset, stash.byteLength);
+      const materialOffset = 9 * 68;
+      assert.equal(stash[materialOffset + 20], 1);
+      const chronicleOffset = materialOffset + view.getUint32(materialOffset + 16, true);
+      assert.equal(stash[chronicleOffset + 20], 2);
+      assert.equal(stash.length - chronicleOffset, 148);
       if (original) {
-        // Five empty 68-byte grid pages and the gold stored in their headers survive edits.
-        assert.deepEqual(stash.slice(0, 5 * 68), original.slice(0, 5 * 68));
+        // Nine empty 68-byte grid pages and the gold stored in their headers survive edits.
+        assert.deepEqual(stash.slice(0, 9 * 68), original.slice(0, 9 * 68));
       }
       original = stash;
       new DataView(original.buffer, original.byteOffset).setUint32(12, 12345, true);

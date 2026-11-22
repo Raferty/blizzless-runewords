@@ -9,6 +9,7 @@ import type { PlannerBuild } from "@/types/planner";
 
 const version = 105;
 const headerSize = 64;
+const sharedGridPages = 9;
 const magic = 0xaa55aa55;
 const codes = new Set(slots.map((slot) => slot.code));
 export const maxStashSize = 4_000_000;
@@ -131,18 +132,40 @@ export function materialSaveCodec(
       );
       stash.set(payload, offset + headerSize);
       stash.set(original.subarray(end), offset + headerSize + payload.length);
+      // Repair the shorter layout emitted by older planner exports.
+      if (
+        offset === 5 * 68 &&
+        original.length - end === 84 &&
+        original[end + 20] === 0 &&
+        new DataView(original.buffer, original.byteOffset + end).getUint32(64, true) === 0xc0eaedc0
+      ) {
+        const emptyPage = new Uint8Array(68);
+        emptyPage.set(original.subarray(0, 12));
+        emptyPage[16] = 68;
+        emptyPage.set([74, 77], headerSize);
+        const missingPages = sharedGridPages - 5;
+        const expanded = new Uint8Array(stash.length + missingPages * 68 + 64);
+        expanded.set(stash.subarray(0, offset));
+        for (let index = 0; index < missingPages; index++)
+          expanded.set(emptyPage, offset + index * 68);
+        expanded.set(stash.subarray(offset), offset + missingPages * 68);
+        const chronicleOffset = expanded.length - 148;
+        expanded[chronicleOffset + 16] = 148;
+        expanded[chronicleOffset + 20] = 2;
+        stash = expanded;
+      }
     } else {
-      const pages = Array.from({ length: 6 }, (_, index) => ({
+      const pages = Array.from({ length: sharedGridPages + 1 }, (_, index) => ({
         name: "",
         type: 0,
-        isStackable: Number(index === 5),
-        items: index === 5 ? items : [],
+        isStackable: Number(index === sharedGridPages),
+        items: index === sharedGridPages ? items : [],
       }));
       stash = await writeStash(
         {
           version: "105",
           type: 0,
-          pageCount: 6,
+          pageCount: pages.length,
           sharedGold: 0,
           hardcore: build.hardcore,
           pages,
@@ -151,8 +174,8 @@ export function materialSaveCodec(
             uniqueItems: [],
             runewords: [],
             _unknown_data: {
-              envelopePadding: new Uint8Array(44),
-              trailing: new Uint8Array(),
+              envelopePadding: Uint8Array.of(2, ...new Uint8Array(43)),
+              trailing: new Uint8Array(64),
               originalCounts: { setItems: 0, uniqueItems: 0, runewords: 0 },
             },
           },
