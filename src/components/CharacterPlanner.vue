@@ -701,7 +701,7 @@ const tabs = [
   { key: "quests", ru: "Задания", en: "Quests" },
   { key: "notes", ru: "Заметки", en: "Notes" },
 ];
-const overviewMaterialsOpen = ref(true);
+const overviewMaterialsOpen = ref(false);
 const hasMaterials = computed(
   () =>
     (store.build.gameSave?.mode ?? defaultGameSaveMode(store.build.classId)) === "rotw"
