@@ -23,6 +23,7 @@ export function itemRequirements(
   const definition = native?.itemDefinition(resolved);
   const requiredLevel = Math.max(
     itemRequiredLevel(item),
+    native?.baseModifierRequiredLevel(resolved) ?? 1,
     base?.levelreq ?? 1,
     Number(definition?.lvlreq ?? 1)
   );

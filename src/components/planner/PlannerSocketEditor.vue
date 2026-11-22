@@ -87,6 +87,7 @@
       class="planner-socket-properties"
       :aria-label="t('Свойства вставок', 'Socket insert properties')"
     >
+      <p v-for="(line, n) in summary" :key="n">{{ line }}</p>
       <template v-for="index in count" :key="index">
         <template v-if="selected(index)">
           <template v-if="jewelItem(index)">
@@ -99,7 +100,6 @@
               @values="setValues(index, $event)"
             />
           </template>
-          <p v-for="(line, n) in properties(index)" v-else :key="n">{{ line }}</p>
         </template>
       </template>
     </div>
@@ -125,7 +125,7 @@ import {
   socketCategory,
   socketInsertItem,
 } from "@/utils/planner-sockets";
-import { socketPropertyLines } from "@/utils/planner-item-catalog";
+import { socketSummaryLines } from "@/utils/planner-item-catalog";
 import type { GameSaveExporter } from "@/utils/planner-game-save";
 import type { PlannerItem } from "@/types/planner";
 
@@ -186,14 +186,17 @@ const jewelItem = (index: number) =>
     props.modelValue[index - 1] ?? "",
     props.item.socketPropertyValues?.[index - 1]
   );
-const properties = (index: number) =>
-  socketPropertyLines(
+const summary = computed(() =>
+  socketSummaryLines(
     props.native,
-    props.modelValue[index - 1] ?? "",
+    props.modelValue
+      .slice(0, props.count)
+      .map((code, index) => (jewelItem(index + 1) ? null : code)),
     socketCategory(props.item),
     props.characterLevel,
-    props.item.socketPropertyValues?.[index - 1]
-  );
+    props.item.socketPropertyValues
+  )
+);
 function setValues(index: number, values: Record<string, number>) {
   emit("values", { ...props.item.socketPropertyValues, [index - 1]: values });
 }

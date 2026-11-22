@@ -145,6 +145,7 @@ export function combatItemStats(
     });
   merge(result, affixStats(item));
   merge(result, baseSkillStats(item));
+  merge(result, native.baseModifierStats(resolved));
   return result;
 }
 

@@ -61,7 +61,7 @@ import { useText } from "@/composables/useText";
 import { plannerClasses } from "@/shared/planner";
 import {
   definitionPropertyLines,
-  socketPropertyLines,
+  socketSummaryLines,
 } from "@/utils/planner-item-catalog";
 import {
   propertyRange,
@@ -152,16 +152,12 @@ const rows = computed(() => {
   }).flat();
 });
 const socketLines = computed(() =>
-  props.native
-    .itemRunes(props.item)
-    .flatMap((code) =>
-      socketPropertyLines(
-        props.native,
-        code,
-        socketCategory(props.item),
-        props.characterLevel
-      )
-    )
+  socketSummaryLines(
+    props.native,
+    props.native.itemRunes(props.item),
+    socketCategory(props.item),
+    props.characterLevel
+  )
 );
 function input(index: number, event: Event, range: { min: number; max: number }) {
   const text = (event.target as HTMLInputElement).value;

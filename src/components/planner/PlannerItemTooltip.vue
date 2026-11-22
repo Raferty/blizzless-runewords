@@ -23,13 +23,7 @@
         ‘{{ runes.map((rune) => rune?.name[lang]).join(" · ") }}’
       </p>
       <p v-for="line in shard?.lines" :key="line">{{ line }}</p>
-      <p
-        v-if="!shard"
-        :class="{ 'planner-requirement--unmet': requirements && !requirements.level.met }"
-      >
-        {{ t("Требуемый уровень", "Required level") }}:
-        {{ requirements?.level.required ?? itemRequiredLevel(item) }}
-      </p>
+      <p v-for="line in baseLines" :key="line">{{ line }}</p>
       <p
         v-for="requirement in requirements?.attributes"
         :key="requirement.key"
@@ -44,6 +38,16 @@
           ({{ t("сейчас", "current") }}: {{ requirement.current }})</template
         >
       </p>
+      <p
+        v-if="!shard"
+        :class="{ 'planner-requirement--unmet': requirements && !requirements.level.met }"
+      >
+        {{ t("Требуемый уровень", "Required level") }}:
+        {{ requirements?.level.required ?? itemRequiredLevel(item) }}
+      </p>
+      <p v-if="item.quality === 'superior' || item.superiorMod">
+        {{ t("Превосходный", "Superior") }}
+      </p>
       <p v-if="item.ethereal">{{ t("Эфирный", "Ethereal") }}</p>
       <p v-if="isTome(item.baseCode)">
         {{ t("Свитков внутри", "Scrolls inside") }}: {{ item.quantity ?? 20 }} / 20
@@ -51,8 +55,11 @@
       <div v-if="word" class="planner-item-tooltip-properties">
         <RunewordStats :lines="wordLines" />
       </div>
-      <ul v-else class="planner-item-tooltip-properties">
+      <ul v-else-if="properties.length" class="planner-item-tooltip-properties">
         <li v-for="(line, index) in properties" :key="index">{{ line }}</li>
+      </ul>
+      <ul v-if="socketLines.length" class="planner-item-tooltip-properties">
+        <li v-for="(line, index) in socketLines" :key="index">{{ line }}</li>
       </ul>
       <ul v-if="baseSkillLines.length" class="planner-item-tooltip-properties">
         <li v-for="line in baseSkillLines" :key="line">{{ line }}</li>
@@ -67,27 +74,6 @@
             {{ rune?.name[lang] || t("Пустой", "Empty") }}
           </span>
         </div>
-        <template v-if="!word && native">
-          <template v-for="(code, index) in item.socketedItems" :key="index">
-            <div v-if="code" class="planner-insert-tooltip-properties">
-              <p v-if="runes.length > 1">{{ runes[index]?.name[lang] }}</p>
-              <ul>
-                <li
-                  v-for="line in socketPropertyLines(
-                    native,
-                    code,
-                    socketCategory(item),
-                    store.build.level,
-                    item.socketPropertyValues?.[index]
-                  )"
-                  :key="line"
-                >
-                  {{ line }}
-                </li>
-              </ul>
-            </div>
-          </template>
-        </template>
       </div>
       <p v-if="item.notes" class="planner-item-tooltip-notes">{{ item.notes }}</p>
     </div>
@@ -96,14 +82,7 @@
 <script setup lang="ts">
 import { watch } from "vue";
 import { baseSkillDefinition } from "@/utils/planner-base-skills";
-import {
-  computed,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  shallowRef,
-  type CSSProperties,
-} from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, type CSSProperties } from "vue";
 import RunewordStats from "@/components/RunewordStats.vue";
 import PlannerSetBonuses from "./PlannerSetBonuses.vue";
 import { useInfoStore, useRunewordsStore } from "@/store";
@@ -121,13 +100,14 @@ import {
   definitionPropertyLines,
   catalogPropertyLines,
   catalogSetBonuses,
-  socketPropertyLines,
+  socketSummaryLines,
   itemPropertyLines,
 } from "@/utils/planner-item-catalog";
 import { affixById, affixDefinition } from "@/utils/planner-affixes";
 import { itemRequiredLevel, socketCategory } from "@/utils/planner-sockets";
 import { plannerItemDimensions } from "@/utils/planner-item-art";
-import type { GameSaveExporter } from "@/utils/planner-game-save";
+import { usePlannerGameData } from "@/composables/usePlannerGameData";
+import { plannerClasses } from "@/shared/planner";
 import type { PlannerItem } from "@/types/planner";
 import { itemSkillClass } from "@/utils/planner-properties";
 import type { ItemRequirementStatus } from "@/utils/planner-item-requirements";
@@ -144,7 +124,7 @@ const words = useRunewordsStore();
 const store = usePlannerStore();
 const t = useText();
 const lang = computed(() => info.currentLang);
-const native = shallowRef<GameSaveExporter>();
+const native = usePlannerGameData();
 const squareSockets = computed(() => {
   const size = plannerItemDimensions(props.item);
   return (
@@ -156,6 +136,37 @@ const squareSockets = computed(() => {
 });
 const identity = computed(() => plannerItemIdentity(props.item));
 const shard = computed(() => worldstoneShardTooltip(identity.value.baseCode, lang.value));
+const baseLines = computed(() => {
+  const base = native.value?.baseCharacteristics(
+    identity.value.baseCode ?? "",
+    store.build.classId
+  );
+  if (!base || shard.value) return [];
+  const lines: string[] = [];
+  if (base.defense) lines.push(`${t("Базовая защита", "Base Defense")}: ${base.defense}`);
+  if (base.block !== undefined)
+    lines.push(`${t("Базовый шанс блока", "Base Chance to Block")}: ${base.block}%`);
+  for (const [label, damage] of [
+    [t("Урон Smite", "Base Smite Damage"), base.smite],
+    [t("Урон ногой", "Base Kick Damage"), base.kick],
+    [t("Базовый урон одной рукой", "Base One-Hand Damage"), base.oneHand],
+    [t("Базовый урон двумя руками", "Base Two-Hand Damage"), base.twoHand],
+    [t("Базовый урон при броске", "Base Throw Damage"), base.throwing],
+  ] as const)
+    if (damage) lines.push(`${label}: ${damage.join("–")}`);
+  if (base.durability)
+    lines.push(`${t("Базовая прочность", "Base Durability")}: ${base.durability}`);
+  if (base.maxStack && !isTome(identity.value.baseCode))
+    lines.push(
+      `${t("Количество", "Quantity")}: ${props.item.quantity ?? 1} / ${base.maxStack}`
+    );
+  const restriction = plannerClasses.find((row) => row.id === base.classId);
+  if (restriction)
+    lines.push(
+      t(`Только для класса «${restriction.name.ru}»`, `(${restriction.name.en} Only)`)
+    );
+  return lines;
+});
 const baseName = computed(() => {
   if (isContainerBase(identity.value.baseCode)) return "";
   const base = native.value?.gd.items[identity.value.baseCode || ""];
@@ -163,6 +174,17 @@ const baseName = computed(() => {
 });
 const word = computed(() => itemRuneword(props.item, words.sortedRunewords));
 const runes = computed(() => itemSockets(props.item, words.sortedRunewords));
+const socketLines = computed(() =>
+  native.value && !word.value
+    ? socketSummaryLines(
+        native.value,
+        props.item.socketedItems ?? [],
+        socketCategory(props.item),
+        store.build.level,
+        props.item.socketPropertyValues
+      )
+    : []
+);
 const wordLines = computed(() =>
   native.value && props.item.propertyValues
     ? itemPropertyLines(native.value, props.item, store.build.level, store.build.classId)
@@ -176,16 +198,28 @@ const wordLines = computed(() =>
         )
       : []
 );
-const baseSkillLines = computed(() =>
-  native.value
-    ? definitionPropertyLines(
-        native.value,
-        baseSkillDefinition(props.item),
-        1,
-        store.build.level
-      )
-    : []
-);
+const baseSkillLines = computed(() => {
+  if (!native.value) return [];
+  const game = native.value;
+  const level = store.build.level;
+  return [
+    ...definitionPropertyLines(game, baseSkillDefinition(props.item), 1, level),
+    ...(["automod", "superiorMod"] as const).flatMap((field) => {
+      const mod = props.item[field];
+      if (!mod) return [];
+      const option = game
+        .baseModifierOptions(props.item, field)
+        .find((row) => row.id === mod.id);
+      if (!option) return [];
+      const values = Object.fromEntries(
+        option.ranges.flatMap(({ min, max }, i) =>
+          min < max ? [[i + 1, mod.values[i]]] : []
+        )
+      );
+      return definitionPropertyLines(game, option.definition, 1, level, values);
+    }),
+  ];
+});
 const properties = computed(() => {
   const { catalogId } = identity.value;
   if (native.value && props.item.containerQuantity !== undefined)
@@ -285,21 +319,12 @@ function place() {
 }
 watch(() => props.anchor, place, { flush: "post" });
 let observer: ResizeObserver;
-let disposed = false;
-onMounted(async () => {
+onMounted(() => {
   observer = new ResizeObserver(place);
   if (tooltip.value) observer.observe(tooltip.value);
   place();
-  try {
-    const module = await import("@/utils/planner-game-save");
-    const value = await module.loadGameSaveExporter();
-    if (!disposed) native.value = value;
-  } catch {
-    // The saved bonuses and bundled runeword description remain available.
-  }
 });
 onBeforeUnmount(() => {
-  disposed = true;
   observer?.disconnect();
 });
 </script>

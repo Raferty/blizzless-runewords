@@ -305,12 +305,26 @@
   gap: 10px;
   align-items: flex-end;
 }
-.planner-item-base-controls > label:first-child {
-  width: 120px;
-}
-.planner-item-base-controls > label:nth-child(2) {
-  width: 230px;
+.planner-item-base-controls > .planner-label,
+.planner-item-name-control {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: auto;
   max-width: 100%;
+  min-height: var(--planner-control-height);
+  padding: 2px 8px;
+  border: 1px solid #383838;
+  border-radius: 4px;
+}
+.planner-item-base-controls input[type="number"] {
+  width: 6ch;
+}
+.planner-item-name-control strong {
+  font-weight: 500;
+}
+.planner-item-name-control button {
+  padding: 4px;
 }
 .planner-item-unique-charm {
   width: 230px;
@@ -565,9 +579,6 @@
   }
   .planner-item-identity h2 {
     font-size: 17px;
-  }
-  .planner-item-base-controls > label:first-child {
-    width: 100px;
   }
   .planner-item-properties {
     font-size: 14px;

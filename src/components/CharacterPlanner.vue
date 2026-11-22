@@ -622,7 +622,7 @@ import PlannerItemEditor from "./planner/PlannerItemEditor.vue";
 import UiSelect from "./ui/UiSelect.vue";
 import UiModal from "./ui/UiModal.vue";
 import TheFooter from "./TheFooter.vue";
-import { useInfoStore } from "@/store";
+import { useInfoStore, useRunewordsStore } from "@/store";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
 import {
@@ -644,7 +644,8 @@ import {
 import { plannerItemIdentity } from "@/utils/planner-item-art";
 import { fitsStashCell } from "@/utils/planner-item-movement";
 import { usePlannerGameData } from "@/composables/usePlannerGameData";
-import { loadGameSaveExporter } from "@/utils/planner-game-save";
+import { assembleSocketedRuneword } from "@/utils/planner-item-catalog";
+import { gameSaveEntries, loadGameSaveExporter } from "@/utils/planner-game-save";
 import type {
   Difficulty,
   EquipmentSlot,
@@ -684,6 +685,16 @@ const libraryOpen = ref(false);
 const resetOpen = ref(false);
 const stashOpen = ref(false);
 const nativeGame = usePlannerGameData();
+const runewords = useRunewordsStore();
+watch(
+  [nativeGame, () => store.build],
+  ([native, build]) => {
+    if (native)
+      for (const { item } of gameSaveEntries(build))
+        assembleSocketedRuneword(native, item, build, runewords.sortedRunewords);
+  },
+  { immediate: true }
+);
 const stashTarget = ref<EquipmentSlot>("mainHand");
 const importInput = ref<HTMLInputElement | null>(null);
 type MercSlot = "head" | "armor" | "mainHand" | "offHand";

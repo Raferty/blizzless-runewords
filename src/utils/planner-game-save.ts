@@ -25,7 +25,13 @@ import {
   spentAttributes,
   spentSkills,
 } from "./planner";
-import type { ClassId, EquipmentSlot, PlannerBuild, PlannerItem } from "@/types/planner";
+import type {
+  ClassId,
+  EquipmentSlot,
+  PlannerAffix,
+  PlannerBuild,
+  PlannerItem,
+} from "@/types/planner";
 
 import {
   affixStats,
@@ -258,7 +264,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           ])
         );
       }
-      for (const kind of ["magicPrefix", "magicSuffix"] as const) {
+      for (const kind of ["magicPrefix", "magicSuffix", "autoMagic"] as const) {
         readData[kind] = Object.fromEntries(
           Object.entries(data[kind]).map(([id, row]) => [
             id.slice(0, 2) + String(saveAffixId(id)).padStart(3, "0"),
@@ -376,7 +382,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const quality: Record<number, PlannerItem["quality"]> = {
       1: "normal",
       2: "normal",
-      3: "normal",
+      3: "superior",
       4: "magic",
       5: "set",
       6: "rare",
@@ -424,6 +430,65 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         : undefined;
       const prefix = prefixKey ? gd.locale.strings[prefixKey] || prefixKey : undefined;
       const suffix = suffixKey ? gd.locale.strings[suffixKey] || suffixKey : undefined;
+      const { autoAffixId, superiorId, baseStats } = native as BinaryParsedItem & {
+        autoAffixId?: number;
+        superiorId?: number;
+        baseStats?: Record<string, number>;
+      };
+      const remaining = { ...(baseStats ?? native.stats) };
+      const baseItem = {
+        quality: itemQuality,
+        baseCode: native.base,
+        itemLevel: native.ilvl,
+      } as PlannerItem;
+      function restoreModifier(field: "automod" | "superiorMod", id: string) {
+        // Magic/rare affixes and automods may contribute to the same saved stat.
+        // Keep the remaining contribution in the imported item after restoring the base.
+        const overlaps =
+          field === "automod" && (itemQuality === "magic" || itemQuality === "rare");
+        const fits = (key: string, value: number) =>
+          overlaps && value >= 0
+            ? (remaining[key] ?? 0) >= value
+            : (remaining[key] ?? 0) === value;
+        const option = baseModifierOptions(baseItem, field).find((row) => row.id === id);
+        if (!option) return;
+        const values = option.ranges.map(({ max }) => max);
+        for (const [i, range] of option.ranges.entries()) {
+          if (range.min === range.max) continue;
+          const def = Object.fromEntries(
+            ["prop", "par", "min", "max"].map((key) => [
+              key + "1",
+              option.definition[key + (i + 1)],
+            ])
+          );
+          for (let value = range.max; value >= range.min; value--) {
+            const stats = definitionStats(
+              { ...def, min1: value, max1: value },
+              native.base,
+              1
+            );
+            if (Object.entries(stats).every(([key, amount]) => fits(key, amount))) {
+              values[i] = value;
+              break;
+            }
+          }
+        }
+        const mod = { id, values };
+        const stats = baseModifierStats({ ...baseItem, [field]: mod });
+        if (!Object.entries(stats).every(([key, value]) => fits(key, value))) return;
+        const totals = { ...native.stats };
+        for (const [key, value] of Object.entries(stats)) {
+          remaining[key] -= value;
+          totals[key] -= value;
+        }
+        native = { ...native, stats: totals };
+        return mod;
+      }
+      const automod =
+        autoAffixId && restoreModifier("automod", plannerAffixId(`am${autoAffixId}`)!);
+      const superiorMod =
+        superiorId !== undefined &&
+        restoreModifier("superiorMod", `qm${String(superiorId).padStart(3, "0")}`);
       const bonuses: PlannerItem["bonuses"] = {};
       for (const [stat, key] of Object.entries(statBonuses)) {
         const value = native.stats[stat];
@@ -486,7 +551,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             (itemQuality === "magic" && (prefix || suffix)
               ? `${prefix ? `${prefix} ` : ""}${gd.locale.strings[base?.namestr ?? ""] || base?.name || native.base}${suffix ? ` ${suffix}` : ""}`
               : gd.locale.strings[base?.namestr ?? ""] || base?.name || native.base),
-        quality: itemQuality,
+        quality: itemQuality === "superior" && !superiorMod ? "normal" : itemQuality,
+        ...(automod ? { automod } : {}),
+        ...(superiorMod ? { superiorMod } : {}),
         requiredLevel: Math.max(1, base?.levelreq || 1),
         notes: "",
         bonuses,
@@ -800,6 +867,107 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     visit(gd.items[code]?.type);
     return result;
   }
+  function baseModifierOptions(item: PlannerItem, field: "automod" | "superiorMod") {
+    const base = gd.items[item.baseCode ?? ""] as unknown as Definition | undefined;
+    const t = types(item.baseCode ?? "");
+    const superior = field === "superiorMod";
+    const allowed = superior
+      ? ["superior", "runeword"]
+      : ["normal", "superior", "runeword", "magic", "rare"];
+    const isBase = allowed.includes(item.quality);
+    if (!base || !isBase) return [];
+    const category = ["shld", "scep", "wand", "staf", "bow", "boot", "glov", "belt"].find(
+      (type) => t.has(type)
+    );
+    const qualityType =
+      (
+        {
+          shld: "shield",
+          scep: "scepter",
+          wand: "wand",
+          staf: "staff",
+          bow: "bow",
+          boot: "boots",
+          glov: "gloves",
+          belt: "belt",
+        } as Record<string, string>
+      )[category ?? ""] ?? (t.has("weap") ? "weapon" : "armor");
+    if (superior && (!(t.has("weap") || t.has("armo")) || base.compactsave)) return [];
+    if (!superior && (!base.autoprefix || item.baseSkillTab)) return [];
+    const level = item.itemLevel ?? 99;
+    return Object.entries(superior ? gd.qualityItems : gd.autoMagic).flatMap(
+      ([id, def]) => {
+        const row = def as unknown as Definition;
+        if (
+          superior
+            ? !row[qualityType] ||
+              ((!base.durability || base.nodurability) &&
+                (row.mod1code === "dur%" || row.mod2code === "dur%"))
+            : row.group !== base.autoprefix ||
+              !row.spawnable ||
+              (item.quality === "rare" && !row.rare) ||
+              Number(row.level ?? 0) > level ||
+              (!!row.maxlevel && Number(row.maxlevel) < level) ||
+              row.mod1code === "skilltab" ||
+              ![1, 2, 3, 4, 5, 6, 7].some((i) => t.has(String(row[`itype${i}`]))) ||
+              [1, 2, 3, 4, 5].some((i) => t.has(String(row[`etype${i}`])))
+        )
+          return [];
+        const definition: Definition = {};
+        const ranges = [1, 2, 3].map((i) => {
+          const code = row[`mod${i}code`];
+          if (!code) return { min: 0, max: 0 };
+          definition[`prop${i}`] = code;
+          definition[`par${i}`] = row[`mod${i}param`];
+          definition[`min${i}`] = row[`mod${i}min`];
+          definition[`max${i}`] = row[`mod${i}max`];
+          return (
+            propertyRange(definition, gd.properties[String(code)] ?? {}, i) ?? {
+              min: Number(row[`mod${i}max`] ?? 0),
+              max: Number(row[`mod${i}max`] ?? 0),
+            }
+          );
+        });
+        return [{ id, definition, ranges, requiredLevel: Number(row.levelreq ?? 1) }];
+      }
+    );
+  }
+  function baseModifierRequiredLevel(item: PlannerItem) {
+    const id = item.automod?.id;
+    if (!id) return 1;
+    return (
+      baseModifierOptions(item, "automod").find((option) => option.id === id)
+        ?.requiredLevel ?? 1
+    );
+  }
+  function baseModifierStats(item: PlannerItem, strict = false) {
+    const stats: Record<string, number> = {};
+    for (const field of ["automod", "superiorMod"] as const) {
+      const mod = item[field];
+      if (!mod) continue;
+      const option = baseModifierOptions(item, field).find((row) => row.id === mod.id);
+      if (
+        !option ||
+        option.ranges.some(
+          ({ min, max }, i) =>
+            !Number.isInteger(mod.values[i]) || mod.values[i] < min || mod.values[i] > max
+        )
+      ) {
+        if (strict) throw new GameSaveError("property", item.name);
+        continue;
+      }
+      const rolls = Object.fromEntries(
+        option.ranges.flatMap(({ min, max }, i) =>
+          min < max ? [[i + 1, mod.values[i]]] : []
+        )
+      );
+      for (const [key, value] of Object.entries(
+        definitionStats(option.definition, item.baseCode ?? "", 1, rolls)
+      ))
+        stats[key] = (stats[key] ?? 0) + value;
+    }
+    return stats;
+  }
   function word(entry: GameSaveEntry) {
     const known = [
       ...RUNEWORDS,
@@ -853,6 +1021,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
   function permitted(code: string, entry: GameSaveEntry, build: PlannerBuild) {
     const base = gd.items[code];
     if (!base || !/^[a-z0-9]{3}$/.test(code)) return false;
+    if (
+      entry.item.quality === "superior" &&
+      !baseModifierOptions({ ...entry.item, baseCode: code }, "superiorMod").length
+    )
+      return false;
     if (
       entry.owner === "inventory" &&
       entry.position !== undefined &&
@@ -1597,6 +1770,10 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     );
     const usedIds = new Set<number>();
     const itemAffixIds = new Map<number, string[]>();
+    const baseModifiers = new Map<
+      number,
+      { auto?: PlannerAffix; superior?: PlannerAffix }
+    >();
     const itemQuantities = new Map<number, number>();
     const socketRolls = new Map<
       number,
@@ -1633,6 +1810,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         base: choice.base,
         quality: {
           normal: 2,
+          superior: 3,
           magic: 4,
           rare: 6,
           unique: 7,
@@ -1853,6 +2031,20 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         baseSkillStats({ ...entry.item, baseCode: choice.base })
       ))
         item.stats[key] = (item.stats[key] || 0) + value;
+      const baseItem = { ...entry.item, baseCode: choice.base };
+      if (baseItem.quality === "superior" && !baseItem.superiorMod)
+        throw new GameSaveError(
+          "property",
+          `${entry.item.name}: select superior modifiers`
+        );
+      const baseStats = baseModifierStats(baseItem, true);
+      for (const [key, value] of Object.entries(baseStats))
+        item.stats[key] = (item.stats[key] ?? 0) + value;
+      baseModifiers.set(item.itemId, {
+        auto: baseItem.automod,
+        superior: baseItem.superiorMod,
+      });
+      if (baseStats.item_armor_percent && item.defense !== undefined) item.defense++;
       validateStats(item.stats);
       items[item.itemId] = item;
       if (item.ethereal && item.defense !== undefined)
@@ -1901,6 +2093,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       const questItem =
         t.has("ques") && "questdiffcheck" in base && !!base.questdiffcheck;
       const rw = runewordProperties.get(item.itemId);
+      const modifiers = baseModifiers.get(item.itemId);
       const affixIds = itemAffixIds.get(item.itemId) ?? [];
       const canonicalRunewordId = rw ? Number(item.unique!.replace("runeword", "")) : 0;
       // Stored v105 aliases documented by the codecs; Nightfall=1396 is
@@ -1925,7 +2118,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         version: "101",
         id: item.itemId,
         level: item.ilvl,
-        quality: rw ? 2 : item.quality,
+        quality: rw ? (modifiers?.superior ? 3 : 2) : item.quality,
         identified: 1,
         socketed: item.sockets ? 1 : 0,
         new: 0,
@@ -1964,7 +2157,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         ),
         multiple_pictures: item.iconIndex === undefined ? 0 : 1,
         picture_id: item.iconIndex ?? 0,
-        class_specific: 0,
+        class_specific: modifiers?.auto ? 1 : 0,
+        auto_affix_id: saveAffixId(modifiers?.auto?.id),
+        file_index: Number(modifiers?.superior?.id.slice(2) ?? 0),
         unique_id: item.quality === 7 ? saveId("uniqueItems", item.unique) : 0,
         set_id: item.quality === 5 ? saveId("setItems", item.unique) : 0,
         runeword_id: storedRunewordIds[canonicalRunewordId] ?? canonicalRunewordId,
@@ -1993,6 +2188,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         validateStats(stats);
         const child = {
           ...native,
+          class_specific: 0,
+          auto_affix_id: 0,
+          file_index: 0,
           id: nextId(),
           type: jewel?.code ?? (customJewel ? "jew" : code),
           type_id: 4,
@@ -2169,7 +2367,47 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     return bytes;
   }
   return {
+    baseCharacteristics(code: string, classId: ClassId) {
+      const base = gd.items[code] as unknown as Definition | undefined;
+      if (!base) return;
+      const kinds = types(code);
+      const shield = kinds.has("shld");
+      const restricted = [...kinds]
+        .map((type) => gd.itemTypes[type]?.class)
+        .find(Boolean);
+      const wearer =
+        shield && restricted ? restricted : nativeClasses[classes.indexOf(classId)];
+      const blockFactor = Number(gd.charStats[wearer]?.blockfactor ?? 0);
+      const damage = (low: string, high: string) =>
+        Number(base[high]) > 0 ? [Number(base[low] ?? 0), Number(base[high])] : undefined;
+      return {
+        defense: Number(base.maxac) || undefined,
+        block: shield ? Number(base.block ?? 0) + blockFactor : undefined,
+        smite: shield ? damage("mindam", "maxdam") : undefined,
+        kick: kinds.has("boot") ? damage("mindam", "maxdam") : undefined,
+        oneHand: kinds.has("weap") ? damage("mindam", "maxdam") : undefined,
+        twoHand: damage("2handmindam", "2handmaxdam"),
+        throwing: damage("minmisdam", "maxmisdam"),
+        durability:
+          !base.nodurability && !base.stackable
+            ? Number(base.durability) || undefined
+            : undefined,
+        maxStack: base.stackable ? Number(base.maxstack) || undefined : undefined,
+        classId: restricted ? classes[nativeClasses.indexOf(restricted)] : undefined,
+      };
+    },
     skillDescriptions: data.skillDesc as Record<string, Definition>,
+    baseModifierOptions,
+    baseModifierRequiredLevel,
+    baseModifierStats,
+    baseModifierBonuses(item: PlannerItem) {
+      const stats = baseModifierStats(item);
+      return Object.fromEntries(
+        Object.entries(bonusStats).flatMap(([key, stat]) =>
+          stats[stat] === undefined ? [] : [[key, stats[stat]]]
+        )
+      ) as PlannerItem["bonuses"];
+    },
     randomRareName: (base: string) => rollRareName(base).name,
     choices,
     permitted,

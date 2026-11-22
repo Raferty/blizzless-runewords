@@ -1,21 +1,20 @@
-import { onMounted, onBeforeUnmount, shallowRef } from "vue";
+import { onMounted, shallowRef } from "vue";
 import type { GameSaveExporter } from "@/utils/planner-game-save";
 
+const native = shallowRef<GameSaveExporter>();
+let loading: Promise<void> | undefined;
+
 export function usePlannerGameData() {
-  const native = shallowRef<GameSaveExporter>();
-  let disposed = false;
-  onMounted(async () => {
-    try {
-      const value = await (
-        await import("@/utils/planner-game-save")
-      ).loadGameSaveExporter();
-      if (!disposed) native.value = value;
-    } catch {
-      // Components can render their basic values while game data is unavailable.
-    }
-  });
-  onBeforeUnmount(() => {
-    disposed = true;
+  onMounted(() => {
+    if (!native.value)
+      loading ??= import("@/utils/planner-game-save")
+        .then((module) => module.loadGameSaveExporter())
+        .then((value) => {
+          native.value = value;
+        })
+        .catch(() => {
+          loading = undefined;
+        });
   });
   return native;
 }

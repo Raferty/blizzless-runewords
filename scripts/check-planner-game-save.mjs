@@ -86,6 +86,142 @@ try {
   }
   {
     const build = planner.createBuild("paladin");
+    const shield = {
+      name: "Vortex Shield",
+      baseCode: "paf",
+      quality: "normal",
+      baseKind: "shield",
+      requiredLevel: 66,
+      itemLevel: 99,
+      notes: "",
+      bonuses: {},
+      sockets: 4,
+      automod: { id: "am069", values: [45, 10, 0] },
+    };
+    const options = { ...opts, choices: { "hero.offHand": "paf" } };
+    build.equipment.offHand = shield;
+    assert.deepEqual(codec.baseModifierStats(shield), {
+      fireresist: 45,
+      coldresist: 45,
+      lightresist: 45,
+      poisonresist: 45,
+      damageresist: 10,
+    });
+    for (const baseCode of ["sbw", "lxb", "amc"]) {
+      const rows = codec.baseModifierOptions(
+        { ...shield, baseCode, quality: "superior" },
+        "superiorMod"
+      );
+      assert(rows.some(({ definition }) => definition.prop1 === "dmg%"));
+      assert(
+        rows.every(
+          ({ definition }) => ![definition.prop1, definition.prop2].includes("dur%")
+        )
+      );
+    }
+    // A pre-existing manually socketed Sacred Targe should become the same
+    // Spirit as the catalog item, including its native runeword save flags.
+    const { assembleSocketedRuneword } = await server.ssrLoadModule(
+      "/src/utils/planner-item-catalog.ts"
+    );
+    const { RUNEWORDS } = await server.ssrLoadModule("/src/shared/runewords.ts");
+    const targe = {
+      ...shield,
+      name: "Sacred Targe",
+      baseCode: "pab",
+      requiredLevel: 47,
+      socketedItems: ["r07", "r10", "r09", "r11"],
+    };
+    const resist = codec
+      .baseModifierOptions(targe, "automod")
+      .find((row) => row.definition.prop1 === "res-all" && row.definition.max1 === 45);
+    targe.automod = { id: resist.id, values: resist.ranges.map((row) => row.max) };
+    assert.equal(
+      assembleSocketedRuneword(codec, { ...targe, quality: "magic" }, build, RUNEWORDS),
+      false
+    );
+    assert.equal(
+      assembleSocketedRuneword(
+        codec,
+        { ...targe, socketedItems: ["r10", "r07", "r09", "r11"] },
+        build,
+        RUNEWORDS
+      ),
+      false
+    );
+    assert(assembleSocketedRuneword(codec, targe, build, RUNEWORDS));
+    assert.equal(targe.name, "Spirit");
+    assert.equal(targe.bonuses.allSkills, 2);
+    assert.equal(targe.bonuses.fcr, 35);
+    assert.equal(targe.bonuses.coldResist, 35);
+    assert.equal(targe.socketedItems, undefined);
+    assert.equal(assembleSocketedRuneword(codec, targe, build, RUNEWORDS), false);
+    build.equipment.offHand = targe;
+    const spiritTarge = await verify(build, {
+      ...options,
+      choices: { "hero.offHand": "pab" },
+    });
+    const roundTripped = codec.importCharacter(spiritTarge.bytes).equipment.offHand;
+    assert.equal(roundTripped.runewordId, targe.runewordId);
+    assert.deepEqual(roundTripped.automod, targe.automod);
+    build.equipment.offHand = shield;
+    const normal = await verify(build, options);
+    assert.equal(normal.read.items[0].quality, 2);
+    assert.equal(normal.read.items[0].auto_affix_id, 70);
+    assert.deepEqual(
+      codec.importCharacter(normal.bytes).equipment.offHand.automod,
+      shield.automod
+    );
+    assert.equal(planner.buildStats(build, codec).bonuses.fireResist, 45);
+    for (const quality of ["magic", "rare"]) {
+      const magic = {
+        ...shield,
+        quality,
+        automod: { id: "am074", values: [109, 52, 10] },
+      };
+      assert.equal(codec.baseModifierOptions(magic, "superiorMod").length, 0);
+      assert.equal(
+        codec.baseModifierOptions(magic, "automod").some((row) => row.id === "am069"),
+        quality === "magic"
+      );
+      build.equipment.offHand = magic;
+      const saved = await verify(build, options);
+      assert.equal(saved.read.items[0].auto_affix_id, 75);
+      assert.deepEqual(
+        codec.importCharacter(saved.bytes).equipment.offHand.automod,
+        magic.automod
+      );
+    }
+    const stacked = { ...shield, quality: "magic", bonuses: { fireResist: 10 } };
+    build.equipment.offHand = stacked;
+    const saved = await verify(build, options);
+    const restoredMagic = codec.importCharacter(saved.bytes).equipment.offHand;
+    assert.deepEqual(restoredMagic.automod, shield.automod);
+    assert.equal(restoredMagic.bonuses.fireResist, 10);
+    const superior = {
+      ...shield,
+      quality: "superior",
+      superiorMod: { id: "qm007", values: [15, 12, 0] },
+    };
+    build.equipment.offHand = superior;
+    const result = await verify(build, options);
+    assert.equal(result.read.items[0].quality, 3);
+    assert.equal(result.read.items[0].file_index, 7);
+    assert.equal(result.read.items[0].defense_rating, 226);
+    const imported = codec.importCharacter(result.bytes).equipment.offHand;
+    assert.equal(imported.quality, "superior");
+    assert.deepEqual(imported.automod, superior.automod);
+    assert.deepEqual(imported.superiorMod, superior.superiorMod);
+    const spirit = { ...superior, name: "Spirit", quality: "runeword" };
+    build.equipment.offHand = spirit;
+    const runeword = await verify(build, options);
+    const restored = codec.importCharacter(runeword.bytes).equipment.offHand;
+    assert.equal(restored.quality, "runeword");
+    assert.deepEqual(restored.automod, superior.automod);
+    assert.deepEqual(restored.superiorMod, superior.superiorMod);
+  }
+  {
+    const build = planner.createBuild("paladin");
     const names = ["Raven Turn", "Entropy Clasp"];
     build.stash = names.map((name, index) => ({
       name,

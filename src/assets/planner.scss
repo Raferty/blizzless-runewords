@@ -653,7 +653,8 @@
   color: #aaa;
   white-space: pre-wrap;
 }
-.planner-item-name[data-quality="normal"] {
+.planner-item-name[data-quality="normal"],
+.planner-item-name[data-quality="superior"] {
   color: #e5e5e5;
 }
 .planner-item-name[data-quality="magic"] {

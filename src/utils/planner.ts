@@ -380,6 +380,7 @@ export function buildStats(build: PlannerBuild, native?: GameSaveExporter) {
     );
     return { ...summary.bonuses, ...item.bonuses };
   });
+  const baseMods = items.map((item) => native?.baseModifierBonuses(item));
   const insertBonuses = items.map(socketedBonuses);
   const mods = items.map((item) => affixBonuses(item, build.level));
   const bonuses = Object.fromEntries(
@@ -389,6 +390,7 @@ export function buildStats(build: PlannerBuild, native?: GameSaveExporter) {
         (sum, _, index) =>
           sum +
           (baseBonuses[index][key] ?? 0) +
+          (baseMods[index]?.[key] ?? 0) +
           (insertBonuses[index].bonuses[key] ?? 0) +
           (mods[index].bonuses[key] ?? 0),
         0
@@ -501,9 +503,16 @@ function string(value: unknown, max: number): string {
 export function parsePlannerItem(value: unknown): PlannerItem {
   const item = record(value);
   if (
-    !["normal", "magic", "rare", "unique", "set", "runeword", "crafted"].includes(
-      String(item.quality)
-    )
+    ![
+      "normal",
+      "superior",
+      "magic",
+      "rare",
+      "unique",
+      "set",
+      "runeword",
+      "crafted",
+    ].includes(String(item.quality))
   )
     throw new Error("quality");
   const rawBonuses = record(item.bonuses);
@@ -590,6 +599,15 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       ? {}
       : { runewordId: integer(item.runewordId, 1, 100000) }),
   };
+  for (const field of ["automod", "superiorMod"] as const) {
+    if (item[field] === undefined) continue;
+    const mod = record(item[field]);
+    const id = string(mod.id, 5);
+    const pattern = field === "automod" ? /^am\d{3}$/ : /^qm00[0-7]$/;
+    if (!pattern.test(id) || !Array.isArray(mod.values) || mod.values.length !== 3)
+      throw Error("base modifier");
+    result[field] = { id, values: Array.from(mod.values, (v) => integer(v, 0, 10000)) };
+  }
   if (item.baseSkills !== undefined)
     result.baseSkills = parseBaseSkills(item.baseSkills, result);
   if (item.baseSkillTab !== undefined)

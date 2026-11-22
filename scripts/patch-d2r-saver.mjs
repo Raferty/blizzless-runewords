@@ -34,8 +34,24 @@ const locationAfter =
             return;
         }
 ` + locationBefore;
+// Preserve the base modifier IDs even when a runeword masks the base quality.
+const baseModifiers = [
+  [
+    "mods.push(`am${mkid(reader.bits(11))}`);",
+    "item.autoAffixId = reader.bits(11); mods.push(`am${mkid(item.autoAffixId)}`);",
+  ],
+  [
+    "mods.push(`qm${mkid(reader.bits(3))}`);",
+    "item.superiorId = reader.bits(3); mods.push(`qm${mkid(item.superiorId)}`);",
+  ],
+  [
+    "if (runeword)\n                parseStats();",
+    "if (runeword) { item.baseStats = { ...stats }; parseStats(); }",
+  ],
+];
 const source = await readFile(file, "utf8");
-const unpatched = source
+const unpatched = baseModifiers
+  .reduce((text, [before, after]) => text.replace(after, before), source)
   .replace(locationAfter, locationBefore)
   .replace(after, before)
   .replace(countAfter, countBefore)
@@ -43,7 +59,8 @@ const unpatched = source
   .replace(legacyRegisterAfter, registerBefore);
 if (createHash("sha256").update(unpatched).digest("hex") !== original)
   throw Error("d2r-saver item parser changed; review the planner reader patches");
-const patched = unpatched
+const patched = baseModifiers
+  .reduce((text, [before, after]) => text.replace(before, after), unpatched)
   .replace(locationBefore, locationAfter)
   .replace(before, after)
   .replace(countBefore, countAfter)

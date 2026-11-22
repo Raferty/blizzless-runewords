@@ -128,6 +128,30 @@
                     max="99"
                     required
                 /></label>
+                <label v-if="canEditQuality" class="planner-label planner-item-quality"
+                  >{{ t("Качество", "Quality") }}
+                  <UiSelect
+                    dropdown-class="planner-select-dropdown"
+                    :model-value="item.quality"
+                    :options="editableQualities"
+                    :aria-label="t('Качество предмета', 'Item quality')"
+                    @update:model-value="changeQuality"
+                  />
+                </label>
+                <div
+                  v-if="item.quality === 'rare' && native && selectedBase"
+                  class="planner-item-name-control"
+                >
+                  <span>{{ t("Имя", "Name") }}</span>
+                  <strong>{{ item.name }}</strong>
+                  <button
+                    type="button"
+                    :aria-label="t('Сгенерировать имя', 'Reroll name')"
+                    @click="item.name = native.randomRareName(selectedBase.code)"
+                  >
+                    <UiIcon name="refresh" />
+                  </button>
+                </div>
                 <label
                   v-if="baseOptions.length && !isContainerBase(item.baseCode)"
                   class="planner-label"
@@ -148,16 +172,6 @@
                     max="20"
                     required
                 /></label>
-                <label v-if="canEditQuality" class="planner-label planner-item-quality"
-                  >{{ t("Качество", "Quality") }}
-                  <UiSelect
-                    dropdown-class="planner-select-dropdown"
-                    :model-value="item.quality"
-                    :options="editableQualities"
-                    :aria-label="t('Качество предмета', 'Item quality')"
-                    @update:model-value="changeQuality"
-                  />
-                </label>
                 <label
                   v-if="isCharm && item.quality === 'unique' && uniqueCharms.length"
                   class="planner-label planner-item-unique-charm"
@@ -175,6 +189,15 @@
                     @update:model-value="changeUniqueCharm"
                   />
                 </label>
+                <label v-if="selectedBase && maxSockets" class="planner-label"
+                  >{{ t("Сокеты", "Sockets")
+                  }}<input
+                    v-model.number="item.sockets"
+                    type="number"
+                    :min="affixSockets(item)"
+                    :max="maxSockets"
+                    :readonly="item.quality === 'runeword'"
+                /></label>
                 <label v-if="selectedBase?.kind" class="planner-item-ethereal"
                   ><input
                     v-model="item.ethereal"
@@ -273,12 +296,22 @@
             :character-level="store.build.level"
             @update:affixes="updateAffixes"
           />
+          <PlannerBaseModifierEditor
+            v-if="native"
+            :native="native"
+            :item="item"
+            :character-level="store.build.level"
+            @update="setBaseModifier"
+          />
           <p v-if="!craftAffixesComplete" class="planner-muted" role="status">
             {{ t("Нужно случайных аффиксов", "Required random affixes") }}:
             {{ craftAffixMinimum(item.itemLevel ?? 99) }} ({{ t("сейчас", "selected") }}
             {{ item.affixes?.length ?? 0 }}).
           </p>
-          <section v-if="!editableQuality(item.quality)" class="planner-item-properties">
+          <section
+            v-if="!editableQuality(item.quality) && !hasBaseModifiers"
+            class="planner-item-properties"
+          >
             <h3 :data-quality="item.quality">
               {{ qualityOptions.find((q) => q.value === item.quality)?.label }}
             </h3>
@@ -319,26 +352,6 @@
             </ul>
             <PlannerSetBonuses :bonuses="setBonuses" />
           </section>
-          <section v-if="selectedBase && maxSockets" class="planner-item-sockets">
-            <label class="planner-label"
-              >{{ t("Сокеты", "Sockets")
-              }}<input
-                v-model.number="item.sockets"
-                type="number"
-                :min="affixSockets(item)"
-                :max="maxSockets"
-                :readonly="item.quality === 'runeword'"
-            /></label>
-            <span v-if="item.quality !== 'runeword'"
-              >{{ t("Свободных гнёзд", "Empty sockets") }}:
-              {{
-                Math.max(
-                  0,
-                  socketCount - (item.socketedItems?.filter(Boolean).length ?? 0)
-                )
-              }}</span
-            >
-          </section>
           <PlannerSocketEditor
             v-if="native && socketCount"
             :item="item"
@@ -351,12 +364,12 @@
             :readonly="item.quality === 'runeword'"
             :native="native"
             :character-level="store.build.level"
-            @update:model-value="item.socketedItems = $event"
+            @update:model-value="updateSocketInserts"
             @values="item.socketPropertyValues = $event"
             @icons="item.socketIconIndices = $event"
           />
           <p
-            v-if="itemRequiredLevel(item) > item.requiredLevel"
+            v-if="requiredItemLevel > item.requiredLevel"
             class="planner-muted planner-item-required-level"
           >
             {{
@@ -364,7 +377,7 @@
                 "Требуемый уровень со свойствами и вставками",
                 "Required level with mods and socket inserts"
               )
-            }}: {{ itemRequiredLevel(item) }}
+            }}: {{ requiredItemLevel }}
           </p>
           <p v-if="!inventoryFits" class="planner-error">
             {{
@@ -390,6 +403,7 @@
   </UiModal>
 </template>
 <script setup lang="ts">
+import PlannerBaseModifierEditor from "./PlannerBaseModifierEditor.vue";
 import PlannerBaseSkillEditor from "./PlannerBaseSkillEditor.vue";
 import { retainBaseSkills, inheritRunewordBase } from "@/utils/planner-base-skills";
 import { normalizeClassCharm } from "@/utils/planner-properties";
@@ -423,6 +437,7 @@ import { usePlannerStore } from "@/store/planner";
 import {
   createItemCatalog,
   applyItemRoll,
+  assembleSocketedRuneword,
   itemRollState,
   catalogPropertyLines,
   catalogSetBonuses,
@@ -538,6 +553,7 @@ item.value.propertyRoll ??= roll.value;
 normalizeClassCharm(item.value, store.build.classId);
 const qualityOptions = computed(() => [
   { value: "normal" as const, label: t("Обычный", "Normal") },
+  { value: "superior" as const, label: t("Превосходный", "Superior") },
   { value: "magic" as const, label: t("Магический", "Magic") },
   { value: "rare" as const, label: t("Редкий", "Rare") },
   { value: "unique" as const, label: t("Уникальный", "Unique") },
@@ -554,7 +570,7 @@ const canEditQuality = computed(
     selectedBase.value.category !== "rpot" &&
     (isCharm.value
       ? ["normal", "magic", "unique"].includes(item.value.quality)
-      : ["normal", "magic", "rare"].includes(item.value.quality))
+      : ["normal", "superior", "magic", "rare"].includes(item.value.quality))
 );
 const editableQualities = computed(() =>
   qualityOptions.value.filter((q) =>
@@ -562,10 +578,53 @@ const editableQualities = computed(() =>
       ? q.value === "magic" || (q.value === "unique" && uniqueCharms.value.length > 0)
       : q.value === "normal" ||
         q.value === "magic" ||
+        (q.value === "superior" &&
+          !!native.value?.baseModifierOptions(
+            { ...item.value, quality: "superior" },
+            "superiorMod"
+          ).length) ||
         (q.value === "rare" && canBeRare(item.value.baseCode ?? ""))
   )
 );
 const affixNotice = ref("");
+const requiredItemLevel = computed(() =>
+  Math.max(
+    itemRequiredLevel(item.value),
+    native.value?.baseModifierRequiredLevel(item.value) ?? 1
+  )
+);
+const hasBaseModifiers = computed(
+  () =>
+    ["normal", "superior"].includes(item.value.quality) &&
+    !!native.value &&
+    (native.value.baseModifierOptions(item.value, "automod").length ||
+      native.value.baseModifierOptions(item.value, "superiorMod").length)
+);
+function setBaseModifier(
+  field: "automod" | "superiorMod",
+  value?: PlannerItem["automod"]
+) {
+  if (value) item.value[field] = value;
+  else delete item.value[field];
+}
+function reconcileBaseModifiers() {
+  if (!native.value) return;
+  for (const field of ["automod", "superiorMod"] as const) {
+    const options = native.value.baseModifierOptions(item.value, field);
+    if (!options.some((option) => option.id === item.value[field]?.id)) {
+      delete item.value[field];
+      if (field === "superiorMod" && item.value.quality === "superior") {
+        const defaults = options[0];
+        if (defaults)
+          item.value[field] = {
+            id: defaults.id,
+            values: defaults.ranges.map(({ max }) => max),
+          };
+        else item.value.quality = "normal";
+      }
+    }
+  }
+}
 function setBaseSkills(value: Record<string, number>) {
   if (Object.keys(value).length) item.value.baseSkills = value;
   else delete item.value.baseSkills;
@@ -585,6 +644,7 @@ function updateAffixes(value: PlannerAffix[]) {
 }
 function reconcileAffixes() {
   retainBaseSkills(item.value);
+  reconcileBaseModifiers();
   const previous = item.value.affixes ?? [];
   const next = retainCompatibleAffixes(item.value);
   if (next.length !== previous.length) {
@@ -927,6 +987,7 @@ async function loadCatalog() {
               roll.value
             ).sockets
           : 0;
+    recognizeRuneword();
   } catch {
     loadError.value = t(
       "Не удалось загрузить каталог предметов.",
@@ -951,7 +1012,10 @@ function changeBase(code: string) {
   item.value.baseCode = code;
   item.value.baseKind = base.kind;
   if (props.charmMode) height.value = base.height;
-  if (item.value.quality === "normal" || editableQuality(item.value.quality)) {
+  if (
+    ["normal", "superior"].includes(item.value.quality) ||
+    editableQuality(item.value.quality)
+  ) {
     if (item.value.quality === "rare" || item.value.quality === "crafted") {
       if (previousCode !== code && native.value)
         item.value.name = native.value.randomRareName(code);
@@ -988,6 +1052,17 @@ function setRoll(value: 0 | 1) {
   delete item.value.propertyValues;
   if (native.value) applyItemRoll(native.value, item.value, value, store.build.classId);
   else if (selectedWord.value) applyTemplate(value);
+}
+function updateSocketInserts(inserts: (string | null)[]) {
+  item.value.socketedItems = inserts;
+  recognizeRuneword();
+}
+function recognizeRuneword() {
+  if (
+    native.value &&
+    assembleSocketedRuneword(native.value, item.value, store.build, words.sortedRunewords)
+  )
+    roll.value = 1;
 }
 function chooseCatalogItem(entry: CatalogItem) {
   affixNotice.value = "";
@@ -1054,6 +1129,8 @@ function save() {
   if (!item.value.name.trim() || !inventoryFits.value || !craftAffixesComplete.value)
     return;
   clearUnsupportedSockets();
+  recognizeRuneword();
+  reconcileBaseModifiers();
   emit(
     "save",
     parsePlannerItem({ ...item.value, name: item.value.name.trim() }),

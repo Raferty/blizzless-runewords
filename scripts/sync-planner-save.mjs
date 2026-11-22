@@ -235,7 +235,7 @@ for (const name of tableNames) {
       case "magicPrefix":
       case "magicSuffix":
       case "autoMagic":
-        if (!row.name) return;
+        if (!row.name && !(key === "autoMagic" && row.mod1code)) return;
         id = `${{ magicPrefix: "mp", magicSuffix: "ms", autoMagic: "am" }[key]}${String(row.id ?? index).padStart(3, "0")}`;
         break;
       default:
@@ -246,6 +246,7 @@ for (const name of tableNames) {
     result[id] =
       key === "magicPrefix" ||
       key === "magicSuffix" ||
+      key === "autoMagic" ||
       key === "uniqueItems" ||
       key === "setItems"
         ? { ...row }

@@ -24,7 +24,10 @@ const classes: Record<string, ClassId> = {
   war: "warlock",
 };
 export function baseSkillProfile(item: PlannerItem) {
-  if (!["normal", "magic", "rare", "crafted", "runeword"].includes(item.quality)) return;
+  if (
+    !["normal", "superior", "magic", "rare", "crafted", "runeword"].includes(item.quality)
+  )
+    return;
   const base = bases[item.baseCode || ""];
   if (!base || (!base.staffClass && !base.skillTabs?.length)) return;
   return {
@@ -139,6 +142,13 @@ export function inheritRunewordBase(
   item.ethereal = previous.ethereal;
   if (previous.baseSkills) item.baseSkills = { ...previous.baseSkills };
   if (previous.baseSkillTab) item.baseSkillTab = { ...previous.baseSkillTab };
+  if (previous.automod)
+    item.automod = { ...previous.automod, values: [...previous.automod.values] };
+  if (previous.superiorMod)
+    item.superiorMod = {
+      ...previous.superiorMod,
+      values: [...previous.superiorMod.values],
+    };
   retainBaseSkills(item);
 }
 export function baseSkillDefinition(item: PlannerItem) {

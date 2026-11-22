@@ -80,7 +80,8 @@ export interface PlannerAffix {
 }
 export interface PlannerItem {
   name: string;
-  quality: "normal" | "magic" | "rare" | "unique" | "set" | "runeword" | "crafted";
+  quality:
+    "normal" | "superior" | "magic" | "rare" | "unique" | "set" | "runeword" | "crafted";
   runewordId?: number;
   requiredLevel: number;
   notes: string;
@@ -97,6 +98,8 @@ export interface PlannerItem {
   socketPropertyValues?: Record<string, Record<string, number>>;
   socketIconIndices?: Record<string, number>;
   affixes?: PlannerAffix[];
+  automod?: PlannerAffix;
+  superiorMod?: PlannerAffix;
   baseSkills?: Record<string, number>;
   baseSkillTab?: { tab: number; value: number };
   ethereal?: boolean;

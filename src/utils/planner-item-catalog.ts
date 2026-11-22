@@ -96,6 +96,47 @@ export function applyItemRoll(
   item.classBonuses = summary.classBonuses;
 }
 
+export function assembleSocketedRuneword(
+  native: GameSaveExporter,
+  item: PlannerItem,
+  build: PlannerBuild,
+  words: RunewordTableItem[]
+) {
+  if (item.quality !== "normal" && item.quality !== "superior") return false;
+  const inserts = item.socketedItems;
+  const code = item.baseCode;
+  if (!code || !inserts?.length || inserts.length !== item.sockets) return false;
+  const category = socketCategory(item);
+  const baseKind = category === "helm" ? "armor" : category;
+  for (const word of words) {
+    if (
+      word.runes.length !== inserts.length ||
+      !word.runes.every((id, i) => inserts[i] === `r${String(id).padStart(2, "0")}`)
+    )
+      continue;
+    const assembled: PlannerItem = {
+      ...item,
+      quality: "runeword",
+      runewordId: word.id,
+      name: word.name.en,
+      baseKind,
+      requiredLevel: Math.max(native.gd.items[code]?.levelreq ?? 1, word.level),
+    };
+    if (
+      !native.permitted(code, { owner: "stash", key: "recipe", item: assembled }, build)
+    )
+      continue;
+    applyItemRoll(native, assembled, 1, build.classId);
+    Object.assign(item, assembled);
+    delete item.socketedItems;
+    delete item.socketPropertyValues;
+    delete item.socketIconIndices;
+    delete item.importedStats;
+    return true;
+  }
+  return false;
+}
+
 export const itemCategories = [
   {
     code: "pala",
@@ -479,6 +520,51 @@ export function socketPropertyLines(
   return lines;
 }
 
+export function socketSummaryLines(
+  native: GameSaveExporter,
+  codes: readonly (string | null)[],
+  category: "weapon" | "helm" | "shield",
+  level: number,
+  values: PlannerItem["socketPropertyValues"] = {}
+) {
+  const totals = new Map<
+    string,
+    { prop1: string; par1: number; min1: number; max1: number }
+  >();
+  const lines: string[] = [];
+  for (const [index, code] of codes.entries()) {
+    if (!code) continue;
+    const rune = native.gd.gems[code] as unknown as Record<string, unknown> | undefined;
+    if (!rune?.letter) {
+      lines.push(...socketPropertyLines(native, code, category, level, values[index]));
+      continue;
+    }
+    for (let i = 1; i <= 3; i++) {
+      const prefix = `${category}mod${i}`;
+      const property = String(rune[prefix + "code"] ?? "");
+      if (!property) continue;
+      const param = Number(rune[prefix + "param"] ?? 0);
+      const key = `${property}:${param}`;
+      const min = Number(rune[prefix + "min"] ?? 0);
+      const max = Number(rune[prefix + "max"] ?? min);
+      const total = totals.get(key);
+      if (!total) totals.set(key, { prop1: property, par1: param, min1: min, max1: max });
+      else if (
+        !["knock", "noheal", "nofreeze", "indestruct", "ignore-ac"].includes(property)
+      ) {
+        total.min1 += min;
+        total.max1 += max;
+      }
+    }
+  }
+  return [
+    ...Array.from(totals.values()).flatMap((def) =>
+      definitionPropertyLines(native, def, 1, level)
+    ),
+    ...lines,
+  ];
+}
+
 export function definitionPropertyLines(
   native: GameSaveExporter,
   definition: Record<string, unknown>,
@@ -630,8 +716,9 @@ export function itemPropertyLines(
     itemSkillClass(item, fallback),
     item.propertyChoices
   );
-  for (const code of native.itemRunes(item))
-    lines.push(...socketPropertyLines(native, code, socketCategory(item), level));
+  lines.push(
+    ...socketSummaryLines(native, native.itemRunes(item), socketCategory(item), level)
+  );
   return lines;
 }
 
