@@ -1769,10 +1769,11 @@
 }
 .planner-main-column
   > .planner-panel:not(.planner-skills-panel):not(.planner-notes):not(
-    .planner-quests-compact
+    .planner-overview-panel
   ):not(.planner-waypoints) {
   padding: 16px;
 }
+.planner-overview-panel .planner-materials-layout,
 .planner-quests-compact .planner-quest-table,
 .planner-waypoints .planner-quest-table {
   padding: 0 12px 8px;
@@ -1790,7 +1791,7 @@
 .planner-waypoints .planner-quest-row:last-child {
   border-bottom: 0;
 }
-.planner-quests-compact .planner-panel-heading,
+.planner-overview-panel .planner-panel-heading,
 .planner-waypoints .planner-panel-heading {
   flex-wrap: wrap;
 }

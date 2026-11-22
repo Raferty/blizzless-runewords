@@ -268,7 +268,7 @@ async function load() {
     loading.value = false;
   }
 }
-const includeStash = ref(false);
+const includeStash = ref(true);
 const withStash = computed(() => gameMode.value === "rotw" && includeStash.value);
 const stashFile = shallowRef<File>();
 function selectStash(event: Event) {

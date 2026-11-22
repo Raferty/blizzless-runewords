@@ -250,6 +250,7 @@
         <PlannerPanel
           v-if="section === 'overview' && hasMaterials"
           v-model:open="overviewMaterialsOpen"
+          class="planner-overview-panel"
           :title="t('Материалы', 'Materials')"
         >
           <template #actions><PlannerMaterialActions /></template>
@@ -257,7 +258,7 @@
         </PlannerPanel>
         <PlannerPanel
           v-if="section === 'overview' || section === 'notes'"
-          class="planner-quests-compact"
+          class="planner-overview-panel planner-quests-compact"
           :title="t('Задания', 'Quests')"
         >
           <template #actions>
