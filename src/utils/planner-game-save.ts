@@ -1,6 +1,6 @@
 import { loadDataFromFile } from "./planner-data-loader";
 import { D2RSaver, type BinaryParsedItem, type D2SCharacterProfile } from "d2r-saver";
-import { writeItem, type types as SaveTypes } from "@d2runewizard/d2s";
+import { read, write, writeItem, type types as SaveTypes } from "@d2runewizard/d2s";
 import { constants as originalConstants } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
 import {
   difficulties,
@@ -305,8 +305,11 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
    * matching save id, so exported planner saves round-trip losslessly enough
    * for editing and re-exporting.
    */
-  function importCharacter(bytes: Uint8Array): PlannerBuild {
-    const { profile, items } = readCharacter(bytes);
+  function importCharacter(
+    bytes: Uint8Array,
+    decoded = readCharacter(bytes)
+  ): PlannerBuild {
+    const { profile, items } = decoded;
     // The reader also uses string base codes for preset inventory/stash supplies.
     const parsedItems = items as Record<number | string, BinaryParsedItem>;
     const classIndex = nativeClasses.indexOf(
@@ -337,7 +340,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         );
       if (bytes[152 + index] & 0x80) build.difficulty = value;
     }
-    build.name = profile.name;
+    const nameField = bytes.subarray(299, 331);
+    const nameEnd = nameField.indexOf(0);
+    build.name =
+      nameEnd > 15
+        ? new TextDecoder().decode(nameField.subarray(0, nameEnd))
+        : profile.name;
     build.hardcore = !!(bytes[20] & 4);
     if (bytes[248] === 2 || bytes[248] === 3)
       build.gameSave = {
@@ -856,6 +864,65 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       e: Number(stat.encode ?? constants.magical_properties[stat.id]?.e ?? 0),
     };
   }
+  async function importGameFile(bytes: Uint8Array) {
+    const header = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+    if (bytes.length < 16 || header.getUint32(0, true) !== 0xaa55aa55)
+      throw new GameSaveError("validation");
+    const version = header.getUint32(4, true);
+    if (version === 105) return { build: importCharacter(bytes) };
+    if (version !== 99) throw new GameSaveError("unsupportedVersion", String(version));
+    if (
+      header.getUint32(8, true) !== bytes.length ||
+      header.getUint32(12, true) !== saveChecksum(bytes)
+    )
+      throw new GameSaveError("validation");
+    // Both layouts use Blizzless stat IDs. The binary codec switches header
+    // offsets, quantity bits and item trailers according to header.version.
+    const config = { disableItemEnhancements: true, extendedStash: true };
+    const legacy = await read(bytes, constants, config);
+    legacy.header.version = 105;
+    const converted = await write(legacy, constants, config);
+    // Preserve opaque quest/waypoint flags, hotkeys, mercenary metadata and
+    // the complete UTF-8 name (the generic codec reads only 16 name bytes).
+    converted.set(bytes.subarray(36, 191), 20);
+    converted.set(bytes.subarray(335, 765), 403);
+    const nameField = bytes.subarray(267, 299);
+    const terminator = nameField.indexOf(0);
+    const nameBytes = terminator < 0 ? nameField : nameField.subarray(0, terminator);
+    converted.fill(0, 299, 331);
+    converted.set(nameBytes, 299);
+    new DataView(converted.buffer, converted.byteOffset, converted.byteLength).setUint32(
+      12,
+      saveChecksum(converted),
+      true
+    );
+    const decoded = readCharacter(converted);
+    if (decoded.warnings.length)
+      throw new GameSaveError("validation", decoded.warnings.join("; "));
+    // Verify the item payloads in their original layout, including socketed
+    // children, before offering the converted file for download.
+    const verified = await read(converted, constants, config);
+    for (const section of [
+      "items",
+      "merc_items",
+      "corpse_items",
+      "golem_item",
+    ] as const) {
+      const before = [legacy[section] ?? []].flat();
+      const after = [verified[section] ?? []].flat();
+      if (before.length !== after.length) throw new GameSaveError("validation", section);
+      for (const [index, item] of before.entries()) {
+        const original = await writeItem(item, 99, constants, config);
+        const restored = await writeItem(after[index], 99, constants, config);
+        if (
+          original.length !== restored.length ||
+          original.some((byte, i) => byte !== restored[i])
+        )
+          throw new GameSaveError("validation", item.type);
+      }
+    }
+    return { build: importCharacter(converted, decoded), converted };
+  }
   function types(code: string) {
     const result = new Set<string>();
     const visit = (type?: string) => {
@@ -1207,6 +1274,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             types(code).has("jewl") ||
             isTome(code) ||
             !!stashSupplies[code] ||
+            code === "key" ||
             code === "box")
       )
       .map((base) => ({ value: base, base, label: `${label(base)} [${base}]` }))
@@ -2423,6 +2491,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     exportCharacter,
     readCharacter,
     importCharacter,
+    importGameFile,
     saver,
     gd,
   };

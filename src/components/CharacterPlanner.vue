@@ -50,8 +50,15 @@
       </div>
     </section>
     <div v-if="store.message" class="planner-notification" role="status">
-      <span>{{ messageText }}</span
-      ><button
+      <span>{{ messageText }}</span>
+      <a
+        v-if="store.message === 'converted' && convertedSave"
+        :href="convertedSave.url"
+        :download="convertedSave.name"
+      >
+        {{ t("Скачать копию v105", "Download v105 copy") }}
+      </a>
+      <button
         :aria-label="t('Скрыть сообщение', 'Dismiss message')"
         @click="store.message = ''"
       >
@@ -944,15 +951,35 @@ function exportBuild() {
   link.click();
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
+const convertedSave = ref<{ url: string; name: string }>();
+function clearConvertedSave() {
+  if (convertedSave.value) URL.revokeObjectURL(convertedSave.value.url);
+  convertedSave.value = undefined;
+}
+onBeforeUnmount(clearConvertedSave);
 async function importBuild(event: Event) {
   const input = event.target as HTMLInputElement;
   const file = input.files?.[0];
   if (!file) return;
+  clearConvertedSave();
   try {
     if (file.size > 1000000) throw new Error("size");
     if (file.name.toLowerCase().endsWith(".d2s")) {
       const native = await loadGameSaveExporter();
-      store.loadBuild(native.importCharacter(new Uint8Array(await file.arrayBuffer())));
+      const { build, converted } = await native.importGameFile(
+        new Uint8Array(await file.arrayBuffer())
+      );
+      if (store.loadBuild(build) && converted) {
+        convertedSave.value = {
+          url: URL.createObjectURL(
+            new Blob([Uint8Array.from(converted).buffer], {
+              type: "application/octet-stream",
+            })
+          ),
+          name: file.name,
+        };
+        store.message = "converted";
+      }
     } else store.loadBuild(JSON.parse(await file.text()));
   } catch {
     store.message = "invalid";
@@ -977,6 +1004,10 @@ const messageText = computed(() => {
     saved: [
       "Снимок сборки сохранён в этом браузере.",
       "Build snapshot saved in this browser.",
+    ],
+    converted: [
+      "Сейв из беты загружен. Готова копия в формате v105.",
+      "Beta save loaded. A v105 copy is ready.",
     ],
     loaded: ["Сборка загружена.", "Build loaded."],
     reset: ["Персонаж сброшен.", "Character reset."],

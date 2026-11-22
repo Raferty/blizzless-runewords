@@ -2,7 +2,11 @@ import assert from "node:assert/strict";
 import { Buffer } from "node:buffer";
 import { readFile, mkdir, writeFile } from "node:fs/promises";
 import { createServer } from "vite";
-import { read as readIndependent, writeItem } from "@d2runewizard/d2s";
+import {
+  read as readIndependent,
+  write as writeIndependent,
+  writeItem,
+} from "@d2runewizard/d2s";
 import { constants as defaults } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
 
 const server = await createServer({
@@ -83,6 +87,33 @@ try {
     assert.equal(imported.name, options.name, "Native import keeps character name");
     assertions++;
     return { bytes, read, raw: codec.readCharacter(bytes) };
+  }
+  {
+    const hero = planner.createBuild("barbarian");
+    hero.stash = [
+      {
+        name: "Key",
+        baseCode: "key",
+        quality: "normal",
+        quantity: 7,
+        requiredLevel: 1,
+        bonuses: {},
+        notes: "",
+        stashPosition: 3,
+      },
+    ];
+    const { read: old } = await verify(hero, { ...opts, choices: { "stash.0": "key" } });
+    old.header.version = 99;
+    const bytes = await writeIndependent(old, constants, { extendedStash: true });
+    const { build, converted } = await codec.importGameFile(bytes);
+    assert.equal(bytes[4], 99);
+    assert.equal(converted[4], 105);
+    assert.deepEqual((await codec.importGameFile(converted)).build, build);
+    assert.equal(build.stash[0].quantity, 7);
+    assert.equal(build.stash[0].stashPosition, 3);
+    const damaged = bytes.slice();
+    damaged[12] ^= 1;
+    await assert.rejects(codec.importGameFile(damaged), /validation/);
   }
   {
     const build = planner.createBuild("paladin");
