@@ -138,6 +138,23 @@
                     @update:model-value="changeQuality"
                   />
                 </label>
+                <label
+                  v-else-if="runewordBaseMods.length"
+                  class="planner-label planner-item-quality"
+                >
+                  {{ t("Качество основы", "Base quality") }}
+                  <UiSelect
+                    dropdown-class="planner-select-dropdown"
+                    :aria-label="t('Качество основы', 'Base quality')"
+                    :model-value="item.superiorMod ? 'superior' : 'normal'"
+                    :options="
+                      qualityOptions.filter(
+                        ({ value }) => value === 'normal' || value === 'superior'
+                      )
+                    "
+                    @update:model-value="changeRunewordBaseQuality"
+                  />
+                </label>
                 <div
                   v-if="item.quality === 'rare' && native && selectedBase"
                   class="planner-item-name-control"
@@ -572,6 +589,22 @@ const canEditQuality = computed(
       ? ["normal", "magic", "unique"].includes(item.value.quality)
       : ["normal", "superior", "magic", "rare"].includes(item.value.quality))
 );
+const runewordBaseMods = computed(() =>
+  item.value.quality === "runeword"
+    ? (native.value?.baseModifierOptions(item.value, "superiorMod") ?? [])
+    : []
+);
+function changeRunewordBaseQuality(quality: string) {
+  if (quality === "normal") setBaseModifier("superiorMod");
+  else if (quality === "superior" && !item.value.superiorMod) {
+    const first = runewordBaseMods.value[0];
+    if (first)
+      setBaseModifier("superiorMod", {
+        id: first.id,
+        values: first.ranges.map(({ max }) => max),
+      });
+  }
+}
 const editableQualities = computed(() =>
   qualityOptions.value.filter((q) =>
     isCharm.value
