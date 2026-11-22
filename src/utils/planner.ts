@@ -1,4 +1,6 @@
+import materialSlots from "@/shared/planner-material-slots.json";
 import {
+  materialSlotLimit,
   stashItemLimit,
   attributes,
   bonusFields,
@@ -80,6 +82,9 @@ export function createBuild(classId: ClassId = "sorceress"): PlannerBuild {
     equipment: {},
     charms: defaultInventory(classId),
     stash: [],
+    materials: Object.fromEntries(
+      materialSlots.map(({ code }) => [code, materialSlotLimit])
+    ),
     primarySkills: [],
     mercenary: { type: "none", level: 90, equipment: {} },
     notes: "",
@@ -674,6 +679,18 @@ export function parseBuild(value: unknown): PlannerBuild {
   if (raw.version !== 1 || !plannerClasses.some((c) => c.id === raw.classId))
     throw new Error("version/class");
   const build = createBuild(raw.classId as ClassId);
+  if (raw.sharedStashData !== undefined) {
+    const encoded = string(raw.sharedStashData, 5_333_336);
+    if (encoded.length % 4 || !/^[A-Za-z0-9+/]+={0,2}$/.test(encoded))
+      throw new Error("shared stash");
+    build.sharedStashData = encoded;
+  }
+  if (raw.materials !== undefined) {
+    const counts = record(raw.materials);
+    for (const { code } of materialSlots) {
+      build.materials[code] = integer(counts[code] ?? 0, 0, materialSlotLimit);
+    }
+  }
   build.name = string(raw.name, 100);
   build.level = integer(raw.level, 1, 99);
   build.gold =

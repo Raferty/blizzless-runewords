@@ -57,7 +57,8 @@ for (const code of Object.keys(data.misc)) {
             ? "ques"
             : /^rv[sl]$/.test(code)
               ? "rpot"
-              : t.has("poti") && data.misc[code].spawnable
+              : (t.has("poti") || (t.has("elix") && data.misc[code].state)) &&
+                  data.misc[code].spawnable
                 ? "poti"
                 : ["tsc", "isc"].includes(code)
                   ? "scro"

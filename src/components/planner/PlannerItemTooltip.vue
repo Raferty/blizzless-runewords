@@ -221,7 +221,26 @@ const baseSkillLines = computed(() => {
   ];
 });
 const properties = computed(() => {
-  const { catalogId } = identity.value;
+  const { catalogId, baseCode } = identity.value;
+  const elixir = native.value?.gd.misc[baseCode ?? ""];
+  if (elixir?.type === "elix" && elixir.stat1) {
+    const labels: Record<string, string> = {
+      item_magicbonus: t(
+        "к шансу найти магические предметы",
+        "Better Chance of Getting Magic Items"
+      ),
+      item_goldbonus: t("золота с монстров", "Extra Gold from Monsters"),
+      item_addexperience: t("к получаемому опыту", "Experience Gained"),
+      item_maxhp_percent: t("к максимуму здоровья", "Maximum Life"),
+      item_maxmana_percent: t("к максимуму маны", "Maximum Mana"),
+    };
+    return [
+      [elixir.stat1, elixir.calc1],
+      [elixir.stat2, elixir.calc2],
+    ].flatMap(([stat, value]) =>
+      typeof stat === "string" && labels[stat] ? [`+${value}% ${labels[stat]}`] : []
+    );
+  }
   if (native.value && props.item.containerQuantity !== undefined)
     return itemPropertyLines(
       native.value,

@@ -115,7 +115,11 @@
     "misc/quest/parts_3": "c8f59b04d4b47cfa1d297399291b3d4421696caf033684c49a397c27322e9af9",
     "misc/key/mephisto_key": "904288fe2a8ef731e175462581565f8752780de3e6104f63901f86001b92af1e",
     "misc/key/mephisto_key2": "d797b93a1d337236419c8e8021bdd18d58b8e5a9240ed8f15276304b8a144177",
-    "misc/key/mephisto_key3": "e0448767fa53aeb0af1ee5626da09451c907ecf5e1563d09360d923e07c0accf"
+    "misc/key/mephisto_key3": "e0448767fa53aeb0af1ee5626da09451c907ecf5e1563d09360d923e07c0accf",
+    "misc/potion/blizzless_luck_elixir": "3c7a8783e7ab0c52a3d823bc093095a014e81d9a56bd4466d184a299b5df6af9",
+    "misc/potion/blizzless_wisdom_elixir": "70a30fa4f1bd36018a18d2048359acd1a0ad12b79fbf1499bc6e28465f9b7877",
+    "misc/potion/blizzless_life_mana_elixir": "f2d852d44b679becea29fb153d6f802bd95edc92c6142aa91f4aef861482d237",
+    "misc/potion/blizzless_fortune_elixir": "05c46b2d0831739f909e682e983bef18ba065754253f270352f282d3b0296792"
   },
   "nativeArtSource": {
     "checkedAt": "2026-11-19",
@@ -867,7 +871,11 @@
     "p14": "images/planner/items/misc/quest/tattered_scroll.png",
     "p15": "images/planner/items/misc/amulet/amulet1.webp",
     "p20": "images/planner/items/misc/gem/bloodstone.png",
-    "p21": "images/planner/items/misc/quest/ceremonial_claws.png"
+    "p21": "images/planner/items/misc/quest/ceremonial_claws.png",
+    "p22": "images/planner/items/misc/potion/blizzless_luck_elixir.png",
+    "p18": "images/planner/items/misc/potion/blizzless_wisdom_elixir.png",
+    "p19": "images/planner/items/misc/potion/blizzless_life_mana_elixir.png",
+    "p17": "images/planner/items/misc/potion/blizzless_fortune_elixir.png"
   },
   "tiers": {
     "hax": 0,
@@ -1553,7 +1561,11 @@
     "p14": 0,
     "p15": 0,
     "p20": 0,
-    "p21": 0
+    "p21": 0,
+    "p22": 0,
+    "p18": 0,
+    "p19": 0,
+    "p17": 0
   },
   "stackableBases": [
     "7b8",

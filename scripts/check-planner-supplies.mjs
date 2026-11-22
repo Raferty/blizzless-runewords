@@ -209,6 +209,25 @@ try {
     native.importCharacter(bossSave).stash.map((item) => [item.catalogId, item.baseCode]),
     bossItems.map((item) => [item.catalogId, item.baseCode])
   );
+  const elixirs = ["p17", "p18", "p19", "p22"].map((code) => {
+    assert.equal(supplies.stashSupplies[code]?.category, "poti");
+    return supplies.createStashSupply(native, code);
+  });
+  const elixirBuild = { ...build, stash: stageStashItems(build, elixirs) };
+  const elixirSave = await native.exportCharacter(elixirBuild, {
+    name: "Elixirs",
+    choices: Object.fromEntries(
+      gameSaveEntries(elixirBuild).map((entry) => [
+        entry.key,
+        native.defaultChoice(entry, elixirBuild),
+      ])
+    ),
+    rolls: {},
+  });
+  assert.deepEqual(
+    native.importCharacter(elixirSave).stash.map((item) => item.baseCode),
+    elixirs.map((item) => item.baseCode)
+  );
   const loose = Object.keys(supplies.stashSupplies).map((code) => {
     const item = supplies.createStashSupply(native, code);
     assert(

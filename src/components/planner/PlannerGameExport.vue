@@ -54,6 +54,24 @@
           }}
         </small>
       </label>
+      <label v-if="gameMode === 'rotw'" class="planner-check">
+        <input v-model="includeStash" type="checkbox" />
+        {{ t("Включить общий сундук", "Include shared stash") }}
+      </label>
+      <template v-if="withStash">
+        <label class="planner-label">
+          {{ t("Существующий общий сундук (.d2i)", "Existing shared stash (.d2i)") }}
+          <input type="file" accept=".d2i" @change="selectStash" />
+        </label>
+        <p class="planner-help">
+          {{
+            t(
+              "ZIP содержит персонажа и общий сундук с материалами. Чтобы сохранить остальные вкладки и хронику, выберите свой .d2i. По умолчанию используется импортированный сундук, если он есть, иначе создаётся новый.",
+              "The ZIP includes your character and shared materials stash. Select your existing .d2i to keep its other tabs and chronicle. The imported stash is used by default when available, otherwise a new stash is created."
+            )
+          }}
+        </p>
+      </template>
       <p v-if="loading" role="status" class="planner-help">
         {{ t("Загружаю игровые данные…", "Loading game data…") }}
       </p>
@@ -150,7 +168,11 @@
           {{ t("Повторить", "Retry") }}
         </button>
         <button type="submit" class="planner-primary" :disabled="!ready">
-          {{ t("Скачать .d2s", "Download .d2s") }}
+          {{
+            withStash
+              ? t("Скачать ZIP", "Download ZIP")
+              : t("Скачать .d2s", "Download .d2s")
+          }}
         </button>
       </div>
     </form>
@@ -246,6 +268,12 @@ async function load() {
     loading.value = false;
   }
 }
+const includeStash = ref(false);
+const withStash = computed(() => gameMode.value === "rotw" && includeStash.value);
+const stashFile = shallowRef<File>();
+function selectStash(event: Event) {
+  stashFile.value = (event.target as HTMLInputElement).files?.[0];
+}
 async function download() {
   if (!ready.value) return;
   writing.value = true;
@@ -258,12 +286,27 @@ async function download() {
       rolls: rolls.value,
       gameMode: gameMode.value,
     });
+    const archive = withStash.value;
+    if (archive && stashFile.value && stashFile.value.size > 4_000_000)
+      throw new GameSaveError("validation");
+    const output = archive
+      ? await native.value!.makeArchive(
+          store.build,
+          characterName,
+          bytes,
+          stashFile.value
+            ? new Uint8Array(await stashFile.value.arrayBuffer())
+            : store.build.sharedStashData
+              ? Uint8Array.from(atob(store.build.sharedStashData), (c) => c.charCodeAt(0))
+              : undefined
+        )
+      : bytes;
     const url = URL.createObjectURL(
-      new Blob([Uint8Array.from(bytes).buffer], { type: "application/octet-stream" })
+      new Blob([Uint8Array.from(output).buffer], { type: "application/octet-stream" })
     );
     const link = document.createElement("a");
     link.href = url;
-    link.download = `${characterName}.d2s`;
+    link.download = `${characterName}.${archive ? "zip" : "d2s"}`;
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
     downloaded.value = link.download;

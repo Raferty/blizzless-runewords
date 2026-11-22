@@ -2,6 +2,13 @@
 
 Downloaded 2026-10-26. No user screenshots are included in the site.
 
+## RotW materials stash
+
+`materials-blizzless.png` is the desktop background selected by the Blizzless
+`bankexpansionlayouthd.json` layout. Its original sprite is
+`PANEL/Stash/AdditionalStash/PANEL_Expanded_Materials_BlizzlessSideGrids`
+(SHA-256 `d36bd61cff632cdcf8b96eadc61ae1e338ab6aac4a89defc7590f88c2c2a8cec`).
+
 ## Custom panel variants — 2026-11-21
 
 - `inventory-clear-v3.png` (1081×1455): generated character inventory panel variant

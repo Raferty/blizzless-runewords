@@ -42,7 +42,7 @@
           ><input
             ref="importInput"
             type="file"
-            accept=".json,.d2s,application/json,application/octet-stream"
+            accept=".json,.zip,.d2i,.d2s,application/json,application/octet-stream"
             hidden
             @change="importBuild"
           />
@@ -76,7 +76,7 @@
     <div class="planner-navigation">
       <nav :aria-label="t('Окна планнера', 'Planner windows')">
         <button
-          v-for="tab in tabs"
+          v-for="tab in visibleTabs"
           :key="tab.key"
           :aria-pressed="section === tab.key"
           @click="section = tab.key"
@@ -130,6 +130,7 @@
           @edit="editStash"
           @manage="stashOpen = true"
         />
+        <PlannerMaterials v-if="section === 'materials' && hasMaterials" />
         <PlannerSkillPanel v-if="section === 'overview' || section === 'skills'" />
         <template v-if="section === 'mercenary'">
           <section class="planner-panel">
@@ -246,6 +247,13 @@
             </p>
           </div>
         </section>
+        <PlannerPanel
+          v-if="section === 'overview' && hasMaterials"
+          v-model:open="overviewMaterialsOpen"
+          :title="t('Материалы', 'Materials')"
+        >
+          <PlannerMaterials />
+        </PlannerPanel>
         <PlannerPanel
           v-if="section === 'overview' || section === 'notes'"
           class="planner-quests-compact"
@@ -379,6 +387,7 @@
     </div>
     <TheFooter />
     <PlannerBuildShare v-if="shareOpen" :build="store.build" @close="shareOpen = false" />
+
     <UiModal
       :model-value="resetOpen"
       closable
@@ -648,11 +657,16 @@ import {
   skillBudget,
   spentSkills,
 } from "@/utils/planner";
+import PlannerMaterials from "./planner/PlannerMaterials.vue";
 import { plannerItemIdentity } from "@/utils/planner-item-art";
 import { fitsStashCell } from "@/utils/planner-item-movement";
 import { usePlannerGameData } from "@/composables/usePlannerGameData";
 import { assembleSocketedRuneword } from "@/utils/planner-item-catalog";
-import { gameSaveEntries, loadGameSaveExporter } from "@/utils/planner-game-save";
+import {
+  defaultGameSaveMode,
+  gameSaveEntries,
+  loadGameSaveExporter,
+} from "@/utils/planner-game-save";
 import type {
   Difficulty,
   EquipmentSlot,
@@ -679,11 +693,23 @@ const tabs = [
   { key: "skills", ru: "Навыки", en: "Skills" },
   { key: "mercenary", ru: "Наёмник", en: "Mercenary" },
   { key: "stash", ru: "Сундук", en: "Stash" },
+  { key: "materials", ru: "Материалы", en: "Materials" },
   { key: "waypoints", ru: "Вейпоинты", en: "Waypoints" },
   { key: "quests", ru: "Задания", en: "Quests" },
   { key: "notes", ru: "Заметки", en: "Notes" },
 ];
+const overviewMaterialsOpen = ref(true);
+const hasMaterials = computed(
+  () =>
+    (store.build.gameSave?.mode ?? defaultGameSaveMode(store.build.classId)) === "rotw"
+);
+const visibleTabs = computed(() =>
+  tabs.filter((tab) => tab.key !== "materials" || hasMaterials.value)
+);
 const section = ref("overview");
+watch(hasMaterials, (available) => {
+  if (!available && section.value === "materials") section.value = "stash";
+});
 const notesOpen = ref(true);
 watch(section, (value) => {
   if (value === "notes") notesOpen.value = true;
@@ -957,18 +983,55 @@ function clearConvertedSave() {
   convertedSave.value = undefined;
 }
 onBeforeUnmount(clearConvertedSave);
+function encodeStash(bytes: Uint8Array) {
+  let binary = "";
+  for (let offset = 0; offset < bytes.length; offset += 16384)
+    binary += String.fromCharCode(...bytes.subarray(offset, offset + 16384));
+  return btoa(binary);
+}
 async function importBuild(event: Event) {
   const input = event.target as HTMLInputElement;
   const file = input.files?.[0];
   if (!file) return;
   clearConvertedSave();
   try {
-    if (file.size > 1000000) throw new Error("size");
+    const extension = file.name.split(".").pop()?.toLowerCase();
+    if (extension === "zip" || extension === "d2i") {
+      const { maxStashSize, unpackMaterialArchive } =
+        await import("@/utils/planner-material-save");
+      if (file.size > maxStashSize) throw new Error("size");
+      const native = await loadGameSaveExporter();
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      if (extension === "zip") {
+        const { character, stash } = unpackMaterialArchive(bytes);
+        const { build } = await native.importGameFile(character);
+        if (build.gameSave?.mode !== "rotw") throw new Error("mode");
+        build.materials = await native.readMaterials(stash, build.hardcore);
+        build.sharedStashData = encodeStash(stash);
+        store.loadBuild(build);
+      } else {
+        if (!hasMaterials.value) throw new Error("mode");
+        store.build.materials = await native.readMaterials(bytes, store.build.hardcore);
+        store.build.sharedStashData = encodeStash(bytes);
+        section.value = "materials";
+        store.message = "loaded";
+      }
+      return;
+    }
+    if (file.size > (extension === "json" ? 7_000_000 : 1_000_000))
+      throw new Error("size");
     if (file.name.toLowerCase().endsWith(".d2s")) {
       const native = await loadGameSaveExporter();
       const { build, converted } = await native.importGameFile(
         new Uint8Array(await file.arrayBuffer())
       );
+      // A character-only file carries no shared stash. Keep the planner's known counts.
+      const previous =
+        store.build.classId === build.classId ? store.build : store.drafts[build.classId];
+      if (previous && previous.hardcore === build.hardcore) {
+        build.materials = { ...previous.materials };
+        build.sharedStashData = previous.sharedStashData;
+      }
       if (store.loadBuild(build) && converted) {
         convertedSave.value = {
           url: URL.createObjectURL(
@@ -983,8 +1046,9 @@ async function importBuild(event: Event) {
     } else store.loadBuild(JSON.parse(await file.text()));
   } catch {
     store.message = "invalid";
+  } finally {
+    input.value = "";
   }
-  input.value = "";
 }
 function resetCharacter() {
   store.resetCharacter();

@@ -286,7 +286,11 @@
     "misc/shard/cont_ua2": "53895807e7a5c41dc6c1637ddd24ecdbd6b568112b2739108a2a0a37a78a805d",
     "misc/shard/cont_ua3": "985fd7f3fc5818e7fab2077f72a493d6ce06163b6cb8b4e01513ad00d344a5ba",
     "misc/shard/cont_ua4": "f5f7cb88b5fd59ba0e269d1f91d27d2c478f968cb1d680b5755d7911108ec3bf",
-    "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85"
+    "misc/shard/cont_ua5": "f758afd47c43d31101c9447d62f3a5478abfbe112176a9a44d5ecec45730bf85",
+    "misc/potion/blizzless_luck_elixir": "3c7a8783e7ab0c52a3d823bc093095a014e81d9a56bd4466d184a299b5df6af9",
+    "misc/potion/blizzless_wisdom_elixir": "70a30fa4f1bd36018a18d2048359acd1a0ad12b79fbf1499bc6e28465f9b7877",
+    "misc/potion/blizzless_life_mana_elixir": "f2d852d44b679becea29fb153d6f802bd95edc92c6142aa91f4aef861482d237",
+    "misc/potion/blizzless_fortune_elixir": "05c46b2d0831739f909e682e983bef18ba065754253f270352f282d3b0296792"
   },
   "externalImages": {
     "misc/body_part/fragment_cold": {
@@ -371,7 +375,11 @@
     "xa2": "misc/shard/mote_of_pain.avif",
     "xa3": "misc/shard/mote_of_hatred.avif",
     "xa4": "misc/shard/mote_of_terror.avif",
-    "xa5": "misc/shard/mote_of_destruction.avif"
+    "xa5": "misc/shard/mote_of_destruction.avif",
+    "p22": "misc/potion/blizzless_luck_elixir",
+    "p18": "misc/potion/blizzless_wisdom_elixir",
+    "p19": "misc/potion/blizzless_life_mana_elixir",
+    "p17": "misc/potion/blizzless_fortune_elixir"
   },
   "imageOverrides": {
     "Harlequin Crest": "images/planner/items/armor/helmet/harlequin_crest.png",

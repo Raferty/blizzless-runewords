@@ -89,6 +89,29 @@ try {
     return { bytes, read, raw: codec.readCharacter(bytes) };
   }
   {
+    const { unpackMaterialArchive } = await server.ssrLoadModule(
+      "/src/utils/planner-material-save.ts"
+    );
+    const hero = planner.createBuild("paladin");
+    const { bytes } = await verify(hero);
+    let original;
+    for (const state of ["full", "partial", "empty"]) {
+      if (state === "partial") Object.assign(hero.materials, { r01: 0, p22: 7 });
+      if (state === "empty")
+        for (const code of Object.keys(hero.materials)) hero.materials[code] = 0;
+      const archive = await codec.makeArchive(hero, opts.name, bytes, original);
+      const { character, stash } = unpackMaterialArchive(archive);
+      assert.deepEqual(character, Uint8Array.from(bytes));
+      assert.deepEqual(await codec.readMaterials(stash, hero.hardcore), hero.materials);
+      if (original) {
+        // Five empty 68-byte grid pages and the gold stored in their headers survive edits.
+        assert.deepEqual(stash.slice(0, 5 * 68), original.slice(0, 5 * 68));
+      }
+      original = stash;
+      new DataView(original.buffer, original.byteOffset).setUint32(12, 12345, true);
+    }
+  }
+  {
     const hero = planner.createBuild("barbarian");
     hero.stash = [
       {

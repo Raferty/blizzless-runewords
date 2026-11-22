@@ -517,6 +517,22 @@
       "name": "Khalim's Will",
       "category": "ques",
       "catalogId": "unique128"
+    },
+    "p22": {
+      "name": "Elixir of Fortune",
+      "category": "poti"
+    },
+    "p18": {
+      "name": "Elixir of Wisdom",
+      "category": "poti"
+    },
+    "p19": {
+      "name": "Elixir of Life and Mana",
+      "category": "poti"
+    },
+    "p17": {
+      "name": "Elixir of Wealth",
+      "category": "poti"
     }
   },
   "recipes": {

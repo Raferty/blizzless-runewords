@@ -1,3 +1,4 @@
+import { materialSaveCodec } from "./planner-material-save";
 import { loadDataFromFile } from "./planner-data-loader";
 import { D2RSaver, type BinaryParsedItem, type D2SCharacterProfile } from "d2r-saver";
 import { read, write, writeItem, type types as SaveTypes } from "@d2runewizard/d2s";
@@ -2435,6 +2436,18 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     return bytes;
   }
   return {
+    ...materialSaveCodec(constants, (code) => {
+      const base = gd.items[code];
+      const kinds = types(code);
+      return {
+        simple:
+          ("compactsave" in base && base.compactsave === 1) ||
+          kinds.has("rune") ||
+          kinds.has("gem") ||
+          kinds.has("poti"),
+        quest: kinds.has("ques") && "questdiffcheck" in base && !!base.questdiffcheck,
+      };
+    }),
     baseCharacteristics(code: string, classId: ClassId) {
       const base = gd.items[code] as unknown as Definition | undefined;
       if (!base) return;

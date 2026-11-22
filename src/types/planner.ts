@@ -150,6 +150,8 @@ export interface PlannerBuild {
   skills: Record<number, number>;
   equipment: Partial<Record<EquipmentSlot, PlannerItem>>;
   stash: PlannerItem[];
+  materials: Record<string, number>;
+  sharedStashData?: string;
   charms: PlannerCharm[];
   primarySkills: number[];
   mercenary: {
