@@ -158,6 +158,57 @@ try {
     }))
   );
   const catalog = createItemCatalog(native, build, { key: "stash", owner: "stash" }, []);
+  const bossItems = [
+    ["unique712", "Leoric's Crown"],
+    ["unique713", "Butcher's Cleaver"],
+    ["unique714", "Talisman of the Lich"],
+    ["unique715", "Talisman of the Bone Lord"],
+  ].map(([catalogId, name]) => {
+    const row = catalog.items.find((entry) => entry.catalogId === catalogId);
+    assert.equal(row?.name, name);
+    return {
+      catalogId,
+      name,
+      baseCode: row.bases[0],
+      quality: row.quality,
+      requiredLevel: row.level,
+      itemLevel: 99,
+      bonuses: {},
+      notes: "",
+      propertyRoll: 1,
+    };
+  });
+  const charmPicker = createItemCatalog(
+    native,
+    build,
+    { key: "charm", owner: "charm" },
+    []
+  );
+  for (const item of bossItems.filter((entry) => entry.baseCode === "cs2"))
+    assert(charmPicker.items.some((entry) => entry.catalogId === item.catalogId));
+  const bossBuild = planner.parseBuild({
+    ...build,
+    stash: stageStashItems(build, bossItems),
+  });
+  const bossSave = await native.exportCharacter(bossBuild, {
+    name: "BossItems",
+    choices: Object.fromEntries(
+      gameSaveEntries(bossBuild).map((entry) => [
+        entry.key,
+        native.defaultChoice(entry, bossBuild),
+      ])
+    ),
+    rolls: {},
+  });
+  // The independent reader ships vanilla bases. The Cleaver uses the mod's War Spike.
+  constants.weapon_items.p09 = constants.weapon_items[data.weapons.p09.namestr];
+  await verify(build, bossItems);
+  const bossRaw = native.readCharacter(bossSave);
+  assert.deepEqual(bossRaw.warnings, []);
+  assert.deepEqual(
+    native.importCharacter(bossSave).stash.map((item) => [item.catalogId, item.baseCode]),
+    bossItems.map((item) => [item.catalogId, item.baseCode])
+  );
   const loose = Object.keys(supplies.stashSupplies).map((code) => {
     const item = supplies.createStashSupply(native, code);
     assert(

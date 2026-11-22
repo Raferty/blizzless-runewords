@@ -182,7 +182,7 @@
       "images/planner/items/misc/charm/charm_large3.webp"
     ]
   },
-  "gameDataSha256": "a672af3454a716412e5d3827166e9a6db97d7c6f17fce69c948f95d5c57d0e5c",
+  "gameDataSha256": "3a36142ac94f57d32fe2af711120ac1fb2e2f73ce1f7edce3e2989a74d69a328",
   "bases": {
     "hax": "images/planner/items/weapon/axe/hand_axe.webp",
     "axe": "images/planner/items/weapon/axe/axe.webp",
@@ -3009,7 +3009,11 @@
     "set136": "xpl",
     "set137": "xlg",
     "set138": "utb",
-    "set139": "wad"
+    "set139": "wad",
+    "unique712": "ci2",
+    "unique713": "p09",
+    "unique714": "cs2",
+    "unique715": "cs2"
   },
   "names": {
     "unique": {
@@ -3705,7 +3709,11 @@
       "bloodforgedhelm": "unique694",
       "bartuc's crimson visage": "unique694",
       "bloodforgedarmor": "unique695",
-      "bartuc's crimson vessel": "unique695"
+      "bartuc's crimson vessel": "unique695",
+      "leoric's crown": "unique712",
+      "butcher's cleaver": "unique713",
+      "talisman of the lich": "unique714",
+      "talisman of the bone lord": "unique715"
     },
     "set": {
       "civerb's ward": "set000",
@@ -6510,6 +6518,26 @@
       "images/planner/items/armor/armor/bloodforged_armor.png",
       "images/planner/items/armor/armor/bloodforged_armor.png",
       "images/planner/items/armor/armor/bloodforged_armor.png"
+    ],
+    "unique712": [
+      "images/cube/8130a93f4dfcd7136d.png",
+      "images/cube/8130a93f4dfcd7136d.png",
+      "images/cube/8130a93f4dfcd7136d.png"
+    ],
+    "unique713": [
+      "images/cube/538c3132d7e5ac21e3.png",
+      "images/cube/538c3132d7e5ac21e3.png",
+      "images/cube/538c3132d7e5ac21e3.png"
+    ],
+    "unique714": [
+      "images/cube/f97751e995f9497c77.png",
+      "images/cube/f97751e995f9497c77.png",
+      "images/cube/f97751e995f9497c77.png"
+    ],
+    "unique715": [
+      "images/cube/d6c585dc2ff3f5d28c.png",
+      "images/cube/d6c585dc2ff3f5d28c.png",
+      "images/cube/d6c585dc2ff3f5d28c.png"
     ]
   },
   "set": {

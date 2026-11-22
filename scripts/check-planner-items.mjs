@@ -776,7 +776,10 @@ try {
   assert(skillLines.includes("+2 to Echoing Strike"));
   assert(skillLines.includes("+3 Additional Echoes"));
   const renewed = stash.items.filter(
-    (item) => item.quality === "unique" && item.bases.includes("cs2")
+    (item) =>
+      item.quality === "unique" &&
+      item.bases.includes("cs2") &&
+      item.name.startsWith("Renewed ")
   );
   assert.equal(
     renewed.length,
@@ -786,13 +789,14 @@ try {
   assert(
     stash.items.every((item) => {
       const row = native.gd.uniqueItems[item.catalogId];
-      return !row?.disablechronicle || !["cm3", "cs2"].includes(row.code);
+      return !row?.disablechronicle || !/^(PreCrafted|Crafted) /.test(row.index);
     }),
     "Disabled Sunder definitions stay outside the item picker"
   );
   // Old experimental builds retain their saved art and properties.
   for (const [catalogId] of Object.entries(native.gd.uniqueItems).filter(
-    ([, row]) => row.code === "cs2" && row.disablechronicle === 1
+    ([, row]) =>
+      row.code === "cs2" && row.index.startsWith("Crafted ") && row.disablechronicle === 1
   )) {
     const item = { baseCode: "cs2", quality: "unique", catalogId };
     assert.equal(plannerItemImage(item), baseItemImage("cs2"));

@@ -406,7 +406,7 @@ export function createItemCatalog(
     for (const choice of choices({ ...empty, quality })) {
       const def = definitions[choice.value];
       const disabledSunder =
-        def.disablechronicle === 1 && ["cm3", "cs2"].includes(String(def.code));
+        def.disablechronicle === 1 && /^(PreCrafted|Crafted) /.test(def.index);
       if (def.enabled === 0 || def.spawnable === 0 || disabledSunder) continue;
       items.push({
         id: `${quality}:${choice.value}`,

@@ -610,7 +610,11 @@
     "The Grandfather Player": "images/planner/items/uniques/sword/the_patriarch.t55.avif",
     "Leoric's Crown Player": "images/planner/items/uniques/helmet/leorics_crown.avif",
     "Tyrael's Might Player": "images/planner/items/uniques/armor/victors_silk.t173.avif",
-    "Skullcollector Player": "images/planner/items/uniques/staff/skullcollector.t171.avif"
+    "Skullcollector Player": "images/planner/items/uniques/staff/skullcollector.t171.avif",
+    "Leoric's Crown": "images/cube/8130a93f4dfcd7136d.png",
+    "Butcher's Cleaver": "images/cube/538c3132d7e5ac21e3.png",
+    "Talisman of the Lich": "images/cube/f97751e995f9497c77.png",
+    "Talisman of the Bone Lord": "images/cube/d6c585dc2ff3f5d28c.png"
   },
   "sunderColors": {
     "lblu": [0.4745098, 0.7137255, 0.9254902],

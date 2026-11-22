@@ -7719,7 +7719,7 @@
         "en": "Transmute the three loose items in Harrogath on Hell difficulty. Opens the entrance to Bartuc."
       },
       "status": "added",
-      "tags": ["event"],
+      "tags": ["uniques", "event"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [

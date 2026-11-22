@@ -280,6 +280,7 @@ try {
   assert.equal(cubeIngredients.get("any_standard_gem").name.en, "Any Standard Gem");
   store.addTag("recipe", "event");
   assert.equal(store.filteredRecipes.length, 4);
+  store.addTag("recipe", "uniques");
   assert(store.filteredRecipes.some((recipe) => recipe.key === "portal_bartuc"));
   store.resetFilters();
 

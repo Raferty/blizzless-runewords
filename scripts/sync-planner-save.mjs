@@ -124,6 +124,12 @@ function readTable(text) {
     });
 }
 const current = {};
+const eventUniques = new Set([
+  "Leoric's Crown",
+  "Butcher's Cleaver",
+  "Talisman of the Lich",
+  "Talisman of the Bone Lord",
+]);
 const enabledSunder = (row) =>
   /^(PreCrafted|Crafted) (Cold Rupture|Flame Rift|Crack of the Heavens|Rotting Fissure|Bone Break|Black Cleft)$/.test(
     row.index ?? ""
@@ -188,13 +194,19 @@ for (const name of tableNames) {
       case "uniqueItems":
         // Colossal jewels are boss rewards, so they have no random-drop flag.
         // Latent/Renewed variants are explicitly enabled for offline planning.
-        if (!row.index || (!row.spawnable && row.code !== "cjw" && !enabledSunder(row)))
+        if (
+          !row.index ||
+          (!row.spawnable &&
+            row.code !== "cjw" &&
+            !enabledSunder(row) &&
+            !eventUniques.has(row.index))
+        )
           return;
         id = `unique${String(row.id ?? index).padStart(3, "0")}`;
         // *ID is a comment, not the binary record number. Keep catalog IDs stable
         // for saved builds, but count every game row (including section headings).
         row.saveId = index;
-        row.enabled = row.code === "cjw" || enabledSunder(row) ? 1 : row.spawnable;
+        row.enabled = 1;
         if (enabledSunder(row)) {
           row.disabled = 0;
           row.spawnable = 1;

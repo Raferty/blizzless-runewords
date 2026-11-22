@@ -381,7 +381,7 @@ export async function augmentNativeCubeRecipes(catalog, sourceBytes) {
     "portal_bartuc",
     "Портал к Бартуку",
     "Portal to Bartuc",
-    ["event"],
+    ["uniques", "event"],
     [part("bartuc_scroll"), part("bartuc_bloodstone"), part("bartuc_demon_paw")],
     [part("portal", 1, "Вход к Бартуку", "Entrance to Bartuc")],
     "Сложите три отдельных предмета в кубе в Харрогате на сложности Ад. Открывает вход к Бартуку.",
