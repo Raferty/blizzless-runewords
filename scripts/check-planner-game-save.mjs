@@ -69,7 +69,11 @@ try {
     assert.equal(read.header.status.expansion, true);
     assert.equal(
       bytes[248],
-      (options.gameMode ?? native.defaultGameSaveMode(build.classId)) === "rotw" ? 3 : 2
+      (options.gameMode ??
+        build.gameSave?.mode ??
+        native.defaultGameSaveMode(build.classId)) === "rotw"
+        ? 3
+        : 2
     );
     assert.equal(read.attributes.gold, build.gold);
     assert.equal(

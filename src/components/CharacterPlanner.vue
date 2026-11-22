@@ -76,7 +76,7 @@
     <div class="planner-navigation">
       <nav :aria-label="t('Окна планнера', 'Planner windows')">
         <button
-          v-for="tab in visibleTabs"
+          v-for="tab in tabs"
           :key="tab.key"
           :aria-pressed="section === tab.key"
           @click="section = tab.key"
@@ -130,7 +130,7 @@
           @edit="editStash"
           @manage="stashOpen = true"
         />
-        <PlannerMaterials v-if="section === 'materials' && hasMaterials" />
+        <PlannerMaterials v-if="section === 'materials'" />
         <PlannerSkillPanel v-if="section === 'overview' || section === 'skills'" />
         <template v-if="section === 'mercenary'">
           <section class="planner-panel">
@@ -248,7 +248,7 @@
           </div>
         </section>
         <PlannerPanel
-          v-if="section === 'overview' && hasMaterials"
+          v-if="section === 'overview'"
           v-model:open="overviewMaterialsOpen"
           class="planner-overview-panel"
           :title="t('Материалы', 'Materials')"
@@ -665,11 +665,7 @@ import { plannerItemIdentity } from "@/utils/planner-item-art";
 import { fitsStashCell } from "@/utils/planner-item-movement";
 import { usePlannerGameData } from "@/composables/usePlannerGameData";
 import { assembleSocketedRuneword } from "@/utils/planner-item-catalog";
-import {
-  defaultGameSaveMode,
-  gameSaveEntries,
-  loadGameSaveExporter,
-} from "@/utils/planner-game-save";
+import { gameSaveEntries, loadGameSaveExporter } from "@/utils/planner-game-save";
 import type {
   Difficulty,
   EquipmentSlot,
@@ -702,17 +698,7 @@ const tabs = [
   { key: "notes", ru: "Заметки", en: "Notes" },
 ];
 const overviewMaterialsOpen = ref(false);
-const hasMaterials = computed(
-  () =>
-    (store.build.gameSave?.mode ?? defaultGameSaveMode(store.build.classId)) === "rotw"
-);
-const visibleTabs = computed(() =>
-  tabs.filter((tab) => tab.key !== "materials" || hasMaterials.value)
-);
 const section = ref("overview");
-watch(hasMaterials, (available) => {
-  if (!available && section.value === "materials") section.value = "stash";
-});
 const notesOpen = ref(true);
 watch(section, (value) => {
   if (value === "notes") notesOpen.value = true;
@@ -1008,12 +994,10 @@ async function importBuild(event: Event) {
       if (extension === "zip") {
         const { character, stash } = unpackMaterialArchive(bytes);
         const { build } = await native.importGameFile(character);
-        if (build.gameSave?.mode !== "rotw") throw new Error("mode");
         build.materials = await native.readMaterials(stash, build.hardcore);
         build.sharedStashData = encodeStash(stash);
         store.loadBuild(build);
       } else {
-        if (!hasMaterials.value) throw new Error("mode");
         store.build.materials = await native.readMaterials(bytes, store.build.hardcore);
         store.build.sharedStashData = encodeStash(bytes);
         section.value = "materials";

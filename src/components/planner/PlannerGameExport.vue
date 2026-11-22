@@ -48,17 +48,17 @@
         <small v-if="gameMode === 'rotw'">
           {{
             t(
-              "Для загрузки персонажа нужно дополнение Reign of the Warlock.",
-              "Loading this character requires Reign of the Warlock."
+              "Если персонаж не появляется без DLC, выберите Expansion.",
+              "If your character does not appear without the DLC, select Expansion."
             )
           }}
         </small>
       </label>
-      <label v-if="gameMode === 'rotw'" class="planner-check">
+      <label class="planner-check">
         <input v-model="includeStash" type="checkbox" />
         {{ t("Включить общий сундук", "Include shared stash") }}
       </label>
-      <template v-if="withStash">
+      <template v-if="includeStash">
         <label class="planner-label">
           {{ t("Существующий общий сундук (.d2i)", "Existing shared stash (.d2i)") }}
           <input type="file" accept=".d2i" @change="selectStash" />
@@ -169,7 +169,7 @@
         </button>
         <button type="submit" class="planner-primary" :disabled="!ready">
           {{
-            withStash
+            includeStash
               ? t("Скачать ZIP", "Download ZIP")
               : t("Скачать .d2s", "Download .d2s")
           }}
@@ -269,7 +269,6 @@ async function load() {
   }
 }
 const includeStash = ref(true);
-const withStash = computed(() => gameMode.value === "rotw" && includeStash.value);
 const stashFile = shallowRef<File>();
 function selectStash(event: Event) {
   stashFile.value = (event.target as HTMLInputElement).files?.[0];
@@ -286,7 +285,7 @@ async function download() {
       rolls: rolls.value,
       gameMode: gameMode.value,
     });
-    const archive = withStash.value;
+    const archive = includeStash.value;
     if (archive && stashFile.value && stashFile.value.size > 4_000_000)
       throw new GameSaveError("validation");
     const output = archive
@@ -309,6 +308,8 @@ async function download() {
     link.download = `${characterName}.${archive ? "zip" : "d2s"}`;
     link.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
+    if (store.build.gameSave?.mode !== gameMode.value)
+      store.build.gameSave = { mode: gameMode.value, legacyExpansion: true };
     downloaded.value = link.download;
   } catch (cause) {
     const code = cause instanceof GameSaveError ? cause.code : "validation";

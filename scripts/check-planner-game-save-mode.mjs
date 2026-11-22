@@ -59,7 +59,7 @@ try {
       const build = createBuild(id);
       build.hardcore = hardcore;
       build.level = hardcore ? 1 : 99;
-      await check(build, undefined, 3);
+      await check(build, undefined, id === "warlock" ? 3 : 2);
     }
   }
   await check(createBuild("paladin"), "rotw", 3);

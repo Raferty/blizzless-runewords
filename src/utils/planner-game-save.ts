@@ -136,7 +136,8 @@ export interface GameSaveOptions {
   gameMode?: GameSaveMode;
 }
 export type GameSaveMode = "expansion" | "rotw";
-export const defaultGameSaveMode: (classId?: ClassId) => GameSaveMode = () => "rotw";
+export const defaultGameSaveMode: (classId?: ClassId) => GameSaveMode = (classId) =>
+  classId === "warlock" ? "rotw" : "expansion";
 export type GameSaveRoll = 0 | 1 | "planned";
 export class GameSaveError extends Error {
   constructor(
