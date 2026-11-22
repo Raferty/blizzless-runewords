@@ -313,12 +313,11 @@
   width: auto;
   max-width: 100%;
   min-height: var(--planner-control-height);
-  padding: 2px 8px;
-  border: 1px solid #383838;
-  border-radius: 4px;
 }
 .planner-item-base-controls input[type="number"] {
-  width: 6ch;
+  box-sizing: border-box;
+  width: calc(4ch + 2rem);
+  padding-inline: 0.5rem;
 }
 .planner-item-name-control strong {
   font-weight: 500;

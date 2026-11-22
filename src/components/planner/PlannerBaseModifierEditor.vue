@@ -31,37 +31,27 @@
   </section>
   <section v-if="superiorRows.length" class="planner-item-properties">
     <h3>{{ t("Бонус Superior", "Superior Mod") }}</h3>
-    <div class="mod-row" :class="{ 'mod-row--selected': superior }">
-      <UiSelect
-        dropdown-class="planner-select-dropdown"
-        :aria-label="t('Бонус Superior', 'Superior Mod')"
-        :model-value="superior?.id ?? ''"
-        :options="[
-          ...(item.quality === 'runeword'
-            ? [{ value: '', label: t('Без бонуса', 'None') }]
-            : []),
-          ...superiorRows.map((row) => ({ value: row.id, label: superiorLabel(row) })),
-        ]"
-        @update:model-value="
-          apply(
-            'superiorMod',
-            superiorRows.find((row) => row.id === $event)
-          )
-        "
-      />
-      <div v-if="superior" class="mod-lines">
-        <label v-for="code in codes(superior)" :key="code">
-          +<input
-            type="number"
-            required
-            :aria-label="propertyName(code)"
-            :value="currentValue(superior, item.superiorMod, code)"
-            :min="superior.ranges[propertyIndex(superior, code)].min"
-            :max="superior.ranges[propertyIndex(superior, code)].max"
-            @change="editRoll($event, 'superiorMod', code, superior)"
-          />{{ code.endsWith("%") ? "%" : "" }} {{ propertyName(code) }}
-        </label>
-      </div>
+    <div v-for="bonus in superiorBonuses" :key="bonus.code" class="superior-bonus">
+      <label>
+        <input
+          type="checkbox"
+          :checked="bonus.selected"
+          :disabled="!bonus.next && !bonus.canClear"
+          @change="apply('superiorMod', bonus.next)"
+        />
+        {{ propertyName(bonus.code) }}
+      </label>
+      <label v-if="bonus.selected && superior">
+        +<input
+          type="number"
+          required
+          :aria-label="propertyName(bonus.code)"
+          :value="currentValue(superior, item.superiorMod, bonus.code)"
+          :min="bonus.range.min"
+          :max="bonus.range.max"
+          @change="editRoll($event, 'superiorMod', bonus.code, superior)"
+        />{{ bonus.code.endsWith("%") ? "%" : "" }}
+      </label>
     </div>
   </section>
 </template>
@@ -212,14 +202,26 @@ const superiorRows = computed(() =>
 const superior = computed(() =>
   superiorRows.value.find((row) => row.id === props.item.superiorMod?.id)
 );
-function superiorLabel(row: Row) {
-  return codes(row)
-    .map((code) => {
-      const { min, max } = row.ranges[propertyIndex(row, code)];
-      return `(${min}–${max})${code.endsWith("%") ? "%" : ""} ${propertyName(code)}`;
-    })
-    .join(" / ");
-}
+const superiorBonuses = computed(() => {
+  const rows = superiorRows.value;
+  const active = superior.value ? codes(superior.value) : [];
+  return [...new Set(rows.flatMap(codes))].map((code) => {
+    const selected = active.includes(code);
+    const wanted = selected ? active.filter((key) => key !== code) : [...active, code];
+    const next = rows.find((row) => {
+      const keys = codes(row);
+      return keys.length === wanted.length && wanted.every((key) => keys.includes(key));
+    });
+    const range = superior.value?.ranges[propertyIndex(superior.value, code)];
+    return {
+      code,
+      selected,
+      range: range ?? { min: 0, max: 0 },
+      next,
+      canClear: wanted.length === 0 && props.item.quality === "runeword",
+    };
+  });
+});
 
 function editRoll(event: Event, field: Field, code: string, row: Row) {
   const input = event.target as HTMLInputElement;
@@ -274,7 +276,19 @@ function editRoll(event: Event, field: Field, code: string, row: Row) {
   gap: 0.25rem;
   align-items: baseline;
 }
-.mod-lines input {
+.superior-bonus {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  min-height: 2.5rem;
+}
+.superior-bonus label {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+.mod-lines input,
+.superior-bonus input[type="number"] {
   width: 5ch;
   min-width: 0;
   padding: 0.15rem;
