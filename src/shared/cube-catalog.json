@@ -22,19 +22,53 @@
     },
     {
       "key": "fix_quality_weapon",
-      "name": { "ru": "Повышения качества оружия", "en": "Weapon Quality Upgrade" },
-      "notes": { "ru": "", "en": "" },
+      "name": {
+        "ru": "Повышения качества оружия",
+        "en": "Weapon Quality Upgrade"
+      },
+      "notes": {
+        "ru": "Восстанавливает обычное качество без повышения ступени основы.",
+        "en": "Restores normal quality without upgrading the base tier."
+      },
       "status": "unchanged",
-      "tags": ["weapon", "base"],
+      "tags": ["upgrade_u", "base", "weapon"],
       "officialVersion": 1,
       "blizzlessVersion": null,
       "ingredients": [
-        { "key": "low_quality_weapon", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "rune_eld", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "any_chipped_gem", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "low_quality_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_eld",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "any_chipped_gem",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ],
       "result": [
-        { "key": "normal_quality_weapon", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "normal_quality_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ]
     },
     {
@@ -76,19 +110,62 @@
     },
     {
       "key": "fix_quality_armor",
-      "name": { "ru": "Повышения качества брони", "en": "Armor Quality Upgrade" },
-      "notes": { "ru": "", "en": "" },
+      "name": {
+        "ru": "Повышения качества брони",
+        "en": "Armor Quality Upgrade"
+      },
+      "notes": {
+        "ru": "Восстанавливает обычное качество без повышения ступени основы.",
+        "en": "Restores normal quality without upgrading the base tier."
+      },
       "status": "unchanged",
-      "tags": ["armor", "base"],
+      "tags": [
+        "upgrade_u",
+        "base",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
       "officialVersion": 1,
       "blizzlessVersion": null,
       "ingredients": [
-        { "key": "low_quality_armor", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "rune_eld", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "any_chipped_gem", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "low_quality_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_el",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "any_chipped_gem",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ],
       "result": [
-        { "key": "normal_quality_armor", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "normal_quality_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ]
     },
     {
@@ -2906,85 +2983,255 @@
     {
       "key": "upgrade_craft_normal_armor",
       "name": {
-        "ru": "Улучшение Ремесленной Обычной Брони",
+        "ru": "Улучшение ремесленной брони: обычная → исключительная основа",
         "en": "Upgrade Crafted Normal Armor"
       },
-      "notes": { "ru": "", "en": "" },
+      "notes": {
+        "ru": "Подходит для пояса, шлема, перчаток, обуви, щита и нательной брони. Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя. Дополнительное снижение физического урона у нательной брони и щитов зависит от основы.",
+        "en": "Works with belts, helms, gloves, boots, shields and body armor. Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further. Additional physical damage reduction on body armor and shields depends on the base."
+      },
       "status": "added",
-      "tags": ["crafted", "armor", "upgrade_u"],
+      "tags": [
+        "upgrade_u",
+        "crafted",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
-        { "key": "norm_craft_armor", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "ith_rune", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "dol_rune", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "gem_perfect_topaz", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "norm_craft_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "ith_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "dol_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_topaz",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ],
       "result": [
-        { "key": "exc_craft_armor", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "exc_craft_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ]
     },
     {
       "key": "upgrade_armor_except_craft",
       "name": {
-        "ru": "Улучшение Ремесленной Исключительной Брони",
+        "ru": "Улучшение ремесленной брони: исключительная → элитная основа",
         "en": "Upgrade Crafted Exceptional Armor"
       },
-      "notes": { "ru": "", "en": "" },
+      "notes": {
+        "ru": "Подходит для пояса, шлема, перчаток, обуви, щита и нательной брони. Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя. Дополнительное снижение физического урона у нательной брони и щитов зависит от основы.",
+        "en": "Works with belts, helms, gloves, boots, shields and body armor. Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further. Additional physical damage reduction on body armor and shields depends on the base."
+      },
       "status": "added",
-      "tags": ["armor", "crafted", "upgrade_u"],
+      "tags": [
+        "upgrade_u",
+        "crafted",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
-        { "key": "exc_craft_armor", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "rune_hel", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "rune_lem", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "gem_perfect_topaz", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "exc_craft_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_hel",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_lem",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_topaz",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ],
       "result": [
-        { "key": "elite_craft_armor", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "elite_craft_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ]
     },
     {
       "key": "upgrade_craft_normal_weapon",
       "name": {
-        "ru": "Улучшение Ремесленного Обычного Оружия",
+        "ru": "Улучшение ремесленного оружия: обычная → исключительная основа",
         "en": "Upgrade Crafted Normal Weapon"
       },
-      "notes": { "ru": "", "en": "" },
+      "notes": {
+        "ru": "Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
       "status": "added",
       "tags": ["upgrade_u", "crafted", "weapon"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
-        { "key": "craft_upgrade_normal", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "rune_ral", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "rune_sol", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "gem_perfect_ruby", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "craft_upgrade_normal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ral",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_sol",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_ruby",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ],
       "result": [
-        { "key": "excep_craft_weapon", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "excep_craft_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ]
     },
     {
       "key": "upgrade_crafted_exceptional_weapon",
       "name": {
-        "ru": "Улучшение Ремесленного Исключительного Оружия",
+        "ru": "Улучшение ремесленного оружия: исключительная → элитная основа",
         "en": "Upgrade Crafted Exceptional Weapon"
       },
-      "notes": { "ru": "", "en": "" },
+      "notes": {
+        "ru": "Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
       "status": "added",
-      "tags": ["weapon", "crafted", "upgrade_u"],
+      "tags": ["upgrade_u", "crafted", "weapon"],
       "officialVersion": null,
       "blizzlessVersion": 1,
       "ingredients": [
-        { "key": "excep_craft_weapon", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "io_rune", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "rune_fal", "count": 1, "notes": { "ru": "", "en": "" } },
-        { "key": "gem_perfect_ruby", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "excep_craft_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "io_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_fal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_ruby",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ],
       "result": [
-        { "key": "elite_craft_weapon", "count": 1, "notes": { "ru": "", "en": "" } }
+        {
+          "key": "elite_craft_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
       ]
     },
     {
@@ -3596,6 +3843,3857 @@
           "notes": {
             "ru": "+135% усиленного урона; приоритетный префикс Vicious",
             "en": "+135% Enhanced Damage; preferred prefix: Vicious"
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_unique_normal_weapon",
+      "name": {
+        "ru": "Улучшение уникального оружия: обычная → исключительная основа",
+        "en": "Upgrade Unique Normal Weapon"
+      },
+      "notes": {
+        "ru": "Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "uniques", "weapon"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "unique_normal_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ral",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_sol",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_emerald",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "unique_exceptional_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_unique_normal_armor",
+      "name": {
+        "ru": "Улучшение уникальной брони: обычная → исключительная основа",
+        "en": "Upgrade Unique Normal Armor"
+      },
+      "notes": {
+        "ru": "Подходит для пояса, шлема, перчаток, обуви, щита и нательной брони. Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Works with belts, helms, gloves, boots, shields and body armor. Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": [
+        "upgrade_u",
+        "uniques",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "unique_normal_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_tal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_shael",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_diamond",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "unique_exceptional_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_unique_exceptional_weapon",
+      "name": {
+        "ru": "Улучшение уникального оружия: исключительная → элитная основа",
+        "en": "Upgrade Unique Exceptional Weapon"
+      },
+      "notes": {
+        "ru": "Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "uniques", "weapon"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "unique_exceptional_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_lum",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_pul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_emerald",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "unique_elite_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_unique_exceptional_armor",
+      "name": {
+        "ru": "Улучшение уникальной брони: исключительная → элитная основа",
+        "en": "Upgrade Unique Exceptional Armor"
+      },
+      "notes": {
+        "ru": "Подходит для пояса, шлема, перчаток, обуви, щита и нательной брони. Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Works with belts, helms, gloves, boots, shields and body armor. Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": [
+        "upgrade_u",
+        "uniques",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "unique_exceptional_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ko",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_lem",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_diamond",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "unique_elite_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rare_normal_armor",
+      "name": {
+        "ru": "Улучшение редкой брони: обычная → исключительная основа",
+        "en": "Upgrade Rare Normal Armor"
+      },
+      "notes": {
+        "ru": "Подходит для пояса, шлема, перчаток, обуви, щита и нательной брони. Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя. Дополнительное снижение физического урона у нательной брони и щитов зависит от основы.",
+        "en": "Works with belts, helms, gloves, boots, shields and body armor. Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further. Additional physical damage reduction on body armor and shields depends on the base."
+      },
+      "status": "unchanged",
+      "tags": [
+        "upgrade_u",
+        "rare",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rare_normal_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ral",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_thul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_amethyst",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rare_exceptional_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rare_exceptional_armor",
+      "name": {
+        "ru": "Улучшение редкой брони: исключительная → элитная основа",
+        "en": "Upgrade Rare Exceptional Armor"
+      },
+      "notes": {
+        "ru": "Подходит для пояса, шлема, перчаток, обуви, щита и нательной брони. Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя. Дополнительное снижение физического урона у нательной брони и щитов зависит от основы.",
+        "en": "Works with belts, helms, gloves, boots, shields and body armor. Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further. Additional physical damage reduction on body armor and shields depends on the base."
+      },
+      "status": "unchanged",
+      "tags": [
+        "upgrade_u",
+        "rare",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rare_exceptional_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ko",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_pul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_amethyst",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rare_elite_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rare_normal_weapon",
+      "name": {
+        "ru": "Улучшение редкого оружия: обычная → исключительная основа",
+        "en": "Upgrade Rare Normal Weapon"
+      },
+      "notes": {
+        "ru": "Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "rare", "weapon"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rare_normal_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ort",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_amn",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_sapphire",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rare_exceptional_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rare_exceptional_weapon",
+      "name": {
+        "ru": "Улучшение редкого оружия: исключительная → элитная основа",
+        "en": "Upgrade Rare Exceptional Weapon"
+      },
+      "notes": {
+        "ru": "Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "rare", "weapon"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rare_exceptional_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_fal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_um",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_sapphire",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rare_elite_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_set_normal_armor",
+      "name": {
+        "ru": "Улучшение комплектной брони: обычная → исключительная основа",
+        "en": "Upgrade Set Normal Armor"
+      },
+      "notes": {
+        "ru": "Подходит для пояса, шлема, перчаток, обуви, щита и нательной брони. Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Works with belts, helms, gloves, boots, shields and body armor. Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": [
+        "upgrade_u",
+        "set_items",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "set_normal_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_tal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_shael",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_diamond",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "set_exceptional_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_set_exceptional_armor",
+      "name": {
+        "ru": "Улучшение комплектной брони: исключительная → элитная основа",
+        "en": "Upgrade Set Exceptional Armor"
+      },
+      "notes": {
+        "ru": "Подходит для пояса, шлема, перчаток, обуви, щита и нательной брони. Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Works with belts, helms, gloves, boots, shields and body armor. Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": [
+        "upgrade_u",
+        "set_items",
+        "armor",
+        "helm",
+        "gloves",
+        "boots",
+        "belt",
+        "shields"
+      ],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "set_exceptional_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ko",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_lem",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_diamond",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "set_elite_armor",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_set_normal_weapon",
+      "name": {
+        "ru": "Улучшение комплектного оружия: обычная → исключительная основа",
+        "en": "Upgrade Set Normal Weapon"
+      },
+      "notes": {
+        "ru": "Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "set_items", "weapon"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "set_normal_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_ral",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_sol",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_emerald",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "set_exceptional_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_set_exceptional_weapon",
+      "name": {
+        "ru": "Улучшение комплектного оружия: исключительная → элитная основа",
+        "en": "Upgrade Set Exceptional Weapon"
+      },
+      "notes": {
+        "ru": "Улучшает основу предмета; свойства, эфирность и содержимое сокетов сохраняются. Требования к уровню, силе и ловкости могут вырасти. Элитную основу улучшить дальше нельзя.",
+        "en": "Upgrades the item base; properties, ethereal status and socket contents are preserved. Level, strength and dexterity requirements may increase. Elite bases cannot be upgraded further."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "set_items", "weapon"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "set_exceptional_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_lum",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "rune_pul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        },
+        {
+          "key": "gem_perfect_emerald",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "set_elite_weapon",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_el",
+      "name": {
+        "ru": "Повышение руны: El → Eld",
+        "en": "Upgrade Rune: El → Eld"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rune_el",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_eld",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_eld",
+      "name": {
+        "ru": "Повышение руны: Eld → Tir",
+        "en": "Upgrade Rune: Eld → Tir"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rune_eld",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "tir_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_tir",
+      "name": {
+        "ru": "Повышение руны: Tir → Nef",
+        "en": "Upgrade Rune: Tir → Nef"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "tir_rune",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "nef_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_nef",
+      "name": {
+        "ru": "Повышение руны: Nef → Eth",
+        "en": "Upgrade Rune: Nef → Eth"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "nef_rune",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "eth_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_eth",
+      "name": {
+        "ru": "Повышение руны: Eth → Ith",
+        "en": "Upgrade Rune: Eth → Ith"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "eth_rune",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "ith_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_ith",
+      "name": {
+        "ru": "Повышение руны: Ith → Tal",
+        "en": "Upgrade Rune: Ith → Tal"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "ith_rune",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_tal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_tal",
+      "name": {
+        "ru": "Повышение руны: Tal → Ral",
+        "en": "Upgrade Rune: Tal → Ral"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rune_tal",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_ral",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_ral",
+      "name": {
+        "ru": "Повышение руны: Ral → Ort",
+        "en": "Upgrade Rune: Ral → Ort"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rune_ral",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_ort",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_ort",
+      "name": {
+        "ru": "Повышение руны: Ort → Thul",
+        "en": "Upgrade Rune: Ort → Thul"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "rune_ort",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_thul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_rune_thul",
+      "name": {
+        "ru": "Повышение руны: Thul → Amn",
+        "en": "Upgrade Rune: Thul → Amn"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_thul",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_amn",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_thul",
+        "name": {
+          "ru": "Повышение руны: Thul → Amn",
+          "en": "Upgrade Rune: Thul → Amn"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_thul",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_chipped_topaz",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_amn",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_amn",
+      "name": {
+        "ru": "Повышение руны: Amn → Sol",
+        "en": "Upgrade Rune: Amn → Sol"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_amn",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_sol",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_amn",
+        "name": {
+          "ru": "Повышение руны: Amn → Sol",
+          "en": "Upgrade Rune: Amn → Sol"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_amn",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_chipped_amethyst",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_sol",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_sol",
+      "name": {
+        "ru": "Повышение руны: Sol → Shael",
+        "en": "Upgrade Rune: Sol → Shael"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_sol",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_shael",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_sol",
+        "name": {
+          "ru": "Повышение руны: Sol → Shael",
+          "en": "Upgrade Rune: Sol → Shael"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_sol",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_chipped_sapphire",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_shael",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_shael",
+      "name": {
+        "ru": "Повышение руны: Shael → Dol",
+        "en": "Upgrade Rune: Shael → Dol"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_shael",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "dol_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_shael",
+        "name": {
+          "ru": "Повышение руны: Shael → Dol",
+          "en": "Upgrade Rune: Shael → Dol"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_shael",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_chipped_ruby",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "dol_rune",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_dol",
+      "name": {
+        "ru": "Повышение руны: Dol → Hel",
+        "en": "Upgrade Rune: Dol → Hel"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "dol_rune",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_hel",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_dol",
+        "name": {
+          "ru": "Повышение руны: Dol → Hel",
+          "en": "Upgrade Rune: Dol → Hel"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "dol_rune",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_chipped_emerald",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_hel",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_hel",
+      "name": {
+        "ru": "Повышение руны: Hel → Io",
+        "en": "Upgrade Rune: Hel → Io"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_hel",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "io_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_hel",
+        "name": {
+          "ru": "Повышение руны: Hel → Io",
+          "en": "Upgrade Rune: Hel → Io"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_hel",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_chipped_diamond",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "io_rune",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_io",
+      "name": {
+        "ru": "Повышение руны: Io → Lum",
+        "en": "Upgrade Rune: Io → Lum"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "io_rune",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_lum",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_io",
+        "name": {
+          "ru": "Повышение руны: Io → Lum",
+          "en": "Upgrade Rune: Io → Lum"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "io_rune",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawed_topaz",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_lum",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_lum",
+      "name": {
+        "ru": "Повышение руны: Lum → Ko",
+        "en": "Upgrade Rune: Lum → Ko"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_lum",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_ko",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_lum",
+        "name": {
+          "ru": "Повышение руны: Lum → Ko",
+          "en": "Upgrade Rune: Lum → Ko"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_lum",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawed_amethyst",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_ko",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_ko",
+      "name": {
+        "ru": "Повышение руны: Ko → Fal",
+        "en": "Upgrade Rune: Ko → Fal"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_ko",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_fal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_ko",
+        "name": {
+          "ru": "Повышение руны: Ko → Fal",
+          "en": "Upgrade Rune: Ko → Fal"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_ko",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawed_sapphire",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_fal",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_fal",
+      "name": {
+        "ru": "Повышение руны: Fal → Lem",
+        "en": "Upgrade Rune: Fal → Lem"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_fal",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_lem",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_fal",
+        "name": {
+          "ru": "Повышение руны: Fal → Lem",
+          "en": "Upgrade Rune: Fal → Lem"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_fal",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawed_ruby",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_lem",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_lem",
+      "name": {
+        "ru": "Повышение руны: Lem → Pul",
+        "en": "Upgrade Rune: Lem → Pul"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_lem",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_pul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_lem",
+        "name": {
+          "ru": "Повышение руны: Lem → Pul",
+          "en": "Upgrade Rune: Lem → Pul"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_lem",
+            "count": 3,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawed_emerald",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_pul",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_pul",
+      "name": {
+        "ru": "Повышение руны: Pul → Um",
+        "en": "Upgrade Rune: Pul → Um"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_pul",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_um",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_pul",
+        "name": {
+          "ru": "Повышение руны: Pul → Um",
+          "en": "Upgrade Rune: Pul → Um"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_pul",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawed_diamond",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_um",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_um",
+      "name": {
+        "ru": "Повышение руны: Um → Mal",
+        "en": "Upgrade Rune: Um → Mal"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_um",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "mal",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_um",
+        "name": {
+          "ru": "Повышение руны: Um → Mal",
+          "en": "Upgrade Rune: Um → Mal"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_um",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_standard_topaz",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "mal",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_mal",
+      "name": {
+        "ru": "Повышение руны: Mal → Ist",
+        "en": "Upgrade Rune: Mal → Ist"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "mal",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "ist",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_mal",
+        "name": {
+          "ru": "Повышение руны: Mal → Ist",
+          "en": "Upgrade Rune: Mal → Ist"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "mal",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_standard_amethyst",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "ist",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_ist",
+      "name": {
+        "ru": "Повышение руны: Ist → Gul",
+        "en": "Upgrade Rune: Ist → Gul"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "ist",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_gul",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_ist",
+        "name": {
+          "ru": "Повышение руны: Ist → Gul",
+          "en": "Upgrade Rune: Ist → Gul"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "ist",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_standard_sapphire",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_gul",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_gul",
+      "name": {
+        "ru": "Повышение руны: Gul → Vex",
+        "en": "Upgrade Rune: Gul → Vex"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_gul",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_vex",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_gul",
+        "name": {
+          "ru": "Повышение руны: Gul → Vex",
+          "en": "Upgrade Rune: Gul → Vex"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_gul",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_standard_ruby",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_vex",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_vex",
+      "name": {
+        "ru": "Повышение руны: Vex → Ohm",
+        "en": "Upgrade Rune: Vex → Ohm"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_vex",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "ohm",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_vex",
+        "name": {
+          "ru": "Повышение руны: Vex → Ohm",
+          "en": "Upgrade Rune: Vex → Ohm"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_vex",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_standard_emerald",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "ohm",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_ohm",
+      "name": {
+        "ru": "Повышение руны: Ohm → Lo",
+        "en": "Upgrade Rune: Ohm → Lo"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "ohm",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_lo",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_ohm",
+        "name": {
+          "ru": "Повышение руны: Ohm → Lo",
+          "en": "Upgrade Rune: Ohm → Lo"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "ohm",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_standard_diamond",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_lo",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_lo",
+      "name": {
+        "ru": "Повышение руны: Lo → Sur",
+        "en": "Upgrade Rune: Lo → Sur"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_lo",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "sur_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_lo",
+        "name": {
+          "ru": "Повышение руны: Lo → Sur",
+          "en": "Upgrade Rune: Lo → Sur"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_lo",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "Flawless topaz",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "sur_rune",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_sur",
+      "name": {
+        "ru": "Повышение руны: Sur → Ber",
+        "en": "Upgrade Rune: Sur → Ber"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "sur_rune",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_ber",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_sur",
+        "name": {
+          "ru": "Повышение руны: Sur → Ber",
+          "en": "Upgrade Rune: Sur → Ber"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "sur_rune",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "Flawless amethyst",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_ber",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_ber",
+      "name": {
+        "ru": "Повышение руны: Ber → Jah",
+        "en": "Upgrade Rune: Ber → Jah"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_ber",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "rune_jah",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_ber",
+        "name": {
+          "ru": "Повышение руны: Ber → Jah",
+          "en": "Upgrade Rune: Ber → Jah"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_ber",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawless_sapphire",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "rune_jah",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_jah",
+      "name": {
+        "ru": "Повышение руны: Jah → Cham",
+        "en": "Upgrade Rune: Jah → Cham"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "rune_jah",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "cham_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_jah",
+        "name": {
+          "ru": "Повышение руны: Jah → Cham",
+          "en": "Upgrade Rune: Jah → Cham"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "rune_jah",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawless_ruby",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "cham_rune",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_rune_cham",
+      "name": {
+        "ru": "Повышение руны: Cham → Zod",
+        "en": "Upgrade Rune: Cham → Zod"
+      },
+      "notes": {
+        "ru": "В Blizzless самоцветы для повышения рун не нужны. Пакетные варианты: 4 → 2; 6 → 3.",
+        "en": "Blizzless rune upgrades do not require gems. Bulk variants: 4 → 2; 6 → 3."
+      },
+      "status": "changed",
+      "tags": ["upgrade_u", "runes"],
+      "officialVersion": 1,
+      "blizzlessVersion": 1,
+      "ingredients": [
+        {
+          "key": "cham_rune",
+          "count": 2,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "zod_rune",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "original": {
+        "key": "upgrade_rune_cham",
+        "name": {
+          "ru": "Повышение руны: Cham → Zod",
+          "en": "Upgrade Rune: Cham → Zod"
+        },
+        "notes": {
+          "ru": "",
+          "en": ""
+        },
+        "status": "unchanged",
+        "tags": ["upgrade_u", "runes"],
+        "officialVersion": 1,
+        "blizzlessVersion": null,
+        "ingredients": [
+          {
+            "key": "cham_rune",
+            "count": 2,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          },
+          {
+            "key": "gem_flawless_emerald",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ],
+        "result": [
+          {
+            "key": "zod_rune",
+            "count": 1,
+            "notes": {
+              "ru": "",
+              "en": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "key": "upgrade_gem_amethyst_chipped",
+      "name": {
+        "ru": "Улучшение самоцвета: Мутный аметист",
+        "en": "Upgrade Gem: Flawed Amethyst"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_chipped_amethyst",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawed_amethyst",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_amethyst_flawed",
+      "name": {
+        "ru": "Улучшение самоцвета: Обычный аметист",
+        "en": "Upgrade Gem: Amethyst"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawed_amethyst",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_standard_amethyst",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_amethyst_standard",
+      "name": {
+        "ru": "Улучшение самоцвета: Безупречный Аметист",
+        "en": "Upgrade Gem: Flawless Amethyst"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_standard_amethyst",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "Flawless amethyst",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_amethyst_flawless",
+      "name": {
+        "ru": "Улучшение самоцвета: Идеальный Аметист",
+        "en": "Upgrade Gem: Perfect Amethyst"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "Flawless amethyst",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_perfect_amethyst",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_ruby_chipped",
+      "name": {
+        "ru": "Улучшение самоцвета: Мутный рубин",
+        "en": "Upgrade Gem: Flawed Ruby"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_chipped_ruby",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawed_ruby",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_ruby_flawed",
+      "name": {
+        "ru": "Улучшение самоцвета: Обычный рубин",
+        "en": "Upgrade Gem: Ruby"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawed_ruby",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_standard_ruby",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_ruby_standard",
+      "name": {
+        "ru": "Улучшение самоцвета: Безупречный рубин",
+        "en": "Upgrade Gem: Flawless Ruby"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_standard_ruby",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawless_ruby",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_ruby_flawless",
+      "name": {
+        "ru": "Улучшение самоцвета: Идеальный Рубин",
+        "en": "Upgrade Gem: Perfect Ruby"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawless_ruby",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_perfect_ruby",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_sapphire_chipped",
+      "name": {
+        "ru": "Улучшение самоцвета: Мутный сапфир",
+        "en": "Upgrade Gem: Flawed Sapphire"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_chipped_sapphire",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawed_sapphire",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_sapphire_flawed",
+      "name": {
+        "ru": "Улучшение самоцвета: Обычный сапфир",
+        "en": "Upgrade Gem: Sapphire"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawed_sapphire",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_standard_sapphire",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_sapphire_standard",
+      "name": {
+        "ru": "Улучшение самоцвета: Безупречный сапфир",
+        "en": "Upgrade Gem: Flawless Sapphire"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_standard_sapphire",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawless_sapphire",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_sapphire_flawless",
+      "name": {
+        "ru": "Улучшение самоцвета: Идеальный Сапфир",
+        "en": "Upgrade Gem: Perfect Sapphire"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawless_sapphire",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_perfect_sapphire",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_topaz_chipped",
+      "name": {
+        "ru": "Улучшение самоцвета: Мутный топаз",
+        "en": "Upgrade Gem: Flawed Topaz"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_chipped_topaz",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawed_topaz",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_topaz_flawed",
+      "name": {
+        "ru": "Улучшение самоцвета: Обычный топаз",
+        "en": "Upgrade Gem: Topaz"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawed_topaz",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_standard_topaz",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_topaz_standard",
+      "name": {
+        "ru": "Улучшение самоцвета: Безупречный Топаз",
+        "en": "Upgrade Gem: Flawless Topaz"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_standard_topaz",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "Flawless topaz",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_topaz_flawless",
+      "name": {
+        "ru": "Улучшение самоцвета: Идеальный Топаз",
+        "en": "Upgrade Gem: Perfect Topaz"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "Flawless topaz",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_perfect_topaz",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_emerald_chipped",
+      "name": {
+        "ru": "Улучшение самоцвета: Мутный изумруд",
+        "en": "Upgrade Gem: Flawed Emerald"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_chipped_emerald",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawed_emerald",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_emerald_flawed",
+      "name": {
+        "ru": "Улучшение самоцвета: Обычный изумруд",
+        "en": "Upgrade Gem: Emerald"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawed_emerald",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_standard_emerald",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_emerald_standard",
+      "name": {
+        "ru": "Улучшение самоцвета: Безупречный изумруд",
+        "en": "Upgrade Gem: Flawless Emerald"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_standard_emerald",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawless_emerald",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_emerald_flawless",
+      "name": {
+        "ru": "Улучшение самоцвета: Идеальный Изумруд",
+        "en": "Upgrade Gem: Perfect Emerald"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawless_emerald",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_perfect_emerald",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_diamond_chipped",
+      "name": {
+        "ru": "Улучшение самоцвета: Мутный алмаз",
+        "en": "Upgrade Gem: Flawed Diamond"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_chipped_diamond",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawed_diamond",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_diamond_flawed",
+      "name": {
+        "ru": "Улучшение самоцвета: Обычный алмаз",
+        "en": "Upgrade Gem: Diamond"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawed_diamond",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_standard_diamond",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_diamond_standard",
+      "name": {
+        "ru": "Улучшение самоцвета: Безупречный алмаз",
+        "en": "Upgrade Gem: Flawless Diamond"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_standard_diamond",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawless_diamond",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_diamond_flawless",
+      "name": {
+        "ru": "Улучшение самоцвета: Идеальный Алмаз",
+        "en": "Upgrade Gem: Perfect Diamond"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawless_diamond",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_perfect_diamond",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_skull_chipped",
+      "name": {
+        "ru": "Улучшение самоцвета: Мутный череп",
+        "en": "Upgrade Gem: Flawed Skull"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_chipped_skull",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawed_skull",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_skull_flawed",
+      "name": {
+        "ru": "Улучшение самоцвета: Обычный череп",
+        "en": "Upgrade Gem: Skull"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawed_skull",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_standard_skull",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_skull_standard",
+      "name": {
+        "ru": "Улучшение самоцвета: Безупречный череп",
+        "en": "Upgrade Gem: Flawless Skull"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_standard_skull",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gem_flawless_skull",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ]
+    },
+    {
+      "key": "upgrade_gem_skull_flawless",
+      "name": {
+        "ru": "Улучшение самоцвета: Идеальный Череп",
+        "en": "Upgrade Gem: Perfect Skull"
+      },
+      "notes": {
+        "ru": "Пакетные варианты: 6 → 2; 9 → 3.",
+        "en": "Bulk variants: 6 → 2; 9 → 3."
+      },
+      "status": "unchanged",
+      "tags": ["upgrade_u", "gems"],
+      "officialVersion": 1,
+      "blizzlessVersion": null,
+      "ingredients": [
+        {
+          "key": "gem_flawless_skull",
+          "count": 3,
+          "notes": {
+            "ru": "",
+            "en": ""
+          }
+        }
+      ],
+      "result": [
+        {
+          "key": "gems",
+          "count": 1,
+          "notes": {
+            "ru": "",
+            "en": ""
           }
         }
       ]
@@ -4432,44 +8530,56 @@
     },
     {
       "key": "craft_upgrade_normal",
-      "name": { "ru": "Обычное Ремесленное Оружие", "en": "Normal Crafted Weapon" },
-      "tags": ["regular"],
-      "image": "images/cube/9402ae891ec704dffe.webp"
+      "name": {
+        "ru": "Обычное ремесленное оружие",
+        "en": "Normal Crafted Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
     },
     {
       "key": "excep_craft_weapon",
       "name": {
-        "ru": "Исключительное Ремесленное Оружие",
+        "ru": "Исключительное ремесленное оружие",
         "en": "Exceptional Crafted Weapon"
       },
-      "tags": ["regular"],
-      "image": "images/cube/9402ae891ec704dffe.webp"
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
     },
     {
       "key": "elite_craft_weapon",
-      "name": { "ru": "Элитное Ремесленное Оружие", "en": "Elite Crafted Weapon" },
-      "tags": ["regular"],
-      "image": "images/cube/9402ae891ec704dffe.webp"
+      "name": {
+        "ru": "Элитное ремесленное оружие",
+        "en": "Elite Crafted Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
     },
     {
       "key": "norm_craft_armor",
-      "name": { "ru": "Обычная Ремесленная Броня", "en": "Normal Crafted Armor" },
-      "tags": ["regular"],
+      "name": {
+        "ru": "Обычная ремесленная броня",
+        "en": "Normal Crafted Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
       "image": "images/cube/5efc2a22a3c8c274e1.png"
     },
     {
       "key": "exc_craft_armor",
       "name": {
-        "ru": "Исключительная Ремесленная Броня",
+        "ru": "Исключительная ремесленная броня",
         "en": "Exceptional Crafted Armor"
       },
-      "tags": ["regular"],
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
       "image": "images/cube/5efc2a22a3c8c274e1.png"
     },
     {
       "key": "elite_craft_armor",
-      "name": { "ru": "Элитная Ремесленная Броня", "en": "Elite Crafted Armor" },
-      "tags": ["regular"],
+      "name": {
+        "ru": "Элитная ремесленная броня",
+        "en": "Elite Crafted Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
       "image": "images/cube/5efc2a22a3c8c274e1.png"
     },
     {
@@ -4690,6 +8800,456 @@
       "name": { "ru": "Уникальный амулет", "en": "Unique Amulet" },
       "tags": ["amulet"],
       "image": "images/cube/22adb834795e6d7bce.webp"
+    },
+    {
+      "key": "unique_normal_armor",
+      "name": {
+        "ru": "Обычная уникальная броня",
+        "en": "Normal Unique Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "unique_exceptional_armor",
+      "name": {
+        "ru": "Исключительная уникальная броня",
+        "en": "Exceptional Unique Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "unique_elite_armor",
+      "name": {
+        "ru": "Элитная уникальная броня",
+        "en": "Elite Unique Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "unique_normal_weapon",
+      "name": {
+        "ru": "Обычное уникальное оружие",
+        "en": "Normal Unique Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "unique_exceptional_weapon",
+      "name": {
+        "ru": "Исключительное уникальное оружие",
+        "en": "Exceptional Unique Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "unique_elite_weapon",
+      "name": {
+        "ru": "Элитное уникальное оружие",
+        "en": "Elite Unique Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "rune_el",
+      "name": {
+        "ru": "Руна Эль",
+        "en": "El Rune"
+      },
+      "tags": ["rune"],
+      "image": "images/el.webp"
+    },
+    {
+      "key": "rune_gul",
+      "name": {
+        "ru": "Руна Гул",
+        "en": "Gul Rune"
+      },
+      "tags": ["rune"],
+      "image": "images/gul.webp"
+    },
+    {
+      "key": "rune_vex",
+      "name": {
+        "ru": "Руна Векс",
+        "en": "Vex Rune"
+      },
+      "tags": ["rune"],
+      "image": "images/vex.webp"
+    },
+    {
+      "key": "rune_lo",
+      "name": {
+        "ru": "Руна Ло",
+        "en": "Lo Rune"
+      },
+      "tags": ["rune"],
+      "image": "images/lo.webp"
+    },
+    {
+      "key": "rune_ber",
+      "name": {
+        "ru": "Руна Бер",
+        "en": "Ber Rune"
+      },
+      "tags": ["rune"],
+      "image": "images/ber.webp"
+    },
+    {
+      "key": "rune_jah",
+      "name": {
+        "ru": "Руна Джа",
+        "en": "Jah Rune"
+      },
+      "tags": ["rune"],
+      "image": "images/jah.webp"
+    },
+    {
+      "key": "gem_chipped_amethyst",
+      "name": {
+        "ru": "Треснувший аметист",
+        "en": "Chipped Amethyst"
+      },
+      "tags": ["gem", "chipped", "amethyst"],
+      "image": "images/planner/items/misc/gem/chipped_amethyst.webp"
+    },
+    {
+      "key": "gem_flawed_amethyst",
+      "name": {
+        "ru": "Мутный аметист",
+        "en": "Flawed Amethyst"
+      },
+      "tags": ["gem", "flawed", "amethyst"],
+      "image": "images/planner/items/misc/gem/flawed_amethyst.webp"
+    },
+    {
+      "key": "gem_standard_amethyst",
+      "name": {
+        "ru": "Обычный аметист",
+        "en": "Amethyst"
+      },
+      "tags": ["gem", "standard", "amethyst"],
+      "image": "images/planner/items/misc/gem/amethyst.webp"
+    },
+    {
+      "key": "gem_chipped_ruby",
+      "name": {
+        "ru": "Треснувший рубин",
+        "en": "Chipped Ruby"
+      },
+      "tags": ["gem", "chipped", "ruby"],
+      "image": "images/planner/items/misc/gem/chipped_ruby.webp"
+    },
+    {
+      "key": "gem_flawed_ruby",
+      "name": {
+        "ru": "Мутный рубин",
+        "en": "Flawed Ruby"
+      },
+      "tags": ["gem", "flawed", "ruby"],
+      "image": "images/planner/items/misc/gem/flawed_ruby.webp"
+    },
+    {
+      "key": "gem_standard_ruby",
+      "name": {
+        "ru": "Обычный рубин",
+        "en": "Ruby"
+      },
+      "tags": ["gem", "standard", "ruby"],
+      "image": "images/planner/items/misc/gem/ruby.webp"
+    },
+    {
+      "key": "gem_flawless_ruby",
+      "name": {
+        "ru": "Безупречный рубин",
+        "en": "Flawless Ruby"
+      },
+      "tags": ["gem", "flawless", "ruby"],
+      "image": "images/planner/items/misc/gem/flawless_ruby.webp"
+    },
+    {
+      "key": "gem_chipped_sapphire",
+      "name": {
+        "ru": "Треснувший сапфир",
+        "en": "Chipped Sapphire"
+      },
+      "tags": ["gem", "chipped", "sapphire"],
+      "image": "images/planner/items/misc/gem/chipped_saphire.webp"
+    },
+    {
+      "key": "gem_flawed_sapphire",
+      "name": {
+        "ru": "Мутный сапфир",
+        "en": "Flawed Sapphire"
+      },
+      "tags": ["gem", "flawed", "sapphire"],
+      "image": "images/planner/items/misc/gem/flawed_saphire.webp"
+    },
+    {
+      "key": "gem_standard_sapphire",
+      "name": {
+        "ru": "Обычный сапфир",
+        "en": "Sapphire"
+      },
+      "tags": ["gem", "standard", "sapphire"],
+      "image": "images/planner/items/misc/gem/saphire.webp"
+    },
+    {
+      "key": "gem_flawless_sapphire",
+      "name": {
+        "ru": "Безупречный сапфир",
+        "en": "Flawless Sapphire"
+      },
+      "tags": ["gem", "flawless", "sapphire"],
+      "image": "images/planner/items/misc/gem/flawless_saphire.webp"
+    },
+    {
+      "key": "gem_chipped_topaz",
+      "name": {
+        "ru": "Треснувший топаз",
+        "en": "Chipped Topaz"
+      },
+      "tags": ["gem", "chipped", "topaz"],
+      "image": "images/planner/items/misc/gem/chipped_topaz.webp"
+    },
+    {
+      "key": "gem_flawed_topaz",
+      "name": {
+        "ru": "Мутный топаз",
+        "en": "Flawed Topaz"
+      },
+      "tags": ["gem", "flawed", "topaz"],
+      "image": "images/planner/items/misc/gem/flawed_topaz.webp"
+    },
+    {
+      "key": "gem_standard_topaz",
+      "name": {
+        "ru": "Обычный топаз",
+        "en": "Topaz"
+      },
+      "tags": ["gem", "standard", "topaz"],
+      "image": "images/planner/items/misc/gem/topaz.webp"
+    },
+    {
+      "key": "gem_chipped_emerald",
+      "name": {
+        "ru": "Треснувший изумруд",
+        "en": "Chipped Emerald"
+      },
+      "tags": ["gem", "chipped", "emerald"],
+      "image": "images/planner/items/misc/gem/chipped_emerald.webp"
+    },
+    {
+      "key": "gem_flawed_emerald",
+      "name": {
+        "ru": "Мутный изумруд",
+        "en": "Flawed Emerald"
+      },
+      "tags": ["gem", "flawed", "emerald"],
+      "image": "images/planner/items/misc/gem/flawed_emerald.webp"
+    },
+    {
+      "key": "gem_standard_emerald",
+      "name": {
+        "ru": "Обычный изумруд",
+        "en": "Emerald"
+      },
+      "tags": ["gem", "standard", "emerald"],
+      "image": "images/planner/items/misc/gem/emerald.webp"
+    },
+    {
+      "key": "gem_flawless_emerald",
+      "name": {
+        "ru": "Безупречный изумруд",
+        "en": "Flawless Emerald"
+      },
+      "tags": ["gem", "flawless", "emerald"],
+      "image": "images/planner/items/misc/gem/flawless_emerald.webp"
+    },
+    {
+      "key": "gem_chipped_diamond",
+      "name": {
+        "ru": "Треснувший алмаз",
+        "en": "Chipped Diamond"
+      },
+      "tags": ["gem", "chipped", "diamond"],
+      "image": "images/planner/items/misc/gem/chipped_diamond.webp"
+    },
+    {
+      "key": "gem_flawed_diamond",
+      "name": {
+        "ru": "Мутный алмаз",
+        "en": "Flawed Diamond"
+      },
+      "tags": ["gem", "flawed", "diamond"],
+      "image": "images/planner/items/misc/gem/flawed_diamond.webp"
+    },
+    {
+      "key": "gem_standard_diamond",
+      "name": {
+        "ru": "Обычный алмаз",
+        "en": "Diamond"
+      },
+      "tags": ["gem", "standard", "diamond"],
+      "image": "images/planner/items/misc/gem/diamond.webp"
+    },
+    {
+      "key": "gem_flawless_diamond",
+      "name": {
+        "ru": "Безупречный алмаз",
+        "en": "Flawless Diamond"
+      },
+      "tags": ["gem", "flawless", "diamond"],
+      "image": "images/planner/items/misc/gem/flawless_diamond.webp"
+    },
+    {
+      "key": "gem_chipped_skull",
+      "name": {
+        "ru": "Треснувший череп",
+        "en": "Chipped Skull"
+      },
+      "tags": ["gem", "chipped", "skull"],
+      "image": "images/planner/items/misc/gem/chipped_skull.webp"
+    },
+    {
+      "key": "gem_flawed_skull",
+      "name": {
+        "ru": "Мутный череп",
+        "en": "Flawed Skull"
+      },
+      "tags": ["gem", "flawed", "skull"],
+      "image": "images/planner/items/misc/gem/flawed_skull.webp"
+    },
+    {
+      "key": "gem_standard_skull",
+      "name": {
+        "ru": "Обычный череп",
+        "en": "Skull"
+      },
+      "tags": ["gem", "standard", "skull"],
+      "image": "images/planner/items/misc/gem/skull.webp"
+    },
+    {
+      "key": "gem_flawless_skull",
+      "name": {
+        "ru": "Безупречный череп",
+        "en": "Flawless Skull"
+      },
+      "tags": ["gem", "flawless", "skull"],
+      "image": "images/planner/items/misc/gem/flawless_skull.webp"
+    },
+    {
+      "key": "rare_normal_armor",
+      "name": {
+        "ru": "Обычная редкая броня",
+        "en": "Normal Rare Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "rare_exceptional_armor",
+      "name": {
+        "ru": "Исключительная редкая броня",
+        "en": "Exceptional Rare Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "rare_elite_armor",
+      "name": {
+        "ru": "Элитная редкая броня",
+        "en": "Elite Rare Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "rare_normal_weapon",
+      "name": {
+        "ru": "Обычное редкое оружие",
+        "en": "Normal Rare Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "rare_exceptional_weapon",
+      "name": {
+        "ru": "Исключительное редкое оружие",
+        "en": "Exceptional Rare Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "rare_elite_weapon",
+      "name": {
+        "ru": "Элитное редкое оружие",
+        "en": "Elite Rare Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "set_normal_armor",
+      "name": {
+        "ru": "Обычная комплектная броня",
+        "en": "Normal Set Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "set_exceptional_armor",
+      "name": {
+        "ru": "Исключительная комплектная броня",
+        "en": "Exceptional Set Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "set_elite_armor",
+      "name": {
+        "ru": "Элитная комплектная броня",
+        "en": "Elite Set Armor"
+      },
+      "tags": ["armor", "helm", "gloves", "boots", "belt", "shields"],
+      "image": "images/cube/5efc2a22a3c8c274e1.png"
+    },
+    {
+      "key": "set_normal_weapon",
+      "name": {
+        "ru": "Обычное комплектное оружие",
+        "en": "Normal Set Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "set_exceptional_weapon",
+      "name": {
+        "ru": "Исключительное комплектное оружие",
+        "en": "Exceptional Set Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
+    },
+    {
+      "key": "set_elite_weapon",
+      "name": {
+        "ru": "Элитное комплектное оружие",
+        "en": "Elite Set Weapon"
+      },
+      "tags": ["weapon"],
+      "image": "images/cube/79d91cba12595c4912.png"
     }
   ],
   "recipeTags": [
@@ -4717,7 +9277,28 @@
     { "key": "materials", "name": { "ru": "Материалы", "en": "Materials" } },
     { "key": "runes_pur", "name": { "ru": "Очищенные Руны", "en": "Pure Runes" } },
     { "key": "sockets", "name": { "ru": "Сокеты", "en": "Sockets" } },
-    { "key": "reroll", "name": { "ru": "Перекрафт", "en": "Reroll" } }
+    { "key": "reroll", "name": { "ru": "Перекрафт", "en": "Reroll" } },
+    {
+      "key": "rare",
+      "name": {
+        "ru": "Редкие",
+        "en": "Rare"
+      }
+    },
+    {
+      "key": "runes",
+      "name": {
+        "ru": "Руны",
+        "en": "Runes"
+      }
+    },
+    {
+      "key": "gems",
+      "name": {
+        "ru": "Самоцветы",
+        "en": "Gems"
+      }
+    }
   ],
   "ingredientTags": [
     { "key": "gem", "name": { "ru": "Камни", "en": "Gems" } },
@@ -4745,6 +9326,98 @@
     "manifestVersion": 1795131992295,
     "checkedAt": "2026-11-20",
     "rows": {
+      "upgrade_unique_normal_armor": [170],
+      "upgrade_unique_exceptional_armor": [172],
+      "upgrade_unique_normal_weapon": [169],
+      "upgrade_unique_exceptional_weapon": [171],
+      "upgrade_rare_normal_armor": [
+        2335, 2336, 2337, 2338, 2351, 2352, 2353, 2354, 2355, 2356, 2357, 2358, 2359,
+        2360, 2361, 2362, 2363, 2364, 2365, 2366, 2367, 2368, 2369, 2370, 2371, 2372,
+        2373, 2374, 2375, 2376, 2377, 2378, 2379, 2380, 2381, 2382, 2383
+      ],
+      "upgrade_rare_exceptional_armor": [
+        2339, 2340, 2341, 2342, 2384, 2385, 2386, 2387, 2388, 2389, 2390, 2391, 2392,
+        2393, 2394, 2395, 2396, 2397, 2398, 2399, 2400, 2401, 2402, 2403, 2404, 2405,
+        2406, 2407, 2408, 2409, 2410, 2411, 2412, 2413, 2414, 2415, 2416
+      ],
+      "upgrade_rare_normal_weapon": [173],
+      "upgrade_rare_exceptional_weapon": [174],
+      "upgrade_set_normal_armor": [190],
+      "upgrade_set_exceptional_armor": [192],
+      "upgrade_set_normal_weapon": [189],
+      "upgrade_set_exceptional_weapon": [191],
+      "upgrade_craft_normal_armor": [
+        2343, 2344, 2345, 2346, 2417, 2418, 2419, 2420, 2421, 2422, 2423, 2424, 2425,
+        2426, 2427, 2428, 2429, 2430, 2431, 2432, 2433, 2434, 2435, 2436, 2437, 2438,
+        2439, 2440, 2441, 2442, 2443, 2444, 2445, 2446, 2447, 2448, 2449
+      ],
+      "upgrade_armor_except_craft": [
+        2347, 2348, 2349, 2350, 2450, 2451, 2452, 2453, 2454, 2455, 2456, 2457, 2458,
+        2459, 2460, 2461, 2462, 2463, 2464, 2465, 2466, 2467, 2468, 2469, 2470, 2471,
+        2472, 2473, 2474, 2475, 2476, 2477, 2478, 2479, 2480, 2481, 2482
+      ],
+      "upgrade_craft_normal_weapon": [935],
+      "upgrade_crafted_exceptional_weapon": [936],
+      "upgrade_rune_el": [51, 2830, 2862],
+      "upgrade_rune_eld": [52, 2831, 2863],
+      "upgrade_rune_tir": [53, 2832, 2864],
+      "upgrade_rune_nef": [54, 2833, 2865],
+      "upgrade_rune_eth": [55, 2834, 2866],
+      "upgrade_rune_ith": [56, 2835, 2867],
+      "upgrade_rune_tal": [57, 2836, 2868],
+      "upgrade_rune_ral": [58, 2837, 2869],
+      "upgrade_rune_ort": [59, 2838, 2870],
+      "upgrade_rune_thul": [140, 2839, 2871],
+      "upgrade_rune_amn": [141, 2840, 2872],
+      "upgrade_rune_sol": [142, 2841, 2873],
+      "upgrade_rune_shael": [143, 2842, 2874],
+      "upgrade_rune_dol": [144, 2843, 2875],
+      "upgrade_rune_hel": [145, 2844, 2876],
+      "upgrade_rune_io": [146, 2845, 2877],
+      "upgrade_rune_lum": [147, 2846, 2878],
+      "upgrade_rune_ko": [148, 2847, 2879],
+      "upgrade_rune_fal": [149, 2848, 2880],
+      "upgrade_rune_lem": [150, 2849, 2881],
+      "upgrade_rune_pul": [151, 2850, 2882],
+      "upgrade_rune_um": [152, 2851, 2883],
+      "upgrade_rune_mal": [153, 2852, 2884],
+      "upgrade_rune_ist": [154, 2853, 2885],
+      "upgrade_rune_gul": [155, 2854, 2886],
+      "upgrade_rune_vex": [156, 2855, 2887],
+      "upgrade_rune_ohm": [157, 2856, 2888],
+      "upgrade_rune_lo": [158, 2857, 2889],
+      "upgrade_rune_sur": [159, 2858, 2890],
+      "upgrade_rune_ber": [160, 2859, 2891],
+      "upgrade_rune_jah": [161, 2860, 2892],
+      "upgrade_rune_cham": [162, 2861, 2893],
+      "upgrade_gem_amethyst_chipped": [23, 2774, 2775],
+      "upgrade_gem_amethyst_flawed": [24, 2776, 2777],
+      "upgrade_gem_amethyst_standard": [25, 2778, 2779],
+      "upgrade_gem_amethyst_flawless": [26, 2780, 2781],
+      "upgrade_gem_ruby_chipped": [27, 2782, 2783],
+      "upgrade_gem_ruby_flawed": [28, 2784, 2785],
+      "upgrade_gem_ruby_standard": [29, 2786, 2787],
+      "upgrade_gem_ruby_flawless": [30, 2788, 2789],
+      "upgrade_gem_sapphire_chipped": [31, 2790, 2791],
+      "upgrade_gem_sapphire_flawed": [32, 2792, 2793],
+      "upgrade_gem_sapphire_standard": [33, 2794, 2795],
+      "upgrade_gem_sapphire_flawless": [34, 2796, 2797],
+      "upgrade_gem_topaz_chipped": [35, 2798, 2799],
+      "upgrade_gem_topaz_flawed": [36, 2800, 2801],
+      "upgrade_gem_topaz_standard": [37, 2802, 2803],
+      "upgrade_gem_topaz_flawless": [38, 2804, 2805],
+      "upgrade_gem_emerald_chipped": [39, 2806, 2807],
+      "upgrade_gem_emerald_flawed": [40, 2808, 2809],
+      "upgrade_gem_emerald_standard": [41, 2810, 2811],
+      "upgrade_gem_emerald_flawless": [42, 2812, 2813],
+      "upgrade_gem_diamond_chipped": [43, 2814, 2815],
+      "upgrade_gem_diamond_flawed": [44, 2816, 2817],
+      "upgrade_gem_diamond_standard": [45, 2818, 2819],
+      "upgrade_gem_diamond_flawless": [46, 2820, 2821],
+      "upgrade_gem_skull_chipped": [47, 2822, 2823],
+      "upgrade_gem_skull_flawed": [48, 2824, 2825],
+      "upgrade_gem_skull_standard": [49, 2826, 2827],
+      "upgrade_gem_skull_flawless": [50, 2828, 2829],
       "socket_add_weapon": [164],
       "socket_add_armor": [163],
       "socket_add_helm": [165],

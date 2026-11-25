@@ -252,6 +252,11 @@ function label(key: string) {
   --result-background: #252219;
   --result-border: #645a3c;
 }
+.cube-ingredient--set {
+  --result-color: #00fc00;
+  --result-background: #142315;
+  --result-border: #285c2d;
+}
 @container (max-width: 380px) {
   .cube-formula__items {
     grid-template-columns: repeat(var(--ingredient-columns-small), minmax(0, 1fr));

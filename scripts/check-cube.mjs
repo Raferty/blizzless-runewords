@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
-import { access } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
+import { gunzipSync } from "node:zlib";
+import { augmentNativeCubeRecipes } from "./cube-native-recipes.mjs";
+import { checkCubeUpgradeCoverage } from "./check-cube-upgrades.mjs";
 import { createPinia, setActivePinia } from "pinia";
 import { createServer } from "vite";
 
@@ -9,14 +12,19 @@ const server = await createServer({
   appType: "custom",
 });
 try {
-  const { cubeCatalog, cubeIngredients, cubeText, isCubeCraftingResult } =
-    await server.ssrLoadModule("/src/utils/cube.ts");
+  const {
+    cubeCatalog,
+    cubeIngredients,
+    cubeText,
+    cubeResultQuality,
+    isCubeCraftingResult,
+  } = await server.ssrLoadModule("/src/utils/cube.ts");
   const { useRecipesStore } = await server.ssrLoadModule("/src/store/recipes.ts");
   const { parseCatalogHash } = await server.ssrLoadModule("/src/utils/navigation.ts");
   const { RUNES } = await server.ssrLoadModule("/src/shared/constants.ts");
-  assert.equal(cubeCatalog.recipes.length, 112);
+  assert.equal(cubeCatalog.recipes.length, 184);
   assert.equal(cubeCatalog.sourceVersionCount, 129);
-  assert.equal(new Set(cubeCatalog.recipes.map((recipe) => recipe.key)).size, 112);
+  assert.equal(new Set(cubeCatalog.recipes.map((recipe) => recipe.key)).size, 184);
   // Different glossary keys can produce the same card. Ignore ingredient order,
   // but keep quantities and notes that distinguish actual recipe variants.
   const formulas = new Map();
@@ -49,20 +57,20 @@ try {
   assert.equal(amulets.length, 1);
   assert.equal(amulets[0].key, "amulet");
   assert.equal(amulets[0].blizzlessVersion, 2);
-  assert.equal(cubeCatalog.ingredients.length, 174);
+  assert.equal(cubeCatalog.ingredients.length, 224);
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "added").length,
     60
   );
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "changed").length,
-    30
+    53
   );
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "unchanged").length,
-    22
+    71
   );
-  assert.equal(cubeCatalog.recipes.filter((recipe) => recipe.original).length, 31);
+  assert.equal(cubeCatalog.recipes.filter((recipe) => recipe.original).length, 54);
   for (const item of cubeCatalog.ingredients.filter((item) =>
     item.tags?.includes("rune")
   )) {
@@ -133,11 +141,11 @@ try {
 
   setActivePinia(createPinia());
   const store = useRecipesStore();
-  assert.equal(store.filteredRecipes.length, 112);
+  assert.equal(store.filteredRecipes.length, 184);
   store.toggleStatus("added");
   assert.equal(store.filteredRecipes.length, 60);
   store.toggleStatus("changed");
-  assert.equal(store.filteredRecipes.length, 90, "Statuses combine with OR");
+  assert.equal(store.filteredRecipes.length, 113, "Statuses combine with OR");
   store.resetFilters();
   for (const [material, count, resultRecipe] of [
     ["Horadric Sphere", 26, "hora_sphere"],
@@ -157,7 +165,7 @@ try {
       "Every result must require the selected material"
     );
     store.toggleMaterial(material);
-    assert.equal(store.filteredRecipes.length, 112, "Toggle material off");
+    assert.equal(store.filteredRecipes.length, 184, "Toggle material off");
   }
   store.toggleMaterial("Horadric Sphere");
   store.toggleMaterial("Resplendent Spark");
@@ -183,7 +191,7 @@ try {
   );
   store.resetFilters();
   assert.equal(store.materials.length, 0);
-  assert.equal(store.filteredRecipes.length, 112);
+  assert.equal(store.filteredRecipes.length, 184);
   store.search = "caster helm";
   assert(store.filteredRecipes.some((recipe) => recipe.key === "caster_helm"));
   store.search = "шлем колдуна";
@@ -211,10 +219,10 @@ try {
   store.addTag("recipe", "armor");
   assert.equal(store.filteredRecipes.length, 0, "Recipe tags combine with AND");
   store.resetFilters();
-  assert.equal(store.filteredRecipes.length, 112);
+  assert.equal(store.filteredRecipes.length, 184);
 
   store.addTag("recipe", "armor");
-  assert.equal(store.filteredRecipes.length, 14);
+  assert.equal(store.filteredRecipes.length, 20);
   assert(!store.filteredRecipes.some((recipe) => recipe.key === "Amulet of the Sensei"));
   store.resetFilters();
   store.addTag("recipe", "amulet");
@@ -261,7 +269,115 @@ try {
   store.resetFilters();
 
   const formula = (key) => find(key).ingredients.map((item) => [item.key, item.count]);
-  assert.deepEqual(formula("weapon"), [["blue_weapon_any", 1], ["blacksmith ingot", 1], ["Flawless amethyst", 1], ["Jewel", 1]]);
+  const upgrades = [
+    [
+      "upgrade_unique_normal_armor",
+      "unique_normal_armor",
+      "rune_tal",
+      "rune_shael",
+      "gem_perfect_diamond",
+      "unique_exceptional_armor",
+      170,
+    ],
+    [
+      "upgrade_unique_exceptional_armor",
+      "unique_exceptional_armor",
+      "rune_ko",
+      "rune_lem",
+      "gem_perfect_diamond",
+      "unique_elite_armor",
+      172,
+    ],
+    [
+      "upgrade_unique_normal_weapon",
+      "unique_normal_weapon",
+      "rune_ral",
+      "rune_sol",
+      "gem_perfect_emerald",
+      "unique_exceptional_weapon",
+      169,
+    ],
+    [
+      "upgrade_unique_exceptional_weapon",
+      "unique_exceptional_weapon",
+      "rune_lum",
+      "rune_pul",
+      "gem_perfect_emerald",
+      "unique_elite_weapon",
+      171,
+    ],
+  ];
+  // Validate the supplement against the pinned mod table offline, and ensure
+  // reapplying it during a sync keeps formulas and ingredients stable.
+  const nativeBytes = gunzipSync(
+    await readFile(new URL("./fixtures/planner/cubemain.txt.gz", import.meta.url))
+  );
+  const supplemented = await augmentNativeCubeRecipes(
+    JSON.parse(JSON.stringify(cubeCatalog)),
+    nativeBytes
+  );
+  assert.equal(supplemented.recipes.length, cubeCatalog.recipes.length);
+  assert.equal(supplemented.ingredients.length, cubeCatalog.ingredients.length);
+  assert.deepEqual(
+    supplemented,
+    JSON.parse(JSON.stringify(cubeCatalog)),
+    "Cube sync is idempotent"
+  );
+  await checkCubeUpgradeCoverage(cubeCatalog, cubeIngredients, cubeResultQuality);
+  for (const [key, input, firstRune, secondRune, gem, result, row] of upgrades) {
+    assert.deepEqual(formula(key), [
+      [input, 1],
+      [firstRune, 1],
+      [secondRune, 1],
+      [gem, 1],
+    ]);
+    assert.deepEqual(
+      find(key).result.map((item) => [item.key, item.count]),
+      [[result, 1]]
+    );
+    assert.equal(find(key).status, "unchanged");
+    assert.equal(cubeResultQuality(input), "unique");
+    assert.equal(cubeResultQuality(result), "unique");
+    assert(!crafting.includes(find(key)), key);
+    assert.deepEqual(cubeCatalog.nativeRecipeSource.rows[key], [row]);
+    assert.deepEqual(
+      supplemented.recipes.find((recipe) => recipe.key === key),
+      find(key)
+    );
+  }
+  const armorUpgrades = [
+    "upgrade_unique_normal_armor",
+    "upgrade_unique_exceptional_armor",
+  ];
+  for (const itemTag of ["armor", "helm", "gloves", "boots", "belt", "shields"]) {
+    store.resetFilters();
+    store.addTag("recipe", "upgrade_u");
+    store.addTag("recipe", "uniques");
+    store.addTag("recipe", itemTag);
+    assert.deepEqual(
+      store.filteredRecipes.map((recipe) => recipe.key),
+      armorUpgrades
+    );
+  }
+  for (const query of [
+    "пояс алмаз",
+    "belt diamond",
+    "улучшение уникальной брони",
+    "upgrade unique armor",
+  ]) {
+    store.search = query;
+    assert.deepEqual(
+      store.filteredRecipes.map((recipe) => recipe.key),
+      armorUpgrades
+    );
+  }
+  store.resetFilters();
+  assert.deepEqual(formula("weapon"), [
+    ["blue_weapon_any", 1],
+    ["blacksmith ingot", 1],
+    ["Flawless amethyst", 1],
+    ["Jewel", 1],
+  ]);
   assert.deepEqual(formula("socket_add_weapon"), [
     ["socket_normal_weapon", 1],
     ["rune_ral", 1],
@@ -327,7 +443,7 @@ try {
   });
   assert.deepEqual(parseCatalogHash(""), { section: "runewords" });
   console.log(
-    "Cube checks passed: 112 current recipes, 31 originals, assets, filters, translations and navigation."
+    "Cube checks passed: 184 current recipes, 54 originals, all upgrades, assets, filters, translations and navigation."
   );
 } finally {
   await server.close();

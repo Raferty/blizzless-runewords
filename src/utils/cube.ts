@@ -34,12 +34,13 @@ const uniqueResultKeys = new Set([
 /** Quality is independent of the current interface language. */
 export function cubeResultQuality(
   key: string
-): "crafted" | "rare" | "magic" | "unique" | "normal" {
+): "crafted" | "rare" | "magic" | "unique" | "set" | "normal" {
   const name = cubeIngredients.get(key)?.name.en ?? "";
   if (/\bcrafted\b/i.test(name)) return "crafted";
   if (/\brare\b/i.test(name)) return "rare";
+  if (/\bset\b/i.test(name)) return "set";
   if (/\b(?:blue|magic|magical)\b/i.test(name)) return "magic";
-  if (uniqueResultKeys.has(key)) return "unique";
+  if (uniqueResultKeys.has(key) || /\bunique\b/i.test(name)) return "unique";
   return "normal";
 }
 export function cubeText(value: LocalizedName, lang: Lang, fallback = ""): string {

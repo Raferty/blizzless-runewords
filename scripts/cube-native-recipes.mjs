@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { augmentCubeUpgrades } from "./cube-upgrade-recipes.mjs";
 
 export const nativeCubeSha256 =
   "9c433e140eb6f93aab839502bc0da847542686cb492c2ca7bb49a79e145e1fc6";
@@ -208,7 +209,7 @@ export async function augmentNativeCubeRecipes(catalog, sourceBytes) {
   ];
   const additions = [];
   function recipe(key, ru, en, tags, inputs, result, noteRu, noteEn, ids, added = false) {
-    additions.push({
+    const entry = {
       key,
       name: localized(ru, en),
       notes: localized(noteRu, noteEn),
@@ -218,9 +219,12 @@ export async function augmentNativeCubeRecipes(catalog, sourceBytes) {
       blizzlessVersion: added ? 1 : null,
       ingredients: inputs,
       result,
-    });
+    };
+    additions.push(entry);
     provenance[key] = ids;
+    return entry;
   }
+  augmentCubeUpgrades({ catalog, rows, check, ingredient, recipe, image });
   const limitRu =
     "Основа должна поддерживать сокеты. Только обычное качество без сокетов: не превосходное и не низкокачественное. Эфирные основы подходят. Бросок 1–6 ограничивается максимумом основы и ilvl; свойства сохраняются.";
   const limitEn =
@@ -506,7 +510,9 @@ export async function augmentNativeCubeRecipes(catalog, sourceBytes) {
     ),
     true
   );
-  const murderousAmulet = catalog.recipes.find((entry) => entry.key === "Murderous Amulet");
+  const murderousAmulet = catalog.recipes.find(
+    (entry) => entry.key === "Murderous Amulet"
+  );
   murderousAmulet.result[0].notes = localized(
     "25–35% смертельного удара. Приоритетные суффиксы: of Worth (+2–8 к минимальному урону), of the Colossus (+41–60 к жизни).",
     "25–35% Deadly Strike. Preferred suffixes: of Worth (+2–8 Minimum Damage), of the Colossus (+41–60 Life)."
