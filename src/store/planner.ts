@@ -1,3 +1,4 @@
+import { MissingCraftSuffixError } from "@/utils/planner-game-save-error";
 import { computed, ref, watch } from "vue";
 import { defineStore } from "pinia";
 import { plannerClasses, plannerSkills } from "@/shared/planner";
@@ -197,8 +198,8 @@ export const usePlannerStore = defineStore("planner", () => {
       build.value = next;
       message.value = "loaded";
       return true;
-    } catch {
-      message.value = "invalid";
+    } catch (error) {
+      message.value = error instanceof MissingCraftSuffixError ? "missingCraftSuffix" : "invalid";
       return false;
     }
   }
@@ -221,8 +222,8 @@ export const usePlannerStore = defineStore("planner", () => {
           `${window.location.pathname}${window.location.search}#/planner`
         );
       }
-    } catch {
-      message.value = "invalid";
+    } catch (error) {
+      message.value = error instanceof MissingCraftSuffixError ? "missingCraftSuffix" : "invalid";
     } finally {
       if (loadingSharedHash === hash) loadingSharedHash = "";
     }

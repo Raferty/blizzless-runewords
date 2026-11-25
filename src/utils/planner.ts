@@ -1,3 +1,4 @@
+import { MissingCraftSuffixError } from "./planner-game-save-error";
 import { itemRequirements } from "./planner-item-requirements";
 import { findPlannerRuneword, runeSequences } from "./planner-runeword-recipes";
 import materialSlots from "@/shared/planner-material-slots.json";
@@ -41,7 +42,7 @@ import {
   parseBaseSkillTab,
   baseSkillStats,
 } from "./planner-base-skills";
-import { craftDefinition } from "./planner-crafts";
+import { craftDefinition, hasRequiredCraftAffixes } from "./planner-crafts";
 import {
   isStackableBase,
   plannerItemDimensions,
@@ -394,7 +395,7 @@ function equippedItemBonuses(build: PlannerBuild, native?: GameSaveExporter) {
       initial,
       build.level
     );
-    if (!requirements.level.met) return [];
+    if (!requirements.level.met || !requirements.classMet) return [];
     const base = baseItemBonuses(item, build.classId, native);
     const baseMods = native?.baseModifierBonuses(item);
     const inserts = socketedBonuses(item);
@@ -691,6 +692,7 @@ export function parsePlannerItem(value: unknown): PlannerItem {
   if (item.craftId !== undefined) {
     result.craftId = string(item.craftId, 120);
     craftDefinition(result);
+    if (!hasRequiredCraftAffixes(result)) throw new MissingCraftSuffixError(result.name);
   }
   if (item.propertyValues !== undefined) {
     result.propertyValues = {};
@@ -810,6 +812,24 @@ export function parseBuild(value: unknown): PlannerBuild {
       mode: gameSave.mode as "expansion" | "rotw",
       legacyExpansion: gameSave.legacyExpansion,
     };
+  }
+  if (raw.nativeState !== undefined) {
+    const state = record(raw.nativeState);
+    const skillBindings = string(state.skillBindings, 160);
+    if (!/^[0-9a-f]{160}$/.test(skillBindings) || typeof state.died !== "boolean")
+      throw new Error("native header");
+    build.nativeState = {
+      skillBindings,
+      died: state.died,
+      mapId: integer(state.mapId, 0, 0xffffffff),
+    };
+    for (const key of ["corpse", "golem"] as const) {
+      if (state[key] === undefined) continue;
+      const hex = string(state[key], 2_000_000);
+      const prefix = key === "corpse" ? /^4a4d[0-9a-f]{4}/ : /^6b6601/;
+      if (!prefix.test(hex) || !/^(?:[0-9a-f]{2})+$/.test(hex)) throw new Error(key);
+      build.nativeState[key] = hex;
+    }
   }
   if (raw.storedItems !== undefined) {
     if (!Array.isArray(raw.storedItems) || raw.storedItems.length > 28)

@@ -7,6 +7,7 @@ import { itemRequiredLevel } from "./planner-sockets";
 export interface ItemRequirementStatus {
   level: { required: number; current: number; met: boolean };
   attributes: { key: Attribute; required: number; current: number; met: boolean }[];
+  classMet: boolean;
   unmet: boolean;
 }
 
@@ -51,9 +52,12 @@ export function itemRequirements(
         ]
       : [];
   });
+  const restricted = base && native?.baseCharacteristics(base.code, classId)?.classId;
+  const classMet = !restricted || restricted === classId;
   return {
+    classMet,
     level: { required: requiredLevel, current: level, met: level >= requiredLevel },
     attributes: requirements,
-    unmet: level < requiredLevel || requirements.some((requirement) => !requirement.met),
+    unmet: !classMet || level < requiredLevel || requirements.some((requirement) => !requirement.met),
   };
 }

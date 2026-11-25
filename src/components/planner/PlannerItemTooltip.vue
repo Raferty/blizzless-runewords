@@ -45,6 +45,9 @@
         {{ t("Требуемый уровень", "Required level") }}:
         {{ requirements?.level.required ?? itemRequiredLevel(item) }}
       </p>
+      <p v-if="requirements && !requirements.classMet" class="planner-requirement--unmet">
+        {{ t("Недоступно этому классу", "Unavailable for this class") }}
+      </p>
       <p v-if="item.quality === 'superior' || item.superiorMod">
         {{ t("Превосходный", "Superior") }}
       </p>

@@ -1070,6 +1070,10 @@ const messageText = computed(() => {
       "Недостаточно свободного места для копии предмета.",
       "Not enough free space to duplicate this item.",
     ],
+    missingCraftSuffix: [
+      "В импортируемой сборке у Greater Caster Ring или Greater Caster Amulet отсутствует обязательный суффикс of the Apprentice.",
+      "The imported build contains a Greater Caster Ring or Greater Caster Amulet missing its required of the Apprentice suffix.",
+    ],
     invalid: [
       "Не удалось загрузить сборку: неверный формат или недопустимые значения.",
       "Cannot load build: invalid format or values.",

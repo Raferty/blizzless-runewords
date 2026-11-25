@@ -95,6 +95,7 @@ try {
     assert(hasRequiredCraftAffixes(item));
     const invalid = complete({ ...item, affixes: [] }, "ms173");
     assert(!hasRequiredCraftAffixes(invalid));
+    assert.throws(() => parsePlannerItem(invalid), (err) => err.code === "property" && err.detail.includes("Apprentice"));
     const build = createBuild("sorceress");
     build.stash = [{ ...invalid, stashPosition: 0 }];
     await assert.rejects(

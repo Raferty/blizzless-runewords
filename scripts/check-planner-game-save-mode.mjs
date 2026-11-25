@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createServer } from "vite";
-import { read as readIndependent } from "@d2runewizard/d2s";
+import { read as readIndependent, write as writeIndependent } from "@d2runewizard/d2s";
 import { constants } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
 
 // Header values cross-checked against D2SSharp's game-created v105 fixtures:
@@ -87,6 +87,43 @@ try {
   highLevel.experience = Number(data.experience[98].amazon) + 1;
   const highBytes = await codec.exportCharacter(highLevel, options);
   assert.equal(codec.importCharacter(highBytes).experience, highLevel.experience);
+  // Start from a save written by the independent codec and carry its native-only state
+  // through the same JSON/share parsing path as a saved planner draft.
+  {
+    const hero = createBuild("necromancer");
+    hero.stash = [{ name: "Short Sword", baseCode: "ssd", quality: "normal", bonuses: {}, requiredLevel: 1, notes: "", stashPosition: 0 }];
+    const config = { disableItemEnhancements: true, extendedStash: true };
+    const seed = await codec.exportCharacter(hero, { ...options, choices: { "stash.0": "ssd" } });
+    const source = await readIndependent(seed, constants, config);
+    const sword = source.items.pop();
+    source.is_dead = 1;
+    source.corpse_items = [{ ...sword, location_id: 1, equipped_id: 4 }];
+    source.golem_item = sword;
+    source.header.status.hardcore = true;
+    source.header.status.died = true;
+    source.header.map_id = 0xf1234567;
+    source.header.assigned_skills = ["Raise Skeleton", "Amplify Damage"];
+    source.header.right_skill = "Raise Skeleton";
+    source.header.left_swap_skill = "Amplify Damage";
+    for (const skill of source.skills) if (source.header.assigned_skills.includes(skill.name)) skill.points = 1;
+    const fixture = await writeIndependent(source, constants, config);
+    const original = await readIndependent(fixture, constants, config);
+    const draft = decodeBuild(encodeBuild((await codec.importGameFile(fixture)).build));
+    for (const gameMode of ["expansion", "rotw"]) {
+      const saved = await readIndependent(await codec.exportCharacter(draft, { ...options, gameMode }), constants, config);
+      for (const key of ["map_id", "assigned_skills", "right_skill", "left_swap_skill", "status"])
+        assert.deepEqual(saved.header[key], original.header[key], key);
+      assert.deepEqual(saved.corpse_items, original.corpse_items);
+      assert.deepEqual(saved.golem_item, original.golem_item);
+    }
+    // The independent writer flattens multiple corpses. Duplicate the on-disk
+    // descriptor and list to check the actual multiple-corpse layout.
+    const record = draft.nativeState.corpse.slice(8);
+    draft.nativeState.corpse = "4a4d0200" + record + record;
+    const multiple = await codec.exportCharacter(draft, options);
+    assert.equal((await readIndependent(multiple, constants, config)).corpse_items.length, 2);
+    assert.equal(codec.importCharacter(multiple).nativeState.corpse, draft.nativeState.corpse);
+  }
   const valid = await codec.exportCharacter(createBuild("paladin"), options);
   for (const version of [99, 105]) {
     for (const invalidField of [8, 12]) {

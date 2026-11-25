@@ -20,6 +20,10 @@
           )
         }}
       </p>
+      <p v-if="build.sharedStashData" class="planner-help">
+        {{ t("Ссылка также передаёт весь импортированный общий сундук со всеми вкладками.",
+          "The link also includes every tab of your imported shared stash.") }}
+      </p>
       <p v-if="loading" role="status">{{ t("Создаю ссылку…", "Creating link…") }}</p>
       <template v-else-if="url">
         <label class="planner-label">

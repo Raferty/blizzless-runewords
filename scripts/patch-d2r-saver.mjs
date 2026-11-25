@@ -74,3 +74,13 @@ if (source !== patched) {
   await writeFile(file, patched);
   console.log("Patched d2r-saver 0.2.0 item reader");
 }
+
+// Each corpse has its own 12-byte descriptor immediately before its item list.
+const readerFile = new URL("../node_modules/d2r-saver/dist/formats/d2s-reader.js", import.meta.url);
+const readerSource = await readFile(readerFile, "utf8");
+const oldLoop = "        reader.skip(corpses * 12);\n        for (let i = 0; i < corpses; ++i) {";
+const newLoop = "        for (let i = 0; i < corpses; ++i) {\n            reader.skip(12);";
+const originalReader = readerSource.replace(newLoop, oldLoop);
+if (createHash("sha256").update(originalReader).digest("hex") !== "817a52c8d5e4687ca3551e77d4655949b6b017ecc8eba9d82a5e0d6f1ffada6c")
+  throw Error("d2r-saver character reader changed; review corpse decoding");
+if (readerSource.includes(oldLoop)) await writeFile(readerFile, readerSource.replace(oldLoop, newLoop));

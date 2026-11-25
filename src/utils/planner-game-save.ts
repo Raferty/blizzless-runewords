@@ -1,3 +1,4 @@
+import { GameSaveError } from "./planner-game-save-error";
 import { plannerRunewords, findPlannerRuneword, runeSequences } from "./planner-runeword-recipes";
 import { materialSaveCodec } from "./planner-material-save";
 import { loadDataFromFile } from "./planner-data-loader";
@@ -135,14 +136,11 @@ export interface GameSaveOptions {
 export type GameSaveMode = "expansion" | "rotw";
 export const defaultGameSaveMode: (classId?: ClassId) => GameSaveMode = () => "rotw";
 export type GameSaveRoll = 0 | 1 | "planned";
-export class GameSaveError extends Error {
-  constructor(
-    public code: string,
-    public detail = ""
-  ) {
-    super(code);
-  }
-}
+export { GameSaveError };
+const toHex = (bytes: ArrayLike<number>) =>
+  Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+const fromHex = (hex: string) =>
+  Uint8Array.from(hex.match(/../g)!, (pair) => parseInt(pair, 16));
 const normalize = (s: string) =>
   s
     .toLowerCase()
@@ -344,6 +342,23 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       nameEnd > 15
         ? new TextDecoder().decode(nameField.subarray(0, nameEnd))
         : profile.name;
+    if (decoded.warnings.length)
+      throw new GameSaveError("validation", decoded.warnings.join("; "));
+    // v105 stores 16 hotkeys and four active skills in consecutive 32-bit fields.
+    build.nativeState = {
+      skillBindings: toHex(bytes.subarray(40, 120)),
+      mapId: new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength).getUint32(
+        155,
+        true
+      ),
+      died: !!(bytes[20] & 8),
+      ...(profile.rawCorpse && profile.rawCorpse.length > 4
+        ? { corpse: toHex(profile.rawCorpse) }
+        : {}),
+      ...(profile.rawGolem && profile.rawGolem.length > 3
+        ? { golem: toHex(profile.rawGolem) }
+        : {}),
+    };
     build.hardcore = !!(bytes[20] & 4);
     if (bytes[248] === 2 || bytes[248] === 3)
       build.gameSave = {
@@ -2394,9 +2409,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     const pieces = [
       seed.subarray(0, prefixLength),
       ...(await list(false)),
-      new Uint8Array([74, 77, 0, 0, 106, 102]),
+      build.nativeState?.corpse
+        ? fromHex(build.nativeState.corpse)
+        : new Uint8Array([74, 77, 0, 0]),
+      new Uint8Array([106, 102]),
       ...(profile.merc ? await list(true) : []),
-      new Uint8Array([107, 102, 0]),
+      build.nativeState?.golem
+        ? fromHex(build.nativeState.golem)
+        : new Uint8Array([107, 102, 0]),
       // Bound-demon data belongs only to Reign of the Warlock saves.
       ...(gameMode === "rotw" ? [new Uint8Array([1, 0, 108, 102, 0, 0])] : []),
     ];
@@ -2433,7 +2453,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     // https://github.com/ResurrectedTrader/D2SSharp/blob/main/src/D2SSharp/Model/PreviewData.cs
     const legacyExpansion =
       build.gameSave?.mode === gameMode ? build.gameSave.legacyExpansion : true;
-    bytes[20] = (legacyExpansion ? 0x20 : 0) | (build.hardcore ? 4 : 0);
+    if (build.nativeState) {
+      bytes.set(fromHex(build.nativeState.skillBindings), 40);
+      header.setUint32(155, build.nativeState.mapId, true);
+    }
+    bytes[20] =
+      (legacyExpansion ? 0x20 : 0) |
+      (build.hardcore ? 4 : 0) |
+      (build.nativeState?.died ? 8 : 0);
     bytes[248] = gameMode === "rotw" ? 3 : 2;
     bytes.fill(0, 152, 155);
     bytes[152 + ["normal", "nightmare", "hell"].indexOf(build.difficulty)] = 0x80;
@@ -2460,6 +2487,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       throw new GameSaveError("validation");
     if (
       check.warnings.length ||
+      toHex(check.profile.rawCorpse ?? []) !==
+        (build.nativeState?.corpse ?? "4a4d0000") ||
+      toHex(check.profile.rawGolem ?? []) !== (build.nativeState?.golem ?? "6b6600") ||
       check.profile.class !== profile.class ||
       check.profile.level !== profile.level ||
       Object.keys(check.profile.items).length !== Object.keys(profile.items).length ||

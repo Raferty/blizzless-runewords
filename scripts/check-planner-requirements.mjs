@@ -129,6 +129,11 @@ try {
   delete build.equipment.ringRight;
   build.weaponSet = 1;
   assert.equal(buildStats(build, native).skillBonus, 0);
+  const sorceress = createBuild("sorceress");
+  sorceress.charms = [];
+  sorceress.attributes.strength = 150;
+  sorceress.equipment.offHand = item("pab", { name: "Spirit", quality: "runeword", baseKind: "shield", bonuses: { allSkills: 2 } });
+  assert.equal(buildStats(sorceress, native).skillBonus, 0);
   const fallback = itemRequirements(
     undefined,
     shako,
