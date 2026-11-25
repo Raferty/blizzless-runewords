@@ -83,6 +83,7 @@ export interface PlannerItem {
   quality:
     "normal" | "superior" | "magic" | "rare" | "unique" | "set" | "runeword" | "crafted";
   runewordId?: number;
+  runewordRunes?: string[];
   requiredLevel: number;
   notes: string;
   bonuses: Bonuses;
@@ -111,6 +112,7 @@ export interface PlannerItem {
   containerQuantity?: number;
   quantity?: number;
   importedStats?: {
+    affixIds?: string[];
     signature: string;
     values: Record<string, number>;
   };
@@ -127,6 +129,8 @@ export interface PlannerBuild {
   level: number;
   difficulty: Difficulty;
   gold: number;
+  stashGold?: number;
+  experience?: number;
   hardcore: boolean;
   gameSave?: {
     mode: "expansion" | "rotw";

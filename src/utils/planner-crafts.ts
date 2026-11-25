@@ -37,6 +37,17 @@ export function craftDefinition(item: PlannerItem) {
     throw Error("Invalid crafting recipe or base");
   return variant.definition;
 }
+// Both Greater Caster recipes guarantee Apprentice. Other cube preferences can roll differently.
+const greaterCasterRecipes = new Set(["great_cast_amu", "ring"]);
+export function isRequiredCraftAffix(item: PlannerItem, id: string) {
+  return greaterCasterRecipes.has(item.craftId ?? "") && id === "ms173";
+}
+export function hasRequiredCraftAffixes(item: PlannerItem) {
+  return (
+    !isRequiredCraftAffix(item, "ms173") ||
+    !!item.affixes?.some((affix) => affix.id === "ms173")
+  );
+}
 export const craftAffixMinimum = (level: number) =>
   level > 70 ? 4 : level > 50 ? 3 : level > 30 ? 2 : 1;
 export function craftedItemLevel(

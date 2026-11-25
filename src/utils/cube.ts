@@ -14,8 +14,8 @@ export const cubeIngredients = new Map<string, CubeIngredient>([
 ]);
 export const cubeMaterials = [
   { key: "Horadric Sphere", name: { ru: "Сферы", en: "Spheres" } },
-  { key: "Resplendent Spark", name: { ru: "Осколки", en: "Sparks" } },
-  { key: "blacksmith ingot", name: { ru: "Инготы", en: "Ingots" } },
+  { key: "Resplendent Spark", name: { ru: "Искры", en: "Sparks" } },
+  { key: "blacksmith ingot", name: { ru: "Слитки", en: "Ingots" } },
 ] as const;
 export type CubeMaterialKey = (typeof cubeMaterials)[number]["key"];
 const uniqueResultKeys = new Set([

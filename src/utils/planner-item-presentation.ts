@@ -1,9 +1,11 @@
+import type { GameSaveExporter } from "./planner-game-save";
 import { RUNES } from "@/shared/constants";
 import { bonusFields, plannerClasses } from "@/shared/planner";
 import type { PlannerItem } from "@/types/planner";
 import type { RunewordTableItem } from "@/types";
 import type { Lang } from "@/types/lang";
 import { splitStatSections, runewordNames } from "./runeword";
+import { nativeStatsSignature } from "./planner-properties";
 import { socketInsertVisual } from "./planner-sockets";
 
 import { isWorldstoneShard, type worldstoneShardCodes } from "./planner-item-art";
@@ -49,6 +51,8 @@ export function itemRuneword(item: PlannerItem, words: RunewordTableItem[]) {
 
 export function itemSockets(item: PlannerItem, words: RunewordTableItem[]) {
   const word = itemRuneword(item, words);
+  if (word && item.runewordRunes)
+    return item.runewordRunes.map((code) => socketInsertVisual(code));
   return word
     ? word.runes.map((id) => RUNES.find((rune) => rune.id === id))
     : Array.from({ length: item.sockets ?? 0 }, (_, index) =>
@@ -99,7 +103,53 @@ export function itemRunewordLines(
   });
 }
 
-export function itemBonusLines(item: PlannerItem, lang: Lang) {
+function importedStatLine(
+  game: GameSaveExporter,
+  key: string,
+  amount: number,
+  level: number,
+  stats: Record<string, number>,
+  lang: Lang
+): string[] {
+  const [stat, parameter, skillLevel] = key.split("#");
+  const definition = game.gd.itemStatCost[stat];
+  if (!definition || !amount) return [];
+  if (stat === "item_addskill_tab") {
+    const tab = Number(parameter);
+    const tree = plannerClasses[Math.floor(tab / 3)]?.trees[tab % 3];
+    if (tree) return [`+${amount} ${lang === "ru" ? "к навыкам" : "to"} ${tree[lang]}`];
+  }
+  if (stats.item_mindamage_percent === stats.item_maxdamage_percent) {
+    if (stat === "item_mindamage_percent") return [];
+    if (stat === "item_maxdamage_percent") return [`+${amount}% Enhanced Damage`];
+  }
+  const strings = game.gd.locale.strings;
+  const perLevel = definition.opbase === "level" && definition.opparam !== undefined;
+  const value = perLevel
+    ? Math.floor((amount * level) / 2 ** definition.opparam!)
+    : amount;
+  const template =
+    strings[(amount < 0 ? definition.descstrneg : definition.descstrpos) ?? ""];
+  if (!template) return [];
+  const args = [value, Number(skillLevel)];
+  const skill = strings[`skillname${parameter}`] || game.gd.skills[parameter]?.skill;
+  const line = template.replace(/%%|%\+?d|%s/g, (token) => {
+    if (token === "%%") return "%";
+    if (token === "%s") return skill || parameter || "";
+    const n = args.shift() ?? value;
+    return token === "%+d" && n >= 0 ? `+${n}` : String(n);
+  });
+  return [
+    perLevel && definition.descstr2 ? `${line} ${strings[definition.descstr2]}` : line,
+  ];
+}
+
+export function itemBonusLines(
+  item: PlannerItem,
+  lang: Lang,
+  game?: GameSaveExporter,
+  level = 99
+) {
   const resistKeys = [
     "fireResist",
     "coldResist",
@@ -121,7 +171,30 @@ export function itemBonusLines(item: PlannerItem, lang: Lang) {
     ) && attributeValues[0]
       ? attributeValues[0]
       : undefined;
+  // A native crafted item carries its rolled stats even when its recipe is unknown.
+  const extra =
+    item.quality === "crafted" &&
+    !item.craftId &&
+    item.importedStats?.signature === nativeStatsSignature(item)
+      ? item.importedStats.values
+      : {};
   return [
+    ...(extra.item_cannotbefrozen
+      ? [lang === "ru" ? "Нельзя заморозить" : "Cannot Be Frozen"]
+      : []),
+    ...(extra.item_deadlystrike
+      ? [
+          `${extra.item_deadlystrike}% ${lang === "ru" ? "смертельного удара" : "Deadly Strike"}`,
+        ]
+      : []),
+    ...(extra.tohit
+      ? [`+${extra.tohit} ${lang === "ru" ? "к рейтингу атаки" : "to Attack Rating"}`]
+      : []),
+    ...Object.entries(extra).flatMap(([key, value]) =>
+      game && !["item_cannotbefrozen", "item_deadlystrike", "tohit"].includes(key)
+        ? importedStatLine(game, key, value, level, extra, lang)
+        : []
+    ),
     ...(allAttributes
       ? [
           `${allAttributes > 0 ? "+" : ""}${allAttributes} ${

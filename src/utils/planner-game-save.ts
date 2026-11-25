@@ -1,3 +1,4 @@
+import { plannerRunewords, findPlannerRuneword, runeSequences } from "./planner-runeword-recipes";
 import { materialSaveCodec } from "./planner-material-save";
 import { loadDataFromFile } from "./planner-data-loader";
 import { D2RSaver, type BinaryParsedItem, type D2SCharacterProfile } from "d2r-saver";
@@ -11,11 +12,7 @@ import {
   resistanceTypes,
 } from "@/shared/planner";
 import { waypoints } from "@/shared/planner-waypoints";
-import { RUNEWORDS } from "@/shared/runewords";
-import { CUSTOM_RUNEWORDS } from "@/shared/custom-runewords";
-import { ROTW_RUNEWORDS } from "@/shared/rotw-runewords";
 import { runewordNames } from "./runeword";
-import { REWORKED_RUNEWORDS } from "@/shared/reworked-runewords";
 import {
   attributeBudget,
   createBuild,
@@ -54,7 +51,7 @@ import {
   parseSocketIconIndices,
   socketInsertByCode,
 } from "./planner-sockets";
-import { craftDefinition, craftVariant, craftAffixMinimum } from "./planner-crafts";
+import { craftDefinition, craftVariant, craftAffixMinimum, hasRequiredCraftAffixes } from "./planner-crafts";
 import { stashSupplies } from "./planner-supplies";
 import {
   resolvePropertyValues,
@@ -354,6 +351,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         legacyExpansion: !!(bytes[20] & 0x20),
       };
     build.level = Math.max(1, Math.min(99, profile.level));
+    build.stashGold = profile.goldStash ?? 0;
+    build.experience = (profile.attributes?.experience ?? 0) >>> 0;
     build.weaponSet = profile.weaponSet === 1 ? 1 : 0;
     build.gold = Math.max(0, Math.min(build.level * 10000, profile.gold ?? 0));
     const character = plannerClasses.find((entry) => entry.id === classId)!;
@@ -523,12 +522,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           : "armor";
       const runeword =
         typeof runewordName === "string"
-          ? [
-              ...RUNEWORDS,
-              ...REWORKED_RUNEWORDS,
-              ...CUSTOM_RUNEWORDS,
-              ...ROTW_RUNEWORDS,
-            ].find(
+          ? plannerRunewords.find(
               (candidate) =>
                 runewordNames(candidate).some(
                   (name) => normalize(name) === normalize(runewordName)
@@ -549,6 +543,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
             )
           : undefined;
       const runewordId = runeword?.id;
+      const runeCodes =
+        itemQuality === "runeword"
+          ? native.socketedItems.map((value) =>
+              typeof value === "string" ? value : parsedItems[value].base
+            )
+          : [];
       const item: PlannerItem = {
         name: catalogId
           ? gd.locale.strings[
@@ -577,6 +577,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         ...(itemQuality === "runeword"
           ? {
               baseKind,
+              ...(runeCodes.some((code) => /^\d{2}r$/.test(code))
+                ? { runewordRunes: runeCodes }
+                : {}),
             }
           : {}),
         baseCode: native.base,
@@ -607,6 +610,37 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       // Native runeword stats exclude the inserted runes. The planner's flat
       // bonuses include them; the exporter removes them again from the parent.
       if (itemQuality === "runeword") {
+        const definition = itemDefinition(item);
+        if (definition) {
+          // Decode only rolls uniquely determined by a stat in the word's own
+          // property list. Base modifiers and inserted runes are separate lists.
+          const minimum = definitionStats(definition, native.base, 0);
+          const maximum = definitionStats(definition, native.base, 1);
+          const values: Record<number, number> = {};
+          for (let index = 1; index <= 7; index++) {
+            const property = gd.properties[String(definition[`prop${index}`])];
+            const range = property && propertyRange(definition, property, index);
+            if (!range) continue;
+            const raised = definitionStats(definition, native.base, 0, {
+              [index]: range.min + 1,
+            });
+            for (const [key, first] of Object.entries(minimum)) {
+              if (
+                raised[key] !== first + 1 ||
+                maximum[key] - first !== range.max - range.min
+              )
+                continue;
+              const amount =
+                (native.stats[key] ?? 0) - (baseStats ? (remaining[key] ?? 0) : 0);
+              const value = range.min + amount - first;
+              if (Number.isInteger(value) && value >= range.min && value <= range.max) {
+                values[index] = value;
+                break;
+              }
+            }
+          }
+          if (Object.keys(values).length) item.propertyValues = values;
+        }
         const category =
           baseKind === "weapon" ? "weapon" : baseKind === "shield" ? "shield" : "helm";
         for (const value of native.socketedItems) {
@@ -781,7 +815,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         extra.item_undeaddamage_percent = (extra.item_undeaddamage_percent ?? 0) - 50;
       delete extra.item_numsockets;
       delete extra.item_ethereal;
+      const affixIds =
+        itemQuality === "crafted"
+          ? [...(native.prefixCodes ?? []), ...(native.suffixCodes ?? [])].map((id) =>
+              plannerAffixId(id)!
+            )
+          : [];
       item.importedStats = {
+        ...(affixIds.length ? { affixIds } : {}),
         signature: nativeStatsSignature(item),
         values: Object.fromEntries(Object.entries(extra).filter(([, value]) => value)),
       };
@@ -870,13 +911,14 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     if (bytes.length < 16 || header.getUint32(0, true) !== 0xaa55aa55)
       throw new GameSaveError("validation");
     const version = header.getUint32(4, true);
-    if (version === 105) return { build: importCharacter(bytes) };
-    if (version !== 99) throw new GameSaveError("unsupportedVersion", String(version));
+    if (version !== 105 && version !== 99)
+      throw new GameSaveError("unsupportedVersion", String(version));
     if (
       header.getUint32(8, true) !== bytes.length ||
       header.getUint32(12, true) !== saveChecksum(bytes)
     )
       throw new GameSaveError("validation");
+    if (version === 105) return { build: importCharacter(bytes) };
     // Both layouts use Blizzless stat IDs. The binary codec switches header
     // offsets, quantity bits and item trailers according to header.version.
     const config = { disableItemEnhancements: true, extendedStash: true };
@@ -1037,18 +1079,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     return stats;
   }
   function word(entry: GameSaveEntry) {
-    const known = [
-      ...RUNEWORDS,
-      ...REWORKED_RUNEWORDS,
-      ...CUSTOM_RUNEWORDS,
-      ...ROTW_RUNEWORDS,
-    ].find((w) =>
-      entry.item.runewordId === undefined
-        ? runewordNames(w).some(
-            (name) => name.toLowerCase() === entry.item.name.trim().toLowerCase()
-          )
-        : w.id === entry.item.runewordId
-    );
+    const known = findPlannerRuneword(entry.item);
     const names = known ? runewordNames(known) : [entry.item.name];
     const matches = Object.entries(gd.runes).filter(([, def]) =>
       names.some((name) => normalize(def.name) === normalize(name))
@@ -1512,20 +1543,13 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       item.propertyChoices
     );
     if (item.quality === "runeword") {
-      const runeWord = word({
-        key: "properties",
-        item,
-        owner: "stash",
-      })?.[1] as unknown as Definition;
       const category =
         item.baseKind === "weapon"
           ? "weapon"
           : item.baseKind === "shield"
             ? "shield"
             : "helm";
-      for (let i = 1; i <= 6; i++) {
-        const code = runeWord[`rune${i}`];
-        if (!code) continue;
+      for (const code of itemRunes(item)) {
         const gem = gd.gems[String(code)] as unknown as Definition;
         const gemDef: Definition = {};
         for (let j = 1; j <= 3; j++) {
@@ -1547,15 +1571,25 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       ) as PlannerItem["classBonuses"],
     };
   }
-  function itemRunes(item: PlannerItem): string[] {
+  function runewordRuneOptions(item: PlannerItem): string[][] {
     if (item.quality !== "runeword") return [];
     const def = word({ key: "runes", item, owner: "stash" })?.[1] as unknown as
       Definition | undefined;
-    return def
+    const normal = def
       ? [1, 2, 3, 4, 5, 6].flatMap((i) =>
           def[`rune${i}`] ? [String(def[`rune${i}`])] : []
         )
       : [];
+    return runeSequences(normal);
+  }
+  function itemRunes(item: PlannerItem): string[] {
+    const options = runewordRuneOptions(item);
+    if (!item.runewordRunes) return options[0] ?? [];
+    const selected = options.find(
+      (codes) => codes.join(",") === item.runewordRunes!.join(",")
+    );
+    if (!selected) throw new GameSaveError("property", item.name);
+    return selected;
   }
   function socketJewelDefinition(code: string): Definition | undefined {
     const unique = gd.uniqueItems[code];
@@ -1759,6 +1793,10 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       character.stamina +
       (build.level - 1) * character.staminaPerLevel +
       build.attributes.vitality * character.staminaPerVitality;
+    const experienceTable = data.experience as Record<string, { amazon: number }>;
+    const levelFloor = Number(experienceTable[build.level - 1]?.amazon ?? 0);
+    const nextFloor = Number(experienceTable[build.level]?.amazon ?? 2 ** 32);
+    const experience = build.experience ?? levelFloor;
     profile.attributes = {
       strength: character.base.strength + build.attributes.strength,
       dexterity: character.base.dexterity + build.attributes.dexterity,
@@ -1773,14 +1811,9 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       stamina: stamina * 256,
       maxstamina: stamina * 256,
       level: build.level,
-      experience: Number(
-        (data.experience as Record<string, { amazon: number }>)[build.level - 1]
-          ?.amazon ?? 0
-      ),
+      experience: experience >= levelFloor && experience < nextFloor ? experience : levelFloor,
       gold: build.gold,
-      // The v105 stash accepts up to 2.5M gold; the usual level-scaled cap reaches
-      // 2,475,000 at level 99.
-      goldbank: Math.min(2_500_000, build.level * 25_000),
+      goldbank: build.stashGold ?? Math.min(2_500_000, build.level * 25_000),
     };
     for (const [key, value] of Object.entries(profile.attributes)) {
       const bits = gd.itemStatCost[key]?.csvbits;
@@ -1872,6 +1905,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           "property",
           `${entry.item.name}: select the random craft affixes`
         );
+      if (!hasRequiredCraftAffixes(entry.item)) throw new GameSaveError("property", entry.item.name + ": of the Apprentice");
       if (entry.item.affixes?.length)
         parseAffixes(entry.item.affixes, { ...entry.item, baseCode: choice.base });
       const item: BinaryParsedItem = {
@@ -1916,6 +1950,12 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       const preserveNative =
         mode === "planned" &&
         entry.item.importedStats?.signature === nativeStatsSignature(entry.item);
+      if (
+        preserveNative &&
+        entry.item.quality === "crafted" &&
+        entry.item.importedStats?.affixIds
+      )
+        itemAffixIds.set(item.itemId, entry.item.importedStats.affixIds);
       const restoreNativeStats = (stats: Record<string, number>) => {
         if (!preserveNative) return;
         for (const stat of Object.keys(stats))
@@ -1975,9 +2015,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
         item.uniqueValues = Array.from({ length: 7 }, (_, i) =>
           Number(def[`t1${roll ? "max" : "min"}${i + 1}`] ?? 0)
         );
-        item.socketedItems = [1, 2, 3, 4, 5, 6].flatMap((i) =>
-          def[`rune${i}`] ? [String(def[`rune${i}`])] : []
-        );
+        item.socketedItems = itemRunes(entry.item);
         item.sockets = item.socketedItems.length;
         item.socketed = true;
         const props: Definition = {};
@@ -2498,6 +2536,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     itemBonuses,
     itemResistanceCaps,
     itemRunes,
+    runewordRuneOptions,
     socketBonuses,
     socketJewelDefinition,
     propertyStats: definitionStats,

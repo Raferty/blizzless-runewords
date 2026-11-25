@@ -2001,7 +2001,7 @@ export const REWORKED_RUNEWORDS = [
       en: "Eternity",
     },
     runes: [11, 30, 24, 12, 29],
-    types: [ItemTypes.ITEM_TYPE_MELEE_WEAPONS],
+    types: [ItemTypes.ITEM_TYPE_MELEE_WEAPONS, ItemTypes.ITEM_TYPE_MISSILE_WEAPONS],
     excluded: "",
     patch: "1.10",
     level: 63,

@@ -1,6 +1,8 @@
 import data from "@/shared/planner-affixes.json";
 import type { Bonuses, ClassId, PlannerAffix, PlannerItem } from "@/types/planner";
 
+import { nativeStatsSignature } from "./planner-properties";
+
 export interface AffixMod {
   code: string;
   param: string | number;
@@ -246,12 +248,15 @@ export function affixBonuses(item: PlannerItem, level: number) {
   };
 }
 export function affixRequiredLevel(item: PlannerItem) {
-  const level = Math.max(
-    0,
-    ...(item.affixes ?? []).map((a) => affixById.get(a.id)?.requiredLevel ?? 1)
-  );
+  const ids =
+    item.quality === "crafted" &&
+    item.importedStats?.affixIds &&
+    item.importedStats.signature === nativeStatsSignature(item)
+      ? item.importedStats.affixIds
+      : (item.affixes ?? []).map((affix) => affix.id);
+  const level = Math.max(0, ...ids.map((id) => affixById.get(id)?.requiredLevel ?? 1));
   return item.quality === "crafted"
-    ? Math.min(98, level + 10 + 3 * (item.affixes?.length ?? 0))
+    ? Math.min(98, level + 10 + 3 * ids.length)
     : Math.max(1, level);
 }
 export function affixSockets(item: PlannerItem) {

@@ -3,6 +3,8 @@ import { createHash } from "node:crypto";
 import { Buffer } from "node:buffer";
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 
+import { bartucChanges, octoberManifest } from "./bartuc-item-changes.mjs";
+
 const origin = "https://blizzless.info";
 const api = `${origin}/api`;
 const root = new URL("../", import.meta.url);
@@ -281,6 +283,13 @@ const classCodes = {
 };
 const runewords = [];
 for (const word of runeRows.filter((r) => r.complete === "1")) {
+  if (manifest.version === octoberManifest) {
+    const fields = bartucChanges.runes[word["*Rune Name"]];
+    for (const key of Object.keys(word)) {
+      const normalized = key.toLowerCase();
+      if (fields && Object.hasOwn(fields, normalized)) word[key] = fields[normalized] ?? "";
+    }
+  }
   const types = Array.from({ length: 6 }, (_, i) => word[`itype${i + 1}`]).filter(
     Boolean
   );

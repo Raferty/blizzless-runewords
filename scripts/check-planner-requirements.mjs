@@ -117,6 +117,18 @@ try {
   );
   build.attributes.dexterity = 115;
   assert.equal(check(blade).unmet, true);
+  build.level = 1;
+  build.equipment.offHand = item("uit", { quality: "runeword", name: "Spirit", baseKind: "shield", bonuses: { fcr: 35, allSkills: 2, strength: 200 } });
+  assert.equal(buildStats(build, native).skillBonus, 0);
+  build.level = 99;
+  assert.equal(buildStats(build, native).skillBonus, 0, "Shield cannot meet its own strength requirement");
+  build.equipment.ringLeft = item("rin", { bonuses: { strength: 131 } });
+  assert.equal(buildStats(build, native).skillBonus, 2, "Eligible gear unlocks the shield");
+  build.equipment.ringRight = item("rin", { bonuses: { strength: -20 } });
+  assert.equal(buildStats(build, native).skillBonus, 0, "Attribute penalties deactivate unsupported gear");
+  delete build.equipment.ringRight;
+  build.weaponSet = 1;
+  assert.equal(buildStats(build, native).skillBonus, 0);
   const fallback = itemRequirements(
     undefined,
     shako,

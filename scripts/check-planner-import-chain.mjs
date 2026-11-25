@@ -68,6 +68,9 @@ try {
       sockets: 1,
       socketedItems: ["j15fr"],
     }),
+    ...["xa1", "xa2", "xa3", "xa4", "xa5"].map((code, index) =>
+      item(code, "normal", code, { stashPosition: 130 + index })
+    ),
     item("Wisp", "unique", "rin", { catalogId: "unique319", propertyRoll: 1 }),
   ];
   const options = (b) => ({
@@ -103,6 +106,52 @@ try {
       stash: profile.stash.map((id) => (id === undefined ? null : normalize(id))),
     };
   }
+  const { itemPropertyLines } = await server.ssrLoadModule(
+    "/src/utils/planner-item-catalog.ts"
+  );
+  const swordguard = item("Swordguard", "unique", "9fb", { catalogId: "unique167" });
+  for (const level of [1, 46, 99])
+    assert(
+      itemPropertyLines(codec, swordguard, level, "paladin").includes(
+        `+${level * 7} Defense (Based on Character Level)`
+      )
+    );
+  for (const [name, id, values] of [
+    ["Brand", 79, { 1: 350 }],
+    ["Brand", 79, { 1: 411 }],
+    ["Brand", 79, { 1: 450 }],
+    ["Wrath", 75, { 1: 300, 7: 6 }],
+    ["Wrath", 75, { 1: 381, 7: 10 }],
+    ["Wrath", 75, { 1: 400, 7: 18 }],
+  ]) {
+    let fixture = {
+      ...planner.createBuild("paladin"),
+      charms: [],
+      stash: [
+        item(name, "runeword", "6s7", {
+          runewordId: id,
+          baseKind: "weapon",
+          propertyValues: values,
+        }),
+      ],
+    };
+    for (let pass = 0; pass < 2; pass++) {
+      const bytes = await codec.exportCharacter(fixture, options(fixture));
+      fixture = (await codec.importGameFile(bytes)).build;
+      const word = fixture.stash[0];
+      assert.deepEqual(word.propertyValues, values, name);
+      const lines = itemPropertyLines(codec, word, 99, "paladin");
+      assert(
+        lines.some((line) => line.includes(`${values[1]}% Enhanced Damage`)),
+        lines.join("\n")
+      );
+      if (values[7])
+        assert(
+          lines.some((line) => line.includes(`+${values[7]} to Enchant`)),
+          lines.join("\n")
+        );
+    }
+  }
   let cycles = 0;
   for (const mode of ["expansion", "rotw"])
     for (const legacyExpansion of [false, true])
@@ -111,6 +160,11 @@ try {
         let bytes = await codec.exportCharacter(fixture, options(fixture));
         const expected = snapshot(bytes);
         assert.equal(expected.equipment.rarm.unique, "unique704");
+        assert.equal(expected.equipment.rarm.base, "7pi");
+        for (let index = 0; index < 5; index++) {
+          const shard = expected.stash[130 + index];
+          assert.equal(typeof shard === "string" ? shard : shard.base, `xa${index + 1}`);
+        }
         assert.equal(expected.equipment.neck.stats["item_addclassskills#3"], 2);
         assert.equal(expected.equipment.neck.stats.manarecoverybonus, 10);
         assert.equal(expected.equipment.neck.stats.item_fastercastrate, 20);

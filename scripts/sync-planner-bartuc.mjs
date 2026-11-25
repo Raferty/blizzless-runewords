@@ -9,6 +9,7 @@ const data = JSON.parse(await readFile(new URL("data.json", target)));
 const strings = new Map(JSON.parse(await readFile(new URL("strings.json", target))));
 const source = JSON.parse(await readFile(new URL("source.json", target)));
 const blobs = {
+  runes: "1dd06c6a49404da9ba0eb660732f4e171d4ecff6c8d8f2ac168d4909c0a037e7",
   uniqueItems: "c2509c81fd0655ba0e015adfea9934db28aa85b272d7391b4db3f530372733eb",
   properties: "84cbc6ed62186da1c7720fb3bdab7b1689fd08f549a59579bb660b55d959f3aa",
   itemStatCost: "6975bb81a533025fcbcd836216c4960ca759d5dec5c7a9273b6e145ed490c1e4",
@@ -48,13 +49,45 @@ const tables = Object.fromEntries(
     Object.entries(blobs).map(async ([key, hash]) => [key, await table(hash)])
   )
 );
+// Pure recipes use their ordinary parent record and distinct socket item codes.
+const runeCodes = (row) => [1, 2, 3, 4, 5, 6].map((i) => row["rune" + i]).filter(Boolean);
+const pureVariants = {};
+for (const row of tables.runes.filter(
+  (r) => r.complete && r.runename?.includes("(Pure)")
+)) {
+  const normal = tables.runes.find(
+    (r) => r.complete && r.name === row.name && !r.runename?.includes("(Pure)")
+  );
+  if (!normal) throw Error("Missing canonical runeword " + row.name);
+  const fields = new Set([...Object.keys(normal), ...Object.keys(row)]);
+  for (const field of fields)
+    if (
+      /^(?:t1(?:code|param|min|max)|itype|etype)\d+$/.test(field) &&
+      row[field] !== normal[field]
+    )
+      throw Error("Distinct Pure runeword properties: " + row.name + " " + field);
+  (pureVariants[runeCodes(normal).join(",")] ??= []).push(runeCodes(row));
+}
+await writeFile(
+  new URL("../src/shared/planner-pure-runewords.json", import.meta.url),
+  JSON.stringify(pureVariants, null, 2) + "\n"
+);
 const names = {
   BloodforgedHelm: "Bartuc's Crimson Visage",
   BloodforgedArmor: "Bartuc's Crimson Vessel",
 };
+const containerNames = {
+  cont_bloodscroll: "Tattered Scroll",
+  cont_bloodstone: "Bloodstone",
+  cont_demonpaw: "Demon Paw",
+  cont_elixirwealth: "Elixir of Wealth",
+  cont_elixirwisdom: "Elixir of Wisdom",
+  cont_elixirlifemana: "Elixir of Life and Mana",
+  cont_elixirfortune: "Elixir of Fortune",
+};
 const ids = [];
 tables.uniqueItems.forEach((row, index) => {
-  if (!names[row.index]) return;
+  if (!names[row.index] && !containerNames[row.index]) return;
   const id = `unique${row.id}`;
   for (let i = 1; i <= 12; i++) {
     const skill = Object.entries(data.skills).find(([, s]) => s.skill === row[`par${i}`]);
@@ -62,8 +95,8 @@ tables.uniqueItems.forEach((row, index) => {
     else if (/^\d+$/.test(row[`par${i}`] ?? "")) row[`par${i}`] = Number(row[`par${i}`]);
   }
   data.uniqueItems[id] = { ...row, id: Number(row.id), saveId: index, enabled: 1 };
-  strings.set(row.index, names[row.index]);
-  ids.push(id);
+  strings.set(row.index, names[row.index] ?? `${containerNames[row.index]} Container`);
+  if (names[row.index]) ids.push(id);
 });
 if (ids.join(",") !== "unique694,unique695")
   throw Error("Bartuc unique record IDs changed");

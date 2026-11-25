@@ -54,11 +54,11 @@
           }}
         </small>
       </label>
-      <label class="planner-check">
+      <label v-if="gameMode === 'rotw'" class="planner-check">
         <input v-model="includeStash" type="checkbox" />
         {{ t("Включить общий сундук", "Include shared stash") }}
       </label>
-      <template v-if="includeStash">
+      <template v-if="exportArchive">
         <label class="planner-label">
           {{ t("Существующий общий сундук (.d2i)", "Existing shared stash (.d2i)") }}
           <input type="file" accept=".d2i" @change="selectStash" />
@@ -169,7 +169,7 @@
         </button>
         <button type="submit" class="planner-primary" :disabled="!ready">
           {{
-            includeStash
+            exportArchive
               ? t("Скачать ZIP", "Download ZIP")
               : t("Скачать .d2s", "Download .d2s")
           }}
@@ -269,6 +269,7 @@ async function load() {
   }
 }
 const includeStash = ref(true);
+const exportArchive = computed(() => gameMode.value === "rotw" && includeStash.value);
 const stashFile = shallowRef<File>();
 function selectStash(event: Event) {
   stashFile.value = (event.target as HTMLInputElement).files?.[0];
@@ -285,7 +286,7 @@ async function download() {
       rolls: rolls.value,
       gameMode: gameMode.value,
     });
-    const archive = includeStash.value;
+    const archive = exportArchive.value;
     if (archive && stashFile.value && stashFile.value.size > 4_000_000)
       throw new GameSaveError("validation");
     const output = archive

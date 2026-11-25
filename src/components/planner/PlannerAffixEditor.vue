@@ -33,6 +33,7 @@
         <button
           type="button"
           :aria-label="`${t('Удалить свойство', 'Remove mod')} ${affixById.get(selected.id)!.name}`"
+          :disabled="isRequiredCraftAffix(item, selected.id)"
           @click="remove(index)"
         >
           <UiIcon name="close" />
@@ -117,6 +118,7 @@
   </section>
 </template>
 <script setup lang="ts">
+import { isRequiredCraftAffix } from "@/utils/planner-crafts";
 import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, nextTick, ref, useId } from "vue";
 import { bonusFields, plannerClasses } from "@/shared/planner";

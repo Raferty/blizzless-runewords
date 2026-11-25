@@ -110,6 +110,9 @@ try {
           : await renderToString(
               h(art ? Branches : NativeBranches, { art: art || native })
             );
+      branches = branches
+        .replaceAll("viewbox=", "viewBox=")
+        .replaceAll("preserveaspectratio=", "preserveAspectRatio=");
       branches = branches.replace(
         "<svg",
         `<svg x="${layer.x}" y="${layer.y}" width="${layer.width}" height="${layer.height}"`
@@ -180,7 +183,7 @@ ${icons.join("\n")}
   );
   const preview = `<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Компактные деревья навыков — Blizzless</title>
 <style>
-@font-face{font-family:Diablo;src:url(../../../fonts/DiabloFont.ttf)}*{box-sizing:border-box}body{margin:0;background:#090a0b;color:#eee;font-family:Arial,sans-serif}main{padding:24px;max-width:1190px;margin:auto}h1{font-size:22px;margin:0 0 8px}p{color:#a9abae;font-size:14px}.class-title{margin:24px 0 12px;font-size:20px}.trees{display:flex;gap:4px;width:max-content}.tree{position:relative;width:360px;height:580px}.tree img{display:block;width:100%;height:100%}.heading{position:absolute;left:10px;top:13px;width:340px;text-align:center;font-family:Diablo,Georgia,serif;font-size:17px;letter-spacing:.7px;line-height:1.25;color:#e0dfdb;text-shadow:0 2px 2px #000}.heading small{display:block;font-size:14px;margin-top:3px}.downloads{margin:10px 0 22px;display:flex;gap:18px}a{color:#cab77b;font-size:13px}.export main{padding:0;margin:0;max-width:none}.export .tree{width:720px;height:1160px}.export .heading{display:none}.export.single .trees{gap:0}.export.preview .heading{display:block}.export.preview .class-title{display:none}
+@font-face{font-family:Diablo;src:url(../../../fonts/DiabloFont.ttf)}*{box-sizing:border-box}body{margin:0;background:#090a0b;color:#eee;font-family:Arial,sans-serif}main{padding:24px;max-width:1190px;margin:auto}h1{font-size:22px;margin:0 0 8px}p{color:#a9abae;font-size:14px}.class-title{margin:24px 0 12px;font-size:20px}.trees{display:flex;gap:4px;width:max-content}.tree{position:relative;width:360px;height:580px}.tree img{display:block;width:100%;height:100%}.heading{position:absolute;left:10px;top:13px;width:340px;text-align:center;font-family:Diablo,Georgia,serif;font-size:17px;letter-spacing:.7px;line-height:1.25;color:#e0dfdb;text-shadow:0 2px 2px #000}.heading small{display:block;font-size:14px;margin-top:3px}.downloads{margin:10px 0 22px;display:flex;gap:18px}a{color:#cab77b;font-size:13px}.export main{padding:0;margin:0;max-width:none}.export .tree{width:720px;height:1160px}.export .heading{display:none}.export.single .trees{gap:0}.export.preview .heading{display:block}.export .class-title{display:none}
 </style><main id="gallery"><h1>Компактные деревья навыков</h1><p>8 классов · 24 ветки · оригинальные иконки и связи Blizzless. Плашки заголовков пустые: текст и очки выводятся интерфейсом.</p></main>
 <script>
 const classes=${JSON.stringify(manifest.classes.map(({ id, name, trees }) => ({ id, name, trees: trees.map(({ title, svg, png }) => ({ title, svg, png })) })))};

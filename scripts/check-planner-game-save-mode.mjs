@@ -14,7 +14,7 @@ const server = await createServer({
   appType: "custom",
 });
 try {
-  const { createBuild: createStarterBuild } = await server.ssrLoadModule(
+  const { createBuild: createStarterBuild, encodeBuild, decodeBuild } = await server.ssrLoadModule(
     "/src/utils/planner.ts"
   );
   // Header fixtures have no item choices; inventory contents are tested separately.
@@ -64,6 +64,43 @@ try {
   }
   await check(createBuild("paladin"), "rotw", 3);
   await check(createBuild("paladin"), "expansion", 2);
+  for (const stashGold of [0, 12345]) {
+    const build = createBuild("paladin");
+    build.level = 90;
+    build.experience = 1618524940;
+    build.stashGold = stashGold;
+    const original = await codec.exportCharacter(build, options);
+    const imported = decodeBuild(encodeBuild(codec.importCharacter(original)));
+    assert.equal(imported.stashGold, stashGold);
+    assert.equal(imported.experience, build.experience);
+    const roundTrip = await codec.exportCharacter(imported, options);
+    const saved = await readIndependent(roundTrip, constants, { disableItemEnhancements: true });
+    assert.equal(saved.attributes.stashed_gold ?? 0, stashGold);
+    assert.equal(saved.attributes.experience, build.experience);
+    imported.level++;
+    const changed = codec.importCharacter(await codec.exportCharacter(imported, options));
+    assert.equal(changed.experience, Number(data.experience[90].amazon));
+    assert.equal(changed.stashGold, stashGold);
+  }
+  const highLevel = createBuild("barbarian");
+  highLevel.level = 99;
+  highLevel.experience = Number(data.experience[98].amazon) + 1;
+  const highBytes = await codec.exportCharacter(highLevel, options);
+  assert.equal(codec.importCharacter(highBytes).experience, highLevel.experience);
+  const valid = await codec.exportCharacter(createBuild("paladin"), options);
+  for (const version of [99, 105]) {
+    for (const invalidField of [8, 12]) {
+      const bytes = valid.slice();
+      const header = new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+      header.setUint32(4, version, true);
+      if (invalidField === 8) header.setUint32(8, bytes.length + 1, true);
+      header.setUint32(12, saveChecksum(bytes) ^ (invalidField === 12 ? 1 : 0), true);
+      await assert.rejects(
+        codec.importGameFile(bytes),
+        (error) => error.code === "validation"
+      );
+    }
+  }
   await assert.rejects(
     codec.exportCharacter(createBuild("warlock"), { ...options, gameMode: "expansion" }),
     (error) => error.code === "gameMode"

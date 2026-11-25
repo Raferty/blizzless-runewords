@@ -57,10 +57,10 @@
       <div
         class="recipe-category-group"
         role="group"
-        :aria-label="t('Материалы', 'Materials')"
+        :aria-label="t('Ингредиенты', 'Ingredients')"
       >
         <span class="recipe-category-group__label">{{
-          t("Материалы", "Materials")
+          t("Ингредиенты", "Ingredients")
         }}</span>
         <div class="recipe-category-group__options">
           <button
@@ -179,6 +179,7 @@ const categoryNames: Record<string, LocalizedName> = {
   uniques: { ru: "Уникальные", en: "Uniques" },
   crafted: { ru: "Крафт", en: "Crafted" },
   event: { ru: "Квесты", en: "Quests" },
+  materials: { ru: "Создание материалов", en: "Create materials" },
   recharge: { ru: "Перезарядка", en: "Recharge" },
 };
 const categoryImages: Record<string, string> = {

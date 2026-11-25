@@ -1,3 +1,4 @@
+import process from "node:process";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
@@ -16,6 +17,8 @@ try {
     craftById,
     createCraftedItem,
     craftAffixMinimum,
+    hasRequiredCraftAffixes,
+    isRequiredCraftAffix,
   } = await server.ssrLoadModule("/src/utils/planner-crafts.ts");
   const { itemAffixes, canAddAffix, newAffix, affixStats, affixRequiredLevel } =
     await server.ssrLoadModule("/src/utils/planner-affixes.ts");
@@ -40,7 +43,7 @@ try {
     data,
     JSON.parse(await readFile("public/data/planner-save/strings.json"))
   );
-  assert.equal(plannerCrafts.length, 54);
+  assert.equal(plannerCrafts.length, 57);
   assert.deepEqual(
     unavailableCrafts.map((row) => [row.recipeKey, row.reason]),
     [["Envenomed Dagger", "disabled"]]
@@ -49,9 +52,9 @@ try {
     !craftById.has("upgrade_craft_normal_armor"),
     "upgrades do not create new crafts"
   );
-  const complete = (item) => {
+  const complete = (item, excludeId) => {
     while (item.affixes.length < craftAffixMinimum(item.itemLevel)) {
-      const affix = itemAffixes.find((a) => canAddAffix(a, item));
+      const affix = itemAffixes.find((a) => a.id !== excludeId && canAddAffix(a, item));
       assert(affix, `${item.name} has enough legal affixes`);
       item.affixes.push(newAffix(affix));
     }
@@ -78,6 +81,43 @@ try {
   assert.equal(
     (greater.bonuses.fcr ?? 0) + (affixStats(greater).item_fastercastrate ?? 0),
     20
+  );
+  for (const [id, base, expectedFcr] of [
+    ["great_cast_amu", "amu", 20],
+    ["ring", "rin", 10],
+  ]) {
+    const item = createCraftedItem(native, id, base, 90, "sorceress");
+    assert.equal(
+      (item.bonuses.fcr ?? 0) + affixStats(item).item_fastercastrate,
+      expectedFcr
+    );
+    assert(isRequiredCraftAffix(item, "ms173"));
+    assert(hasRequiredCraftAffixes(item));
+    const invalid = complete({ ...item, affixes: [] }, "ms173");
+    assert(!hasRequiredCraftAffixes(invalid));
+    const build = createBuild("sorceress");
+    build.stash = [{ ...invalid, stashPosition: 0 }];
+    await assert.rejects(
+      native.exportCharacter(build, saveOptions(build, "expansion")),
+      (error) => error.code === "property"
+    );
+  }
+  for (const craft of plannerCrafts) {
+    if (["great_cast_amu", "ring"].includes(craft.id)) continue;
+    for (const variant of craft.variants) {
+      const base = variant.bases.find((code) => code === "rin" || code === "amu");
+      if (!base) continue;
+      const item = createCraftedItem(native, craft.id, base, 99, "sorceress");
+      for (const id of variant.preferredAffixes) assert(!isRequiredCraftAffix(item, id));
+    }
+  }
+  const missile = createCraftedItem(native, "weapon", "amf", 90, "amazon");
+  const oldMissile = parsePlannerItem({ ...missile, propertyValues: { 1: 40, 3: 60 } });
+  assert.deepEqual(oldMissile.propertyValues, { 1: 40 });
+  assert(
+    itemPropertyLines(native, oldMissile, 90, "amazon").some((line) =>
+      line.includes("50% Enhanced Damage")
+    )
   );
   for (const patch of [
     { craftId: "missing" },
@@ -155,60 +195,136 @@ try {
       dF: 0,
       e: Number(stat.encode ?? constants.magical_properties[stat.id]?.e ?? 0),
     };
+  const { itemBonusLines } = await server.ssrLoadModule(
+    "/src/utils/planner-item-presentation.ts"
+  );
+  function saveOptions(build, mode) {
+    const options = { name: "CraftTest", gameMode: mode, choices: {}, rolls: {} };
+    for (const entry of gameSaveEntries(build)) {
+      options.choices[entry.key] = native.defaultChoice(entry, build);
+      options.rolls[entry.key] = "planned";
+    }
+    return options;
+  }
+  const displayedExtras = new Set();
   let exports = 0;
   for (const craft of plannerCrafts) {
     for (const roll of [0, 1]) {
-      const variant = craft.variants.find((v) => !v.ethereal) ?? craft.variants[0];
-      const code = variant.bases[0];
-      const value = createCraftedItem(native, craft.id, code, 99, "sorceress");
-      value.propertyRoll = roll;
-      Object.assign(value, native.itemBonuses(value, "sorceress"));
-      complete(value);
-      assert.deepEqual(parsePlannerItem(value), value);
-      const test = createBuild("sorceress");
-      test.stash = [value];
-      const options = { name: "CraftTest", choices: {}, rolls: {} };
-      for (const entry of gameSaveEntries(test)) {
-        options.choices[entry.key] = native.defaultChoice(entry, test);
-        options.rolls[entry.key] = "planned";
-      }
-      const expected = native.propertyStats(native.itemDefinition(value), code, roll);
-      for (const [key, n] of Object.entries(affixStats(value)))
-        expected[key] = (expected[key] ?? 0) + n;
-      const original = JSON.stringify(test);
-      const result = await native.exportCharacter(test, options);
-      const saved = await read(result, constants, {
-        disableItemEnhancements: true,
-        extendedStash: true,
-      });
-      const item = saved.items.find((item) => item.alt_position_id === 5);
-      assert(item, craft.id);
-      assert.equal(item.quality, 8, craft.id);
-      assert.equal(item.type, code);
-      const actual = new Map(item.magic_attributes.map((row) => [row.id, row.values]));
-      for (const stat of [
-        "item_fastercastrate",
-        "maxmana",
-        "maxhp",
-        "strength",
-        "dexterity",
-        "item_allskills",
-        "passive_fire_mastery",
-        "passive_ltng_mastery",
-      ])
-        if (expected[stat])
-          assert.equal(
-            actual.get(data.itemStatCost[stat].id)?.[0],
-            expected[stat],
-            `${craft.id} ${stat}`
+      for (const variant of craft.variants)
+        for (const code of process.argv.includes("--all-bases")
+          ? variant.bases
+          : variant.bases.slice(0, 1)) {
+          const value = createCraftedItem(native, craft.id, code, 99, "sorceress");
+          value.ethereal = variant.ethereal;
+          value.propertyRoll = roll;
+          Object.assign(value, native.itemBonuses(value, "sorceress"));
+          complete(value);
+          assert.deepEqual(parsePlannerItem(value), value);
+          const test = createBuild("sorceress");
+          test.stash = [value];
+          const mode = roll === 0 ? "expansion" : "rotw";
+          const options = saveOptions(test, mode);
+          const expected = native.propertyStats(native.itemDefinition(value), code, roll);
+          for (const [key, n] of Object.entries(affixStats(value)))
+            expected[key] = (expected[key] ?? 0) + n;
+          const original = JSON.stringify(test);
+          const result = await native.exportCharacter(test, options);
+          const saved = await read(result, constants, {
+            disableItemEnhancements: true,
+            extendedStash: true,
+          });
+          const item = saved.items.find((item) => item.alt_position_id === 5);
+          assert(item, craft.id);
+          assert.equal(item.quality, 8, craft.id);
+          assert.equal(item.type, code);
+          const actual = new Map(
+            item.magic_attributes.map((row) => [row.id, row.values])
           );
-      assert.equal(JSON.stringify(test), original, "export does not mutate a craft");
-      assert(itemRequiredLevel(value) >= value.requiredLevel);
-      exports++;
+          for (const stat of [
+            "item_fastercastrate",
+            "maxmana",
+            "maxhp",
+            "strength",
+            "dexterity",
+            "item_allskills",
+            "passive_fire_mastery",
+            "passive_ltng_mastery",
+          ])
+            if (expected[stat])
+              assert.equal(
+                actual.get(data.itemStatCost[stat].id)?.[0],
+                expected[stat],
+                `${craft.id} ${stat}`
+              );
+          const importedBuild = (await native.importGameFile(result)).build;
+          const imported = importedBuild.stash[0];
+          assert.equal(imported.baseCode, code, craft.id);
+          assert.equal(imported.quality, "crafted", craft.id);
+          assert.equal(Boolean(imported.ethereal), variant.ethereal);
+          assert.equal(imported.name, value.name);
+          assert.equal(itemRequiredLevel(imported), itemRequiredLevel(value), craft.id);
+          assert.equal(importedBuild.gameSave.mode, mode);
+          for (const [stat, amount] of Object.entries(imported.importedStats.values)) {
+            assert.equal(amount, expected[stat], `${craft.id} imported ${stat}`);
+            if (displayedExtras.has(stat)) continue;
+            const onlyStat = {
+              ...imported,
+              bonuses: {},
+              classBonuses: {},
+              importedStats: { ...imported.importedStats, values: { [stat]: amount } },
+            };
+            for (const lang of ["en", "ru"]) {
+              const lines = itemBonusLines(onlyStat, lang, native, 99);
+              assert(
+                lines.length > 0 &&
+                  lines.every((line) => !/undefined|NaN|%[ds]|%\d/.test(line)),
+                `${craft.id} missing tooltip for ${stat}: ${lines}`
+              );
+            }
+            displayedExtras.add(stat);
+          }
+          const decoded = decodeBuild(encodeBuild(importedBuild));
+          const second = await native.exportCharacter(
+            decoded,
+            saveOptions(decoded, mode)
+          );
+          const reread = await read(second, constants, {
+            disableItemEnhancements: true,
+            extendedStash: true,
+          });
+          const copy = reread.items.find((entry) => entry.alt_position_id === 5);
+          assert.deepEqual(copy.magical_name_ids, item.magical_name_ids, craft.id);
+          const effective = (rows) =>
+            rows.filter(
+              (row) => row.name !== "item_addclassskills" || row.values[1] !== 0
+            );
+          assert.deepEqual(
+            effective(copy.magic_attributes),
+            effective(item.magic_attributes),
+            craft.id
+          );
+          if (["Unstoppable Ring", "Murderous Ring"].includes(craft.id)) {
+            const lines = itemBonusLines(imported, "en", native, 99);
+            const label =
+              craft.id === "Unstoppable Ring"
+                ? "Cannot Be Frozen"
+                : `${expected.item_deadlystrike}% Deadly Strike`;
+            assert(lines.includes(label), `${craft.id}: ${lines.join(", ")}`);
+            assert(itemPropertyLines(native, value, 99, "sorceress").includes(label));
+            const stat =
+              craft.id === "Unstoppable Ring"
+                ? "item_cannotbefrozen"
+                : "item_deadlystrike";
+            assert.equal(actual.get(data.itemStatCost[stat].id)?.[0], expected[stat]);
+          }
+          assert.equal(JSON.stringify(test), original, "export does not mutate a craft");
+          assert(itemRequiredLevel(value) >= value.requiredLevel);
+          exports++;
+        }
     }
   }
   console.log(
-    `Crafts: ${plannerCrafts.length} recipes, ${exports} independent crafted .d2s readbacks, fixed rolls, preferred affixes, limits, JSON/share and slot filters passed`
+    `Crafts: ${plannerCrafts.length} recipes, ${exports} crafted .d2s import/export round trips, fixed rolls, preferred affixes, limits, JSON/share and slot filters passed`
   );
 } finally {
   await server.close();

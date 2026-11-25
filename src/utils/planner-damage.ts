@@ -3,7 +3,7 @@ import combat from "@/shared/planner-combat.json";
 import { plannerSkills } from "@/shared/planner";
 import type { ClassId, PlannerBuild, PlannerItem, PlannerSkill } from "@/types/planner";
 import type { GameSaveExporter } from "./planner-game-save";
-import { activeItems, buildStats } from "./planner";
+import { buildStats } from "./planner";
 import { affixStats } from "./planner-affixes";
 import { plannerItemIdentity } from "./planner-item-art";
 import { socketCategory } from "./planner-sockets";
@@ -207,9 +207,12 @@ export function skillCalculationContext(
     Object.entries(skills).map(([id, row]) => [normalize(String(row.skill)), Number(id)])
   );
   const metadata = new Map(plannerSkills.map((skill) => [skill.id, skill]));
-  const main = build.equipment[build.weaponSet ? "swapMain" : "mainHand"];
-  const off = build.equipment[build.weaponSet ? "swapOff" : "offHand"];
-  const items = activeItems(build);
+  const selectedMain = build.equipment[build.weaponSet ? "swapMain" : "mainHand"];
+  const selectedOff = build.equipment[build.weaponSet ? "swapOff" : "offHand"];
+  const summary = buildStats(build, native);
+  const items = summary.items;
+  const main = selectedMain && items.includes(selectedMain) ? selectedMain : undefined;
+  const off = selectedOff && items.includes(selectedOff) ? selectedOff : undefined;
   const stats: Stats = {};
   const itemStats = new Map<PlannerItem, Stats>();
   const warnings: string[] = [];
@@ -222,7 +225,6 @@ export function skillCalculationContext(
       warnings.push(item.name);
     }
   }
-  const summary = buildStats(build, native);
   Object.assign(stats, summary.attributes, { level: build.level });
   const classIndex = classIds.indexOf(build.classId);
   const rank = (id: number) => {

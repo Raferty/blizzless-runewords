@@ -4,6 +4,8 @@ import { Buffer } from "node:buffer";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
+import { applyBartucItemChanges, octoberManifest } from "./bartuc-item-changes.mjs";
+
 const root = new URL("../", import.meta.url);
 const work = new URL("docs/audits/2026-10-27/planner-save/converter/", root);
 const target = new URL("public/data/planner-save/", root);
@@ -274,6 +276,7 @@ if (
 )
   throw new Error("Native save table validation failed");
 await mkdir(target, { recursive: true });
+if (manifest.version === octoberManifest) applyBartucItemChanges(raw);
 await writeFile(new URL("data.json", target), JSON.stringify(raw));
 await writeFile(
   new URL("strings.json", target),

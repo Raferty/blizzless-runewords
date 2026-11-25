@@ -132,6 +132,26 @@ try {
     )
   );
   const native = createGameSaveExporter(data, locale);
+  const { definitionPropertyLines } = await server.ssrLoadModule(
+    "/src/utils/planner-item-catalog.ts"
+  );
+  for (const [id, roll, expected] of [
+    ["unique702", 1, "Repairs 1 Durability every 20 seconds"],
+    ["unique703", 1, "Replenishes 1 Quantity every 5 seconds"],
+    ["unique703", 1, "Increased Stack Size (+60)"],
+    ["unique704", 0, "Hit Causes Monster to Flee 10%"],
+    ["unique704", 1, "33% Piercing Attack"],
+    ["unique707", 0, "+2 Additional Mirrored Arrows"],
+    ["unique707", 1, "+3 Additional Mirrored Arrows"],
+    ["unique711", 1, "Drain Mana -20"],
+    ["unique711", 0, "+10% Magic Absorb"],
+    ["unique711", 1, "+20% Magic Absorb"],
+  ])
+    assert(
+      definitionPropertyLines(native, data.uniqueItems[id], roll, 99).includes(expected),
+      expected
+    );
+  assert.equal(data.runes.runeword042.t1code6, "gethit-skill");
   const { socketInserts, socketCategory } = await server.ssrLoadModule(
     "/src/utils/planner-sockets.ts"
   );
@@ -868,7 +888,7 @@ try {
     ([, row]) =>
       ["bg1", "bg2"].includes(row.code) && row.enabled !== 0 && row.spawnable !== 0
   );
-  assert.equal(containers.length, 68);
+  assert.equal(containers.length, 75);
   for (const [id, row] of containers) {
     const graphic = plannerItemImage({
       quality: "unique",

@@ -1,12 +1,15 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { Buffer } from "node:buffer";
 
-const sha256 = "50fe8aa45f6d3ce2b7fc2cec48ed5c6bee11662e28476544f80beadc0c71785d";
-const url = "https://blizzless.info/api/launcher-mods/blobs/" + sha256;
-const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
-if (!response.ok) throw Error("Cannot load cube ingredients");
-const bytes = Buffer.from(await response.arrayBuffer());
+import { gunzipSync } from "node:zlib";
+import {
+  nativeCubeSha256 as sha256,
+  nativeCubeUrl as url,
+} from "./cube-native-recipes.mjs";
+
+const bytes = gunzipSync(
+  await readFile(new URL("./fixtures/planner/cubemain.txt.gz", import.meta.url))
+);
 if (createHash("sha256").update(bytes).digest("hex") !== sha256)
   throw Error("Cube source checksum mismatch");
 const lines = bytes

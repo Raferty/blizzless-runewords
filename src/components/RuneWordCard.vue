@@ -37,6 +37,12 @@
         >
       </span>
     </div>
+    <div v-if="showOld && pureRecipes.length" class="runeword__note">
+      {{ t("Варианты с чистыми рунами", "Pure rune combinations") }}
+      <div v-for="recipe in pureRecipes" :key="recipe.join(',')">
+        {{ recipe.map(runeLabel).join(" + ") }}
+      </div>
+    </div>
     <dl v-if="showOld" class="runeword__specs">
       <div>
         <dt>{{ t("Основа", "Base") }}</dt>
@@ -116,6 +122,7 @@
   </article>
 </template>
 <script setup lang="ts">
+import pureRunewords from "@/shared/planner-pure-runewords.json";
 import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref } from "vue";
 import { useInfoStore, useRunewordsStore } from "@/store";
@@ -133,6 +140,19 @@ const store = useInfoStore();
 const words = useRunewordsStore();
 const t = useText();
 const { findRune, getTypeName, getRuneName } = useRunes();
+const variants: Record<string, string[][]> = pureRunewords;
+const pureRecipes = computed(
+  () =>
+    variants[
+      (props.runeword.runes ?? [])
+        .map((id) => `r${String(id).padStart(2, "0")}`)
+        .join(",")
+    ] ?? []
+);
+function runeLabel(code: string) {
+  const name = getRuneName(Number(code.replace("r", "")));
+  return code.endsWith("r") ? `${t("Чистая", "Pure")} ${name}` : name;
+}
 const types = computed(() => (props.runeword.types ?? []).map(getTypeName).join(", "));
 const runeImage = (id: number) =>
   `${import.meta.env.BASE_URL}${findRune(id)?.image_url.replace(/^\//, "") ?? ""}`;

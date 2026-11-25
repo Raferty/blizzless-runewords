@@ -206,6 +206,13 @@
                     @update:model-value="changeUniqueCharm"
                   />
                 </label>
+                <label v-if="runeOptions.length > 1" class="planner-label">
+                  {{ t("Руны", "Runes") }}
+                  <UiSelect
+                    :model-value="(item.runewordRunes ?? runeOptions[0]).join(',')"
+                    :options="runeOptions.map((codes) => ({ value: codes.join(','), label: codes.map((code) => socketInsertByCode.get(code)?.name[lang] ?? code).join(' + ') }))"
+                    @update:model-value="selectRuneVariant" />
+                </label>
                 <label v-if="selectedBase && maxSockets" class="planner-label"
                   >{{ t("Сокеты", "Sockets")
                   }}<input
@@ -321,6 +328,7 @@
             @update="setBaseModifier"
           />
           <p v-if="!craftAffixesComplete" class="planner-muted" role="status">
+            <span v-if="!hasRequiredCraftAffixes(item)">{{ t("Требуется суффикс of the Apprentice (+10% FCR).", "Requires the of the Apprentice suffix (+10% FCR).") }}</span>
             {{ t("Нужно случайных аффиксов", "Required random affixes") }}:
             {{ craftAffixMinimum(item.itemLevel ?? 99) }} ({{ t("сейчас", "selected") }}
             {{ item.affixes?.length ?? 0 }}).
@@ -375,7 +383,7 @@
             :count="socketCount"
             :model-value="
               selectedWord
-                ? selectedWord.runes.map((id) => `r${String(id).padStart(2, '0')}`)
+                ? native.itemRunes(item)
                 : (item.socketedItems ?? [])
             "
             :readonly="item.quality === 'runeword'"
@@ -435,6 +443,7 @@ import {
   craftById,
   craftVariant,
   createCraftedItem,
+  hasRequiredCraftAffixes,
   craftAffixMinimum,
 } from "@/utils/planner-crafts";
 import { cubeCatalog, cubeIngredients } from "@/utils/cube";
@@ -468,6 +477,7 @@ import { useText } from "@/composables/useText";
 import { useInfoStore, useRunewordsStore } from "@/store";
 import { bonusFields } from "@/shared/planner";
 import { RUNES } from "@/shared/constants";
+import { socketInsertByCode } from "@/utils/planner-sockets";
 import { matchesItemType } from "@/utils/runeword";
 import { parsePlannerItem, charmFits, inventoryWidth } from "@/utils/planner";
 import {
@@ -755,6 +765,14 @@ const restrictedTypes: Partial<Record<number, ClassId>> = {
   23: "druid",
   24: "warlock",
 };
+const runeOptions = computed(() => native.value?.runewordRuneOptions(item.value) ?? []);
+function selectRuneVariant(value: string) {
+  const index = runeOptions.value.findIndex((codes) => codes.join(",") === value);
+  if (!native.value || index < 0) return;
+  if (index) item.value.runewordRunes = runeOptions.value[index];
+  else delete item.value.runewordRunes;
+  Object.assign(item.value, native.value.itemBonuses(item.value, store.build.classId));
+}
 const selectedWord = computed(() => itemRuneword(item.value, words.sortedRunewords));
 const templates = computed(() =>
   selectedWord.value ? runewordTemplates(selectedWord.value.name.en) : []
@@ -807,7 +825,7 @@ const preferredCraftAffixes = computed(() =>
 const craftAffixesComplete = computed(
   () =>
     !item.value.craftId ||
-    (item.value.affixes?.length ?? 0) >= craftAffixMinimum(item.value.itemLevel ?? 99)
+    (hasRequiredCraftAffixes(item.value) && (item.value.affixes?.length ?? 0) >= craftAffixMinimum(item.value.itemLevel ?? 99))
 );
 const canToggleCraftEthereal = computed(
   () =>
@@ -1061,7 +1079,7 @@ function changeBase(code: string) {
     item.value.requiredLevel = Math.max(selectedWord.value?.level ?? 1, base.level);
   } else item.value.sockets = Math.min(item.value.sockets ?? 0, maxSockets.value);
   reconcileAffixes();
-  if ((item.value.propertyValues || selectedCraft.value) && native.value)
+  if ((item.value.propertyValues || item.value.runewordRunes || selectedCraft.value) && native.value)
     Object.assign(item.value, native.value.itemBonuses(item.value, store.build.classId));
 }
 function setPropertyValues(values: Record<string, number>) {

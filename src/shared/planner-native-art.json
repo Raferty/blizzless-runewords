@@ -152,7 +152,14 @@
     "cont_uab": "misc/shard/cont_ua2",
     "cont_uac": "misc/shard/cont_ua3",
     "cont_uad": "misc/shard/cont_ua4",
-    "cont_uae": "misc/shard/cont_ua5"
+    "cont_uae": "misc/shard/cont_ua5",
+    "cont_bloodscroll": "misc/quest/cont_bloodscroll",
+    "cont_bloodstone": "misc/quest/cont_bloodstone",
+    "cont_demonpaw": "misc/quest/cont_demonpaw",
+    "cont_elixirwealth": "misc/quest/cont_elixirwealth",
+    "cont_elixirwisdom": "misc/quest/cont_elixirwisdom",
+    "cont_elixirlifemana": "misc/quest/cont_elixirlifemana",
+    "cont_elixirfortune": "misc/quest/cont_elixirfortune"
   },
   "variants": {
     "jew": [
@@ -290,7 +297,14 @@
     "misc/potion/blizzless_luck_elixir": "3c7a8783e7ab0c52a3d823bc093095a014e81d9a56bd4466d184a299b5df6af9",
     "misc/potion/blizzless_wisdom_elixir": "70a30fa4f1bd36018a18d2048359acd1a0ad12b79fbf1499bc6e28465f9b7877",
     "misc/potion/blizzless_life_mana_elixir": "f2d852d44b679becea29fb153d6f802bd95edc92c6142aa91f4aef861482d237",
-    "misc/potion/blizzless_fortune_elixir": "05c46b2d0831739f909e682e983bef18ba065754253f270352f282d3b0296792"
+    "misc/potion/blizzless_fortune_elixir": "05c46b2d0831739f909e682e983bef18ba065754253f270352f282d3b0296792",
+    "misc/quest/cont_bloodscroll": "751da364884edeb761a6a090dfb8db4c085cedc1293923decbdb44d917e067a3",
+    "misc/quest/cont_bloodstone": "6a6e70872a5a96ebffd8a349c8d7dc24475f840c7b43a9c64f0a1c915c9f9d8f",
+    "misc/quest/cont_demonpaw": "f67f04fe6b83514bc6cc63c81f52db21d19af6bd1e2460e24d367571239d6952",
+    "misc/quest/cont_elixirwealth": "923b9e19d8191e71d759bb4e892a72b21a0e70646f4e9fe73490ab50e91ab8e4",
+    "misc/quest/cont_elixirwisdom": "2e1899db74e27478c2c48c8da2e05aa9efdd83ce7aaa6301c08725a6633fa3ab",
+    "misc/quest/cont_elixirlifemana": "8e51e5d90761ab4895ccd0fa790df48505023e80ce8810b6fbf99722eb3b7a86",
+    "misc/quest/cont_elixirfortune": "7b608b96c94f81862e8783b07c7c096d38edbc0af454113785343388e13ede79"
   },
   "externalImages": {
     "misc/body_part/fragment_cold": {

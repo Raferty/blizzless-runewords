@@ -20,8 +20,12 @@ const registerBefore =
   "        else if ((gd.items[item.base] && itemTypeTreeFilter(gd.items[item.base].type)) ||";
 const legacyRegisterAfter =
   "        else if ((gd.items[item.base] && (itemTypeTreeFilter(gd.items[item.base].type) || questItem)) ||";
-const registerAfter =
+const questRegisterAfter =
   "        else if ((gd.items[item.base] && (itemTypeTreeFilter(gd.items[item.base].type) || isSubType(gd, gd.items[item.base].type, 'ques'))) ||";
+const registerAfter = questRegisterAfter.replace(
+  "itemTypeTreeFilter(",
+  "base.type === 'elix' || itemTypeTreeFilter("
+);
 // Keep separate records for preset stacks with different quantities. Cube and
 // belt records must also include the complete bytes of any socketed children.
 const locationBefore = "        // ── Validate / store / emit";
@@ -56,6 +60,7 @@ const unpatched = baseModifiers
   .replace(after, before)
   .replace(countAfter, countBefore)
   .replace(registerAfter, registerBefore)
+  .replace(questRegisterAfter, registerBefore)
   .replace(legacyRegisterAfter, registerBefore);
 if (createHash("sha256").update(unpatched).digest("hex") !== original)
   throw Error("d2r-saver item parser changed; review the planner reader patches");

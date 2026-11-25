@@ -389,6 +389,179 @@ export async function augmentNativeCubeRecipes(catalog, sourceBytes) {
     check([2334], ["p14", "p20", "p21"], "Red Portal,lvl=142,qty=1", { op: "28" }),
     true
   );
+  for (const [
+    key,
+    ru,
+    en,
+    family,
+    base,
+    baseNames,
+    rune,
+    runeCode,
+    gem,
+    gemCode,
+    modsRu,
+    modsEn,
+    ids,
+  ] of [
+    [
+      "blood_gloves",
+      "Кровавые перчатки",
+      "Blood Gloves",
+      "blood",
+      "vgl",
+      "Heavy Gloves / Sharkskin Gloves / Vampirebone Gloves",
+      "nef_rune",
+      "r04",
+      "gem_perfect_ruby",
+      "gpr",
+      "1–3% кражи жизни при ударе, +10–20 к жизни, 5–10% сокрушительного удара",
+      "1–3% Life Stolen per Hit, +10–20 Life, 5–10% Crushing Blow",
+      [75, 113, 1902, 1940],
+    ],
+    [
+      "caster_gloves",
+      "Перчатки колдуна",
+      "Caster Gloves",
+      "caster",
+      "lgl",
+      "Leather Gloves / Demonhide Gloves / Bramble Mitts",
+      "rune_ort",
+      "r09",
+      "gem_perfect_amethyst",
+      "gpv",
+      "15–30% регенерации маны, +20–40 к мане, +5% скорости сотворения заклинаний",
+      "Regenerate Mana 15–30%, +20–40 Mana, +5% Faster Cast Rate",
+      [85, 123, 1912, 1950],
+    ],
+  ]) {
+    const inputs = ids.map((_, i) => [
+      base + ",mag,upg," + (i % 2 ? "noe" : "eth"),
+      i < 2 ? "jew" : "jwd",
+      runeCode,
+      gemCode,
+    ]);
+    recipe(
+      key,
+      ru,
+      en,
+      ["gloves", family],
+      [
+        part("blue_gloves", 1, baseNames, baseNames),
+        part("Jewel"),
+        part(rune),
+        part(gem),
+      ],
+      [part("craft_gloves", 1, modsRu, modsEn)],
+      "Вместо джевела подходит распылённый джевел.",
+      "A Disenchanted Jewel can replace the jewel.",
+      check(
+        ids,
+        inputs,
+        ids.map((_, i) => (i % 2 ? "usetype,crf" : "usetype,crf,eth"))
+      )
+    );
+    if (key === "caster_gloves")
+      Object.assign(additions.at(-1), {
+        status: "changed",
+        blizzlessVersion: 1,
+      });
+  }
+  recipe(
+    "battle_hardened_weapon",
+    "Закалённое в бою оружие",
+    "Battle-hardened Weapon",
+    ["weapon"],
+    [
+      part("blue_weapon_any"),
+      part("blacksmith ingot"),
+      part("Flawless topaz"),
+      part("Jewel"),
+    ],
+    [
+      part(
+        "weapon",
+        1,
+        "+135% усиленного урона; приоритетный префикс Vicious",
+        "+135% Enhanced Damage; preferred prefix: Vicious"
+      ),
+    ],
+    "Вместо джевела подходит распылённый джевел.",
+    "A Disenchanted Jewel can replace the jewel.",
+    check(
+      [2245, 2246, 2247, 2248],
+      [
+        ["weap,mag,eth", "cr1", "gly", "jew"],
+        ["weap,mag", "cr1", "gly", "jew"],
+        ["weap,mag,eth", "cr1", "gly", "jwd"],
+        ["weap,mag", "cr1", "gly", "jwd"],
+      ],
+      [
+        "usetype,crf,pre=188,eth",
+        "usetype,crf,pre=188",
+        "usetype,crf,pre=188,eth",
+        "usetype,crf,pre=188",
+      ],
+      { "mod 1": "dmg%", "mod 1 min": "135", "mod 1 max": "135" }
+    ),
+    true
+  );
+  const murderousAmulet = catalog.recipes.find((entry) => entry.key === "Murderous Amulet");
+  murderousAmulet.result[0].notes = localized(
+    "25–35% смертельного удара. Приоритетные суффиксы: of Worth (+2–8 к минимальному урону), of the Colossus (+41–60 к жизни).",
+    "25–35% Deadly Strike. Preferred suffixes: of Worth (+2–8 Minimum Damage), of the Colossus (+41–60 Life)."
+  );
+  const missile = catalog.recipes.find((entry) => entry.key === "weapon");
+  missile.ingredients = [
+    part(
+      "blue_weapon_any",
+      1,
+      "Метательные ножи, топоры и дротики, включая дротики амазонки",
+      "Throwing knives, throwing axes and javelins, including Amazon javelins"
+    ),
+    part("blacksmith ingot"),
+    part("Flawless amethyst"),
+    part("Jewel"),
+  ];
+  missile.result[0].notes = localized(
+    "+35–45 к минимальному урону, +20% скорости атаки, +50% усиленного урона. Приоритетные аффиксы: Vicious и of Readiness.",
+    "+35–45 Minimum Damage, +20% Increased Attack Speed, +50% Enhanced Damage. Preferred affixes: Vicious and of Readiness."
+  );
+  const andy = catalog.recipes.find((entry) => entry.key === "andy");
+  provenance.andy = check([2755], ["usk,mag", "cr3,qty=4"], "Andariel's Visage", {
+    "mod 1": "ethereal",
+    "mod 1 chance": "5",
+  });
+  andy.result[0].notes = localized(
+    "5% шанс получить эфирный шлем",
+    "5% chance to be ethereal"
+  );
+  ingredient(
+    "spark_unique_amulet",
+    "Уникальный амулет",
+    "Unique Amulet",
+    ["amulet"],
+    image("amulet")
+  );
+  recipe(
+    "spark_unique_amulet",
+    "Уникальный амулет из искры",
+    "Unique Amulet from a Spark",
+    ["amulet", "uniques"],
+    [part("Blue amulet"), part("Resplendent Spark")],
+    [
+      part(
+        "spark_unique_amulet",
+        1,
+        "Один из трёх: Highlord’s Wrath, The Rising Sun, Atma’s Scarab",
+        "One of three: Highlord’s Wrath, The Rising Sun, Atma’s Scarab"
+      ),
+    ],
+    "",
+    "",
+    check([1388], ["amu,mag", "cr3"], "fmu,uni", { lvl: "99" }),
+    true
+  );
   for (const entry of additions) {
     const i = catalog.recipes.findIndex((recipe) => recipe.key === entry.key);
     if (i < 0) catalog.recipes.push(entry);

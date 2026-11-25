@@ -1,32 +1,24 @@
 // Compare binary identities against the launcher's actual record order, not *ID.
 import assert from "node:assert/strict";
-import { Buffer } from "node:buffer";
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
+import { gunzipSync } from "node:zlib";
 import { createHash } from "node:crypto";
 import { createServer } from "vite";
 import { read } from "@d2runewizard/d2s";
 import { constants as defaults } from "@d2runewizard/d2s/lib/data/versions/105_constant_data.js";
 
 const data = JSON.parse(await readFile("public/data/planner-save/data.json"));
-const source = JSON.parse(await readFile("public/data/planner-save/source.json"));
+// Launcher tables captured November 18 (sets) and November 20 (uniques).
+const hashes = {
+  runes: "1dd06c6a49404da9ba0eb660732f4e171d4ecff6c8d8f2ac168d4909c0a037e7",
+  uniqueItems: "c2509c81fd0655ba0e015adfea9934db28aa85b272d7391b4db3f530372733eb",
+  setItems: "cb0f07f436d1b9a28b55c560e7f98d6768603150d7ab93d00d06c668e2572008",
+};
 async function table(name) {
-  const hash = source.files[name].sha256;
-  let bytes;
-  try {
-    bytes = await readFile(
-      `docs/audits/2026-10-27/planner-save/converter/data/txt/${name}.txt`
-    );
-  } catch {
-    /* Fetch verified source if uncached. */
-  }
-  if (!bytes || createHash("sha256").update(bytes).digest("hex") !== hash) {
-    const response = await fetch(
-      `https://blizzless.info/api/launcher-mods/blobs/${hash}`
-    );
-    assert(response.ok);
-    bytes = Buffer.from(await response.arrayBuffer());
-  }
-  assert.equal(createHash("sha256").update(bytes).digest("hex"), hash);
+  const bytes = gunzipSync(
+    await readFile(new URL(`./fixtures/planner/${name}.txt.gz`, import.meta.url))
+  );
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), hashes[name]);
   const [header, ...lines] = bytes
     .toString("utf8")
     .replace(/^\uFEFF/, "")
@@ -40,8 +32,15 @@ async function table(name) {
     });
 }
 const tables = await Promise.all(["uniqueItems", "setItems"].map(table));
+const skillIds = new Map(
+  Object.entries(data.skills).map(([id, row]) => [row.skill.toLowerCase(), id])
+);
 for (const [index, kind] of ["uniqueItems", "setItems"].entries()) {
   const rows = tables[index];
+  const catalogNames = new Set(Object.values(data[kind]).map((row) => row.index));
+  for (const row of rows)
+    if (row.spawnable === "1" && row.disabled !== "1")
+      assert(catalogNames.has(row.index), `Missing ${kind}: ${row.index}`);
   for (const [id, def] of Object.entries(data[kind])) {
     const expected = rows.findIndex((row) => row.index === def.index);
     assert(expected >= 0, `${id}: missing source identity`);
@@ -52,9 +51,17 @@ for (const [index, kind] of ["uniqueItems", "setItems"].entries()) {
       `${id}: base`
     );
     for (let i = 1; i <= 12; i++) {
-      // Empty source cells must not inherit another patch's properties.
-      if (!rows[expected][`prop${i}`])
-        assert.equal(def[`prop${i}`], undefined, `${id}: extra prop${i}`);
+      const row = rows[expected];
+      // The launcher references a missing group on Renewed Cold Rupture.
+      const disabledGroup =
+        row[`prop${i}`] === "Gelid-Affix5" && !data.propertyGroups["Gelid-Affix5"];
+      for (const field of ["prop", "par", "min", "max"]) {
+        const key = field + i;
+        let value = disabledGroup ? "" : row[key] || "";
+        if (field === "par") value = skillIds.get(value.toLowerCase()) ?? value;
+        if (field === "prop" && row.code === "cjw") value = value.toLowerCase();
+        assert.equal(String(def[key] ?? ""), value, `${id} (${def.index}): ${key}`);
+      }
     }
   }
 }
@@ -72,9 +79,12 @@ try {
   const { createGameSaveExporter, gameSaveEntries } = await server.ssrLoadModule(
     "/src/utils/planner-game-save.ts"
   );
-  const { createBuild, encodeBuild, decodeBuild } = await server.ssrLoadModule(
-    "/src/utils/planner.ts"
-  );
+  const {
+    createBuild: createStarterBuild,
+    encodeBuild,
+    decodeBuild,
+  } = await server.ssrLoadModule("/src/utils/planner.ts");
+  const createBuild = (classId) => ({ ...createStarterBuild(classId), charms: [] });
   const { createUberKeySet } = await server.ssrLoadModule("/src/utils/planner-stash.ts");
   const codec = createGameSaveExporter(
     data,
@@ -129,6 +139,87 @@ try {
     });
     return { saved, bytes };
   }
+  const pureRecipes = JSON.parse(
+    await readFile("src/shared/planner-pure-runewords.json")
+  );
+  const sourceVariants = {};
+  const sourceRunes = (row) =>
+    [1, 2, 3, 4, 5, 6].map((i) => row["Rune" + i]).filter(Boolean);
+  for (const row of (await table("runes")).filter((row) => row.complete === "1")) {
+    const number = Number(row.Name.slice(8));
+    const id = "runeword" + String(number + (number > 75 ? 25 : 26)).padStart(3, "0");
+    const canonical = data.runes[id];
+    assert(canonical, row.Name);
+    const pure = row["*Rune Name"].includes("(Pure)");
+    for (const [field, value] of Object.entries(row)) {
+      const key = field.toLowerCase();
+      if (!/^(?:t1(?:code|param|min|max)|itype|etype|rune)\d+$/.test(key)) continue;
+      if (pure && key.startsWith("rune")) continue;
+      const expected = key.startsWith("t1param")
+        ? (skillIds.get(value.toLowerCase()) ?? value)
+        : value;
+      assert.equal(
+        String(canonical[key] ?? "").toLowerCase(),
+        String(expected).toLowerCase(),
+        id + " " + key
+      );
+    }
+    if (pure) {
+      const normal = [1, 2, 3, 4, 5, 6].map((i) => canonical["rune" + i]).filter(Boolean);
+      (sourceVariants[normal.join(",")] ??= []).push(sourceRunes(row));
+    }
+  }
+  assert.deepEqual(pureRecipes, sourceVariants);
+  let checkedVariants = 0;
+  for (const [normal, variants] of Object.entries(pureRecipes)) {
+    const def = Object.values(data.runes).find(
+      (row) =>
+        [1, 2, 3, 4, 5, 6]
+          .map((i) => row["rune" + i])
+          .filter(Boolean)
+          .join(",") === normal
+    );
+    assert(def, normal);
+    const build = createBuild("paladin");
+    const item = {
+      name: def.name,
+      quality: "runeword",
+      requiredLevel: 1,
+      notes: "",
+      bonuses: {},
+      stashPosition: 0,
+    };
+    const entry = { owner: "stash", key: "recipe", item };
+    const baseCode = codec.choices(entry, build)[0]?.base;
+    assert(baseCode, def.name);
+    item.baseCode = baseCode;
+    build.stash = [item];
+    item.runewordRunes = ["r01"];
+    assert.throws(() => decodeBuild(encodeBuild(build)), /Invalid rune sequence/);
+    for (const codes of variants) {
+      item.runewordRunes = codes;
+      assert.deepEqual(codec.itemRunes(item), codes, def.name);
+      assert.deepEqual(decodeBuild(encodeBuild(build)).stash[0].runewordRunes, codes);
+      const { saved, bytes } = await exportBuild(build, { "stash.0": 0 });
+      assert.deepEqual(
+        saved.items[0].socketed_items.map((child) => child.type),
+        codes
+      );
+      assert.deepEqual(codec.importCharacter(bytes).stash[0].runewordRunes, codes);
+      const imported = codec.importCharacter(bytes);
+      const again = await exportBuild(imported, { "stash.0": "planned" });
+      assert.deepEqual(
+        again.saved.items[0].socketed_items.map((child) => child.type),
+        codes
+      );
+      assert.equal(again.saved.items[0].runeword_id, saved.items[0].runeword_id);
+      checkedVariants++;
+    }
+  }
+  assert.equal(checkedVariants, 34);
+  console.log(
+    "Pure runewords: 34 native socket sequences survived JSON and binary round trips."
+  );
   const failures = [];
   const stat = (item, name) =>
     item.magic_attributes.find((a) => a.id === data.itemStatCost[name].id)?.values;
@@ -194,7 +285,7 @@ try {
   for (const roll of [undefined, 0, 1]) {
     const build = createBuild("paladin");
     build.equipment.head = helmet;
-    const { saved, bytes } = await exportBuild(
+    const { saved } = await exportBuild(
       build,
       roll === undefined ? {} : { "hero.head": roll }
     );
@@ -210,7 +301,6 @@ try {
     assert.deepEqual(stat(parent, "item_armor_percent"), [roll === 0 ? 150 : 215]);
     assert.deepEqual(stat(parent, "passive_fire_mastery"), [roll === 0 ? 10 : 15]);
     assert.deepEqual(stat(jewel, "item_magicbonus"), [roll === 0 ? 15 : 35]);
-    if (roll === undefined) await writeFile("/tmp/blizzless-hellwarden-fixed.d2s", bytes);
   }
   for (const [id, propertyChoices, name, expected] of [
     ["unique358", { 7: 25 }, "item_singleskill", [60, 3]],
@@ -252,14 +342,13 @@ try {
     createUberKeySet(new Set(Array.from({ length: 208 }, (_, i) => i))),
     undefined
   );
-  const { saved, bytes } = await exportBuild(build);
+  const { saved } = await exportBuild(build);
   assert.equal(saved.items.length, 9);
   for (const code of ["pk1", "pk2", "pk3"])
     assert.equal(saved.items.filter((i) => i.type === code).length, 3);
   assert(
     saved.items.every((i) => i.quality === 2 && i.alt_position_id === 5 && !i.unique_id)
   );
-  await writeFile("/tmp/blizzless-key-set-fixed.d2s", bytes);
   console.log(
     "Hellwarden + Guardian jewel (planned/min/max) and 3×3 actual keys: passed."
   );

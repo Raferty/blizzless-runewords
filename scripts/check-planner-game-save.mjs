@@ -69,11 +69,7 @@ try {
     assert.equal(read.header.status.expansion, true);
     assert.equal(
       bytes[248],
-      (options.gameMode ??
-        build.gameSave?.mode ??
-        native.defaultGameSaveMode(build.classId)) === "rotw"
-        ? 3
-        : 2
+      (options.gameMode ?? build.gameSave?.mode ?? native.defaultGameSaveMode(build.classId)) === "rotw" ? 3 : 2
     );
     assert.equal(read.attributes.gold, build.gold);
     assert.equal(
@@ -150,6 +146,7 @@ try {
   }
   {
     const build = planner.createBuild("paladin");
+    build.attributes.strength = 123;
     const shield = {
       name: "Vortex Shield",
       baseCode: "paf",
@@ -189,6 +186,15 @@ try {
       "/src/utils/planner-item-catalog.ts"
     );
     const { RUNEWORDS } = await server.ssrLoadModule("/src/shared/runewords.ts");
+    const pureBlack = {
+      name: "Flail", baseCode: "fla", baseKind: "weapon", quality: "normal",
+      requiredLevel: 1, sockets: 3, bonuses: {}, notes: "",
+      socketedItems: ["r10", "r16", "04r"],
+    };
+    assert(assembleSocketedRuneword(codec, pureBlack, build, RUNEWORDS));
+    assert.equal(pureBlack.name, "Black");
+    assert.deepEqual(pureBlack.runewordRunes, ["r10", "r16", "04r"]);
+    assert.equal(pureBlack.socketedItems, undefined);
     const targe = {
       ...shield,
       name: "Sacred Targe",
@@ -865,6 +871,7 @@ try {
     assert(!slot(ring, "head"));
     assert(slot(ring, "ringLeft"));
 
+    build.attributes.strength = 100;
     build.equipment.armor = item("Guardian Angel", "xlt", {
       quality: "unique",
       catalogId: "unique218",

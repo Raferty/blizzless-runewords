@@ -109,11 +109,7 @@ export function assembleSocketedRuneword(
   const category = socketCategory(item);
   const baseKind = category === "helm" ? "armor" : category;
   for (const word of words) {
-    if (
-      word.runes.length !== inserts.length ||
-      !word.runes.every((id, i) => inserts[i] === `r${String(id).padStart(2, "0")}`)
-    )
-      continue;
+    if (word.runes.length !== inserts.length) continue;
     const assembled: PlannerItem = {
       ...item,
       quality: "runeword",
@@ -122,6 +118,10 @@ export function assembleSocketedRuneword(
       baseKind,
       requiredLevel: Math.max(native.gd.items[code]?.levelreq ?? 1, word.level),
     };
+    const runeOptions = native.runewordRuneOptions(assembled);
+    const variant = runeOptions.findIndex((codes) => codes.join(",") === inserts.join(","));
+    if (variant < 0) continue;
+    if (variant > 0) assembled.runewordRunes = runeOptions[variant];
     if (
       !native.permitted(code, { owner: "stash", key: "recipe", item: assembled }, build)
     )
@@ -565,6 +565,15 @@ export function socketSummaryLines(
   ];
 }
 
+const propertyFormatters: Record<string, (amount: number) => string> = {
+  "mana-regen": (n) => (n < 0 ? `Drain Mana ${n}` : `Regenerate Mana +${n}`),
+  "abs-mag%": (n) => `+${n}% Magic Absorb`,
+  stack: (n) => `Increased Stack Size (+${n})`,
+  howl: (n) => `Hit Causes Monster to Flee ${Math.round((n * 100) / 128)}%`,
+  pierce: (n) => `${n}% Piercing Attack`,
+  plusmirror: (n) => `+${n} Additional Mirrored Arrow${n === 1 ? "" : "s"}`,
+};
+
 export function definitionPropertyLines(
   native: GameSaveExporter,
   definition: Record<string, unknown>,
@@ -606,6 +615,20 @@ export function definitionPropertyLines(
     }
     if (code === "red-dmg%" && (roll ? max : min) < 0) {
       lines.push(`Physical Damage Received Increased By ${-(roll ? max : min)}%`);
+      continue;
+    }
+    const amount = roll ? max : min;
+    if (code === "rep-dur" || code === "rep-quant") {
+      const speed = Number(par) || amount;
+      if (speed > 0) {
+        const action = code === "rep-dur" ? "Repairs 1 Durability" : "Replenishes 1 Quantity";
+        lines.push(`${action} every ${Number((100 / speed).toFixed(2))} seconds`);
+      }
+      continue;
+    }
+    const format = propertyFormatters[code];
+    if (format) {
+      lines.push(format(amount));
       continue;
     }
     if (code === "plusecho") {
@@ -666,9 +689,11 @@ export function definitionPropertyLines(
       const charges = min < 0 && max < 0 ? Math.floor((-min * level) / 8) - min : min;
       text = text.replace("#", String(level)).replace(/#/g, String(charges));
     }
+    const stat = native.gd.itemStatCost[String(property.stat1)] as
+      { opbase?: string; opparam?: number } | undefined;
     const value =
-      code.endsWith("/lvl") && String(property.parameter).includes("#/8")
-        ? Math.floor((Number(par) * characterLevel) / 8)
+      code.endsWith("/lvl") && stat?.opbase === "level" && stat.opparam !== undefined
+        ? Math.floor((Number(par) * characterLevel) / 2 ** stat.opparam)
         : roll
           ? max
           : min;

@@ -186,7 +186,7 @@
       "images/planner/items/misc/charm/charm_large3.webp"
     ]
   },
-  "gameDataSha256": "3a36142ac94f57d32fe2af711120ac1fb2e2f73ce1f7edce3e2989a74d69a328",
+  "gameDataSha256": "10ce199016f5bf3e03792354de0f66b1a91d404e6316a50c6b2c29931ec901ae",
   "bases": {
     "hax": "images/planner/items/weapon/axe/hand_axe.webp",
     "axe": "images/planner/items/weapon/axe/axe.webp",
@@ -3025,7 +3025,14 @@
     "unique712": "ci2",
     "unique713": "p09",
     "unique714": "cs2",
-    "unique715": "cs2"
+    "unique715": "cs2",
+    "unique734": "bg1",
+    "unique735": "bg1",
+    "unique736": "bg1",
+    "unique737": "bg1",
+    "unique738": "bg1",
+    "unique739": "bg1",
+    "unique740": "bg1"
   },
   "names": {
     "unique": {
@@ -3725,7 +3732,21 @@
       "leoric's crown": "unique712",
       "butcher's cleaver": "unique713",
       "talisman of the lich": "unique714",
-      "talisman of the bone lord": "unique715"
+      "talisman of the bone lord": "unique715",
+      "cont_bloodscroll": "unique734",
+      "tattered scroll container": "unique734",
+      "cont_bloodstone": "unique735",
+      "bloodstone container": "unique735",
+      "cont_demonpaw": "unique736",
+      "demon paw container": "unique736",
+      "cont_elixirwealth": "unique737",
+      "elixir of wealth container": "unique737",
+      "cont_elixirwisdom": "unique738",
+      "elixir of wisdom container": "unique738",
+      "cont_elixirlifemana": "unique739",
+      "elixir of life and mana container": "unique739",
+      "cont_elixirfortune": "unique740",
+      "elixir of fortune container": "unique740"
     },
     "set": {
       "civerb's ward": "set000",
@@ -6550,6 +6571,41 @@
       "images/cube/d6c585dc2ff3f5d28c.png",
       "images/cube/d6c585dc2ff3f5d28c.png",
       "images/cube/d6c585dc2ff3f5d28c.png"
+    ],
+    "unique734": [
+      "images/planner/items/misc/quest/tattered_scroll.png",
+      "images/planner/items/misc/quest/tattered_scroll.png",
+      "images/planner/items/misc/quest/tattered_scroll.png"
+    ],
+    "unique735": [
+      "images/planner/items/misc/gem/bloodstone.png",
+      "images/planner/items/misc/gem/bloodstone.png",
+      "images/planner/items/misc/gem/bloodstone.png"
+    ],
+    "unique736": [
+      "images/planner/items/misc/quest/ceremonial_claws.png",
+      "images/planner/items/misc/quest/ceremonial_claws.png",
+      "images/planner/items/misc/quest/ceremonial_claws.png"
+    ],
+    "unique737": [
+      "images/planner/items/misc/potion/blizzless_fortune_elixir.png",
+      "images/planner/items/misc/potion/blizzless_fortune_elixir.png",
+      "images/planner/items/misc/potion/blizzless_fortune_elixir.png"
+    ],
+    "unique738": [
+      "images/planner/items/misc/potion/blizzless_wisdom_elixir.png",
+      "images/planner/items/misc/potion/blizzless_wisdom_elixir.png",
+      "images/planner/items/misc/potion/blizzless_wisdom_elixir.png"
+    ],
+    "unique739": [
+      "images/planner/items/misc/potion/blizzless_life_mana_elixir.png",
+      "images/planner/items/misc/potion/blizzless_life_mana_elixir.png",
+      "images/planner/items/misc/potion/blizzless_life_mana_elixir.png"
+    ],
+    "unique740": [
+      "images/planner/items/misc/potion/blizzless_luck_elixir.png",
+      "images/planner/items/misc/potion/blizzless_luck_elixir.png",
+      "images/planner/items/misc/potion/blizzless_luck_elixir.png"
     ]
   },
   "set": {

@@ -57,8 +57,10 @@ const normalizeRecipe = (item) => ({
 const grouped = new Map();
 for (const version of versions) {
   if (!version.isPublished) continue;
-  if (!grouped.has(version.key)) grouped.set(version.key, []);
-  grouped.get(version.key).push(version);
+  // The glossary renamed Unstoppable Amulet to "amulet" in version 2.
+  const key = version.key === "Unstoppable Amulet" ? "amulet" : version.key;
+  if (!grouped.has(key)) grouped.set(key, []);
+  grouped.get(key).push(version);
 }
 const recipes = [...grouped.values()].map((group) => {
   const latest = (field) =>

@@ -1,12 +1,15 @@
 import { readFile, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { Buffer } from "node:buffer";
 
-const sha256 = "50fe8aa45f6d3ce2b7fc2cec48ed5c6bee11662e28476544f80beadc0c71785d";
-const url = "https://blizzless.info/api/launcher-mods/blobs/" + sha256;
-const response = await fetch(url, { signal: AbortSignal.timeout(30000) });
-if (!response.ok) throw Error("Cannot load native crafting recipes");
-const bytes = Buffer.from(await response.arrayBuffer());
+import { gunzipSync } from "node:zlib";
+import {
+  nativeCubeSha256 as sha256,
+  nativeCubeUrl as url,
+} from "./cube-native-recipes.mjs";
+
+const bytes = gunzipSync(
+  await readFile(new URL("./fixtures/planner/cubemain.txt.gz", import.meta.url))
+);
 if (createHash("sha256").update(bytes).digest("hex") !== sha256)
   throw Error("Crafting source checksum mismatch");
 const lines = bytes
@@ -108,7 +111,13 @@ for (const recipe of cube.recipes.filter(
   if (!usable.length) throw Error(`Craft has no usable bases: ${recipe.key}`);
   templates.push({ id: recipe.key, name: recipe.name, variants: usable });
 }
-if (templates.length !== 54 || unavailable.length !== 1)
+const implemented = new Set(templates.map((template) => normalize(template.name.en)));
+for (const row of rows) {
+  if (row.enabled !== "1" || !row.output.split(",").includes("crf")) continue;
+  const resultName = row.description.split("->").at(-1);
+  if (!implemented.has(normalize(resultName))) throw Error("Missing planner craft: " + resultName);
+}
+if (templates.length !== 57 || unavailable.length !== 1)
   throw Error(`Unexpected craft coverage: ${templates.length}/${unavailable.length}`);
 await writeFile(
   "src/shared/planner-crafts.json",

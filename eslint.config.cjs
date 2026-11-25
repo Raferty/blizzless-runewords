@@ -10,6 +10,7 @@ module.exports = [
     ignores: [
       "node_modules/",
       "dist/",
+      "blizzless-armory/",
       "dist-ssr/",
       "coverage/",
       "docs/",

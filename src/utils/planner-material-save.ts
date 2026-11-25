@@ -137,7 +137,8 @@ export function materialSaveCodec(
         offset === 5 * 68 &&
         original.length - end === 84 &&
         original[end + 20] === 0 &&
-        new DataView(original.buffer, original.byteOffset + end).getUint32(64, true) === 0xc0eaedc0
+        new DataView(original.buffer, original.byteOffset + end).getUint32(64, true) ===
+          0xc0eaedc0
       ) {
         const emptyPage = new Uint8Array(68);
         emptyPage.set(original.subarray(0, 12));

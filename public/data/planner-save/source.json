@@ -136,7 +136,8 @@
         "uniqueItems": "c2509c81fd0655ba0e015adfea9934db28aa85b272d7391b4db3f530372733eb",
         "properties": "84cbc6ed62186da1c7720fb3bdab7b1689fd08f549a59579bb660b55d959f3aa",
         "itemStatCost": "6975bb81a533025fcbcd836216c4960ca759d5dec5c7a9273b6e145ed490c1e4",
-        "monstats": "cbd17fe08e35f5fe5ad6261748ed791b4753780a18e7b1638f6ba8a3a0a21c1f"
+        "monstats": "cbd17fe08e35f5fe5ad6261748ed791b4753780a18e7b1638f6ba8a3a0a21c1f",
+        "runes": "1dd06c6a49404da9ba0eb660732f4e171d4ecff6c8d8f2ac168d4909c0a037e7"
       }
     }
   }

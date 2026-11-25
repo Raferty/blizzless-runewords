@@ -1,3 +1,5 @@
+import { itemRequirements } from "./planner-item-requirements";
+import { findPlannerRuneword, runeSequences } from "./planner-runeword-recipes";
 import materialSlots from "@/shared/planner-material-slots.json";
 import {
   materialSlotLimit,
@@ -346,60 +348,110 @@ export function addDefaultInventory(build: PlannerBuild) {
     if (position !== undefined) build.charms.push({ ...item, position });
   }
 }
-export function activeItems(build: PlannerBuild) {
+function baseItemBonuses(item: PlannerItem, classId: ClassId, native?: GameSaveExporter) {
+  // Imported totals include the exact native rolls. Older JSON drafts can
+  // contain only overrides, including an explicit zero for a catalogue stat.
+  if (
+    !native ||
+    item.importedStats ||
+    !item.catalogId ||
+    (item.quality !== "unique" && item.quality !== "set") ||
+    !native.itemDefinition(item) ||
+    bonusFields.every(({ key }) => item.bonuses[key] !== undefined)
+  )
+    return item.bonuses;
+  const summary = native.catalogBonuses(
+    item.catalogId,
+    item.quality,
+    item.propertyRoll ?? 1,
+    item.propertyValues,
+    itemSkillClass(item, classId),
+    item.propertyChoices
+  );
+  return { ...summary.bonuses, ...item.bonuses };
+}
+
+function equippedItemBonuses(build: PlannerBuild, native?: GameSaveExporter) {
   const activeSlots = equipmentSlots
     .map((s) => s.key)
     .filter((key) => key !== "mainHand" && key !== "offHand");
-  return [
+  const candidates = [
     ...activeSlots.map((key) => build.equipment[key]),
     build.equipment[build.weaponSet ? "swapMain" : "mainHand"],
     build.equipment[build.weaponSet ? "swapOff" : "offHand"],
     ...build.charms.filter(grantsInventoryBonuses),
   ].filter((item): item is PlannerItem => !!item);
+  const base = plannerClasses.find((c) => c.id === build.classId)!.base;
+  const initial = Object.fromEntries(
+    attributes.map(({ key }) => [key, base[key] + build.attributes[key]])
+  ) as PlannerBuild["attributes"];
+  const current = { ...initial };
+  const pending = candidates.flatMap((item) => {
+    const requirements = itemRequirements(
+      native,
+      item,
+      build.classId,
+      initial,
+      build.level
+    );
+    if (!requirements.level.met) return [];
+    const base = baseItemBonuses(item, build.classId, native);
+    const baseMods = native?.baseModifierBonuses(item);
+    const inserts = socketedBonuses(item);
+    const affixes = affixBonuses(item, build.level);
+    const bonuses = Object.fromEntries(
+      bonusFields.map(({ key }) => [
+        key,
+        (base[key] ?? 0) +
+          (baseMods?.[key] ?? 0) +
+          (inserts.bonuses[key] ?? 0) +
+          (affixes.bonuses[key] ?? 0),
+      ])
+    ) as Required<Bonuses>;
+    return [{ item, requirements, bonuses, inserts, affixes }];
+  });
+  const equipped: typeof pending = [];
+  // Start with unaided attributes so that items cannot unlock one another in a cycle.
+  while (pending.length) {
+    const index = pending.findIndex(({ requirements }) =>
+      requirements.attributes.every(({ key, required }) => current[key] >= required)
+    );
+    if (index < 0) break;
+    const [entry] = pending.splice(index, 1);
+    equipped.push(entry);
+    current.strength += entry.bonuses.strength;
+    current.dexterity += entry.bonuses.dexterity;
+  }
+  // Attribute penalties can invalidate an earlier item and anything it supported.
+  while (equipped.length) {
+    const index = equipped.findIndex(({ requirements, bonuses }) =>
+      requirements.attributes.some(
+        ({ key, required }) => current[key] - bonuses[key] < required
+      )
+    );
+    if (index < 0) break;
+    const [removed] = equipped.splice(index, 1);
+    current.strength -= removed.bonuses.strength;
+    current.dexterity -= removed.bonuses.dexterity;
+  }
+  return equipped;
+}
+export function activeItems(build: PlannerBuild, native?: GameSaveExporter) {
+  return equippedItemBonuses(build, native).map(({ item }) => item);
 }
 export function buildStats(build: PlannerBuild, native?: GameSaveExporter) {
+  const equipped = equippedItemBonuses(build, native);
+  const items = equipped.map(({ item }) => item);
   const character = plannerClasses.find((c) => c.id === build.classId)!;
-  const items = activeItems(build);
   const caps = native
     ? items.map((item) => native.itemResistanceCaps(item, build.classId))
     : [];
-  const baseBonuses = items.map((item) => {
-    // Imported totals include the exact native rolls. Older JSON drafts can
-    // contain only overrides, including an explicit zero for a catalogue stat.
-    if (
-      !native ||
-      item.importedStats ||
-      !item.catalogId ||
-      (item.quality !== "unique" && item.quality !== "set") ||
-      !native.itemDefinition(item) ||
-      bonusFields.every(({ key }) => item.bonuses[key] !== undefined)
-    )
-      return item.bonuses;
-    const summary = native.catalogBonuses(
-      item.catalogId,
-      item.quality,
-      item.propertyRoll ?? 1,
-      item.propertyValues,
-      itemSkillClass(item, build.classId),
-      item.propertyChoices
-    );
-    return { ...summary.bonuses, ...item.bonuses };
-  });
-  const baseMods = items.map((item) => native?.baseModifierBonuses(item));
-  const insertBonuses = items.map(socketedBonuses);
-  const mods = items.map((item) => affixBonuses(item, build.level));
+  const insertBonuses = equipped.map((entry) => entry.inserts);
+  const mods = equipped.map((entry) => entry.affixes);
   const bonuses = Object.fromEntries(
     bonusFields.map(({ key }) => [
       key,
-      items.reduce(
-        (sum, _, index) =>
-          sum +
-          (baseBonuses[index][key] ?? 0) +
-          (baseMods[index]?.[key] ?? 0) +
-          (insertBonuses[index].bonuses[key] ?? 0) +
-          (mods[index].bonuses[key] ?? 0),
-        0
-      ),
+      equipped.reduce((sum, entry) => sum + entry.bonuses[key], 0),
     ])
   ) as Required<Bonuses>;
   const classSkills = items.reduce(
@@ -424,6 +476,8 @@ export function buildStats(build: PlannerBuild, native?: GameSaveExporter) {
   const questResist = Object.values(build.quests).filter((q) => q.anya).length * 10;
   const penalty = difficulties.find((d) => d.value === build.difficulty)!.penalty;
   return {
+    items,
+    itemBonuses: new Map(equipped.map(({ item, bonuses }) => [item, bonuses])),
     attributes: stats,
     bonuses,
     classSkills,
@@ -559,7 +613,20 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       throw new Error("socket contents");
     socketedItems = [...item.socketedItems];
   }
+  if (
+    item.runewordRunes !== undefined &&
+    (item.quality !== "runeword" ||
+      !Array.isArray(item.runewordRunes) ||
+      !item.runewordRunes.length ||
+      item.runewordRunes.length > 6 ||
+      item.runewordRunes.some(
+        (code) =>
+          typeof code !== "string" || socketInsertByCode.get(code)?.group !== "rune"
+      ))
+  )
+    throw new Error("runeword runes");
   const result: PlannerItem = {
+    ...(item.runewordRunes ? { runewordRunes: [...item.runewordRunes] } : {}),
     name: string(item.name, 100),
     quality: item.quality as PlannerItem["quality"],
     requiredLevel: integer(item.requiredLevel, 1, 99),
@@ -629,7 +696,11 @@ export function parsePlannerItem(value: unknown): PlannerItem {
     result.propertyValues = {};
     for (const [key, value] of Object.entries(record(item.propertyValues))) {
       if (!/^(?:[1-9]|1[0-2])$/.test(key)) throw new Error("property index");
-      result.propertyValues[key] = integer(value, -100000, 100000);
+      const roll = integer(value, -100000, 100000);
+      // Older shared builds could store 50–60 on the now-fixed +50% damage line.
+      if (result.craftId === "weapon" && key === "3" && roll >= 50 && roll <= 60)
+        continue;
+      result.propertyValues[key] = roll;
     }
   }
   if (item.propertyChoices !== undefined) {
@@ -667,10 +738,34 @@ export function parsePlannerItem(value: unknown): PlannerItem {
       if (!/^[a-z][a-z0-9_]*(?:#\d+){0,2}$/i.test(key)) throw new Error("native stat");
       stats[key] = integer(value, -2147483648, 2147483647);
     }
+    const ids = imported.affixIds;
+    if (
+      ids !== undefined &&
+      (!Array.isArray(ids) ||
+        ids.length > 6 ||
+        ids.some(
+          (id) =>
+            typeof id !== "string" ||
+            !/^m[ps]\d{3,4}$/.test(id) ||
+            Number(id.slice(2)) > 2046
+        ) ||
+        ["mp", "ms"].some(
+          (prefix) => ids.filter((id) => id.startsWith(prefix)).length > 3
+        ))
+    )
+      throw new Error("native affix IDs");
     result.importedStats = {
+      ...(ids === undefined ? {} : { affixIds: ids }),
       signature: string(imported.signature, 10000),
       values: stats,
     };
+  }
+  if (result.runewordRunes) {
+    const word = findPlannerRuneword(result);
+    const normal = word?.runes.map((id) => "r" + String(id).padStart(2, "0")) ?? [];
+    const selected = result.runewordRunes.join(",");
+    if (!runeSequences(normal).some((codes) => codes.join(",") === selected))
+      throw new Error(`Invalid rune sequence for ${result.name}`);
   }
   return result;
 }
@@ -700,6 +795,9 @@ export function parseBuild(value: unknown): PlannerBuild {
   build.difficulty = raw.difficulty as PlannerBuild["difficulty"];
   if (typeof raw.hardcore !== "boolean") throw new Error("hardcore");
   build.hardcore = raw.hardcore;
+  if (raw.stashGold !== undefined) build.stashGold = integer(raw.stashGold, 0, 2_500_000);
+  if (raw.experience !== undefined)
+    build.experience = integer(raw.experience, 0, 0xffffffff);
   if (raw.gameSave !== undefined) {
     const gameSave = record(raw.gameSave);
     if (

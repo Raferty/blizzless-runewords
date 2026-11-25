@@ -186,7 +186,7 @@ const socketLines = computed(() =>
     : []
 );
 const wordLines = computed(() =>
-  native.value && props.item.propertyValues
+  native.value && (props.item.propertyValues || props.item.runewordRunes)
     ? itemPropertyLines(native.value, props.item, store.build.level, store.build.classId)
     : word.value
       ? itemRunewordLines(
@@ -283,7 +283,12 @@ const properties = computed(() => {
           store.build.level,
           store.build.classId
         )
-      : itemBonusLines(props.item, lang.value)),
+      : itemBonusLines(
+          props.item,
+          lang.value,
+          native.value ?? undefined,
+          store.build.level
+        )),
     ...(props.item.affixes ?? []).flatMap((row) => {
       const affix = affixById.get(row.id);
       return native.value && affix

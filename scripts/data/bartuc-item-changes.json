@@ -1,0 +1,146 @@
+{
+  "uniqueItems": {
+    "Griswolds Edge": {
+      "prop7": "hit-skill",
+      "par7": 66,
+      "min7": 4,
+      "max7": 1,
+      "prop8": "slow",
+      "min8": 25,
+      "max8": 25
+    },
+    "The Tannr Gorerod": {
+      "prop9": "lifesteal",
+      "min9": 5,
+      "max9": 9
+    },
+    "Dimoaks Hew": {
+      "prop1": "str",
+      "min1": 20,
+      "max1": 20
+    },
+    "Serpent Lord": {
+      "min5": 40,
+      "max5": 80,
+      "prop8": "swing1",
+      "min8": 15,
+      "max8": 15,
+      "prop9": "dmg/lvl",
+      "par9": 12
+    },
+    "The Salamander": {
+      "par4": 398,
+      "max4": 4,
+      "min6": 4,
+      "max6": 4,
+      "prop7": "cast1",
+      "min7": 20,
+      "max7": 20
+    },
+    "Victors Silk": {
+      "prop5": "move2",
+      "min5": 20,
+      "max5": 20,
+      "prop6": "swing2",
+      "min6": 30,
+      "max6": 30,
+      "prop7": "dmg%",
+      "min7": 50,
+      "max7": 100,
+      "prop8": "mag%",
+      "min8": 15,
+      "max8": 50
+    },
+    "Coldkill": {
+      "min1": 100,
+      "max1": 100
+    },
+    "Earthshaker": {
+      "prop7": "skill",
+      "par7": 239,
+      "min7": 2,
+      "max7": 5
+    },
+    "The Atlantian": {
+      "lvlreq": 35,
+      "prop9": "skill",
+      "par9": 106,
+      "min9": 2,
+      "max9": 5,
+      "prop10": "att",
+      "min10": 100,
+      "max10": 125,
+      "prop11": "ease",
+      "min11": -20,
+      "max11": -20
+    },
+    "Swordguard": {
+      "par2": 56,
+      "min3": 20,
+      "max3": 30,
+      "prop10": "regen",
+      "min10": 20,
+      "max10": 30,
+      "prop11": "thorns",
+      "min11": 100,
+      "max11": 127
+    },
+    "Lavagout": {
+      "min3": 5,
+      "prop8": "nofreeze",
+      "min8": 1,
+      "max8": 1
+    },
+    "Veil of Steel": {
+      "prop8": "allskills",
+      "min8": 2,
+      "max8": 2,
+      "prop9": "red-dmg%",
+      "min9": 10,
+      "max9": 10,
+      "prop10": "ease",
+      "min10": -10,
+      "max10": -10
+    },
+    "Crescent Moon": {
+      "prop4": "gethit-skill"
+    },
+    "Guardian's Light": {
+      "par1": 387
+    }
+  },
+  "runes": {
+    "Brand": {
+      "t1min1": 350,
+      "t1max1": 450,
+      "t1code2": "swing2",
+      "t1min2": 30,
+      "t1max2": 30,
+      "t1min3": 25
+    },
+    "Eternity": {
+      "itype2": "miss",
+      "t1code5": "dmg/lvl",
+      "t1param5": 12,
+      "t1min5": null,
+      "t1max5": null
+    },
+    "Wrath": {
+      "t1min1": 300,
+      "t1max1": 400,
+      "t1code7": "oskill",
+      "t1param7": 52,
+      "t1min7": 6,
+      "t1max7": 18
+    },
+    "Chaos": {
+      "t1code6": "gethit-skill"
+    }
+  },
+  "setItems": {
+    "Isenhart's Lightbrand": {
+      "min2": 40,
+      "max2": 40
+    }
+  }
+}

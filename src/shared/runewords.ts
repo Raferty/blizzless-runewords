@@ -1608,7 +1608,7 @@ export const RUNEWORDS = [
     ladder: false,
     stats: {
       ru: [
-        "Вероятность 9% применить умение «Замешательство» 5-го уровня при ударе",
+        "Вероятность 9% применить умение «Замешательство» 5-го уровня при получении удара",
         "Вероятность 33% применить умение «Печать: Озлобленность» 10-го уровня при ударе",
         "+35% к скорости атаки",
         "+<span class='varies'>290-340</span>% к урону",
@@ -1619,7 +1619,7 @@ export const RUNEWORDS = [
         "+100% к вероятности найти магический предмет",
       ],
       en: [
-        "9% Chance To Cast Level 5 Confuse On Striking",
+        "9% Chance To Cast Level 5 Confuse When Struck",
         "33% Chance To Cast Level 10 Sigil: Rancor On Striking",
         "+35% Increased Attack Speed",
         "+<span class='varies'>290-340</span>% Enhanced Damage (varies)",

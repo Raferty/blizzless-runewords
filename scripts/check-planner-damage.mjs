@@ -230,6 +230,8 @@ try {
   assert.equal(socketRoll.passive_ltng_mastery, 3);
   assert.equal(socketRoll.passive_ltng_pierce, 3);
   const dual = createBuild("barbarian");
+  dual.attributes.strength = 25;
+  dual.attributes.dexterity = 120;
   dual.equipment.mainHand = item("ssd");
   const oneHand = row(dual, 0);
   dual.equipment.offHand = item("7cr");
