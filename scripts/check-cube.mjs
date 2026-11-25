@@ -22,9 +22,9 @@ try {
   const { useRecipesStore } = await server.ssrLoadModule("/src/store/recipes.ts");
   const { parseCatalogHash } = await server.ssrLoadModule("/src/utils/navigation.ts");
   const { RUNES } = await server.ssrLoadModule("/src/shared/constants.ts");
-  assert.equal(cubeCatalog.recipes.length, 184);
+  assert.equal(cubeCatalog.recipes.length, 124);
   assert.equal(cubeCatalog.sourceVersionCount, 129);
-  assert.equal(new Set(cubeCatalog.recipes.map((recipe) => recipe.key)).size, 184);
+  assert.equal(new Set(cubeCatalog.recipes.map((recipe) => recipe.key)).size, 124);
   // Different glossary keys can produce the same card. Ignore ingredient order,
   // but keep quantities and notes that distinguish actual recipe variants.
   const formulas = new Map();
@@ -57,20 +57,20 @@ try {
   assert.equal(amulets.length, 1);
   assert.equal(amulets[0].key, "amulet");
   assert.equal(amulets[0].blizzlessVersion, 2);
-  assert.equal(cubeCatalog.ingredients.length, 224);
+  assert.equal(cubeCatalog.ingredients.length, 193);
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "added").length,
     60
   );
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "changed").length,
-    53
+    30
   );
   assert.equal(
     cubeCatalog.recipes.filter((recipe) => recipe.status === "unchanged").length,
-    71
+    34
   );
-  assert.equal(cubeCatalog.recipes.filter((recipe) => recipe.original).length, 54);
+  assert.equal(cubeCatalog.recipes.filter((recipe) => recipe.original).length, 31);
   for (const item of cubeCatalog.ingredients.filter((item) =>
     item.tags?.includes("rune")
   )) {
@@ -141,11 +141,11 @@ try {
 
   setActivePinia(createPinia());
   const store = useRecipesStore();
-  assert.equal(store.filteredRecipes.length, 184);
+  assert.equal(store.filteredRecipes.length, 124);
   store.toggleStatus("added");
   assert.equal(store.filteredRecipes.length, 60);
   store.toggleStatus("changed");
-  assert.equal(store.filteredRecipes.length, 113, "Statuses combine with OR");
+  assert.equal(store.filteredRecipes.length, 90, "Statuses combine with OR");
   store.resetFilters();
   for (const [material, count, resultRecipe] of [
     ["Horadric Sphere", 26, "hora_sphere"],
@@ -165,7 +165,7 @@ try {
       "Every result must require the selected material"
     );
     store.toggleMaterial(material);
-    assert.equal(store.filteredRecipes.length, 184, "Toggle material off");
+    assert.equal(store.filteredRecipes.length, 124, "Toggle material off");
   }
   store.toggleMaterial("Horadric Sphere");
   store.toggleMaterial("Resplendent Spark");
@@ -191,7 +191,7 @@ try {
   );
   store.resetFilters();
   assert.equal(store.materials.length, 0);
-  assert.equal(store.filteredRecipes.length, 184);
+  assert.equal(store.filteredRecipes.length, 124);
   store.search = "caster helm";
   assert(store.filteredRecipes.some((recipe) => recipe.key === "caster_helm"));
   store.search = "шлем колдуна";
@@ -219,7 +219,7 @@ try {
   store.addTag("recipe", "armor");
   assert.equal(store.filteredRecipes.length, 0, "Recipe tags combine with AND");
   store.resetFilters();
-  assert.equal(store.filteredRecipes.length, 184);
+  assert.equal(store.filteredRecipes.length, 124);
 
   store.addTag("recipe", "armor");
   assert.equal(store.filteredRecipes.length, 20);
@@ -443,7 +443,7 @@ try {
   });
   assert.deepEqual(parseCatalogHash(""), { section: "runewords" });
   console.log(
-    "Cube checks passed: 184 current recipes, 54 originals, all upgrades, assets, filters, translations and navigation."
+    "Cube checks passed: 124 current recipes, 31 originals, item upgrades, assets, filters, translations and navigation."
   );
 } finally {
   await server.close();

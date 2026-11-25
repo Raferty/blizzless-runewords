@@ -61,14 +61,7 @@ export async function checkCubeUpgradeCoverage(catalog, ingredients, quality) {
   for (const [row, source] of current.entries()) {
     if (source.enabled !== "1") continue;
     const tier = /(?:^|,)(?:exc|eli)(?:,|$)/.test(source.output);
-    const runeInput = /^r(\d{2}),qty=(\d+)$/.exec(source["input 1"]);
-    const runeOutput = /^r(\d{2})$/.exec(source.output);
-    const rune =
-      runeInput && runeOutput && Number(runeInput[1]) + 1 === Number(runeOutput[1]);
-    const gem =
-      /^(?:g[a-z]{2}|sk[a-z]),qty=(?:3|6|9)$/.test(source["input 1"]) &&
-      /^(?:g[a-z]{2}|sk[a-z])$/.test(source.output);
-    if (tier || rune || gem)
+    if (tier)
       assert(
         covered.has(row),
         `Missing enabled upgrade: row ${row}: ${source.description}`
@@ -105,31 +98,8 @@ export async function checkCubeUpgradeCoverage(catalog, ingredients, quality) {
     assert(entry.ingredients.every((item) => item.count === 1));
     assert.equal(quality(entry.result[0].key), color);
   }
-  for (const [prefix, count] of [
-    ["upgrade_rune_", 32],
-    ["upgrade_gem_", 28],
-  ]) {
-    const entries = catalog.recipes.filter((recipe) => recipe.key.startsWith(prefix));
-    assert.equal(entries.length, count);
-    for (const entry of entries) {
-      assert.equal(entry.ingredients.length, 1);
-      assert.equal(entry.result.length, 1);
-      assert.equal(entry.result[0].count, 1);
-      assert.equal(catalog.nativeRecipeSource.rows[entry.key].length, 3);
-      const amount = entry.ingredients[0].count;
-      assert(entry.notes.en.includes(`${amount * 2} → 2; ${amount * 3} → 3`));
-    }
-  }
-  for (const key of ["upgrade_rune_el", "upgrade_rune_lem"])
-    assert.equal(find(key).ingredients[0].count, 3);
-  for (const key of ["upgrade_rune_pul", "upgrade_rune_cham"])
-    assert.equal(find(key).ingredients[0].count, 2);
-  for (const key of ["upgrade_rune_thul", "upgrade_rune_cham"]) {
-    assert.equal(find(key).status, "changed");
-    assert.equal(find(key).original.ingredients.length, 2);
-    assert(ingredients.get(find(key).original.ingredients[1].key).tags.includes("gem"));
-  }
-  assert.equal(find("upgrade_rune_el").original, undefined);
+  assert(!catalog.recipes.some((entry) => /^upgrade_(?:rune|gem)_/.test(entry.key)));
+  assert(!catalog.recipeTags.some((tag) => ["runes", "gems"].includes(tag.key)));
   const armorFix = find("fix_quality_armor");
   assert.equal(ingredients.get(armorFix.ingredients[1].key).name.en, "El Rune");
   for (const key of ["fix_quality_armor", "fix_quality_weapon"])

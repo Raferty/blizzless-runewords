@@ -3,96 +3,57 @@ import assert from "node:assert/strict";
 const localized = (ru, en) => ({ ru, en });
 const part = (key, count = 1) => ({ key, count, notes: localized("", "") });
 const armorTags = ["armor", "helm", "gloves", "boots", "belt", "shields"];
-const runeNames = [
-  ["El", "Эль"],
-  ["Eld", "Элд"],
-  ["Tir", "Тир"],
-  ["Nef", "Неф"],
-  ["Eth", "Эт"],
-  ["Ith", "Ит"],
-  ["Tal", "Тал"],
-  ["Ral", "Рал"],
-  ["Ort", "Орт"],
-  ["Thul", "Тул"],
-  ["Amn", "Амн"],
-  ["Sol", "Сол"],
-  ["Shael", "Шаэль"],
-  ["Dol", "Дол"],
-  ["Hel", "Хел"],
-  ["Io", "Ио"],
-  ["Lum", "Лум"],
-  ["Ko", "Ко"],
-  ["Fal", "Фал"],
-  ["Lem", "Лем"],
-  ["Pul", "Пул"],
-  ["Um", "Ум"],
-  ["Mal", "Мал"],
-  ["Ist", "Ист"],
-  ["Gul", "Гул"],
-  ["Vex", "Векс"],
-  ["Ohm", "Ом"],
-  ["Lo", "Ло"],
-  ["Sur", "Сур"],
-  ["Ber", "Бер"],
-  ["Jah", "Джа"],
-  ["Cham", "Чам"],
-  ["Zod", "Зод"],
-];
-const gemTypes = [
-  ["amethyst", "Аметист", ["gcv", "gfv", "gsv", "gzv", "gpv"]],
-  ["ruby", "Рубин", ["gcr", "gfr", "gsr", "glr", "gpr"]],
-  ["sapphire", "Сапфир", ["gcb", "gfb", "gsb", "glb", "gpb"]],
-  ["topaz", "Топаз", ["gcy", "gfy", "gsy", "gly", "gpy"]],
-  ["emerald", "Изумруд", ["gcg", "gfg", "gsg", "glg", "gpg"]],
-  ["diamond", "Алмаз", ["gcw", "gfw", "gsw", "glw", "gpw"]],
-  ["skull", "Череп", ["skc", "skf", "sku", "skl", "skz"]],
-];
-const gemGrades = [
-  ["chipped", "Треснувший", "Chipped"],
-  ["flawed", "Мутный", "Flawed"],
-  ["standard", "Обычный", ""],
-  ["flawless", "Безупречный", "Flawless"],
-  ["perfect", "Идеальный", "Perfect"],
-];
-
-/** Every formula, including bulk quantities, is checked against the mod table. */
+/** Item upgrades are checked against the mod table; rune/gem upgrades are excluded. */
 export function augmentCubeUpgrades({ catalog, rows, check, ingredient, recipe, image }) {
-  const runeKeys = new Map();
-  for (const [index, [en, ru]] of runeNames.entries()) {
-    const existing = catalog.ingredients.find((item) => item.name.en === `${en} Rune`);
-    const key = existing?.key ?? `rune_${en.toLowerCase()}`;
-    if (!existing)
-      ingredient(
-        key,
-        `Руна ${ru}`,
-        `${en} Rune`,
-        ["rune"],
-        `images/${en.toLowerCase()}.webp`
-      );
-    runeKeys.set(`r${String(index + 1).padStart(2, "0")}`, key);
-  }
-  const gemKeys = new Map();
-  for (const [type, ru, codes] of gemTypes) {
-    for (const [index, [grade, gradeRu, gradeEn]] of gemGrades.entries()) {
-      const nameEn = `${gradeEn} ${type[0].toUpperCase()}${type.slice(1)}`.trim();
-      const existing = catalog.ingredients.find((item) => item.name.en === nameEn);
-      const key = existing?.key ?? `gem_${grade}_${type}`;
-      if (!existing) {
-        const art = `${grade === "standard" ? "" : grade + "_"}${type}`.replace(
-          "sapphire",
-          "saphire"
-        );
-        ingredient(
-          key,
-          `${gradeRu} ${ru.toLowerCase()}`,
-          nameEn,
-          ["gem", grade, type],
-          `images/planner/items/misc/gem/${art}.webp`
-        );
-      }
-      gemKeys.set(codes[index], key);
-    }
-  }
+  const excluded = (entry) => /^upgrade_(?:rune|gem)_/.test(entry.key);
+  const removed = catalog.recipes.filter(excluded);
+  catalog.recipes = catalog.recipes.filter((entry) => !excluded(entry));
+  const parts = (entry) => [
+    ...entry.ingredients,
+    ...entry.result,
+    ...(entry.original ? [...entry.original.ingredients, ...entry.original.result] : []),
+  ];
+  const removedIngredients = new Set(removed.flatMap(parts).map((part) => part.key));
+  const retainedIngredients = new Set(
+    catalog.recipes.flatMap(parts).map((part) => part.key)
+  );
+  catalog.ingredients = catalog.ingredients.filter(
+    (entry) => !removedIngredients.has(entry.key) || retainedIngredients.has(entry.key)
+  );
+  catalog.recipeTags = catalog.recipeTags.filter(
+    (entry) => !["runes", "gems"].includes(entry.key)
+  );
+  if (!catalog.ingredients.some((entry) => entry.key === "rune_el"))
+    ingredient("rune_el", "Руна Эль", "El Rune", ["rune"], "images/el.webp");
+  const runeKeys = new Map([
+    ["r01", "rune_el"],
+    ["r02", "rune_eld"],
+    ["r06", "ith_rune"],
+    ["r07", "rune_tal"],
+    ["r08", "rune_ral"],
+    ["r09", "rune_ort"],
+    ["r10", "rune_thul"],
+    ["r11", "rune_amn"],
+    ["r12", "rune_sol"],
+    ["r13", "rune_shael"],
+    ["r14", "dol_rune"],
+    ["r15", "rune_hel"],
+    ["r16", "io_rune"],
+    ["r17", "rune_lum"],
+    ["r18", "rune_ko"],
+    ["r19", "rune_fal"],
+    ["r20", "rune_lem"],
+    ["r21", "rune_pul"],
+    ["r22", "rune_um"],
+  ]);
+  const gemKeys = new Map([
+    ["gpw", "gem_perfect_diamond"],
+    ["gpg", "gem_perfect_emerald"],
+    ["gpb", "gem_perfect_sapphire"],
+    ["gpv", "gem_perfect_amethyst"],
+    ["gpr", "gem_perfect_ruby"],
+    ["gpy", "gem_perfect_topaz"],
+  ]);
   const kinds = [
     ["armor", "броня", "Armor", armorTags, image("normal_quality_armor")],
     ["weapon", "оружие", "Weapon", ["weapon"], image("normal_quality_weapon")],
@@ -234,129 +195,6 @@ export function augmentCubeUpgrades({ catalog, rows, check, ingredient, recipe, 
       "usetype,nor"
     );
   }
-  const runeGems = [
-    "gcy",
-    "gcv",
-    "gcb",
-    "gcr",
-    "gcg",
-    "gcw",
-    "gfy",
-    "gfv",
-    "gfb",
-    "gfr",
-    "gfg",
-    "gfw",
-    "gsy",
-    "gsv",
-    "gsb",
-    "gsr",
-    "gsg",
-    "gsw",
-    "gly",
-    "gzv",
-    "glb",
-    "glr",
-    "glg",
-  ];
-  function materialUpgrade(
-    key,
-    input,
-    output,
-    inputKey,
-    outputKey,
-    count,
-    nameRu,
-    nameEn,
-    tag,
-    changed = false,
-    originalGem = null
-  ) {
-    const native = rows
-      .map((row, id) => ({ row, id }))
-      .filter(
-        ({ row }) =>
-          row.enabled === "1" &&
-          row.output === output &&
-          row["input 1"].startsWith(`${input},qty=`) &&
-          !row["input 2"]
-      );
-    const ids = [];
-    for (const multiplier of [1, 2, 3]) {
-      const match = native.find(
-        ({ row }) => row["input 1"] === `${input},qty=${count * multiplier}`
-      );
-      assert(match, `Missing bulk upgrade: ${key} ×${multiplier}`);
-      ids.push(
-        ...check([match.id], [`${input},qty=${count * multiplier}`], output, {
-          "output b": multiplier >= 2 ? output : "",
-          "output c": multiplier === 3 ? output : "",
-        })
-      );
-    }
-    const entry = recipe(
-      key,
-      nameRu,
-      nameEn,
-      ["upgrade_u", tag],
-      [part(inputKey, count)],
-      [part(outputKey)],
-      `${changed ? "В Blizzless самоцветы для повышения рун не нужны. " : ""}Пакетные варианты: ${count * 2} → 2; ${count * 3} → 3.`,
-      `${changed ? "Blizzless rune upgrades do not require gems. " : ""}Bulk variants: ${count * 2} → 2; ${count * 3} → 3.`,
-      ids
-    );
-    if (changed) {
-      entry.status = "changed";
-      entry.blizzlessVersion = 1;
-      entry.original = {
-        ...entry,
-        notes: localized("", ""),
-        status: "unchanged",
-        blizzlessVersion: null,
-        ingredients: [part(inputKey, count), part(gemKeys.get(originalGem))],
-      };
-    }
-  }
-  for (let number = 1; number < runeNames.length; number++) {
-    const input = `r${String(number).padStart(2, "0")}`;
-    const output = `r${String(number + 1).padStart(2, "0")}`;
-    materialUpgrade(
-      `upgrade_rune_${runeNames[number - 1][0].toLowerCase()}`,
-      input,
-      output,
-      runeKeys.get(input),
-      runeKeys.get(output),
-      number <= 20 ? 3 : 2,
-      `Повышение руны: ${runeNames[number - 1][0]} → ${runeNames[number][0]}`,
-      `Upgrade Rune: ${runeNames[number - 1][0]} → ${runeNames[number][0]}`,
-      "runes",
-      number >= 10,
-      runeGems[number - 10]
-    );
-  }
-  for (const [type, , codes] of gemTypes) {
-    for (let grade = 0; grade < 4; grade++) {
-      const result = catalog.ingredients.find(
-        (item) => item.key === gemKeys.get(codes[grade + 1])
-      );
-      materialUpgrade(
-        `upgrade_gem_${type}_${gemGrades[grade][0]}`,
-        codes[grade],
-        codes[grade + 1],
-        gemKeys.get(codes[grade]),
-        result.key,
-        3,
-        `Улучшение самоцвета: ${result.name.ru}`,
-        `Upgrade Gem: ${result.name.en}`,
-        "gems"
-      );
-    }
-  }
-  for (const [key, ru, en] of [
-    ["rare", "Редкие", "Rare"],
-    ["runes", "Руны", "Runes"],
-    ["gems", "Самоцветы", "Gems"],
-  ])
-    if (!catalog.recipeTags.some((tag) => tag.key === key))
-      catalog.recipeTags.push({ key, name: localized(ru, en) });
+  if (!catalog.recipeTags.some((tag) => tag.key === "rare"))
+    catalog.recipeTags.push({ key: "rare", name: localized("Редкие", "Rare") });
 }
