@@ -1,5 +1,9 @@
 import { GameSaveError } from "./planner-game-save-error";
-import { plannerRunewords, findPlannerRuneword, runeSequences } from "./planner-runeword-recipes";
+import {
+  plannerRunewords,
+  findPlannerRuneword,
+  runeSequences,
+} from "./planner-runeword-recipes";
 import { materialSaveCodec } from "./planner-material-save";
 import { loadDataFromFile } from "./planner-data-loader";
 import { D2RSaver, type BinaryParsedItem, type D2SCharacterProfile } from "d2r-saver";
@@ -52,7 +56,12 @@ import {
   parseSocketIconIndices,
   socketInsertByCode,
 } from "./planner-sockets";
-import { craftDefinition, craftVariant, craftAffixMinimum, hasRequiredCraftAffixes } from "./planner-crafts";
+import {
+  craftDefinition,
+  craftVariant,
+  craftAffixMinimum,
+  hasRequiredCraftAffixes,
+} from "./planner-crafts";
 import { stashSupplies } from "./planner-supplies";
 import {
   resolvePropertyValues,
@@ -1586,6 +1595,39 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       ) as PlannerItem["classBonuses"],
     };
   }
+  function itemLevelBonuses(item: PlannerItem, level: number, fallback: ClassId) {
+    const def = itemDefinition(item);
+    const stats = def
+      ? definitionStats(
+          def,
+          item.baseCode ?? "",
+          item.propertyRoll ?? 0,
+          item.propertyValues,
+          itemSkillClass(item, fallback),
+          item.propertyChoices
+        )
+      : {};
+    const imported = item.importedStats?.signature === nativeStatsSignature(item);
+    if (imported && item.importedStats) Object.assign(stats, item.importedStats.values);
+    const random = imported ? affixStats(item) : {};
+    const result: PlannerItem["bonuses"] = {};
+    // Flat projections stay editable; native per-level properties are separate.
+    // Random affix per-level properties are already handled by affixBonuses.
+    for (const [stat, key] of Object.entries({
+      item_strength_perlevel: "strength",
+      item_dexterity_perlevel: "dexterity",
+      item_vitality_perlevel: "vitality",
+      item_energy_perlevel: "energy",
+      item_hp_perlevel: "life",
+      item_mana_perlevel: "mana",
+      item_find_magic_perlevel: "magicFind",
+    } as const)) {
+      // A template contains no random affixes; imported totals include them.
+      const value = (stats[stat] ?? 0) - (random[stat] ?? 0);
+      if (value) result[key] = Math.floor((value * level) / 8);
+    }
+    return result;
+  }
   function runewordRuneOptions(item: PlannerItem): string[][] {
     if (item.quality !== "runeword") return [];
     const def = word({ key: "runes", item, owner: "stash" })?.[1] as unknown as
@@ -1826,7 +1868,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
       stamina: stamina * 256,
       maxstamina: stamina * 256,
       level: build.level,
-      experience: experience >= levelFloor && experience < nextFloor ? experience : levelFloor,
+      experience:
+        experience >= levelFloor && experience < nextFloor ? experience : levelFloor,
       gold: build.gold,
       goldbank: build.stashGold ?? Math.min(2_500_000, build.level * 25_000),
     };
@@ -1920,7 +1963,8 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
           "property",
           `${entry.item.name}: select the random craft affixes`
         );
-      if (!hasRequiredCraftAffixes(entry.item)) throw new GameSaveError("property", entry.item.name + ": of the Apprentice");
+      if (!hasRequiredCraftAffixes(entry.item))
+        throw new GameSaveError("property", entry.item.name + ": of the Apprentice");
       if (entry.item.affixes?.length)
         parseAffixes(entry.item.affixes, { ...entry.item, baseCode: choice.base });
       const item: BinaryParsedItem = {
@@ -2564,6 +2608,7 @@ export function createGameSaveExporter(data: RawData, locale: Locale) {
     catalogBonuses,
     itemDefinition,
     itemBonuses,
+    itemLevelBonuses,
     itemResistanceCaps,
     itemRunes,
     runewordRuneOptions,

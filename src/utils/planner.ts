@@ -397,6 +397,7 @@ function equippedItemBonuses(build: PlannerBuild, native?: GameSaveExporter) {
     );
     if (!requirements.level.met || !requirements.classMet) return [];
     const base = baseItemBonuses(item, build.classId, native);
+    const level = native?.itemLevelBonuses(item, build.level, build.classId);
     const baseMods = native?.baseModifierBonuses(item);
     const inserts = socketedBonuses(item);
     const affixes = affixBonuses(item, build.level);
@@ -404,6 +405,7 @@ function equippedItemBonuses(build: PlannerBuild, native?: GameSaveExporter) {
       bonusFields.map(({ key }) => [
         key,
         (base[key] ?? 0) +
+          (level?.[key] ?? 0) +
           (baseMods?.[key] ?? 0) +
           (inserts.bonuses[key] ?? 0) +
           (affixes.bonuses[key] ?? 0),

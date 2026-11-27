@@ -119,7 +119,9 @@ export function assembleSocketedRuneword(
       requiredLevel: Math.max(native.gd.items[code]?.levelreq ?? 1, word.level),
     };
     const runeOptions = native.runewordRuneOptions(assembled);
-    const variant = runeOptions.findIndex((codes) => codes.join(",") === inserts.join(","));
+    const variant = runeOptions.findIndex(
+      (codes) => codes.join(",") === inserts.join(",")
+    );
     if (variant < 0) continue;
     if (variant > 0) assembled.runewordRunes = runeOptions[variant];
     if (
@@ -621,7 +623,8 @@ export function definitionPropertyLines(
     if (code === "rep-dur" || code === "rep-quant") {
       const speed = Number(par) || amount;
       if (speed > 0) {
-        const action = code === "rep-dur" ? "Repairs 1 Durability" : "Replenishes 1 Quantity";
+        const action =
+          code === "rep-dur" ? "Repairs 1 Durability" : "Replenishes 1 Quantity";
         lines.push(`${action} every ${Number((100 / speed).toFixed(2))} seconds`);
       }
       continue;

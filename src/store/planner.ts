@@ -199,7 +199,8 @@ export const usePlannerStore = defineStore("planner", () => {
       message.value = "loaded";
       return true;
     } catch (error) {
-      message.value = error instanceof MissingCraftSuffixError ? "missingCraftSuffix" : "invalid";
+      message.value =
+        error instanceof MissingCraftSuffixError ? "missingCraftSuffix" : "invalid";
       return false;
     }
   }
@@ -223,7 +224,8 @@ export const usePlannerStore = defineStore("planner", () => {
         );
       }
     } catch (error) {
-      message.value = error instanceof MissingCraftSuffixError ? "missingCraftSuffix" : "invalid";
+      message.value =
+        error instanceof MissingCraftSuffixError ? "missingCraftSuffix" : "invalid";
     } finally {
       if (loadingSharedHash === hash) loadingSharedHash = "";
     }

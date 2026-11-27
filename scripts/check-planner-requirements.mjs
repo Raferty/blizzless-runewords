@@ -118,21 +118,43 @@ try {
   build.attributes.dexterity = 115;
   assert.equal(check(blade).unmet, true);
   build.level = 1;
-  build.equipment.offHand = item("uit", { quality: "runeword", name: "Spirit", baseKind: "shield", bonuses: { fcr: 35, allSkills: 2, strength: 200 } });
+  build.equipment.offHand = item("uit", {
+    quality: "runeword",
+    name: "Spirit",
+    baseKind: "shield",
+    bonuses: { fcr: 35, allSkills: 2, strength: 200 },
+  });
   assert.equal(buildStats(build, native).skillBonus, 0);
   build.level = 99;
-  assert.equal(buildStats(build, native).skillBonus, 0, "Shield cannot meet its own strength requirement");
+  assert.equal(
+    buildStats(build, native).skillBonus,
+    0,
+    "Shield cannot meet its own strength requirement"
+  );
   build.equipment.ringLeft = item("rin", { bonuses: { strength: 131 } });
-  assert.equal(buildStats(build, native).skillBonus, 2, "Eligible gear unlocks the shield");
+  assert.equal(
+    buildStats(build, native).skillBonus,
+    2,
+    "Eligible gear unlocks the shield"
+  );
   build.equipment.ringRight = item("rin", { bonuses: { strength: -20 } });
-  assert.equal(buildStats(build, native).skillBonus, 0, "Attribute penalties deactivate unsupported gear");
+  assert.equal(
+    buildStats(build, native).skillBonus,
+    0,
+    "Attribute penalties deactivate unsupported gear"
+  );
   delete build.equipment.ringRight;
   build.weaponSet = 1;
   assert.equal(buildStats(build, native).skillBonus, 0);
   const sorceress = createBuild("sorceress");
   sorceress.charms = [];
   sorceress.attributes.strength = 150;
-  sorceress.equipment.offHand = item("pab", { name: "Spirit", quality: "runeword", baseKind: "shield", bonuses: { allSkills: 2 } });
+  sorceress.equipment.offHand = item("pab", {
+    name: "Spirit",
+    quality: "runeword",
+    baseKind: "shield",
+    bonuses: { allSkills: 2 },
+  });
   assert.equal(buildStats(sorceress, native).skillBonus, 0);
   const fallback = itemRequirements(
     undefined,
@@ -142,6 +164,71 @@ try {
     1
   );
   assert.equal(fallback.unmet, false, "Missing native data does not invent requirements");
+  const perLevel = createBuild("druid");
+  perLevel.level = 92;
+  perLevel.charms = [];
+  perLevel.attributes.strength = 40;
+  perLevel.equipment.armor = item("xtp", {
+    name: "Enigma",
+    quality: "runeword",
+    runewordId: 77,
+    baseKind: "armor",
+    propertyRoll: 1,
+  });
+  perLevel.equipment.head = item("uap", {
+    name: "Harlequin Crest",
+    quality: "unique",
+    catalogId: "unique248",
+    propertyRoll: 1,
+  });
+  const { applyItemRoll } = await server.ssrLoadModule(
+    "/src/utils/planner-item-catalog.ts"
+  );
+  for (const value of Object.values(perLevel.equipment))
+    applyItemRoll(native, value, 1, "druid");
+  const expected = (level) => {
+    const stats = buildStats(perLevel, native);
+    assert.equal(stats.attributes.strength, 15 + 40 + 2 + Math.floor(level * 0.75));
+    assert.equal(stats.bonuses.life, Math.floor(level * 1.5));
+    assert.equal(stats.bonuses.mana, Math.floor(level * 1.5));
+    assert.equal(stats.bonuses.magicFind, level + 50);
+  };
+  for (const level of [65, 80, 92, 99]) {
+    perLevel.level = level;
+    expected(level);
+  }
+  const { gameSaveEntries } = await server.ssrLoadModule(
+    "/src/utils/planner-game-save.ts"
+  );
+  const exportOptions = {
+    name: "LevelBonus",
+    choices: Object.fromEntries(
+      gameSaveEntries(perLevel).map((entry) => [
+        entry.key,
+        native.defaultChoice(entry, perLevel),
+      ])
+    ),
+    rolls: {},
+  };
+  const bytes = await native.exportCharacter(perLevel, exportOptions);
+  const importedLevel = native.importCharacter(bytes);
+  assert.deepEqual(
+    buildStats(importedLevel, native).bonuses,
+    buildStats(perLevel, native).bonuses,
+    "Native per-level stats survive importing without double counting"
+  );
+  importedLevel.level = 65;
+  assert.equal(buildStats(importedLevel, native).attributes.strength, 105);
+  assert.equal(buildStats(importedLevel, native).bonuses.life, 97);
+  assert.equal(buildStats(importedLevel, native).bonuses.magicFind, 115);
+  const rawEnigma = Object.values(native.readCharacter(bytes).items).find(
+    (value) => value.base === "xtp"
+  );
+  assert.equal(
+    rawEnigma.stats.strength ?? 0,
+    0,
+    "Per-level strength does not become a flat native bonus"
+  );
   console.log(
     "Item requirements: allocation boundaries, gear and weapon swaps, stash exclusion, Hel, ethereal, upgraded/legacy bases and level passed."
   );

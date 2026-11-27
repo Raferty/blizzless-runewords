@@ -210,8 +210,16 @@
                   {{ t("Руны", "Runes") }}
                   <UiSelect
                     :model-value="(item.runewordRunes ?? runeOptions[0]).join(',')"
-                    :options="runeOptions.map((codes) => ({ value: codes.join(','), label: codes.map((code) => socketInsertByCode.get(code)?.name[lang] ?? code).join(' + ') }))"
-                    @update:model-value="selectRuneVariant" />
+                    :options="
+                      runeOptions.map((codes) => ({
+                        value: codes.join(','),
+                        label: codes
+                          .map((code) => socketInsertByCode.get(code)?.name[lang] ?? code)
+                          .join(' + '),
+                      }))
+                    "
+                    @update:model-value="selectRuneVariant"
+                  />
                 </label>
                 <label v-if="selectedBase && maxSockets" class="planner-label"
                   >{{ t("Сокеты", "Sockets")
@@ -328,7 +336,12 @@
             @update="setBaseModifier"
           />
           <p v-if="!craftAffixesComplete" class="planner-muted" role="status">
-            <span v-if="!hasRequiredCraftAffixes(item)">{{ t("Требуется суффикс of the Apprentice (+10% FCR).", "Requires the of the Apprentice suffix (+10% FCR).") }}</span>
+            <span v-if="!hasRequiredCraftAffixes(item)">{{
+              t(
+                "Требуется суффикс of the Apprentice (+10% FCR).",
+                "Requires the of the Apprentice suffix (+10% FCR)."
+              )
+            }}</span>
             {{ t("Нужно случайных аффиксов", "Required random affixes") }}:
             {{ craftAffixMinimum(item.itemLevel ?? 99) }} ({{ t("сейчас", "selected") }}
             {{ item.affixes?.length ?? 0 }}).
@@ -382,9 +395,7 @@
             :item="item"
             :count="socketCount"
             :model-value="
-              selectedWord
-                ? native.itemRunes(item)
-                : (item.socketedItems ?? [])
+              selectedWord ? native.itemRunes(item) : (item.socketedItems ?? [])
             "
             :readonly="item.quality === 'runeword'"
             :native="native"
@@ -825,7 +836,8 @@ const preferredCraftAffixes = computed(() =>
 const craftAffixesComplete = computed(
   () =>
     !item.value.craftId ||
-    (hasRequiredCraftAffixes(item.value) && (item.value.affixes?.length ?? 0) >= craftAffixMinimum(item.value.itemLevel ?? 99))
+    (hasRequiredCraftAffixes(item.value) &&
+      (item.value.affixes?.length ?? 0) >= craftAffixMinimum(item.value.itemLevel ?? 99))
 );
 const canToggleCraftEthereal = computed(
   () =>
@@ -1079,7 +1091,10 @@ function changeBase(code: string) {
     item.value.requiredLevel = Math.max(selectedWord.value?.level ?? 1, base.level);
   } else item.value.sockets = Math.min(item.value.sockets ?? 0, maxSockets.value);
   reconcileAffixes();
-  if ((item.value.propertyValues || item.value.runewordRunes || selectedCraft.value) && native.value)
+  if (
+    (item.value.propertyValues || item.value.runewordRunes || selectedCraft.value) &&
+    native.value
+  )
     Object.assign(item.value, native.value.itemBonuses(item.value, store.build.classId));
 }
 function setPropertyValues(values: Record<string, number>) {

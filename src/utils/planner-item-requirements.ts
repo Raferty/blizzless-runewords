@@ -58,6 +58,9 @@ export function itemRequirements(
     classMet,
     level: { required: requiredLevel, current: level, met: level >= requiredLevel },
     attributes: requirements,
-    unmet: !classMet || level < requiredLevel || requirements.some((requirement) => !requirement.met),
+    unmet:
+      !classMet ||
+      level < requiredLevel ||
+      requirements.some((requirement) => !requirement.met),
   };
 }
