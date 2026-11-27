@@ -1334,6 +1334,12 @@
   font-size: 12px;
   color: #bbb;
 }
+.planner-attribute .planner-attribute-invested {
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: #888;
+  white-space: nowrap;
+}
 .planner-attribute small {
   display: block;
   font-size: 8px;
@@ -1396,7 +1402,41 @@
   color: #aaa;
 }
 .planner-summary-list dd {
+  align-self: start;
+  margin: 0;
   color: #ddd;
+  white-space: nowrap;
+}
+.planner-summary-list dt {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.planner-bonus-group {
+  padding: 9px 0;
+  border-top: 1px solid #252525;
+}
+.planner-bonus-group > summary {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #ccc;
+  cursor: pointer;
+}
+.planner-bonus-group > summary small {
+  font-size: 10px;
+  color: #777;
+}
+.planner-bonus-group > summary .ui-icon {
+  transform: rotate(-90deg);
+}
+.planner-bonus-group[open] > summary .ui-icon {
+  transform: rotate(0);
+}
+.planner-bonus-group .planner-summary-list {
+  margin-top: 9px;
 }
 
 .planner-notification {

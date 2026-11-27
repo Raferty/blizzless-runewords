@@ -68,8 +68,16 @@
         @keydown="handledControlClick = false"
       >
         <div>
-          <span>{{ t(attribute.ru, attribute.en) }}</span
-          ><small
+          <span>
+            {{ t(attribute.ru, attribute.en) }}
+            <span
+              class="planner-attribute-invested"
+              :aria-label="`${t('Вложено очков', 'Invested points')}: ${store.build.attributes[attribute.key]}`"
+              :title="`${t('Вложено очков', 'Invested points')}: ${store.build.attributes[attribute.key]}. ${t('Без экипировки', 'Without equipment')}: ${store.character.base[attribute.key] + store.build.attributes[attribute.key]}`"
+              >({{ store.build.attributes[attribute.key] }})</span
+            >
+          </span>
+          <small
             >{{ store.character.base[attribute.key] }} +
             {{ store.build.attributes[attribute.key]
             }}<template v-if="stats.bonuses[attribute.key]">
@@ -149,23 +157,7 @@
           )
         }}
       </p>
-      <div class="planner-section-label">
-        {{ t("Введённые бонусы", "Entered bonuses") }}
-      </div>
-      <dl class="planner-summary-list">
-        <dt>{{ t("Навыки класса", "Class skills") }}</dt>
-        <dd>{{ stats.classSkills }}</dd>
-        <template
-          v-for="field in bonusFields.filter(
-            (f) =>
-              ['allSkills', 'fcr', 'fhr', 'ias', 'frw', 'magicFind'].includes(f.key) &&
-              matches(f.ru, f.en)
-          )"
-          :key="field.key"
-          ><dt>{{ t(field.ru, field.en) }}</dt>
-          <dd>{{ stats.bonuses[field.key] }}{{ field.percent ? "%" : "" }}</dd></template
-        >
-      </dl>
+      <PlannerAdvancedStats :build="store.build" :native="native" :query="query" />
     </PlannerPanel>
   </aside>
 </template>
@@ -174,11 +166,12 @@ import { usePlannerGameData } from "@/composables/usePlannerGameData";
 import UiIcon from "@/components/ui/UiIcon.vue";
 import { computed, ref } from "vue";
 import PlannerClassSelect from "./PlannerClassSelect.vue";
+import PlannerAdvancedStats from "./PlannerAdvancedStats.vue";
 import PlannerPanel from "./PlannerPanel.vue";
 import { useInfoStore } from "@/store";
 import { usePlannerStore } from "@/store/planner";
 import { useText } from "@/composables/useText";
-import { attributes, bonusFields, difficulties } from "@/shared/planner";
+import { attributes, difficulties } from "@/shared/planner";
 import type { Attribute } from "@/types/planner";
 import { attributeBudget, buildStats, spentAttributes } from "@/utils/planner";
 const store = usePlannerStore();
